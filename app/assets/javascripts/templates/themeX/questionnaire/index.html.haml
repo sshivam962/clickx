@@ -1,0 +1,21 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-IntelligentStrategies.title-icon
+    Campaign Intelligence
+  .options
+    %a.btn.btn-default.btn-raised{'ng-href' => "/questionnaires.pdf?business_id={{business_id}}", target: '_blank'}
+      %i.fa.fa-file-pdf-o.pr
+      Export as PDF
+
+.container-fluid
+  %div
+    .row
+      .col-md-12
+        .panel.panel-default{"data-widget" => "{\"draggable\": \"false\"}"}
+          .panel-body
+            .login-form.ci_form
+              %form.questionnaire{"accept-charset" => "UTF-8", id: "questionnaire", name:'questionnaireForm', "ng-submit" => "save_answers()", "novalidate" => ""}
+                %wizard{"on-finish" => "save_answers()"}
+                  %div{"ng-include" => "", :src => "'themeX/questionnaire/_form.html'"}
+
+%div{"ng-include" => "", :src => "'themeX/questionnaire/_latest_question.html'"}

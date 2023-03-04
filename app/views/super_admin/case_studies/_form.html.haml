@@ -1,0 +1,111 @@
+%div.col-md-12
+  .row.case_study_form
+    .form-group
+      %label{for: "case_study_industry_ids"} Industries
+      = f.select :industry_ids, Industry.order(:title).pluck(:title, :id), { include_blank: 'Select Industries' }, required: true, class: 'form-control', multiple: true
+    .form-group
+      %label{for: "case_study_services"} Service
+      = f.select :services, CaseStudy::SERVICES, { include_blank: 'Select Services' }, class: 'form-control', multiple: true
+    .form-group
+      %label{for: "case_study_assignee"} Assignee
+      = f.select :assignee_id, super_admins.collect {|super_admin| [super_admin.name, super_admin.id] }, { include_blank: 'Select Assignee' }, class: 'form-control'
+    .form-group
+      %label{for: "case_study_title"} Title
+      = f.text_field :title, required: true, class: 'form-control login', placeholder: 'Enter Title'
+    .form-group
+      %label{for: "case_study_short_desc"} Short Description
+      = f.text_field :short_desc, class: 'form-control login', placeholder: 'Short Description'
+    .form-group
+      .row
+        .col-md-6
+          = f.label :stat1_value, 'Stat 1 Value'
+          = f.text_field :stat1_value, class: 'form-control width100 login', placeholder: 'Stat 1 Value'
+        .col-md-6
+          = f.label :stat1_text, 'Stat 1 Text'
+          = f.text_field :stat1_text, class: 'form-control width100 login', placeholder: 'Stat 1 Text'
+    .form-group
+      .row
+        .col-md-6
+          = f.label :stat2_value, 'Stat 2 Value'
+          = f.text_field :stat2_value, class: 'form-control width100 login', placeholder: 'Stat 2 Value'
+        .col-md-6
+          = f.label :stat2_text, 'Stat 2 Text'
+          = f.text_field :stat2_text, class: 'form-control width100 login', placeholder: 'Stat 2 Text'
+    .form-group
+      .row
+        .col-md-6
+          = f.label :stat3_value, 'Stat 3 Value'
+          = f.text_field :stat3_value, class: 'form-control width100 login', placeholder: 'Stat 3 Value'
+        .col-md-6
+          = f.label :stat3_text, 'Stat 3 Text'
+          = f.text_field :stat3_text, class: 'form-control width100 login', placeholder: 'Stat 3 Text'
+
+    .form-group
+      %label Images
+      .col-md-12
+        %ul.list-group#images
+          = f.fields_for :images do |image|
+            %li.list-group-item.display-inline{data: {url: update_position_super_admin_case_study_image_path(image.object)}}
+              = render 'image_fields', f: image
+      .col-md-12
+        .col-md-3.cs_image_card
+          = link_to_add_association '+', f, :images
+    .form-group
+      %label{for: 'case_study_description'} Description
+      = f.cktext_area :description
+    .form-group
+      %label{for: 'case_study_detailed_description'} Detailed Description
+      = f.cktext_area :detailed_description
+    .form-group
+      %label{for: 'case_study_in_their_words'} In Their Words
+      = f.text_area :in_their_words, class: 'form-control', rows: 5  
+    .form-group
+      = f.label :tier
+      = f.select :tier, CaseStudy.tiers.keys, { include_blank: 'Select Tier' }, required: true, class: 'form-control'
+    .form-group
+      %label{for: 'case_study_internal_note'} Internal Note
+      = f.text_area :internal_note, class: 'form-control', rows: 5
+    .form-group
+      = f.submit "Save and Publish", class: 'btn btn-warning saveBtn', name: 'publish'
+      = f.submit "Save to Draft", class: 'btn btn-default saveBtn', name: 'draft'
+:javascript
+  $('#case_study_industry_ids').select2({
+    width: '100%',
+    multiple: true
+  });
+  $('#case_study_services').select2({
+    width: '100%',
+    multiple: true
+  });
+  $('.file_input').change(function(event){
+    var input = $(event.currentTarget);
+    var file = input[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+       image_base64 = e.target.result;
+       $(".descriptive_preview").attr("src", image_base64);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  $("#images").sortable({
+    update: function(e, ui) {
+      $.ajax({
+        url: ui.item.data('url'),
+        type: 'patch',
+        data: { position: ui.item.index() + 1 },
+        dataType: 'json',
+        success:function(response){}
+      })
+    }
+  });
+
+  $(document).on("click", '[data-toggle="lightbox"]', function(event) {
+    event.preventDefault();
+    $(this).ekkoLightbox();
+  });
+
+:css
+  .modal-backdrop {
+    z-index: 9;
+  }

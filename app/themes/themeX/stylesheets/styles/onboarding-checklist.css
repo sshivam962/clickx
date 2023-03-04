@@ -1,0 +1,122 @@
+.onboarding-checklist .checklist-timeline {
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+  border-left: 1px solid #dee5ea;
+}
+
+.onboarding-checklist .checklist-timeline .timeline-item {
+  padding: 0 35px 12px;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item::before {
+  position: absolute;
+  top: 12px;
+  left: -2px;
+  height: 3px;
+  width: 3px;
+  content: '';
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px #198dec;
+}
+
+.timeline-item {
+  .fa-check-circle {
+    margin-bottom: 15px;
+    font-size: 50px;
+    color: #11c54a;
+  }
+
+  .fa-plus {
+    position: absolute;
+    top: 0;
+    left: -13px;
+    width: 27px;
+    height: 26px;
+    padding: 4px 6px;
+    font-size: 14px;
+    color: #ecf0f3;
+    background-color: #fff;
+    border: 2px solid #ecf0f3;
+    border-radius: 50%;
+  }
+}
+
+.timeline-item .icon-item {
+  position: absolute;
+  top: -6px;
+  left: -21px;
+  width: 40px;
+  height: 40px;
+  padding: 8px 9px;
+  font-size: 22px;
+  color: #198dec;
+  background-color: #fff;
+  border: 2px solid #198dec;
+  border-radius: 50%;
+}
+
+.timeline-item .item-card .fa-user-plus {
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+.timeline-item .item-card .fa-credit-card {
+  font-size: 26px;
+  width: 47px;
+  height: 47px;
+  padding: 10px;
+  color: #fff;
+  background-color: #198dec;
+  border-radius: 50%;
+}
+
+.onboarding-checklist-title {
+  margin-top: 0;
+}
+
+.checklist-steps {
+  line-height: 15px;
+  margin-bottom: 15px;
+  color: #198dec;
+}
+
+.panel-default {
+  max-height: auto;
+}
+
+@media (max-width: 1300px) {
+  .onboarding-checklist .checklist-timeline {
+    margin-left: 30px;
+  }
+
+  .onboarding-checklist .checklist-timeline .timeline-item {
+    padding: 0 15px 12px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-item .icon-item {
+    position: absolute;
+    top: -6px;
+    left: -19px;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    font-size: 18px;
+    color: #198dec;
+    background-color: #fff;
+    border: 2px solid #198dec;
+    border-radius: 50%;
+  }
+}
+
+.proc_title {
+  width: 50% !important;
+  margin: 0 0 12px 36px;
+}

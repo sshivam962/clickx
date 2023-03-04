@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <th>Keyword</th>
+    <th>Google Rank</th>
+    <th>URL</th>
+    <th>Search Volume</th>
+    <th>CPC</th>
+    <th>Keyword Difficulty</th>
+  </thead>
+  <tbody>
+    <% @latest_data.each do |keyword| %>
+      <tr>
+        <td><%= keyword['name'] %></td>
+        <td><%= keyword['googleRanking'] %></td>
+        <td><%= keyword['googleRankingUrl'] %></td>
+        <td><%= keyword['searchVolume'] %></td>
+        <td><%= keyword['cpc'] %></td>
+        <td><%= keyword['kdi'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

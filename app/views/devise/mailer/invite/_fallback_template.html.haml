@@ -1,0 +1,54 @@
+- @email_template = MailTemplate.where(mail_type: MailTemplate::Types[0]).first
+
+- if @resource.super_admin?
+  - agency = nil
+- else
+  - if @resource.business_user?
+    - biz = Business.find_by_id(@resource.ownable_id) || @resource.businesses.first
+    - agency = biz.agency
+  - if @resource.agency_admin?
+    - agency = Agency.find(@resource.ownable_id)
+
+%div{bgcolor: "#f7f8f9"}
+  %table{align: "center", bgcolor: "#fff", border: "0", cellpadding: "0", cellspacing: "0", style: "width:100%;max-width:600px;margin-top:60px;padding-bottom:60px;border-radius:5px;border-spacing:40px 10px;border:2px solid #f3f3f3"}
+    %tr{style: 'background-color: #4C4E60'}
+      %td{align: "center", style: "padding:40px 30px;border-bottom-width:2px;border-bottom-style:solid;border-bottom-color:#f3f3f3;text-align:center;"}
+        - if @resource.super_admin? || agency.nil?
+          %img{alt: "", src: "https://clickx-images.s3.amazonaws.com/clickx-logo-white.png", type: "fetch"}
+        - else
+          - if agency && agency.logo
+            %img{src: "#{agency.logo}", alt: "", crop:'fit', type:'fetch', style:"width:160px"}
+          - else
+            %h2{style: 'color: white;'}= agency.name
+
+    %tr
+      %td{align: "center", style: "padding:40px 30px"}
+        = raw @email_template.welcome_text
+        - if @resource.super_admin?|| agency.nil?
+          %tr
+            %td{style: "color:#646464;padding:10px 0"}
+              = "#{@resource.invited_by&.name || 'Someone'} has invited to join Clickx."
+        - else
+          = agency.name
+          = raw @email_template.agency_note
+
+        = raw @email_template.paragraph1
+
+    %tr
+      %td{style: "padding:0px 30px 40px"}
+        %table{bgcolor: "#5ebcea", border: "0", cellspacing: "0", cellpadding: "0", style: "border-radius:5px;margin:0 auto"}
+          %tr
+            %td{height: "45", style: "text-align:center;font-size:18px;font-family:sans-serif;font-weight:bold;padding:0 30px", align: "center"}
+              %a{href: "#{accept_invitation_url(@resource, :invitation_token => @token, host: agency&.active_domain || ROOT_URL)}", style: "color:#ffffff;text-decoration:none"}= I18n.t("devise.mailer.invitation_instructions.accept")
+
+    %tr
+      - if !@resource.super_admin? && !agency.nil?
+        %td{align: "center", style: "color:#646464;text-align:center;padding:0px 30px 0px"}
+          Questions? Call us at #{agency.phone} today!
+    %tr
+    %tr
+      %td{align: "center", style: "color:#646464;text-align:center;padding:0px 30px 40px"}
+        - if @resource.super_admin? || agency.nil?
+          © #{Time.now.year} Clickx
+        - else
+          © #{Time.now.year} #{agency.name} #{agency.address}

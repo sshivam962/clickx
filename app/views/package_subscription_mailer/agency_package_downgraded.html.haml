@@ -1,0 +1,11 @@
+%p
+  %h4
+    Package subscription Downgraded:
+    = @schedule.stripe_plan.titleize
+
+%p
+  Subscription Downgraded from #{(@previous_package && @previous_package.package_name.humanize) || 'Free'} to #{@schedule.stripe_plan.titleize}
+
+%p
+  Agency :
+  = @agency.name

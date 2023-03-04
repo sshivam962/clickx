@@ -1,0 +1,61 @@
+= form_for client, url: add_keywords_agency_client_path(client.id), method: :patch, remote: true do |f|
+  - remaining_keywords = current_agency.keywords_limit - current_agency.businesses.sum(&:keyword_limit)
+  = hidden_field_tag :remaining_keywords, remaining_keywords
+  - if remaining_keywords&.positive?
+    .row
+      .form-group
+        .col-md-3
+          %label.control-label Keyword Limit
+        .col-md-6
+          = f.hidden_field :seo_service, value: true
+          = f.number_field :keyword_limit, class: 'form-control', min: 0, max: remaining_keywords
+        .col-md-3
+          %span.help-inline.remaining_keywords_text
+            #{remaining_keywords} Keywords Remaining
+  .row
+    .form-group
+      .col-md-3
+        %label.control-label Keywords
+      .col-md-6
+        - if f.object.keyword_limit <= 0
+          %textarea#keyword-form-text.form-control{placeholder: "Please specify 1 keyword per line..", rows:3, name: 'keywords', disabled: 'disabled'}
+        - else
+          %textarea#keyword-form-text.form-control{placeholder: "Please specify 1 keyword per line..", rows:3, name: 'keywords'}
+      .col-md-3
+        %span.help-inline.keywords_left_text
+          #{f.object.keyword_limit} Keywords Left
+  .row
+    .form-group
+      .col-md-offset-8.col-md-4
+        %button.invisible.keyword_submit{type: :submit}
+        %a.btn.btn-raised.approve_submit.pull-right{href: 'javascript:void(0)'}
+          Approve and Submit
+          %i.fa.fa-chevron-right
+
+:javascript
+  $(document).on('click', '.approve_submit',function() {
+    keywords_length = $('#keyword-form-text').val().split(/\r\n|\r|\n/).length
+    limit = parseFloat($('#business_keyword_limit').val())
+    if(keywords_length > limit){
+      toastr.error("Keywords Limit exceeded to create Keyword!")
+    }else{
+      $('.keyword_submit').click();
+    }
+  })
+
+  $(document).on('keyup', '#business_keyword_limit',function() {
+    remaining = parseFloat($('#remaining_keywords').val())
+    limit = parseFloat($(this).val()) || 0
+    $('.remaining_keywords_text').html('' + (remaining - limit) + ' Keywords remaining')
+  });
+
+  $(document).on('keyup', '#keyword-form-text',function() {
+    keywords = $('#keyword-form-text').val().split(/\r\n|\r|\n/)
+    filtered_keywords = keywords.filter(function (el) {if(el != ""){return el}});
+    keywords_length = filtered_keywords.length
+    limit = parseFloat($('#business_keyword_limit').val())
+    if(keywords_length > limit){
+      toastr.error("Keywords Limit Exceeded")
+    }
+    $('.keywords_left_text').html('' + (limit - keywords_length) + ' Keywords left')
+  });

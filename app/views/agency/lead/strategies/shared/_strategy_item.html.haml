@@ -1,0 +1,11 @@
+.panel.panel-default.strategy_item{:style => "position: relative; left: 0px; top: 0px;"}
+  .panel-heading
+    .col-md-11.p-n.mt-sm.mb-sm
+      .form-group
+        - template  = Liquid::Template.parse(strategy)
+        - parsed_strategy = template.render({'company_name' => lead.company})
+        = cktext_area_tag 'lead_strategy[strategies][]', parsed_strategy, class: 'form-control', id: "strategy_item_text_#{uniq_id}", ckeditor: { toolbar: 'lead_strategy' }
+        %span.material-input
+    .col-md-1
+      %a.remove_strategy.pull-right.text-right{:href => "javascript:void(0)"}
+        %i.fa.fa-times

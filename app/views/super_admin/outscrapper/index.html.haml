@@ -1,0 +1,55 @@
+.header
+  .d-flex.justify-content-between.flex-wrap
+    .col-search
+      .input-wrapper
+        = text_field_tag :search_agency, '', class: 'search login select-box form-control search_client search_name', placeholder: 'Search By Agency', style: "width: 100%"
+        .inner-glyph.glyph-align
+          %i.glyphicon.glyphicon-search
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1
+      Outscrapper Requests
+.data_list
+  = render 'super_admin/outscrapper/outscraper_data', all_outscrapper_requests: @outscrapper_requests
+
+:javascript
+  $(document).ready(function() {
+    var data_id;
+    $('.copy-modal').on('show.bs.modal', function (e) {
+        data_id = $(e.relatedTarget).data('id');
+    })
+    $("#btn_copy_details").on('click', function(e) {
+    var form_data = $("#copy_data_form").serialize();
+      var url = "/s/external_leads/copy_data/" + data_id;
+      $.ajax({
+          url: url,
+          type: 'post',
+          data: form_data,
+          success: function(){
+          },
+          beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
+        });
+    });
+    $('#search_agency').on("keyup", function() {
+      var agency = $('#search_agency').val().toLowerCase();
+      var search = false
+      if(agency.length >= 3){
+        search = true
+      }else if (agency.length === 0){
+          search = true
+      } else {
+          search = false
+      }
+      if(search === true){
+        $.ajax({
+          url: "/s/external_leads",
+          type: 'get',
+          data: { agency: agency},
+          dataType: 'script',
+          async: false,
+          success:function(response){
+            $('.data_list').html(response.data)
+          }
+        })
+      }
+  });
+  });

@@ -1,0 +1,35 @@
+.panel.panel-default.m-n#best-ads{ 'ng-if': 'marketing_performance_loaded && bestAdsStatus' }
+  .panel-heading.cursor-move
+    %h2
+      %a.l-grey{ 'href': "#/adwords" }
+        Best Performing Ads
+        %i.fa.fa-info-circle.tooltip-text-icon{ 'title': 'This shows your best performing ads by campaign name and specifies the type of ad being used for each ad campaign.' }
+    #onboarding-best-ads.on-boarding
+    .panel-ctrls
+      %button.Dbutton.btn.button-icon.pull-left.mt-sm{ 'ng-click': 'pdf_export("best-ads")', 'title': 'Download report', 'ng-class': "{'disable-button': export_disabled}" }
+        %span.material-icons.inverted file_download
+      %button.btn.button-icon.mt-sm.refresh-panel{ 'ng-click': 'refresh_intelligence("best_performing_ads")', 'title': 'Refresh report' }
+        %span.material-icons.inverted refresh
+  .panel-body.no-padding.scroll-pane{ 'style': 'height: 420px;' }
+    .panel.panel-white.no-shadow.scroll-content.p-n
+      .panel-body
+        .table-responsive
+          %table.table.table-hover.table-bordered.table-vam.mb-n.ten-rows-dashlets
+            %tbody
+              %tr
+                %th.text-left{ 'width': '400' }
+                  %b.l-grey Ad
+                %th.text-left
+                  %b.l-grey Campaign
+                %th.text-left
+                  %b.l-grey Clicks
+                %th.text-left
+                  %b.l-grey Impressions
+                %th.text-left
+                  %b.l-grey Engagements
+              %tr{ 'ng-repeat': 'ad in dashlets.best_performing_ads', 'ng-if': '$index > 1 && $index != 10' }
+                %td.text-left{ 'width': '400' } {{ ad['Ad'] || 'NA' }}
+                %td.text-left {{ ad['Campaign'] || 'NA' }}
+                %td.text-left {{ ( ad['Clicks'] | toLocaleString) || 'NA' }}
+                %td.text-left {{ ( ad['Impressions'] | toLocaleString) || 'NA' }}
+                %td.text-left {{ ( ad['Engagements'] | toLocaleString) || 'NA' }}

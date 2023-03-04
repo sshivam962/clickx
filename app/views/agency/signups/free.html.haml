@@ -1,0 +1,105 @@
+= content_for :title, 'Apply to Become a Partner'
+.signup-wrapper
+  .form-wrapper
+    = form_tag agency_free_signup_path, method: :post, class: 'form-vertical cardy clickx-parsley',"data-parsley-validate":"", id: 'signup_form' do
+      .d-xl-flex.justify-content-between.mb-5
+        .col
+          %a{href: '#'}
+            = image_tag 'logo.png'
+          %h3.m-0.mt-3 Apply To Become a Partner
+
+      #profile-section
+        %h4.m-0.mb-4 Create Your Profile
+
+        #profile_email_field.pb-3
+          - email = @signup_link&.email
+          %label.input-label{for: "user_email"} Email
+          .email-div.verifying-email
+            = email_field_tag 'user[email]', email, required: true, class: 'form-input form-input--email', readonly: email.present?
+            #email-verification-section
+              .verifying-email--success
+                .success-anime
+                  .check-anime
+                    %svg#Layer_1{"enable-background" => "new 0 0 161.2 161.2", :version => "1.1", :viewbox => "0 0 161.2 161.2", :x => "0px", "xml:space" => "preserve", :xmlns => "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink", :y => "0px"}
+                      %circle.path{:cx => "80.6", :cy => "80.6", :fill => "none", :r => "62.1", :stroke => "#BAD531", "stroke-miterlimit" => "10", "stroke-width" => "8"}
+                      %polyline.check{:fill => "none", :points => "113,52.8 \n                                74.1,108.4 48.2,86.4 ", :stroke => "#BAD531", "stroke-linecap" => "round", "stroke-miterlimit" => "10", "stroke-width" => "10"}
+              .verifying-email--loading
+                .loading
+                  .loading-anime
+                    %span
+                    %span
+              .signup-email-error.text-red
+                .d-flex
+                  .col.mt-3
+                    Email already exists! You can try logging in with this email or use the magic link in the email we sent you.
+                    %br
+                    %a.d-inline-block.pt-2{href: "/"} Login
+
+              .text-right
+                %input.btn-submit.email-check.mt-2{type: "button", value: "Go"}
+
+        #profile_other_fields
+          = render 'agency/signups/shared/profile'
+
+      #billing-section
+        %h4.m-0.mb-4 Billing Address
+        = render 'agency/signups/shared/billing_address'
+
+      #payment-section
+        .input-card.mb-4
+          %label.checkbox
+            \&#160;&#160;I agree to the
+            %a{href: "http://www.clickx.io/terms/", target: "_blank"} Terms
+            and understand this is a non-refundable payment.
+            %input#tnc{checked: "checked", name: "checkboxs1", type: "checkbox", disabled: true, readonly: true}
+            %span.checkmark
+        %input.btn.btn-input{type: "submit", value: "Apply to Become a Partner"}
+
+:javascript
+  $('.email-check').on('click', function(){
+    if(!$("#signup_form").valid()){
+      return false;
+    }
+    $('.email-div').removeClass('show-error')
+    $('.form-input--email').removeClass("error");
+    $('.verifying-email--loading').fadeIn();
+
+    var email = $('#user_email').val()
+    $.ajax({
+      url: '/pu/check_email',
+      method: "POST",
+      data: {
+        email: email
+      },
+      headers: {"X-CSRF-Token": $('meta[name="csrf-token"]').attr('content')},
+      success: function(resp){
+        if(resp.exists){
+          setTimeout(function () {
+              $('.verifying-email--loading').fadeOut();
+              $('.email-div').remove('verifying-email')
+              $('.email-div').addClass('show-error')
+              $('.form-input--email').addClass("error");
+          }, 1200);
+        }else{
+          setTimeout(function () {
+            $('.verifying-email--loading').fadeOut();
+            $('.verifying-email--success').fadeIn();
+          }, 500);
+
+          setTimeout(function () {
+            $('#email-verification-section').fadeOut();
+            $('#user_email').attr('readonly', true);
+            $('#profile_other_fields').fadeIn();
+            $('#billing-section').fadeIn();
+            $('#payment-section').fadeIn();
+            $('#user_first_name').focus()
+          }, 2000);
+        }
+      }
+    });
+  })
+
+:css
+  #profile_other_fields, #billing-section, #payment-section{
+    display: none;
+  }

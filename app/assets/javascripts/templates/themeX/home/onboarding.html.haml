@@ -1,0 +1,58 @@
+= stylesheet_link_tag 'styles/onboarding', media: 'all'
+
+#clickx-form
+  / Welcome
+  %fieldset
+    %h1.title Welcome
+    .line
+    .midimg
+      .wistia_responsive_padding{:style => "padding:56.25% 0 0 0;position:relative;"}
+        .wistia_responsive_wrapper{:style => "height:100%;left:0;position:absolute;top:0;width:100%;"}
+          %iframe.wistia_embed{:allowfullscreen => "", :allowtransparency => "true", :frameborder => "0", :height => "100%", :mozallowfullscreen => "", :msallowfullscreen => "", :name => "wistia_embed", :oallowfullscreen => "", :scrolling => "no", :src => "//fast.wistia.net/embed/iframe/uhkrmcrva1?seo=false&videoFoam=true", :title => "Wistia video player", :webkitallowfullscreen => "", :width => "100%"}
+      %script{:async => "", :src => "//fast.wistia.net/assets/external/E-v1.js"}
+    %p.head1 Thank you for choosing Clickx!
+    %p.toppara In 5 easy steps, you will be able to quickly setup your Clickx dashboard to start measuring your marketing in an intelligent and comprehensive platform. The platform has everything you need to gain more exposure, generate more leads, and improve your metrics. Let’s get started and achieve marketing success for your business!
+    %input#getstarted.next{:name => "next", :type => "submit", :value => "Get Started", 'ng-click': 'next($event)'}
+    .spacer-m
+  %fieldset.profile
+    %h1.title Getting Started
+    .line
+    %p.subhead Add Your Profile Information
+    .block.profile
+      %input.txt-box{placeholder: "Enter first name", type: "text", 'ng-model': 'current_user.first_name', required: true}
+      %br
+      %input.txt-box{placeholder: "Enter last name", type: "text", 'ng-model': 'current_user.last_name', required: true}
+      %br
+      %input.txt-box{placeholder: "Enter phone", type: "text", 'ng-model': 'current_user.phone', required: true}
+    .nav-dots
+      %label#img-dot-1.navactive{:for => "img-1"}
+      %label#img-dot-2.nav-dot{:for => "img-2"}
+      %label#img-dot-3.nav-dot{:for => "img-3"}
+    %a.skiptext{herf: '', 'ng-click': "next($event)"} SKIP FOR NOW
+    %img#next.next.nextbtn{:name => "next", :src => "#{asset_path('inactivenext.png')}", 'ng-click': "UpdateUser($event)"}
+    %span.extension--icon-pulse--learn
+  %fieldset{'ng-if': '!business.domain'}
+    %h1.title Getting Started
+    .line
+    %p.subhead Verify Your Website Domain
+    %p.toppara Once you enter your website domain, you will not be able to change it later on. Please make sure you select the right domain to generate optimal results and increase your online presence.
+    .topdiv
+      %img{:src => "#{asset_path('lap.png')}"}
+    .middiv
+      #edit.inlineb
+        %img#editimg.editdiv{:onclick => "changeColor('website'); return false;", :src => "#{asset_path('edit.png')}"}
+      .inlineb
+        %input#website.midtextbox{:type => "text", :placeholder => "www.mywebsite.com", 'ng-model': 'domain'}
+      .inlineb.m-tick-in
+        %img#tick.midright{:src => "#{asset_path('check.svg')}"}
+    %input#verify{'ng-click' => "addDomain(domain, $event)", :type => "submit", :value => "Verify"}
+    .nav-dots
+      %label#img-dot-1.nav-dot{:for => "img-1"}
+      %label#img-dot-2.navactive{:for => "img-2"}
+      %label#img-dot-3.nav-dot{:for => "img-3"}
+    / %a.skiptext{herf: '', 'ng-click': "next($event, 'domain_div')"} SKIP FOR NOW
+    %img#next.next.nextbtn{:name => "next", :src => "#{asset_path('inactivenext.png')}", 'ng-click': "addDomain(domain, $event)"}
+    %span.extension--icon-pulse--learn
+  %fieldset
+    / %img.previous.previousbtn{:name => "previous", :src => "#{asset_path('previous.png')}", 'ng-click': 'prev()'}
+    %img#next1.nextbtn{:name => "next", :src => "#{asset_path('inactivenext.png')}", 'ng-click': 'goToDashboard()'}

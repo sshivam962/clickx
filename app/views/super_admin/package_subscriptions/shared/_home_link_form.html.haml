@@ -1,0 +1,7 @@
+- path_resource = resource.is_a?(Agency) ? 'agencies' : 'clients'
+= form_for resource, url: "/s/#{path_resource}/#{resource.id}/update_home_link", method: :patch, remote: true do |f|
+  .col-md-8.pl-n.pr-n
+    = f.text_field :home_link, class: 'form-control', placeholder: 'Home Link'
+  .col-md-4
+    = f.submit 'Save', class: 'btn btn-default m-n'
+

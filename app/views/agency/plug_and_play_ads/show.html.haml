@@ -1,0 +1,35 @@
+= stylesheet_link_tag 'public/public_pages', media: 'all', 'data-turbolinks-track': false
+%link{href: 'https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css', rel: 'stylesheet'}
+.social-media-ad-image
+  .px-lg-4
+    .page-heading.mb-n.pb-md.mt-sm
+      .d-flex.justify-content-between.align-items-center
+        .col-auto
+          %h1
+          Plug And Play Ads
+        .col-auto
+          %a.btn.btn-warning.btn-raised.m-n.f-w-lg{href: agency_plug_and_play_ads_path }
+            %i.fa.fa-arrow-left.pr-xs
+            Back
+
+  .content-container.text-center
+    .bg-white.rounded.shadow.p-4.my-5
+      - @plug_and_play_ad.images.where(heading: true).each do |image|
+        %div.slide-item
+          %img.img-responsive.m-md-auto{alt: '', src: image.file.url}
+
+  .content-container.text-center
+    .bg-sky-blue.border-1.border-blue.rounded.shadow.p-4.my-5
+      .slider-wrapper
+        .images-slider
+          - @plug_and_play_ad.images.where(heading: false).each do |image|
+            %div.slide-item
+              %img.img-responsive.m-md-auto{alt: '', src: image.file.url}
+
+%script{src: 'https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js'}
+%script{type:'text/javascript'}
+  $(document).ready(function(){
+  $('.images-slider').bxSlider({
+  adaptiveHeight: true,
+  });
+  });

@@ -1,0 +1,11 @@
+.course_form
+  .row
+    = f.collection_check_boxes :agency_roles_permission, current_user.permission_info_collection, :last, :first do |b|
+      .col-md-3
+        .styled-checkbox
+          = b.check_box
+          .styled-checkbox-label
+            %span
+            = b.label
+  .form-group
+    = f.submit "Save Permissions", class: 'btn btn-raised btn-warning saveBtn'

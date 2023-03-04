@@ -1,0 +1,26 @@
+- content_for :title do
+  Social Posts | Clickx
+.container-fluid.pt-4.pb-4
+  .bg-sky-blue.rounded.border-1.border-blue
+    .bg-white.rounded-t-12.pt-4.pb-md-4.px-lg-5.px-4
+      .d-md-flex.justify-content-between.align-items-center
+        .col-auto
+          .fs-md.color-dark-blue.fw-m Social Posts
+    .p-lg-5.p-4#social_posts_lists
+      %h4.fw-sb New Posts Drops Monthly!
+      .row.d-flex.flex-wrap
+        - @social_media_ads.each do |social_media_ad|
+          .col-xs-12.col-sm-6.col-lg-4.col-xl-3
+            .awesome-card
+              .awesome-card-inner
+                = link_to agency_social_post_path(social_media_ad), class: 'awesome-card-link' do
+                  .awesome-card-thumbnail
+                    .awesome-card-thumb{style: "background-image:url(#{social_media_ad.images.first&.file&.url});"}
+                  .awesome-card-footer
+                    %span.awesome-card-btn.awesome-card-btn--fb
+                      View
+                      %span
+                        Post
+              .awesome-card--shadow
+              .awesome-card--shadow.awesome-card--shadow2
+      %h5 Check back next month for more posts!

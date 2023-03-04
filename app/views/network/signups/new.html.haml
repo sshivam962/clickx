@@ -1,0 +1,19 @@
+.page-wrapper.page-bg.network-pages.visitor-page
+  .header.shadow-md
+    .container.mx-auto.px-4
+      .flex.justify-between.items-center
+        .col
+          %a{:href => "#0"}
+            = image_tag 'network/network-logo.svg' || '', class: 'w-16 mx-auto'
+  .grid.md:grid-cols-2
+    .col-auto.hidden.md:block
+      .half-cover-image.half-cover-image--signup{:style => "background-image: url(#{image_path "network/userpage-image.jpg"})"}
+    .col-auto.flex.flex-col.justify-center#user_form
+      = render 'user_form'
+.footer.text-gray-500.text-sm
+  .container.mx-auto
+    .py-8.text-center © 2022 Clickx. All Rights Reserved.
+
+:javascript
+  var input = document.querySelector("#phone");
+  window.intlTelInput(input, {});

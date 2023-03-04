@@ -1,0 +1,13 @@
+.modal.fade.edit_direct_lead{"aria-labelledby": "mySmallModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md
+    .bg-white.p-4.p-sm-5.rounded
+      .fs-sm.fw-sb.text-darkblue.pb-4
+        Edit Direct Lead - #{direct_lead.name}
+      = simple_form_for direct_lead, url: agency_direct_lead_path, html: { remote: true } do |f|
+        .input-wrapper-label.fs-14 Name
+        .input-wrapper.mb-4
+          = f.text_field :name,class: 'input-wrapper-input', as: :string, required: true, placeholder: 'Name'
+        .input-wrapper-label.fs-14 Company URL
+        .input-wrapper.mb-4
+          = text_field_tag 'url', direct_lead.root_url, class: 'input-wrapper-input', placeholder: 'http://www.example.com', required: true
+        = submit_tag 'Save', class: 'btn btn-raised btn-primary'

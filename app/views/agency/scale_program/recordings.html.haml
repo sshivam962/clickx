@@ -1,0 +1,187 @@
+- content_for :title do
+  Academy | Clickx
+.page-content.ui-2020
+  .page-heading.pt-md.pb-md
+    .row.align-items-center
+      .col-md-6
+        %h1
+          Coaching
+  .container-fluid
+  .container-fluid
+    - if current_agency.scale_zoom_info? && (current_agency.scale_zoom_expiry_date.nil? || Date.current <= current_agency.scale_zoom_expiry_date)
+      %h3.mt-0 Live Calls
+      .section-card.bg-white.rounded-12.mb-4.support-accordion.support-accordion--collapsed
+        .section-card-heading.px-5.py-4.rounded-t-12.support-accordion-header
+          .d-flex.justify-content-between
+            .col
+              %p.fw-m.mr-3.mb-0
+                %i.fa.fa-video-camera.color-blue.mr-2
+                Agency Webinar Series
+            .col
+              %span.accordion-arrow
+                %i.fa.fa-chevron-up
+        #agency_support_call.support-accordion-content
+          .section-card-body.px-5.py-4
+            %p Chet Holmes International - Amanda Holmes.
+            %p 30-minute Podcast Interview
+            %p
+              %a.btn--zoom{:href => "https://us06web.zoom.us/j/82608828222", :target => "_blank"} Join Zoom Meeting
+            %p Meeting ID: 826 0882 8222
+            %p Oct 26th Wednesday 3:00pm - 3:30pm Eastern Time (US and Canada)
+            %a.addeventatc{"data-id" => "UC15057265", :href => "https://www.addevent.com/event/UC15057265", :target => "_blank", :title => "Add to Calendar"} Add to Calendar
+            %script{:async => "", :defer => "defer", :src => "https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js", :type => "text/javascript"}
+            -# %p
+            -#   We will host a series of interviews and trainings each Thursday with guest speakers. You can find out who our guests are and what time they will be in the
+            -#   %a{:href => "https://www.facebook.com/groups/467613194221213", :target => "_blank"}Facebook Group.
+            -# %p
+            -#   Looking for coaching? Find out more about our SCALE Program and see if it's a good fit for you.
+
+      .section-card.bg-white.rounded-12.mb-4.support-accordion.support-accordion--collapsed
+        .section-card-heading.px-5.py-4.rounded-t-12.support-accordion-header
+          .d-flex.justify-content-between
+            .col
+              %span.fw-m.mr-3
+                %i.fa.fa-video-camera.color-blue.mr-2
+                Lead Generation
+              %span.f-s-xxs.d-none.d-md-inline Every Monday at 3.30pm Eastern Time (US and Canada)
+            .col
+              %span.accordion-arrow
+                %i.fa.fa-chevron-up
+        #scale_live_qa.support-accordion-content
+          .section-card-body.px-5.py-4
+            %p.d-md-none
+              Time: Every Monday at 3.30pm Eastern Time (US and Canada)
+            %p
+              %a.btn--zoom{:href => "https://us06web.zoom.us/j/81949295583", :target => "_blank"} Join Zoom Meeting
+            %p
+              Meeting ID: 819 4929 5583
+            .py-2
+            %a.addeventatc{"data-id" => "oX11477204", :href => "https://www.addevent.com/event/oX11477204", :rel => "nofollow", :target => "_blank", :title => "Add to Calendar"} Add to Calendar
+
+      .section-card.bg-white.rounded-12.mb-4.support-accordion.support-accordion--collapsed
+        .section-card-heading.px-5.py-4.rounded-t-12.support-accordion-header
+          .d-flex.justify-content-between
+            .col
+              %span.fw-m.mr-3
+                %i.fa.fa-video-camera.color-blue.mr-2
+                Sales Training
+              %span.f-s-xxs.d-none.d-md-inline Every Wednesday at 3.30pm Eastern Time (US and Canada)
+            .col
+              %span.accordion-arrow
+                %i.fa.fa-chevron-up
+        #scale_private_coaching.support-accordion-content
+          .section-card-body.px-5.py-4
+            %p.d-md-none
+              Time: Every Wednesday at 3.30pm Eastern Time (US and Canada)
+            %p
+              %a.btn--zoom{:href => "https://us06web.zoom.us/j/81949295583", :target => "_blank"} Join Zoom Meeting
+            %p Meeting ID: 819 4929 5583
+            .py-2
+            %a.addeventatc{"data-id" => "iI11477254", :href => "https://www.addevent.com/event/iI11477254", :rel => "nofollow", :target => "_blank", :title => "Add to Calendar"} Add to Calendar
+      
+      .section-card.bg-white.rounded-12.mb-4.support-accordion.support-accordion--collapsed.border-1.border-light
+        .section-card-heading.px-5.py-4.rounded-t-12.support-accordion-header
+          .d-flex.justify-content-between
+            .col
+              %span.fw-m.mr-3
+                %i.fa.fa-video-camera.color-blue.mr-2
+                Hour of Sales
+              %span.f-s-xxs.d-none.d-md-inline Every Monday to Thursday 11am - 12pm Eastern Time (US and Canada)
+            .col
+              %span.accordion-arrow
+                %i.fa.fa-chevron-up
+        #scale_private_coaching.support-accordion-content
+          .section-card-body.px-5.py-4
+            %h5.d-md-none.fs-sm.fw-sb.mt-0.mb-4 Hour of Sales
+            %p.d-md-none
+              Time: Every Monday to Thursday 11am - 12am Eastern Time (US and Canada)
+            %p
+              %a.btn--zoom{:href => "https://us06web.zoom.us/j/82841254748", :target => "_blank"} Join Zoom Meeting
+            %p Meeting ID: 828 412 54748
+            .py-2
+            %a.addeventatc{"data-id" => "Bm16109488", :href => "https://www.addevent.com/event/Bm16109488", :rel => "nofollow", :target => "_blank", :title => "Add to Calendar"} Add to Calendar
+
+      - if current_agency.support_prospecting_call?
+        -# .section-card.bg-white.rounded-12.mb-4.support-accordion.support-accordion--collapsed
+        -#   .section-card-heading.px-5.py-4.rounded-t-12.support-accordion-header
+        -#     .d-flex.justify-content-between
+        -#       .col
+        -#         %span.fw-m.mr-3
+        -#           %i.fa.fa-video-camera.color-blue.mr-2
+        -#           Agency Webinar Series
+        -#         %span.f-s-xxs.d-none.d-md-inline Thursday, March 24th 2022 12 pm Eastern Time (US and Canada)
+        -#       .col
+        -#         %span.accordion-arrow
+        -#           %i.fa.fa-chevron-up
+        -#   #agency_support_call.support-accordion-content
+        -#     .section-card-body.px-5.py-4
+        -#       %p
+        -#         %a.word-break{:href => "https://us06web.zoom.us/j/89865470222 "} https://us06web.zoom.us/j/89865470222
+        -#       %p Meeting ID: 898 6547 0222
+        -#       %p
+        -#         %a.addeventatc{"data-id" => "zY12760651", href: "https://www.addevent.com/event/zY12760651", rel: "nofollow", target: "_blank", title: "Add to Calendar"} Add to Calendar
+
+      -# .section-card.bg-white.rounded-12.mb-4.support-accordion.support-accordion--collapsed
+      -#   .section-card-heading.px-5.py-4.rounded-t-12.support-accordion-header
+      -#     .d-flex.justify-content-between
+      -#       .col
+      -#         %span.fw-m.mr-3
+      -#           %i.fa.fa-video-camera.color-blue.mr-2
+      -#           Your First Offer
+      -#         %span.f-s-xxs.d-none.d-md-inline Friday, September 21st 2022 3pm Eastern Time (US and Canada)
+      -#       .col
+      -#         %span.accordion-arrow
+      -#           %i.fa.fa-chevron-up
+      -#   #scale_private_coaching.support-accordion-content
+      -#     .section-card-body.px-5.py-4
+      -#       %p.d-md-none
+      -#         Friday, September 21st 2022 3pm Eastern Time (US and Canada)
+      -#       %p
+      -#         %a.btn--zoom{:href => "https://us06web.zoom.us/j/83533566145", :target => "_blank"} Join Zoom Meeting
+      -#       %p Meeting ID: 835 3356 6145
+      -#       %p
+      -#         %a.addeventatc{"data-id" => "FT13234451", :href => "https://www.addevent.com/event/FT13234451", :rel => "nofollow", :target => "_blank", :title => "Add to Calendar"} Add to Calendar
+             
+      
+    -# %hr
+    -# .panel
+    -#   .panel-body.p-0
+    -#     %h3.mt-0 Recordings
+    -#     .row.d-flex.flex-wrap
+    -#       - @courses.each do |course|
+    -#         .col-xs-12.col-sm-6.col-lg-4.col-xl-3
+    -#           .academy-item
+    -#             - if agency_access_to_course?(course) || current_agency.coaching_recordings || current_agency.scale_program
+    -#               %a.academy-item__link{href: agency_course_path(course)}
+    -#                 - if course.thumbnail_file_url.present?
+    -#                   = image_tag course.thumbnail_file_url
+    -#                 %h2.academy-item__name
+    -#                   = course.title
+    -#                 = course_progress(course)
+    -#             - else
+    -#               .academy-lock-icon
+    -#                 %i.fa.fa-lock{"aria-hidden":"true"}
+    -#               %a.academy-item__link{href: 'javascript:void(0)'}
+    -#                 - if course.thumbnail_file_url.present?
+    -#                   = image_tag course.thumbnail_file_url
+    -#                 %h2.academy-item__name
+    -#                   = course.title
+    -#                 = course_progress(course)
+    -#               - if course.access_tip.present?
+    -#                 .academy-item-notice
+    -#                   = course.access_tip
+    -#             .academy-item--shadow.academy-item--shadow1
+    -#             .academy-item--shadow.academy-item--shadow2
+    .spacer15
+
+%script{:async => "", :defer => "defer", :src => "https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js", :type => "text/javascript"}
+:javascript
+  $(document).on('click', '.support-accordion-header', function() {
+    if($(this).next('.support-accordion-content').is(':visible')) {
+      $(this).next('.support-accordion-content').slideUp();
+      $(this).parent('.support-accordion').addClass('support-accordion--collapsed');
+    } else {
+      $(this).next('.support-accordion-content').slideDown();
+      $(this).parent('.support-accordion').removeClass('support-accordion--collapsed');
+    }
+  });

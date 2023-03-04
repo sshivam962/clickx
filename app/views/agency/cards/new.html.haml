@@ -1,0 +1,14 @@
+- content_for :title do
+  Add New Card | Clickx
+.page-heading.bg-white.mb-4
+  .d-flex.justify-content-between.flex-wrap
+    .coll.my-2
+      %h1 New Card
+.container-fluid.pb-4
+  .bg-white.p-5.rounded
+    = form_tag agency_cards_path, method: :post, remote: true do
+      = render 'agency/cards/shared/new'
+      .text-right.pt-4
+        %a.btn.btn-warning.mr-3{href: agency_cards_path}
+          Cancel
+        %input.btn.btn-success{type: :submit, value: 'Save'}

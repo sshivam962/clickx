@@ -1,0 +1,88 @@
+.table-responsive
+  %table.table.table-striped.table-bordered.table-vam.font-14
+    %thead
+      %tr
+        %th{'rowspan': '2', 'style': 'padding-right: 150px'}
+          %b
+            %u
+              = link_to 'Keywords', business_keywords_path(order: @order, order_by: 'name'), {:style => 'color:#656565;', remote: true}
+        %th.text-center{'colspan': '3'}
+          %b
+            Google
+        %th.text-center.p-n{'rowspan': '2'}
+          %b
+            %u
+              = link_to 'Search Volume', business_keywords_path(order: @order, order_by: 'search_volume'), {:style => 'color:#656565;', remote: true}
+        %th.text-center.p-n{'rowspan': '2'}
+          %b
+            %u
+              = link_to 'CPC', business_keywords_path(order: @order, order_by: 'cpc'), {:style => 'color:#656565;', remote: true}
+        -# %th.text-center.p-n{'rowspan': '2'}
+        -#   %b
+        -#     %u
+        -#       = link_to 'Keyword Difficulty', business_keywords_path(order: @order, order_by: 'kdi'), {:style => 'color:#656565;', remote: true}
+      %tr
+        %th.success.pointer
+          %u
+            = link_to 'Rank', business_keywords_path(order: @order, order_by: 'rank'), remote: true
+        %th.success.pointer
+          %u
+            = link_to 'Change', business_keywords_path(order: @order, order_by: 'last_day_google_change'), remote: true
+        %th.success.pointer
+          %u
+            = link_to 'URL', business_keywords_path(order: @order, order_by: 'url'), remote: true
+    %tbody
+      - @keywords.each do |keyword|
+        %tr
+          %td
+            .row
+              .keyword_name
+                .col-md-10
+                  = keyword.name
+          %td.google_rank<
+            - if keyword.rank.nil?
+              100+
+            - else
+              = keyword.rank
+              %sup #{keyword.rank.ordinal}
+          %td.google_change
+            %div
+              - if keyword.last_day_google_change.nil?
+                \-
+              - elsif keyword.last_day_google_change.positive?
+                .success.pointer.st-sort-ascent
+                  = keyword.last_day_google_change
+              - elsif keyword.last_day_google_change&.negative?
+                .success.pointer.st-sort-descent{ style: "color: red" }
+                  = keyword.last_day_google_change
+              - else
+                = keyword.last_day_google_change
+          %td.google_link
+            - if keyword.rank.nil?
+              \-
+            - else
+              %a#link.l-grey{ 'href': "#{keyword.url}", 'target': '_blank' }
+                %span #{keyword.url}
+          %td
+            - if keyword.search_volume.to_i < 10
+              Low
+            - else
+              = keyword.search_volume
+          %td
+            - if keyword.cpc.nil? || keyword.cpc.zero?
+              \-
+            - else
+              = keyword.cpc
+          -# %td
+          -#   - if keyword.kdi == -1
+          -#     \-
+          -#   - else
+          -#     = keyword.kdi
+    %tfoot
+      %tr
+        %td{ 'colspan': '7' }
+          .ui-2020
+            .row.pagination-wrapper.pull-left
+              .left.pagination-links
+                .pagination
+                  = will_paginate @keywords

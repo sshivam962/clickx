@@ -1,0 +1,53 @@
+.header
+	.row
+		.col-md-12
+			%h1
+				Categories
+		.clearfix
+.clearfix
+.pt-5
+	.bg-white.p-5.rounded
+		.d-flex
+			.col.w-25
+				.input-wrapper
+					%input.input-wrapper-input.input-add-cat(type="text")
+			.col.pl-3
+				%button.input-wrapper-btn.btn-add-cat(type= 'Submit') Add new category
+		%hr/
+		%form
+			.outscrapper-categories.col
+				= render 'super_admin/outscrapper/category_tab', categories: @categories
+
+:javascript
+	$( function() {
+		$( ".outscrapper-categories" ).sortable();
+	} );
+	$(document).on('click', '.btn-add-cat', function() {
+		var val = $('.input-add-cat').val();
+		if(val.length > 2) {
+		$.ajax({
+		url: "/s/external_leads/create_categories",
+		type: 'post',
+		data: {category: val},
+		success: function(result){
+		var newCatVal = '<label class="outscrapper-category"><input type="checkbox"><div class="outscrapper-category--name">'+val+'</div><span class="outscrapper-category--remove"><i class="fa fa-times"></i></span></label>'
+		$('.outscrapper-categories').append(newCatVal);
+		$('.input-add-cat').val('');
+		window.location.reload();
+		},
+		beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
+		});
+		}
+	});
+	$(document).on('click', '.outscrapper-category--remove', function() {
+	var category_id = $(this).parent('.outscrapper-category').children()[0].innerText.trim();
+	$.ajax({
+	url: "/s/external_leads/destroy_category",
+	type: "delete",
+	data: {category_id: category_id},
+	success: function(result){
+	window.location.reload();
+	},
+	beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
+	});
+	})

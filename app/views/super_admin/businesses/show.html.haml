@@ -1,0 +1,77 @@
+.page-header.clearfix
+  %h3
+    = @business.name
+    %small.pull-right
+      %a.btn.btn-warning.reset-btn.btn-reset.btn-sm.btn-sm-reset{"href":"/s/businesses"}
+        Back
+
+.history-section
+  %h4
+    %span.fa.fa-history
+    Recent activities
+    %small.pull-right
+      Select number of items
+      &nbsp;
+      %select#count.form-control.form-control-inline{:name => "count"}
+        %option 10
+        %option 25
+        %option 50
+        %option 100
+  - @activities.each do |activity|
+    .each-dates
+      .show-date
+        %span.fa.fa-calendar
+        = activity.created_at.strftime("%d-%m-%Y")
+      .in-a-day
+        .activities-date{"ng-repeat": "activity in activities_group[activities_date] track by $index"}
+          .show-case-created-at
+            = activity.created_at.strftime("%A,%b %dth %Y, %I:%M:%S %p")
+          .panel1{id: "panel1-#{activity.id}"}
+            %span.fa.fa-user
+            = "#{ activity.user.name if activity.user.present? } | #{@activities.count} #{ @activities.count == 1 ? "activity" : "activities" }"
+
+          .panel2{id: "panel2-#{activity.id}"}
+            = activity.created_at.strftime("%A,%b %dth %Y, %I:%M:%S %p")
+
+          :javascript
+            $('document').ready(function(){
+              $('#panel1-#{activity.id}').on('click', function(){
+                $('#panel2-#{activity.id}').show(300);
+              });
+            });
+
+    / .well{"ng-show":"activities_group.length == 0"}
+    /   We don't have any activities
+    / .history-pagination{"ng-hide":"activities_group.length == 0"}
+    /   %nav{"aria-label" => ""}
+    /     %ul.pager
+    /       %li
+    /         %a{:href => "#","ng-hide":"page==1","ng-click":"changePage($event, 'prev')"} Previous
+    /       %li
+    /         {{Math.ceil(total_entries/per_page)}}
+    /         %select.form-control.form-control-inline{"ng-model":"page","ng-change":"pageChange()"}
+    /           %option{"ng-repeat":"page_in in [] | range: get_num_pages()",value:"{{page_in + 1}}"} {{page_in + 1}}
+    /       %li
+    /         %a{:href => "#","ng-show":"page < get_num_pages()","ng-click":"changePage($event, 'next')"} Next
+
+:css
+  .panel1 {
+    color: #9e9e9e;
+    / background-color: #fafafa;
+    background-color: lightblue;
+    padding: 0px 16px 0px 16px;
+    line-height: 48px;
+    border-color: #ddd;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    overflow: hidden;
+    cursor: pointer;
+    margin:0 0 10px 0;
+  }
+  .panel2 {
+    display:none;
+    background-color: #ffc994;
+    font-size: 14px;
+    padding: 16px;
+  }

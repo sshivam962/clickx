@@ -1,0 +1,17 @@
+.page
+  .container
+    .row
+      .col-sm-12
+        #header.aligncenter.white
+          %h1 Notifications
+      .col-sm-12
+        %table.table.table-striped.table-left.table-anchortext
+          %tbody
+            - @all_notifications.each do |notification|
+              %tr
+                %td
+                  %a{href: view_notification_path(notification)}
+                    %span.notification-icon
+                    %i.material-icons remove_red_eye
+                    %h4 #{notification.content}
+                    %span.clx-text.clx-t-size-12 #{time_ago_in_words(notification.created_at)}

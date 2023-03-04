@@ -1,0 +1,31 @@
+.course_form
+  .row
+    .col-md-4
+      .form-group.no-margin-top
+        = f.label :t_shirt_size, 'T-shirt Size', class: 'control-label mt-n'
+        = f.select :t_shirt_size, options_for_select(['XS','S','M','L','XL','XXL'], (@user.t_shirt_size)), { prompt: 'Select T-shirt Size' }, {class: 'form-control', required: true}
+  .row
+    
+    .col-md-4
+      .form-group.no-margin-top
+        - @birth_month = ""
+        - if @user.birth_day.present? && @user.birth_month.present?
+          - @birth_month = @user.birth_day.to_s + '/' + @user.birth_month.to_s
+        = f.label :birth_month, 'When\'s your birthday?', class: 'control-label mt-n'
+        =# f.select :birth_month, options_for_select(Array(1..12), (@user.birth_month)), { prompt: 'Select Birth Month' }, {class: 'form-control', required: true}
+        = f.text_field :birth_month, value: @birth_month, class: 'form-control birth-day-input', placeholder: 'When\'s your birthday?', id:'birth_month', required: true
+  .form-group
+    = f.submit "Save", class: 'btn btn-raised btn-warning saveBtn'
+
+:javascript
+  $('.birth-day-input').datepicker( {
+    changeMonth: true,
+    changeYear: true,
+    showButtonPanel: true,
+    dateFormat: 'dd/mm',
+    beforeShow: function(input, inst) {
+      $('#ui-datepicker-div').addClass('birth-day-picker');
+    }
+  });
+
+  //$('#birth_month').val('01/04');

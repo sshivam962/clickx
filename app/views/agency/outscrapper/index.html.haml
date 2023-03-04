@@ -1,0 +1,44 @@
+- content_for :title do
+  External Requests | Clickx
+.page-heading.pt-md.pb-md.ui-2020
+  .row.align-items-center
+    .col-md-4
+      %h1
+        %i.clickx-icon-db.title-icon
+        External Data Requests
+
+  .header
+  .col-md-12.col-md-12.col-lg-12.mb-md
+  .locations
+    %span
+      .address.row.ml-n.mr-n{style: "margin-bottom: 30px"}
+        .col-md-12{style: "width: 10%"}
+          %b Serial no
+        .col-md-6{style: "width: 25%"}
+          %b Agency
+        .col-md-6{style: "width: 15%"}
+          %b Status
+        .col-md-6.text-center{style: "width: 25%"}
+          %b Created
+        .col-md-6.text-center{style: "width: 25%"}
+          %b Updated
+    - @outscrapper_requests.each_with_index do |request, i|
+      %span
+        .address.row.ml-n.mr-n{style: "margin-bottom: 30px; padding-bottom: 30px"}
+          .col-md-12{style: "width: 10%"}
+            = i+1
+          .col-md-6{style: "width: 25%"}
+            = request.agency.name
+          .col-md-6{style: "width: 15%"}
+            = request.outscrapper_status
+          .col-md-6.col-md-1.text-center{style: "width: 25%"}
+            = format_at_date(request.created_at)
+          .col-md-6.col-md-1.text-center{style: "width: 25%"}
+            = format_at_date(request.updated_at)
+
+  .ui-2020
+    .row.pagination-wrapper
+      .pagination
+        = will_paginate @outscrapper_requests
+
+

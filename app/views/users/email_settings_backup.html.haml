@@ -1,0 +1,24 @@
+%h1
+  Email Preferences
+= nested_form_for @user, html:{class:'nested-form'} do |f|
+  = f.fields_for :email_preferences do |ff|
+    .pull-left
+      %h3
+        = ff.object.key
+      - if ff.object.key == EmailPreference::WeeklyEmail
+        - ['enable', 'disable'].each do |x|
+          = ff.radio_button :email_frequency, x
+          = label_tag x.to_sym, x.titleize
+      - elsif ff.object.key == EmailPreference::ReviewEmail
+        - ['enable', 'disable'].each do |x|
+          = ff.radio_button :email_frequency, x
+          = label_tag x.to_sym, x.titleize
+      - elsif ff.object.key == EmailPreference::ContactEmail
+        - ['enable', 'disable'].each do |x|
+          = ff.radio_button :email_frequency, x
+          = label_tag x.to_sym, x.titleize
+  .form-group.pull-right
+    = f.button "Save", class:'btn btn-warning btn-sm'
+    %a.btn.btn-default{href: profile_path} Back
+
+

@@ -1,0 +1,21 @@
+%tr
+  %td{:align => "left", :style => "padding:10px;"}
+    - @upcoming_subscriptions.each do |upcoming_subscription|
+      - agency = Agency.find upcoming_subscription[:agency_id]
+      %b= agency.name
+      - if upcoming_subscription[:last_contacted].present?
+        %p= "(Last contacted - #{upcoming_subscription[:last_contacted]})"
+      %table{align: 'center', border: 0, cellpadding: 5, cellspacing: 0, width: '100%'}
+        %tbody
+          - upcoming_subscription[:items].each do |item|
+            %tr
+              %td{width: '30%'}
+                = item[:name]
+              %td{width: '25%'}
+                = item[:business_name]
+              %td.text-center{width: '20%'}
+                = "#{number_to_currency(item[:amount])}/#{item[:interval]}"
+              %td.text-center{width: '25%'}
+                = Time.at(item[:current_period_end]).strftime('%a, %d %b %Y')
+      %br
+      %br

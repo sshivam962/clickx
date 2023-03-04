@@ -1,0 +1,50 @@
+.row
+  .col-md-12
+    .tab-container
+      .tab-content{'st-table':"ad_ads", 'st-safe-src':"copy_ad_ads"}
+        .table-responsive
+          %table.table.table-hover.table-bordered.table-vam
+            %thead
+              %tr
+                %th.vam{'st-sort':'ad', style: "padding-right:190px;"}
+                  %u.help_pointer{'title': 'The PPC search terms that are driving traffic to your site'}
+                    Search Term
+                %th.text-center{'st-sort':'keyword'}
+                  %u.help_pointer{'title': 'The keywords present in your PPC search terms'}
+                    Keyword
+                %th.text-center{'st-sort':'match_type'}
+                  %u.help_pointer{'title': 'The type of PPC keywords that are driving you traffic via PPC ads'}
+                    Match Type
+                %th.text-center{'st-sort':'clicks'}
+                  %u.help_pointer{'title': 'Number of clicks you received through PPC ads by the given keywords'}
+                    Clicks
+                %th.text-center{'st-sort':'impressions'}
+                  %u.help_pointer{'title': 'Number of views your PPC ads got from the given keywords '}
+                    Impressions
+                %th.text-center{'st-sort':'numeric_avg_cost'}
+                  %u.help_pointer{'title': 'Average cost incurred for PPC ads for the given keywords'}
+                    Avg. Cost
+                %th.text-center{'st-sort':'ctr'}
+                  %u.help_pointer{'title': 'Percent of clicks your PPC ads got to that of impressions it received for the given keywords '}
+                    CTR
+                %th.text-center{'st-sort':'conversion'}
+                  %u.help_pointer{'title': 'Number of people who converted after clicking on your PPC ads for the given keywords'}
+                    Conversion
+                %th.text-center{'st-sort':'cost'}
+                  %u.help_pointer{'title': 'Cost per click incurred for PPC ads', 'title-direction': 'left' }
+                    Cost
+            %tbody
+              %tr{'ng-repeat':"ad in ad_ads"}
+                %td
+                  {{ad.query}}
+                  %add-remove-keywords{"keyword":"ad"}
+                %td.text-center {{ad.keyword}}
+                %td.text-center {{ad.match_type|titleize}}
+                %td.text-center {{ad.clicks}}
+                %td.text-center {{ad.impressions}}
+                %td.text-center ${{ad.average_cost|number:2}}
+                %td.text-center {{ad.ctr}}%
+                %td.text-center {{ad.conversions}}
+                %td.text-center
+                  ${{ad.cost/1000000 |number:2}}
+        %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}

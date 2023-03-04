@@ -1,0 +1,24 @@
+= content_for :title, 'Apply to Become a Partner'
+.signup-wrapper
+  .form-wrapper
+    = form_tag business_signup_path, method: :post, class: 'form-vertical cardy clickx-parsley',"data-parsley-validate":"" do
+      .d-xl-flex.justify-content-between.mb-5
+        .col
+          %a{href: '#'}
+            = image_tag 'logo.png'
+          %h3.m-0.mt-3 Start Your Free Plan
+
+      %h4.m-0.mb-4 Create Your Profile
+      = render 'business/signups/shared/profile'
+      .pb-5
+      %h4.m-0.mb-4 Billing Address
+      = render 'business/signups/shared/billing_address'
+      .pb-5
+      .input-card.mb-4
+        %label.checkbox
+          \&#160;&#160;I agree to the
+          %a{href: "http://www.clickx.io/terms/", target: "_blank"} Terms
+          and understand this is a non-refundable payment.
+          %input#tnc{checked: "checked", name: "checkboxs1", type: "checkbox", disabled: true, readonly: true}
+          %span.checkmark
+      %input.btn.btn-input{type: "submit", value: "Apply Now"}

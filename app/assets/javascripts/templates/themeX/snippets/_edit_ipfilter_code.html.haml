@@ -1,0 +1,18 @@
+%script{"type":"text/ng-template","id":"edit_ipfilter_code.html"}
+  %md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-compressed{'aria-label':'Edit IP Filter'}
+    %form.add-lead-m-form{name:"edit_ipfilter","ng-submit":"editIpFilter($event)"}
+      .modal-header
+        %button.close{"aria-hidden" => "true", "ng-click": "closeModal()", :type => "button"}
+          %span.fa.fa-times-circle-o
+        %h2.modal-title Edit IP Filter
+      %md-dialog-content
+        .md-dialog-content
+          .form-group{"ng-class":"{'has-warning':edit_ipfilter.name.$invalid && edit_ipfilter.$dirty}"}
+            %label.control-label IP Name
+            %input.form-control{"ng-model":"ip_filter.name","placeholder":"IP Name",name:"name",required:"required"}
+          .form-group{"ng-class":"{'has-warning':edit_ipfilter.ip.$invalid && edit_ipfilter.$dirty}"}
+            %label.control-label IP Address
+            %input.form-control{"ng-model":"ip_filter.ip","placeholder":"IP Address",name:"address",required:"required"}
+      %md-dialog-actions{'layout':'row'}
+        %button.btn.btn-raised.btn-primary{"data-dismiss" => "modal", :type => "button","ng-click":"closeModal()"} Close
+        %button.btn.btn-info.btn-raised{:type => "submit","ng-disabled":"edit_ipfilter.$invalid"} Save Changes

@@ -1,0 +1,275 @@
+.pagge-middle
+  = form_for @profile, url: network_profile_path, id: 'network_form', method: :patch do |f|
+    .profile-top
+      - cover_image_url = @profile.background_image.present? ? @profile.background_image : image_path('network/cover-image.png')
+      .profile-cover{:style => "background: url(#{cover_image_url});"}
+        .edit-cover-image
+          = file_field_tag :background_image, class: 'custom-file-input', 'onchange': 'upload_background_image(this.files[0]);'
+          %div
+            %i.fa.fa-camera.text-lg.mr-2
+            %span.fs-sm Edit Cover Image
+      .bg-white.shadow-md
+        .container.mx-auto.px-4
+          .lg:flex.items-starting.profile-details.text-center.sm:text-left.relative.z-10
+            - logo_url = @profile.user.logo.present? ? @profile.user.logo : image_path('network/profile-avatar.png')
+            .avatar.profile-avatar.mx-auto.lg.mx-0.logo_upload{style: "background-image: url(#{logo_url});"}
+              .edit-avatar
+                = file_field_tag :user_logo, class: 'custom-file-input', 'onchange': 'upload(this.files[0]);'
+                %span
+                  %i.fa.fa-camera
+            .col.text-center.lg:text-left.flex-1.lg:pl-8.py-6
+              .mb-3
+                = text_field_tag :first_name, current_user.first_name, class: 'text-4xl font-light leading-6 block w-full border px-2 rounded-lg', placeholder: 'First Name'
+              .mb-3
+                = text_field_tag :last_name, current_user.last_name, class: 'text-4xl font-light leading-6 block w-full border px-2 rounded-lg', placeholder: 'Last Name'
+              %div
+                = f.text_field :description, id: "description", class: 'text-gray-700 block w-full border px-2 rounded-lg', placeholder: 'Headline'
+              .pb-5
+              .flex.items-center.justify-center.lg:justify-start.text-gray-700.flex-wrap.gap-2
+                .col.pr-4.w-full.sm:w-auto Availability
+                .coltext-blue-400
+                  .custom-select.custom-select--sm.bg-secondary.text-white
+                    = f.select :available_hours, [["0-10","0-10"],["10-20","10-20"],["20-30","20-30"],["30-40","30-40"]], {prompt: 'Hours'}, id: "available_hours", class: 'border px-2 rounded w-full'
+                .col
+                  .custom-select.custom-select--sm.bg-secondary.text-white
+                    = f.select :time_period, [["hrs/day","day"],["hrs/week","week"],["hrs/month","month"]], {prompt: 'Time Period'}, id: "time_period", class: 'border px-2 rounded w-full'
+              .grid.sm:grid-cols-2.gap-4.pt-5.flex-wrap
+                %div{"class" =>"col"}
+                  .s_flex
+                    %i.fa.fa-linkedin.mr-2
+                    = f.text_field :linkedin, class: 'font-light leading-6 block w-full border px-2 rounded-md', id: 'linkedin', placeholder: 'Linkedin Profile URL', readonly: true
+                %div{"class" =>"col"}
+                  .s_flex
+                    %i.fa.fa-facebook.mr-2
+                    = f.text_field :facebook, class: 'font-light leading-6 block w-full border px-2 rounded-md', id: 'facebook', placeholder: 'Facebook Profile URL'
+                %div{"class" =>"col"}
+                  .s_flex
+                    %i.fa.fa-instagram.mr-2
+                    = f.text_field :instagram, class: 'font-light leading-6 block w-full border px-2 rounded-md', id: 'instagram', placeholder: 'Instagram Profile URL'
+                %div{"class" =>"col"}
+                  .s_flex
+                    %i.fa.fa-dribbble.mr-2
+                    = f.text_field :dribbble, class: 'font-light leading-6 block w-full border px-2 rounded-md', id: 'dribbble', placeholder: 'Dribbble Profile URL'
+              /
+                <div class="flex justify-center lg:justify-end mt-4 pb-8 lg:pb-0 lg:mt-4 lg:-mb-5">
+                <button class="btn uppercase shadow-md btn--hire">Hire Me</button>
+                </div>
+    .pt-12.bg-cover{:style => "background: url(image_path('/network/profile-section-bg.png'));"}
+      .container.mx-auto.px-4
+        .border.bg-light-blue.border-blue-200.rounded-md.mb-8
+          .bg-white.py-4.px-4.rounded-t-md
+            .text-lg.color-dark-blue.font-medium Overview
+          .lg:p-5.p-4
+            .editor
+              = f.cktext_area :overview, ckeditor: { toolbar: 'support' }
+            .text-center.pt-8.pb-3
+              .custom-file-input.btn.btn--blue.shadow-md
+                %span UPLOAD RESUME
+                = file_field_tag :cv, class: 'text-blue', 'onchange': 'upload_pdf(this.files[0]);'
+
+        .border.bg-light-blue.border-blue-200.rounded-md.mb-8
+          .bg-white.py-4.px-4.rounded-t-md
+            .text-lg.color-dark-blue.font-medium What I Do
+          .lg:p-5.p-4
+            .grid.grid-cols-1.md:grid-cols-2.gap-4
+              = f.fields_for :work_profiles do |ff|
+                = render 'work_profile_fields', f: ff, new_form: false
+              .btn-add
+                = link_to_add_association '+', f, :work_profiles, render_options: {locals: { new_form: true }}
+        .border.bg-light-blue.border-blue-200.rounded-md.mb-8
+          .bg-white.py-4.px-4.rounded-t-md
+            .text-lg.color-dark-blue.font-medium Professional Skills
+          .lg:p-5.p-4
+            .grid.grid-cols-1.sm:grid-cols-2.gap-10
+              = f.fields_for :skills do |ff|
+                - n = ff.options[:child_index]
+                .skill-item
+                  .flex.justify-between.mb-3.text-sm
+                    .col-auto
+                      = ff.text_field :name, class: 'block w-full border px-2 rounded-lg', placeholder: 'Skill'
+                    .col-auto
+                      = ff.number_field :value, class: 'block w-full border px-2 rounded-lg', placeholder: 'Percentage', min: 0, step: 0.1
+                  .skill-range
+                    .skill-range-percentage{id: "progress_bar_#{n}", :style => "width:#{:value}%"}
+                :javascript
+                  $(document).ready(function(){
+                    var value = $('input[name="network_profile[skills_attributes][#{n}][value]"]').val();
+                    $("#progress_bar_#{n}").css('width', value + '%');
+
+                    $('input[name="network_profile[skills_attributes][#{n}][value]"]').keyup(function(){
+                      $("#progress_bar_#{n}").css('width', $(this).val() + '%');
+                    });
+
+                    $('input[name="network_profile[skills_attributes][#{n}][value]"]').change(function(){
+                      $("#progress_bar_#{n}").css('width', $(this).val() + '%');
+                    });
+                  });
+
+    -#     .card.bg-white.shadow-xl.p-6.md:p-10.lg:p-12.rounded-xl.mb-12
+    -#       .section-title
+    -#         %h4 Portfolio
+    -#       .grid.grid-cols-1.sm:grid-cols-2.gap-8.px-2.md:px-4.lg:px-10
+    -#         = f.fields_for :network_portfolios do |ff|
+    -#           .col
+    -#             .portfolio-item.mb-8
+    -#               .thumbnail-wrap.mb-8
+    -#                 = image_tag 'network/default-thumbnail.png'
+    -#               = ff.text_field :heading, class: 'text-lg font-light mb-2 block w-full border px-2 rounded-lg', placeholder: 'Heading'
+    -#               = ff.text_area :paragraph, class: 'font-light mb-2 block w-full border px-2 rounded-lg auto-height', placeholder: 'Paragraph'
+    -#     .pt-1
+
+    .bg-light-blue
+      .mx-auto.px-8
+        .grid.grid-cols-1.sm:grid-cols-2.lg:grid-cols-4.text-center.gap-2.lg:gap-10.text-gray-700.py-12.lg:py-0
+          .col.lg:py-12.py-4
+            .pb-1.md:pb-2.lg:pb-3
+              .iconpicker
+                .iconpicker-icon-holder.iconpicker-icon-holder--edit.w-24.h-24.rounded-full.border.leading-loose
+                  %span.edit-icon.absolute.bg-gray-300.edit-icon.leading-8.right-0.rounded-full.top-0.w-8
+                    %i.fa.fa-pencil
+                  - icon = @profile.stats['1'].present? ? @profile.stats['1']['icon'] : 'fa fa-plane'
+                  .iconpicker-icon.text-5xl
+                    %i{class: icon}
+                  = f.text_field :stats, class: 'iconpicker-value', :type => "hidden", :value => icon, name: "network_profile[stats][1][icon]"
+                = render 'icon_picker_popup'
+            = f.text_field :stats, class: "text-xl lg:text-3xl block w-full border px-2 rounded-lg auto-height bg-transparent text-center mb-2", :type => "text", :value => @profile.stats['1'].present? ? @profile.stats['1']['title'] : '', :placeholder => "Title", name: "network_profile[stats][1][title]"
+            = f.text_field :stats, class: "text-sm lg:text-lg w-full inline-block w-24 border px-2 rounded-lg auto-height bg-transparent text-center uoppercase", :type => "text", :value => @profile.stats['1'].present? ? @profile.stats['1']['value'] : '', :placeholder => "Value", name: "network_profile[stats][1][value]"
+          .col.lg:py-12.py-4
+            .pb-1.md:pb-2.lg:pb-3
+              .iconpicker
+                .iconpicker-icon-holder.iconpicker-icon-holder--edit.w-24.h-24.rounded-full.border.leading-loose
+                  %span.edit-icon.absolute.bg-gray-300.edit-icon.leading-8.right-0.rounded-full.top-0.w-8
+                    %i.fa.fa-pencil
+                  - icon = @profile.stats['2'].present? ? @profile.stats['2']['icon'] : 'fa fa-bell'
+                  .iconpicker-icon.text-5xl
+                    %i{class: icon}
+                  = f.text_field :stats, class: 'iconpicker-value', :type => "hidden", :value => icon, name: "network_profile[stats][2][icon]"
+                = render 'icon_picker_popup'
+            = f.text_field :stats, class: "text-xl lg:text-3xl block w-full border px-2 rounded-lg auto-height bg-transparent text-center mb-2", :type => "text", :value => @profile.stats['2'].present? ? @profile.stats['2']['title'] : '', :placeholder => "Title", name: "network_profile[stats][2][title]"
+            = f.text_field :stats, class: "text-sm lg:text-lg w-full inline-block w-24 border px-2 rounded-lg auto-height bg-transparent text-center uoppercase", :type => "text", :value => @profile.stats['2'].present? ? @profile.stats['2']['value'] : '', :placeholder => "Value", name: "network_profile[stats][2][value]"
+          .col.lg:py-12.py-4
+            .pb-1.md:pb-2.lg:pb-3
+              .iconpicker
+                .iconpicker-icon-holder.iconpicker-icon-holder--edit.w-24.h-24.rounded-full.border.leading-loose
+                  %span.edit-icon.absolute.bg-gray-300.edit-icon.leading-8.right-0.rounded-full.top-0.w-8
+                    %i.fa.fa-pencil
+                  - icon = @profile.stats['3'].present? ? @profile.stats['3']['icon'] : 'fa fa-apple'
+                  .iconpicker-icon.text-5xl
+                    %i{class: icon}
+                  = f.text_field :stats, class: 'iconpicker-value', :type => "hidden", :value => icon, name: "network_profile[stats][3][icon]"
+                = render 'icon_picker_popup'
+            = f.text_field :stats, class: "text-xl lg:text-3xl block w-full border px-2 rounded-lg auto-height bg-transparent text-center mb-2", :type => "text", :value => @profile.stats['3'].present? ? @profile.stats['3']['title'] : '', :placeholder => "Title", name: "network_profile[stats][3][title]"
+            = f.text_field :stats, class: "text-sm lg:text-lg w-full inline-block w-24 border px-2 rounded-lg auto-height bg-transparent text-center uoppercase", :type => "text", :value => @profile.stats['3'].present? ? @profile.stats['3']['value'] : '', :placeholder => "Value", name: "network_profile[stats][3][value]"
+          .col.lg:py-12.py-4
+            .pb-1.md:pb-2.lg:pb-3
+              .iconpicker
+                .iconpicker-icon-holder.iconpicker-icon-holder--edit.w-24.h-24.rounded-full.border.leading-loose
+                  %span.edit-icon.absolute.bg-gray-300.edit-icon.leading-8.right-0.rounded-full.top-0.w-8
+                    %i.fa.fa-pencil
+                  - icon = @profile.stats['4'].present? ? @profile.stats['4']['icon'] : 'fa fa-chrome'
+                  .iconpicker-icon.text-5xl
+                    %i{class: icon}
+                  = f.text_field :stats, class: 'iconpicker-value', :type => "hidden", :value => icon, name: "network_profile[stats][4][icon]"
+                = render 'icon_picker_popup'
+            = f.text_field :stats, class: "text-xl lg:text-3xl block w-full border px-2 rounded-lg auto-height bg-transparent text-center mb-2", :type => "text", :value => @profile.stats['4'].present? ? @profile.stats['4']['title'] : '', :placeholder => "Title", name: "network_profile[stats][4][title]"
+            = f.text_field :stats, class: "text-sm lg:text-lg w-full inline-block w-24 border px-2 rounded-lg auto-height bg-transparent text-center uoppercase", :type => "text", :value => @profile.stats['4'].present? ? @profile.stats['4']['value'] : '', :placeholder => "Value", name: "network_profile[stats][4][value]"
+
+      .text-center.pb-10
+        = f.submit "Save", class: 'btn btn-warning'
+:javascript
+  var upload = function(file) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      var params = {
+        user: {
+          logo: reader.result
+        }
+      };
+      $.ajax({
+        url: "/n/profile/update_logo",
+        type: 'patch',
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: params
+      });
+   };
+  };
+
+  var upload_background_image = function(file) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      var params = {
+        profile: {
+          background_image: reader.result
+        }
+      };
+      $.ajax({
+        url: "/n/profile/update_background_image",
+        type: 'patch',
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: params
+      });
+   };
+  };
+
+  var upload_pdf = function(file) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      var params = {
+        user: {
+          cv: reader.result
+        }
+      };
+      $.ajax({
+        url: "/n/profile/upload_pdf",
+        type: 'patch',
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: params
+      });
+    };
+  };
+
+  (function($){
+    $(document).on('click','.iconpicker .iconpicker-icon-holder .iconpicker-icon', function(){
+      var iconPickerPopup = $(this).parents('.iconpicker').find('.iconpicker-popup');
+      $('.iconpicker').find('.iconpicker-popup').slideUp();
+      if($(iconPickerPopup).is(':visible')) {
+        $(this).parents('.iconpicker').removeClass('open')
+        iconPickerPopup.slideUp();
+      } else {
+        iconPickerPopup.slideDown();
+        $(this).parents('.iconpicker').addClass('open')
+      }
+    });
+    $('.iconpicker .iconpicker-popup').on('click', 'a', function (e) {
+      e.preventDefault();
+      var iconClass = $(this).data('icon'),
+          inputField = $(this).parents('.iconpicker').find('.iconpicker-value'),
+          iconHolder = $(this).parents('.iconpicker').find('.iconpicker-icon i');
+      iconHolder.attr('class', '');
+      iconHolder.addClass(iconClass);
+      inputField.val(iconClass);
+    });
+    $('.iconpicker .iconpicker-popup').on('change keyup paste input', 'input.iconpicker-search-input', function (e) {
+      var iconPickerPopup = $(this).parents('.iconpicker').find('.iconpicker-popup ul'),
+          searchVal = $(this).val();
+      if( searchVal.length == 0 ){
+        console.log(1);
+        iconPickerPopup.find('li').removeClass('hidden');
+      } else {
+        console.log(2);
+        iconPickerPopup.find('li').addClass('hidden');
+        var found = iconPickerPopup.find('li a[data-icon*="'+searchVal+'"]');
+        found.parent('li').removeClass('hidden');
+      }
+    });
+    $(document).click(function (e){
+      var iconPicker = $('.iconpicker'),
+          iconPickerPopup = $(iconPicker).find('.iconpicker-popup');
+        if ( ( ! iconPicker.is(e.target) && iconPicker.has(e.target).length === 0)){
+            iconPickerPopup.stop().slideUp();
+        }
+    });
+  })(jQuery)

@@ -1,0 +1,2 @@
+$('#modal_container').html("<%= escape_javascript render( partial: 'agency/clients/shared/lead_info', locals: { lead: @lead }) %>");
+$('#lead-info-modal.modal').modal('show')

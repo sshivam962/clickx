@@ -1,0 +1,27 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Local-Listings.title-icon>
+    Add New Location
+    %i.fa.fa-info-circle.tooltip-text-icon{'title': 'This tool helps you add new local listings for your company easily.'}
+    %small
+
+.container-fluid
+  = form_with model: @location, url: business_locations_path, method: :post, id: 'location_form', class: 'form-horizontal', local: true do |f|
+    = render "business/locations/form/basic", f: f
+    = render "business/locations/form/details", f: f
+    = render "business/locations/form/description", f: f
+
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.2/parsley.min.js"}
+
+:javascript
+  window.ParsleyConfig = {
+    validationThreshold: 0,
+    successClass: 'has-success',
+    errorClass: 'has-error',
+    errorElem: '<span></span>',
+    errorsWrapper: '<span class="help-block"></span>',
+    errorTemplate: "<div></div>",
+    classHandler: function(el) {
+      return el.$element.closest(".form-group");
+    }
+  };

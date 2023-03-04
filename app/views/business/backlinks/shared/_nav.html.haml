@@ -1,0 +1,17 @@
+.container-fluid
+  %div
+    .row
+      .col-md-12
+        %ul.nav.nav-tabs.material-nav-tabs.mb-lg
+          %li#overview-tab
+            = link_to 'Overview', business_backlinks_path
+          %li#backlinks-tab
+            = link_to 'Backlinks', all_business_backlinks_path
+          %li#anchor-text-tab
+            = link_to 'Anchor Text', anchor_text_business_backlinks_path
+          %li#topics-tab
+            = link_to 'Topics', topics_business_backlinks_path
+          %li#pages-tab
+            = link_to 'Pages', pages_business_backlinks_path
+          %li#referring-domains-tab
+            = link_to 'Referring Domains', referring_domains_business_backlinks_path

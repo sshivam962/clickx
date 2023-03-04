@@ -1,0 +1,19 @@
+---
+:queues:
+  - [outscrapper_import_queue, 5]
+  - [outscrapper_refresh_queue, 5]
+  - [upload_contact, 5]
+  - [kw_priority_queue, 5]
+  - [search_results_priority_queue, 5]
+  - [kw_delayed_queue, 3]
+  - [search_results_delayed_queue, 3]
+  - [mailers, 2]
+  - [site_audit_callback_queue, 2]
+  - [default, 1]
+  - [low_priority, 1]
+
+staging:
+  :concurrency: <%= ENV['SIDEKIQ_CONCURRENCY'] || 2 %>
+production:
+  :concurrency: <%= ENV['SIDEKIQ_CONCURRENCY'] || 25 %>
+  :max_retries: <%= ENV['SIDEKIQ_MAX_RETRIES'] || 25 %>

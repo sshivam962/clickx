@@ -1,0 +1,8 @@
+<% if @lead.errors.present? %>
+  toastr.error("<%= @lead.errors.full_messages.to_sentence %>")
+<% else %>
+  $(".lead_body_<%= @lead.id%>").remove();
+  $("#lead_<%= @lead.id%>").remove();
+  toastr.success("Lead Archived");
+<% end %>
+

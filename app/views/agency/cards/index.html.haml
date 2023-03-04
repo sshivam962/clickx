@@ -1,0 +1,48 @@
+- content_for :title do
+  Payment Cards | Clickx
+.page-heading.bg-white.mb-4
+  .d-flex.justify-content-between.flex-wrap
+    .coll.my-2
+      %h1 Payment Cards
+.container-fluid
+  .container-sm
+    .bg-white.p-3.p-md-5.rounded.d-table.mx-auto.mb-5
+      = form_tag set_default_agency_cards_path, id: 'set_default_form', method: :post, remote: true do
+        .saved-cards.bg-white.rounded
+          - @cards.each do |card|
+            %label.saved-card.d-block
+              .d-flex.align-items-center
+                .column
+                  .styled-radio.mb-0
+                    = radio_button_tag 'default_card', card[:id], @default_card.eql?(card[:id]), class: 'default_card_radio'
+                    .styled-radio-label 
+                      %span 
+                .column.flex-col.pl-3.pr-4.pr-sm-5
+                  .text-darkblue.fs-14
+                    %span Ending in: 
+                    %span.fw-m ..#{card[:last4]}
+                  .text-muted.fs-xxs
+                    .d-inline-block
+                      = "#{card[:brand]}"
+                    .d-inline-block
+                      = "Expires on #{card[:exp_month]}/#{card[:exp_year]}"
+                .column.fs-24.text-darkblue
+                  %i.fa{class: "fa-#{cc_icon_klass(card[:brand])}", aria: {hidden: true}}
+        .py-3
+        %a.btn.btn-info.btn-block{href: new_agency_card_path}
+          %span.fa.fa-plus.mr-3
+          Add Card
+
+:javascript
+  $('input[type=radio][name=default_card]').change(function() {
+    $('#set_default_form').submit();
+    $('.default_card_radio').attr('disabled', 'disabled');
+  });
+  $(window).load(function() {
+    selectedRadio = $('.saved-card').find('input[type="radio"]:checked');
+    $(selectedRadio).parents('.saved-card').addClass('active');
+  })
+  $(document).on('change', '.saved-card input[type="radio"]', function() {
+    $('.saved-card').removeClass('active');
+    $(this).parents('.saved-card').addClass('active');
+  })

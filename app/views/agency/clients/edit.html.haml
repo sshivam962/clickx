@@ -1,0 +1,152 @@
+- content_for :title do
+  Edit Business - #{@client.name}
+.page-content
+  .page-heading.mb-n.pb-md
+    %h1 Edit Business - #{@client.name}
+  .clickx-breadcrumb-wrapper
+    %ol.breadcrumb.clx-breadcrumb
+      %li
+        %a{href: '/clients'} Clients
+      %li
+        Edit - #{@client.name}
+  .container-fluid
+    .row
+      .col-md-12
+        .tab-container
+          .panel.panel-default
+            .panel-body
+              = form_for @client, url: agency_client_path(@client.id), method: :patch, class: 'form-vertical cardy clickx-parsley',"data-parsley-validate": '' do |f|
+                .row
+                  .form-group.mt-md
+                    .col-md-3
+                      %label.control-label Company Name
+                    .col-md-4
+                      = f.text_field :name, class: 'form-control', required: true
+                .row
+                  .form-group.mt-md
+                    .col-md-3
+                      %label.control-label Domain Name(eg: example.com)
+                    .col-md-4
+                      - if f.object.domain.present?
+                        = f.text_field :domain, class: 'form-control', required: true, disabled: true
+                      - else
+                        = f.text_field :domain, class: 'form-control', required: true
+                .row
+                  .form-group.mt-md
+                    .col-md-3
+                      %label.control-label Country
+                    .col-md-4
+                      = f.select :locale, LOCALE_CODES.map{|l| [l['country'], l['locale']]}, {}, required: true, class: 'form-control'
+                .row
+                  .form-group.mt-md
+                    .col-md-3
+                      %label.control-label Target City(eg: Chicago)
+                    .col-md-4
+                      = f.text_field :target_city, class: 'form-control', required: true
+                .row
+                  .form-group.mt-md
+                    .col-md-3
+                      %label.control-label Keyword Ranking
+                    .col-md-1
+                      = f.check_box :seo_service, class: 'mt-md'
+                    .col-md-8.seo_service_limit_block{class: "#{'hidden' unless f.object.seo_service}"}
+                      .col-md-1.p-n
+                        %label.control-label Limit :
+                      .col-md-2.p-n
+                        = f.number_field :keyword_limit, max: current_agency.remaining_keywords, class: 'form-control pt-md'
+                      .col-md-9.mt-md
+                        %span.help-inline
+                        = "#{current_agency.remaining_keywords} Keywords Remaining"
+                .row
+                  .form-group.mt-md
+                    .col-md-3
+                      %label.control-label Site Audit
+                    .col-md-4
+                      = f.check_box :site_audit_service, class: 'mt-md'
+                .row
+                  .form-group.mt-md
+                    .col-md-3
+                      %label.control-label Backlinks
+                    .col-md-4
+                      = f.check_box :backlink_service, class: 'mt-md'
+                .row
+                  .form-group.mt-md
+                    .col-md-3
+                      %label.control-label Call Analytics
+                    .col-md-4
+                      = f.check_box :call_analytics_service, class: 'mt-md'
+
+                .row
+                  .form-group.mt-md
+                    .col-md-3
+                      %label.control-label Content Service
+                    .col-md-4
+                      = f.check_box :contents_service, class: 'mt-md'
+                .row
+                  .form-group.mt-md
+                    .col-md-3
+                      %label.control-label Competitor Tracking
+                    .col-md-1
+                      = f.check_box :competitors_service, class: 'mt-md'
+                    .col-md-8.competitors_service_limit_block{class: "#{'hidden' unless f.object.competitors_service}"}
+                      .col-md-1.p-n
+                        %label.control-label Limit :
+                      .col-md-2.p-n
+                        = f.number_field :competitors_limit, max: current_agency.remaining_competitors, class: 'form-control pt-md'
+                      .col-md-9.mt-md
+                        %span.help-inline
+                        = "#{current_agency.remaining_competitors} Competitors Remaining"
+                .row
+                  .form-group.mt-md
+                    .col-md-3
+                      %label.control-label Reputation Management
+                    .col-md-4
+                      = f.check_box :reputation_service, class: 'mt-md'
+                .row
+                  .form-group.mt-md
+                    .col-md-3
+                      %label.control-label Logo
+                    .col-md-6
+                      = f.file_field :logo, class: 'invisible'
+                      %a.btn.btn-raised.btn-md{href: 'javascript:void(0)', title: 'upload image (png image is preferred)', onClick: "$('#business_logo').click()"} Upload logo
+                      %span
+                        %i (Recommended Size is 1000 x 200 px)
+                .row
+                  .col-md-3
+                  .col-md-3
+                    %img#business-logo.img-responsive{src: f.object.logo, style: 'max-height:150px'}
+                .col-md-12
+                  %span.text-gray
+                    %button#save_basic.btn.btn-success.btn-raised.btn-label.btn-lg{ "type": "submit", 'ng-click' => "submitted=true" } Update Client
+:javascript
+  $('#business_logo').change(function(event){
+    var input = $(event.currentTarget);
+    var file = input[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+       image_base64 = e.target.result;
+       $("#business-logo").attr("src", image_base64);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  $("#business_competitors_service").change(function() {
+    if(this.checked) {
+      $('.competitors_service_limit_block').removeClass('hidden')
+    }else{
+      $('.competitors_service_limit_block').addClass('hidden')
+    }
+  });
+
+  $("#business_seo_service").change(function() {
+    if(this.checked) {
+      $('.seo_service_limit_block').removeClass('hidden')
+    }else{
+      $('.seo_service_limit_block').addClass('hidden')
+    }
+  });
+
+  $("#business_locale").change(function() {
+    city = $("#business_locale option:selected").text().split('-')[0].trim() || 'United States';
+    $('#business_target_city').val(city)
+  })

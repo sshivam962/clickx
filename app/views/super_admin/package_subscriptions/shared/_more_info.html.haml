@@ -1,0 +1,40 @@
+#subscription-more-info-modal.modal.fade{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg{role: 'document'}
+    .modal-content
+      .modal-header
+        More Info - #{subscription.package_name.titleize}
+        %a.close.pl-md{'data-dismiss': 'modal'}
+          %span ×
+      .modal-body
+        - if subscription.business.present?
+          .row
+            .col-sm-4
+              .author
+                Agency
+            .col-sm-8
+              .author
+                %b
+                  = subscription.business.name
+        .row
+          .col-sm-4
+            .author
+              Business
+          .col-sm-8
+            .author
+              %b
+                = subscription.agency.name
+        %br
+        %h5
+          Payments
+        - subscription.payments.each do |payment|
+          .row
+            .col-sm-8
+              .author
+                = payment.description
+            .col-sm-4
+              %b
+                - if payment.subscription?
+                  = "#{number_to_currency(payment.amount, precision: 0)}/mo"
+                - else
+                  = number_to_currency(payment.amount, precision: 0)
+

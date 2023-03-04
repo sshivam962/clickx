@@ -1,0 +1,20 @@
+.bg-dark.pt-5.pb-5.overall_grade
+  .panel.no-shadow
+    .panel-body.pb-0.pb-lg-xxl.pt-xxl
+      .container.mw-100.pl-0.pr-0
+        #overall_grade
+          = render partial: 'public/grader_reports/shared/overall_grade'
+.container.mw-100
+  .row.grader.ff2
+    .pt-5.mt-5.col-sm-12
+      %h2.pb-5.m-0 Grade Breakdown
+      #onpage_optimization.row.mb-5
+        = render partial: 'public/grader_reports/shared/onpage_optimization'
+      -# #offpage_optimization.row.mb-5
+      -#   = render partial: 'public/grader_reports/shared/offpage_optimization'
+      #web_performance.mb-5
+        = render partial: 'public/grader_reports/shared/web_performance'
+      #competitors.mb-5
+        = render partial: 'public/grader_reports/shared/competitors'
+      #calendly.mb-5
+        = render partial: 'public/grader_reports/shared/calendly'

@@ -1,0 +1,18 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Agencies List - #{Time.now.strftime('%b %d, %Y')}") do |sheet|
+  sheet.add_row([
+    'Name', 'Address', 'Created Date', 'Lead count','Client count',
+    'Active subscription', 'Users'
+  ])
+  @agencies.each do |agency|
+    sheet.add_row([
+      agency.name,
+      agency.address,
+      agency.created_at.to_date,
+      agency.leads.size,
+      agency.businesses.size,
+      agency.active_package_subscriptions.pluck(:package_name).map(&:titleize).join(', '),
+      agency.normal_users.map(&:name).join(', ')
+    ])
+  end
+end

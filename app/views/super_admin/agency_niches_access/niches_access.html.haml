@@ -1,0 +1,56 @@
+- content_for :title do
+  Agency Niches Access | Clickx
+.content.p-n
+  .page-header
+    %h3
+      Manage Agency Niches Access
+      %small.pull-right
+        %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{:href => "/s/agencies"} Back
+  - unless @agency_niches_full_access.present?
+    %span
+      Give Access To All The Niches
+      %a.btn.btn-warning.m-0.px-4{href:give_access_super_admin_agency_niches_access_path(@agency, full_access: 'true'), data: {remote: true, method: :post}}
+        %i.fa.fa-arrow-right
+    .spacer30
+    %span
+      Give Access By Selecting Niches
+      %a.btn.btn-warning.m-0.px-4#by_niche_btn{href: niches_list_super_admin_agency_niches_access_path(@agency), data: {remote: true}}
+        %i.fa.fa-chevron-down
+      %a.btn.btn-warning.m-0.px-4#by_niche_close_btn.hidden{:href => "javascript:void(0)"}
+        %i.fa.fa-chevron-up
+    %a.btn.btn-success.m-0.px-4#give_access_btn.hidden{style: "pointer-events:none;", disabled: :disabled, data: {url: give_access_super_admin_agency_niches_access_path(@agency), fullaccess: 'false'}}
+      Save
+  - else
+    %span
+      Access Given To All Niches
+      %i.fa.fa-check
+    = link_to 'Cancel', cancel_access_super_admin_agency_niches_access_path(@agency), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger m-0 px-4'
+
+  #by_niche_container
+
+:javascript
+  $('#by_niche_close_btn').on('click', function() {
+    $('#by_niche_container').empty();
+    $('#give_access_btn').addClass('hidden');
+    $(this).addClass('hidden');
+    $('#by_niche_btn').show();
+  });
+
+  $('#give_access_btn').on('click', function(){
+    var url = $(this).data('url');
+    var full_access = $(this).data('fullaccess');
+    industries_ids = [];
+    $("input:checkbox[name=industries_ids]:checked").each(function () {
+      id = $(this).attr("id");
+      industries_ids.push(id);
+    });
+    $.ajax({
+      url: url,
+      type: 'post',
+      data: {
+        full_access: full_access,
+        industries_ids: industries_ids
+        },
+      dataType: 'script'
+    });
+  });

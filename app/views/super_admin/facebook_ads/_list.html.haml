@@ -1,0 +1,16 @@
+.row.d-flex.flex-wrap
+  - @facebook_ads.each do |facebook_ad|
+    .col-md-4.col-sm-6.col-xs-12.mb-5
+      .bg-white.rounded.p-4.h-100{ id: "facebook_ad-#{facebook_ad.id}"}
+        .pb-5
+          .preview-thumb{:style => "background-image: url(#{facebook_ad.thumbnail&.file&.url})"}
+        .pt-4.fs-md.d-flex.flex-wrap.align-items-center
+          = link_to super_admin_facebook_ad_path(facebook_ad), class: 'btn btn-default grey-btn-icon d-flex align-items-center mx-1 my-0 py-1 fs-xxs px-3' do
+            %i.glyphicon.glyphicon-eye-open.mr-2
+            View
+          = link_to edit_super_admin_facebook_ad_path(facebook_ad), "data-placement" => "bottom", class: 'btn btn-default grey-btn-icon d-flex align-items-center mx-1 my-0 py-1 fs-xxs px-3' do
+            %i.glyphicon.glyphicon-pencil.mr-2
+            Edit
+          = link_to super_admin_facebook_ad_path(facebook_ad), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger grey-btn-icon d-flex align-items-center mx-1 my-0 py-1 fs-xxs px-3' do
+            %i.fa.fa-trash.mr-2
+            Delete

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="534" height="833" viewBox="0 0 534 833">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_5263" data-name="Rectangle 5263" width="534" height="833" transform="translate(885)" fill="#f8b018"/>
+    </clipPath>
+  </defs>
+  <g id="bg-logo" transform="translate(-885)" clip-path="url(#clip-path)">
+    <g id="Group_160" data-name="Group 160" transform="translate(490 0.445)" opacity="0.213">
+      <path id="Path_19" data-name="Path 19" d="M259.964,289.062a44.407,44.407,0,0,0,62.183-8.849c.326-.412.634-.84.926-1.269L475.016,72.812a44.406,44.406,0,0,0-8.849-62.183c-.411-.326-.84-.635-1.269-.926a44.407,44.407,0,0,0-62.183,8.849c-.326.412-.635.84-.926,1.269L250.018,225.61A45.61,45.61,0,0,0,259.964,289.062Z" transform="translate(546.213 -0.801)" fill="#fff"/>
+      <path id="Path_20" data-name="Path 20" d="M424.657,336.45a47.336,47.336,0,0,0,63.109,9.089,45.105,45.105,0,0,0,9.089-63.109L322.962,46.973a45.126,45.126,0,0,0-73.056,52.991Z" transform="translate(545.128 443.991)" fill="#fff"/>
+      <path id="Path_21" data-name="Path 21" d="M571.081,356.207,454.123,197.921,321.731,19.4A45.781,45.781,0,0,0,258.621,9.28,45.78,45.78,0,0,0,248.5,72.389L455.666,353.806l2.572,3.6a48.528,48.528,0,0,1,0,56.421L228.1,725.77a45.125,45.125,0,1,0,73.056,52.991h0l269.93-368.534A45.275,45.275,0,0,0,571.081,356.207Z" transform="translate(192.915 1.165)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

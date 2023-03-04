@@ -1,0 +1,10 @@
+<% if @writer_form.errors.present? %>
+  toastr.error("<%= @writer_form.errors.full_messages.to_sentence %>")
+<% else %>
+  $(".editable_text_two_star_writer").html("<%= @writer_form.two_star_writer%>")
+  $(".editable_text_three_star_writer").html("<%= @writer_form.three_star_writer%>")
+  $(".editable_text_four_star_writer").html("<%= @writer_form.four_star_writer%>")
+  $(".editable_text_five_star_writer").html("<%= @writer_form.five_star_writer%>")
+  $(".editable_text_six_star_writer").html("<%= @writer_form.six_star_writer%>")
+  toastr.success("Settings Saved");
+<% end %>

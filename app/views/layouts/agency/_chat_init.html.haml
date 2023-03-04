@@ -1,0 +1,62 @@
+:javascript
+  updateChat = function(data) {
+    if(data.user_type == "agency") {
+      $(".chat-box-" + data.chat_thread_id).append("<div class='messaging-chat-area-item messaging-chat-area-item--reply'><div class='col pr-4 text-right'><div class='fs-14 text-dark pb-1 messaging-chat-name text-left'>" + data.username + "</div><div class='chat-bubble'>" + data.message + "</div><div class='text-muted fs-12 pt-2'>" + data.time + "</div></div><div class='col-auto'><div class='avatar'><i class='fa fa-user'></i></div></div></div>");
+      $(".messaging-wrapper-messages").animate({scrollTop: $('.messaging-wrapper-messages').get(0).scrollHeight}, 500);
+      $("#latest_message_" + data.chat_thread_id).html(data.message);
+      $("#message_time_" + data.chat_thread_id).html("<div class='col-auto pl-3 whitespace-no-wrap fs-12'>" + data.message_time + "</div>");
+
+      if($('.new-messages').length == '1') {
+        $('.new-messages').hide();
+      };
+      $("#chat_thread_" + data.chat_thread_id).remove();
+      $(".messaging-messages-list").prepend("<div class='messaging-messages-list-item chat_item active-chat' data-thread_id= "+ data.chat_thread_id +" id='chat_thread_"+ data.chat_thread_id +"'><a class='p-3 d-block text-grey'><div class='d-flex'><div class='col-auto pr-4'><div class='avatar bg-gray text-center p-3 lh-14 text-dark fw-m'>" + data.receiver_logo + "</div></div><div class='flex-col overflow-h pt-1 fs-14'><div class='d-flex justify-between pb-2'><div class='fw-m truncate'>" + data.receiver_name + "</div><div id='message_time_"+ data.chat_thread_id +"'><div class='col-auto pl-3 whitespace-no-wrap fs-12'>" + data.message_time + "</div></div></div><div class='lh-12 truncate' id='latest_message_"+ data.chat_thread_id +"'>" + data.message + "</div></div></div></a></div>");
+    }
+    else {
+      if(#{!current_page?(agency_chats_path)}){
+        var notification = toastr.info(data.message, data.username);
+        $(notification).on('click', function(){
+          url = "/a/messages?chat_thread_id=" + data.chat_thread_id;
+          window.location.replace(url);
+        })
+      };
+      $(".chat-box-" + data.chat_thread_id).append("<div class='messaging-chat-area-item message_" + data.message_id + "' id='message_" + data.message_id + "'><div class='col-auto'><div class='avatar'><i class='fa fa-user'></i></div></div><div class='col pl-4'><div class='fs-14 text-dark pb-1 messaging-chat-name'>" + data.username + "</div><div class='chat-bubble'>" + data.message + "</div><div class='text-muted fs-12 pt-2'>" + data.time + "</div></div></div>");
+
+      $("#chat_thread_" + data.chat_thread_id).remove();
+      $(".messaging-messages-list").prepend("<div class='messaging-messages-list-item chat_item' data-thread_id= "+ data.chat_thread_id +" id='chat_thread_"+ data.chat_thread_id +"'><a class='p-3 d-block text-grey'><div class='d-flex'><div class='col-auto pr-4 unread-messages-notification'><span class='bubble text-xxs' id='bubble_" + data.chat_thread_id + "'>" + data.unread_messages_count + "</span><div class='avatar bg-gray text-center p-3 lh-14 text-dark fw-m'>" + data.logo + "</div></div><div class='flex-col overflow-h pt-1 fs-14'><div class='d-flex justify-between pb-2'><div class='fw-m truncate'>" + data.username + "</div><div id='message_time_"+ data.chat_thread_id +"'><div class='col-auto pl-3 whitespace-no-wrap fs-12'>" + data.message_time + "</div></div></div><div class='lh-12 truncate' id='latest_message_"+ data.chat_thread_id +"'>" + data.message + "</div></div></div></a></div>");
+
+      $(".messaging-wrapper-messages").animate({scrollTop: $('.messaging-wrapper-messages').get(0).scrollHeight}, 500);
+      $("#latest_message_" + data.chat_thread_id).html(data.message);
+      $("#message_time_" + data.chat_thread_id).html("<div class='col-auto pl-3 whitespace-no-wrap fs-12'>" + data.message_time + "</div>");
+
+      if( $(".message_" + data.message_id).length > 0 ) {
+        if($('.messaging-wrapper-messages').find('.message_' + data.message_id).length == 1) {
+          $.ajax({
+            url: "/a/messages/update_message_read_status",
+            type: 'post',
+            beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+            data: { message_id: data.message_id }
+          });
+          $('.unread-messages-notification').find('#bubble_' + data.chat_thread_id).remove();
+          $('#chat_thread_' + data.chat_thread_id).addClass('active-chat');
+        }
+      }
+    }
+  };
+
+  var pusher = new Pusher('#{ENV["PUSHER_KEY"]}', {
+    cluster: '#{ENV["PUSHER_CLUSTER"]}',
+    encrypted: true
+  });
+
+- current_agency.chat_threads.each do |chat_thread|
+  :javascript
+    channel = pusher.subscribe("chat_thread_" + #{chat_thread.id});
+    channel.bind('new_msg', function(data) {
+      updateChat(data);
+    });
+:javascript
+  channel = pusher.subscribe("new_thread_" + #{current_agency.id});
+  channel.bind('new_thread', function(data) {
+    console.log('new_thread_created')
+  });

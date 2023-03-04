@@ -1,0 +1,57 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Local-Listings.title-icon>
+    Listings
+
+.container-fluid
+  %div{'st-table' => 'listingsData', 'st-safe-src' => 'copyListings'}
+    .row
+      .col-xs-12
+        .panel.panel-default
+          .panel-heading
+          .panel-body
+            %table.table.m-n
+              %thead
+                %tr
+                  / %th Site
+                  %th Site Name
+                  %th Type
+                  %th Status
+                  %th Citation Value
+                  %th Domain Authority
+                  / %th Phone Verification
+                  / %th Client Verification
+                  %th Notes
+                  / %th Quick Listing
+                  %th Actions
+              %tbody
+                %tr{'ng-repeat' => "list in listingsData"}
+                  / %td
+                  /   .row-picture
+                  /     = image_tag "/directories/{{list.site.toLowerCase()}}.png", class: 'img-circle loclisticon'
+                  %td
+                    %h4.list-group-item-heading {{ list.site }}
+                  %td
+                    {{ list.type }}
+                  %td
+                    %h4.list-group-item-heading{'ng-class' => "list.status == 'LIVE' ?  'success' : (list.status == 'UNAVAILABLE' ? 'listing-status-blocked' : 'listing-status-other')"}
+                      %i.fa{'ng-class' => "list.status == 'LIVE' ? 'fa-check' : (list.status == 'UNAVAILABLE' ? 'fa-times' : 'fa-exclamation')"}
+                      {{ list.status }}
+                  %td
+                    {{ list.citation_value }}
+                  %td
+                    {{ list.domain_authority }}
+                  / %td
+                  /   {{ list.phone_verification }}
+                  / %td
+                  /   {{ list.client_verification }}
+                  %td
+                    {{ list.notes }}
+                  / %td
+                  /   {{ list.quick_listing }}
+                  %td
+                    %a.btn.btn-warning.btn-raised{:href => "{{ list.url }}", :target => "_blank", 'ng-show' => "list.status == 'LIVE' && (!!list.url)"}
+                      %i.fa.fa-external-link.pr-xs
+                      View Listing
+
+          %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}

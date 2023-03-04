@@ -1,0 +1,66 @@
+= stylesheet_link_tag 'public/public_pages', media: 'all', 'data-turbolinks-track': false
+%link{href: 'https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css', rel: 'stylesheet'}
+.page-header
+  %h3
+    Social Posts
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: super_admin_social_posts_path } Back
+  .content-container.text-center.px-4
+    .bg-white.rounded-8.shadow.my-5
+      .social-media-ad
+        .d-flex.justify-content-between.align-items-center.p-4
+          .col-auto
+            .d-flex.align-items-center
+              .col-auto
+                .avatar-img{style: "background-image:url(http://myclickx.com.php56-10.dfw3-2.websitetestlink.com/images/clickx-avatar.png)"}
+              .col-auto.pl-3.text-left
+                .fw-sb.mb-0 Clickx
+                %span.text-grey.fs-12
+          .col-auto
+            %button.fb-more-btn
+              %i.fa.fa-ellipsis-v
+        %a.sodial-media-ad-banner.d-block.relative{href: @social_media_ad.title, target: '_blank'}
+          - @social_media_ad.images.where(heading: true).each do |image|
+            %img.img-responsive.m-md-auto{alt: '', src: image.file.url}
+            %span.canva-btn
+              %img{:src => '/logo-canva.svg'}
+              Design with Canva
+        .sodial-media-ad-content.pt-5.px-4.text-left.fs-14
+          - if @social_media_ad.description.present? 
+            -if @social_media_ad.description.length > 150
+              .less-text
+                = @social_media_ad.description.to_s.truncate(150)
+                .py-2
+                %button.more-link See more
+              .more-text
+                = @social_media_ad.description
+            -else
+              = @social_media_ad.description
+        %hr.mt-3.mb-0
+        .sodial-media-ad-footer.px-4.py-3
+          .d-flex.justify-content-between
+            .col-auto.pr-4
+              %i.fa.fa-thumbs-o-up.mr-1
+              Like
+            .col-auto
+              %i.fa.fa-comment-o.mr-1
+              Like
+            .col-auto
+              %i.fa.fa-mail-forward.mr-1
+              Share
+%script{src: 'https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js'}
+%script{type:'text/javascript'}
+  $(document).ready(function(){
+  $('.images-slider').bxSlider({
+  adaptiveHeight: true,
+  });
+  });
+  $(document).on('click', '.more-link', function() {
+  if($('.more-text').is(':visible')) {
+  $('.less-text').show();
+  $('.more-text').hide();
+  } else {
+  $('.more-text').show();
+  $('.less-text').hide();
+  }
+  })

@@ -1,0 +1,9 @@
+.col-md-3.p-sm
+  .nested-fields
+    .field
+      .form-group
+        = f.file_field :file, class: 'file_upload'
+        = f.text_field :filename, placeholder: 'Filename', class: 'form-control'
+      - if f.object.file&.url
+        = link_to 'View | ', f.object.file&.url, target: '_blank'
+      = link_to_remove_association 'Remove', f

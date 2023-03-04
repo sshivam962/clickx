@@ -1,0 +1,47 @@
+.pb-md.page-heading.no-margin-bottom.competitors-list
+  - if @properties.present?
+    %h1
+      Please choose the site you wish to connect with :
+  - else
+    %h1
+      Sorry ! We can't find any Google Analytics profiles in this account.
+    .options
+      %a.btn.btn-white.btn-raised{href: "/b/dashboard"}
+        %i.fa.fa-arrow-left.pr-xs
+        Back
+- if @properties.present?
+  .container-fluid
+    %div
+      .row
+        .col-md-12
+          .tab-container
+            .tab-content
+              .table-responsive
+                = form_tag tokens_store_analytics_info_path, method: 'post' do
+                  %table#profile_table.table.table-bordered.table-vam.table-hover.mb-n
+                    %thead
+                      %th
+                      %th Name
+                      %th Property ID
+                    %tbody
+                      = hidden_field_tag :authenticity_token, form_authenticity_token
+                      - @properties.each_with_index do |item, index|
+                        - property_id = item['property'].split('/').last
+                        %tr
+                          %td
+                            .radio-button
+                              %label
+                                = radio_button_tag :profile_id, property_id, index.zero?
+                                %span.checkbox-button
+                          %td
+                            = item['displayName']
+                          %td
+                            = property_id
+                  %button.btn.btn-info.btn-raised.btn-md.pull-right{type: 'submit'} Submit
+
+:javascript
+  $(document).ready( function () {
+      $('#profile_table').DataTable({
+        "pageLength": 25
+      });
+  });

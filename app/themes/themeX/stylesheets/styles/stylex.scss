@@ -1,0 +1,51 @@
+.search-bar-style {
+  font-size: 14px;
+  border: solid lightgrey 1px;
+  width: 250px;
+}
+
+.options-button-style {
+  height: 35px;
+  position: relative;
+  top: 6px;
+}
+
+.no-box-shadow {
+  box-shadow: none !important;
+}
+.input-wrapper .select2-container {width:100% !important;}
+.select2-container {
+  // z-index: 999999;
+  .select2-dropdown {font-size: 14px;}
+  .select2-selection--single {height:auto !important;
+    .select2-selection__rendered {line-height: 28px; padding: 8px 10px; height: 28px; padding-top: 0px;}
+  }
+}
+.spinner-overlay {
+  position: absolute;
+  top:0; left:0; pointer-events: none; right: 0; bottom: 0; background-color: rgba(#fff, 0.7);
+  z-index: 99999999; opacity:0; transition: 333ms; display: flex; justify-content: center; align-items: center;;
+}
+.nb-spinner {
+  width: 75px;
+  height: 75px;
+  margin: 0;
+  background: transparent;
+  border-top: 4px solid var(--primary);
+  border-right: 4px solid transparent;
+  border-radius: 50%;
+  -webkit-animation: 1s spin linear infinite;
+  animation: 1s spin linear infinite;
+}
+.prospecting_details_form { position: relative;
+  &.loading {
+    .spinner-overlay {opacity: 1; pointer-events: initial;}
+  }
+}
+.prospecting_details_result {
+  display: none;
+}
+.video-embed-wrapper {
+  iframe {max-width: 100%;}
+  & iframe {border-radius: 12px; box-shadow: 0 1px 3px 0 rgba(#000, 0.1), 0 1px 2px 0 rgba(#000, 0.06); background-color: #fff;}
+}

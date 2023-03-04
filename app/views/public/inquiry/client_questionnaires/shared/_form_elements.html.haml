@@ -1,0 +1,74 @@
+.field-wrapper
+  .field-label
+    = question.question
+    - if question.required
+      .red.inline *
+  .field-note
+    = question.blurb
+  .input-wrapper
+  - if question.element_type == "text_area"
+    = fa.text_area :answer, class: '', required: question.required, onkeyup: "textAreaAdjust(this)"
+  - elsif question.element_type == "check_box"
+    = fa.hidden_field :answer, class: ' check_field_cls'
+    .pt-3.pb-2
+      .d-flex.flex-wrap.mt-4
+        .p-1
+          %label.awesome-checkbox-card-label
+            = check_box_tag 'single_image', 'Single image', false, class: 'check_input_step'
+            .awesome-checkbox-card
+              %span.check-cirlce
+              %span.text-center.py-2.d-block
+                %img{:alt => "", :src => "/icon-single-image.svg"}/
+              %span.awesome-checkbox-card-title Single Image
+        .p-1
+          %label.awesome-checkbox-card-label
+            = check_box_tag 'single_video', 'Single video', false, class: ' check_input_step'
+            .awesome-checkbox-card
+              %span.check-cirlce
+              %span.text-center.py-2.d-block
+                %img{:alt => "", :src => "/icon-single-video.svg"}/
+              %span.awesome-checkbox-card-title Single Video
+        .p-1
+          %label.awesome-checkbox-card-label
+            = check_box_tag 'i_dont_know', 'I dont know', false, class: ' check_input_step'
+            .awesome-checkbox-card
+              %span.check-cirlce
+              %span.text-center.py-2.d-block
+                %img{:alt => "", :src => "/icon-dont-know.svg"}/
+              %span.awesome-checkbox-card-title I Don't Know
+  - elsif question.element_type == "radio_button"
+    = fa.hidden_field :answer, class: ' radio_field_cls'
+    .pt-3.pb-2
+      .d-flex.flex-wrap.mt-3
+        .col-auto.m-1
+          %label.awesome-radio-card-label
+            = radio_button_tag 'lead_or_messenger', "Facebook Lead Ad", false, class: ' radio_input_step', id: 'lead_or_messenger_lead'
+            .awesome-radio-card
+              %span.check-cirlce
+              %span.text-center.py-3.d-block
+                %img{:alt => "", :src => "/icon-funnel.svg"}/
+              %span.awesome-radio-card-title Facebook Lead Ad
+        .col-auto.m-1
+          %label.awesome-radio-card-label
+            = radio_button_tag 'lead_or_messenger', "Facebook Messenger Ad", false, class: ' radio_input_step', id: 'lead_or_messenger_messenger'
+            .awesome-radio-card
+              %span.check-cirlce
+              %span.text-center.py-3.d-block
+                %img{:alt => "", :src => "/icon-messages.svg"}/
+              %span.awesome-radio-card-title Facebook Messenger Ad
+        .col-auto.m-1
+          %label.awesome-radio-card-label
+            = radio_button_tag 'lead_or_messenger', "I Don't Know", false, class: ' radio_input_step', id: 'lead_or_messenger_dont_know'
+            .awesome-radio-card
+              %span.check-cirlce
+              %span.text-center.py-3.d-block
+                %img{:alt => "", :src => "/icon-question.svg"}/
+              %span.awesome-radio-card-title I Don't Know
+  - elsif question.element_type == "file_field"
+    = fa.file_field :answer, class: '', required: question.required
+  - elsif question.element_type == "text_field"
+    = fa.text_field :answer, class: '', required: question.required
+  - else
+    = fa.text_area :answer, class: '', required: question.required, onkeyup: "textAreaAdjust(this)"
+  = fa.hidden_field :question_id
+  = fa.hidden_field :client_id

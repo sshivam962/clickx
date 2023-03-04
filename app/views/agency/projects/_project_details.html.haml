@@ -1,0 +1,26 @@
+.project-detail-view.bg-sky-blue.border-blue.rounded.border-1
+  .bg-white.p-4.p-md-5.rounded-t-12
+    .fw-m.fs-md.text-black= @project.title
+    .fs-xs= current_agency.name
+    .fs-xs= current_agency.address
+    .fs-xs= number_to_currency(@project.budget, strip_insignificant_zeros: true)
+    / %p.fs-xxs.mt-4 Employer actively reviewed Project 2 days ago
+    .d-flex.pt-4
+      .col-auto.pr-3
+        %a.btn.btn-warning{href: edit_agency_project_path} Edit
+      .col-auto
+        = link_to 'Remove', agency_project_path(@project), class: 'btn btn-warning', method: :delete, remote: true, data: { confirm: "Are you sure you want to remove this project?"}
+  .p-4.p-md-5
+    .fw-b.text-md.mb-4.text-blue Project Details
+    .pb-4
+      .fw-m.text-black.pb-1 Budget
+      .fs-xs= "#{number_to_currency(@project.budget, strip_insignificant_zeros: true)}"
+    / .pb-4
+    /   .fw-m.text-black.pb-1 Number of hires for this role
+    /   .fs-xs 3
+    .pb-5
+    .fw-b.text-md.mb-4.text-blue Short Descripton
+    %p= @project.short_desc
+    .pb-5
+    .fw-b.text-md.mb-4.text-blue Full Descripton
+    %p= @project.description

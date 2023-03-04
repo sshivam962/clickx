@@ -1,0 +1,2 @@
+$('.edit-todo-form-overlay').html("<%= escape_javascript render( partial: 'agency/todo_items/edit_item_form', locals: { list: @list, item: @item }) %>");
+$('.edit-todo-form-overlay').modal('show')

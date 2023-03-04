@@ -1,0 +1,54 @@
+.container-fluid.bg-white
+  .col-md-12{ 'ng-show': 'isLoading' }
+    %loading
+  .col-md-12{ 'ng-if': 'history.length == 0 && !isLoading' }
+    .tab-container
+      .tab-content
+        %h4.text-muted.text-center
+          Nothing to show, please check back again later.
+  .col-md-12{ 'ng-show': 'history.length > 0 && !isLoading' }
+    %div{'st-table':"history", 'st-safe-src':"history_safe_copy"}
+      .row
+        .col-md-12
+          .panel.panel-success
+            .panel-heading.pl-n
+              %ul.nav.panel-warning.nav-tabs.pull-left
+                %li.active
+                  %a{'data-toggle':'tab', 'data-target':'#google-rank', 'ng-click': "resizeChart('google_rank_history')"} Google
+              .pull-right
+                %button.btn.btn-icon-rounded.refresh-panel
+                  %span.material-icons.inverted.white refresh
+            .panel-body
+              .tab-content{ "style": "border: 0px" }
+                #google-rank.tab-pane.active
+                  .col-md-12
+                    .centered
+                      #google_rank_history{style:'min-height: 360px'}
+
+        .col-md-12
+          .tab-container
+            .tab-content
+              .table-responsive
+                %table.table.table-hover.table-bordered.table-vam
+                  %thead
+                    %tr
+                      %th.text-center{'ng-click':"sortBy('rank_date')"}
+                        Date
+                      %th.text-center{'ng-click':"sortBy('google_rank')"}
+                        Google Rank
+                      %th.text-center{'ng-click':"sortBy('search_volume')"}
+                        Search Volume
+                      %th.text-center
+                        CPC
+                  %tbody
+                    %tr{'ng-repeat':"row in history"}
+                      %td {{ readableDate(row.rank_date) }}
+                      %td.text-center {{ row.google_rank || ' - ' }}
+                      %td.text-center {{ row.search_volume || ' _ ' }}
+                      %td.text-center {{ row.cpc || ' _ ' }}
+              .row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}
+              .pagination.pagination-lg.pagination-download
+                %li
+                  %a{ "href":"{{ csv_all_url }}", target: "_blank" }
+                    %i.fa.fa-download.pr>
+                    Download CSV

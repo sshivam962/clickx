@@ -1,0 +1,20 @@
+$xss: 545px;
+$xs: 768px;
+$sm: 992px;
+$md: 1200px;
+$lg: 1440px;
+$laptop: 1366px;
+$fhd: 1920px;
+
+$upto_small_mobile: '(max-width: $xss - 1)';
+$upto_mobile: '(max-width: $xs - 1)';
+$upto_tab: '(max-width: $sm - 1)';
+$upto_desktop: '(max-width: $md - 1)';
+
+$above_desktop: '(min-width: $md)';
+$above_tab: '(min-width: $sm)';
+$above_mobile: '(min-width:$xs)';
+$above_small_mobile: '(min-width: $xss)';
+
+$between_mobile_tab: '(min-width: $xs) and (max-width: $sm - 1)';
+$between_tab_desktop: '(min-width: $sm) and (max-width: $md - 1)';

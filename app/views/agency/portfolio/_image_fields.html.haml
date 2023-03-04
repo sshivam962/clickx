@@ -1,0 +1,8 @@
+.preview-images-list-item.nested-fields
+  .cs_image_card.cs_image_card--img
+    .preview-thumb{:style => "background-image: url(#{f.object.file.url})"}
+      .preview-thumb-edit
+        = f.file_field :file
+      .preview-thumb-buttons
+        .preview-thumb-button
+          = link_to_remove_association "<i class='fa fa-times'></i>".html_safe, f

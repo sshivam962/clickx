@@ -1,0 +1,7 @@
+<% if @error.present? %>
+  toastr.error("<%= @error %>")
+<% else %>
+  toastr.success("You have successfully Upgraded to <%= @plan[:name] %>");
+  window.location.reload();
+<% end %>
+

@@ -1,0 +1,134 @@
+%div.col-md-12
+  .row.signup_link_form
+    .form-group
+      %label{for: "signup_link_first_name"} First Name
+      = f.text_field :first_name, class: 'form-control login halfWidth', placeholder: 'First Name'
+    .form-group
+      %label{for: "signup_link_last_name"} Last Name
+      = f.text_field :last_name, class: 'form-control login halfWidth', placeholder: 'Last Name'
+    .form-group
+      %label{for: "signup_link_email"} Email
+      = f.email_field :email, class: 'form-control login halfWidth', placeholder: 'Email'
+    .form-group
+      %label{for: "signup_link_company"} Company
+      = f.text_field :company, class: 'form-control login halfWidth', placeholder: 'Company'
+    .form-group
+      %label{for: "signup_link_title"} Title
+      .halfWidth
+        = f.cktext_area :title, class: 'form-control login halfWidth', ckeditor: { toolbar: 'support' }
+    .form-group
+      .d-flex
+        %label{for: "signup_link_reusable_link"} Re-Usable Link
+        .d-flex
+          .ml-md= f.check_box :reusable_link
+    .form-group
+      .d-flex
+        %label{for: "signup_link_onetime_charge"} Onetime Charge | Duration
+        .d-flex
+          %p.ml-2| Recurring
+          .ml-1
+            = check_box_tag :recurring_charge
+          %p.ml-2| Down Payment
+          .ml-1
+            = check_box_tag :down_payment_charge
+      %label{for: "down_payment", class: 'hidden', id: 'downpayment_label'} Down Payment - Due Today
+      = f.number_field :down_payment, class: 'form-control login halfWidth hidden'
+      %br
+      %label{for: "onetime_charge"} Recurring Payments OR Month 2 Onwards (if onboarding is broken down into multiple months)
+      = f.number_field :onetime_charge, required: true, class: 'form-control login halfWidth'
+      %br
+      %label{for: "onetime_charge_duration"} # of Months Onboarding Fee is Broken Down To (Excluding Month 1 if They Have Down Payment)
+      = f.number_field :onetime_charge_duration, required: true, class: 'form-control login halfWidth', placeholder: 'Duration in Months', step: 1, min: 1
+    .form-group
+      %label{for: "signup_link_discount_by"} Discount By
+      = f.number_field :discount_by, class: 'form-control login halfWidth'
+    .form-group
+      %label{for: "signup_link_stripe_plan"} Plan
+      = f.select :plan_key, Package.growth.plans.order(:amount).map { |plan| [plan.display_name, plan.key] }, { include_blank: 'Select Plan' }, required: true, class: 'form-control halfWidth'
+    .form-group
+      %label{for: "signup_link_stripe_plan"} Sales Rep (optional)
+      = f.select :sales_rep_id, User.admin_users.order(:first_name).map {|user| [user.name, user.id]}, { include_blank: 'Select Sales Rep' }, class: 'form-control halfWidth'
+    .form-group
+      %label Discount Category
+      .radio
+        %label.pr
+          = f.radio_button :discount_type, 'coupon'
+          Coupon
+        %label.pr
+          = f.radio_button :discount_type, 'trial'
+          Trial
+    .form-group
+      %span.coupon_div{class: "#{'hidden' unless f.object.coupon?}"}
+        = f.label :coupon
+        = f.select :coupon_code, Subscription::Coupon.order(:coupon_id).pluck(:coupon_id), { include_blank: 'Coupon' }, class: 'form-control halfWidth'
+      %span.trial_div{class: "#{'hidden' unless f.object.trial?}"}
+        = f.label :trial_interval
+        = f.select :trial_interval, SignupLink::TRIAL_INTERVALS, { include_blank: 'Trial Interval' }, class: 'form-control halfWidth'
+        %br
+        = f.label :trial_interval_count
+        = f.number_field :trial_interval_count, class: 'form-control halfWidth', placeholder: 'Trial Interval Count'
+    .form-group
+      %label{for: "signup_link_expires_on"} Expires On
+      = f.date_field :expires_on, class: 'form-control login halfWidth', placeholder: 'Expires On', min: Date.today
+    .form-group
+      %label{for: "signup_link_calendly_script"} Calendly Script
+      .halfWidth
+        = f.text_area :calendly_script, class: 'form-control login', rows: 5
+    .form-group
+      = f.submit "Save Link", class: 'btn btn-warning saveBtn'
+:javascript
+  $("#signup_link_sales_rep_id").on('change', function() {
+    var admin_id = $(this).val();
+    $.ajax({
+      url: "/s/agency_signup_links/set_calendly_script",
+      type: 'get',
+      data: { admin_id: admin_id },
+      dataType: 'script',
+      async: false,
+      success:function(response){}
+    })
+  });
+  $("input[name='signup_link[discount_type]']").click(function(){
+    var radioValue = $("input[name='signup_link[discount_type]']:checked").val();
+    if(radioValue == 'coupon'){
+      $('.trial_div').addClass('hidden')
+      $('.coupon_div').removeClass('hidden')
+    }else{
+      $('.coupon_div').addClass('hidden')
+      $('.trial_div').removeClass('hidden')
+    }
+  });
+  $('#recurring_charge').click(function(){
+    if($(this).is(':checked')){
+      $('#signup_link_onetime_charge_duration').val('').prop( "disabled", true );
+      $('#down_payment_charge').prop( "disabled", true );
+    }
+    else{
+      $('#signup_link_onetime_charge_duration').prop( "disabled", false );
+      $('#down_payment_charge').prop( "disabled", false );
+    }
+  });
+  $('#down_payment_charge').click( function(){
+    if($(this).is(':checked')){
+      $('#signup_link_down_payment').removeClass('hidden').prop("required", true);
+      $('#downpayment_label').removeClass('hidden')
+      $('#recurring_charge').prop( "disabled", true );
+      $('#signup_link_onetime_charge_duration').prop("min", 2);
+    }
+    else{
+      $('#signup_link_down_payment').addClass('hidden').val('').prop("required", false);
+      $('#downpayment_label').addClass('hidden')
+      $('#recurring_charge').prop( "disabled", false );
+      $('#signup_link_onetime_charge_duration').prop("min", 1);
+    }
+  });
+  $('#down_payment_charge').click( function(){
+    if($(this).is(':checked')){
+      $('#signup_link_down_payment').removeClass('hidden').prop("required", true);
+      $('#signup_link_onetime_charge_duration').prop("min", 2);
+    }
+    else{
+      $('#signup_link_down_payment').addClass('hidden').val('').prop("required", false);
+      $('#signup_link_onetime_charge_duration').prop("min", 1);
+    }
+  });

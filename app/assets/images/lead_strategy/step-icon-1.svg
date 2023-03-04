@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="33.998" height="34" viewBox="0 0 33.998 34">
+  <g id="step-icon-1" transform="translate(-0.016)">
+    <path id="Path_801" data-name="Path 801" d="M10.041,0V9.861L5.084,1.928.016,5.095C.159,5.323,9.958,21,10.041,21.128V34H34.014V6.56L27.454,0Zm18,3.4,2.576,2.576H28.037ZM9.922,17.19l-2.939-4.7,1.689-1.056,2.939,4.7ZM4.451,4.673,7.617,9.742,5.928,10.8,2.761,5.729ZM12.9,18.189l.279.446a17.968,17.968,0,0,1,2.269,5.51,17.964,17.964,0,0,1-3.959-4.455l-.279-.446Zm-.862,13.819V23.675a19.944,19.944,0,0,0,4.043,3.365l.873,1.4,1.689-1.056-.871-1.394a19.971,19.971,0,0,0-2.9-8.409l-2.83-4.53V1.992H26.045V7.969h5.977V32.008Z" transform="translate(0)"/>
+    <path id="Path_802" data-name="Path 802" d="M210.984,90h10.027v1.992H210.984Z" transform="translate(-196.958 -84.023)"/>
+    <path id="Path_803" data-name="Path 803" d="M210.984,150h16v1.992h-16Z" transform="translate(-196.958 -140.039)"/>
+    <path id="Path_804" data-name="Path 804" d="M240.984,210H255v1.992H240.984Z" transform="translate(-224.966 -196.055)"/>
+    <path id="Path_805" data-name="Path 805" d="M270.984,270H283v1.992h-12.02Z" transform="translate(-252.974 -252.07)"/>
+    <path id="Path_806" data-name="Path 806" d="M300.984,330h10.027v1.992H300.984Z" transform="translate(-280.982 -308.086)"/>
+    <path id="Path_807" data-name="Path 807" d="M331.984,420h7.969v1.992h-7.969Z" transform="translate(-309.923 -392.109)"/>
+  </g>
+</svg>

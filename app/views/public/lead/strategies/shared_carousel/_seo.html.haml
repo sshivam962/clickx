@@ -1,0 +1,233 @@
+- content_for :title do
+  Search Engine Optimization
+.strategy_carousel
+  .section-cards-wrapper.bg-light
+    .section-container
+      .section-card.section-card--top.section-card--cover.mCustomScrollbar
+        .text-center
+          .pt-5.pb-5
+          .pt-5.pb-5
+          .sticky-logo{style: "background:#{agency.strategy_product_header_color}"}
+            - if agency.weburl.present?
+              %a{href: formatted_url(agency.weburl), target: '_blank'}
+                = image_tag agency.logo || ''
+            - else
+              = image_tag agency.logo || ''
+          .pb-5.pt-5
+          = image_tag 'lead_strategy/seo.svg', class: 'img-responsive'
+          .pb-5.pt-3
+          %h4 Improve Search Rankings
+          %h1
+            Search Engine Optimization
+          .pb-5.pt-3
+
+  - if @lead_strategy.strategies.present?
+    .section-cards-wrapper
+      .section-container
+        .section-card.section-card--cover.mCustomScrollbar
+          .text-center
+            .pb-5.pt-3
+            %h2.pb-xl.text-black Proposed Solution
+            .pb-5
+            %ul.arrow-list.px-0.px-md-3
+              - @lead_strategy.strategies.each do |strategy|
+                %li
+                  = raw(strategy)
+
+  - if @lead_strategy.strategy_images.present?
+    .section-cards-wrapper.bg-color-gray
+      .section-container
+        .section-card.section-card--cover.mCustomScrollbar
+          .swiper-container.image-carousel
+            .swiper-wrapper
+              - @lead_strategy.strategy_images.order_by_created.each do |image|
+                .swiper-slide
+                  .card-new.p-xl
+                    %img.img-responsive{alt: '', src: image.file&.url}
+            .pb-5
+            - if @lead_strategy.strategy_images.count > 1
+              .swiper-pagination
+
+  - if @lead_strategy.ad_spend_info.present?
+    .section-cards-wrapper
+      .section-container
+        .section-card.section-card--cover.mCustomScrollbar
+          .text-center
+            .img-circle.img-circle--light.mx-auto
+              = image_tag 'lead_strategy/seo-ad-spend.png', class: 'img-responsive img-align-center--md strategies_carousel_image'
+            %div
+              %h2.pb-5 Budget Recommendations
+              .row.v-center--lg
+                %ul.arrow-list.px-0.px-md-3
+                  - @lead_strategy.ad_spend_info.split(/\r?\n/).each do |info|
+                    %li= info
+
+  .section-cards-wrapper.bg-color-gray
+    .section-container
+      .section-card.section-card--cover.mCustomScrollbar
+        .text-center
+          = image_tag 'lead_strategy/seo2.svg', class: 'img-responsive img-hcenter'
+          %div
+            %h2.pb-5
+              Proposed Solution
+              %br/
+              %span.f-w-sm SEO Strategy & Implementation Process
+
+  .section-cards-wrapper
+    .section-container
+      .section-card.section-card--cover.mCustomScrollbar
+        .text-center
+          .img-circle.img-circle--light.mx-auto
+            = image_tag 'lead_strategy/seo4.png', class: 'img-responsive img-align-center--md strategies_carousel_image'
+          .pb-5.pt-3
+          %h3.f-w-lg.pb-xl
+            Initial Assessment and Campaign Planning
+            %br/
+            %span.f-w-sm Timeline: Month 1
+          %h4.f-w-md.pb-xl Research and Analysis
+          %ul.arrow-list.px-0.px-md-3
+            %li Kickoff Call - Team Intro
+            %li Perform in depth keyword research (Top of funnel, Middle of funnel, Bottom of funnel)
+            %li Organize Keywords based on marketing and growth goals
+            %li Conduct competitive analysis and identify keyword overlap
+            %li Perform thorough website audit to identify technical challenges and opportunities
+            %li Conduct content audit to determine content gaps for future month
+          .pb-5
+
+  .section-cards-wrapper.bg-color-gray
+    .section-container
+      .section-card.section-card--cover.mCustomScrollbar
+        .text-center
+          .img-circle.img-circle--light.mx-auto
+            = image_tag 'lead_strategy/seo3.svg', class: 'img-responsive img-align-center--md strategies_carousel_image'
+          .pb-5.pt-3
+          %h3.f-w-lg.pb-xl
+            Deep Technical Audit
+            %br/
+            %span.f-w-sm Timeline: Month 1 &amp; 2
+          %ul.arrow-list.px-0.px-md-3
+            %li Assess website structure to maximize search traffic
+            %li Google Search Console Indexation Cleanup
+            %li
+              Assist with on-page optimization
+              %ul
+                %li Implement Metadata
+                %li Schema (Structured Data)
+                %li Heading &amp; Image optimization
+                %li Internal Link Structure
+            %li Support in Rich Media Optimization
+            %li Weekly Monitoring of Website Performance
+          .pb-5
+
+  .section-cards-wrapper
+    .section-container
+      .section-card.section-card--cover.mCustomScrollbar
+        .text-center
+          .row.d-flex.justify-content-center
+            .col-md-5
+              = image_tag 'lead_strategy/mobile.png', class: 'img-responsive'
+              .circle
+                .circle-70
+                  = image_tag 'lead_strategy/circle-70.svg', class: 'img-responsive img-align-center--md'
+          .pb-5.pt-3
+          %h3.f-w-lg.pb-xl
+            Mobile Strategy &amp; Recommendations
+            %br/
+            %span.f-w-sm Timeline: Month 3 onwards
+          %ul.arrow-list.px-0.px-md-3
+            %li Ongoing Optimization of Posts, Pages, and Various Types of Content
+            %li Mobile usability recommendation and optimization
+            %li Page speed test and optimization
+            %li Mobile conversion recommendations
+            %li Mobile content experience / AMP strategy
+            %li Optimize for Mobile First Algorithm
+          .pb-5
+
+  .section-cards-wrapper.bg-color-gray
+    .section-container
+      .section-card.section-card--cover.mCustomScrollbar
+        .text-center
+          .img-circle.img-circle--light.mx-auto
+            = image_tag 'lead_strategy/seo5.svg', class: 'img-responsive img-align-center--md strategies_carousel_image'
+          .pb-5.pt-3
+          %h3.f-w-lg.pb-xl
+            Link Building &amp; Thought Leadership Strategy
+            %br/
+            %span.f-w-sm Timeline: Month 3 onwards
+          %ul.arrow-list.px-0.px-md-3
+            %li Build thought leadership through Digital PR placement and outreach
+            %li Develop a prospective industry relevant publications &amp; contacts
+            %li Review PR opportunities for new mentions and content opportunities
+            %li Develop and submit content abstracts to the select publications
+            %li Support in creating content approved by the publication’s content guidelines
+            %li Follow up, provide editorial support to secure content placement
+          .pb-5
+
+  .section-cards-wrapper
+    .section-container
+      .section-card.section-card--cover.mCustomScrollbar
+        .text-center
+          .text-center
+            %h2.pb-4 Next Steps...
+            %div
+              .methods
+                .methods-col
+                  .methods-icon
+                    = image_tag 'lead_strategy/step-icon-1.svg', class: 'img-responsive'
+                  .methods-name
+                    Accept
+                    = succeed "Proposed Solution" do
+                      %br/
+                .methods-col
+                  .methods-icon
+                    = image_tag 'lead_strategy/step-icon-2.svg', class: 'img-responsive'
+                  .methods-name
+                    Access To Google Analytics
+                    = succeed "and Google Search Console" do
+                      %br/
+                .methods-col
+                  .methods-icon
+                    = image_tag 'lead_strategy/step-icon-3.svg', class: 'img-responsive'
+                  .methods-name
+                    Schedule
+                    = succeed "Kick Off Call" do
+                      %br/
+                .methods-col
+                  .methods-icon
+                    = image_tag 'lead_strategy/step-icon-4.svg', class: 'img-responsive'
+                  .methods-name
+                    Approve
+                    = succeed "Seo Recommendations" do
+                      %br/
+                .methods-col
+                  .methods-icon
+                    = image_tag 'lead_strategy/step-icon-5.svg', class: 'img-responsive'
+                  .methods-name
+                    Campaign Launch and
+                    = succeed "Ongoing Optimization" do
+                      %br/
+
+  .section-cards-wrapper.bg-color-gray
+    .section-container
+      .section-card.section-card--cover.mCustomScrollbar
+        .text-center
+          %h2.pb-4 Campaign Reporting
+          .pb-5
+          %script{:async => "", :src => "https://fast.wistia.com/embed/medias/9rpo4u2k5e.jsonp"}
+          %script{:async => "", :src => "https://fast.wistia.com/assets/external/E-v1.js"}
+          .wistia_responsive_padding{:style => "padding:56.25% 0 0 0;position:relative;"}
+            .wistia_responsive_wrapper{:style => "height:100%;left:0;position:absolute;top:0;width:100%;"}
+              .wistia_embed.wistia_async_9rpo4u2k5e{:class => "videoFoam=true", :style => "height:100%;position:relative;width:100%"}
+                .wistia_swatch{:style => "height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"}
+                  %img{:alt => "", "aria-hidden" => "true", :onload => "this.parentNode.style.opacity=1;", :src => "https://fast.wistia.com/embed/medias/9rpo4u2k5e/swatch", :style => "filter:blur(5px);height:100%;object-fit:contain;width:100%;"}/
+
+  - if raw(agency.calendly_script).present?
+    .section-cards-wrapper.bg-calendly
+      .section-container
+        .section-card.pb-0.section-card--cover.section-card--calendly.mCustomScrollbar
+          .text-center.pt-3.pt-md-0
+            %h2.pb-4 Schedule a Call
+            = raw(agency.calendly_script)
+            .p-5
+          .sticky-footer
+            = "© #{Date.current.year} #{agency&.name}. All Rights Reserved."

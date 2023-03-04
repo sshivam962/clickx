@@ -1,0 +1,229 @@
+-# .page-heading.bg-white.mb-0
+-#   .d-flex.justify-content-between.flex-wrap.align-items-center
+-#     .col
+-#       %h1.m-0.py-2 Send
+-#     .col
+
+-# .pb-4.px-4
+.container-fluid.py-4
+  .bg-white.rounded.border-1.border-blue
+    .py-4.px-lg-5.px-4
+      .d-xl-flex.justify-content-between.align-items-center
+        .col-auto
+          .d-flex.flex-wrap.align-items-center
+            .fs-md.color-dark-blue.fw-m Send
+            - if direct_lead.present?
+              .col.pl-4.pr-5.py-1
+                Domain : #{direct_lead.base_domain}
+                %a.ml-2{href: direct_lead.root_url, target: '_blank'}
+                  %i.fa.fa-external-link
+              .col.py-1
+                .sendmail-actions-item.d-inline-block.mr-2
+                  .pagination-wrapper.send-next-link.fs-14
+                    .pagination{"aria-label" => "Pagination", role: "navigation"}
+                      %a.next_page{href: agency_single_direct_lead_path(lead_source_id: @lead_source.id), rel: 'next'} Next →
+              
+                = link_to 'Reject', reject_agency_direct_lead_path(direct_lead, lead_source_id: @lead_source.id), method: :post, class: 'reject-btn text-danger d-inline-block'
+
+        .col-auto.mt-4.mt-xl-0
+          .d-flex.align-items-center.flex-wrap.fs-14
+            .col.pr-3.py-2.border-light.border-r
+              .text-blue.fw-sb.email-sent-count
+                Emails Sent Today :
+                %span #{total_mail_send_today}
+            -# .col.px-3.py-2
+            -#   .text-warning.fw-sb
+            -#     %span.email_remain_count #{@remain_email_count.present? ? @remain_email_count : 0 }
+            -#     Remaining
+            .col.pl-2
+              - if @lead_source.present?
+                .input-wrapper-select.input-wrapper-select--sm
+                  = select_tag 'source', options_for_select(current_agency.lead_sources.enabled.order_by_name.map{|u| [u.name, u.id]}, @lead_source.id), include_blank: 'Select Lead Source', class: 'input-wrapper-input text-darkblue'
+
+    %hr.my-0
+    - if direct_lead.present?
+      .py-4.px-lg-5.px-4
+        .direct_lead_email
+          .direct_lead_email_col.direct_lead_email_col--actions.d-flex.flex-column
+            .direct_lead_email_col--actions-top
+              .sendmail-actions
+                .sendmail-actions-item
+                  %a.sendmail-actions-btn.w-100.email_preview_modal
+                    %span
+                      %i.fa.fa-envelope
+                    Preview & Send
+                .sendmail-actions-item
+                  %a.sendmail-actions-btn{data: {target: '#change_lead_source_modal', toggle: 'modal'}}
+                    %span
+                      %i.fa.fa-exchange
+                    Change Lead Source
+                .sendmail-actions-item
+                  %a.sendmail-actions-btn.ignore_btn{href: add_to_negative_domains_list_agency_direct_lead_path(direct_lead.id), data: { method: :post, confirm: 'Are you sure you want to ignore this domain?' }}
+                    %span
+                      %i.fa.fa-trash
+                    Delete Lead
+                -# .pb-2
+                -#   %a.btn.w-100.btn-info.next_lead Next
+              .pb-2.is-wordpress-website.pt-2{:class => direct_lead.wordpress ? 'is-wordpress' : ''}
+                %span
+                  %i.fa.fa-times
+                  %i.fa.fa-check-circle
+                = "WordPress Website: #{direct_lead.wordpress ? 'Yes' : 'No'}"
+
+            - if contacts.present?
+              .direct_lead_email_col--actions-body.flex-col
+                .lead_contacts.py-3
+                  - contacts.each do |contact|
+                    .lead_contact_item{ id: "contact_panel_#{contact.id}", data_id: contact.id }
+                      .lead_contact_item_card
+                        .contact_first_name.pb-1
+                          = contact.first_name
+                        .contact_title.fs-12.text-muted
+                          = contact.title
+                        .hidden
+                          .contact_last_name.fs-14
+                            = contact.last_name
+                          .contact_phone.fs-14
+                            = contact.phone
+                          .contact_email.fs-14
+                            = contact.email
+                          .contact_instagram
+                            = contact.instagram
+                          .contact_city
+                            = contact.city
+                        - if contact.email_sent?
+                          .pt-2
+                            %span.badge.badge-success.text-white.fs-12
+                              - sent_email_count = contact.sent_emails.count
+                              #{sent_email_count} #{'Email'.pluralize(sent_email_count)} Sent
+          .direct_lead_email_col.direct_lead_email_col--message
+            #contact-email-template
+              = render 'email_template', contact: contacts.first, direct_lead: direct_lead
+    - else
+      .text-center.p-5
+        No leads available
+
+- if direct_lead.present?
+  .modal.fade{'aria-labelledby': 'mySmallModalLabel', role: 'dialog', tabindex: "-1", id: 'email_preview'}
+    .modal-dialog.modal-lg
+      .bg-white.p-4.p-sm-5.rounded
+        .fs-md.fw-sb.text-darkblue.pb-4 Email Preview
+        %hr.m-0
+        .pt-4
+          .subject.mb
+          .well.preview
+        .text-left
+          %button.btn.btn-raised.btn-primary.draft_mail{"data-dismiss": "modal", type: "button", 'data-lead_id': direct_lead.id} Send
+
+  = render 'agency/direct_leads/shared/change_lead_source_modal', direct_lead: direct_lead
+
+:css
+  .tagit-new{
+    width: 100%;
+  }
+
+:javascript
+
+  $(function(){
+    $('.select2').select2({
+      width: '100%'
+    })
+
+    $('#source').change(function(){
+      window.location.href = '/a/direct_lead?lead_source_id=' + $(this).val()
+    })
+  })
+
+  var email = ''
+  var lead_source_id = ''
+
+  $('.next_lead').click(function(e){
+    lead_source_id = $('#source').val()
+    $.ajax({
+      url: '/a/direct_lead',
+      type: 'get',
+      data:{lead_source_id: lead_source_id},
+      dataType: 'script',
+      success:function(response){
+      }
+    })
+  })
+
+  $('.draft_mail').click(function(){
+    $.ajax({
+      url: '/a/direct_leads/' + #{direct_lead&.id} + '/draft_mail',
+      type: 'post',
+      data: {
+        first_name:  $('#mail_contact_first_name').val().trim(),
+        last_name:  $('#mail_contact_last_name').val().trim(),
+        phone:  $('#mail_contact_phone').val().trim(),
+        email: $("#contact_emails").val(),
+        variable_1: $('.variable_1').val(),
+        variable_2: $('.variable_2').val(),
+        variable_3: $('.variable_3').val(),
+        prompt_1: $('.prompt_1').val(),
+        prompt_2: $('.prompt_2').val(),
+        prompt_3: $('.prompt_3').val(),
+        intro: $('.intro').val(),
+        instagram: $("#mail_contact_instagram").val(),
+        city: $("#mail_contact_city").val(),
+        body: email_body
+      },
+      dataType: 'json',
+      success:function(response){
+        var contact_id = $('#current_contact_id').data('id');
+        $('.draft_mail').removeAttr('disabled')
+        if(response.status == 200){
+          toastr['success'](response.message);
+        } else{
+          toastr['error'](response.message);
+        }
+        if(response.status == 200 || response.status == 400){
+          $('.email-sent-count span').html(response.count)
+          $(".email_remain_count").html(response.remain_email_count)
+        }
+      }
+    })
+  })
+
+  $(document).on('click', '.lead_contact_item', function() {
+    var contact_id = $(this).attr('data_id');
+    $.ajax({
+      url: '/a/direct_leads/next_contact',
+      type: 'get',
+      data: { contact_id: contact_id },
+      dataType: 'script',
+    })
+    $('.lead_contact_item').removeClass('lead_contact_item--selected');
+    $(this).addClass('lead_contact_item--selected');
+  })
+
+  $(window).load(function() {
+    $('.lead_contact_item:first-child').addClass('lead_contact_item--selected');
+  })
+
+  function responsiveArea() {
+    // var contentAreaHeight = $('.static-content-wrapper').outerHeight();
+    var contentAreaHeight = $(window).height();
+    var windWidth = $(window).width();
+    if(!$('body').hasClass('sidebar-collapsed') && windWidth > 1299) {
+      var editorHeight = contentAreaHeight - 552
+    } else if($('body').hasClass('sidebar-collapsed') && windWidth > 1023) {
+      var editorHeight = contentAreaHeight - 552
+    } else {
+      var editorHeight = 'auto'
+    }
+    CKEDITOR.config.height = editorHeight;
+  }
+  $(document).ready(function() {
+    responsiveArea();
+  });
+  $(window).load(function() {
+    setTimeout(function() {
+      responsiveArea();
+    }, 200);
+  });
+  window.addEventListener('resize', responsiveArea());
+  $(window).resize(function() {
+    responsiveArea();
+  })

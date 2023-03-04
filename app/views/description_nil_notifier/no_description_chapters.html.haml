@@ -1,0 +1,8 @@
+Academy modules without description
+%hr
+- @courses.each do |course|
+  %b= "#{course.title}(#{ course.resource_type})"
+  %ul{style:"list-style-type:none;margin-top:0;"}
+    - course.chapters.each do |chapter|
+      %li
+        = chapter.title

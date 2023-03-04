@@ -1,0 +1,10 @@
+- content_for :title do
+  = "Edit #{@course.title} | Clickx"
+.page-header
+  %h3
+    = @course.title
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: super_admin_start_agency_courses_path } Back
+.agency-form
+  = form_for @course, url: super_admin_start_agency_course_path, method: :patch do |f|
+    = render 'form', f: f

@@ -1,0 +1,113 @@
+.page-heading.bg-white.mb-4
+  %h1 Data
+.container-fluid
+  .buy-data-requests
+    %table.table.buy-data-requests--table.fs-xxs.mb-0
+      %thead
+        %tr
+          %th.fw-m.text-darkblue Category Name
+          %th.fw-m.text-darkblue Limit
+          %th.fw-m.text-darkblue State / City
+          %th.fw-m.text-darkblue Updated
+          %th.fw-m.text-darkblue Status
+          %th.fw-m.text-darkblue Download
+          - if current_agency.readymode_enabled
+            %th.fw-m.text-darkblue ReadyMode
+      %tbody
+        -@outscrapper_requests.order("updated_at DESC").each do |request|
+          %tr
+            %td
+              =request.categories.join(", ")
+            %td
+              =request.limit
+            %td
+              ="#{request.states.join(", ")} / #{request.cities.join(", ") unless request.cities.nil?}"
+            %td
+              =format_at_date(request.updated_at)
+            %td
+              -if request.outscrapper_status == "Pending"
+                %span.d-inline-block.py-2.px-3.rounded-15.bg-warning.fs-xxs.text-white Processing
+              -elsif request.outscrapper_status == "Success"
+                %span.d-inline-block.py-2.px-3.rounded-15.bg-green.fs-xxs.text-white Completed
+              -else
+                -if request.retry_count < 3
+                  %a{"data-target": ".reorder-modal", "data-toggle": "modal", "data-id": "#{request.id}", title: "Reorder data"}
+                    %span.d-inline-block.py-2.px-3.rounded-15.bg-red.fs-xxs.text-white Error
+                -else
+                  %a{title: "Request failed for 3 consecutive time"}
+                    %span.d-inline-block.py-2.px-3.rounded-15.bg-red.fs-xxs.text-white Error
+            -if request.outscrapper_status == "Success"
+              %td{title: "Download data"}
+                %form
+                  %select.form-select.download{id: "download", style: "position: relative; display: flex; width: 10em; height: 2em; line-height: 3; overflow: hidden; border-radius: .25em;"}
+                    %option{value: ''} Select format
+                    %option{value: "/a/external_leads/download_data/#{request.id}.csv"} CSV
+                    -#%option{value: "/a/external_leads/download_data/#{request.id}.xlsx"} Excel
+                    %option{value: "/a/external_leads/download_data/#{request.id}.json"} JSON
+            -elsif request.outscrapper_status == "Pending"
+              %td{title: "Request failed or wait for data to process"}
+                %form
+                  %select.form-select{id: "download", disabled: true, style: "position: relative; display: flex; width: 10em; height: 2em; line-height: 3; overflow: hidden; border-radius: .25em;"}
+                    %option{value: ''} Select format
+            -else
+              %td
+                %a.btn.btn--xs.btn-warning{style: "width: 57%", href: "/a/lead_sources/delete_data_requests/#{request.id}", "data-method": "delete"}
+                  %span Delete
+            - if current_agency.readymode_enabled
+              %td
+                .d-flex.align-items-center
+                  %span.d-inlie-block.v-center.py-1.px-3.rounded-12.text-white{class: 'status-'+ request.readymode_upload_status}
+                    = request.readymode_upload_status.capitalize()
+                  - if not (["completed",'processing'].include?request.readymode_upload_status)
+                    = link_to upload_redymode_data_agency_external_lead_path(id: request.id), method: :post, data: { remote: true }, class: 'close-hover action-btn action-btn--xs ml-3 v-center', title: 'Lock', id: "upload_redymode_data_#{request.id}"  do
+                      %span.btn-icon{'data-toggle': 'tooltip', title: 'Upload', 'data-placement': 'bottom'}
+                        %i.fa.fa-upload
+
+.modal.fade.in.reorder-modal{role: "dialog", tabindex: "-1"}
+  %button.close.m-4{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+    %span.px-2.py-2.rounded-8.bg-white.d-inline-block{"aria-hidden" => "true"}
+      %i.material-icons close
+  .modal-dialog.modal-m
+    .bg-white.p-4.p-sm-5.rounded
+      .prospecting_details_form
+        .row
+          .col-md-6
+            .fw-m.fw-b.text-darkblue.text-sm Reorder Data
+          .col-md-6
+            .fw-m.fw-b.text-sm.text-right Available credits: #{current_agency.outscraper_limit.credit_balance}
+        %hr.my-4
+          %div#reorder
+            .fw-m.fw-b.text-sm.text-center Do you want to reorder this data
+            %div{style: "text-align:center; padding:25px 25px 0 25px;"}
+              .btn.btn-success#reorder_request Yes
+              .btn.btn-warning{"data-dismiss" => "modal", :type => "button","ng-click": "closeModal()"} No
+
+
+.ui-2020
+  .row.pagination-wrapper.pt-5
+    .pagination
+      = will_paginate @outscrapper_requests
+:javascript
+  $(document).ready(function() {
+    $(".download").change(function(){
+      if ($(this).val()!=='') {
+        window.location.href=$(this).val();
+      }
+    });
+    var request_id;
+    $('.reorder-modal').on('show.bs.modal', function (e) {
+        request_id = $(e.relatedTarget).data('id');
+    })
+    $("#reorder_request").on('click', function(e) {
+      var url = "/a/external_leads/reorder_data/" + request_id;
+      $.ajax({
+          url: url,
+          type: 'patch',
+          success: function(){
+            $('.reorder-modal').modal('hide');
+            window.location.reload();
+          },
+          beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
+        });
+    });
+  });

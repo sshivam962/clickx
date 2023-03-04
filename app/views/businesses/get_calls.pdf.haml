@@ -1,0 +1,31 @@
+%html
+  %head
+    %h1 Call Analytics
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+  %body
+    %table-responsive
+      %table.table.table-bordered.table-vam.table-left
+        %thead
+          %th Caller
+          %th Caller Name
+          %th Campaign
+          %th Time
+          %th Duration
+          %th Status
+        %tbody
+          - @data.each do |data|
+            %tr
+              %td
+                = data.caller
+              %td
+                = data.caller_name
+              %td
+                = data.campaign
+              %td
+                = data.time
+              %td
+                = data.duration
+              %td
+                = data.status
+
+

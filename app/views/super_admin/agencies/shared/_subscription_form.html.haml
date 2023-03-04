@@ -1,0 +1,22 @@
+- if active_subscription.present?
+  .pb-2
+    %span.mr-3.d-inline-block
+      Subscribed to
+      %b
+        #{active_subscription.package_name.titleize}
+      - if active_subscription.cancel_at.present?
+        %br
+        Scheduled to end subscription on  #{active_subscription.cancel_at.strftime('%B %d, %Y')}
+
+      - if subscription_schedule.present?
+        %br
+        Scheduled downgrade to
+        %b
+          #{subscription_schedule.stripe_plan.titleize}
+        on #{subscription_schedule.start_at.strftime('%B %d, %Y')}
+    = link_to manage_growth_subscription_super_admin_agency_path(agency.id), class: 'btn btn-info btn-raised btn-xs', method: :get, remote: true do
+      %i.fa.fa-gear
+      Manage
+- plans_collection = Package.growth.plans.order(:interval, :amount).map{|p| [p.display_name, p.id]}
+= select_tag 'agency[package]', options_for_select(plans_collection.unshift(['Free', 'free']), agency_active_manual_plan(agency)&.id), include_blank: 'Select Package', class: 'input-wrapper-input'
+

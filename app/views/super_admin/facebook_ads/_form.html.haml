@@ -1,0 +1,47 @@
+%div.col-md-12
+  .row.funnel_page_form
+    -#  .form-group
+          %label{for: "funnel_page_title"} Title
+          = f.text_field :title, required: true, class: 'form-control login', placeholder: 'Enter Title'
+    -#  .form-group
+          %label{for: "funnel_page_title"} Description
+          = f.text_area :description, required: true, class: 'form-control login', placeholder: 'Enter Description'  
+    .form-group
+      %label.font-size18 Thumbnail
+      .input-wrapper
+        = f.fields_for :thumbnail do |t|
+          .preview-thumb-list
+            .preview-thumb-item.cs_image_card
+              .preview-thumb{:style => "background-image: url(#{t.object.file.url})"}
+              .preview-thumb-buttons
+                .preview-thumb-button.preview-thumb-edit
+                  %i.fa.fa-pencil
+                  = t.file_field :file
+
+    .form-group.images_wrapper
+      %label.font-size18 Images
+      .list-group#images.preview-thumb-list
+        = f.fields_for :images do |ff|
+          = render 'image_fields', f: ff
+
+        .preview-thumb.preview-thumb--add-new
+          = link_to_add_association '+', f, :images
+    = f.hidden_field :category_type, value: 'FacebookAds'      
+    .form-group
+      = f.submit "Save", class: 'btn btn-warning saveBtn', name: 'Save'
+
+:javascript
+  $(document).ready(()=>{
+  $(document).on('change', '.preview-thumb-edit input[type="file"]', function(){
+  const file = this.files[0];
+  if (file){
+  var it = $(this).parents('.cs_image_card');
+  let reader = new FileReader();
+  reader.onload = function(event){
+    var imageUrl = event.target.result;
+    $(it).find('.preview-thumb').css('background-image', 'url(' + imageUrl + ')');
+  }
+  reader.readAsDataURL(file, it);
+  }
+  });
+  });

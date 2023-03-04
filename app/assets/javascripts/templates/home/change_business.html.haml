@@ -1,0 +1,21 @@
+%span
+  %a.btn.btn-warning{'ng-click' => "select_campaign()"} Select A Campaign
+  %br
+
+%div{'ng-controller' => "Home"}
+  %script{type: "text/ng-template", id: "changeBusiness"}
+    %form.new_task{"accept-charset" => "UTF-8", name:'userForm', "ng-submit" => "change_business()", "novalidate" => "" }
+      .modal-header
+        %h3.modal-title Select a Campaign
+      .modal-body
+        .form-group{"ng-class" => "{'has-error' : submitted && userForm.business_id.$invalid}"}
+          %label{:for => "business_id"} Campaign Name
+          %select#business_id.form-control.login.width40per{:name => "new_business", 'ng-model' => 'new_business', required: true, 'ng-options' => "business.id as business.expired_name for business in current_user_businesses"}
+            %option{:value => ""} Select a Campaign
+          %span.help-inline{"ng-show" => " submitted && userForm.business_id.$invalid"} not a valid business
+          %br/
+
+
+      .modal-footer
+        %button.btn.btn-success{:type => "submit", 'ng-click' => "submitted=true"} Change Campaign
+        %button.btn.btn-primary{'ng-click' => "modalInstance.dismiss('cancel')"} Cancel

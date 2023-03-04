@@ -1,0 +1,2 @@
+$('.archived_users_list').html("<%= escape_javascript render( partial: 'super_admin/admin_users/shared/archived_list', locals: { users: @users }) %>");
+$('html, body').animate({ scrollTop: 0 }, 'slow');

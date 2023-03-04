@@ -1,0 +1,20 @@
+.primary-skills-0.pt-4
+  .input-wrapper-label What Specific Skill do you Need? (Optional)
+  %ul.skill-buttons
+    - secondary_skills.each do |skill|
+      %li
+        %label
+          - if @project.present?
+            - border_color = skill.first.to_s == project_specific_skill(field, @project.id) ? '#4C4E60' : ''
+          - else
+            - border_color = ''
+          %input{:name => "secondary-skill", :type => "radio"}/
+          %span{id: "#{field}_#{skill.first}", class: "field_#{field}", style: "border-color: #{border_color};", data:{value: skill.first}}= skill.second
+
+      :javascript
+        $("##{field}_#{skill.first}").on('click', function() {
+          var val = $(this).data('value');
+          $("#project_specific_#{field}").val(val);
+          $(".field_#{field}").removeAttr( 'style' );
+          $(this).css('border-color', '#4C4E60');
+        });

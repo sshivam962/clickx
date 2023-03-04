@@ -1,0 +1,277 @@
+- lead = f.object
+.section-card.bg-white.rounded-12.mb-4
+  .section-card-body.px-5.py-4
+    .row
+      .form-group.m-n.col-sm-6
+        %label.control-label
+          First Name
+          .red.inline *
+        .form-control-input.mb-4
+          = f.text_field :first_name, required: true, class: 'form-control'
+      .form-group.m-n.col-sm-6
+        %label.control-label
+          Last Name
+        .form-control-input.mb-4
+          = f.text_field :last_name, class: 'form-control'
+    .row
+      .form-group.m-n.col-sm-6
+        %label.control-label
+          Email
+          .red.inline *
+        .form-control-input.mb-4
+          = f.email_field :email, required: true, class: 'form-control'
+      .form-group.m-n.col-sm-6
+        %label.control-label
+          Company
+          .red.inline *
+        .form-control-input.mb-4
+          = f.text_field :company, required: true, class: 'form-control'
+    .row
+      .form-group.m-n.col-sm-6
+        %label.control-label
+          Phone
+        .form-control-input.mb-4
+          = f.phone_field :phone, class: 'form-control', placeholder: "+1 555 555 1234"
+      .form-group.m-n.col-sm-6
+        %label.control-label
+          Domain
+        .form-control-input.mb-4.relative
+          = f.text_field :domain, class: 'form-control'
+      .form-group.m-n.col-sm-6
+        %label.control-label
+          Status
+        .form-control-input.mb-4
+          = f.select :status, ::Lead.status_collection, {}, class: 'form-control'
+      .form-group.m-n.col-sm-6
+        %label.control-label
+          Monthly Marketing Budget (Including Ad Budget)
+        .form-control-input.mb-4
+          = f.text_field :value, class: 'form-control'
+      .form-group.m-n.col-sm-6
+        %label.control-label
+          Next Meeting Date
+        .form-control-input.mb-4
+          = f.text_field :next_meeting_date, class: 'form-control', value: f.object.next_meeting_date&.to_date&.strftime('%m-%d-%Y'), placeholder: 'MM-DD-YYYY', readonly: true, style: 'cursor:pointer;'
+
+.section-card.bg-white.rounded-12.mb-4
+  .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#client_interested"}
+    .d-flex.justify-content-between.align-items-center
+      .col.fw-sb
+        Client is Interested in
+        .red.inline *
+        %small.font-14.fw-n (select atleast one)
+      .col
+        %span.accordion-arrow
+          %i.fa.fa-chevron-up
+  #client_interested.collapse
+    .section-card-body.px-5.py-4
+      .row
+        - Lead::CAMPAIGN_INFO.each do |info|
+          .form-group.m-n.col-md-6.col-lg-4
+            .styled-checkbox
+              = check_box_tag "lead[campaign_info][#{info[:key]}]", '', lead.campaign_info&.include?(info[:key]), class: 'lead_campaign_info_check'
+              .styled-checkbox-label
+                %span
+                %label{"for" => "lead_campaign_info_#{info[:key]}"}
+                  = info[:name]
+
+.section-card.bg-white.rounded-12.mb-4
+  .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#marketing_tactics"}
+    .d-flex.justify-content-between.align-items-center
+      .col.fw-sb
+        Client's Current Marketing Tactics
+      .col
+        %span.accordion-arrow
+          %i.fa.fa-chevron-up
+  #marketing_tactics.collapse
+    .section-card-body.px-5.py-4
+      .font-14 What marketing tactics are they currently doing?
+      .font-14 What is their current marketing budget?
+      .font-14 What have they done in the past for marketing? What worked? What did not work?
+      .font-14 What help are you looking for?
+      .collapsable_textarea_wrapper
+        .form-group.mb-0.mt-4.p-n
+          = f.text_area :current_info, class: 'form-control col-sm-5 p-0 collapsable_textarea collapsable_textarea--collapsed mb-0', rows: 4
+        #toggle_lead_info_textarea.btn-textara-hight-toggle.toggle_collapsable_textarea
+          Show full
+          %i.fa.fa-angle-double-down.ml-2
+
+.section-card.bg-white.rounded-12.mb-4
+  .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#competitor_info"}
+    .d-flex.justify-content-between.align-items-center
+      .col.fw-sb
+        Competitor Information
+      .col
+        %span.accordion-arrow
+          %i.fa.fa-chevron-up
+  #competitor_info.collapse
+    .section-card-body.px-5.py-4
+      .row
+        .form-group.m-n.col-sm-6
+          %label.control-label{:for => "fieldname"} Competitor 1:
+          .form-control-input.mb-4.relative
+            %input.form-control{name: 'lead[competitor_info][]', type: 'text', value: lead.competitor_info[0]}
+        .form-group.m-n.col-sm-6
+          %label.control-label{:for => "fieldname"} Competitor 2:
+          .form-control-input.mb-4.relative
+            %input.form-control.col-sm-5{name: 'lead[competitor_info][]', type: 'text', value: lead.competitor_info[1]}
+        .form-group.m-n.col-sm-6
+          %label.control-label{:for => "fieldname"} Competitor 3:
+          .form-control-input.mb-4.relative
+            %input.form-control.col-sm-5{name: 'lead[competitor_info][]', type: 'text', value: lead.competitor_info[2]}
+
+.section-card.bg-white.rounded-12.mb-4
+  .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#client_goals"}
+    .d-flex.justify-content-between.align-items-center
+      .col.fw-sb
+        Client Goals & Expectations
+      .col
+        %span.accordion-arrow
+          %i.fa.fa-chevron-up
+  #client_goals.collapse
+    .section-card-body.px-5.py-4
+      %h2.mb-lg.mt-0.pl-0
+        .font-14 What are they looking to achieve from marketing? What are their goals?
+        .font-14 What are they looking to invest in marketing?
+        .font-14 What are your KPIs for which you measure success?
+        .font-14 What are your CPA/CPL aims?
+      .collapsable_textarea_wrapper
+        .form-control-input.mb-0
+          .form-group.mb-0.p-n
+            = f.text_area :goals_and_expectations, class: 'form-control col-sm-5 collapsable_textarea collapsable_textarea--collapsed mb-0', rows: 4
+          #toggle_lead_info_textarea.btn-textara-hight-toggle.toggle_collapsable_textarea
+            Show full
+            %i.fa.fa-angle-double-down.ml-2
+.section-card.bg-white.rounded-12.mb-4
+  .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#next_steps"}
+    .d-flex.justify-content-between.align-items-center
+      .col.fw-sb
+        Next Steps
+        %small.font-14.fw-n We need Admin Access to perform any Audits.
+      .col
+        %span.accordion-arrow
+          %i.fa.fa-chevron-up
+  #next_steps.collapse
+    .section-card-body.px-5.pb-4.pt-5
+      .row
+        - Lead::NEXT_STEPS.each do |info|
+          .form-group.m-n.col-lg-4.col-sm-6
+            .form-control-input
+              .checkbox.checkbox-warning.m-0
+                - if lead_next_step_enabled?(info[:key], lead.agency)
+                  .styled-checkbox
+                    = check_box_tag "lead[next_steps][#{info[:key]}]", '', lead.next_steps&.include?(info[:key]), disabled: info[:disabled]
+                    .styled-checkbox-label
+                      %span
+                      %label{'for':"lead_next_steps_#{info[:key]}"}
+                        = info[:name]
+                - else
+                  .styled-checkbox
+                    = check_box_tag 'temp', '', false, disabled: true
+                    .styled-checkbox-label
+                      %span
+                      %label{'for':"lead_next_steps_#{info[:key]}"}
+                        = info[:name]
+                        %span.custom-tooltip.ml-2
+                          %i.fa.fa-lock
+                          %span.custom-tooltiptext
+                            Requires Pro Plan or Higher
+
+      .form-group.audit_request.hidden.mt-0
+        %label.control-label
+          Do you have access to the account?
+        .form-control-input
+          = f.select :audit_request, Lead::AUDIT_REQUESTS, { include_blank: 'Select Answer' }, class: 'form-control col-sm-5'
+
+.section-card.bg-white.rounded-12.mb-4
+  .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#call_notes"}
+    .d-flex.justify-content-between.align-items-center
+      .col.fw-sb
+        Call Notes
+      .col
+        %span.accordion-arrow
+          %i.fa.fa-chevron-up
+  #call_notes.collapse
+    .section-card-body.px-5.py-4
+      %h2.mb-lg.mt-0.pl-0
+        .font-14 What is a client worth to you over the course of their lifespan with you?
+        .font-14 What is their budget?
+        .font-14 What is being sold? What is the price for the item(s) being sold?
+        .font-14 Who is the ideal customer?
+      .collapsable_textarea_wrapper
+        .form-group.m-n.p-n
+          .form-control-input.mb-0
+            = f.text_area :call_notes, class: 'form-control col-sm-5 collapsable_textarea collapsable_textarea--collapsed mb-0', rows: 4
+        #toggle_lead_info_textarea.btn-textara-hight-toggle.toggle_collapsable_textarea
+          Show full
+          %i.fa.fa-angle-double-down.ml-2
+.form-group
+  .form-control-input
+    = f.submit 'Save', class: 'hidden form_submit'
+    %a.btn.btn-warning.btn-raised.btn-lg.save_lead{href: 'javascript:void(0)'}
+      Save
+
+:javascript
+  $(function() {
+    $("#lead_next_meeting_date").datepicker({
+      todayHighlight: true,
+      minDate: 0,
+      nextText: '',
+      prevText: '',
+      dateFormat: "mm-dd-yy"
+    });
+  });
+
+  $('.save_lead').click(function(){
+    if ($('.lead_campaign_info_check').filter(':checked').length < 1){
+      toastr.error('Please Select any Interest.')
+    }else{
+      $('.form_submit').click();
+    }
+  })
+
+  $("input[name='lead[next_steps][account_campaign_audit]']").change(function() {
+    if(this.checked) {
+      $('.audit_request').removeClass('hidden')
+    }else{
+      $('.audit_request').addClass('hidden')
+    }
+  });
+
+  $(document).on('keydown', '.collapsable_textarea', function() {
+    if(!$(this).hasClass('textarea-collapsed')) {
+      $(this).css({'height':'auto', 'padding':'0'});
+      $(this).css({'height': + this.scrollHeight + 'px'});
+    }
+    var lines = $(this).val().split('\n');
+    if(lines.length < 5 ) {
+      $(this).parents('.collapsable_textarea_wrapper').find('.toggle_collapsable_textarea').hide();
+    } else {
+      $(this).parents('.collapsable_textarea_wrapper').find('.toggle_collapsable_textarea').slideDown();
+    }
+  })
+
+  $(document).on('click', '.toggle_collapsable_textarea', function() {
+    var textArea = $(this).parents('.collapsable_textarea_wrapper').find('.collapsable_textarea');
+    if(textArea.hasClass('collapsable_textarea--collapsed')) {
+        textArea.css({'height':'auto', 'padding':'0'});
+        textArea.css({'height': + textArea.prop('scrollHeight') + 'px'});
+        $(this).html("Show Less <i class='fa fa-angle-double-up ml-2'></i>");
+        textArea.removeClass('collapsable_textarea--collapsed');
+    } else {
+      textArea.css({'height':'auto', 'padding':'0'});
+      textArea.addClass('collapsable_textarea--collapsed')
+      $(this).html("Show Full <i class='fa fa-angle-double-down ml-2'></i>");
+    }
+  });
+
+  $(window).load(function() {
+    $('.collapsable_textarea_wrapper').find('.collapsable_textarea').each(function() {
+      var textArea = $(this);
+      var lines = $(this).val().split('\n');
+      if(lines.length < 5 ) {
+        $(this).parents('.collapsable_textarea_wrapper').find('.toggle_collapsable_textarea').hide();
+      }
+    })
+  })
+

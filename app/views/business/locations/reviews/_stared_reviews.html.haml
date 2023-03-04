@@ -1,0 +1,27 @@
+.tab-pane.active
+  - if reviews.length > 0
+    - reviews.each do |rev|
+      .panel.panel-grey.11
+        .panel-heading
+          %img.panel-logo{:alt => "#{rev.name}", src: "/directories/#{rev.directory}.png" }
+          %h2.intialtitle-panel #{ rev.author || rev.email }
+          %span.pl #{ rev.timestamp.strftime("%-dth %b %Y") }
+          .panel-ctrls.dropdown
+            .star-rating.pr-n
+              - rev.rating.to_i.times do |star|
+                %i.fa.gold-star{ class: "fa-star" }
+              - (5 - rev.rating.to_i).times do |star|
+                %i.fa.gold-star{ class: "fa-star-o" }
+            - if rev.directory != "clickx"
+              %button.btn.btn-icon-rounded.dropdown-toggle{"data-toggle" => "dropdown"}
+                %span.material-icons.inverted more_vert
+              %ul.dropdown-menu
+                %li.p-sm
+                  %a{href: "#{rev.url}", target: '_blank'}
+                    %i.fa.fa-external-link.pr-xs
+                    Reply
+
+        .panel-body
+          %blockquote #{ rev.text || "This review on " + rev.name + " does not have any content." }
+
+  %div.row.text-center.p-n.mgl-33{src: "'themeX/shared/_pagination_links.html'"}

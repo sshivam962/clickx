@@ -1,0 +1,18 @@
+%td.vam{:align => "left"}
+- package.plans.order(:amount).each do |plan|
+  %td.vam
+    - if active_subscription.present?
+      - if active_subscription.plan_id.eql?(plan.stripe_plan)
+        .mt-xl.m-n.text-center.p-10.bdr-line{class: "text-#{plan_color_klass(plan.key)}"}
+          Subscribed
+      - else
+        - if active_subscription.amount < plan.amount
+          = link_to agency_package_subscription_upgrade_path(package: package.key, plan: plan.key), method: :post, data: { confirm: 'Are you sure?' }, class: "btn btn-block btn-lg mt-xl m-n btn-#{plan_color_klass(plan.key)}", remote: true do
+            Upgrade
+            %i.pl-sm.fa.fa-angle-double-right
+            .ripple-container
+    - else
+      %a.btn.btn-block.btn-lg.mt-xl.m-n{class: "btn-#{plan_color_klass(plan.key)}", href: agency_checkout_path(package: package.key, plan: plan.key)}
+        Get Started
+        %i.pl-sm.fa.fa-angle-double-right
+        .ripple-container

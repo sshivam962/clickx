@@ -1,0 +1,64 @@
+- count = 0
+- messages.reverse_each do |message|
+  - if message.sender_id == current_user.id
+    .flex.justify-end.mb-8
+      %div{class:"col flex-1 max-w-screen-sm pr-4"}
+        .chat-bubble.text-right
+          .text-sm.text-right.text-gray-600.pb-1.chat-username
+            = message.sender.name
+          .bg-blue.py-3.px-6.rounded-2xl.rounded-tr-none.text-sm.text-white.inline-block.chat-message.text-left
+            = message.message
+          .text-gray-500.text-xs.pt-2= message.created_at.strftime("%d %b %I:%M:%S %P")
+      .col-auto
+        .w-8.h-8.sm:w-12.sm:h-12.rounded-full.bg-blue.text-white.p-1.text-2xl.text-center
+          %i.fa.fa-user.sm:leading-10.leading-6.align-top
+  - else
+    - if !message.read?
+      - count += 1
+      - if count == 1
+        .new-messages
+          %hr.mb-5{:style => "height:1px; width:40%; border-width:0; color:black; background-color:black"}
+          %p.text-sm.ml-3.mr-3= "#{pluralize(unread_messages_count(@chat_thread.id), 'Unread Message')}"
+          %hr.mb-5{:style => "height:1px; width:40%; border-width:0; color:black; background-color:black"}
+    .flex.mb-8
+      .col-auto
+        .w-8.h-8.sm:w-12.sm:h-12.rounded-full.bg-secondary.text-white.p-1.text-2xl.text-center
+          %i.fa.fa-user.sm:leading-10.leading-6.align-top
+      %div{class:"col flex-1 max-w-screen-sm pl-4"}
+        .text-sm.text-gray-600.pb-1
+          = message.sender.name
+        .bg-white.py-3.px-6.rounded-2xl.rounded-tl-none.text-sm.text-gray-500.inline-block.chat-message
+          = message.message
+        .text-gray-500.text-xs.pt-2= message.created_at.strftime("%d %b %I:%M:%S %P")
+
+#chat_box_bottom
+
+:javascript
+  $(function(){
+    var scrolled = false;
+    var thread_id = #{chat_thread.id};
+    var total_pages = #{messages.total_pages};
+    var current_page = #{messages.current_page};
+    var next_page = current_page + 1;
+
+    $('.messaging-wrapper-messages').scroll(function() {
+      if(($('.messaging-wrapper-messages').scrollTop() < 75 || $('.messaging-wrapper-messages').scrollTop() == 0) && !scrolled && (total_pages != current_page)) {
+        scrolled = true;
+
+        $.ajax({
+          url: "/n/messages/chat_history",
+          type: 'GET',
+          data: { page: next_page, thread_id: thread_id },
+          success: function(response){}
+        });
+      }
+    });
+    if(#{@unread_messages.present?}) {
+      $.ajax({
+        url: "/n/messages/unread_messages",
+        type: 'post',
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: {thread_id: #{@chat_thread.id}}
+      })
+    }
+  })

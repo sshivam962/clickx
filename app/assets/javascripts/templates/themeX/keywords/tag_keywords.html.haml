@@ -1,0 +1,81 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-PromoteSearch.title-icon
+    Keywords
+    %small
+      Tag :
+      %b {{ tag.name }}
+
+.container-fluid
+  %div
+    .row
+      .col-md-12{'st-table':'dupkeywords', 'st-safe-src':'keywords'}
+        .panel.panel-blue
+          .panel-body.pt-sm
+            .col-sm-12.p-n
+              .col-lg-3.col-sm-6.col-xs-12.p-n
+                .form-group.m-n.pl-n.pt-sm
+                  .pl-n.input-group
+                    %span.input-group-addon.formfldic
+                      %i.material-icons search
+                    %input#search-table.form-control.col-sm-5.cus6in.pl-lg{"placeholder"=>"keyword","st-search"=>"name"}
+              .col-lg-3.col-sm-6.col-xs-12.pt-sm.pb-md.p-n.hidden-sm.hidden-xs
+                %h4.text-left
+                  %st-summary{"number-Of-rows"=>"st_per_page"}
+              .col-lg-2.col-sm-6.col-xs-12.p-n.hidden-sm.hidden-xs
+                %md-select.md-no-underline.form-control.mt-sm{'ng-model':'limit_keyword_rows','ng-init':"limit_keyword_rows=50"}
+                  %md-option Select
+                  %md-option{value:10} 10
+                  %md-option{value:25} 25
+                  %md-option{value:50} 50
+                  %md-option{value:100} 100
+                  %md-option{value:150} 150
+              .col-lg-4.col-sm-6.col-xs-12.p-n
+                .btn-group.pull-right
+                  %button.btn.btn-white.btn-md.btn-raised{type:"button",'ng-click'=>"untagSelectedKeyword($event)"}
+                    %i.fa.fa-trash-o.pr-xs
+                    Untag
+
+            .col-sm-12.pt-sm.p-n
+              .table-responsive
+                %table.table.table-stripped.reports.table-left.keyword-table
+
+                  %thead
+                    %tr
+                      %th{rowspan:2,width:"50px"} #
+                      %th{rowspan:2,"st-sort"=>"name"} Keywords
+                      %th.google.text-center.table-text-center{colspan:3} Google
+                      %th.table-text-center{rowspan:2,"st-sort"=>"searchVolume"} Search Volume
+                      %th.table-text-center{rowspan:2} CPC
+
+                      %th.text-right{width:"100px",rowspan:2}
+                        %div.pull-right{"ng-if":"keywords.length > 0"}
+                          Select All
+                          &nbsp;
+                          %input{type:"checkbox",id:"select_keywords","ng-click"=>"toggleKeywordSelect($event)"}
+                    %tr
+                      %th.google-tl.table-text-center{"st-sort"=>"googleRanking","st-sort-default"=>"true"} Rank
+                      %th.google-tl.table-text-center Change
+                      %th.google-tl.table-text-center URL
+                  %tbody
+                    %tr{"ng-repeat"=>"keyword in dupkeywords"}
+                      %td{width:"50px"} {{($index+1)}}
+                      %td {{keyword.name}}
+                      %td.google_rank
+                        %span{style: 'display:block','popover-placement' => "bottom", 'popover-template-a' => 'popover-google.html', 'popover-trigger'=>'mouseenter',"popover-classname":"clx-popover clx-bg popover-darkstone-blue-bg"}
+                          %div{"ng-bind-html"=>"(keyword.googleRanking || '100+') | seoRankingPosition"}
+                        %script{:id => 'popover-google.html', :type => "text/ng-template"}
+                          %popover_seo{:keyword => "keyword", :type => "google"}
+                      %td.google_change
+                        %span.fa{"ng-class":"{'fa-caret-down text-danger': keyword.google_ranking_change == (keyword.google_ranking_change | mathABS) ,'fa-caret-up text-success' : keyword.google_ranking_change !=( keyword.google_ranking_change | mathABS)}",
+                        "ng-show":"keyword.google_ranking_change"}
+                        %span{"ng-class":"{'text-danger': keyword.google_ranking_change == (keyword.google_ranking_change | mathABS),'text-success': keyword.google_ranking_change != (keyword.google_ranking_change | mathABS)}"} {{((keyword.google_ranking_change | mathABS) || "--")  }}
+                      %td.google_link
+                        %a{"title":"{{keyword.googleRankingUrl}}","ng-show":"keyword.googleRankingUrl",href:"{{keyword.googleRankingUrl}}",target:"_blank"}
+                          %md-tooltip {{keyword.googleRankingUrl}}
+                          %span.fa.fa-external-link
+                        %span{"ng-show":"keyword.googleRankingUrl==null"} --
+                      %td.text-center.table-text-center {{keyword.searchVolume || "Low"}}
+                      %td.table-text-center {{keyword.cpc || "Low"}}
+                      %td.text-right
+                        %input.keyword-checkbox.pull-right{type:'checkbox',name:'keywords[]',"id":"keyword-{{keyword[1]}}",value:"{{keyword.id}}"}

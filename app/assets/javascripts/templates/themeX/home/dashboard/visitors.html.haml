@@ -1,0 +1,49 @@
+.panel.panel-default.m-n#visitors{ 'ng-if': 'marketing_performance_loaded && visitorsStatus' }
+  .panel-heading.cursor-move
+    %h2
+      %a.l-grey{href: "#/google_analytics"}
+        Visitors
+        %i.fa.fa-info-circle.tooltip-text-icon{ 'title': 'List of sources where your visitors come from' }
+    #onboarding-visitors.on-boarding
+    .panel-ctrls
+      %button.Dbutton.btn.button-icon.pull-left.mt-sm{ 'ng-click': 'pdf_export("visitors")', 'title': 'Download report', 'ng-class': "{'disable-button': export_disabled}" }
+        %span.material-icons.inverted file_download
+      %button.btn.button-icon.mt-sm.refresh-panel{ 'ng-click': 'init_visitors_page()', 'title': 'Refresh report ' }
+        %span.material-icons.inverted refresh
+  .panel-body.no-padding.scroll-pane{style: 'height: 420px;'}
+    .boxes-cover{"ng-show"=>"analytics == null"}
+      .boxes.clearfix.pd-t-95
+        %span
+          .col-lg-12.col-md-12.col-xs-12.box
+            %a.block-link{href: "#/google_analytics"}
+              .item.text-center
+                .img
+                  %img{'ng-src' => "/hub_images/ic-analytics.png"}
+                %h3 No visitors data available
+    .scroll-content.p-n{"ng-show"=>"analytics != null"}
+      .panel-body
+        %draw-chart#analytics_pie_chart.btn-pointer{ 'on-click-chart': '',
+        'on-load-chart': '', 'config': 'visitor_chart_data',
+        'ng-show': 'visitorsStatus' }
+        .boxes-cover{'ng-show': "!visitorsStatus"}
+          .boxes.clearfix
+            %span
+              .col-lg-12.col-md-12.col-xs-12.box
+                %a.block-link{href: "#/google_analytics"}
+                  .item
+                    .img
+                      %img{'ng-src' => "/hub_images/ic-analytics.png"}
+                    %h3 Error in fetching google analytics data.
+      .panel-footer.width100.p-sm.mb{ 'ng-click': "goTo('/google_analytics')" }
+        .col-lg-4.bdr-line.col-md-4.col-sm-4.col-xs-4.p-sm.text-center.bdr-b-blue.btn-pointer
+          %h4.mt-n.mb-n.pt-xs
+            %small.mt-n.mb-sm> Sessions
+            {{ analytics['ga:sessions']  | toLocaleString }}
+        .col-lg-4.bdr-line.col-md-4.col-sm-4.col-xs-4.p-sm.text-center.bdr-b-red.btn-pointer
+          %h4.mt-n.mb-n.pt-xs
+            %small.mt-n.mb-sm> Users
+            {{ analytics['ga:users'] | toLocaleString }}
+        .col-lg-4.bdr-line.col-md-4.col-sm-4.col-xs-4.p-sm.text-center.bdr-b-green.btn-pointer
+          %h4.mt-n.mb-n.pt-xs
+            %small.mt-n.mb-sm> Pageviews
+            {{ analytics['ga:pageviews'] | toLocaleString }}

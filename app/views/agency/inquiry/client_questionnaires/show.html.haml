@@ -1,0 +1,27 @@
+- content_for :title do
+  Client Questionnaires | Clickx
+.page-content
+  .page-heading.mb-n.pb-md
+    %h1 #{@client_questionnaire.client&.name} - Questionnaires
+  .clickx-breadcrumb-wrapper
+    %ol.breadcrumb.clx-breadcrumb
+      %li
+        %a{:href => "/b/dashboard"} Home
+      %li
+        %span Client Questionnaires
+  .container-fluid
+    .row
+      .col-md-12
+        .section-panel.panel.panel-default
+          .collapse.in
+            .panel-body
+              .faq-list.panel-group.mb-n
+                - @client_questionnaire.answers.each do |answer|
+                  - next if answer.question.blank?
+                  .cus-acc.panel
+                    %a{'data-toggle':'collapse', href: "#collapse#{answer.id}"}
+                      .acc-heading
+                        %h2= answer.question.question
+                    .collapse{id: "collapse#{answer.id}"}
+                      .acc-body
+                        %p= answer.answer.html_safe

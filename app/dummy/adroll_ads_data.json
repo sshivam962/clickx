@@ -1,0 +1,43 @@
+{
+  "ads_data": {
+    "ad": {
+      "byEIDs": [
+        {
+          "eid": "1234567890",
+          "metrics": {
+            "summary": {
+              "clickRevenue": 0.0,
+              "clicks": 10,
+              "cost": 23.9,
+              "impressions": 12459,
+              "viewRevenue": 0.0
+            }
+          },
+          "name": "Test Ad",
+          "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrjqyfrZjbW2PNPdy2vR7tFIjP-BYo5Ioig9AE766zW0eqBX5B",
+          "status": "running"
+        },
+        {
+          "eid": "0987654321",
+          "metrics": {
+            "summary": {
+              "clickRevenue": 10.0,
+              "clicks": 100,
+              "cost": 15,
+              "impressions": 10000,
+              "viewRevenue": 0.0
+            }
+          },
+          "name": "Facebook AD 01",
+          "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrjqyfrZjbW2PNPdy2vR7tFIjP-BYo5Ioig9AE766zW0eqBX5B",
+          "status": "running"
+        }
+      ]
+    }
+  },
+  "total_clicks": 3192,
+  "total_impressions": 5425132,
+  "total_cost": 7945.43,
+  "total_click_revenue": 20,
+  "total_view_revenue": 0
+}

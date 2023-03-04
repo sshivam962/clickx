@@ -1,0 +1,410 @@
+- content_for :title do
+  Digital PR | Clickx
+.ui-2020.package-page
+  .page-content
+    .page-heading.pt-md.pb-md
+      %h1
+        .d-flex.justify-content-between
+          .col-auto
+            %i.clickx-icon-package
+            Digital PR
+          = render 'agency/packages/shared/msrp_percentage'
+    .container-fluid
+      .table-responsive.table-plan.text-center
+        %table.table.table-hover.mb-n.overflow-h
+          %thead
+            %tr
+              %th.col-label{"vertical-align" => "top"}
+                .pt-col-content
+                  %h2.pt-header-caption.pt-header-caption--title.text-left Digital PR
+              - @plans.order(:amount).each do |plan|
+                %th.col-package
+                  .pt-col-content
+                    .pt-header-caption= plan.title
+                    .pt-header-price
+                      = in_currency(plan.amount, current_agency.display_currency)
+                      - if plan.interval.eql?('month')
+                        %span> /mo
+                      = hidden_field_tag(:hidden_plan_amount, plan.amount, class: 'hidden_plan_amount', id: plan.key)
+                    %span.plan-label
+                      - @msrp_class = "msrp_#{plan.key}"
+                      %span.d-inline-block{:class => @msrp_class} MSRP: #{in_currency(plan.amount + (plan.amount * 0.5), current_agency.display_currency)}
+
+          %tbody
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span 100% Customized Outreach Strategy
+              %td
+                .pt-col-content{"data-label" => "100% Customized Outreach Strategy"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "100% Customized Outreach Strategy"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "100% Customized Outreach Strategy"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Dedicated Campaign Manager
+              %td
+                .pt-col-content{"data-label" => "Dedicated Campaign Manager"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Campaign Manager"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Campaign Manager"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Dedicated Content Specialists
+              %td
+                .pt-col-content{"data-label" => "Dedicated Content Specialists"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Content Specialists"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Content Specialists"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Assess Industry Journals
+              %td
+                .pt-col-content{"data-label" => "Assess Industry Journals"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Assess Industry Journals"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Assess Industry Journals"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Extensive Journalist Research
+              %td
+                .pt-col-content{"data-label" => "Extensive Journalist Research"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Extensive Journalist Research"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Extensive Journalist Research"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Develop Relevant Media Lists
+              %td
+                .pt-col-content{"data-label" => "Develop Relevant Media Lists"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Develop Relevant Media Lists"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Develop Relevant Media Lists"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Develop Editorial Calendar
+              %td
+                .pt-col-content{"data-label" => "Develop Editorial Calendar"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Develop Editorial Calendar"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Develop Editorial Calendar"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Abstracts Development
+              %td
+                .pt-col-content{"data-label" => "Abstracts Development"}
+                  %span 1+ Abstracts Developed
+              %td
+                .pt-col-content{"data-label" => "Abstracts Development"}
+                  %span 2+ Abstracts Developed
+              %td
+                .pt-col-content{"data-label" => "Abstracts Development"}
+                  %span 2+ Abstracts Developed
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Thought Leadership
+              %td
+                .pt-col-content{"data-label" => "Thought Leadership"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Thought Leadership"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Thought Leadership"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span PR Content Creation
+              %td
+                .pt-col-content{"data-label" => "PR Content Creation"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "PR Content Creation"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "PR Content Creation"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Secure Placements Based on Content Approvals
+              %td
+                .pt-col-content{"data-label" => "Secure Placements Based on Content Approvals"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Secure Placements Based on Content Approvals"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Secure Placements Based on Content Approvals"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Strategic PR Planning
+              %td
+                .pt-col-content{"data-label" => "Strategic PR Planning"}
+                  %span
+                    %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Strategic PR Planning"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Strategic PR Planning"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Conduct Discovery Sessions
+              %td
+                .pt-col-content{"data-label" => "Conduct Discovery Sessions"}
+                  %span
+                    %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Conduct Discovery Sessions"}
+                  %span
+                    %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Conduct Discovery Sessions"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Monitor HARO Opportunities
+              %td
+                .pt-col-content{"data-label" => "Monitor HARO Opportunities"}
+                  %span
+                    %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Monitor HARO Opportunities"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Monitor HARO Opportunities"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Personal Branding Strategy
+              %td
+                .pt-col-content{"data-label" => "Personal Branding Strategy"}
+                  %span
+                    %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Personal Branding Strategy"}
+                  %span
+                    %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Personal Branding Strategy"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Monthly PR Strategy Calls
+              %td
+                .pt-col-content{"data-label" => "Monthly PR Strategy Calls"}
+                  %span
+                    %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Monthly PR Strategy Calls"}
+                  %span
+                    %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Monthly PR Strategy Calls"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span PR Placements
+              %td
+                .pt-col-content{"data-label" => "PR Placements"}
+                  %span ~2 PR Placements Per Quarter
+              %td
+                .pt-col-content{"data-label" => "PR Placements"}
+                  %span 2-3 PR Placements Per Quarter
+              %td
+                .pt-col-content{"data-label" => "PR Placements"}
+                  %span 4-5 PR Placements Per Quarter
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Client Cancellation
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content{"data-label" => "Client Cancellation"}
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content{"data-label" => "Client Cancellation"}
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content{"data-label" => "Client Cancellation"}
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Implementation Fee
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content{"data-label" => "Implementation Fee"}
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content{"data-label" => "Implementation Fee"}
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content{"data-label" => "Implementation Fee"}
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+            - unless @is_preview
+              %tr.pt-row-footer
+                %td.col-label.text-left
+                  .pt-col-content
+                %td
+                  .pt-col-content
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'digital_pr', plan: 'starter')}
+                      Get Started
+                %td
+                  .pt-col-content
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'digital_pr', plan: 'pro')}
+                      Get Started
+                %td
+                  .pt-col-content
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'digital_pr', plan: 'advanced')}
+                      Get Started
+      .row.pt-5.pb-4.d-none.flex-wrap.row-p-5
+        .col-md-6.col-sm-6.col
+          .panel-body.bg-white.panel-br-10.p-5.h-100
+            .panel-head.pb-5
+              %i.clickx-icon-Support.ico-60.pr-sm.text-info
+              %h5.f-s-16.f-w-lg.l-s-2.text-muted OPTIONAL
+              .pt-header-caption.text-info White-Glove™ Customer Service
+              .pt-header-price
+                #{in_currency(500, current_agency.display_currency)}
+                %span> /mo
+            .panel-content.pl-n.pr-n
+              %p In addition to our White Label Dashboard for Reporting, White-Glove™ Customer Service include day to day Account Management, Email Communication with our Account Managers as well as Monthly Strategy and Reporting Phone Call.
+        .col-md-6.col-sm-6.col.mt-4.mt-md-0
+          .panel-body.bg-white.panel-br-10.p-5.h-100
+            .panel-head.pb-5
+              %i.clickx-icon-partner.ico-60.pr-sm.text-info
+              %h5.f-s-16.f-w-lg.l-s-2.text-muted OPTIONAL
+              .pt-header-caption.text-info Expedited Onboarding
+              .pt-header-price
+                #{in_currency(500, current_agency.display_currency)}
+                %span> /One Time
+            .panel-content.pl-n.pr-n
+              %p Speedy Ad Setup and Approval. 2 Weeks Rush Turn Around.
+              %p Requesting Access to Business Manager as an Admin, Ad Account Creation, and Page Access, Dashboard Provisioning, Campaign Funding and Launch Support
+      - if raw(@package.sales_pitch).present?
+        .row.pt-4.pb-4.d-flex.flex-wrap.row-p-4
+          .col-sm-12.mt-4.mt-md-0
+            .panel-body.bg-white.panel-br-10.p-5.h-100
+              .panel-content.pl-n.pr-n
+                = raw(@package.sales_pitch)
+      .spacer15
+:javascript
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.plan-preloader').removeClass('plan-preloader');
+    }, 500);
+  });

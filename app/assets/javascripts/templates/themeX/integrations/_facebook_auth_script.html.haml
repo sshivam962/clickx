@@ -1,0 +1,16 @@
+%md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-lg.modal-compressed{ 'aria-label': 'Facebook auth' }
+  .modal-header
+    %button.close{ 'aria-hidden': 'true', 'ng-click': 'closeModal($event)' }
+      %span.fa.fa-times-circle-o
+    %h2.modal-title Facebook Ads
+  %md-dialog-content
+    .md-dialog-content
+      %h4.text-grey.text-center
+        You don't have any connected account.
+        %br
+        %br
+        %a{ 'ng-href': 'auth/facebook?redirect_to=integrations' } Connect
+        account, and manage your ad account.
+
+  %md-dialog-actions{'layout':'row'}
+    %button.btn.btn-info.btn-raised{ 'ng-click': 'closeModal()' } Close

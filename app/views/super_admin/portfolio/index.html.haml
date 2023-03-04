@@ -1,0 +1,77 @@
+- content_for :title do
+  Portfolio | Clickx
+.header{style: 'border:none;'}
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1
+      Portfolio
+
+.container-fluid
+  .row
+    .col-xs-12
+      %ul.nav.nav-tabs.nav-justified
+        - Portfolio::CATEGORY_INFO.each_with_index do |category, index|
+          %li{class: index.zero? ? 'active' : ''}
+            %a.w100{"data-toggle" => "tab", :href => "#sec-#{category[:key]}"}= category[:name]
+    .col-md-12
+      .tab-content
+        - Portfolio::CATEGORY_INFO.each_with_index do |category, index|
+          .tab-pane.pt-n.p-md{id: "sec-#{category[:key]}", class: index.zero? ? 'active' : '' }
+            .panel-group.mt-md.row.pl-md.pr-md{id: "portfolio-#{category[:key]}"}
+              - portfolios = Portfolio.includes(:images, :thumbnail).active.where(category: category[:key])
+              - portfolios.each do |portfolio|
+                .col-md-3.portfolio-item{ id: "portfolio-#{portfolio.id}"}
+                  - if portfolio.video?
+                    %a{"data-target" => "#pf-video-modal-#{portfolio.id}", "data-toggle" => "modal", href: 'javascript:void(0)'}
+                      %img.img-responsive.mt-md{ alt: '', src: portfolio.thumbnail_url}
+                    = render 'super_admin/portfolio/shared/video_modal', portfolio: portfolio
+                  - else
+                    %a{"data-gallery" => "mixedgallery#{portfolio.id}", "data-toggle" => "lightbox", href: portfolio.thumbnail_url}
+                      %img.img-responsive.mt-md{ alt: '', src: portfolio.thumbnail_url}
+                    - portfolio.images.each do |image|
+                      %a{"data-gallery" => "mixedgallery#{portfolio.id}", "data-toggle" => "lightbox", href: image.file.url}
+
+                  .buttons
+                    = link_to preview_super_admin_portfolio_path(portfolio), class: 'btn btn-primary m-n mr-sm ml-sm', target: :_blank do
+                      %i.glyphicon.glyphicon-eye-open
+                    = link_to edit_super_admin_portfolio_path(portfolio), "data-placement" => "bottom", class: 'btn btn-default m-n mr-sm ml-sm' do
+                      %i.glyphicon.glyphicon-pencil
+                    = link_to super_admin_portfolio_path(portfolio), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger m-n mr-sm ml-sm' do
+                      %i.fa.fa-archive
+                  - if portfolio.draft?
+                    .text-center
+                      .badge.m-sm
+                        DRAFT
+
+%a.btn.btn--add.pull-right{ 'href': new_super_admin_portfolio_path}
+  %i.glyphicon.glyphicon-plus.glyphplus
+
+:javascript
+  $(document).on("click", '[data-toggle="lightbox"]', function(event) {
+    event.preventDefault();
+    $(this).ekkoLightbox();
+  });
+
+  $(document).ready(function(){
+    $("#portfolio").sortable({
+      update: function(e, ui) {
+        $.ajax({
+          url: $(this).data("url"),
+          type: "post",
+          data: $(this).sortable('serialize'),
+        });
+      }
+    });
+  });
+:css
+  .modal-backdrop {
+    z-index: 9;
+  }
+  .portfolio-item{
+    border: 1px solid #ccc;
+    min-height: 350px;
+  }
+  .buttons{
+    text-align:center;
+    margin: 10px 10px 10px 10px;
+  }
+

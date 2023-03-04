@@ -1,0 +1,328 @@
+= content_for :title, 'Dashboard | Clickx'
+.py-8.h-full
+  .lg:container.mx-auto.px-4
+    - if @projects.present?
+      / Job Search
+      #job-search.flex.flex-col.lg:flex-row.flex-wrap.gap-2.lg:gap-4.mb-8.lg:mb-4
+        .flex-1
+          .search-form-input
+            .search-form-label What
+            %input#search_projects{:placeholder => "Project Titles, Skills", :type => "text"}
+        .col-auto
+          %button.btn.btn--red.btn--md#clear_button.cb_disabled Clear
+        .col-auto
+          %button.btn.btn--blue.btn--md#search_button Search
+      / Job Filter
+      #job-filter.flex.flex-wrap.gap-4.mb-10
+        .col-auto
+          .custom-select.custom-select--filter
+            = select_tag :date_posted, options_for_select([['Today', 'today'],['Yesterday', 'yesterday'],['This Week', 'this_week'],['This Month', 'this_month'],['Last 30 Days', 'last_30_days'],['This Year', 'this_year'],['All Time', 'all_time']]), include_blank: 'Date Posted'
+        .col-auto
+          .custom-select.custom-select--filter
+            = select_tag :budget_estimate, options_for_select([['$0 - $10,000', 's_10'],['$10,001 - $50,000', 's_10_50'],['$50,001 - $100,000', 's_50_100'],['> $100,000', 's_100']]), include_blank: 'Budget Estimate'
+      / Page contents
+      .flex.flex-wrap.main-content
+        / Page Left
+        .flex-1.lg:pr-10{:class => "lg:w-3/6"}
+          - if current_user.network_profile&.cv.blank?
+            .text-sm.py-3
+              .text-blue.relative.inline-block
+                Upload your resume
+                = file_field_tag :cv, class: 'text-blue absolute left-0 top-0 w-full h-full opacity-0', 'onchange': 'upload_pdf(this.files[0]);'
+              \- Let agencies find you!
+          %hr.border-t-2/
+          .flex.items-center.justify-between.text-sm.my-5.text-gray-700.flex-wrap
+            .col-auto.pr-5
+              Sort by: -
+              = select_tag :sort_by, options_for_select([["Date","date"],["Price","price"]]), id: 'sort-by', class: 'sort-by-select text-blue bg-transparent'
+            .pagination_info
+              = render '/network/dashboard/pagination_info'
+          .projects-listing
+            = render '/network/dashboard/project_list'
+
+        .col-auto.project-deatils-col#project_details{:class => "lg:w-3/6"}
+
+    - else
+      .bg-white.p-5.rounded
+        Projects will be available as soon as we launch to Agencies.
+
+  -# Project Contract Overlay
+  #project_contract_modal
+- if current_user.network_profile.start_tour.blank?
+  #start_tour_overlay.fixed.z-10.inset-0.overflow-y-auto.overlay
+    .flex.items-center.justify-center.min-h-screen.pt-4.px-4.pb-10.text-center
+      .fixed.inset-0.bg-gray-500.bg-opacity-75.transition-opacity
+      .inline-block.align-bottom.bg-white.rounded-lg.text-left.overflow-hidden.shadow-xl.transform.transition-all.sm:align-middle.sm:max-w-3xl.sm:w-full
+        .bg-white.px-2.pt-2.pb-4.sm:p-6.sm:pb-4.sm:pt-2.sm:px-2
+          .text-center.pt-3.px-3
+            %h5 Take a Tour of the Clickx Fulfillment Network!
+            #startTour.btn.btn--primary.sm:w-32.text-center.mx-1 Start Now
+            -# .btn.btn--grey.sm:w-32.text-center.overlay-close.mx-1 Skip
+  #tour_success_overlay.fixed.z-10.inset-0.overflow-y-auto.overlay.hidden
+    .flex.items-center.justify-center.min-h-screen.pt-4.px-4.pb-10.text-center
+      .fixed.inset-0.bg-gray-500.bg-opacity-75.transition-opacity.overlay-close
+      .inline-block.align-bottom.bg-white.rounded-lg.text-left.overflow-hidden.shadow-xl.transform.transition-all.sm:align-middle.sm:max-w-3xl.sm:w-full
+        .bg-white.px-2.pt-2.pb-4.sm:p-6.sm:pb-4.sm:pt-2.sm:px-2
+          .text-center.pt-3.px-3
+            %h5 You Have Completed the Clickx Fulfillment Network Tour!
+            #exitTour.btn.btn--grey.btn--primary.sm:w-32.text-center.overlay-close.mx-1 Exit
+            #startTour2.btn.text-center.mx-1 Take Tour Again
+
+:javascript
+  $("#sort_by").change(function() {
+    type = $(this).val();
+    $.ajax({
+      url: "/n/dashboard",
+      type: 'get',
+      data: {type:type},
+      dataType: 'script'
+    });
+  });
+
+  var upload_pdf = function(file) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      var params = {
+        user: {
+          cv: reader.result
+        }
+      };
+      $.ajax({
+        url: "/n/profile/upload_pdf",
+        type: 'patch',
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: params
+      });
+   };
+  };
+
+  $('#search_button').on('click', function(){
+    var name = $('#search_projects').val().toLowerCase();
+    var address = $('#search_by_address').val().toLowerCase();
+    $.ajax({
+      url: "/n/dashboard",
+      type: 'get',
+      data: { q: name, a: address },
+      dataType: 'script',
+      async: false
+    })
+  });
+
+  $('#search_projects, #search_by_address').keyup(function(){
+    if($(this).val().length > 0){
+      $('#clear_button').removeClass('cb_disabled')
+    }
+    else if($(this).val().length == 0){
+      $('#clear_button').addClass('cb_disabled')
+    }
+  });
+
+  $('#clear_button').on('click', function(){
+    $('#search_projects, #search_by_address').val('');
+    $(this).addClass('cb_disabled');
+    $.ajax({
+      url: "/n/dashboard",
+      type: 'get',
+      data: { q: '', a: '' },
+      dataType: 'script',
+      async: false
+    })
+  });
+
+  $('#date_posted').on('change', function (){
+    var date_posted = $(this).val();
+    var job_type = $('#job_type').val();
+    var budget_estimate = $('#budget_estimate').val();
+    var company = $('#companies').val();
+    $.ajax({
+      url: "/n/dashboard",
+      type: 'get',
+      data: { date_posted: date_posted, job_type: job_type, budget_estimate: budget_estimate, company: company },
+      dataType: 'script',
+      async: false
+    })
+  });
+
+  $('#job_type').on('change', function (){
+    var date_posted = $('#date_posted').val();
+    var job_type = $(this).val();
+    var budget_estimate = $('#budget_estimate').val();
+    var company = $('#companies').val();
+    $.ajax({
+      url: "/n/dashboard",
+      type: 'get',
+      data: { date_posted: date_posted, job_type: job_type, budget_estimate: budget_estimate, company: company },
+      dataType: 'script',
+      async: false
+    })
+  });
+
+  $('#budget_estimate').on('change', function (){
+    var date_posted = $('#date_posted').val();
+    var job_type = $('#job_type').val();
+    var budget_estimate = $(this).val();
+    var company = $('#companies').val();
+    $.ajax({
+      url: "/n/dashboard",
+      type: 'get',
+      data: { date_posted: date_posted, job_type: job_type, budget_estimate: budget_estimate, company: company },
+      dataType: 'script',
+      async: false
+    })
+  });
+
+  $('#companies').on('change', function (){
+    var date_posted = $('#date_posted').val();
+    var job_type = $('#job_type').val();
+    var budget_estimate = $('#budget_estimate').val();
+    var company = $(this).val();
+    $.ajax({
+      url: "/n/dashboard",
+      type: 'get',
+      data: { date_posted: date_posted, job_type: job_type, budget_estimate: budget_estimate, company: company },
+      dataType: 'script',
+      async: false
+    })
+  });
+
+  // const driver = new Driver();
+  function closeDriver(item) {
+    if(item == 'project-submit') {
+      $('#tour_success_overlay').fadeIn();
+    }
+  }
+
+  const driver = new Driver({
+    allowClose: false,
+    onReset: (Element) => {
+      closeDriver(Element.node.id);
+    }
+  });
+  function startTour() {
+    document.getElementById('start_tour_overlay').classList.add("hidden")
+    document.getElementById('tour_success_overlay').classList.add("hidden")
+     document.getElementById('tour_success_overlay').style.display = "none";
+    driver.defineSteps([
+      {
+        element: '#nav-membership',
+        popover: {
+          className: 'first-step-popover-class',
+          title: 'Clickx Community',
+          description: 'Follow us on social media, add Clickx to your “work experience”, and connect with fellow members!',
+          position: 'bottom'
+        }
+      },
+      {
+        element: '#nav-branding',
+        popover: {
+          title: 'Clickx Branding',
+          description: 'Proudly showcase your Clickx Fulfillment Network membership with Clickx logos.',
+          position: 'bottom'
+        }
+      },
+      {
+        element: '#nav-profile',
+        popover: {
+          title: ' Network Profile',
+          description: 'Update your profile with photos, social media links, skills and descriptions.',
+          position: 'bottom'
+        }
+      },
+      {
+        element: '#nav-feedback',
+        popover: {
+          title: 'Send Feedback',
+          description: 'Let the team know how we can improve your user experience.',
+          position: 'left'
+        }
+      },
+      {
+        element: '#nav-notifications',
+        popover: {
+          title: 'Notifications',
+          description: 'Stay up-to-date with announcements from the Clickx team here!',
+          position: 'left'
+        }
+      },
+      {
+        element: '#nav-messages',
+        popover: {
+          title: 'Chat',
+          description: 'Once you submit a proposal on a project, agencies can reach out to you to discuss the details.',
+          position: 'left'
+        }
+      },
+      {
+        element: '#nav-options',
+        popover: {
+          title: 'Settings',
+          description: 'Edit your user info, download your agreement, or log out here.',
+          position: 'left'
+        }
+      },
+      {
+        element: '#job-search',
+        popover: {
+          title: 'Search Projects',
+          description: 'Look for projects based on your skills and interests.',
+          position: 'bottom'
+        }
+      },
+      {
+        element: '#job-filter',
+        popover: {
+          title: 'Filter Projects',
+          description: 'Use filters to find projects that fit your specifications.',
+          position: 'bottom'
+        }
+      },
+      {
+        element: '#project_details',
+        popover: {
+          title: 'Project Details',
+          description: 'Click on a posted project to learn more.',
+          position: 'left'
+        }
+      },
+      {
+        element: '#project-submit',
+        popover: {
+          title: 'Submit Proposal',
+          description: 'If you want to apply for a project, submit a proposal and set it to the desired price.',
+          position: 'left'
+        }
+      }
+    ]);
+    driver.start();
+  }
+  document.getElementById('startTour').addEventListener('click', function(event){
+    event.stopPropagation();
+    startTour();
+  });
+  document.getElementById('startTour2').addEventListener('click', function(event){
+    event.stopPropagation();
+    startTour();
+  });
+
+  $(document).on("click",".driver-close-btn",function() {
+     change_start_tour();
+  });
+
+  $(document).on("click","#exitTour",function() {
+    change_start_tour();
+  });
+
+  function change_start_tour(){
+
+    $.ajax({
+      url: "/n/change_start_tour",
+      type: 'get',
+      dataType: 'json',
+      success:function(response){
+
+      }
+    })
+  }
+
+   

@@ -1,0 +1,151 @@
+- package_key = plan.custom? ? 'custom' : package.key
+- package_addons = plan.all_addons
+- addons_without_mandatory = plan.addons_without_mandatory
+- mandatory_addons = plan.mandatory_addons
+= form_tag agency_subscribe_package_path(package: package_key, plan: plan.key), method: :post, remote: true, id: 'new_package_subscription_form' do
+  - if package.is_a?(CustomPackage) && package&.business.present?
+    = hidden_field_tag :business_id, package.business.id
+  - else
+    = hidden_field_tag :business_id
+  = hidden_field_tag :card_id
+  = hidden_field_tag :onetime_charge, current_agency.onetime_charge? ? plan.onetime_charge : 0
+  = hidden_field_tag :plan_amount, plan.amount
+  = hidden_field_tag :funnel_platform
+  - if package.is_a?(Package) && package.agency_website?
+    = render 'agency/package_subscriptions/shared/agency_website', plan: plan
+  - else
+    = hidden_field_tag :expedited_onboarding_fees, plan.implementation_fee
+    = hidden_field_tag :plan, plan.key
+    = hidden_field_tag :package, package_key
+    .row_container_addon
+      .row
+        .col-md-6
+          .l-com-info.pt-n
+            %h4.fw-sb.text-darkblue
+              = plan.product_name
+          %div
+            = "Price: #{plan_price(plan)}"
+          - if plan.onetime_charge&.positive? && current_agency.onetime_charge?
+            .l-com-info.pt-n
+              %div
+                One-Time Implementation Fee:
+                %span
+                  = " #{number_to_currency(@plan.onetime_charge, precision: 0)}"
+          - if mandatory_addons.present?
+            - mandatory_addons.each do |addon|
+              = check_box_tag "addons[]", addon.id, true, class: 'payment_checks addon_plans hidden', id: addon.key, data: {amount: addon.amount}
+              .l-com-info.pt-n
+                %div
+                  = addon.name
+                  %span
+                    = addon.price_text
+          - if @package.plan_switch_enabled?(plan.key)
+            .radio-button
+              - @package.switch_plans(plan.key).each do |plan|
+                %span.mr-md
+                  = radio_button_tag 'change_plan', plan.key, plan.key.eql?(@plan.key)
+                  = plan.switch_display_name
+          - if @package.quantity_enabled?
+            - if @package.key == 'consulting'
+              .plan_quantity
+                #{@package.item_name} Hours
+                - @quantity = @plan.min_quantity
+                = select_tag :quantity, options_for_select(Array(@plan.min_quantity..@plan.max_quantity), (@quantity || 1)), class: 'payment_checks'
+            - else
+              .plan_quantity
+                Number of #{@package.item_name}
+                = select_tag :quantity, options_for_select(Array(1..@plan.max_quantity), (@quantity || 1)), class: 'payment_checks'
+          %div.pt-3
+            .fw-sb
+              Total Amount Due Today:
+              %span.total_amount_due.text-black
+                - plan_amount = plan.amount * @quantity
+                - amount = expedited_onboarding ? plan.implementation_fee + plan_amount : plan_amount
+                - amount += mandatory_addons&.sum(&:amount)
+                - amount += addons&.sum(&:amount)
+                - onetime_charge = current_agency.onetime_charge? ? plan.onetime_charge.to_i : 0
+                = " #{number_to_currency(onetime_charge + amount, precision: 0)}"
+          - if @package.ensure_checklist.try(:any?)
+            %div.pt-5.pb-4.fw-sb.text-darkblue
+              Ensure your client has these items before moving forward:
+            %span
+              %div
+                - @package.ensure_checklist.each do |ensure_check|
+                  .d-flex.pb-3
+                    .col
+                      %label.pure-material-checkbox
+                        = check_box_tag :ensure_checklist, ensure_check, false, checked: false, class: 'ensure_checklist_cls'
+                        %span
+                          = " #{ensure_check}"
+
+        .col-md-6.pt-4.pt-lg-0.addon_postion
+          - if plan.implementation_fee || white_glove_service_enabled?(package, plan) || package_addons.present?
+            %h4.fw-sb
+              Add On's
+          - if plan.implementation_fee || white_glove_service_enabled?(package, plan)
+            %span
+              .l-com-info.pt-n
+                - if white_glove_service_enabled?(package, plan)
+                  %h4
+                    %label.pure-material-checkbox
+                      - if white_glove_service
+                        = check_box_tag :white_glove_service, white_glove_service, true, checked: true, class: 'payment_checks'
+                      - else
+                        = check_box_tag :white_glove_service, white_glove_service, false, class: 'payment_checks'
+                      %span
+                        - if package&.funnel_development? || package&.ala_carte?
+                          = "White-Glove™ Service: #{number_to_currency(500, precision: 0)}"
+                        - else
+                          = "White-Glove™ Service: #{number_to_currency(500, precision: 0)}/mo"
+                
+                - if white_glove_service_enabled?(package, plan)
+                  - addon = Plan.find_by(package_type: 'addons', key: 'kickoff_call_with_client')
+                  - if addon.present?
+                    %h4
+                      = hidden_field_tag addon.key, addon.amount
+                      %label.pure-material-checkbox
+                        = check_box_tag "addons[]", addon.id, addons.include?(addon), class: 'payment_checks addon_plans', id: addon.key, data: {amount: addon.amount}
+                        %span
+                          - if addon.charge?
+                            = "#{addon.name}: #{number_to_currency(addon.amount, precision: 0)}"
+                          - else
+                            = "#{addon.name}: #{number_to_currency(addon.amount, precision: 0)}/mo"
+          - if addons_without_mandatory.present?
+            %div
+              - addons_without_mandatory.each do |addon|
+                - @addons_attached_to_another = addon.addons
+                - @auto_checkmark_cls = ''
+                - @label_disable_cls = ''
+                - @addon_left_align  = ''
+                - if addon.key == 'google_ads_mcc_setup_addon' || addon.key == 'fb_business_manager_setup_addon'
+                  - @auto_checkmark_cls = 'addon_auto_check'
+                  - @label_disable_cls = 'prevent-check-click'
+                  - @addon_left_align  = 'addon_left_align'
+
+                .l-com-info.pt-n{:class => @addon_left_align}
+                  = hidden_field_tag addon.key, addon.amount
+                  %h4
+                    %label.pure-material-checkbox{:class => @label_disable_cls}
+                      = check_box_tag "addons[]", addon.id, addons.include?(addon), class: "payment_checks addon_plans #{@auto_checkmark_cls}", id: addon.key, data: {amount: addon.amount}
+                      %span
+                        - if addon.charge?
+                          = "#{addon.name}: #{number_to_currency(addon.amount, precision: 0)}"
+                        - else
+                          = "#{addon.name}: #{number_to_currency(addon.amount, precision: 0)}/mo"
+                      - @addons_attached_to_another.each do |addon_attached|
+                        .l-com-info.pt-n.pl-5
+                          = hidden_field_tag addon_attached.key, addon_attached.amount
+                          %div
+                            %label
+                              = check_box_tag "addons[]", addon_attached.id, addons.include?(addon_attached), :onclick => "return false;", class: 'payment_checks addon_plans disabled d-none', id: addon_attached.key, data: {amount: addon_attached.amount}
+                            %span
+                              - if addon_attached.charge?
+                                = "#{addon_attached.name}: #{number_to_currency(addon_attached.amount, precision: 0)}"
+                              - else
+                                = "#{addon_attached.name}: #{number_to_currency(addon_attached.amount, precision: 0)}/mo"
+
+
+
+
+
+

@@ -1,0 +1,100 @@
+.row
+  .col-md-12
+    .tab-container
+      %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+        %li.active
+          %a{"data-toggle":"tab", 'data-target': "#ppc-clicks", 'ng-click':"resizeChart('clicks_ads_chart'); ads()", 'title': 'Number of times a user clicks on the headline of your Ad'} Clicks
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#ppc-impressions", 'ng-click':"resizeChart('impressions_ads_chart'); ads()", 'title': 'Number of times your ad is shown on a search result page or other site on the Google Network'} Impressions
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#ppc-cost", 'ng-click':"resizeChart('cost_ads_chart'); ads()", 'title': 'Total cost required to display the PPC Report'} Cost
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#ppc-avg-cost", 'ng-click':"resizeChart('avg_cost_ads_chart'); ads()", 'title': 'Average cost that were incurred for PPC ads '} Avg. Cost
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#ppc-ctr", 'ng-click':"resizeChart('ctr_ads_chart'); ads()", 'title': 'Percent of clicks received on your PPC ads to that of impressions'} CTR
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#ppc-conversions", 'ng-click':"resizeChart('conversions_ads_chart'); ads()", 'title': 'Shows you what happens after a customer clicks on your ads – whether they purchased a product, signed up for your newsletter, called your business, or submitted a form.'} Conversions
+      .tab-content
+        #ppc-clicks.tab-pane.active
+          .panel-body
+            .centered
+              #clicks_ads_chart
+        #ppc-impressions.tab-pane
+          .panel-body
+            .centered
+              #impressions_ads_chart
+        #ppc-cost.tab-pane
+          .panel-body
+            .centered
+              #cost_ads_chart
+        #ppc-avg.tab-pane
+          .panel-body
+            .centered
+              #avg_cost_ads_chart
+        #ppc-ctr.tab-pane
+          .panel-body
+            .centered
+              #ctr_ads_chart
+        #ppc-conversions.tab-pane
+          .panel-body
+            .centered
+              #conversions_ads_chart
+
+.row
+  .col-md-12
+    .tab-container
+      .tab-content{'st-table':"ad_ads", 'st-safe-src':"copy_ad_ads"}
+        .table-responsive
+          %table.table.table-hover.table-bordered.table-vam
+            %thead
+              %tr
+                %th.vam{'st-sort':'ad', style: "padding-right:190px;"}
+                  %u.help_pointer{'title': 'Preview of the ads that are running in Google for the given keywords'}
+                    Ad
+                %th.text-center{'st-sort':'ad_grp_name'}
+                  %u.help_pointer{'title': 'Group to which the given PPC ads belong'}
+                    Ad Group
+                %th.text-center{'st-sort':'clicks'}
+                  %u.help_pointer{'title': 'Number of clicks you received through PPC ads by the given keywords'}
+                    Clicks
+                %th.text-center{'st-sort':'impressions'}
+                  %u.help_pointer{'title': 'Number of views your PPC ads got from the given keywords'}
+                    Impressions
+                %th.text-center{'st-sort':'numeric_avg_cost'}
+                  %u.help_pointer{'title': 'Average cost incurred for PPC ads for the given keywords'}
+                    Avg. Cost
+                %th.text-center{'st-sort':'ctr'}
+                  %u.help_pointer{'title': 'Percent of clicks your PPC ads got to that of impressions it received for the given keywords'}
+                    CTR
+                %th.text-center{'st-sort':'conversion'}
+                  %u.help_pointer{'title': 'Number of people who converted after clicking on your PPC ads for the given keywords'}
+                    Conversion
+                %th.text-center{'st-sort':'status'}
+                  %u.help_pointer{'title': 'Current status of the ad'} Status
+                %th.text-center{'st-sort':'cost', 'ng-if':'markup_value == 0'}
+                  %u.help_pointer{'title': 'Cost per click incurred for PPC ads', 'title-direction': 'left' }
+                    Cost
+                %th.text-center{'st-sort':'cost_markup', 'ng-if':'markup_value > 0'}
+                  %u.help_pointer{'title': 'Cost per click incurred for PPC ads', 'title-direction': 'left' }
+                    Cost
+            %tbody
+              %tr{'ng-repeat': "ad in ad_ads"}
+                %td{"ng-include":"", src:"'themeX/adwords/_ad_info.html'"}
+                %td.text-center {{ad.ad_grp_name}}
+                %td.text-center {{ad.clicks}}
+                %td.text-center {{ad.impressions}}
+                %td.text-center {{ad.avg_cost}}
+                %td.text-center {{ad.ctr}}
+                %td.text-center {{ad.conversion}}
+                %td.text-center {{ad.status | titleize}}
+                %td.text-center{'ng-if':'ad.markup_value == 0'}
+                  ${{ad.cost/1000000 |number:2}}
+                %td.text-center{'ng-if':'ad.markup_value > 0'}
+                  ${{ad.cost_markup/1000000 |number:2}}
+        %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}
+%script{type: "text/ng-template", id: "Image"}
+  %md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-lg{"aria-label":"Ads Image"}
+    %md-dialog-content
+      .md-dialog-content
+        %center
+          %img{src: '{{image_url}}'}

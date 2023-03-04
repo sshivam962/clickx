@@ -1,0 +1,34 @@
+.row
+  .col-md-12
+    .tab-container
+      .tab-content{'st-table':"copy_ga_sites", 'st-safe-src':"ga_data_toggle_table"}
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th #
+                %th{'st-sort':'linkUrl'} Shared URLs
+                %th{'st-sort':'sessions', 'st-sort-default':'reverse'}
+                  Sessions
+                %th{'st-sort':'screenPageViews'}
+                  Page Views
+                %th{'st-sort':'averageSessionDuration'}
+                  Avg. Session
+                  %br Duration
+                %th{'st-sort':'screenPageViewsPerSession'}
+                  Pages/Session
+            %tbody
+              %tr{'ng-repeat':"site in copy_ga_sites"}
+                %td {{$index + 1}}
+                %td.text-left{align:'left'}
+                  %a{'ng-href' => "{{ site.linkUrl | web_link}}", target: '_blank'} {{site.linkUrl}}
+                %td
+                  {{site.sessions}}
+                  %span.per_info ({{ (site.sessions/total_sessions) *100 |number:2 }}%)
+                %td
+                  {{site.screenPageViews}}
+                  %span.per_info ({{ (site.screenPageViews/total_pageviews) *100 |number:2 }}%)
+                %td
+                  {{site.averageSessionDuration | date:'HH:mm:ss'}}
+                %td {{site.screenPageViewsPerSession |number:3}}
+        %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}

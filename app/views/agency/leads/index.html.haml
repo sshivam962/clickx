@@ -1,0 +1,54 @@
+- content_for :title do
+  Leads | Clickx
+.page-heading.pt-md.pb-md.ui-2020
+  .row.align-items-center
+    .col-md-4
+      %h1
+        %i.clickx-icon-SellSheets.title-icon
+        Leads
+    .col-md-8.text-md-right.text-left.pt-3.pt-md-0
+      %a.btn.btn--dark.btn--rounded-md.mb-2.mb-md-0{href: archived_agency_leads_path}
+        %i.fa.fa-archive.d-none.d-sm-inline-block
+        \&#160; Archived Leads
+      %a.btn.btn--dark.btn--rounded-md.mb-2.mb-md-0{href: register_lead_path(agency_slug: current_agency.name_slug), target: '_blank'}
+        %i.fa.fa-link.d-none.d-sm-inline-block
+        \&#160; Register Offline
+      %a.btn.btn--dark.btn--rounded-md.mb-2.mb-md-0{href: new_agency_lead_path}
+        %i.fa.fa-plus
+        \&#160; Create
+
+#dashboard-table.container-fluid.mt-md.pt-xs.ui-2020
+  .row.row--v-center.row--wrap.pb-md.justify-content-center.justify-content-md-start
+    .col-sm-9.col-xs-9
+      .search-form
+        %input.search-form__input#search_leads{placeholder: 'Search', type: 'search'}
+
+  .row
+    .col-md-12#leads_container
+      = render 'agency/leads/shared/leads_list'
+  #modal_container
+
+:javascript
+  $('#search_leads').on("keyup", function() {
+    var name = $('#search_leads').val().toLowerCase();
+    $.ajax({
+      url: "/a/leads",
+      type: 'get',
+      data: { name: name},
+      dataType: 'script',
+      async: false,
+      success:function(response){}
+    })
+  });
+  $(document).on('click', '.copy_to_clipboard',function() {
+    try {
+      navigator.clipboard.writeText($(this).attr('href'))
+      toastr.success("Link Copied");
+    } catch (err) {
+      toastr.error("Failed to copy!");
+    }
+  })
+
+  $(document).on('click', '.strategy_exceeded',function() {
+    toastr.error("This monthly strategy limit exceeded!");
+  })

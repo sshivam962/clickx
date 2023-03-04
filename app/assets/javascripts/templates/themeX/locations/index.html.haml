@@ -1,0 +1,122 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Local-Listings.title-icon>
+    Listings
+    %i.fa.fa-info-circle.tooltip-text-icon{'title': 'This tool helps you manage and edit current local listings of your company.'}
+  .options{ 'ng-if': '!demo_login' }
+    .form-group
+      %a.btn.btn-white.btn-raised{href: "#/locations/new", 'title': 'Add a new location lisitng.'}
+        %i.fa.fa-plus
+        Add New Location
+        .ripple-container
+
+.container-fluid
+  %div
+    .row
+      .col-xs-12
+        .panel.panel-default
+          .panel-heading
+          .panel-body
+            .div.inline-flex{id: "googlemap"}
+            .div{id: "class" , 'ng-repeat': "marker in markers"}
+              .a{href: "#", 'ng-click': "openInfoWindow($event, marker)"}
+            .row
+              .col-xs-12{'ng-show' => "locations.length",  'ng-repeat' => "loc in locations track by $index"}
+                .row
+                  / Contents
+                  .col-md-8.col-lg-7
+                    %address
+                      %h4.addlocation{"ng-if":"!!loc.name"}
+                        %i.material-icons> place
+                        {{ loc.name }}
+                      %span{"ng-if":"!!loc.address || !!loc.city"}
+                        {{ loc.address }} {{ loc.address  && ','}}
+                        {{ loc.city }} {{ loc.city && ','}}
+                      %span{"ng-if":"!!loc.state"} {{ loc.state }},
+                      %span{"ng-if":"!!loc.country"} {{ loc.country }},
+                      %span{"ng-if":"!!loc.zip"} {{ loc.zip }}
+                      %br
+                      {{ loc.phone }}
+                      %br
+                      %abbr.pt-md.inlineb
+                        %strong Last Updated:
+                      {{ loc.updated_at}} days ago
+                    %address{"ng-if":"!!loc.website"}
+                      %strong Website :
+                      %a{"ng-href" => "#", :target => "_blank"} {{ loc.website }}
+                  / Options
+                  .col-md-4.col-lg-5{ 'ng-if': '!demo_login' }
+                    .form-group.loc-form-group.text-right
+                      .btn-group.clearfix
+                        %a.btn.btn-default.btn-raised{href: '', 'ng-click':'openLocationReviewModal($event,loc)', 'title': 'Add a company review form on your site to enable visitors to review your company.'}
+                          %i.material-icons.f-14 assignment
+                          Reviews Form
+                        %a.btn.btn-default.btn-raised{href:"javascript:void(0)", "data-clipboard-target" => "#copy-{{loc.id}}", :ngclipboard => "", "ngclipboard-error" => "onError(e);", "ngclipboard-success" => "onSuccess(e);","data-target-url"=>"{{loc.short_url}}"}
+                          %i.material-icons.f-14{'title': 'View the landing page where visitors can leave a review about your company.'}
+                            link
+                          Review Landing Page
+                      %input.copy-input-hide.hidden{ id:"copy-{{loc.id}}",:value => "{{loc.short_url}}"}
+                      .btn-group
+                        %a.btn.btn-default.btn-raised{href: "#/locations/{{loc.id}}/add_coupon", 'title': 'Upload images for your positive and negative reviews.'}
+                          %i.material-icons.f-14 add
+                          Review Message
+                        %a.btn.btn-warning.btn-raised{href: "#/locations/{{loc.id}}/edit", 'title': 'Edit this listing'}
+                          %i.material-icons.white.f-14 edit
+                        %a.btn.btn-danger.btn-raised{href: "", 'ng-click': "deleteLocation(loc.id)", 'title': 'Delete this listing'}
+                          %i.material-icons.white.f-14 delete
+
+// Review page has same section, Can be used this as partial or common snippet
+// @todo Remove below snippet and use common in both review and location page
+%script{'type':'text/ng-template', id: "reviews-form-location-modal.html"}
+  %md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-compressed{'aria-label':'Review Embedded Form'}
+    .modal-header
+      %button.close{"aria-label" => "Close",'ng-click':'closeModal()'}
+        %span.fa.fa-times-circle-o
+      %h3.modal-title
+        {{loc.name}} - Reviews Embed Form
+    %md-dialog-content
+      .md-dialog-content
+        %h4 Instructions :
+        Use the following Url in an iframe tag within your webpage to embed the reviews form.
+        %p
+          URL :
+          %a{'ng-href': "{{loc.short_url}}", target: '_target'}
+            {{loc.short_url}}
+        %p
+          %h4 Example Code :
+          %pre
+            %code
+              &lt;iframe src="{{trustSrc(loc.short_url)}}" width='100%' height='350px'&gt;&lt;/iframe&gt;
+        .row
+          .col-xs-12
+            %h4 Preview :
+            %iframe{ 'ng-src': "{{trustSrc(loc.short_url)}}", width: '100%', height: '350px' }
+      %md-dialog-actions{layout:'row'}
+        %a.btn.btn-raised.btn-default{'ng-click':'closeModal()'} Cancel
+.modal.fade{"aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1", id: "reviews_form_{{loc.id}}"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        {{loc.name}} - Reviews Embed Form
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &#215;
+      .modal-body
+        %h4 Instructions :
+        Use the following Url in an iframe tag within your webpage to embed the reviews form.
+        %br
+        %br
+        URL :
+        %a{'ng-href': "{{loc.short_url}}", target: '_target'}
+          {{loc.short_url}}
+        %br
+        %br
+        %h4 Example Code :
+        %br
+        %code
+          &lt;iframe src="{{trustSrc(loc.short_url)}}" width='100%' height='350px'&gt;&lt;/iframe&gt;
+        %br
+        %br
+        %br
+        %h4 Preview :
+        %iframe{ 'ng-src': "{{trustSrc(loc.review_url)}}", width: '100%', height: '350px' }
+

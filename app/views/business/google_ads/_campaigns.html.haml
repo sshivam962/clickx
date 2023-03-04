@@ -1,0 +1,25 @@
+.row
+  .col-md-8
+    .tab-container
+      .tab-content
+        .table-responsive
+          %table#campaign_table.table.table-hover.table-bordered.table-vam
+            %thead
+              %tr
+                %th.vam
+                  %u.help_pointer
+                    Campaign
+                %th.text-center
+                  Type
+                -# %th.text-center
+            %tbody
+              - data.each do |data|
+                %tr
+                  %td
+                    #{data[:name]}
+                    %small #{data[:id]}
+                  %td #{data[:type]}
+                  -# %td.text-center
+                  -#   = link_to "View Locations", business_google_ads_campaign_locations_path(campaign_id: data[:id]), class: "btn btn-default btn-sm", remote: true
+
+  #location

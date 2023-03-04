@@ -1,0 +1,39 @@
+%li.dropdown.toolbar-icon-bg.hidden-xs
+  %a.hasnotifications.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+    %span.icon-bg
+      %i.material-icons mail
+    %span.badge.badge-info
+  .dropdown-menu.animated.notifications
+    .topnav-dropdown-header
+      %span 3 new Comments
+    .scroll-pane
+      %ul.media-list.scroll-content
+        %li.media.notification-message
+          %a{href: "#"}
+            .media-left
+              %img.img-circle.avatar{alt: "Solomon Thimothy", src: "missing.png"}
+            .media-body
+              %h4.notification-heading
+                %strong Solomon Thimothy
+                %span.text-gray ‒ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              %span.notification-time 2 mins ago
+        %li.media.notification-message
+          %a{href: "#"}
+            .media-left
+              %img.img-circle.avatar{alt: "Solomon Thimothy", src: "missing.png"}
+            .media-body
+              %h4.notification-heading
+                %strong Solomon Thimothy
+                %span.text-gray ‒ Sestibulum commodo felis quis tortor
+              %span.notification-time 40 mins ago
+        %li.media.notification-message
+          %a{href: "#"}
+            .media-left
+              %img.img-circle.avatar{alt: "Solomon Thimothy", src: "missing.png"}
+            .media-body
+              %h4.notification-heading
+                %strong Solomon Thimothy
+                %span.text-gray ‒ Nusce lobortis lorem at ipsum semper sagittis.
+              %span.notification-time 6 hours ago
+    .topnav-dropdown-footer
+      %a{href: "#"} See all messages

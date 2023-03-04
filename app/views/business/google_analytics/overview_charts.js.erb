@@ -1,0 +1,1 @@
+$('.tab-content.overview_charts').html("<%= escape_javascript render(partial: 'business/google_analytics/overview_charts', locals: { chart_data: @data, graph_option: params['graph_option'] }) %>")

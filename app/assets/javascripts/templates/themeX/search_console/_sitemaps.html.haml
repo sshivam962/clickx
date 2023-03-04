@@ -1,0 +1,57 @@
+.row
+  .col-md-12
+    .panel.panel-default{'data-widget': {draggable: 'false'}}
+      .panel-body
+        .centered
+          #sitemap_all
+.row
+  .col-md-12
+    .tab-container
+      .tab-content{'st-table':'sitemaps', 'st-safe-src':'all_sitemaps'}
+        .table-responsive
+          %table.table.table-hover.table-bordered.table-vam
+            %thead
+              %tr
+                %th.vam{style: 'padding-right:190px;', 'st-sort':'path'}
+                  %u.help_pointer{ 'title': 'Name of the slug in your sitemap URL' }
+                    Sitemap
+                %th.text-center{'st-sort':'type'}
+                  %u.help_pointer{'title': 'Type of sitemap'}
+                    Type
+                %th.text-center{'st-sort':'processed'}
+                  %u.help_pointer{ 'title': 'The date when your sitemap was last processed by Google' }
+                    Processed
+                %th.text-center{'st-sort':'issues'}
+                  %u.help_pointer{ 'title': 'This data will show up if there are any issues with your sitemap' }
+                    Issues
+                %th{ colspan: 4 }
+                  .row.font15
+                    .col-xs-4.text-center
+                      %u.help_pointer{ 'title': 'Items present in your sitemap' }
+                        Items
+                    .col-xs-4.text-center
+                      %u.help_pointer{ 'title': 'Number of pages and images you submitted to Google via sitemaps' }
+                        Submitted
+                    .col-xs-4.text-center
+                      %u.help_pointer{ 'title': 'Number of pages and images Google has indexed out of the things you submitted' }
+                        Indexed
+            %tbody
+              %tr{'ng-repeat':'data in sitemaps'}
+                %td {{ page_view_url(data.path) }}
+                %td.text-center
+                  %span{'ng-if':'data.isSitemapsIndex == true'} Sitemap Index
+                  %span{'ng-if':'data.isSitemapsIndex == false'} Sitemap
+                %td.text-center {{data.lastDownloaded | amDateFormat:'MMM DD, YYYY'}}
+                %td.text-center
+                  %span{'ng-if':'data.errors > 0'} {{data.errors}} Errors
+                  %span{'ng-if':'data.warnings > 0'} {{data.warnings}} Warnings
+                %td{ colspan: 4 }
+                  .row.font15{'ng-repeat':'content in data.contents' }
+                    .col-xs-4.text-center
+                      {{ content.type|capitalize }}
+                    .col-xs-4.text-center
+                      {{ content.submitted }}
+                    .col-xs-4.text-center
+                      {{ content.indexed }}
+
+        %div.row.text-center.p-n.mgl-33{'ng-include':'', src: "'themeX/shared/_pagination_links.html'"}

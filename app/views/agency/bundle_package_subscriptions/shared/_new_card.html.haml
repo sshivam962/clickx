@@ -1,0 +1,56 @@
+%form#checkout_create_card.stripe-card-form
+  - billing_address = current_agency.billing_address
+  #new_card_form
+    .col-md-12.p-n
+      .form-group.mt-n
+        %label.control-label{:for => "Name"} Name
+        = text_field_tag 'card[name]', billing_address&.name, class: 'form-control col-sm-5', required: true
+    .col-md-12.pl-n
+      .form-group.mt-n
+        %label.control-label{:for => "address_line1"} Address 1
+        = text_field_tag 'card[address_line1]', billing_address&.address_line_1, class: 'form-control col-sm-5', required: true
+    .col-md-12.p-n
+      .form-group.mt-n
+        %label.control-label{:for => "address_line2"} Address 2
+        = text_field_tag 'card[address_line2]', billing_address&.address_line_2, class: 'form-control col-sm-5'
+    .col-md-6.pl-n
+      .form-group.mt-n
+        %label.control-label{:for => "address_city"} City
+        = text_field_tag 'card[address_city]', billing_address&.city, class: 'form-control col-sm-5', required: true
+    .col-md-6.pl-n
+      .form-group.mt-n
+        %label.control-label{:for => "address_zip"} Zip
+        = text_field_tag 'card[address_zip]', billing_address&.zip, class: 'form-control col-sm-5', required: true
+    - country = billing_address&.country || 'United States'
+    .col-md-6.p-n
+      .form-group.mt-n
+        %label.control-label{:for => "address_country"} Country
+        = select_tag 'card[address_country]', options_for_select(ISO3166::Country.all_translated.collect {|c| [c, c]}, country), class: 'form-control', required: true, data: {url: "/p/states?state=#{billing_address&.state}", partial: 'agency/cards/shared/states'}, id: 'country_select'
+    .col-md-6.p-n
+      .form-group.mt-n
+        %label.control-label{:for => "address_state"} State
+        #state_div
+          = render 'agency/cards/shared/states', states: {}, state: billing_address&.state
+    #card-container1
+      .col-md-12.pl-n
+        .form-group.mt-n
+          %label.control-label{:for => "number"} Card Number
+          #card-number-div.input.empty
+      .col-md-6.pl-n
+        .form-group.mt-n
+          %label.control-label{:for => "expiry"} Expiration Date
+          #card-expiry-div.input.empty
+      .col-md-6.p-n
+        .form-group.mt-n
+          %label.control-label{:for => "cvc"} CVC
+          #card-cvc-div.input.empty
+      .col-md-12.pl-n
+        .error{:role => "alert"}
+          %span
+            %i.fa.fa-times-circle
+          %span.card-message
+  = submit_tag 'submit', class: 'invisible checkout_create_card_submit'
+
+:javascript
+  CountrySelect.changeStateAccordingToCountry();
+  $.fn.stripeCard();

@@ -1,0 +1,13 @@
+%table.table.mb-0{"data-widget-group" => "group1"}
+  .fav_case_studies
+    - if @my_case_studies.present?
+      - @my_case_studies.each do |case_study|
+        = render 'my_case_study_item', case_study: case_study, favorite: false, checked: 'unchecked'
+  .fav_case_studies
+    - if @fav_case_studies.present?
+      - @fav_case_studies.each do |case_study|
+        = render 'case_study_item', case_study: case_study, favorite: true, checked: ''
+  .rem_case_studies
+  - if @rem_case_studies.present?
+    - @rem_case_studies.each do |case_study|
+      = render 'case_study_item', case_study: case_study, favorite: false, checked: 'unchecked'

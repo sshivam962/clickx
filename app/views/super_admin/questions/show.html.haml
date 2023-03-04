@@ -1,0 +1,42 @@
+%h2 Groups
+%hr/
+%button{ onclick: "document.getElementById('group-field').innerHTML = Date()",type: "button", class: 'btn btn-warning'}
+  Add Group
+
+/ %p#group-field
+
+%p#group-field
+  = form_with model: Group.new, url: super_admin_groups_path do |f|
+    .row
+      .col-sm-5
+        = f.text_field :name, class: 'form-control', placeholder: 'Name'
+      .col
+      = f.submit 'Add', class: 'btn btn-warning'
+
+
+
+= form_with model: Group.new, url: super_admin_group_path(@grp) do |f|
+  - @groups.each do |group|
+    .row
+      .col-sm-5
+        = text_field_tag :name, group.name, class: 'form-control'
+      .col
+        = f.submit 'save', class: 'btn btn-warning'
+        = link_to 'Delete', super_admin_group_path(group) ,class: 'btn btn-info', method: :delete, data: { confirm: 'Are you sure ?'}
+        %i.glyphicon.glyphicon-trash.font-size18
+
+
+
+
+
+/     .col
+/       %input.form-control{:placeholder => "Last name", :type => "text"}/
+/     .col
+/       %input.form-control{:placeholder => "Last name", :type => "text"}/
+/     .col
+/       %input.form-control{:placeholder => "Last name", :type => "text"}/
+/ :javascript
+
+/ function myFunction() {
+/ document.getElementById("demo").innerHTML = "Hello World";
+/ }

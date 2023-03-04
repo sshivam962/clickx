@@ -1,0 +1,10 @@
+.modal.fade#change_lead_source_modal{'aria-labelledby': 'mySmallModalLabel', role: 'dialog', tabindex: "-1"}
+  .modal-dialog.modal-sm
+    .bg-white.p-4.p-sm-5.rounded
+      .fs-md.fw-sb.text-darkblue.pb-4
+        Change Lead Source
+      = form_tag change_lead_source_agency_direct_lead_path(@direct_lead), method: :post, remote: true do
+        .input-wrapper-select.mb-3
+          = select_tag 'lead_source_id', options_for_select(current_agency.lead_sources.enabled.order_by_name.map{|u| [u.name&.titleize, u.id]}, direct_lead.lead_source_id), include_blank: 'Change Lead Source', class: 'input-wrapper-input'
+
+        = submit_tag 'Save', class: 'btn btn-primary btn-raised'

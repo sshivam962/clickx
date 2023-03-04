@@ -1,0 +1,289 @@
+.border-1.bg-sky-blue.border-blue.rounded.h-100
+  .bg-white.px-4.py-4.rounded-t-12.fw-m.text-darkblue
+    .d-flex.justify-content-between.align-items-center.flex-wrap
+      .col.pr-4
+        %button.btn.btn-sm.px-4.mr-2.d-lg-line-block.btn_back_to_leads
+          %i.fa.fa-chevron-left
+        =lead_source.name
+      .col
+        - if lead_source.remaining_count > 0
+          = lead_source.remaining_count== 1 ? "Processing 1 Contact" : "Processing #{lead_source.remaining_count} Contacts"
+      .col
+        %a.btn.border-1.btn-sm.m-1{"data-target": ".datas-modal", "data-toggle": "modal"}
+          Get Data
+        %a.btn.border-1.btn-default.btn-sm.m-1{"data-target": ".bs-import-csv-leads", "data-toggle": "modal"}
+          Import CSV
+        %a.btn.border-1.btn-default.btn-sm.m-1.edit-email-template Email Sequences
+        %a.btn.btn--dark.btn-sm.m-1{"data-target": ".bs-import-csv-leads", href: "/lead_emails.csv"}
+          CSV Template
+        %a.btn.btn--dark.btn-sm.m-1{'data-toggle': 'modal', 'data-target': '#new_direct_lead_modal'} Add Lead
+    .d-flex.justify-content-between.align-items-center.pt-4
+      .flex-col.pr-4
+        = form_tag agency_lead_source_path(lead_source, per_page: params[:per_page]), :method => 'get', :id => "agency_lead_source_search", remote: true do
+          .search-form.search-form--sm
+            = text_field_tag :search, params[:search], placeholder: "Name", class: "search-form__input"
+            %button.search-form__btn
+              %i.fa.fa-search
+            // = submit_tag "Search", :name => nil, :class => "search-form__btn"
+      .col
+        .styled-select-wrapper
+          = select_tag(:per_page, options_for_select([100 ,50 , 20, 10], params[:per_page]) ,data:{remote: true, url: agency_lead_source_path(lead_source, search: params[:search]), method: 'get'}, class: 'styled-select py-2 px-3 bg-white border-light-gray fs-14 border-1' )
+  .p-4#direct_leads_listing_table
+    = render 'direct_leads_listing_table'
+= render 'agency/direct_leads/new', lead_source: lead_source
+.modal.fade.in.datas-modal{role: "dialog", tabindex: "-1"}
+  %button.close.m-4{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+    %span.px-2.py-2.rounded-8.bg-white.d-inline-block{"aria-hidden" => "true"}
+      %i.material-icons close
+  .modal-dialog.modal-lg
+    .bg-white.p-4.p-sm-5.rounded
+      .prospecting_details_form
+        .row
+          .col-md-6
+            .fw-m.fw-b.text-darkblue.text-sm Get Data
+          .col-md-6
+            .fw-m.fw-b.text-sm.text-right Available credits: #{current_agency.outscraper_limit.credit_balance}
+        %hr.my-4
+          %div{style: 'float: right;'}
+            %input#advanced_search{:name => "advanced_search", :type => "checkbox", onchange: "enableAdvancedSearch()"}/
+            %label{:for => "advanced_search", style: "color: #666464; padding-left: 2px"} Advanced Search
+          %br/
+          %div#form1
+            = form_for :outscrapper_data do |f|
+              .fs-xs.mb-3 Category
+              .input-wrapper.mb-4.input-select2
+                = f.collection_select(:category, get_previous_categories(lead_source.id), :category, :category, {selected: get_selected_categories(lead_source.id)}, {class: 'input-wrapper-input w-full', id: 'category', multiple: true})
+              .row
+                .col-md-6.d-none
+                  .fs-xs.mb-3 List name
+                  .input-wrapper.mb-4
+                    =f.select :lead_source_id, [[lead_source.name, lead_source.id]],{}, class: 'input-wrapper-input w-full', placeholder: "Select Lead Source", id: "lead_source_id"
+                .col-md-12
+                  .fs-xs.mb-3 
+                    Records to Buy
+                    %span.fs-12 (Maximum 100)
+                  .input-wrapper.mb-4.input-select2
+                    =f.number_field :limit, class: "input-wrapper-input w-full normal_limit input-max-limit", placeholder: "Maximum Records to Buy", value: 20, min: 1, id: "limit"
+              .row
+                .col-md-6
+                  .fs-xs.mb-3 State
+                  .input-wrapper.mb-4.input-select2
+                    =f.select :state, options_for_state, {selected: get_selected_state(lead_source.id)}, class: "input-wrapper-input w-full", placeholder: "State", multiple: true, id: "state", data:{remote: true, url: "/a/lead_sources/cities", method: 'get'}
+                .col-md-6
+                  .fs-xs.mb-3 City
+                  .input-wrapper.mb-4.input-select2{id: "cities_field"}
+                    =render partial: "agency/lead_sources/cities", locals: { lead_source_id: lead_source.id}
+              .row
+                .col-md-12
+                  .fs-xs.mb-3 Zip Codes
+                  .input-wrapper.mb-4.input-select2
+                    =f.text_field :zip, class: "input-wrapper-input w-full", placeholder: "Please specify multiple Zip Codes for the given city comma-separated, if any", id: "zip", value: get_selected_zips(lead_source.id)
+              .pt-4
+                =f.submit "Get Data", id: 'btn_get_details', class: 'btn btn--dark'
+          %div#form2{style: "display: none; padding-top: 15px;"}
+            = form_for :outscrapper_advanced_data do |f|
+              .fs-xs.mb-3 Query
+              .input-wrapper.mb-4.input-select2
+                =f.text_area :data_query, class: "input-wrapper-input w-full", placeholder: "Category, Zip/State,City", id: "zip"
+              .row
+                .col-md-6.d-none
+                  .fs-xs.mb-3 List name
+                  .input-wrapper.mb-4
+                    =f.select :lead_source_id, [[lead_source.name, lead_source.id]],{}, class: 'input-wrapper-input w-full', placeholder: "Select Lead Source", id: "lead_source_id"
+                .col-md-12
+                  .fs-xs.mb-3 
+                    Records to Buy
+                    %span.fs-12 (Maximum 100)
+                  .input-wrapper.mb-4.input-select2
+                    =f.number_field :limit, class: "input-wrapper-input w-full advanced_data_limit input-max-limit", placeholder: "Maximum Records to Buy", value: 20, id: "limit"
+              .pt-4
+                =f.submit "Get Data", id: 'btn_get_details', class: 'btn btn--dark'
+        .spinner-overlay
+          .nb-spinner
+      .prospecting_details_result
+        .p-5.text-center.relative
+          .prospecting_details_back.fs-xxs
+            %i.fa.fa-chevron-left
+            Back
+          %h4.fw-m.mt-0.mb-4.credits 300 results
+          %p Pay Using Credits - 1 credit per result
+          .py-3
+          %p.fs-xxs
+            Your remaining credit:
+            %strong.d-inline-block.ml-3
+            = current_agency.outscraper_limit.credit_balance
+          %button#buy_data_place_order.btn.btn-blue.fw-sb Place Your Order
+          .py-4
+          %p.fs-xxs.text-muted.mb-0 Charges will only apply to contacts we obtained.
+        .spinner-overlay
+          .nb-spinner
+      .prospecting_details_success
+        .text-center
+          .mb-2.text-success
+            %i.fa.fa-check-circle-o.fa-4x
+          %h4.text-success.fs-sb.fs-lg.mb-5  Success
+          %p.mb-3 Order Placed Successfully
+          %p.mb-3 Note: You will receive an email on <strong><i>#{lead_source.agency.support_email}</i></strong> once process is completed.
+          %a.btn.btn--dark(href="/a/lead_sources/buy_data_requests") View Details
+      .prospecting_details_fail
+        .prospecting_details_result_back.fs-xxs
+          %i.fa.fa-chevron-left
+          Back
+        .text-center
+          .mb-2.text-danger
+            %i.fa.fa-times-circle-o.fa-3x
+          %h4.text-danger.fs-sb.fs-lg.mb-5  Failed
+          %p.mb-3 Order Not Placed. Either credit balance is low or your monthly limit exceeds
+
+#edit_direct_lead
+#contacts_show
+#create_contact
+:javascript
+  $(document).ready(function() {
+    validate();
+    $('.prospecting_details_fail').slideUp();
+    $('#category').prepend('<option></option>');
+    var $categorySelect = $("#category");
+    var $stateSelect = $("#state");
+    $categorySelect.on("change", function (e) { validate(); });
+    $stateSelect.on("change", function (e) { validate(); });
+  });
+
+  var form_data;
+  var advanced_search = false;
+
+  function enableAdvancedSearch() {
+        if($('#advanced_search').is(":checked")){
+            $("#form2").show();
+            $("#form1").hide();
+            advanced_search = true;
+        }else{
+            $("#form1").show();
+            $("#form2").hide();
+            advanced_search = false;
+        }
+    }
+
+  $('#category').select2({
+    placeholder: 'Select Category',
+    minimumInputLength: 1,
+    multiple: true,
+    ajax: {
+      url: '/a/lead_sources/search_outscrapper_categories',
+      dataType: 'json',
+      data: function (params) {
+        return {
+          search: params.term
+        }
+      },
+      processResults: function (data) {
+        return {
+          results: data.categories
+        }
+      }
+    }
+  });
+
+  $('#country').select2({
+    multiple: false,
+    placeholder: 'Country'
+  });
+  $('#state').select2({
+    multiple: true,
+    placeholder: 'State'
+  });
+  $('#city').select2({
+    multiple: true,
+    placeholder: 'City'
+  });
+  $(document).on('click', '#btn_get_details', function(e) {
+    var limit;
+    if($('#advanced_search')[0].checked){
+      limit = $('.advanced_data_limit')[0];
+      limit.value = getLimit(limit.value);
+    }else{
+      limit = $('.normal_limit')[0];
+      limit.value = getLimit(limit.value);
+    }
+    $('.prospecting_details_form').addClass('loading');
+    $(".credits").text(limit.value + " results");
+    setTimeout(function() {
+      $('.prospecting_details_form').removeClass('loading');
+    }, 1500);
+    setTimeout(function() {
+      $('.prospecting_details_form').slideUp();
+      $('.prospecting_details_result').slideDown();
+    }, 1600);
+  });
+  jQuery(document).on('click', '.prospecting_details_back', function() {
+      $('.prospecting_details_form').slideDown();
+      $('.prospecting_details_result').slideUp();
+      $('#btn_get_details').attr('disabled', false);
+  })
+  jQuery(document).on('click', '.prospecting_details_result_back', function() {
+      $('.prospecting_details_form').slideUp();
+      $('.prospecting_details_fail').slideUp();
+      $('.prospecting_details_result').slideDown();
+      $('#btn_get_details').attr('disabled', false);
+  })
+  $(".prospecting_details_form form").submit(function(e){
+    form_data = $(".prospecting_details_form form").serialize();
+    e.preventDefault();
+  });
+  $("#buy_data_place_order").on('click', function(e) {
+    $('.prospecting_details_result').addClass('loading');
+    $('.spinner-overlay').css("opacity", "1");
+    var url;
+    if (advanced_search){
+      url = '/a/external_leads/advanced_data'
+    } else {
+      url = '/a/external_leads/data'
+    }
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: form_data,
+        success: function(data){
+          setTimeout(function() {
+            $('.prospecting_details_result').removeClass('loading');
+            $('.spinner-overlay').css("opacity", "0");
+          }, 1500);
+          if (data.code === 422){
+            $('.prospecting_details_success').slideUp();
+            $('.prospecting_details_result').slideUp();
+            $('.prospecting_details_fail').slideDown();
+          }else {
+            $('.prospecting_details_result').slideUp();
+            $('.prospecting_details_success').slideDown();
+          }
+        },
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
+      });
+  });
+  $('.datas-modal').on('hidden.bs.modal', function (e) {
+    $('.prospecting_details_form').show();
+    $('.prospecting_details_result, .prospecting_details_success').hide();
+    $('#btn_get_details').attr('disabled', false);
+  })
+  function validate() {
+    if ($('#category').val() !== null && $('#state').val() !== null) {
+      $('#btn_get_details').removeAttr('disabled');
+    } else {
+      $('#btn_get_details').attr('disabled','disabled');
+    }
+  }
+  function getLimit(limit_value) {
+    if (limit_value > 100) {
+      return 100;
+    }
+    return limit_value;
+  }
+
+  $(document).on('input', '.input-max-limit', function() {
+    console.log($(this).val());
+    if($(this).val() > 100) {
+      $(this).parent('.input-wrapper').addClass('has-error');
+    } else {
+      $(this).parent('.input-wrapper').removeClass('has-error');
+    }
+  })

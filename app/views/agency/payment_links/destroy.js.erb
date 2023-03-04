@@ -1,0 +1,7 @@
+<% if @payment_link.errors.present? %>
+  toastr.error("<%= @payment_link.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success('Payment Link Archived')
+  $('#payment_link_<%= @payment_link.id%>').remove();
+  $('#row_spacer_<%= @payment_link.id%>').remove();
+<% end %>

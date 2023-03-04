@@ -1,0 +1,11 @@
+/ New Design for Review PDF
+!!!
+%html
+  %head
+    %title Latest Review PDF
+    %meta{name:"viewport",content:"width=device-width, initial-scale=1"}
+    = wicked_pdf_stylesheet_link_tag  'review_pdf'
+  %body
+    - container_width = "col-xs-12 col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"
+    .review_pdf_wrapper
+      = yield

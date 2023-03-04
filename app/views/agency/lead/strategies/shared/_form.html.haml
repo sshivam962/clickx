@@ -1,0 +1,54 @@
+- lead_strategy = f.object
+.spacer5
+#lead_strategy_step1
+  %h2.mt-2.mb-3.regsubt Strategy Template
+  %h4
+    = lead_strategy.category
+    = f.hidden_field :category
+#lead_strategy_step2
+  = render 'agency/lead/strategies/shared/step2', lead_strategy: lead_strategy, lead: lead
+#lead_strategy_step3
+  = render 'agency/lead/strategies/shared/step3', lead_strategy: lead_strategy, lead: lead, strategy_items: strategy_items
+
+%h2.mt-2.mb-3.regsubt#ls_images
+  Images
+  = link_to_add_association '+', f, :strategy_images, 'data-association-insertion-node' => '#new_ls_images', 'data-association-insertion-method' => 'append'
+.col-md-12
+  %ul.list-group#images.pl-n
+    = f.fields_for :strategy_images do |image|
+      %li.list-group-item.display-inline
+        = render 'strategy_image_fields', f: image
+%hr
+.col-md-12#new_ls_images
+= submit_tag 'Save', class: 'btn btn-lg btn-warning'
+.spacer15
+
+:javascript
+  $(document).on('click', '.add_strategy_item',function() {
+    item_id = $(this).data('item')
+    $.ajax({
+      url: "/a/lead/strategy_items/" + item_id + "/load_item?lead_id=#{lead.id}",
+      type: 'get',
+      data: {},
+      dataType: 'script',
+      async: false,
+      success:function(response){}
+    })
+  })
+
+  $(document).on('click', '.remove_strategy',function() {
+    $(this).closest('.strategy_item').remove();
+    $("#strategies").sortable({});
+  })
+
+  $(document).on('change', '.ls_image_file',function(event) {
+    var target_image = $(this).parent().find('img.image_preview')
+    var input = $(event.currentTarget);
+    var file = input[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+       image_base64 = e.target.result;
+       target_image.attr("src", image_base64);
+    };
+    reader.readAsDataURL(file);
+  });

@@ -1,0 +1,34 @@
+- total_price = @plan.amount + @signup_link.onetime_charge
+- display_price = total_price
+= hidden_field_tag :total_price, total_price
+.input-card.input-card--gray.p-4.mb-5.dark
+  %h4.fw-n Purchase Summary
+  %h3.fw-b.mb-3
+    = @plan.name
+  %p.dark
+    Agency Success Onboarding (One-Time): #{number_to_currency(@signup_link.onetime_charge, precision: 0)}
+    %br
+    %span.current_price_text
+      Plan Pricing: #{plan_price(@plan)}
+  %p.dark
+    - if @coupon.present?
+      - coupon_info = coupon_applied_info @coupon, @plan.amount, false
+      %p#coupon_applied
+        = coupon_info.first
+      %p#coupon_offer
+        = coupon_info.last
+      %span.current_price_text
+        - display_price -= discount_by_coupon(@coupon, @plan.amount, false)
+        Amount Payable Today: #{number_to_currency(display_price, precision: 2)}
+    - elsif @signup_link.trial?
+      %p#coupon_applied
+        Free Trial for #{@signup_link.trial_info}
+      %span.current_price_text
+        Amount Payable Today: #{number_to_currency(@signup_link.onetime_charge, precision: 0)}
+    - else
+      %p#coupon_applied
+      %p#coupon_offer
+      .coupon_applied_text.hidden
+        %span.charge_coupon_text
+%a.btn.btn-input.business_signup_submit{href: 'javascript:void(0)'}
+  Apply Now

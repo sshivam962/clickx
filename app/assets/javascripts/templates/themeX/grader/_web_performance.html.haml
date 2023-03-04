@@ -1,0 +1,41 @@
+.col-md-12
+  .panel.panel-default
+
+    .panel-heading
+      %h2.text-darkblue Website Performance
+    .panel-body
+      .row
+        .col-sm-6
+          %h4.mb-n Desktop
+          %hr.mt-md/
+          .table-responsive
+            %table.table.table-hover.table-vam
+              %tbody
+                %tr{'ng-repeat': 'result in desktop_insights.results'}
+                  %td{:width => "40"}
+                    %i.fa.fa-check.text-success.f-s-20{'ng-if': 'result.pass'}
+                    %i.fa.fa-close.text-danger.f-s-20{'ng-if': '!result.pass'}
+                  %td {{result.rule | spaceBeforeCaps}}
+            %h2.pl-sm{'ng-class': "{'text-danger': desktop_insights.score <= 30, 'text-warning': (desktop_insights.score > 30 && desktop_insights.score <= 50), 'text-success': desktop_insights.score > 50 }"}
+              {{desktop_insights.score}}
+              %small.inlineb.text-muted.f-s-60 /100
+        .col-sm-6
+          %h4.mb-n Mobile
+          %hr.mt-md
+          .table-responsive
+            %table.table.table-hover.table-vam
+              %tbody
+                %tr{'ng-repeat': 'result in mobile_insights.results'}
+                  %td{:width => "40"}
+                    %i.fa.fa-check.text-success.f-s-20{'ng-if': 'result.pass'}
+                    %i.fa.fa-close.text-danger.f-s-20{'ng-if': '!result.pass'}
+                  %td {{result.rule | spaceBeforeCaps}}
+            %h2.pl-sm{'ng-class': "{'text-danger': mobile_insights.score <= 30, 'text-warning': (mobile_insights.score > 30 && mobile_insights.score <= 50), 'text-success': mobile_insights.score > 50 }"}
+              {{mobile_insights.score}}
+              %small.inlineb.text-muted.f-s-60 /100
+    .panel-footer
+      .col-xs-12.col-sm-10.col-xs-offset-0.col-sm-offset-1
+        .jumbotron.bg-info.pl-xl.pr-xl.no-shadow
+          %h4.mb-sm.f-s-20 Clickx Pro Tip
+          %p.text-white In today's world, consumers want to access content fast. Having a slow website can increase bounce rate and drive your rank down in the Google results. A few tweaks and you can easily boost your overall rankings in Google. The higher the experience score, the better your website is.
+          / %button.btn.btn-outline-white.f-w-md{:type => "button"} Get a Complete Audit of Your Website

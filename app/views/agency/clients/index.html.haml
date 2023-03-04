@@ -1,0 +1,45 @@
+- content_for :title do
+  Businesses
+#dashboard-table.container-fluid.mt-md.pt-xs.ui-2020
+  .row.row--v-center.row--wrap
+    .col-sm-9.col-xs-9
+      .search-form
+        %input.search-form__input#search_clients{placeholder: 'Search', type: 'search'}
+        %button.search-form__btn 
+          %i.fa.fa-search
+    .col-sm-3.text-right.col-xs-3
+      %a.btn--add{'data-original-title' => 'Add new client', 'data-toggle' => 'tooltip', href: new_agency_client_path}
+        %i.fa.fa-plus
+        %span Add Client
+
+  .spacer25
+  .row
+    .col-md-12#clients_list
+      = render 'agency/clients/shared/list', clients: @clients
+
+= render 'agency/clients/shared/client_limit_exceeded'
+#modal_container
+
+:javascript
+  $(document).on('click', '.copy_to_clipboard',function() {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).attr('href')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Link Copied");
+  });
+
+  $('#search_clients').on('keyup', function() {
+    var name = $('#search_clients').val().toLowerCase();
+    $.ajax({
+      url: "/a/clients",
+      type: 'get',
+      data: { q: name },
+      dataType: 'script',
+      async: false,
+      success:function(response){
+        $('#tab_content').html(response.data)
+      }
+    })
+  });

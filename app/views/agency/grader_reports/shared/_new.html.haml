@@ -1,0 +1,8 @@
+= form_for GraderReport.new, url: agency_grader_reports_path, method: :post, class: 'new_grader_report' do |f|
+  .d-sm-flex
+    .col-auto.col-stretch
+      .form-group.is-empty
+        = f.text_field :domain, required: true, class: 'form-control', placeholder: 'Enter Domain'
+        %span.material-input
+    .col-auto
+      = f.submit "Generate Report", class: 'btn btn-warning btn-raised'

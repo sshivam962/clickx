@@ -1,0 +1,6 @@
+<% if @procedure.errors.present? %>
+  toastr.error("<%= @procedure.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success("Onboarding Procedure Tasks Updated");
+  $('#show-op-modal').modal('hide')
+<% end %>

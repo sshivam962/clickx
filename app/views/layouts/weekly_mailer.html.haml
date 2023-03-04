@@ -1,0 +1,198 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xmlns:o" => "urn:schemas-microsoft-com:office:office", "xmlns:v" => "urn:schemas-microsoft-com:vml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}/
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1", :name => "viewport"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "date=no", :name => "format-detection"}/
+    %meta{:content => "address=no", :name => "format-detection"}/
+    %meta{:content => "telephone=no", :name => "format-detection"}/
+    %meta{:name => "x-apple-disable-message-reformatting"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700", :rel => "stylesheet"}/
+    %title Weekly Stats
+    :css
+      body {
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important;
+        min-width: 100% !important;
+        width: 100% !important;
+        background: #f5f7fa;
+        -webkit-text-size-adjust: none;
+        font-family: 'Source Sans Pro', sans-serif;
+      }
+
+      a {
+        color: #fff;
+        text-decoration: none
+      }
+
+      p {
+        padding: 0 !important;
+        margin: 0 !important
+      }
+
+      img {
+        -ms-interpolation-mode: bicubic;
+        /* Allow smoother rendering of resized image in Internet Explorer */
+      }
+
+      .mcnPreviewText {
+        display: none !important;
+      }
+
+      /* Mobile styles */
+
+      @media only screen and (max-device-width: 480px), only screen and (max-width: 480px) {
+        .mobile-shell {
+          width: 100% !important;
+          min-width: 100% !important;
+        }
+        .m-center {
+          text-align: center !important;
+        }
+        .text3,
+        .text-footer,
+        .text-header {
+          text-align: center !important;
+        }
+        .center {
+          margin: 0 auto !important;
+        }
+        .td {
+          width: 100% !important;
+          min-width: 100% !important;
+        }
+        .m-br-15 {
+          height: 15px !important;
+        }
+        .p30-15 {
+          padding: 30px 15px !important;
+        }
+        .p30-15-0 {
+          padding: 30px 15px 0px 15px !important;
+        }
+        .p40 {
+          padding-bottom: 30px !important;
+        }
+        .box,
+        .footer,
+        .p15 {
+          padding: 15px !important;
+        }
+        .h2-white {
+          font-size: 40px !important;
+          line-height: 44px !important;
+          text-align: center !important;
+        }
+        .h2 {
+          font-size: 42px !important;
+          line-height: 50px !important;
+        }
+        .m-td,
+        .m-hide {
+          display: none !important;
+          width: 0 !important;
+          height: 0 !important;
+          font-size: 0 !important;
+          line-height: 0 !important;
+          min-height: 0 !important;
+        }
+        .m-block {
+          display: block !important;
+        }
+        .container {
+          padding: 0px !important;
+        }
+        .separator {
+          padding-top: 30px !important;
+        }
+        .fluid-img img {
+          width: 100% !important;
+          max-width: 100% !important;
+          height: auto !important;
+        }
+        .column,
+        .column-top,
+        .column-dir,
+        .column-empty,
+        .column-empty2,
+        .column-bottom,
+        .column-dir-top,
+        .column-dir-bottom {
+          float: left !important;
+          width: 100% !important;
+          display: block !important;
+        }
+        .column-empty {
+          padding-bottom: 10px !important;
+        }
+        .column-empty2 {
+          padding-bottom: 30px !important;
+        }
+        .content-spacing {
+          width: 15px !important;
+        }
+        .mob-title {
+          font-size: 22px !important;
+        }
+        .mob-txt {
+          font-size: 20px !important;
+          line-height: 1.5;
+        }
+        .summary-img {
+          width: 187px !important;
+        }
+      }
+  %body.body{:style => "padding:0 !important; margin:0 !important; display:block !important; min-width:100% !important; width:100% !important; background:#f5f7fa; -webkit-text-size-adjust:none;"}
+    %table{:bgcolor => "#f5f7fa", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+      %tr
+        %td.container{:align => "center", :style => "padding:50px 10px;", :valign => "top"}
+          / Container
+          %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+            %tr
+              %td{:align => "center"}
+                %table.mobile-shell{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "650"}
+                  %tr
+                    %td.td{:bgcolor => "#ffffff", :style => "width:650px; min-width:650px; font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal;"}
+                      / Header
+                      %table{:bgcolor => "#ffffff", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+                        %tr
+                          %td
+                            %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+                              %tr
+                                %th.column{:style => "font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal;"}
+                                  %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+                                    %tr
+                                      %td.img.m-center{:style => "text-align:center; padding-top:15px; padding-bottom:15px;"}
+                                        - logo = @agency&.email_logo
+                                        - if logo
+                                          = image_tag logo, width: '300'
+                                        - else
+                                          %h2{style: 'color: white;'}= @agency&.name
+                      / END Header
+                      = yield
+                      - if @agency
+                        / Footer
+                        %table{:bgcolor => "#4C4E60", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+                          %tr
+                            %td.footer{:style => "padding: 0px 30px 30px 30px;"}
+                              %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+                                %tr
+                                  %td{:width => "100%"}
+                                    %table.full{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "540"}
+                                      %tr
+                                        %td{:align => "center", :cclass => "center", :style => "font-family: 'Source Sans Pro', sans-serif;margin: 0; padding: 30px 0px 0; font-weight:400;  color:#B3B4BF; font-family: 'Open Sans', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.2em;"}
+                                          Questions? Call us at #{@agency.phone} today!
+                                      %tr
+                                        %td{:align => "center", :cclass => "center", :style => "font-family: 'Source Sans Pro', sans-serif;margin: 0; padding: 10px 0px 0; font-weight:400;  color:#B3B4BF; font-family: 'Open Sans', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.2em;"}
+                                          © #{Time.current.year} #{@agency.name}
+                                      - if @user
+                                        %tr
+                                          %td.center{:align => "center", :style => "font-family: 'Source Sans Pro', sans-serif;margin: 0; padding:0 0 30px 0px; font-weight:400; font-size:14px ; color:#B3B4BF; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 30px;"}
+                                            %span
+                                              If you would prefer not receiving our emails, please
+                                              %a{ href: "#{ROOT_URL}/users/#{@user.id}/email_settings" } click here
+                                              to unsubscribe.
+                        / END Footer
+            / END Container

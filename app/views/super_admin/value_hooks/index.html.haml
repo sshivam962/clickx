@@ -1,0 +1,13 @@
+- content_for :title do
+  Value Hooks | Clickx
+.uiv2.mb-4
+  .d-flex.justify-content-between.align-items-center
+    .col-auto
+      %h1 Value Hooks
+    .col-auto
+      %a.btn.btn--sm.btn-warning.pull-right.m-0{href:new_super_admin_value_hook_path, 'data-title' => 'New'}
+        %i.fa.fa-plus.mr-2
+        New
+
+#value_hooks_container
+  = render 'list'

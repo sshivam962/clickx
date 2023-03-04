@@ -1,0 +1,47 @@
+.project-deatils-wrapper
+  .bg-white.lg:rounded-md.shadow-lg.lg:mb-8.min-h-full
+    .lg:rounded-t-md.overflow-hidden.pb-5
+      .lg:hidden.bak-header.border-b-2.bg-white.px-4.py-4
+        %button.btn-back.btn-back--project-details.flex.align-items-center.outline-none
+          %span.inlin-block.w-6.h-6.mr-2
+            %svg.feather.feather-chevron-left{:fill => "none", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+              %polyline{:points => "15 18 9 12 15 6"}
+          Back
+      .p-6.p-md-10.text-sm.lg:rounded-t-md.shadow
+        #project-title.text-lg.font-bold.leading-none.pb-2= @project.title
+        -# .text-sm.text-gray-600= @project.agency.name
+        .text-sm.text-gray-600 Posted by: Name
+        .text-sm.text-gray-600= @project.agency.address
+        #project-budget.project-budget.text-sm.text-gray-600= number_to_currency(@project.budget, strip_insignificant_zeros: true)
+        .py-2
+        - project_proposal = @project.project_proposals.find_or_initialize_by(user_id: current_user.id )
+        - if project_proposal.amount.present?
+          %a#project-submit.btn.btn-disabled.rounded-md.font-light.text-center.overlay-show Proposal submitted
+        - else
+          %a#project-submit.btn.rounded-md.font-light.text-center.overlay-show.project_contract Submit a Proposal
+    .p-6.pt-0.p-md-10
+      .text-md.font-semibold.pb-2 Project Details
+      .pb-4.text-sm
+        .font-medium.text-black Budget
+        .text-sm.text-gray-600= "#{number_to_currency(@project.budget, strip_insignificant_zeros: true)}"
+      %hr.-mx-6
+      .pb-4
+      .text-lg.font-medium.pb-2 Short Descripton
+      .text-sm.text-gray-600
+        %p= @project.short_desc
+      .pb-4
+      .text-lg.font-medium.pb-2 Full Descripton
+      .text-sm.text-gray-600
+        %p= @project.description
+
+:javascript
+  $(document).ready(function(){
+    $('.project_contract').on('click', function(){
+      var project_id = #{@project.id};
+      $.ajax({
+        url: "/n/projects/" + project_id + "/contract",
+        type: 'get',
+        dataType: 'script'
+      });
+    });
+  });

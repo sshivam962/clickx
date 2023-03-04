@@ -1,0 +1,84 @@
+- content_for :title do
+  Case Studies | Clickx
+.page-content
+  .container-fluid.mt-4
+    .searchform-wrapper.pt-4
+      .search-form
+        %input.search-form__input#search_case_study{placeholder: 'Search', type: 'search'}
+        %button.search-form__btn
+          %i.fa.fa-search
+        %a.search-form-btn-clear.clear_filters{href: 'javascript:void(0)', 'data-title' => 'Clear Filters'}
+          %i.fa.fa-times
+    .case_studies_list
+      .spacer25
+      .bg-sky-blue.rounded.border-1.border-blue
+        .bg-white.rounded-t-12.py-4.px-5
+          .d-flex.flex-wrap.justify-content-between
+            .col-auto
+              .fs-md.color-dark-blue.fw-m.py-2
+                = @industry.title
+                = hidden_field_tag :industry_id, @industry.id
+                = hidden_field_tag :my_case_study_id, params['my_case_study']
+            .col-auto
+              .relative
+                - if current_user.preview_user? || @industry.funnel_page.present?
+                  .dropdown
+                    %button.btn.btn-warning{ 'data-toggle': 'dropdown' }
+                      %i.fa.fa-gear.mr-2
+                      Settings
+                    %ul.dropdown-menu.rounded-8.p-3{:role => "menu"}
+                      / - if current_user.preview_user?
+                      %li.mb-1
+                        %a.btn.d-block.px-4.py-3.text-left{ href: '#', 'data-toggle': 'modal', 'data-target': '#lead-form-modal' } Update Lead Form
+                      - if @industry.funnel_page.present?
+                        %li
+                          %a.btn.d-block.px-4.py-3.text-left{href: funnel_page_public_link(@industry.funnel_page, current_agency), target: '_blank'} Funnel Page
+        .p-lg-5.p-4
+          #case_studies_list
+            = render 'case_studies_list'
+      .p-3
+
+#lead-form-modal.modal.fade{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg{role: 'document'}
+    = form_with model: @agency_niche, url: update_lead_form_agency_industry_path(@industry), method: :post, remote: true do |f|
+      .modal-content
+        .modal-header
+          Lead Form - #{@industry.title}
+          %a.close.pl-md{'data-dismiss': 'modal'}
+            %span ×
+        .modal-body
+          .row
+            .col-md-12
+              .form-group
+                %label{for: :lead_form}
+                  Lead Form Embed Code
+                = f.text_area :lead_form, class: 'form-control', rows: 7, placeholder: 'Paste your lead form embed code here'
+                = hidden_field_tag :my_case_study, params['my_case_study']
+        .modal-footer
+          = f.submit 'Save', class: 'btn btn-primary btn-raised'
+
+
+:javascript
+  $('.copy_to_clipboard').on('click', function (e) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).data('link')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Link Copied");
+  });
+  $('#search_case_study').on('keyup', function() {
+    var name = $('#search_case_study').val().toLowerCase();
+    var industry_id = $('#industry_id').val();
+    var my_case_study_id = $('#my_case_study_id').val();
+    $.ajax({
+      url: "/a/industries/" + industry_id + "/case_studies/"+my_case_study_id,
+      type: 'get',
+      data: { name: name },
+      dataType: 'script',
+      async: false,
+      success:function(response){
+        $('#tab_content').html(response.data)
+      }
+    })
+  });

@@ -1,0 +1,31 @@
+.pb-md.page-heading.no-margin-bottom.competitors-list.competitors-header
+  %h1
+    %i.clickx-icon-LinkBuilding.title-icon>
+    Common Backlinks
+.container-fluid
+  %div
+    .row
+      .col-md-12
+        %p.clx-text.text-color-accent-red.text-center
+          - if @backlinks.empty?
+            No Data Available
+          - else
+            .tab-container
+              .tab-content
+                .table-responsive
+                  %table.table.table-bordered.table-vam.table-hover.mb-n
+                    %thead
+                      %tr
+                        %th
+                          %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "URL of backlinks that are common with your site and your competitors", :type => "button" }
+                            URL
+                        %th.text-center
+                          %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Number of your competitors who have backlinks from the given URL", :type => "button", "title-direction": "left" }
+                            Count
+                    %tbody
+                      - @backlinks.each do |backlink|
+                        %tr
+                          %td
+                            %a{:href => "#{backlink.domain}", :target => "_blank"}
+                              %h4.list-group-item-heading #{backlink.domain}
+                          %td.text-center #{backlink.count}

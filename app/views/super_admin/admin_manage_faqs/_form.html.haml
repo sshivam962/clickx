@@ -1,0 +1,11 @@
+%div.col-md-12
+  .row.faq_form
+    .form-group
+      %label.font-size18 Question
+      = f.text_field :question, required: true, class: 'form-control login', placeholder: 'Enter Question'
+    .form-group
+      %label.font-size18 Answer
+      = f.cktext_area :answer
+    .form-group
+      = f.submit "Save Faq", class: 'btn btn-warning saveBtn'
+

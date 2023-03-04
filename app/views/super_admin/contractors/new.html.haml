@@ -1,0 +1,13 @@
+.header.no-bottom-border
+  %h3 Invite Contractors
+.login-form
+  = form_for(@user, as: :user, url: super_admin_contractors_path(@user), html: {method: :post}) do |f|
+    .form-group
+      = f.email_field :email, class: 'form-control login width40per display-inline', placeholder: 'Email', autofocus: true, required: true
+    .form-group
+      = f.text_field :first_name, class: 'form-control login width40per display-inline', placeholder: 'First Name', required: true
+    .form-group
+      = f.text_field :last_name, class: 'form-control login width40per display-inline', placeholder: 'Last Name', required: true
+    .form-group
+      = f.text_field :phone, class: 'form-control login width40per display-inline', placeholder: 'Phone'
+    %button.btn.btn-warning{:type => "submit"}=t("devise.invitations.new.submit_button").titleize

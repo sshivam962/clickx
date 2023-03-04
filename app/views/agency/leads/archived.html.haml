@@ -1,0 +1,33 @@
+- content_for :title do
+  Leads | Clickx
+.page-heading.pt-md.pb-md.ui-2020
+  .row.align-items-center
+    .col-md-6
+      %h1
+        %i.clickx-icon-SellSheets.title-icon
+        Archived Leads
+
+#dashboard-table.container-fluid.mt-md.pt-xs.ui-2020
+  .row.row--v-center.row--wrap
+    .col-sm-9.col-xs-9
+      .search-form
+        %input.search-form__input#search_leads{placeholder: 'Search', type: 'search'}
+
+  .row
+    .col-md-12#leads_container
+      = render 'agency/leads/shared/archived_leads_list'
+  #modal_container
+
+:javascript
+  $('#search_leads').on("keyup", function() {
+    var name = $('#search_leads').val().toLowerCase();
+    $.ajax({
+      url: "/a/leads/archived",
+      type: 'get',
+      data: { name: name},
+      dataType: 'script',
+      async: false,
+      success:function(response){}
+    })
+  });
+

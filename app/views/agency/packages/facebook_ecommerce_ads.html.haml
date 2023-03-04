@@ -1,0 +1,979 @@
+- content_for :title do
+  Meta Ecommerce Ads | Clickx
+.ui-2020.package-page
+  .page-content
+    .page-heading.pt-md.pb-md
+      %h1
+        .d-flex.justify-content-between
+          .col-auto
+            %i.clickx-icon-facebook
+            Meta Ecommerce Ads
+          = render 'agency/packages/shared/msrp_percentage'
+    .container-fluid
+      .table-responsive.table-plan.text-center
+        %table.table.table-hover.mb-n.overflow-h.plan-preloader
+          %thead
+            %tr
+              %th.col-label{"vertical-align" => "top"}
+                .pt-col-content
+              - @plans.each do |plan|
+                %th.col-package
+                  .pt-col-content
+                    .pt-header-caption
+                      = plan.title
+                    .pt-header-price
+                      = in_currency(plan.amount, current_agency.display_currency)
+                      %span> /mo
+                      = hidden_field_tag(:hidden_plan_amount, plan.amount, class: 'hidden_plan_amount', id: plan.key)
+                    %span.plan-label
+                      - @msrp_class = "msrp_#{plan.key}"
+                      %span.d-inline-block{:class => @msrp_class} MSRP: #{in_currency(plan.amount + (plan.amount * 0.5), current_agency.display_currency)}
+                      %span.d-inline-block + Ad Spend
+                    .mt-4
+                      %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'facebook_ecommerce_ads', plan: plan.key)}
+                        Get Started
+          %tbody
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Meta Ad Spend
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Paid directly to Facebook
+              %td
+                .pt-col-content{"data-label" => "Meta Ad Spend"}
+                  %span
+                    #{in_currency(2001, current_agency.display_currency)} - #{in_currency(4000, current_agency.display_currency)}
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Paid directly to Facebook
+              %td
+                .pt-col-content{"data-label" => "Meta Ad Spend"}
+                  %span
+                    #{in_currency(4001, current_agency.display_currency)} - #{in_currency(6500, current_agency.display_currency)}
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Paid directly to Facebook
+              %td
+                .pt-col-content{"data-label" => "Meta Ad Spend"}
+                  %span
+                    #{in_currency(6501, current_agency.display_currency)} - #{in_currency(8000, current_agency.display_currency)}
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Paid directly to Facebook
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Implementation Fee
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content{"data-label" => "Implementation Fee"}
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content{"data-label" => "Implementation Fee"}
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content{"data-label" => "Implementation Fee"}
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Inital Timeline Required
+              %td
+                .pt-col-content{"data-label" => "Inital Timeline Required"}
+                  %span 90 Days
+              %td
+                .pt-col-content{"data-label" => "Inital Timeline Required"}
+                  %span 90 Days
+              %td
+                .pt-col-content{"data-label" => "Inital Timeline Required"}
+                  %span 90 Days
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Kick-Off Call with Agency
+              %td
+                .pt-col-content{"data-label" => "Kick-Off Call with Agency"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Kick-Off Call with Agency"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Kick-Off Call with Agency"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Unlimited Email Support
+              %td
+                .pt-col-content{"data-label" => "Unlimited Email Support"}
+                  %span With Agency
+              %td
+                .pt-col-content{"data-label" => "Unlimited Email Support"}
+                  %span With Agency
+              %td
+                .pt-col-content{"data-label" => "Unlimited Email Support"}
+                  %span With Agency
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Campaign Launch Timeline
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Timeline is subject to verified FB Business Manager, good standing ad account, Facebook Page, and credit card on file
+              %td
+                .pt-col-content{"data-label" => "Campaign Launch Timeline"}
+                  %span
+                    2 Weeks
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Timeline is subject to verified FB Business Manager, good standing ad account, Facebook Page, and credit card on file
+              %td
+                .pt-col-content{"data-label" => "Campaign Launch Timeline"}
+                  %span
+                    2 Weeks
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Timeline is subject to verified FB Business Manager, good standing ad account, Facebook Page, and credit card on file
+              %td
+                .pt-col-content{"data-label" => "Campaign Launch Timeline"}
+                  %span
+                    2 Weeks
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Timeline is subject to verified FB Business Manager, good standing ad account, Facebook Page, and credit card on file
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Dedicated Facebook Ad Specialists
+              %td
+                .pt-col-content{"data-label" => "Dedicated Facebook Ad Specialists"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Facebook Ad Specialists"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Facebook Ad Specialists"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Implementation
+              %td
+                .pt-col-content{"data-label" => "Implementation"}
+              %td
+                .pt-col-content{"data-label" => "Implementation"}
+              %td
+                .pt-col-content{"data-label" => "Implementation"}
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span 100% Customized Strategy
+              %td
+                .pt-col-content{"data-label" => "100% Customized Strategy"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "100% Customized Strategy"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "100% Customized Strategy"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Conversion Tracking Support (Pixel)
+              %td
+                .pt-col-content{"data-label" => "Conversion Tracking Support (Pixel)"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Conversion Tracking Support (Pixel)"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Conversion Tracking Support (Pixel)"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Targeting Audience Research
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext When conducting Target Audience Research, we'll explore the different targeting options for the services being advertised. We will use past targeting (if applicable), client recommendations, and our experience to build the initial targeting options to start testing.
+              %td
+                .pt-col-content{"data-label" => "Targeting Audience Research"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext When conducting Target Audience Research, we'll explore the different targeting options for the services being advertised. We will use past targeting (if applicable), client recommendations, and our experience to build the initial targeting options to start testing.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Targeting Audience Research"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext When conducting Target Audience Research, we'll explore the different targeting options for the services being advertised. We will use past targeting (if applicable), client recommendations, and our experience to build the initial targeting options to start testing.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Targeting Audience Research"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext When conducting Target Audience Research, we'll explore the different targeting options for the services being advertised. We will use past targeting (if applicable), client recommendations, and our experience to build the initial targeting options to start testing.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Setup Lookalike Audience
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If applicable - per client. Our team will need a list of more than 100 past Customers that were a good fit for the client so Facebook can find similar Leads.
+              %td
+                .pt-col-content{"data-label" => "Setup Lookalike Audience"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If applicable - per client. Our team will need a list of more than 100 past Customers that were a good fit for the client so Facebook can find similar Leads.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Setup Lookalike Audience"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If applicable - per client. Our team will need a list of more than 100 past Customers that were a good fit for the client so Facebook can find similar Leads.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Setup Lookalike Audience"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If applicable - per client. Our team will need a list of more than 100 past Customers that were a good fit for the client so Facebook can find similar Leads.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Setup Custom Audiences
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For the setup of a custom audience, our team will use a list of set people who will be specifically targeted. This means that those who are in that Custom Audience will see our Ads.
+              %td
+                .pt-col-content{"data-label" => "Setup Custom Audiences"}
+                  %span
+                    %i.material-icons.text-success.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Setup Custom Audiences"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For the setup of a custom audience, our team will use a list of set people who will be specifically targeted. This means that those who are in that Custom Audience will see our Ads.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Setup Custom Audiences"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For the setup of a custom audience, our team will use a list of set people who will be specifically targeted. This means that those who are in that Custom Audience will see our Ads.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    E-commerce Ad Types
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Depending on the Ad Spend and Client resources, we can create and manage multiple types of E-commerce Ads. E-commerce options include: Catalog Ads, Carousel Ads, Single Image Ads, and Product Ads.
+              %td
+                .pt-col-content{"data-label" => "E-commerce Ad Types"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Depending on the Ad Spend and Client resources, we can create and manage multiple types of E-commerce Ads. E-commerce options include: Catalog Ads, Carousel Ads, Single Image Ads, and Product Ads.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "E-commerce Ad Types"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Depending on the Ad Spend and Client resources, we can create and manage multiple types of E-commerce Ads. E-commerce options include: Catalog Ads, Carousel Ads, Single Image Ads, and Product Ads.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "E-commerce Ad Types"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Depending on the Ad Spend and Client resources, we can create and manage multiple types of E-commerce Ads. E-commerce options include: Catalog Ads, Carousel Ads, Single Image Ads, and Product Ads.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Campaign Buildout
+              %td
+                .pt-col-content{"data-label" => "Campaign Buildout"}
+                  %span
+                    2 Campaigns/Offers
+              %td
+                .pt-col-content{"data-label" => "Campaign Buildout"}
+                  %span
+                    4 Campaigns/Offers
+              %td
+                .pt-col-content{"data-label" => "Campaign Buildout"}
+                  %span
+                    6 Campaigns/Offers
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Product Ads
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Multiple products can be advertised at once using these kinds of ads. This allows for a dynamic solution that shows customers relevant products.
+              %td
+                .pt-col-content{"data-label" => "Product Ads"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Multiple products can be advertised at once using these kinds of ads. This allows for a dynamic solution that shows customers relevant products.
+                    3-5 Products
+              %td
+                .pt-col-content{"data-label" => "Product Ads"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Multiple products can be advertised at once using these kinds of ads. This allows for a dynamic solution that shows customers relevant products.
+                    5-7 Products
+              %td
+                .pt-col-content{"data-label" => "Product Ads"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Multiple products can be advertised at once using these kinds of ads. This allows for a dynamic solution that shows customers relevant products.
+                    7-10 Products
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Catalog Setup (3-10 Products)
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext There will be an additional fee if there are more than ten products in the Facebook Catalog (see payment page for Add-on fee). If you need any assistance with set up, please contact the Account Manager.
+              %td
+                .pt-col-content{"data-label" => "Catalog Setup (3-10 Products)"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext There will be an additional fee if there are more than ten products in the Facebook Catalog (see payment page for Add-on fee). If you need any assistance with set up, please contact the Account Manager.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Catalog Setup (3-10 Products)"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext There will be an additional fee if there are more than ten products in the Facebook Catalog (see payment page for Add-on fee). If you need any assistance with set up, please contact the Account Manager.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Catalog Setup (3-10 Products)"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext There will be an additional fee if there are more than ten products in the Facebook Catalog (see payment page for Add-on fee). If you need any assistance with set up, please contact the Account Manager.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Initial Image Creation for Ads
+              %td
+                .pt-col-content{"data-label" => 'Initial Image Creation for Ads'}
+                  %span
+                    2 Creatives Per Campaign
+                    -# = succeed '1 Round of Revisions' do
+                    -#   %br/
+              %td
+                .pt-col-content{"data-label" => 'Initial Image Creation for Ads'}
+                  %span
+                    4 Creatives Per Campaign
+                    -# = succeed '1 Round of Revisions' do
+                    -#   %br/
+              %td
+                .pt-col-content{"data-label" => 'Initial Image Creation for Ads'}
+                  %span
+                    6 Creatives Per Campaign
+                    -# = succeed '1 Round of Revisions' do
+                      -# %br/
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Initial Ad Creatives
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will include the Image Uploads or Video Ad Setup (if applicable), etc. The creative portion is determined by the resources the client provides, plus additional images if needed. It is a collaboration so this can be custom per client.
+              %td
+                .pt-col-content{"data-label" => "Initial Ad Creatives"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will include the Image Uploads or Video Ad Setup (if applicable), etc. The creative portion is determined by the resources the client provides, plus additional images if needed. It is a collaboration so this can be custom per client.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Initial Ad Creatives"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will include the Image Uploads or Video Ad Setup (if applicable), etc. The creative portion is determined by the resources the client provides, plus additional images if needed. It is a collaboration so this can be custom per client.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Initial Ad Creatives"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will include the Image Uploads or Video Ad Setup (if applicable), etc. The creative portion is determined by the resources the client provides, plus additional images if needed. It is a collaboration so this can be custom per client.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Initial Copywriting for Ads
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext These are the long- and short-form versions of the copy that are seen above the Ad’s image. This can include an offer, call to action, details/unique features on product(s).
+              %td
+                .pt-col-content{"data-label" => "Initial Copywriting for Ads"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext These are the long- and short-form versions of the copy that are seen above the Ad’s image. This can include an offer, call to action, details/unique features on product(s).
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Initial Copywriting for Ads"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext These are the long- and short-form versions of the copy that are seen above the Ad’s image. This can include an offer, call to action, details/unique features on product(s).
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Initial Copywriting for Ads"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext These are the long- and short-form versions of the copy that are seen above the Ad’s image. This can include an offer, call to action, details/unique features on product(s).
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Ad Creative Approval
+              %td
+                .pt-col-content{"data-label" => "Ad Creative Approval"}
+                  %span From Client
+              %td
+                .pt-col-content{"data-label" => "Ad Creative Approval"}
+                  %span From Client
+              %td
+                .pt-col-content{"data-label" => "Ad Creative Approval"}
+                  %span From Client
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Ad Creatives Refresh
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This 90 day period will begin after the first round of Ads has been launched successfully. The Account Manager will be the point of contact for any changes to be made.
+              %td
+                .pt-col-content{"data-label" => "Ad Creatives Refresh"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This 90 day period will begin after the first round of Ads has been launched successfully. The Account Manager will be the point of contact for any changes to be made.
+                    Every 90 Days
+              %td
+                .pt-col-content{"data-label" => "Ad Creatives Refresh"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This 90 day period will begin after the first round of Ads has been launched successfully. The Account Manager will be the point of contact for any changes to be made.
+                    Every 90 Days
+              %td
+                .pt-col-content{"data-label" => "Ad Creatives Refresh"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This 90 day period will begin after the first round of Ads has been launched successfully. The Account Manager will be the point of contact for any changes to be made.
+                    Every 90 Days
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    New Ad Creatives
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If the client needs new creatives (images, copy) before the 90 day refresh period, this will be an extra cost. These items can be found on the A La Carte Plan page. The Account Manager will be the point of contact for any changes to be made.
+              %td
+                .pt-col-content{"data-label" => "New Ad Creatives"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If the client needs new creatives (images, copy) before the 90 day refresh period, this will be an extra cost. These items can be found on the A La Carte Plan page. The Account Manager will be the point of contact for any changes to be made.
+                    Additional
+              %td
+                .pt-col-content{"data-label" => "New Ad Creatives"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If the client needs new creatives (images, copy) before the 90 day refresh period, this will be an extra cost. These items can be found on the A La Carte Plan page. The Account Manager will be the point of contact for any changes to be made.
+                    Additional
+              %td
+                .pt-col-content{"data-label" => "New Ad Creatives"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If the client needs new creatives (images, copy) before the 90 day refresh period, this will be an extra cost. These items can be found on the A La Carte Plan page. The Account Manager will be the point of contact for any changes to be made.
+                    Additional
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Custom Catalog Image Creation (3-10 Products)
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is for clients who have images that Facebook won't publish, are of low quality, or who want to change up a catalog image for a special offer. An example of this is using a holiday background in a catalog image for a special sale the client is having.
+              %td
+                .pt-col-content{"data-label" => "Custom Catalog Image Creation (3-10 Products)"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is for clients who have images that Facebook won't publish, are of low quality, or who want to change up a catalog image for a special offer. An example of this is using a holiday background in a catalog image for a special sale the client is having.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Custom Catalog Image Creation (3-10 Products)"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is for clients who have images that Facebook won't publish, are of low quality, or who want to change up a catalog image for a special offer. An example of this is using a holiday background in a catalog image for a special sale the client is having.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Custom Catalog Image Creation (3-10 Products)"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is for clients who have images that Facebook won't publish, are of low quality, or who want to change up a catalog image for a special offer. An example of this is using a holiday background in a catalog image for a special sale the client is having.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Custom Catalog Image Refresh
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This 90 day period will begin after the first round of Ads has been launched successfully. The Account Manager will be the point of contact for any changes to be made.
+              %td
+                .pt-col-content{"data-label" => "Custom Catalog Image Refresh"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This 90 day period will begin after the first round of Ads has been launched successfully. The Account Manager will be the point of contact for any changes to be made.
+                    Every 90 Days
+              %td
+                .pt-col-content{"data-label" => "Custom Catalog Image Refresh"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This 90 day period will begin after the first round of Ads has been launched successfully. The Account Manager will be the point of contact for any changes to be made.
+                    Every 90 Days
+              %td
+                .pt-col-content{"data-label" => "Custom Catalog Image Refresh"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This 90 day period will begin after the first round of Ads has been launched successfully. The Account Manager will be the point of contact for any changes to be made.
+                    Every 90 Days
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Implementation of Initial bids
+              %td
+                .pt-col-content{"data-label" => "Implementation of Initial bids"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Implementation of Initial bids"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Implementation of Initial bids"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Implementation of Ad Scheduling
+              %td
+                .pt-col-content{"data-label" => "Implementation of Ad Scheduling"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Implementation of Ad Scheduling"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Implementation of Ad Scheduling"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Retargeting Campaign Setup
+              %td
+                .pt-col-content{"data-label" => "Retargeting Campaign Setup"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Retargeting Campaign Setup"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Retargeting Campaign Setup"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    24/7 Reporting Dashboard
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+              %td
+                .pt-col-content{"data-label" => "24/7 Reporting Dashboard"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "24/7 Reporting Dashboard"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "24/7 Reporting Dashboard"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span On-Going Support
+              %td
+                .pt-col-content{"data-label" => "On-Going Support"}
+              %td
+                .pt-col-content{"data-label" => "On-Going Support"}
+              %td
+                .pt-col-content{"data-label" => "On-Going Support"}
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Dedicated Campaign Management Team
+              %td
+                .pt-col-content{"data-label" => "Dedicated Campaign Management Team"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Campaign Management Team"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Campaign Management Team"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Meta Ads Management
+              %td
+                .pt-col-content{"data-label" => "Meta Ads Management"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Meta Ads Management"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Meta Ads Management"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            -# %tr
+            -#   %td.col-label.text-left
+            -#     .pt-col-content
+            -#       %span Instagram Ads Management
+            -#   %td
+            -#     .pt-col-content{"data-label" => "Instagram Ads Management"}
+            -#       %span
+            -#         %i.material-icons.text-success.tick-r.f-s-20 check
+            -#   %td
+            -#     .pt-col-content{"data-label" => "Instagram Ads Management"}
+            -#       %span
+            -#         %i.material-icons.text-success.tick-r.f-s-20 check
+            -#   %td
+            -#     .pt-col-content{"data-label" => "Instagram Ads Management"}
+            -#       %span
+            -#         %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Feedback on Website
+              %td
+                .pt-col-content{"data-label" => "Feedback on Website"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Feedback on Website"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Feedback on Website"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    A/B Test Creatives & Ad Sets
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext A/B Testing compares ads and targeting currently running to find the top-performing ones to allocate budget to (reducing wasted ad spend). This will let us get rid of ineffective targeting and creatives, so that we can explore new opportunities to test.
+              %td
+                .pt-col-content{"data-label" => "A/B Test Creatives & Ad Sets"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext A/B Testing compares ads and targeting currently running to find the top-performing ones to allocate budget to (reducing wasted ad spend). This will let us get rid of ineffective targeting and creatives, so that we can explore new opportunities to test.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "A/B Test Creatives & Ad Sets"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext A/B Testing compares ads and targeting currently running to find the top-performing ones to allocate budget to (reducing wasted ad spend). This will let us get rid of ineffective targeting and creatives, so that we can explore new opportunities to test.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "A/B Test Creatives & Ad Sets"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext A/B Testing compares ads and targeting currently running to find the top-performing ones to allocate budget to (reducing wasted ad spend). This will let us get rid of ineffective targeting and creatives, so that we can explore new opportunities to test.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Monthly Performance Updates
+              %td
+                .pt-col-content{"data-label" => "Monthly Performance Updates"}
+                  %span Email
+              %td
+                .pt-col-content{"data-label" => "Monthly Performance Updates"}
+                  %span Report
+              %td
+                .pt-col-content{"data-label" => "Monthly Performance Updates"}
+                  %span Report
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Campaign Quality Audits
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is an internal deliverable. Clients will not be receiving a weekly report from our team. Our team consistently checks the Ad Account every week, to make sure everything is working well and if anything needs to be changed.
+              %td
+                .pt-col-content{"data-label" => "Campaign Quality Audits"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is an internal deliverable. Clients will not be receiving a weekly report from our team. Our team consistently checks the Ad Account every week, to make sure everything is working well and if anything needs to be changed.
+                    Weekly
+              %td
+                .pt-col-content{"data-label" => "Campaign Quality Audits"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is an internal deliverable. Clients will not be receiving a weekly report from our team. Our team consistently checks the Ad Account every week, to make sure everything is working well and if anything needs to be changed.
+                    Weekly
+              %td
+                .pt-col-content{"data-label" => "Campaign Quality Audits"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is an internal deliverable. Clients will not be receiving a weekly report from our team. Our team consistently checks the Ad Account every week, to make sure everything is working well and if anything needs to be changed.
+                    Weekly
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Performance-Based Ad Spend Allocation
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Performance-Based Ad Spend Allocation is used when multiple campaigns are tested to find the right targeting and creative that makes sense to our audience. For example, if one campaign outperforms another, more Ad Spend is allocated to the one performing the best, so budget is not wasted.
+              %td
+                .pt-col-content{"data-label" => "Performance-Based Ad Spend Allocation"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Performance-Based Ad Spend Allocation is used when multiple campaigns are tested to find the right targeting and creative that makes sense to our audience. For example, if one campaign outperforms another, more Ad Spend is allocated to the one performing the best, so budget is not wasted.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Performance-Based Ad Spend Allocation"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Performance-Based Ad Spend Allocation is used when multiple campaigns are tested to find the right targeting and creative that makes sense to our audience. For example, if one campaign outperforms another, more Ad Spend is allocated to the one performing the best, so budget is not wasted.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Performance-Based Ad Spend Allocation"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Performance-Based Ad Spend Allocation is used when multiple campaigns are tested to find the right targeting and creative that makes sense to our audience. For example, if one campaign outperforms another, more Ad Spend is allocated to the one performing the best, so budget is not wasted.
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Performance-Based Budget pacing
+              %td
+                .pt-col-content{"data-label" => "Performance-Based Budget pacing"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Performance-Based Budget pacing"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Performance-Based Budget pacing"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Month to Month Commitment
+              %td
+                .pt-col-content{"data-label" => "Month to Month Commitment"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Month to Month Commitment"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Month to Month Commitment"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Client Cancellation
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content{"data-label" => "Client Cancellation"}
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content{"data-label" => "Client Cancellation"}
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content{"data-label" => "Client Cancellation"}
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+
+            - unless @is_preview
+              %tr.pt-row-footer
+                %td.col-label.text-left
+                  .pt-col-content
+                - @plans.each do |plan|
+                  %td
+                    .pt-col-content
+                      %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'facebook_ecommerce_ads', plan: plan.key)}
+                        Get Started
+
+      .row.pt-5.pb-4.d-none.flex-wrap.row-p-5
+        .col-md-6.col-sm-6.col
+          .panel-body.bg-white.panel-br-10.p-5.h-100
+            .panel-head.pb-5
+              %i.clickx-icon-Support.ico-60.pr-sm.text-info
+              %h5.f-s-16.f-w-lg.l-s-2.text-muted OPTIONAL
+              .pt-header-caption.text-info White-Glove™ Customer Service
+              .pt-header-price
+                #{in_currency(500, current_agency.display_currency)}
+                %span> /mo
+            .panel-content.pl-n.pr-n
+              %p In addition to our White Label Dashboard for Reporting, White-Glove™ Customer Service include day to day Account Management, Email Communication with our Account Managers as well as Monthly Strategy and Reporting Phone Call.
+        .col-md-6.col-sm-6.col.mt-4.mt-md-0
+          .panel-body.bg-white.panel-br-10.p-5.h-100
+            .panel-head.pb-5
+              %i.clickx-icon-partner.ico-60.pr-sm.text-info
+              %h5.f-s-16.f-w-lg.l-s-2.text-muted OPTIONAL
+              .pt-header-caption.text-info Expedited Onboarding
+              .pt-header-price
+                #{in_currency(500, current_agency.display_currency)}
+                %span> /One Time
+            .panel-content.pl-n.pr-n
+              %p Speedy Ad Setup and Approval. 1 Week Rush Turn Around.
+              %p Requires Immediate Access to Business Manager as an Admin, Ad Account Creation, and Page Access, Dashboard Provisioning, Campaign Funding and Launch Support
+
+      - if raw(@package.sales_pitch).present?
+        .row.pt-4.pb-4.d-flex.flex-wrap.row-p-4
+          .col-sm-12.mt-4.mt-md-0
+            .panel-body.bg-white.panel-br-10.p-5.h-100
+              .panel-content.pl-n.pr-n
+                = raw(@package.sales_pitch)
+      .spacer15
+:javascript
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.plan-preloader').removeClass('plan-preloader');
+    }, 500);
+  });

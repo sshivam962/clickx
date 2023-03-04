@@ -1,0 +1,27 @@
+- content_for :title do
+  New Social Media Prompt | Clickx
+
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    .col-xs-10.col-sm-10.col-lg-10
+      %h1 New Social Media Prompt
+    .col-xs-2.col-sm-2.col-lg-2
+      %a.btn.btn-warning.pull-right.mt-lg.mb-lg{href: super_admin_social_media_prompts_path} Back
+
+.uiv2
+  .clearfix
+  .content-card.p-md-5
+    = form_for @social_media_prompt, url: super_admin_social_media_prompts_path, method: :post do |f|
+      .form-group
+        .row
+          .col-sm-12
+            .form-group.mt-2
+              %label Title
+              = f.text_field :title, class: 'form-control mb-0 pt-0', placeholder: 'Title'
+          .col-sm-12
+            .form-group.mt-2
+              %label Prompt
+              = f.text_area :prompt, class: 'form-control mb-0 pt-0', placeholder: 'Prompt', rows: 5
+      
+      .spacer40
+      = f.submit 'Create Social Media Prompt', class: 'btn-raised btn-primary btn btn--md', disable_with: 'Submitting...'

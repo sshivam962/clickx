@@ -1,0 +1,16 @@
+#adminCalendlyScriptModal.modal.fade{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg{role: 'document'}
+    = form_tag update_admin_calendly_script_super_admin_agency_signup_links_path(link_id: link.id), method: :patch, remote: true do
+      .modal-content
+        .modal-header
+          %b= link.user.name
+          %a.close.pl-md{'data-dismiss': 'modal'}
+            %span ×
+        .modal-body
+          .row
+            .col-md-10
+              .d-flex.align-items-center
+                %p{style: "width:130px;"} Calendly Script
+                = text_area_tag 'admin_calendly_script', link.calendly_script , class: 'form-control', rows: 5
+        .modal-footer
+          = submit_tag 'Save', class: 'btn btn-primary btn-raised submit'

@@ -1,0 +1,200 @@
+- content_for :title do
+  Funnels
+.page-heading
+  %h1 Funnels
+.container-fluid
+  %div{"data-widget-group" => "group1"}
+    .row
+      .col-sm-12
+        .panel.panel-default.p-lg
+          .panel-body.p-n
+            .row
+              .col-sm-12
+                - plans = @package.plans.group_by(&:key)
+                .table-responsive.table-pricing1
+                  %table.table.table-hover.mb-n
+                    %thead
+                      %tr
+                        %th.vat.pb-lg{:width => "300"}
+                          - plan = plans['starter'].first
+                          %h2.pt-header-caption.text-info= plan.title
+                          .pt-header-price
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                        %th.vat.pb-lg{:width => "300"}
+                          - plan = plans['pro'].first
+                          %h2.pt-header-caption.text-success= plan.title
+                          .pt-header-price
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                        %th.vat.pb-lg{:width => "300"}
+                          - plan = plans['advanced'].first
+                          %h2.pt-header-caption.text-warning= plan.title
+                          .pt-header-price
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                    %tbody
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Funnel Strategy Development
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Funnel Strategy Development
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Funnel Strategy Development
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          2 Step Funnel Development
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          3 Step Funnel Development
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          4 Step Funnel Development
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Copy Repurposing
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Copy Repurposing
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Copy Repurposing
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          CTA Development
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          CTA Development
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          CTA Development
+                      %tr.bdr-b-line
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Mobile Optimization
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Mobile Optimization
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Mobile Optimization
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          SEO Friendly Structure
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          SEO Friendly Structure
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          SEO Friendly Structure
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          ClickFunnels Setup
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          ClickFunnels Setup
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          ClickFunnels Setup
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          30 Days Free Support
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          30 Days Free Support
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          30 Days Free Support
+                      %tr
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Messaging Strategy
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Messaging Strategy
+                      %tr
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Email Optimization
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          3 Email Sequence
+                      %tr
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          A/B Testing
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          A/B Testing
+                      %tr
+                        %td.vam
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Conversion Optimization
+                      %tr
+                        %td.vam
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Retargeting Funnel
+                      %tr
+                        %td.vam
+                          %a.btn.btn-info.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'funnel_development', plan: 'starter')}
+                            Get Started
+                            %i.pl-sm.fa.fa-angle-double-right
+                            .ripple-container
+                        %td.vam
+                          %a.btn.btn-success.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'funnel_development', plan: 'pro')}
+                            Get Started
+                            %i.pl-sm.fa.fa-angle-double-right
+                            .ripple-container
+                        %td.vam
+                          %a.btn.btn-warning.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'funnel_development', plan: 'advanced')}
+                            Get Started
+                            %i.pl-sm.fa.fa-angle-double-right
+                            .ripple-container

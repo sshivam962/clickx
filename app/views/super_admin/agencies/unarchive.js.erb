@@ -1,0 +1,8 @@
+<% if @agency.blank? %>
+  toastr.error('Agency not found')
+<% elsif @agency.errors.present? %>
+  toastr.error("<%= @agency.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success('Agency Unarchived');
+  $("#agency_<%= @agency.id%>").remove();
+<% end %>

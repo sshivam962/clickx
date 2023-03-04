@@ -1,0 +1,77 @@
+.col-md-4
+  .panel.panel-default
+    .panel-heading
+      %h2 Calls By Status
+      .panel-ctrls
+        %button.btn.button-icon.pull-left.mt-sm.refresh-panel
+          %span.material-icons.inverted refresh
+    .panel-body.no-padding.table-responsive
+      .col-md-12
+        #calls_by_status_chart
+
+:javascript
+  var answered_calls = "#{@answered}"
+  var cancelled_calls = "#{@cancelled}"
+  var not_answered_calls = "#{@no_answer}"
+
+  $('#calls_by_status_chart').highcharts(call_status_pie_chart_data(answered_calls, cancelled_calls, not_answered_calls));
+
+  function call_status_pie_chart_data(answered_calls, cancelled_calls, not_answered_calls){
+    return {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        backgroundColor: '#fff',
+        height: 200
+      },
+      exporting: { enabled: false },
+      title: { text: '' },
+      tooltip: {
+        formatter: function() {
+          return this.y;
+        }
+      },
+      plotOptions: {
+        pie: {
+          size: 100,
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: false
+          },
+          showInLegend: true
+        },
+        series: {
+          point: {
+            events: {
+              legendItemClick: function() {
+                return false;
+              }
+            }
+          }
+        }
+      },
+      legend: {
+        align: 'center',
+        layout: 'horizontal',
+        verticalAlign: 'bottom',
+        labelFormatter: function() {
+          return this.name + '  ' + this.y;
+        }
+      },
+      series: [
+        {
+          type: 'pie',
+          innerSize: '60%',
+          name: 'Calls_By_Status',
+          data: [
+            ['Answered', parseInt(answered_calls) || 0],
+            ['Cancelled', parseInt(cancelled_calls) || 0],
+            ['No Answer', parseInt(not_answered_calls) || 0]
+          ]
+        }
+      ],
+      credits: { enabled: false }
+    };
+  };

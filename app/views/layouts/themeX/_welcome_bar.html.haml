@@ -1,0 +1,47 @@
+#welcome-bar.welcome-bar{:style => "background-color:#{@welcome_banner.body_bg_color}; color:#{@welcome_banner.body_text_color};"}
+  .welcome-bar--message 
+    %span= @welcome_banner.body_text
+    - if @welcome_banner&.body_link.present?
+      %a{href: @welcome_banner.body_link, target: "_blank"}= @welcome_banner.call_to_action
+  .welcome-bar--close 
+    %i.fa.fa-times
+:javascript
+    $(document).ready(function() {
+        if ($.cookie('showWelcomeBar') != "true") {
+            $("#welcome-bar").show();
+            $('body').addClass('with-welcome-bar');
+            var barHeight = $("#welcome-bar").outerHeight();
+            $('.with-welcome-bar').animate('padding-top', barHeight + 'px');
+            $('.with-welcome-bar .navbar-fixed-top').css('top', barHeight + 'px');
+            $('.with-welcome-bar .sidebar nav.widget-body > ul.acc-menu').css('padding-top', barHeight + 'px');
+            $(".welcome-bar--close").click(function() {
+                $("#welcome-bar").hide();
+                $('body').removeClass('with-welcome-bar').css('padding-top', 0);
+                $('.navbar-fixed-top').css('top', 0);
+                $('.sidebar nav.widget-body > ul.acc-menu').css('padding-top', 0);
+                // set the cookie for 24 hours
+                var date = new Date();
+                date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+                $.cookie('showWelcomeBar', "true", {
+                    expires: date
+                });
+            });
+        } else {
+            $('body').removeClass('with-welcome-bar').css('padding-top', 0);
+            $("#welcome-bar").hide();
+        }
+    });
+
+    $(window).resize(function() {
+        if($('body').hasClass('with-welcome-bar')) {
+            var barHeight = $("#welcome-bar").outerHeight();
+            $('.with-welcome-bar').css('padding-top', barHeight + 'px');
+            $('.with-welcome-bar .navbar-fixed-top').css('top', barHeight + 'px');
+            $('.with-welcome-bar .sidebar nav.widget-body > ul.acc-menu').css('padding-top', barHeight + 'px');
+        }
+    })
+
+  $('#agency_strategy_product_header_color').minicolors({
+    theme: 'bootstrap',
+    defaultValue: $('#agency_strategy_product_header_color').val()
+  });

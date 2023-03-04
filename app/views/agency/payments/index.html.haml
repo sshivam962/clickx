@@ -1,0 +1,31 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-SellSheets.title-icon
+    Payment History
+  .options
+    %a.btn.btn-white.btn-raised.load_card_update{href: agency_cards_path}
+      %span.fa.fa-plus
+      Update Billing Info
+.container-fluid
+  .row.pt-lg
+    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+      .panel.panel-default
+        .panel-body
+          %table.table.table-bordered.mb-n
+            %tbody
+              %tr
+                %th
+                  %b Amount
+                %th
+                  %b Description
+                %th
+                  %b Date
+              - @payments.each do |payment|
+                %tr
+                  %td{width: '15%'}
+                    = number_to_currency(payment.amount, precision: 0)
+                  %td.package_amount{width: '70%'}
+                    = payment.description
+                  %td{width: '15%'}
+                    - if payment.metadata['created'].present?
+                      = Time.at(payment.metadata['created']).strftime('%m/%d/%Y')

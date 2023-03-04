@@ -1,0 +1,6 @@
+<% if params[:from] == 'conference_lead' %>
+  $('#single_direct_lead').html("<%= escape_javascript render(partial: 'direct_leads/direct_lead', locals: { direct_lead: @direct_lead, contacts: @contacts })%>");
+<% else %>
+  humane.create()
+  humane.log("Contacts fetched succesfully")
+<% end %>

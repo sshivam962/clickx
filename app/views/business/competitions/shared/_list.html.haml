@@ -1,0 +1,31 @@
+- if competitions.blank?
+  .col-md-12
+    No Data Available
+- else
+  - competitions.each do |competition|
+    = render 'business/competitions/shared/list_item', competition: competition
+  .row.p-n.pagination-wrapper.pull-left
+    .left.pagination-links
+      .pagination
+        = will_paginate @competitions, params: { page: params[:page], per_page: params[:per_page] }
+        = select_tag :per_page, options_for_select([["5","5"],["10","10"],["25","25"],["50","50"]],params[:per_page]), class: 'per-page-select'
+
+  :javascript
+    $('.pagination a').attr('data-remote', 'true');
+
+    $("#per_page").on("change",function(){
+      per_page = $(this).val();
+      page = $('.pagination .current').text()
+      name = $('#search_name').val()
+      $.ajax({
+        url: "/b/competitions",
+        type: 'get',
+        data: { per_page: per_page, page: page, name: name },
+        dataType: 'script',
+        async: false,
+        success:function(response){
+          $('.competitors_list').html(response.data)
+        }
+      });
+    });
+

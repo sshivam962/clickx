@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %title
+      = yield(:title) || 'Clickx'
+    = stylesheet_link_tag 'themeX_base', media: 'all', 'data-turbolinks-track': false
+    = javascript_include_tag 'themeX_base', 'data-turbolinks-track': false
+    = csrf_meta_tags
+    = render 'layouts/themeX/fonts'
+    = render 'layouts/themeX/ie_support'
+  %body.sidebar-scroll
+    = render 'layouts/themeX/flash'
+    #wrapper
+      #layout-static
+        .static-content-wrapper
+          .static-content
+            .page-content
+              = yield

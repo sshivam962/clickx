@@ -1,0 +1,38 @@
+= hidden_field_tag :stripe_publishable_key, @agency.stripe_credential.publishable_key
+= hidden_field_tag :base_route, '/payment_links/create_card'
+= hidden_field_tag :current_page, 'payment_link'
+%header.payment-header{style: "background:#{@agency.case_study_portfolio_header_color}"}
+  .container-fluid
+    .row
+      .col-sm-3
+        %a{href: formatted_url(@agency.weburl) || '#'}
+          = image_tag @agency.logo || '', height: '45px', class: 'payment-logo'
+      .col-sm-9
+        #social.payment-social
+          %ul
+            %li
+              %a{:href => "#", :target => "_blank"}
+                %i.fa.fa-facebook
+            %li
+              %a{:href => "#", :target => "_blank"}
+                %i.fa.fa-twitter
+            %li
+              %a{:href => "#", :target => "_blank"}
+                %i.fa.fa-linkedin
+            %li
+              %a{:href => "#", :target => "_blank"}
+                %i.fa.fa-youtube
+            %li
+              %a{:href => "#", :target => "_blank"}
+                %i.fa.fa-instagram
+            %li
+              %a{:href => "#", :target => "_blank"}
+                %i.fa.fa-envelope
+
+#step_content_plan
+  = render 'public/payment_links/shared/plan'
+#step_content_card.hidden
+  = render 'public/payment_links/shared/card'
+#step_content_success.hidden
+  = render 'public/payment_links/shared/success'
+

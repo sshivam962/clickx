@@ -1,0 +1,90 @@
+.panel.panel-default{ 'ng-init': 'show_description = true' }
+  .panel-heading.pointer{ 'ng-click': 'show_description = !show_description;' }
+    Description
+    %span.pull-right
+      %i.fa{ 'ng-class': ' show_description ? "fa-chevron-down" : "fa-chevron-right" ' }
+  %span
+    .progress.form-progress
+      .progress-bar.progress-bar-success{ 'aria-valuemax': '100', 'aria-valuemin': '0',
+      'aria-valuenow': '{{ progress_width(location) }}', 'role': 'progressbar', 'style': 'width:{{ progress_width(location) }}%' }
+  .panel-body{ 'ng-show': 'show_description' }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Slogan
+        .col-md-12
+          %textarea.form-control.locationTextArea{ "name": "slogan", "ng-model": "location.slogan", "data-parsley-trigger": "keyup",
+            "data-parsley-maxlength": "80", "data-parsley-debounce":"500"	 }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Keywords
+        .col-md-12
+          %textarea.form-control.locationTextArea{ "name": "keywords", "ng-model": "location.keywords", "data-parsley-trigger": "keyup",
+            "data-parsley-maxlength": "255", "data-parsley-debounce":"500" }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Short Description ( 140 characters)
+        .col-md-12
+          %textarea.form-control.locationTextArea{ "name": "short_description", "ng-model": "location.short_description",
+            "data-parsley-trigger": "keyup", "data-parsley-maxlength": "140", "data-parsley-debounce":"500"}
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Medium Description (150-200 Characters)
+        .col-md-12
+          %textarea.form-control.locationTextArea{ "name": "medium_description", "ng-model": "location.medium_description",
+            "data-parsley-trigger": "keyup", "data-parsley-maxlength": "200", "data-parsley-debounce":"500" }
+    .col-md-12
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Full Description (400-500 Characters)
+        .col-md-12
+          %textarea.form-control.locationTextArea{ :name => "full_description", "ng-model": "location.full_description",
+            "data-parsley-trigger": "keyup", "data-parsley-maxlength": "500", "data-parsley-debounce":"500" }
+    .col-md-12{ "ng-repeat" => "link in location.social_links track by $index", "ng-hide" => "link._destroy" }
+      .col-md-4.p-n
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Connect With Social Media
+          .col-md-12{ "ng-init": "SocialLinks = #{SOCIAL_LINK_OPTIONS}" }
+            %md-select{ "aria-label": "$index", "ng-model" => "link.link_type", "style": "margin-top: 10px;", "placeholder": "Select a type" }
+              %md-option{ "ng-repeat": "type in SocialLinks", "ng-value" => "type" } {{ type }}
+      .col-md-8.p-n
+        .form-group.no-margin-top
+          %label.col-md-12.control-label{:for => "fieldurl"} URL
+          .col-md-10
+            %input#fieldurl.form-control{ :name => "link", id: "link.link_type",:placeholder => "Enter a URL", :type => "text", "ng-model" => "link.link" }
+          .col-md-2
+            %a.btn.btn-xs.btn-danger.btn-raised{'ng-click' => "removeSocialLink($index, location)", 'ng-show': 'link.link' }
+              %i.material-icons.white delete
+    .col-md-12
+      %a.btn.btn-inverse.btn-raised.btn-lg{ 'ng-click' => "addSocialLink()" }
+        %i.icpadd-r10.fa.fa-plus
+        Add Social Link
+
+    .col-md-12.review_links{ "ng-repeat" => "link in location.review_links track by $index", "ng-if" => "!link._destroy" }
+      .col-md-4.p-n
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Review Link
+          .col-md-12{ "ng-init": "ReviewLinks = #{REVIEW_LINK_OPTIONS}" }
+            %md-select{ "aria-label": "$index", "ng-model" => "link.link_type", "style": "margin-top: 10px;", "placeholder": "Select a type"}
+              %md-option{ "ng-repeat": "type in ReviewLinks", "ng-value" => "type" } {{ type }}
+      .col-md-8.p-n
+        .form-group.no-margin-top
+          %label.col-md-12.control-label{:for => "fieldurl"} URL
+          .col-md-10
+            %input#fieldurl.form-control{ :name => "link", id: "link.link_type",:placeholder => "Enter a URL", :type => "text", "ng-model" => "link.link" }
+          .col-md-2
+            %a.btn.btn-xs.btn-danger.btn-raised{'ng-click' => "removeReviewLink($index, location)", 'ng-show': 'link.link' }
+              %i.material-icons.white delete
+    .col-md-12
+      %a.btn.btn-inverse.btn-raised.btn-lg{ 'ng-click' => "addReviewLink()", 'ng-show': 'review_btn' }
+        %i.icpadd-r10.fa.fa-plus
+        Add Review Link
+
+    .col-md-12
+      %ng-dropzone.dropzone{ "methods": "dzMethods", "options": "dzOptions", "callbacks": "dzCallbacks" }
+    .col-md-12
+      %button.btn.btn-success.btn-raised.btn-label.btn-lg{ "type": "submit" }
+        = succeed "Save" do
+          .ripple-container
+      %a.btn.btn-warning.btn-raised.btn-label.btn-lg{ 'ng-click':"go_back()" }
+        %i.icpadd-r10.fa.fa-arrow-left
+        = succeed "Back" do
+          .ripple-container

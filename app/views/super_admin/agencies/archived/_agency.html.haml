@@ -1,0 +1,37 @@
+%span{id: dom_id(agency)}
+  .clients-list
+    .clients-list__item.d-flex.flex-wrap
+      .col-stretch.clients-list__datas.pt-3
+        .d-flex
+          .col-md-4.pl-0
+            - if agency.logo.present?
+              %img.mr-md{alt: 'logo', src: agency.logo, width: '50'}
+            %span.name.blue
+              = agency.name
+          .col-sm-4.col-md-4
+            %p
+              = link_to agency.active_domain
+            - if agency.support_email.present?
+              %p
+                Email:
+                %a{href: "mailto:#{agency.support_email}"}= agency.support_email
+          .col-md-1.col-sm-1.p-n
+            %span.small
+              = agency.deleted_at.strftime('%b %d, %Y')
+          .col-md-1.p-n
+            - agency.label_list.each do |label|
+              %span.small.pr-sm
+                %span.label.label-default
+                  = label
+      .col-auto.clients-list__actions.align-items-center
+        .btn-icon-list
+          - if agency.deleted_agreements.present?
+            - if agency.deleted_agreements.first.signed?
+              %a.btn-icon{"data-title" => "Download Agreement", href: download_super_admin_agency_path(agency), target: "_blank"}
+                %i.glyphicon.glyphicon-download
+
+          = link_to unarchive_super_admin_agency_path(agency.id), class: 'btn-icon', remote: true, method: :patch, data: { confirm: "Are you sure you'd like to Unarchive #{agency.name}?", title: 'Unarchive'} do
+            %i.glyphicon.glyphicon-folder-close
+
+          = link_to force_delete_super_admin_agency_path(agency.id), class: 'btn-icon btn-icon--delete', method: :delete, data: { confirm: "Are you sure you'd like to permanently delete #{agency.name}?"} do
+            %i.fa.fa-trash

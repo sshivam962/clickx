@@ -1,0 +1,5 @@
+<% if @message[:status] == 200 %>
+toastr['success']("<%=escape_javascript "#{@message[:message]}" %>");
+<% else %>
+toastr['error']("<%=escape_javascript "#{@message[:message]}" %>");
+<% end %>

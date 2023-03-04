@@ -1,0 +1,8 @@
+.uiv2
+  .clearfix
+    %h3 Contractor Invites
+  .spacer30
+  %div#contractors_list
+    = render '/super_admin/contractors/upload_list', users: @users
+%a.btn.btn--add.pull-right{ 'href': new_super_admin_contractor_path }
+  %i.glyphicon.glyphicon-plus.glyphplus

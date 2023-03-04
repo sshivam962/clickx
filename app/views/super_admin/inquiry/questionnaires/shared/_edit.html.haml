@@ -1,0 +1,16 @@
+#edit-questionnaire-modal.modal.fade{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg{role: 'document'}
+    = form_for questionnaire, url: super_admin_inquiry_questionnaire_path(questionnaire), method: :patch, remote: true do |f|
+      .modal-content
+        .modal-header
+          Edit Question
+          %a.close.pl-md{'data-dismiss': 'modal'}
+            %span ×
+        .modal-body
+          .row
+            .col-md-12
+              .form-group
+                %label{for: :question}
+                = f.text_area :question, class: 'form-control'
+        .modal-footer
+          = f.submit 'Save', class: 'btn btn-primary btn-raised'

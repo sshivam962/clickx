@@ -1,0 +1,36 @@
+# frozen_string_literal: true
+module Analytics
+  class TopPresenter < ApplicationPresenter
+    def initialize(model)
+      @model = model
+    end
+
+    def site
+      model[:site].presence || 'NA'
+    end
+
+    def sessions
+      model[:sessions].presence || 'NA'
+    end
+
+    def page_views
+      model[:page_views].presence || 'NA'
+    end
+
+    def avg_session
+      model[:avg_session].presence || 'NA'
+    end
+
+    def data_hub
+      model[:data_hub].presence || 'NA'
+    end
+
+    def page_per_session
+      model[:page_per_session].presence || 'NA'
+    end
+
+    private
+
+    attr_accessor :model
+  end
+end

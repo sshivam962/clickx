@@ -1,0 +1,54 @@
+- content_for :title do
+  Settings | Budget Pacing
+.clickx-breadcrumb-wrapper.ng-scope
+  %ol.breadcrumb.clx-breadcrumb.ng-isolate-scope
+    %li
+      %a{:href => "/b/dashboard"} Home
+    %li
+      %span Budget Pacing
+.page-content
+  .page-heading.no-margin-bottom
+    %h1
+      %i.clickx-icon-page-cog.title-icon>
+      Settings
+.container-fluid
+  = render '/business/settings/shared/tab_links'
+  .row
+    .col-sm-12
+      .panel.panel-default{'data-widget': {draggable: 'false'}}
+        = form_for current_business, url: :set_budget_business_settings, method: :patch, remote: true do |f|
+          .panel-heading
+            %h2 Budget Settings
+            %i.fa.fa-info-circle.tooltip-text-icon.tooltips{'title': 'This section allows you to set budget for all types of advertising campaigns'}
+            .panel-ctrls
+              %button.btn.button-icon.pull-left.mt-sm{type: "submit", 'title': 'Save'}
+                %span.material-icons.inverted save
+              %button.btn.button-icon.pull-left.mt-sm.budget_button{"aria-controls" => "collapseBudgetSettings", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseBudgetSettings", :role => "button"}
+                #budget_chevron_down.hidden
+                  %i.fa.fa-chevron-down
+                #budget_chevron_up
+                  %i.fa.fa-chevron-up
+          .panel-body.fadeInLeft.collapse.in#collapseBudgetSettings
+            .row
+              .col-md-3
+                .form-group.no-margin-top
+                  - disabled = current_business.managed_ppc_service? ? false : true
+                  %label.control-label.mt-n{:for => "fieldname"} Google Ads Budget
+                  = f.number_field :ppc_budget, class: 'form-control', placeholder: 'Paid Search Budget', disabled: disabled, min: 0.1, step: 0.1
+              .col-md-3
+                .form-group.no-margin-top
+                  - disabled = current_business.facebook_ad_service? ? false : true
+                  %label.control-label.mt-n{:for => "fieldname"} Facebook Ads Budget
+                  = f.number_field :fb_budget, class: 'form-control', placeholder: 'Facebook Ads Budget', disabled: disabled, min: 0.1, step: 0.1
+:javascript
+  $(document).ready(function() {
+    $('.budget_button').on('click', function() {
+      if($('#budget_chevron_down').hasClass('hidden')){
+        $('#budget_chevron_up').addClass('hidden');
+        $('#budget_chevron_down').removeClass('hidden');
+      } else {
+        $('#budget_chevron_up').removeClass('hidden');
+        $('#budget_chevron_down').addClass('hidden');
+      }
+    })
+  });

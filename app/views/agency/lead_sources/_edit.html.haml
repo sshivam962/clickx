@@ -1,0 +1,36 @@
+.modal.fade.edit_lead_source{"aria-labelledby": "mySmallModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md.task-create-modal-body
+    .bg-white.p-4.p-sm-5.rounded
+      .fs-md.fw-sb.text-darkblue.pb-4
+        Edit List - #{lead_source.name}
+      = simple_form_for lead_source,url: agency_lead_source_path, html: { remote: true } do |f|
+        %label List Name
+        .input-wrapper.mb-3
+          = f.input_field :name, class: 'input-wrapper-input', as: :string, required: true, placeholder: 'List Name'
+        %label From Email Address
+        .input-wrapper.mb-3.input-wrapper-from-email
+          .input-wrapper-input.mb-3
+            .col.flex-col
+              = f.input_field :from_email_name, class: 'input-from-email', as: :string, required: true, placeholder: 'From Email Name', id: 'from-email-name-input'
+            - if @agency.cold_email_sub_domain.present?
+              .col.pr-4
+                %span.input-from-email--domain @#{@agency.cold_email_sub_domain}.clickxmail.com
+            - else
+              .col.pr-4
+                %span.input-from-email--domain @.clickxmail.com
+          - if @agency.cold_email_sub_domain.blank?
+            .text-danger
+              Agency subdomain is not set. Please set it before sending emails.
+          #from-email-name-helper-text
+        %label Autopilot Emails Per Day
+        .input-wrapper.mb-3
+          = f.input_field :batch_size, class: 'input-wrapper-input', as: :string, required: true, placeholder: 'Autopilot Emails Per Day'
+        .pt-3
+          %button.btn.btn-default.btn-raised{"data-dismiss": "modal", type: "button"} Close
+          = submit_tag 'Save', class: 'btn btn-raised btn-primary'
+
+:javascript
+  $('#from-email-name-input').on('keyup', function(){
+    var typed_letters = $(this).val();
+    $('#from-email-name-helper-text').text('From e-mail will be: ' + typed_letters + '@' + "#{@agency.cold_email_sub_domain}" + '.clickxmail.com');
+  });

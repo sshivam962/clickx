@@ -1,0 +1,63 @@
+<table>
+  <tr>
+    <th>city</th>
+    <th>state</th>
+    <th>website</th>
+    <th>type</th>
+    <th>email_1</th>
+    <th>email_2</th>
+    <th>email_3</th>
+    <th>email_1_full_name</th>
+    <th>email_2_full_name</th>
+    <th>email_3_full_name</th>
+    <th>instagram</th>
+    <th>company_name</th>
+    <th>phone</th>
+    <th>phone_1</th>
+    <th>phone_2</th>
+    <th>phone_3</th>
+    <th>reviews</th>
+    <th>reviews_id</th>
+    <th>reviews_data</th>
+    <th>reviews_link</th>
+    <th>reviews_tags</th>
+    <th>reviews_per_score</th>
+    <th>twitter</th>
+    <th>youtube</th>
+    <th>facebook</th>
+    <th>website_has_fb_pixel</th>
+    <th>website_has_google_tag</th>
+  </tr>
+  <%@outscrapper_data.each do |data| %>
+  <tr>
+    <td><%= data["city"] %></td>
+    <td><%= data["state"] %></td>
+    <td><%= data["site"] %></td>
+    <td><%= data["type"] %></td>
+    <td><%= (data["email_1"].nil? ? "" : data["email_1"]) %></td>
+    <td><%= (data["email_2"].nil? ? "" : data["email_2"]) %></td>
+    <td><%= (data["email_3"].nil? ? "" : data["email_3"]) %></td>
+    <td><%= (data["email_1_full_name"].nil? ? "" : data["email_1_full_name"]) %></td>
+    <td><%= (data["email_2_full_name"].nil? ? "" : data["email_2_full_name"]) %></td>
+    <td><%= (data["email_3_full_name"].nil? ? "" : data["email_3_full_name"]) %></td>
+    <td><%= data["instagram"] %></td>
+    <td><%= data["company_name"] %></td>
+    <td><%= (data["phone"].nil? ? "" : data["phone"]) %></td>
+    <td><%= (data["phone_1"].nil? ? "" : data["phone_1"]) %></td>
+    <td><%= (data["phone_2"].nil? ? "" : data["phone_2"]) %></td>
+    <td><%= (data["phone_3"].nil? ? "" : data["phone_3"]) %></td>
+    <td><%= (data["full_address"].nil? ? "" : data["full_address"]) %></td>
+    <td><%= (data["reviews"].nil? ? "" : data["reviews"]) %></td>
+    <td><%= (data["reviews_id"].nil? ? "" : data["reviews_id"]) %></td>
+    <td><%= (data["reviews_data"].nil? ? "" : data["reviews_data"]) %></td>
+    <td><%= (data["reviews_link"].nil? ? "" : data["reviews_link"])%></td>
+    <td><%= (data["reviews_tags"].nil? ? "" : data["reviews_tags"]) %></td>
+    <td><%= (data["reviews_per_score"].nil? ? "" : data["reviews_per_score"]) %></td>
+    <td><%= (data["twitter"].nil? ? "" : data["twitter"]) %></td>
+    <td><%= (data["youtube"].nil? ? "" : data["youtube"]) %></td>
+    <td><%= (data["facebook"].nil? ? "" : data["facebook"]) %></td>
+    <td><%= (data["website_has_fb_pixel"].nil? ? "" : data["website_has_fb_pixel"]) %></td>
+    <td><%= (data["website_has_google_tag"].nil? ? "" : data["website_has_google_tag"]) %></td>
+  </tr>
+  <% end %>
+</table>

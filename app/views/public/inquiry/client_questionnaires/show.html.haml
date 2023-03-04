@@ -1,0 +1,108 @@
+- content_for :custom_assets do
+  = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+  = stylesheet_link_tag 'public/questionnaire', media: 'all', 'data-turbolinks-track' => true
+.qpage-wrapper
+  .qpage-header.horizontal-align.text-center{style: "background:#{@agency.questionnaire_header_color}"}
+    .container.text-center
+      - if @agency.weburl.present?
+        %a{href: formatted_url(@agency.weburl), target: '_blank', class:'d-inline-block va-top'}
+          = image_tag @agency.logo || '', class: 'img-responsive logo'
+      - else
+        = image_tag @agency.logo || '', class: 'img-responsive logo'
+  .qpage-contents
+    .container
+      .qpage-title.mb-2 #{@client_questionnaire.client&.name}
+      -# %form#validate-form.form-horizontal.row-border{"data-parsley-validate" => "", :novalidate => ""}
+      = form_for @client_questionnaire, url: client_questionnaire_path(@client_questionnaire), method: :patch do |f|
+        .qpage-subtitle Please complete the following questionnaire. Your answers will provide us additional information to develop the best in class strategy.
+        .py-5
+        - if @client_questionnaire.category == "Facebook Ads - Lead Gen"
+          - steps = questinnire_steps
+          - steps.each_with_index do |step, index|
+            .checkout_steps{id: "step_#{step}_content", class: "#{'hidden' unless step.eql?('background')}"}
+              = render "public/inquiry/client_questionnaires/shared/step_#{step}", next_step: (steps[index + 1] || 'finish'), prev_step: (steps[index - 1] || 'start'), steps: steps, f: f
+        - else
+          = f.fields_for :answers do |fa|
+            - answer = fa.object
+            - question = answer.question
+            - next if question.blank?
+            .form-group.form-group--boxed
+              .col-sm-12
+                %label.control-label
+                  - if question.required
+                    .red.inline *
+                  = question.question
+                %span.control-label-sm
+                  = question.blurb
+                = fa.text_area :answer, class: 'form-control', required: question.required, onkeyup: "textAreaAdjust(this)"
+                = fa.hidden_field :question_id
+                = fa.hidden_field :client_id
+          .form-group.p-b-n
+            .col-sm-12
+              %button.btn.btn-warning.btn-raised.btn-lg.mb-n{type: :submit, data: {disable_with: "Submitting.."}}
+                Submit
+                .ripple-container
+.section.bg-muted.text-muted.page-footer
+  .container.container--sm
+    .py-5.text-center
+      %p.mb-0
+        = "© #{Date.current.year} #{@agency.name}. All Rights Reserved."
+
+:javascript
+  $( ".step_complete" ).click(function() {
+
+    var next_step = $(this).data('next-step');
+    $('.checkout_steps').addClass('hidden')
+    $('#step_' + next_step + '_content').removeClass('hidden')
+
+  });
+
+  var check_val = $(".check_field_cls").val();
+  if(check_val == "")
+  {
+    $("#i_dont_know").prop("checked", true);
+    $(".check_field_cls").val('dont_know');
+  }
+  else
+  {
+    var checkArray = check_val.split(",");
+    for(i = 0; i < checkArray.length; i++)
+    {
+      if(checkArray[i] == "Single image")
+        $("#single_image").prop("checked", true);
+      else if(checkArray[i] == "Single video")
+        $("#single_video").prop("checked", true);
+      else
+        $("#i_dont_know").prop("checked", true);
+    }
+  }
+  var radio_val = $(".radio_field_cls").val();
+  if(radio_val == ""){
+    $("#lead_or_messenger_dont_know").prop("checked", true);
+    $(".radio_field_cls").val('dont_know');
+  }
+  else
+  {
+    if(radio_val == "Facebook Lead Ad")
+      $("#lead_or_messenger_lead").prop("checked", true);
+    else if(radio_val == "Facebook Messenger Ad")
+      $("#lead_or_messenger_messenger").prop("checked", true);
+    else
+      $("#lead_or_messenger_dont_know").prop("checked", true);
+  }
+
+  $( ".check_input_step" ).click(function() 
+  {
+    var matches = [];
+    $(".check_input_step:checked").each(function() {
+      matches.push(this.value);
+    });
+    var check_hidden_val = matches.join(',');
+    $(".check_field_cls").val(check_hidden_val);
+  });
+
+  $( ".radio_input_step" ).click(function() 
+  {
+    var radio_hidden_val = $("input:radio.radio_input_step:checked").val();
+    $(".radio_field_cls").val(radio_hidden_val);
+  });

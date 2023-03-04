@@ -1,0 +1,42 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Performance-Review.title-icon>
+    Review Responses
+    %small Upload Response for Reviews
+.container-fluid
+  %div
+    .row
+      .col-xs-12
+        / Basic Information
+        .panel.panel-default{'data-widget': {draggable: 'false'}}
+          .panel-body
+            .col-md-6
+              .form-group
+                %p.col-sm-12.coupentitle.control-label Upload image for Positive Reviews
+                .col-sm-12
+                  .fileinput.fileinput-new{"data-provides" => "fileinput", :style => "width: 100%;"}
+                    %img.fileinput-preview.thumbnail.mb20{"data-trigger" => "fileinput", :style => "width: 100%; height: 150px;", "ng-src"=>"{{location.positive_review_coupon}}"}
+                    %div
+                      %a.btn.btn-default.fileinput-exists{"data-dismiss" => "fileinput", :href => "#"} Remove
+                      %span.btn.btn-inverse.btn-raised.btn-file{:href => "#", "ng-file-select" => "", "ng-model" => "location.positive_review_coupon_file", "ng-multiple" => "true", :resetonclick => "true", :title => "upload"}
+                        %span.fileinput-new
+                          %i.fa.fa-cloud.icpadd-r10>
+                          Select image
+            .col-md-6
+              .form-group
+                %p.col-sm-12.coupentitle.control-label Upload image for Negative Reviews
+                .col-sm-12
+                  .fileinput.fileinput-new{"data-provides" => "fileinput", :style => "width: 100%;"}
+                    %img.fileinput-preview.thumbnail.mb20{"data-trigger" => "fileinput", :style => "width: 100%; height: 150px;", "ng-src"=>"{{location.negative_review_coupon}}"}
+                    %div
+                      %a.btn.btn-default.fileinput-exists{"data-dismiss" => "fileinput", :href => "#"} Remove
+                      %span.btn.btn-inverse.btn-raised.btn-file{:href => "#", "ng-file-select" => "", "ng-model" => "location.negative_review_coupon_file", "ng-multiple" => "false", :resetonclick => "true", :title => "upload"}
+                        %span.fileinput-new
+                          %i.fa.fa-cloud.icpadd-r10>
+                          Select image
+            .col-md-12
+              .col-sm-12
+                .alert.alert-info All images uploaded should be of 600x200 - Image preview only works in IE10+, FF3.6+, Safari6.0+, Chrome6.0+ and Opera11.1+. In older browsers the filename is shown instead.
+          .panel-footer
+            %span.text-gray
+              %em

@@ -1,0 +1,121 @@
+.d-flex.mb-4.flex-wrap.mx-n2
+  .col.w-xl-25.w-md-50.w-100.px-lg-2
+    .bg-white.px-5.py-4.rounded.h-lg-100.shadow.form-group
+      %h4.mb-4 Email Prospecting
+      .pb-3
+        .togglebutton.toggle-info
+          %label.word-break-all
+            = f.check_box :enable_cold_email
+            %span.toggle
+            Enable
+      .input-wrapper
+        .pb-3
+          %label{for: 'agency_cold_email_sub_domain'} Email Sub Domain
+          .input-wrapper.mb-3.input-wrapper-from-email
+            .input-wrapper-input.mb-3
+              .col.flex-col
+                = f.text_field :cold_email_sub_domain, class: 'input-from-email ', placeholder: 'Email Sub Domain', id: 'sub-domain-input'
+              .col.pr-4
+                %span.input-from-email--domain .clickxmail.com
+          -# = f.text_field :cold_email_sub_domain, class: 'input-wrapper-input ', placeholder: 'Email Sub Domain', id: 'sub-domain-input'
+          -# \.clickxmail.com
+          #sub-domain-helper-text
+
+        .pb-3
+          %label{for: 'agency_email_leads_count_limit'} Monthly Email Limit
+          = f.number_field :email_leads_count_limit, class: 'input-wrapper-input '
+        .pb-3
+          $299 Limit : 1500 Emails
+          %br
+          $799 Limit : 5000 Emails
+        .input-wrapper
+          .pb-3
+            = f.fields_for :outscraper_limit do |outscraper_limit_fields|
+              = render 'outscraper_limit_form', f: outscraper_limit_fields
+        .pb-3
+          Internal Use
+        .input-wrapper
+          .pb-3
+            %label{for: 'agency_niches'} Niches
+            = f.text_field :niches, class: 'input-wrapper-input login', placeholder: 'Niches'
+        .input-wrapper
+          .pb-3
+            %label{for: 'agency_niches'} State
+            = f.text_field :state, class: 'input-wrapper-input login', placeholder: 'State'
+  .col.w-xl-25.w-md-50.w-100.px-lg-2
+    .bg-white.px-5.py-4.rounded.h-lg-100.shadow.form-group
+      %h4.mb-4 Packages
+      = f.collection_check_boxes :enabled_packages,  Package.client_packages.pluck(:key, :name)&.sort, :first, :last do |b|
+        .pb-3
+          .togglebutton.toggle-info
+            %label.word-break-all
+              = b.check_box
+              %span.toggle
+              = b.text
+
+  .col.w-xl-25.w-md-50.w-100.px-lg-2
+    .bg-white.px-5.py-4.rounded.h-lg-100.shadow.form-group
+      %h4.mb-4 Unscalable Products
+      = f.collection_check_boxes :enabled_packages, Package::OPTIONAL_PACKAGES.map { |pname| [pname, pname.titleize] }, :first, :last do |b|
+        .pb-3
+          .togglebutton.toggle-info
+            %label.word-break-all
+              = b.check_box
+              %span.toggle
+              = b.text
+      .pb-3
+        .togglebutton.toggle-info
+          %label.word-break-all
+            = f.check_box :bundle_plans
+            %span.toggle
+            Bundled Plans
+
+  .col.w-xl-25.w-md-50.w-100.px-lg-2
+    .bg-white.px-5.py-4.rounded.h-lg-100.shadow.form-group
+      %h4.mb-4 Allow Duplicate Clients
+      .mb-4
+        %div
+          %label.pr-5
+            .styled-radio
+              = f.radio_button :allow_client_duplication, 'true'
+              .styled-radio-label
+                %span
+                Yes
+        %div
+          %label.pr-5
+            .styled-radio
+              = f.radio_button :allow_client_duplication, 'false'
+              .styled-radio-label
+                %span
+                No
+      %h4.mb-4 ReadyMode
+      .mb-4     
+        %div
+          %label.pr-5
+            .styled-radio
+              = f.radio_button :readymode_enabled, 'true'
+              .styled-radio-label
+                %span
+                Yes
+        %div
+          %label.pr-5
+            .styled-radio
+              = f.radio_button :readymode_enabled, 'false'
+              .styled-radio-label
+                %span
+                No       
+      %h4.mb-4 Level
+      - Agency.levels.keys.unshift('none').each do |level|
+        %div
+          %label.pr-5
+            .styled-radio
+              = f.radio_button :level, level.eql?('none') ? '' : level
+              .styled-radio-label
+                %span
+                = level.titleize
+
+:javascript
+  $('#sub-domain-input').on('keyup', function(){
+    var typed_letters = $(this).val();
+    $('#sub-domain-helper-text').text('Domain: ' + typed_letters + '.clickxmail.com');
+  });

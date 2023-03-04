@@ -1,0 +1,27 @@
+- total_amount = @plan.amount
+%p
+  %h4
+    New subscription recieved:
+    = "#{@payment_link.name}"
+
+%p
+  Plan Description:
+  = "#{@plan.description_line_1}, #{@plan.description_line_1}"
+
+%p
+  Amount :
+  = number_to_currency(@plan.amount)
+
+- if @plan.pay_with_implementation_fee
+  - total_amount += @plan.implementation_fee
+  %p
+    Implementation Fee:
+    = number_to_currency(@plan.implementation_fee)
+
+%p
+  Total Amount:
+  = number_to_currency(total_amount)
+
+%p
+  Name :
+  = @payment_link.name

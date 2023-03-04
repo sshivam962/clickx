@@ -1,0 +1,68 @@
+- content_for :title do
+  Agency Demo | Clickx
+.uiv2
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1 Agency Demo
+  .clearfix
+  .content-card.p-md-5
+    
+
+    .archived_agencies_list
+      - @agencies.each do |agency|
+        %span{id: dom_id(agency)}
+          .clients-list
+            .clients-list__item.d-flex.flex-wrap
+              .col-stretch.clients-list__datas.pt-3
+                .d-flex
+                  .col-md-4.pl-0
+                    - if agency.logo.present?
+                      %img.mr-md{alt: 'logo', src: agency.logo, width: '50'}
+                    %span.name.blue
+                      = agency.name
+                  .col-sm-4.col-md-4
+                    %p
+                      = link_to agency.active_domain
+                    - if agency.support_email.present?
+                      %p
+                        Email:
+                        %a{href: "mailto:#{agency.support_email}"}= agency.support_email
+                  
+                  .col-md-1.p-n
+                    - agency.label_list.each do |label|
+                      %span.small.pr-sm
+                        %span.label.label-default
+                          = label
+              .col-auto.clients-list__actions.align-items-center
+                .btn-icon-list
+                  = select_tag 'login_as', options_from_collection_for_select(agency.users, 'id', 'first_name'), class: 'login_as_user form-control select-box width200px', include_blank: 'Login as user..', 'data-target' => agency.id, "data-title" => "View Dashboard"
+                  %a.btn-icon.btn-icon--login{"data-title" => "View Dashboard", href: "/switch_to_agency_user?user_id=#{agency.preview_users.first&.id}&agency_id=#{agency.id}", id: "view_dashboard_#{agency.id}" }
+                    %i.fa.fa-sign-in
+
+
+= hidden_field_tag :search_state, 'all'
+:javascript
+  $('#search_name').on("keyup", function() {
+    var name = $('#search_name').val().toLowerCase();
+    var search = false
+    if(name.length >= 3){
+      $('#search_state').val('search')
+      search = true
+    }else if(name.length == 0){
+      if($('#search_state').val() == 'search'){
+        $('#search_state').val('all')
+        search = true
+      }else{
+        search = false
+      }
+    }
+    if(search == true){
+      $.ajax({
+        url: "/s/agencies/archived",
+        type: 'get',
+        data: { name: name },
+        dataType: 'script',
+        async: false,
+        success:function(response){}
+      })
+    }
+  });

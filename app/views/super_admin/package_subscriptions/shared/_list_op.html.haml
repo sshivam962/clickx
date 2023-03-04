@@ -1,0 +1,44 @@
+#list-op-modal.modal.fade.ng-isolate-scope.ng-aside.horizontal.right.in{role: 'dialog', tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-dialog.modal-lg
+    .modal-content.bg-white.pl-4.pr-4
+      .modal-header
+        Onboarding Tasks
+        %a.close.pl-md{'data-dismiss': 'modal'}
+          %span ×
+      .modal-body
+        .col-md-12.p-n
+          %ul.nav.nav-tabs.nav-justified.op-tabs
+            - @procedures.each do |procedure|
+              %li{id: "procedure_tab_#{procedure.id}"}
+                %a.w100{"data-toggle" => "tab", :href => "#sec-#{procedure.id}"}
+                  = procedure.title
+        .col-md-12.p-n
+          .tab-content
+            - @procedures.each do |procedure|
+              .tab-pane.pt-n.p-md{id: "sec-#{procedure.id}"}
+                = form_for procedure, url: update_op_super_admin_package_subscription_path(subscription, category: category, onboarding_procedure_id: procedure.id), method: :patch, remote: true do |f|
+                  .pb-2
+                  %h2.fs-md.fs-sm-30
+                    = procedure.title
+                  %hr
+                  .row.onboarding-checklist
+                    .col-md-12
+                      %ul.timeline2
+                        = f.fields_for :onboarding_tasks do |ot|
+                          - task = ot.object
+                          %li.step
+                            .text-heading.line
+                              %h3.regsubt.pb-sm
+                                = task.title
+                            %p
+                              = task.description
+                            .panel.panel-default{:style => "visibility: visible; opacity: 1; display: block; transform: translateY(0px);"}
+                              .panel-body.item-card
+                                .row
+                                  .col-xs-12.col-sm-1.col-md-1.text-center
+                                    = ot.check_box :completed, class: 'mt-md'
+                                  .col-xs-12.col-sm-11.col-md-11
+                                    %h4.onboarding-checklist-title
+                                      = task.task
+                  .col-auto.mr-4
+                    = submit_tag 'Update Tasks', class: 'btn btn-sm btn-primary btn-lg'

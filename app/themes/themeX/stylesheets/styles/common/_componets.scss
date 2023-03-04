@@ -1,0 +1,506 @@
+$GENERAL_COLORS: (
+  'darkstone-blue': $DARKSTONE_BLUE,
+  'merigold': $MERIGOLD,
+  'light-haze': $LIGHT_HAZE,
+  'accent-red': $ACCENT_RED,
+  'accent-blue': $ACCENT_BLUE,
+  'accent-green': $ACCENT_GREEN
+);
+
+/** KEYWORD MODAL COMPONENTS **/
+.keyword-add-modal {
+  max-width: 60%;
+  .panel {
+    .panel-heading {
+      md-checkbox {
+        margin-bottom: 0;
+      }
+    }
+    .panel-body {
+      .list-unstyled {
+        .checkbox {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+/** END KEYWORD MODAL COMPONENTS **/
+
+/** CHECKBOX AND RADIO BUTTONS **/
+$checkbox_colors: (
+  'clickx-yellow': $CLICKX_YELLOW,
+  'clickx-blue': $CLICKX_BLUE,
+  'clickx-green': $CLICKX_GREEN,
+  'clickx-orange': $CLICKX_ORANGE,
+  'clickx-red': $CLICKX_RED,
+  'darkstone-blue': $DARKSTONE_BLUE,
+  'merigold': $MERIGOLD,
+  'light-haze': $LIGHT_HAZE,
+  'accent-red': $ACCENT_RED,
+  'accent-green': $ACCENT_GREEN,
+  'accent-blue': $ACCENT_BLUE,
+  'grey': $GREY_COLOR,
+  'white': $WHITE_COLOR
+);
+
+md-checkbox {
+  @each $name, $color in $checkbox_colors {
+    &.checkbox-#{$name}.md-checked {
+      .md-icon {
+        background: $color !important;
+        border-color: $color;
+      }
+    }
+  }
+}
+
+.checkbox {
+  @each $name, $color in $checkbox_colors {
+    &.checkbox-#{$name} {
+      input[type='checkbox']:checked + span.checkbox-material {
+        &:before {
+          //background-color: rgba($color,.84);
+        }
+        span.check {
+          border-color: $color;
+          color: $color;
+          &:before {
+            color: $color;
+          }
+        }
+      }
+      input[type='checkbox'] + span.check {
+        border-color: $name;
+      }
+    }
+  }
+}
+
+md-radio-button {
+  @each $name, $color in $checkbox_colors {
+    &.radio-#{$name}.md-checked {
+      .md-ink-ripple {
+        color: rgba($color, 0.86);
+      }
+      .md-on {
+        background-color: rgba($color, 0.87);
+      }
+      .md-off {
+        border-color: rgba($color, 0.87);
+      }
+    }
+  }
+}
+md-radio-group {
+  &.md-focused {
+    &:not(:empty) {
+      md-radio-button {
+        @each $name, $color in $checkbox_colors {
+          &.radio-#{$name}.md-checked {
+            .md-container {
+              &:before {
+                background-color: rgba($color, 0.26);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+/** END CHECKBOX AND RADIO BUTTON **/
+
+/** SPECIAL CLICKX MODAL MATERIAL **/
+$MODAL_BG_COLORS: (
+  'darkstone-blue': $DARKSTONE_BLUE,
+  'merigold': $MERIGOLD,
+  'light-haze': $LIGHT_HAZE,
+  'accent-red': $ACCENT_RED,
+  'accent-blue': $ACCENT_BLUE,
+  'accent-green': $ACCENT_GREEN
+);
+
+.clx-bg {
+  @each $name, $color in $MODAL_BG_COLORS {
+    &.clx-bg-#{$name} {
+      background: $color;
+    }
+  }
+}
+.panel {
+  .panel-heading.clx-bg {
+    @each $name, $color in $MODAL_BG_COLORS {
+      &.clx-bg-#{$name} {
+        background: $color;
+      }
+    }
+  }
+}
+/**
+* Remove repetitive lines once color fix
+**/
+.clx-modal {
+  .modal-title {
+    &:not(.regsubt) {
+      padding-bottom: 0;
+    }
+    font-size: 20px;
+  }
+  .close {
+    opacity: 1;
+    text-shadow: none;
+    font-size: 24px;
+  }
+  .modal-header {
+    min-height: 1px;
+    height: auto;
+  }
+  md-toolbar {
+    .md-button {
+      span.fa {
+        font-size: 20px;
+      }
+    }
+    &.spl-tool {
+      md-button {
+        font-size: 16px;
+      }
+    }
+  }
+  &.spl-modal {
+    .modal-header {
+      padding: 20px 15px;
+      &:after,
+      &:before {
+        content: '';
+        display: table;
+        width: 100%;
+        height: 0;
+        clear: both;
+      }
+    }
+  }
+  .modal-footer,
+  md-dialog-actions {
+    .btn + .btn {
+      margin-left: 5px;
+    }
+  }
+  @each $name, $color in $MODAL_BG_COLORS {
+    &.modal-#{$name}-bg {
+      .modal-header,
+      md-toolbar {
+        background: $color;
+        @if ($name== 'darkstone-blue') {
+          color: $WHITE_COLOR;
+        } @else if ($name == 'merigold') {
+          color: $GREY_COLOR;
+        } @else if ($name == 'light-haze') {
+          color: $DARKSTONE_BLUE;
+        } @else if ($name == 'accent-red') {
+          color: $WHITE_COLOR;
+        } @else if ($name == 'accent-blue') {
+          color: $WHITE_COLOR;
+        } @else if ($name == 'accent-green') {
+          color: $WHITE_COLOR;
+        }
+        .modal-title {
+          @if ($name== 'darkstone-blue') {
+            color: $WHITE_COLOR;
+          } @else if ($name == 'merigold') {
+            color: $WHITE_COLOR;
+          } @else if ($name == 'light-haze') {
+            color: $DARKSTONE_BLUE;
+          } @else if ($name == 'accent-red') {
+            color: $WHITE_COLOR;
+          } @else if ($name == 'accent-blue') {
+            color: $WHITE_COLOR;
+          } @else if ($name == 'accent-green') {
+            color: $WHITE_COLOR;
+          }
+        }
+        .close,
+        md-icon {
+          @if ($name== 'darkstone-blue') {
+            color: $WHITE_COLOR;
+          } @else if ($name == 'merigold') {
+            color: $WHITE_COLOR;
+          } @else if ($name == 'light-haze') {
+            color: $DARKSTONE_BLUE;
+          } @else if ($name == 'accent-red') {
+            color: $WHITE_COLOR;
+          } @else if ($name == 'accent-blue') {
+            color: $WHITE_COLOR;
+          } @else if ($name == 'accent-green') {
+            color: $WHITE_COLOR;
+          }
+        }
+      }
+    }
+  }
+  .modal-footer {
+    .btn {
+      margin-bottom: 0;
+    }
+  }
+  &.modal-compressed {
+    .form-group {
+      margin-top: 0;
+      margin-bottom: 10px;
+      label.control-label {
+        margin-top: 0;
+      }
+    }
+  }
+}
+/** END SPECIAL CLICKX MODAL MATERIAL **/
+
+/** BMD ACCORDION AND COLLAPSE **/
+
+.panel-group {
+  .bmd-accordion-panel {
+    .panel-heading {
+      a:after {
+        content: '\f107';
+      }
+    }
+    &.panel-open {
+      .panel-heading {
+        a:after {
+          content: '\f106';
+        }
+      }
+    }
+  }
+}
+/** END BMD ACCORDION AND COLLPASE **/
+
+/** CLICKX TABLE STYLE **/
+.clx-table {
+  tbody {
+    tr {
+      td {
+        vertical-align: middle;
+      }
+    }
+  }
+  &[class*='table-border-top'] {
+    thead {
+      tr.table-head {
+        th,
+        td {
+          border-top: 3px solid $BLACK_COLOR;
+        }
+      }
+    }
+  }
+  $TABLE_BG_COLORS: (
+    'darkstone-blue': $DARKSTONE_BLUE,
+    'merigold': $MERIGOLD,
+    'light-haze': $LIGHT_HAZE,
+    'accent-red': $ACCENT_RED,
+    'accent-blue': $ACCENT_BLUE,
+    'accent-green': $ACCENT_GREEN
+  );
+  @each $name, $color in $TABLE_BG_COLORS {
+    //Table Background Color
+    &.table-#{$name}-bg:not([class*='table-border-top-']) {
+      thead {
+        tr.table-head {
+          th {
+            background: $color;
+            border-color: $color;
+            @if (
+              $name==
+                'darkstone-blue' or
+                $name==
+                'accent-red' or
+                $name ==
+                'accent-blue' or
+                $name ==
+                'accent-green'
+            ) {
+              color: $WHITE_COLOR;
+            } @else if($name == 'light-haze') {
+              color: $GREY_COLOR;
+            } @else {
+              color: $BLACK_COLOR;
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          &.trans-color {
+            &:nth-child(2n + 1) {
+            }
+            &:nth-child(2n) {
+              td {
+                background: lighten($color, 70%);
+              }
+            }
+          }
+        }
+      }
+    }
+    // Table Border Top
+    &.table-border-top-#{$name} {
+      thead {
+        tr.table-head {
+          th {
+            border-color: $color transparent #eee transparent;
+            &:first-child {
+              border-left-color: #eee;
+            }
+            &:last-child {
+              border-right-color: #eee;
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            border-left-color: transparent;
+            border-right-color: transparent;
+            &:first-child {
+              border-left-color: #eee;
+            }
+            &:last-child {
+              border-right-color: #eee;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/** END CLICKX TABLE STYLE **/
+
+/** CLICKX POPOVER **/
+
+.popover {
+  color: $BLACK_COLOR;
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      display: block;
+      line-height: 23px;
+      font-size: 15px;
+    }
+  }
+  &.clx-popover {
+    &.clx-border-top {
+      border-top-width: 3px;
+      border-top-style: solid;
+      border-top-color: #eee;
+      @each $name, $color in $GENERAL_COLORS {
+        &.popover-#{$name}-border {
+          color: $color;
+          border-top-color: #{$color};
+          @if (
+            $name==
+              'accent-blue' or
+              $name==
+              'accent-red' or
+              $name==
+              'accent-blue'
+          ) {
+            color: $BLACK_COLOR;
+            a {
+              color: $color;
+            }
+          }
+        }
+      }
+    }
+    &.clx-bg {
+      @each $name, $color in $GENERAL_COLORS {
+        &.popover-#{$name}-bg {
+          .popover-title {
+            background: darken($color, 5%);
+            @if ($name== 'light-haze') {
+              color: $BLACK_COLOR;
+              a {
+                color: $BLACK_COLOR;
+              }
+            } @else if($name== 'darkstone-blue') {
+              color: $WHITE_COLOR;
+            } @else if(
+              $name==
+                'accent-green' or
+                $name==
+                'accent-blue' or
+                $name==
+                'accent-red'
+            )
+            {
+              color: $WHITE_COLOR;
+            }
+          }
+          .popover-content {
+            background: $color;
+            @if ($name== 'light-haze') {
+              color: $BLACK_COLOR;
+              a {
+                color: $BLACK_COLOR;
+              }
+            } @else if($name== 'darkstone-blue') {
+              color: $WHITE_COLOR;
+              a {
+                color: $MERIGOLD;
+              }
+            } @else if(
+              $name==
+                'accent-green' or
+                $name==
+                'accent-blue' or
+                $name==
+                'accent-red'
+            )
+            {
+              color: $WHITE_COLOR;
+              a {
+                color: $WHITE_COLOR;
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/** END CLICKX POPOVER **/
+
+/** AGENCY LOGO CONTAINER **/
+.fileinput-responsive {
+  .show-file {
+    height: auto !important;
+    padding: 15px;
+    .image-background {
+      width: 100% !important;
+      height: 0% !important;
+      padding: 0;
+      padding-bottom: 30% !important;
+      position: relative;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+    }
+    .over.pdt-25 {
+      visibility: hidden;
+      display: none;
+    }
+  }
+}
+
+/** END AGENCY LOGO CONTAINER **/
+
+/** CLICKX ANGULAR MATERIAL **/
+
+/** END CLICKX ANGULAR MATERIAL **/

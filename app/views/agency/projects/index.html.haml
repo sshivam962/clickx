@@ -1,0 +1,39 @@
+- content_for :title do
+  Project | Clickx
+- if @projects.blank?
+  .page-heading
+    %h1
+      %i.clickx-icon-db>
+      My Projects
+  .container-fluid
+    .pt-4
+      .d-table.bg-white.rounded.mx-auto.p-5.text-center.no-items-notification
+        .py-5
+        %img{ 'src': "#{ image_path 'projects/create-project.svg' }", style: "width:80px;" }
+        .pb-5
+        .fs-md.fw-b.pb-2.text-black Create Your First Project
+        %p.pb-4.fs-xxs You are almost done! start building awesome new projects.
+        %a.btn.btn-warning{href: new_agency_project_path} Post a Project
+        .py-5
+- else
+  .page-heading.d-md-flex.flex-wrap.justify-content-between
+    .col-auto.col-stretch
+      %h1
+        %i.clickx-icon-db>
+        My Projects
+    .col-auto.pt-4.pt-md-0
+      %a.btn.btn-warning{:href => new_agency_project_path} Post a Project
+  .container-fluid
+    .row.d-flex.flex-wrap
+      .col-lg-5.col-md-12.col-xs-12.project-listing-col.pb-5
+        .bg-sky-blue.border-blue.p-4.p-md-5.rounded.border-1
+          .d-flex.flex-wrap.justify-content-between.text-black.mb-4
+            .col-auto.fw-sb
+              Sort by: -
+              = select_tag :sort_by, options_for_select([["Date","date"],["Price","price"]]), class: 'sort-by-select text-blue'
+            .pagination_info.fs-14.text-muted
+              = render '/agency/projects/pagination_info'
+          .projects-listing.m-0
+            = render '/agency/projects/projects_list'
+      .col-lg-7.col-md-12.col-xs-12.pb-5#project_details
+

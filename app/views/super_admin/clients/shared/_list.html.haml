@@ -1,0 +1,42 @@
+- clients.each do |client|
+  .pt-n{id: dom_id(client)}
+    .clients-list
+      .clients-list__item.d-flex.flex-wrap
+        .col-stretch.clients-list__datas.pr-4.pt-3
+          .d-flex
+            .col-md-4.pl-0
+              %a.no-underline{href: edit_super_admin_client_path(client.id), data: {remote: true}}
+                %span.name
+                  = client.name
+            .col-md-3
+              %span.name.name2
+                = client.agency.name
+            .col-md-3
+              - client.label_list.each do |label|
+                %span.small
+                  %span.label.label-default= label
+            .col-md-2
+              %span
+                = days_since(client.last_logged_in)
+        .col-auto.clients-list__actions.align-items-center
+          .btn-icon-list
+            %a.btn-icon.btn-icon--login{"data-title" => "Login", href: switch_to_business_user_path(business_id: client.id)}
+              %i.fa.fa-sign-in
+            %a.btn-icon{"data-title" => "Activity", href: activities_super_admin_client_path(client.id)}
+              %i.fa.fa-clock-o
+            %a.btn-icon{"data-title" => "Weekly Report", href: weekly_report_preview_business_path(client.id), target: '_blank'}
+              %i.fa.fa-envelope-o
+            %a.btn-icon.btn-icon--edit{href: edit_super_admin_client_path(client.id), data: { toggle: 'tooltip', 'original-title' => 'Edit Client', remote: true}}
+              %i.fa.fa-edit
+            = link_to super_admin_client_path(client.id), method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn-icon btn-icon--delete' do
+              %i.fa.fa-archive
+      .clearfix
+    .clearfix
+    .spacer20
+.row
+  .col-md-4.col-lg-4.col-sm-12
+    = page_entries_info clients
+  .col-md-8.col-lg-8.col-sm-12.right_align
+    = will_paginate clients, params: {name: params[:name], label: params[:label]}
+:javascript
+  $('.pagination a').attr('data-remote', 'true');

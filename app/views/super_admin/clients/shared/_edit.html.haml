@@ -1,0 +1,134 @@
+#aside-modal-client-edit.modal.modal-client-details.fade.ng-aside.horizontal.right.in{style: 'display: none;', data: {backdrop: 'false'}}
+  .modal-dialog.modal-lg
+    .modal-top
+      %button.back-btn{onclick: 'hideModal()'}
+        %i.fa.fa-angle-left
+        Back
+    .modal-content
+      .p-0.pt-3.p-sm-3
+        .res-tab.bg-white
+          .res-tab__header
+            %ul.res-tab__nav
+              %li
+                %button.res-tab__nav-btn.active{:onclick => "showTab('tab_users', this)"} Users
+              %li
+                %button.res-tab__nav-btn{:onclick => "showTab('tab_client', this)"} Client Edit
+              %li
+                %button.res-tab__nav-btn{:onclick => "showTab('tab_locations', this)"} Locations
+              %li
+                %button.res-tab__nav-btn{:onclick => "showTab('tab_invitations', this)"} Invitations
+          .res-tab__body
+            #tab_users.res-tab__item.active
+              = render 'super_admin/clients/shared/tabs/users', client: client
+            #tab_client.res-tab__item
+              = render 'super_admin/clients/shared/tabs/edit', client: client
+            #tab_locations.res-tab__item
+              = render 'super_admin/clients/shared/tabs/locations', client: client
+            #tab_invitations.res-tab__item
+              = render 'super_admin/clients/shared/tabs/invitations', client: client
+
+  .modal-bg{onclick: 'hideModal()'}
+:javascript
+  $('#semrush_project_connection_button').click(function() {
+    var text = $('#semrush_project_connection_button').text().trim();
+    if(text == 'Disconnect') {
+      selection = confirm("This will erase all tracked data.")
+      if(selection == true) {
+        $.ajax({
+          type: 'post',
+          url: "/s/clients/#{client.id}/disconnect_semrush_project",
+          success: function(result){
+            $('#business_semrush_project_id').val('');
+            $('#business_semrush_project_id').prop('disabled', false);
+            $(".semrush-setup-button").html('Connect')
+          }
+        });
+      }
+    } else{
+      var input_value = $('#business_semrush_project_id').val();
+      $.ajax({
+        type: 'post',
+        url: "/s/clients/#{client.id}/connect_semrush_project",
+        data: {
+          semrush_project_id: input_value
+        },
+        success: function(result){
+          if(result.status == 200){
+            $('.project-id-error-text').html('');
+            $('#business_semrush_project_id').prop('disabled', true);
+            $('.project-id-message-text').html(result.message).fadeOut(5000);
+            $('.semrush-setup-button').html('Disconnect');
+          }else if(result.status == 'unprocessable_entity'){
+            $('.project-id-message-text').html(result.message);
+          }
+        }
+      });
+    }
+  });
+
+  $('#business_label_list').select2({
+    width: '100%',
+    multiple: true,
+    placeholder: 'Select Labels'
+  });
+
+  $('#client_logo_file').change(function(event){
+    var input = $(event.currentTarget);
+    var file = input[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+       image_base64 = e.target.result;
+       $('#current-campaign-image').attr("src", image_base64);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  $('.logo-upload-btn').click(function(event){
+    $("#client_logo_file").click();
+  })
+
+  $('.client-form-dummy-submit').click(function(event){
+    $('.client-form-actual-submit').click();
+  })
+
+  $(".show_on_check").change(function() {
+    required_input = $(this).data('required-input')
+    if(this.checked) {
+      $($(this).data('target')).removeClass('hidden')
+      $($(this).data('target') + ' input').attr('disabled', false)
+      if(required_input != '' || required_input != undefined){
+        $(required_input).attr('required', true)
+      }
+    }else{
+      $($(this).data('target')).addClass('hidden')
+      $($(this).data('target') + ' input').attr('disabled', true)
+      if(required_input != '' || required_input != undefined){
+        $(required_input).attr('required', false)
+      }
+    }
+  });
+
+  $('#adword_margin').keyup(function() {
+    margin = parseFloat($(this).val())
+    if(margin == ""){
+      $('#business_adword_cost_markup').val(0)
+    }else{
+      cost_val = (100 * margin) / (100 - margin);
+      $('#business_adword_cost_markup').val(cost_val)
+    }
+  })
+
+  $('#fb_ad_margin').keyup(function() {
+    margin = parseFloat($(this).val())
+    if(margin == ""){
+      $('#business_fb_ad_cost_markup').val(0)
+    }else{
+      cost_val = (100 * margin) / (100 - margin);
+      $('#business_fb_ad_cost_markup').val(cost_val)
+    }
+  })
+
+  $("#business_locale").change(function() {
+    city = $("#business_locale option:selected").text().split('-')[0].trim() || 'United States';
+    $('#business_target_city').val(city)
+  })

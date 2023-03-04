@@ -1,0 +1,196 @@
+= render 'stripe/assets'
+= content_for :title, 'Apply to Become a Partner'
+= hidden_field_tag :current_page, 'signup'
+.signup-wrapper
+  .form-wrapper
+    = form_tag agency_signup_path(tier: params[:tier]), method: :post, class: 'form-vertical clickx-parsley',"data-parsley-validate":"", id: 'signup_form' do
+      = hidden_field_tag :card_token
+      = hidden_field_tag :lm_data
+      = hidden_field_tag :referral_code, @referral_code
+      = hidden_field_tag :signup_link, @signup_link&.id
+      = hidden_field_tag :interval, @plan.interval
+      = hidden_field_tag 'plan', @plan.stripe_plan , required: true
+      = hidden_field_tag 'plan_price', @plan.amount, required: true
+      = hidden_field_tag :coupon_code
+      %input#tnc.hidden{checked: "checked", name: "checkboxs1", type: "checkbox", disabled: true, readonly: true}
+      .d-xl-flex.justify-content-between.mb-5
+        .col
+          %a{href: '#'}
+            = image_tag 'logo.png'
+          //%h3.m-0.mt-3 Apply To Become a Partner
+        .col.pt-4.pt-xl-0
+          = render 'agency/signups/shared/coupon'
+
+      - if raw(@signup_link&.title).present?
+        .input-card.input-card--gray.p-4.mb-5.dark
+          = raw(@signup_link.title)
+
+      #profile-section
+        %h4.m-0.mb-4 Create Your Profile
+
+        #profile_email_field.pb-3
+          - email = @signup_link&.email
+          %label.input-label{for: "user_email"} Email
+          .email-div.verifying-email
+            = email_field_tag 'user[email]', email, required: true, class: 'form-input form-input--email', readonly: email.present?
+            #email-verification-section
+              .verifying-email--success
+                .success-anime
+                  .check-anime
+                    %svg#Layer_1{"enable-background" => "new 0 0 161.2 161.2", :version => "1.1", :viewbox => "0 0 161.2 161.2", :x => "0px", "xml:space" => "preserve", :xmlns => "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink", :y => "0px"}
+                      %circle.path{:cx => "80.6", :cy => "80.6", :fill => "none", :r => "62.1", :stroke => "#BAD531", "stroke-miterlimit" => "10", "stroke-width" => "8"}
+                      %polyline.check{:fill => "none", :points => "113,52.8 \n                                74.1,108.4 48.2,86.4 ", :stroke => "#BAD531", "stroke-linecap" => "round", "stroke-miterlimit" => "10", "stroke-width" => "10"}
+              .verifying-email--loading
+                .loading
+                  .loading-anime
+                    %span
+                    %span
+              .signup-email-error.text-red
+                .d-flex
+                  .col.mt-3
+                    Email already exists! You can try logging in with this email or use the magic link in the email we sent you.
+                    %br
+                    %a.d-inline-block.pt-2{href: "/"} Login
+
+              .text-right
+                %input.btn-submit.email-check.mt-2{type: "button", value: "Go"}
+
+        #profile_other_fields
+          = render 'agency/signups/shared/profile'
+
+      #billing-section
+        %h4.m-0.mb-4 Billing Address
+        = render 'agency/signups/shared/billing_address'
+
+    #payment-section
+      = render 'agency/signups/shared/new_card'
+      .input-card.mb-4
+        %label.checkbox
+          \&#160;&#160;I agree to the
+          %a{href: "http://www.clickx.io/terms/", target: "_blank"} Terms
+          and understand this is a non-refundable payment.
+          %input#tnc{checked: "checked", name: "checkboxs1", type: "checkbox", disabled: true, readonly: true}
+          %span.checkmark
+
+      - if @signup_link.present?
+        = render 'agency/signups/shared/signup_link_purchase_summary'
+      - else
+        = render 'agency/signups/shared/purchase_summary'
+
+- if !@signup_link&.trial? && @coupon.blank?
+  :javascript
+    var input = document.querySelector('.input-promocode');
+    var el = document.querySelector('.promocode-btn');
+    var inputWrap = document.querySelector('.promocode');
+
+    input.addEventListener('input', function(e){
+      if(this.value.length >= 6){
+        inputWrap.classList.add('promocode--active');
+      } else {
+        inputWrap.classList.remove('promocode--active');
+      }
+    });
+
+:javascript
+  $(document).ready(function(){
+    var lm_data = lm.getReferralData();
+    $('#lm_data').val(lm_data);
+  });
+
+  $(document).on('click', '.agency_signup_submit',function() {
+    $('.checkout_create_card_submit').click()
+  })
+
+  $('#apply_coupon').on('click', function(){
+    var plan_price = $("input[name='plan_price'").val()
+    var coupon_code = $("input[name='coupon_code_input']").val()
+    $.ajax({
+      url: '/a/check_coupon',
+      method: "GET",
+      data: {
+        coupon_code: coupon_code,
+        plan_price: plan_price
+      },
+      headers: {"X-Requested-With": "XMLHttpRequest"},
+      success: function(resp){
+        $('#coupon_applied').text(resp.message)
+        if(resp.code == 200){
+          $('#coupon_code').val(coupon_code)
+          total_price = parseFloat($('#total_price').val())
+          discount = resp.discount
+          display_price = total_price - discount
+
+          $('#coupon_code_input').attr('readonly', true)
+          $('#apply_coupon').addClass('hidden')
+          $('#remove_coupon').removeClass('hidden')
+
+          $('#coupon_offer').text(resp.offer_msg)
+
+          $('.coupon_applied_text').removeClass('hidden')
+          $('.coupon_applied_text .charge_coupon_text').html('Total Charge with coupon applied: ' + '$' + parseFloat(display_price, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString())
+        }else{
+          $('#coupon_code').val('')
+        }
+      }
+    });
+  })
+
+  $('#remove_coupon').on('click', function(){
+    $('#coupon_code_input').removeAttr('readonly')
+    $('#coupon_code_input').val('')
+    $('#coupon_code').val('')
+    $('#apply_coupon').removeClass('hidden')
+    $('#remove_coupon').addClass('hidden')
+    $('.coupon_applied_text').addClass('hidden')
+    $('.coupon_applied_text .current_price_text').html('')
+    $('#coupon_applied').text('')
+    $('#coupon_offer').text('')
+  })
+
+  $('.email-check').on('click', function(){
+    if(!$("#signup_form").valid()){
+      return false;
+    }
+    $('.email-div').removeClass('show-error')
+    $('.form-input--email').removeClass("error");
+    $('.verifying-email--loading').fadeIn();
+
+    var email = $('#user_email').val()
+    $.ajax({
+      url: '/pu/check_email',
+      method: "POST",
+      data: {
+        email: email
+      },
+      headers: {"X-CSRF-Token": $('meta[name="csrf-token"]').attr('content')},
+      success: function(resp){
+        if(resp.exists){
+          setTimeout(function () {
+              $('.verifying-email--loading').fadeOut();
+              $('.email-div').remove('verifying-email')
+              $('.email-div').addClass('show-error')
+              $('.form-input--email').addClass("error");
+          }, 1200);
+        }else{
+          setTimeout(function () {
+            $('.verifying-email--loading').fadeOut();
+            $('.verifying-email--success').fadeIn();
+          }, 500);
+
+          setTimeout(function () {
+            $('#email-verification-section').fadeOut();
+            $('#user_email').attr('readonly', true);
+            $('#profile_other_fields').fadeIn();
+            $('#billing-section').fadeIn();
+            $('#payment-section').fadeIn();
+            $('#user_first_name').focus()
+          }, 2000);
+        }
+      }
+    });
+  })
+
+:css
+  #profile_other_fields, #billing-section, #payment-section{
+    display: none;
+  }

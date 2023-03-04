@@ -1,0 +1,17 @@
+%html
+  %head
+    %h1.align-center Competitors
+    = stylesheet_link_tag wicked_pdf_asset_base64('wicked_pdf')
+  %body
+    %table-responsive
+      %table.table.table-bordered.table-vam.table-left
+        %thead
+          %th Logo
+          %th Competitor
+        %tbody
+          - competitions.each do |competition|
+            %tr
+              %td.align-center.image
+                = wicked_pdf_image_tag competition.logo
+              %td.align-center
+                = competition.name

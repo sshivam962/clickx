@@ -1,0 +1,47 @@
+swagger: '2.0'
+info:
+  title: Clickx
+  description: Clickx API
+  version: 1.0.0
+host: 'localhost:3000'
+schemes:
+  - http
+basePath: /api/v1
+produces:
+  - application/json
+securityDefinitions:
+  oauth:
+    type: oauth2
+    flow: accessCode
+    tokenUrl:
+      localhost:3000/oauth/authorize?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=code
+    authorizationUrl: >-
+      localhost:3000/oauth/authorize?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=token
+    scopes:
+      basic: |
+        to read any and all data related to twitter
+security:
+  - oauth:
+      - basic
+paths:
+  /users:
+    get:
+      summary: users list
+      description: get all users
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/user'
+        '401':
+          description: Unauthorized
+definitions:
+  user:
+    type: object
+    properties:
+      name:
+        type: string

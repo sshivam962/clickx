@@ -1,0 +1,6 @@
+json.impressions        report[:impressions]
+json.interactions       report[:interactions]
+json.interaction_rate   report[:interaction_rate]
+json.avg_cost           report[:avg_cost]
+json.cost               report[:cost]
+json.conversion         report[:conversion]

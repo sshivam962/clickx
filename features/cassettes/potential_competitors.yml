@@ -1,0 +1,203 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.rebrandly.com/v1/domains
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type,Accept,X-Access-Token,X-Key,apikey,Authorization,Team
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Fri, 24 Nov 2017 06:44:16 GMT
+      Etag:
+      - W/"c-dAuDFQrdjS3hezqxDTNgW7AOlYk"
+      Vary:
+      - Accept-Encoding
+      X-Powered-By:
+      - Express
+      Content-Length:
+      - '12'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: Unauthorized
+    http_version: 
+  recorded_at: Fri, 24 Nov 2017 06:44:16 GMT
+- request:
+    method: get
+    uri: https://company-stream.clearbit.com/v2/companies/find?domain=sampletest.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 24 Nov 2017 06:45:24 GMT
+      Vary:
+      - Accept-Encoding
+      X-Api-Version:
+      - '2017-09-12'
+      Content-Length:
+      - '137'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "error": {
+            "type": "auth_required",
+            "message": "Authentication is required for this action. Sign up at https://clearbit.com"
+          }
+        }
+    http_version: 
+  recorded_at: Fri, 24 Nov 2017 06:45:24 GMT
+- request:
+    method: get
+    uri: http://api.majestic.com/api/json?Count=5&app_api_key&cmd=GetIndexItemInfo&datasource=fresh&item0=sampletest.com&items=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 24 Nov 2017 06:45:24 GMT
+      Server:
+      - Apache
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Code":"FailedRequestViaAPI","ErrorMessage":"Access to this report
+        requires user to be logged in.","FullError":""}'
+    http_version: 
+  recorded_at: Fri, 24 Nov 2017 06:45:25 GMT
+- request:
+    method: get
+    uri: http://api.semrush.com/?database=us&display_limit=10&display_sort=tr_desc&domain=example.com&export_columns=Dn,Cr,Np,Or,Ot,Oc&key=02536abb9c64d14aff5633ead5e02020&type=domain_organic_organic
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 24 Nov 2017 06:48:15 GMT
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Expires:
+      - Fri, 24 Nov 2017 07:48:11 GMT
+      Cache-Control:
+      - max-age=3600
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: "Domain;Competitor Relevance;Common Keywords;Organic Keywords;Organic
+        Traffic;Organic Cost\r\ngoogle.com;0.09;56;234335041;605056833;1267689498\r\nwikipedia.org;0.07;41;83103881;1647841122;1618529687\r\nyoutube.com;0.06;38;141655480;1256933163;778808155\r\nfacebook.com;0.03;21;63079133;734454259;491643115\r\ngithub.com;0.03;19;6329216;12235451;17971428\r\niana.org;0.03;17;52570;140212;296036\r\npinterest.com;0.03;20;67893243;168303215;111730612\r\ncrichd.com;0.02;13;17689;114694;171425\r\ncrictime.com;0.02;15;11395;90171;115059\r\ndigitalocean.com;0.02;14;298765;565025;1334747"
+    http_version: 
+  recorded_at: Fri, 24 Nov 2017 06:48:15 GMT
+- request:
+    method: get
+    uri: http://api.semrush.com/?database=us&display_limit=10&display_sort=tr_desc&domain=example.com&export_columns=Dn,Cr,Np,Ad,At,Ac&key=02536abb9c64d14aff5633ead5e02020&type=domain_adwords_adwords
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 24 Nov 2017 06:48:16 GMT
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Expires:
+      - Fri, 24 Nov 2017 07:48:12 GMT
+      Cache-Control:
+      - max-age=3600
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: "Domain;Competitor Relevance;Common Keywords;Adwords Keywords;Adwords
+        Traffic;Adwords Cost\r\ngoogle.com;1.59;1693;460438;4828622;3960830\r\ninformationvine.com;0.15;163;5182200;42403095;46775878\r\namazon.com;0.11;120;11058852;67661413;59799507\r\nbetterhelp.com;0.11;124;39207;85628;277663\r\nmapquest.com;0.05;57;348101;970117;1145556\r\nabout.com;0.03;42;7505090;23447728;42821049\r\nalhea.com;0.03;37;753021;3639980;3247094\r\nbestdeals.today;0.03;41;9158263;147023418;146325262\r\nguidetoonlineschools.com;0.03;32;3813;5181;26751\r\nnetworktherapy.com;0.03;39;2299;8549;37502"
+    http_version: 
+  recorded_at: Fri, 24 Nov 2017 06:48:16 GMT
+recorded_with: VCR 3.0.3

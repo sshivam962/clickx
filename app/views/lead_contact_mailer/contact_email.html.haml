@@ -1,0 +1,8 @@
+= raw(@mail_content)
+%br
+%br
+
+%p{style: "font-family:'Segoe UI','Open Sans',Arial,sans-serif;font-size:x-small;padding-left:4px;padding-right:4px;"}
+  This email was sent to you personally, however, if you don't want to hear from me, please let me know. You can
+  = link_to 'opt-out', unsubscribe_url(@contact.encrypted_email), target: '_blank'
+  here

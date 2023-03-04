@@ -1,0 +1,41 @@
+- content_for :title do
+  Invite User | Clickx
+.page-content.ui-2020
+  .page-heading.no-margin-bottom
+    %h1
+      %i.clickx-icon-Local-Listings.title-icon>
+      Invite New User
+
+  .container-fluid
+    .row
+      .col-xs-12
+        .panel.panel-default
+          = form_for(@user, as: :user, url: invitation_path(@user), html: {method: :post}) do |f|
+            = f.hidden_field :ownable_id
+            = f.hidden_field :ownable_type
+            = f.hidden_field :role
+            .panel-heading
+              %h2 User Details
+            .panel-body
+              .col-md-6
+                .form-group.no-margin-top
+                  %label.control-label{for: "email"} Email
+                  = f.email_field :email, class: 'form-control login display-inline', placeholder: 'Email', autofocus: true, required: true
+              .col-md-6
+                .form-group.no-margin-top
+                  %label.control-label{for: "first_name"} First Name
+                  = f.text_field :first_name, class: 'form-control login display-inline', placeholder: 'First Name', autofocus: true, required: true
+              .col-md-6
+                .form-group.no-margin-top
+                  %label.control-label{for: "last_name"} Last Name
+                  = f.text_field :last_name, class: 'form-control login display-inline', placeholder: 'Last Name', autofocus: true, required: true
+              .col-md-6
+                .form-group.no-margin-top
+                  %label.control-label Role
+                  .custom-select
+                    = f.select :role, company_roles_collection, {prompt: 'Select a Role'}, class: 'form-control login display-inline', required: true
+            .panel-footer
+              .col-md-12
+                %button#invite_new_user.btn.btn-success.btn-raised.btn-label.btn-md
+                  .ripple-container
+                  Send An Invitation

@@ -1,0 +1,105 @@
+.template-preview.m-b-20{ 'layout': 'row', 'layout-align': 'center center' }
+  %social-magnet-preview
+.col-sm-6
+  .panel.panel-default.collapsible-panel{ 'ng-init': 'show_button_settings = true' }
+    .panel-heading{ 'ng-click': 'show_button_settings = !show_button_settings' }
+      Settings
+      %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Customize the text you want to display in your social magnet to persuade readers for clicking on your call to action.'}
+      %span.pull-right
+        %i.fa{ 'ng-class': ' show_button_settings ? "fa-chevron-down" : "fa-chevron-right" ' }
+    .panel-body{ 'ng-if': 'show_button_settings' }
+      %md-list
+        %md-list-item
+          %md-input-container.md-block{ 'flex': '' }
+            %label Brand Name
+            %input{ 'ng-model': 'new_template.brand_name', 'required': '' }
+        %md-list-item
+          %md-input-container.md-block{ 'flex': '' }
+            %label Content
+            %input{ 'ng-model': 'new_template.content' }
+        %md-list-item
+          %md-input-container.md-block{ 'flex': '' }
+            %label Button Text
+            %input{ 'ng-model': 'new_template.button_text', 'required': '' }
+        %md-list-item
+          %md-input-container.md-block{ 'flex': '' }
+            %label Button URL
+            %input{ 'ng-model': 'new_template.button_link', 'required': '' }
+      .col-sm-12
+        .form-group.mt-n{ 'ng-click': 'uploadBrand("new_template", ".importBrand")' }
+          %label
+            %input.importBrand.hidden{ 'name': 'file', 'type': 'file' }
+            .btn.btn-raised.btn-primary.btn-label
+              %span
+                %i.fa.fa-upload
+              %span
+                {{ (new_template.logo_url == default_logo) ? 'Upload Brand Logo': 'Change Logo' }}
+        .upload-size-warning{ 'layout': 'row', 'layout-align': 'left top' }
+          .alert.alert-info.small
+            %span.fa.fa-warning
+            Upload image size less than 2 MB and image resolution less than 640X640.
+.col-sm-6
+  .panel.panel-default.collapsible-panel{ 'ng-init': 'show_button_customization = true' }
+    .panel-heading{ 'ng-click': 'show_button_customization = !show_button_customization' }
+      Customize
+      %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Customize the visual aspects of the call to action button.'}
+      %span.pull-right
+        %i.fa{ 'ng-class': ' show_button_customization ? "fa-chevron-down" : "fa-chevron-right" ' }
+    .panel-body{ 'ng-if': 'show_button_customization' }
+      %md-list
+        %md-list-item
+          %md-input-container.md-block.form-group{ 'flex': '' }
+            %label.control-label.mt-n Button Color
+            %input.form-control{ 'type': 'text', 'minicolors': '',
+              'ng-model': "new_template.style.button['background-color']" }
+        %md-list-item
+          %md-input-container.md-block.form-group{ 'flex': '' }
+            %label.control-label.mt-n Button Text Color
+            %input.form-control{ 'type': 'text', 'minicolors': '',
+              'ng-model': 'new_template.style.button.color' }
+        %md-list-item
+          %md-input-container.md-block{ 'flex': '' }
+            %label.control-label.mt-n Button Font Size
+            %md-select{ 'md-on-open': '', 'ng-model': 'new_template.style.button.fontSize' }
+              %md-option{ 'value': '12' }
+                %h6 Small
+              %md-option{ 'value': '18' }
+                %h5 Medium
+              %md-option{ 'value': '24' }
+                %h4 Large
+        %md-list-item
+          %md-input-container.md-block.form-group{ 'flex': '' }
+            %label.control-label.mt-n Button Vertical Padding ({{new_template.style.button.verticalPadding}}px)
+            %input.form-control{ type: 'range', 'ng-model': 'new_template.style.button.verticalPadding',
+            placeholder: 'Button Vertical Padding', min: 0, max: 30 }
+        %md-list-item
+          %md-input-container.md-block.form-group{ 'flex': '' }
+            %label.control-label.mt-n Button Horizontal Padding ({{new_template.style.button.horizontalPadding}}px)
+            %input.form-control{ type: 'range', 'ng-model': 'new_template.style.button.horizontalPadding',
+            placeholder: 'Button Horizontal Padding', min: 0, max: 10 }
+        %md-list-item
+          %md-input-container.md-block.form-group{ 'flex': '' }
+            %label.control-label.mt-n Button Width ({{new_template.style.button.widtH}}px)
+            %input.form-control{ type: 'range', 'ng-model': 'new_template.style.button.widtH',
+            placeholder: 'Button Width', min: 100, max:335 }
+        %md-list-item
+          %md-input-container.md-block.form-group{ 'flex': '' }
+            %label.control-label.mt-n Content Text Color
+            %input.form-control{ 'type': 'text', 'minicolors': '',
+              'ng-model': 'new_template.style.content.color' }
+        %md-list-item
+          %md-input-container.md-block{ 'flex': '' }
+            %label.control-label.mt-n Content Font Size
+            %md-select{ 'md-on-open': '', 'ng-model': 'new_template.style.content.fontSize' }
+              %md-option{ 'value': '12' }
+                %h6 Small
+              %md-option{ 'value': '18' }
+                %h5 Medium
+              %md-option{ 'value': '24' }
+                %h4 Large
+.col-sm-12.text-right
+  %a.btn.btn-danger.btn-raised.btn-label{ 'ng-click': 'current_template ? confirmDelete("Social Magnet Template") : initTemplate();', 'title': 'Reset to default customization.' }
+    %span
+      {{ current_template ? 'Delete' : 'Reset' }}
+  %a.btn.btn-success.btn-raised.btn-label{ 'ng-click': 'current_template ? updateTemplate(new_template) : createNewTemplate(new_template);', 'title': 'Create a new call to action' }
+    {{ current_template ? 'Update' : 'Create' }}

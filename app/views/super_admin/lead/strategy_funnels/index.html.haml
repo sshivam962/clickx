@@ -1,0 +1,29 @@
+- content_for :title do
+  Strategy Funnels | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1
+      Strategy Funnels
+.locations
+  %div{"data-widget-group" => "group1"}
+    .row
+      .col-xs-12
+        %ul.nav.nav-tabs.nav-justified.funnel-tabs
+          - Lead::StrategyFunnel.categories.each do |c_value, c_key|
+            %li
+              %a.w100.h50{id: "funnel-tab-#{c_key}", "data-toggle" => "tab", :href => "#sec-#{c_key}"}= c_value
+      .col-md-12
+        .tab-content
+          - Lead::StrategyFunnel.categories.each do |c_value, c_key|
+            .tab-pane.pt-n.p-md{id: "sec-#{c_key}"}
+              .panel-group.mt-md
+                .row
+                  .col-md-12.mb-md.mt-sm
+                    .new-funnel-form
+                      = render 'form', category: c_value, c_key: c_key
+
+- active_tab = params[:tab].presence || 'facebook_leadgen'
+:javascript
+  $(document).ready(function(){
+    $("#funnel-tab-#{active_tab}").click()
+  });

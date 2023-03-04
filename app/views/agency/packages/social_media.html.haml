@@ -1,0 +1,744 @@
+- content_for :title do
+  Brand Building & Social Media | Clickx
+.ui-2020.package-page
+  .page-content
+    .page-heading.pt-md.pb-md
+      %h1
+        .d-flex.justify-content-between
+          .col-auto
+            %i.clickx-icon-SocialMedia
+            Brand Building & Social Media
+          = render 'agency/packages/shared/msrp_percentage'
+    .container-fluid
+      -# .f-s-28.info.table-plan--heading Brand Building
+      .table-responsive.table-plan.text-center
+        %table.table.table-hover.mb-n.overflow-h.plan-preloader.pt-xxl
+          %thead
+            %tr
+              %th.col-label{"vertical-align" => "top"}
+                .pt-col-content
+                  -# %h2.pt-header-caption.pt-header-caption--title.text-left Brand Building
+              - @plans.order(:amount).each do |plan|
+                %th.col-package
+                  .pt-col-content
+                    - if plan.title == 'Pro'
+                      .best-seller-badge.fw-m Best Seller
+                    .pt-header-caption= plan.title
+                    .pt-header-price
+                      = in_currency(plan.amount, current_agency.display_currency)
+                      - if plan.interval.eql?('month')
+                        %span> /mo
+                        = hidden_field_tag(:hidden_plan_amount, plan.amount, class: 'hidden_plan_amount', id: plan.key)
+                      %span.plan-label
+                        - @msrp_class = "msrp_#{plan.key}"
+                        %span.d-inline-block{:class => @msrp_class} MSRP: #{in_currency(plan.amount + (plan.amount * 0.5), current_agency.display_currency)}
+                    .mt-4
+                      %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'social_media', plan: plan.key)}
+                        Get Started
+          %tbody
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Implementation Fee
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              / %td.col-small
+              /   .pt-col-content{"data-label" => "Implementation Fee"}
+              /     %span
+              /       #{in_currency(250, current_agency.display_currency)} One Time
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content{"data-label" => "Implementation Fee"}
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content{"data-label" => "Implementation Fee"}
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content{"data-label" => "Implementation Fee"}
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    100% Customized Social Strategy
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We take your clients' entire business into consideration when creating the social strategy and content that will yield the best results.
+              / %td
+              /   .pt-col-content{"data-label" => "100% Customized Social Strategy"}
+              /     %span
+              /       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "100% Customized Social Strategy"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We take your clients' entire business into consideration when creating the social strategy and content that will yield the best results.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "100% Customized Social Strategy"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We take your clients' entire business into consideration when creating the social strategy and content that will yield the best results.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "100% Customized Social Strategy"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We take your clients' entire business into consideration when creating the social strategy and content that will yield the best results.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Dedicated Campaign Manager
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext You will have an account manager as the main POC to discuss campaign content creation and review monthly reports.
+              / %td
+              /   .pt-col-content{"data-label" => "Dedicated Campaign Manager"}
+              /     %span
+              /       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Campaign Manager"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext You will have an account manager as the main POC to discuss campaign content creation and review monthly reports.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Campaign Manager"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext You will have an account manager as the main POC to discuss campaign content creation and review monthly reports.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Campaign Manager"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext You will have an account manager as the main POC to discuss campaign content creation and review monthly reports.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Dedicated Content Specialists
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The dedicated content specialists will work on social channels to create content that boosts their digital presence while building a strong brand message.
+              / %td
+              /   .pt-col-content{"data-label" => "Dedicated Content Specialists"}
+              /     %span
+              /       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Content Specialists"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The dedicated content specialists will work on social channels to create content that boosts their digital presence while building a strong brand message.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Content Specialists"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The dedicated content specialists will work on social channels to create content that boosts their digital presence while building a strong brand message.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Content Specialists"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The dedicated content specialists will work on social channels to create content that boosts their digital presence while building a strong brand message.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Dedicated Design Team
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The design team will work on creatives that are cohesive with the brand and capture the attention of their audiences.
+              / %td
+              /   .pt-col-content{"data-label" => "Dedicated Design Team"}
+              /     %span
+              /       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Design Team"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The design team will work on creatives that are cohesive with the brand and capture the attention of their audiences.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Design Team"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The design team will work on creatives that are cohesive with the brand and capture the attention of their audiences.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Design Team"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The design team will work on creatives that are cohesive with the brand and capture the attention of their audiences.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Assess Growth Objectives
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll set clear benchmarks that include: follower count, likes, comments, and other important social metrics to grow online presence.
+              / %td
+              /   .pt-col-content{"data-label" => "Assess Growth Objectives"}
+              /     %span
+              /       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Assess Growth Objectives"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll set clear benchmarks that include: follower count, likes, comments, and other important social metrics to grow online presence.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Assess Growth Objectives"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll set clear benchmarks that include: follower count, likes, comments, and other important social metrics to grow online presence.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Assess Growth Objectives"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll set clear benchmarks that include: follower count, likes, comments, and other important social metrics to grow online presence.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Social Messaging Strategy
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll assess the brand's voice, tone, how we interact with customers, and the goals of each post on a weekly basis.
+              / %td
+              /   .pt-col-content{"data-label" => "Social Messaging Strategy"}
+              /     %span
+              /       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Social Messaging Strategy"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll assess the brand's voice, tone, how we interact with customers, and the goals of each post on a weekly basis.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Social Messaging Strategy"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll assess the brand's voice, tone, how we interact with customers, and the goals of each post on a weekly basis.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Social Messaging Strategy"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll assess the brand's voice, tone, how we interact with customers, and the goals of each post on a weekly basis.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Support for Individual Page or Group Available
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Agency will jumpstart/join client page/group to encourage engagement.
+              / %td
+              /   .pt-col-content{"data-label" => "Support for Individual Page or Group Available"}
+              /     %span
+              /       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Support for Individual Page or Group Available"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Agency will jumpstart/join client page/group to encourage engagement.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Support for Individual Page or Group Available"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Agency will jumpstart/join client page/group to encourage engagement.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Support for Individual Page or Group Available"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Agency will jumpstart/join client page/group to encourage engagement.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Content Creation
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Content will be created using client provided assets and/or repurposing existing website content.
+              / %td
+              /   .pt-col-content{"data-label" => "Content Creation"}
+              /     %span
+              /       Up to 8 Posts
+              /       %br/
+              /       Up to 6 Custom Graphics
+              /       each month
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext Content will be created using client provided assets and/or repurposing existing website content.
+              %td
+                .pt-col-content{"data-label" => "Content Creation"}
+                  %span
+                    Up to 16 Posts
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Content will be created using client provided assets and/or repurposing existing website content.
+              %td
+                .pt-col-content{"data-label" => "Content Creation"}
+                  %span
+                    Up to 20 Posts
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Content will be created using client provided assets and/or repurposing existing website content.
+              %td
+                .pt-col-content{"data-label" => "Content Creation"}
+                  %span
+                    Up to 30 Posts
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Content will be created using client provided assets and/or repurposing existing website content.
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Content Publishing
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Using scheduling tools, our team will load approved posts for automated publishing.
+              / %td
+              /   .pt-col-content{"data-label" => "Content Publishing"}
+              /     %span
+              /       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Content Publishing"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Using scheduling tools, our team will load approved posts for automated publishing.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Content Publishing"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Using scheduling tools, our team will load approved posts for automated publishing.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Content Publishing"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Using scheduling tools, our team will load approved posts for automated publishing.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Managing Social Platforms
+              / %td
+              /   .pt-col-content{"data-label" => "Managing Social Platforms"}
+              /     %span
+              /       Manage up to 1 Social Platform
+              /       %br
+              /       (Pick 1)
+              /       %br/
+              /       %small Facebook, Instagram, LinkedIn
+              %td
+                .pt-col-content{"data-label" => "Managing Social Platforms"}
+                  %span
+                    Manage up to 1 Social Platform
+                    %br
+                    (Pick 1)
+                    %br/
+                    %small Facebook, Instagram, LinkedIn
+              %td
+                .pt-col-content{"data-label" => "Managing Social Platforms"}
+                  %span
+                    Manage up to 2 Social Platform
+                    %br
+                    (Pick up to 2)
+                    %br/
+                    %small Facebook, Instagram, LinkedIn
+              %td
+                .pt-col-content{"data-label" => "Managing Social Platforms"}
+                  %span
+                    Manage up to 3 Social Platform
+                    %br
+                    (Pick up to 3)
+                    %br/
+                    %small Facebook, Instagram, LinkedIn
+            -# %tr
+            -#   %td.col-label.text-left
+            -#     .pt-col-content
+            -#       %span Generic Messenger Support
+            -#   %td
+            -#     .pt-col-content{"data-label" => "Generic Messenger Support"}
+            -#       %span
+            -#         %i.material-icons.text-success.tick-r.f-s-20 check
+            -#   %td
+            -#     .pt-col-content{"data-label" => "Generic Messenger Support"}
+            -#       %span
+            -#         %i.material-icons.text-success.tick-r.f-s-20 check
+            -#   %td
+            -#     .pt-col-content{"data-label" => "Generic Messenger Support"}
+            -#       %span
+            -#         %i.material-icons.text-success.tick-r.f-s-20 check
+            -#   %td
+            -#     .pt-col-content{"data-label" => "Generic Messenger Support"}
+            -#       %span
+            -#         %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Hashtag Research & Implementation
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll monitor what’s trending and use best practices to make sure each post is seen.
+              / %td
+              /   .pt-col-content{"data-label" => "Hashtag Research & Implementation"}
+              /     %span
+              /       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Hashtag Research & Implementation"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll monitor what’s trending and use best practices to make sure each post is seen.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Hashtag Research & Implementation"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll monitor what’s trending and use best practices to make sure each post is seen.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Hashtag Research & Implementation"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll monitor what’s trending and use best practices to make sure each post is seen.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Caption Creation
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll create captions that align with your clients brand and result in the most interactions from their followers and customers.
+              / %td
+              /   .pt-col-content{"data-label" => "Caption Creation"}
+              /     %span
+              /       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Caption Creation"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll create captions that align with your clients brand and result in the most interactions from their followers and customers.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Caption Creation"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll create captions that align with your clients brand and result in the most interactions from their followers and customers.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Caption Creation"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll create captions that align with your clients brand and result in the most interactions from their followers and customers.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Month to Month Commitment
+              / %td
+              /   .pt-col-content{"data-label" => "Month to Month Commitment"}
+              /     %span
+              /       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Month to Month Commitment"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Month to Month Commitment"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Month to Month Commitment"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Social Media Coaching
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Provide best practices and implement them into their social media strategy.
+              / %td
+              /   .pt-col-content{"data-label" => "Social Media Coaching"}
+              /     %span
+              /       %i.material-icons.text-success.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Social Media Coaching"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Provide best practices and implement them into their social media strategy.
+                    %i.material-icons.text-success.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Social Media Coaching"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Provide best practices and implement them into their social media strategy.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Social Media Coaching"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Provide best practices and implement them into their social media strategy.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Quarterly New Cover Image
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll update their social media platform cover images based on quarterly goals or new launches.
+              / %td
+              /   .pt-col-content{"data-label" => "Quarterly New Cover Image"}
+              /     %span
+              /       %i.material-icons.text-success.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Quarterly New Cover Image"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll update their social media platform cover images based on quarterly goals or new launches.
+                    %i.material-icons.text-success.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Quarterly New Cover Image"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll update their social media platform cover images based on quarterly goals or new launches.
+                    %i.material-icons.text-success.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Quarterly New Cover Image"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll update their social media platform cover images based on quarterly goals or new launches.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Advanced Competitive Research
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll extract all of the important information about their competitors to build a strategy that is a cut above.
+              / %td
+              /   .pt-col-content{"data-label" => "Advanced Competitive Research"}
+              /     %span
+              /       %i.material-icons.text-success.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Advanced Competitive Research"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll extract all of the important information about their competitors to build a strategy that is a cut above.
+                    %i.material-icons.text-success.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Advanced Competitive Research"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll extract all of the important information about their competitors to build a strategy that is a cut above.
+                    %i.material-icons.text-success.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Advanced Competitive Research"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We’ll extract all of the important information about their competitors to build a strategy that is a cut above.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Analyze Competitor's Growth Strategies
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Will continue to monitor identified competitors for growth trends on a monthly basis.
+              / %td
+              /   .pt-col-content{"data-label" => "Analyze Competitor's Growth Strategies"}
+              /     %span
+              /       %i.material-icons.text-success.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Analyze Competitor's Growth Strategies"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Will continue to monitor identified competitors for growth trends on a monthly basis.
+                    %i.material-icons.text-success.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Analyze Competitor's Growth Strategies"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Will continue to monitor identified competitors for growth trends on a monthly basis.
+                    %i.material-icons.text-success.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Analyze Competitor's Growth Strategies"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Will continue to monitor identified competitors for growth trends on a monthly basis.
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Client Cancellation
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              / %td
+              /   .pt-col-content{"data-label" => "Client Cancellation"}
+              /     %span
+              /       30 Days Required
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content{"data-label" => "Client Cancellation"}
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content{"data-label" => "Client Cancellation"}
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content{"data-label" => "Client Cancellation"}
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+            - unless @is_preview
+              %tr.pt-row-footer
+                %td.col-label.text-left
+                  .pt-col-content
+                / %td
+                /   .pt-col-content
+                /     %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'social_media', plan: 'jumpstart')}
+                /       Get Started
+                %td
+                  .pt-col-content
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'social_media', plan: 'starter')}
+                      Get Started
+                %td
+                  .pt-col-content
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'social_media', plan: 'pro')}
+                      Get Started
+                %td
+                  .pt-col-content
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'social_media', plan: 'advanced')}
+                      Get Started
+      .row.pt-5.pb-4.d-none.flex-wrap.row-p-5
+        .col-md-6.col-sm-6.col
+          .panel-body.bg-white.panel-br-10.p-5.h-100
+            .panel-head.pb-5
+              %i.clickx-icon-Support.ico-60.pr-sm.text-info
+              %h5.f-s-16.f-w-lg.l-s-2.text-muted OPTIONAL
+              .pt-header-caption.text-info White-Glove™ Customer Service
+              .pt-header-price
+                #{in_currency(500, current_agency.display_currency)}
+                %span> /mo
+            .panel-content.pl-n.pr-n
+              %p In addition to our White Label Dashboard for Reporting, White-Glove™ Customer Service include day to day Account Management, Email Communication with our Account Managers as well as Monthly Strategy and Reporting Phone Call.
+        .col-md-6.col-sm-6.col.mt-4.mt-md-0
+          .panel-body.bg-white.panel-br-10.p-5.h-100
+            .panel-head.pb-5
+              %i.clickx-icon-partner.ico-60.pr-sm.text-info
+              %h5.f-s-16.f-w-lg.l-s-2.text-muted OPTIONAL
+              .pt-header-caption.text-info Expedited Onboarding
+              .pt-header-price
+                #{in_currency(500, current_agency.display_currency)}
+                %span> /One Time
+            .panel-content.pl-n.pr-n
+              %p Speedy Ad Setup and Approval. 2 Weeks Rush Turn Around.
+              %p Requires Immediate Access to Business Manager as an Admin, Ad Account Creation, and Page Access, Dashboard Provisioning, Campaign Funding and Launch Support
+      - if raw(@package.sales_pitch).present?
+        .row.pt-4.pb-4.d-flex.flex-wrap.row-p-4
+          .col-sm-12.mt-4.mt-md-0
+            .panel-body.bg-white.panel-br-10.p-5.h-100
+              .panel-content.pl-n.pr-n
+                = raw(@package.sales_pitch)
+      .spacer15
+:javascript
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.plan-preloader').removeClass('plan-preloader');
+    }, 500);
+  });

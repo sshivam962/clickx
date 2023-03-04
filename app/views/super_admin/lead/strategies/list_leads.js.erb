@@ -1,0 +1,3 @@
+<% Lead::Strategy.status_collection.each do |status| %>
+  $("#sec-<%=status%>").html("<%= escape_javascript render(partial: 'super_admin/lead/strategies/shared/tab_content', locals: {status: status}) %>")
+<% end %>

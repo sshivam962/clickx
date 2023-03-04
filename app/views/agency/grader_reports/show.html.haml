@@ -1,0 +1,43 @@
+- content_for :title do
+  Grader | Clickx
+- if @grader_report.completed?
+  .pt-4.pb-4.text-center.bg-white
+    .container.mw-100
+      - if grader_logo_url.present?
+        = image_tag grader_logo_url, class: 'img-responsive d-inline-block', width: '200px'
+  #report_container
+    = render partial: 'agency/grader_reports/loader/full_report'
+
+  :javascript
+    $(document).on('ready', function (e) {
+      $.ajax({
+        url: window.location.pathname + '/full_report',
+        type: 'get',
+        data: {},
+        dataType: 'json',
+        success:function(response){
+          $('#report_container').html(response.data)
+          jQuery('.grader-preloader').removeClass('grader-preloader');
+        }
+      })
+    });
+
+- else
+  .page-heading
+    %h1
+      = @grader_report.domain
+  .container-fluid
+    %div{"data-widget-group" => "group1"}
+      .row
+        .col-sm-12
+          .panel.panel-default.p-xxl
+            .panel-body.p-n
+              .row
+                .col-sm-12
+                  - progress = @grader_report.progress
+                  %span.font-12.mb-sm
+                    Progress (#{progress}%)
+                  .progress.progress-striped.active.m-n
+                    .progress-bar.progress-bar-info{ 'style': "width: #{progress}%"}
+                .col-sm-12
+                  Report is still being generated.. Please check back later

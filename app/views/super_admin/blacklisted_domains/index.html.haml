@@ -1,0 +1,45 @@
+.uiv2
+  .clearfix
+    %h3 Blacklisted Domains
+  .spacer30
+  .clearfix
+  .content-card.p-md-5
+    = form_tag super_admin_blacklisted_domains_path, method: :post do
+      .content-card__header
+        .d-flex.justify-content-between.flex-wrap
+          .col-search
+            .input-wrapper.d-flex
+              %input{name: "blacklisted_domain[name]",class: 'select-box form-control',id: "blacklist_input", placeholder: 'Domain name'}
+              .inner-glyph.glyph-align
+              %button{type: "submit", class: "btn btn-danger"}
+                BlackList
+            #helper_text
+    #domain_list
+      = render '/super_admin/blacklisted_domains/list', users: @users
+
+:javascript
+  $(function() {
+    $('#helper_text').append("Eg: Google.com");
+
+    $('#blacklist_input').keyup(function() {
+      console.log($(this).val())
+      let regex = new RegExp(/^(?!-)[A-Za-z0-9-]+([\-\.]{1}[a-z0-9]+)*\.[A-Za-z]{2,6}$/);
+      if (regex.test($(this).val()) == true) {
+        $('#helper_text').empty();
+        $('#helper_text').append("Valid domain format");
+        $('#helper_text').css("color", "blue");
+        $(":submit").attr("disabled", false);
+      } else if($(this).val().length === 0) {
+        $('#helper_text').empty();
+        $('#helper_text').append("Eg: Google.com");
+        $('#helper_text').css("color", "black");
+        $(":submit").attr("disabled", false);
+      }
+      else {
+        $('#helper_text').empty();
+        $('#helper_text').append("InValid domain format");
+        $('#helper_text').css("color", "red");
+        $(":submit").attr("disabled", true);
+      }
+    })
+  })

@@ -1,0 +1,8 @@
+- if users.present?
+  .form-group
+    %label
+      User
+    = select_tag 'payment_link[business_user_id]', options_for_select(users.push(['Other', 'other'])), include_blank: "Select User", required: true, class: 'form-control login display-inline'
+#user_info_section
+  - if users.blank?
+    = render 'agency/payment_links/shared/user_info'

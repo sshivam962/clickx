@@ -1,0 +1,28 @@
+= chapter.video_embed_code.html_safe
+- if raw(chapter.description).present?
+  %h2.bdr-b-line.pb-md.mb-lg.text-info
+    Lesson overview
+  %p
+    = raw(chapter.description)
+.row
+  - if chapter.file_attachments.present?
+    .col-md-12
+      - chapter.file_attachments.each do |file_attachment|
+        = link_to file_attachment.file.url, {target: '_blank', class: 'pull-right btn btn-raised btn-primary font15'} do
+          = file_attachment.display_name
+          %i.fa.fa-download.pl-sm
+
+.row.pt-md
+  .col-md-12
+    - last_chapter = chapter.last?
+    %a.btn.btn-warning.btn-raised.m-n.f-w-lg.pull-right.next_chapter{href: a_next_chapter_button_url(last_chapter)}
+      = a_next_chapter_button_text(last_chapter)
+      %i.fa.fa-arrow-right.pr-xs
+
+:javascript
+  $('.timeline-icon').removeClass('selected')
+  $('.timeline .author').removeClass('text-warning')
+  $('.timeline .author').removeClass('fw-bold')
+  $("#chapter_li_#{chapter.id} .timeline-icon").addClass('selected')
+  $("#chapter_li_#{chapter.id} .author").addClass('text-warning')
+  $("#chapter_li_#{chapter.id} .author").addClass('fw-bold')

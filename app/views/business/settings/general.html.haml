@@ -1,0 +1,156 @@
+- content_for :title do
+  Settings | General
+.clickx-breadcrumb-wrapper.ng-scope
+  %ol.breadcrumb.clx-breadcrumb.ng-isolate-scope
+    %li
+      %a{:href => "/b/dashboard"} Home
+    %li
+      %span General
+.page-content
+  .page-heading.no-margin-bottom
+    %h1
+      %i.clickx-icon-page-cog.title-icon>
+      Settings
+.container-fluid
+  = render '/business/settings/shared/tab_links'
+  .row
+    .col-sm-6
+      .panel.panel-default{'data-widget': {draggable: 'false'}}
+        .panel-heading
+          %h2 Logo
+          .panel-ctrls
+            %button.btn.button-icon.pull-left.mt-sm.logo_button{"aria-controls" => "collapseLogo", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseLogo", :role => "button"}
+              #logo_chevron_down.hidden
+                %i.fa.fa-chevron-down
+              #logo_chevron_up
+                %i.fa.fa-chevron-up
+        .panel-body.fadeInLeft.collapse.in#collapseLogo
+          .form-group.mt-n.pb-n
+            .fileinput.fileinput-new.mb-n.width100
+              .fileinput-preview.thumbnail.mb20.width100{style: 'height: 100px;'}
+                %img.over.img-responsive{src: current_business.logo, crop: 'fit', effect: 'sepia', rel: 'shortcut icon', type: 'fetch'}
+              %div
+                %span.btn.btn-primary.btn-raised.btn-file.mb-n.tooltips.branding_upload{title: 'Upload your company logo (png image is preferred)', data: {placement: 'top', toggle: 'tooltips', type: 'logo'}}
+                  %span.fileinput-new
+                    %i.fa.fa-camera.icpadd-r10
+                    Select image
+                %span
+                  %i (Recommended Size is 1000 x 200 px)
+                %input.logo_upload{name: 'file', type: 'file', class: 'invisible', onchange: "upload(this.files[0], 'logo')"}
+
+    .col-sm-6
+      .panel.panel-default{'data-widget': {draggable: 'false'}}
+        .panel-heading
+          %h2 Timezone
+          .panel-ctrls
+            %button.btn.button-icon.pull-left.mt-sm.timezone_button{"aria-controls" => "collapseTimezone", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseTimezone", :role => "button"}
+              #timezone_chevron_down.hidden
+                %i.fa.fa-chevron-down
+              #timezone_chevron_up
+                %i.fa.fa-chevron-up
+        .panel-body.fadeInLeft.collapse.in#collapseTimezone
+          = form_for current_business, url: :update_business_business_settings, method: :patch, remote: true do |f|
+            .form-group.no-margin-top.pb-n
+              %label.control-label.mt-n.mb-md Select a Timezone
+              - timezones =  ActiveSupport::TimeZone.all.collect{|z| z.name}.compact
+              = f.select :timezone, timezones, { :placeholder => "Select a Timezone" }, class: 'form-control mb-lg'
+            .form-group.no-margin-top.pb-n
+              %label.control-label.mt-n.mb-md Country
+              = f.select :locale, LOCALE_CODES.map{|l| [l['country'], l['locale']]}, {}, required: true, class: 'form-control mb-lg'
+            .form-group.no-margin-top.pb-n
+              %label.control-label.mt-n.mb-md Target City
+              = f.text_field :target_city, class: 'form-control login display-inline', placeholder: "City Name (eg: Chicago)", required: true
+            = f.submit 'Save', class: 'btn btn-primary btn-raised btn-file mb-n'
+
+  - if current_business.free_service == false
+    .row
+      .col-sm-12
+        .panel.panel-default{'data-widget': {draggable: 'false'}}
+          .panel-heading
+            %h2 Saved Credit Cards
+            .panel-ctrls
+              %button.btn.button-icon.pull-left.mt-sm.card_button{"aria-controls" => "collapseSavedCards", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseSavedCards", :role => "button"}
+                #card_chevron_down.hidden
+                  %i.fa.fa-chevron-down
+                #card_chevron_up
+                  %i.fa.fa-chevron-up
+          .panel-body.fadeInLeft.collapse.in#collapseSavedCards
+            - credit_card_list = current_business.payment_details
+            - if credit_card_list.length > 0
+              .row
+                - credit_card_list.each do |card|
+                  .mt-n.col-sm-4.mb-md
+                    - card_info = card.card_info.split('_')
+                    .cc
+                      %span.chip
+                      - card_type = set_card_type(card_info[0].downcase)
+                      %span{ 'data-card' => "#{(card_info[0].downcase)}", 'class' => "#{card_type}" }
+                      %div
+                        - card_number = card_info[1].split('-')
+                        %span.cc-number
+                          - card_number.each do |number_c|
+                            %span= number_c
+                      = link_to remove_card_business_setting_path(card), class: 'btn btn-danger btn-lg btn-raised btn-sm delete-card', title: 'Delete Credit Card', remote: true, method: :delete, data: { confirm: 'Are you sure?' } do
+                        %i.fa.fa-trash-o.pr-xs
+            - else
+              %p You don't have any credit cards.
+:javascript
+  $(document).ready(function() {
+    $('.branding_upload').click(function() {
+      $('.' + $(this).data('type') + '_upload').click();
+    });
+    var upload = function(file, logo) {
+      if(typeof(file) != 'string' && file.type != 'image/png'){
+        toastr.error("Whoops! you didn't upload a .png file. Please upload a png file");
+      }else{
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+          var params = {
+            image: reader.result,
+            logo: logo
+          };
+          $.ajax({
+            url: "/b/settings/update_logo",
+            type: 'PATCH',
+            dataType: 'script',
+            data: params,
+            success: function(result) {
+              location.reload();
+            }
+          });
+        };
+      }
+    };
+    $("#business_locale").change(function() {
+      city = $("#business_locale option:selected").text().split('-')[0].trim() || 'United States';
+      $('#business_target_city').val(city)
+    })
+    $('.logo_button').on('click', function() {
+      if($('#logo_chevron_down').hasClass('hidden')){
+        $('#logo_chevron_up').addClass('hidden');
+        $('#logo_chevron_down').removeClass('hidden');
+      } else {
+        $('#logo_chevron_up').removeClass('hidden');
+        $('#logo_chevron_down').addClass('hidden');
+      }
+    });
+    $('.timezone_button').on('click', function() {
+      if($('#timezone_chevron_down').hasClass('hidden')){
+        $('#timezone_chevron_up').addClass('hidden');
+        $('#timezone_chevron_down').removeClass('hidden');
+      } else {
+        $('#timezone_chevron_up').removeClass('hidden');
+        $('#timezone_chevron_down').addClass('hidden');
+      }
+    });
+    $('.card_button').on('click', function() {
+      if($('#card_chevron_down').hasClass('hidden')){
+        $('#card_chevron_up').addClass('hidden');
+        $('#card_chevron_down').removeClass('hidden');
+      } else {
+        $('#card_chevron_up').removeClass('hidden');
+        $('#card_chevron_down').addClass('hidden');
+      }
+    })
+  });

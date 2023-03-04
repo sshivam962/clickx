@@ -1,0 +1,11 @@
+.uiv2
+  .clearfix
+    %h3 Email Sent
+  .spacer30
+  = form_tag super_admin_email_sents_path, :method => 'get', :id => "contractors_invites" do
+    %p
+    .pull-right
+      = select_tag(:email_sent_time_option, options_for_select([["24 hours",'24'],["Last 1 week", '168'],["Last 1 month",'730']], params[:email_sent_time_option]) ,data:{remote: true}, class: 'width250px select-box form-control mt-md' )
+
+  %div#email_stats_list
+    = render '/super_admin/email_sents/email_sent_stats', data: @data

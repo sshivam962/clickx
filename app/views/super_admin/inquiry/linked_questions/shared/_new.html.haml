@@ -1,0 +1,25 @@
+#linked-question-modal.modal.fade{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg{role: 'document'}
+    = form_for :linked_question, url: super_admin_inquiry_linked_questions_path(question_id: question.id), method: :post, remote: true do |f|
+      .modal-content
+        .modal-header
+          Assign to Questionnaires
+          %a.close.pl-md{'data-dismiss': 'modal'}
+            %span ×
+        .modal-body
+          .row
+            .col-md-12
+              %h4
+                %b
+                  = question.question
+            .col-md-12
+              - Inquiry::Questionnaire.order(:category).each do |questionnaire|
+                .form-group
+                  - if questionnaire.questions.include?(question)
+                    = check_box_tag 'questionnaire_ids[]', questionnaire.id, checked: true
+                  - else
+                    = check_box_tag 'questionnaire_ids[]', questionnaire.id
+                  %label{for: "#{questionnaire.id}"}
+                    = questionnaire.category
+        .modal-footer
+          = f.submit 'Save', class: 'btn btn-primary btn-raised'

@@ -1,0 +1,56 @@
+%table.table.table-bordered.users.reports.table-condensed.table-hover.table-clickable
+  %thead
+    %th Agency
+    - if tab.eql?('client')
+      %th Client
+    %th Plan
+    %th Amount
+    %th Date
+    - if tab.eql?('client')
+      %th
+        Actions
+  %tbody#leads_container
+    - subscriptions.each do |subscription|
+      %tr{id: dom_id(subscription)}
+        %td
+          = subscription.agency.name
+        - if tab.eql?('client')
+          %td
+            = subscription.business&.name
+        %td
+          - if tab.eql?('client')
+            = subscription.package_name.titleize
+          - else
+            = subscription.package_name.sub('agency_infrastructure_', '').titleize
+        %td
+          - if subscription.package_type.eql?('bundle')
+            - subscription.payments.group_by(&:billing_category).each do |bc, payments|
+              - if bc.eql?('charge')
+                = "One-Time: #{number_to_currency(payments.sum(&:amount), precision: 0)}"
+                %br
+              - if bc.eql?('subscription')
+                = "Recurring: #{number_to_currency(payments.sum(&:amount), precision: 0)}"
+                %br
+            = link_to more_info_super_admin_package_subscription_path(subscription, category: 'agency'), method: :get, remote: true do
+              %i.fa.fa-info
+              More info
+          - else
+            - if subscription.amount.present?
+              - if subscription.billing_category.eql?('charge')
+                = "Charge: #{number_to_currency(subscription.amount, precision: 0)}"
+              - else
+                = "Recurring: #{number_to_currency(subscription.amount, precision: 0)}"
+            - if tab.eql?('infrastructure')
+              - onetime = subscription.payments.group_by(&:billing_category)['charge']&.first
+              - if onetime.present?
+                %br
+                = "One-time: #{number_to_currency(onetime.amount, precision: 0)}"
+            %br
+            - if subscription.onetime_charge.present?
+              = "One-Time: #{number_to_currency(subscription.onetime_charge, precision: 0)}"
+        %td
+          = subscription.created_at.strftime('%b %d, %Y')
+        - if tab.eql?('client')
+          %td.text-center
+            %a.btn.btn-info.btn-sm{href: questionnaires_super_admin_client_path(subscription.business_id, subscription_id: subscription.id), data: { toggle: 'tooltip', 'original-title' => 'Questionnaire Links', remote: true}}
+              %i.fa.fa-question

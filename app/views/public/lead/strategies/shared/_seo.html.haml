@@ -1,0 +1,193 @@
+- content_for :title do
+  Search Engine Optimization
+- text_color = agency.strategy_product_text_color
+.section.bg-dark.p-tb-60.section-cover{style: "background:#{agency.strategy_product_background_color}"}
+  .container
+    .p-t-60
+    .row.v-center--lg.text-center--md.col-centered--md
+      .col-md-5.col-md-offset-1.text-center
+        = image_tag 'lead_strategy/seo.svg', class: 'img-responsive'
+        .p-lg--md
+      .col-md-6
+        %h4{style: "color:#{text_color}"} Improve Search Rankings
+        %h1{style: "color:#{text_color}"}
+          Search Engine Optimization
+          %br
+          %span.f-w-lg
+            = @lead.company
+        %p{style: "color:#{text_color}"}
+          Prepared For
+          - if @lead.full_name.present?
+            %br
+            = @lead.full_name
+          - if @lead.email.present?
+            %br
+            = @lead.email
+
+.section.bg-light.p-tb-60.section-cover
+  .container.container--sm
+    %h2.f-w-lg.pb-xl.text-black Proposed Solution
+    %ul.arrow-list.arrow-list--style-2
+      - @lead_strategy.strategies.each do |strategy|
+        %li
+          = raw(strategy)
+- if @lead_strategy.strategy_images.present?
+  .section.bg-light.p-tb-60.section-cover
+    .container.container--sm
+      .swiper-container.image-carousel
+        .swiper-wrapper
+          - @lead_strategy.strategy_images.order_by_created.each do |image|
+            .swiper-slide
+              .card-new.p-xl
+                %img.img-responsive{alt: '', src: image.file&.url}
+        - if @lead_strategy.strategy_images.count > 1
+          .swiper-pagination
+- if @lead_strategy.ad_spend_info.present?
+  .section.p-tb-60.section-cover
+    .container.container--sm
+      .row.v-center--lg.col-reverse--md
+        .col-md-7
+          %h2.f-w-lg.pb-xl.text-black Budget Recommendations
+          %ul.arrow-list.arrow-list--style-2
+            - @lead_strategy.ad_spend_info.split(/\r?\n/).each do |info|
+              %li= info
+        .col-md-5
+          = image_tag 'lead_strategy/seo-ad-spend.png', class: 'img-responsive img-align-center--md'
+          .p-lg--md
+.section.p-tb-60.section-cover
+  .container.container--sm
+    %h3.f-w-lg.pb-xl
+      Proposed Solution
+      %br/
+      %span.f-w-sm SEO Strategy & Implementation Process
+    .text-center
+      = image_tag 'lead_strategy/seo2.svg', class: 'img-responsive img-hcenter'
+.section.bg-light.p-tb-60.section-cover
+  .container.container--sm
+    .row.v-center--lg.col-reverse--md
+      .col-md-7
+        %h3.f-w-lg.pb-xl
+          Initial Assessment and Campaign Planning
+          %br/
+          %span.f-w-sm Timeline: Month 1
+        %h4.f-w-md.pb-xl Research and Analysis
+        %ul.arrow-list
+          %li Kickoff Call - Team Intro
+          %li Perform in depth keyword research (Top of funnel, Middle of funnel, Bottom of funnel)
+          %li Organize Keywords based on marketing and growth goals
+          %li Conduct competitive analysis and identify keyword overlap
+          %li Perform thorough website audit to identify technical challenges and opportunities
+          %li Conduct content audit to determine content gaps for future month
+      .col-md-5
+        = image_tag 'lead_strategy/seo4.png', class: 'img-responsive img-align-center--md'
+.section.p-tb-60.bg-blue.text-white.section-cover
+  .container.container--sm
+    .row.v-center--lg.col-reverse--md
+      .col-md-7
+        %h3.f-w-lg.pb-xl.text-white
+          Deep Technical Audit
+          %br/
+          %span.f-w-sm Timeline: Month 1 &amp; 2
+        %ul.arrow-list
+          %li Assess website structure to maximize search traffic
+          %li Google Search Console Indexation Cleanup
+          %li
+            Assist with on-page optimization
+            %ul
+              %li Implement Metadata
+              %li Schema (Structured Data)
+              %li Heading &amp; Image optimization
+              %li Internal Link Structure
+          %li Support in Rich Media Optimization
+          %li Weekly Monitoring of Website Performance
+      .col-md-5
+        = image_tag 'lead_strategy/seo3.svg', class: 'img-responsive img-align-center--md'
+        .p-lg--md
+.section.p-t-60.bg-d-grey.text-white.section-cover
+  .container.container--sm
+    .row.v-end.flex-wrap
+      .col-md-7.p-b-60
+        %h3.f-w-lg.pb-xl.text-white
+          Mobile Strategy &amp; Recommendations
+          %br/
+          %span.f-w-sm Timeline: Month 3 onwards
+        %ul.arrow-list
+          %li Ongoing Optimization of Posts, Pages, and Various Types of Content
+          %li Mobile usability recommendation and optimization
+          %li Page speed test and optimization
+          %li Mobile conversion recommendations
+          %li Mobile content experience / AMP strategy
+          %li Optimize for Mobile First Algorithm
+      .col-md-5
+        = image_tag 'lead_strategy/mobile.png', class: 'img-responsive'
+        .circle
+          .circle-70
+            = image_tag 'lead_strategy/circle-70.svg', class: 'img-responsive img-align-center--md'
+.section.bg-light.p-tb-60.section-cover
+  .container.container--sm
+    .row.v-center--lg.col-centered--md
+      .col-md-9
+        %h3.f-w-lg.pb-xl
+          Link Building &amp; Thought Leadership Strategy
+          %br/
+          %span.f-w-sm Timeline: Month 3 onwards
+        %ul.arrow-list
+          %li Build thought leadership through Digital PR placement and outreach
+          %li Develop a prospective industry relevant publications &amp; contacts
+          %li Review PR opportunities for new mentions and content opportunities
+          %li Develop and submit content abstracts to the select publications
+          %li Support in creating content approved by the publication’s content guidelines
+          %li Follow up, provide editorial support to secure content placement
+      .col-md-3
+        = image_tag 'lead_strategy/seo5.svg', class: 'img-responsive img-align-center--md'
+        .p-lg--md
+.secion.p-tb-60.text-center.section-cover
+  .container
+    %h2.f-w-lg.text-black Next Steps...
+    .mt-xl.pt-lg
+      .process
+        .process-col
+          .process-icon
+            = image_tag 'lead_strategy/step-icon-1.svg'
+          .process-name.f-w-md
+            Accept
+            = succeed "Proposed Solution" do
+              %br/
+        .process-col
+          .process-icon
+            = image_tag 'lead_strategy/step-icon-2.svg'
+          .process-name.f-w-md
+            Access To Google Analytics
+            = succeed "and Google Search Console" do
+              %br/
+        .process-col
+          .process-icon
+            = image_tag 'lead_strategy/step-icon-3.svg'
+          .process-name.f-w-md
+            Schedule
+            = succeed "Kick Off Call" do
+              %br/
+        .process-col
+          .process-icon
+            = image_tag 'lead_strategy/step-icon-4.svg'
+          .process-name.f-w-md
+            Approve
+            = succeed "Seo Recommendations" do
+              %br/
+        .process-col
+          .process-icon
+            = image_tag 'lead_strategy/step-icon-5.svg'
+          .process-name.f-w-md
+            Campaign Launch and
+            = succeed "Ongoing Optimization" do
+              %br/
+.section.section--calendly.p-tb-60.text-center.section-cover
+  .container.container--sm
+    %h3.f-w-lg.pb-xl.text-center Campaign Reporting
+    %script{:src => "https://fast.wistia.com/embed/medias/9rpo4u2k5e.jsonp"}
+    %script{:src => "https://fast.wistia.com/assets/external/E-v1.js"}
+    .wistia_responsive_padding{:style => "padding:56.25% 0 0 0;position:relative;"}
+      .wistia_responsive_wrapper{:style => "height:100%;left:0;position:absolute;top:0;width:100%;"}
+        .wistia_embed.wistia_async_9rpo4u2k5e{:class => "videoFoam=true", :style => "height:100%;position:relative;width:100%"}
+          .wistia_swatch{:style => "height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"}
+            %img{:alt => "", "aria-hidden" => "true", :onload => "this.parentNode.style.opacity=1;", :src => "https://fast.wistia.com/embed/medias/9rpo4u2k5e/swatch", :style => "filter:blur(5px);height:100%;object-fit:contain;width:100%;"}

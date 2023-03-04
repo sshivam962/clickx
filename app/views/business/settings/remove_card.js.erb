@@ -1,0 +1,6 @@
+<% if @card.errors.present? %>
+  toastr.error("<%= @card.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success("Credit deleted successfully");
+  location.reload();
+<% end %>

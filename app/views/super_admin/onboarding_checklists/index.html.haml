@@ -1,0 +1,73 @@
+- content_for :title do
+  Onboarding Checklist | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1 Onboarding Checklist
+
+.locations
+  %button.add-onboarding_checklist{type: "button", class: 'btn btn-warning'}
+    Add Onboarding Checklist
+
+  #onboarding_checklist-field
+    = form_with model: OnboardingChecklist.new, url: super_admin_onboarding_checklists_path do |f|
+      .row.mb-md
+        .col-sm-5
+          = f.text_field :title, class: 'form-control', placeholder: 'Title' 
+        .col
+          = f.submit 'Add', class: 'btn btn-warning m-n'
+
+
+  #onboarding_check_list.p-n.ui-sortable.a_strategy_order_items
+    - @onboarding_checklists.each_with_index do |onboarding_checklist, index|
+      
+      = form_with model: onboarding_checklist, url: super_admin_onboarding_checklist_path(onboarding_checklist) do |f|
+        .row.mb-md
+          .col-sm-5
+            .d-flex
+              .col
+                .px-4.py-2
+                  %i.fa.fa-arrows-v
+              .col.col-stretch
+                = f.text_field :title, class: 'form-control'
+                = hidden_field_tag :onboarding_checklist_id, onboarding_checklist.id, class: 'onboarding_checklist_position'
+          .col-sm-6
+            = f.submit 'Save', class: 'btn btn-warning m-n'
+            = link_to super_admin_onboarding_checklist_path(onboarding_checklist) ,class: 'btn btn-info', method: :delete, data: { confirm: 'Are you sure ?'} do
+              %i.glyphicon.glyphicon-trash.font-size12
+              Delete
+  #save_reorder.btn.btn-primary
+    Save Reorder
+
+:css
+  #onboarding_checklist-field{
+    display: none;
+  }
+
+:javascript
+  $('.add-onboarding_checklist').on('click', function(){
+    $('#onboarding_checklist-field').show()
+  })
+  $("#onboarding_check_list").sortable({});
+
+  $('#save_reorder').on('click', function(e){
+    e.preventDefault();
+    var checklist_len = $(".onboarding_checklist_position").length;
+    var sortOrder = [];
+    for(var i=0; i<checklist_len; i++){
+        sortOrder.push($(".onboarding_checklist_position")[i].value);
+
+    }
+    $.ajax({
+      url: "/s/onboarding_checklists/sort_position",
+      type: 'post',
+      data: {sortOrder: sortOrder},
+      dataType: 'json',
+      success:function(response){
+        if(response.status == 200){
+          alert("Checklist Reordered Successfully!!");
+        }
+      }
+    })
+  });
+
+

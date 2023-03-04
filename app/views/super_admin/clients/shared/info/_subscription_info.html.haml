@@ -1,0 +1,81 @@
+- if client.active_subscription&.account_id
+  .form-group
+    .row.d-flex.d-sm-block.justify-content-between
+      .col-sm-4.col-xs-auto
+        %label Active Plan
+      .col-sm-8.col-xs-auto
+        .d-flex.justify-content-end.justify-content-md-start
+        %span
+          = client.active_subscription.plan_name || '--'
+  .form-group
+    .row.d-flex.d-sm-block.justify-content-between
+      .col-sm-4.col-xs-auto
+        %label Subscription Id
+      .col-sm-8.col-xs-auto
+        .d-flex.justify-content-end.justify-content-md-start
+        %span
+          = client.active_subscription.account_id || '--'
+  .form-group
+    .row.d-flex.d-sm-block.justify-content-between
+      .col-sm-4.col-xs-auto
+        %label Start Date
+      .col-sm-8.col-xs-auto
+        .d-flex.justify-content-end.justify-content-md-start
+        %span
+          = client.active_subscription_period[:start_date]
+  .form-group
+    .row.d-flex.d-sm-block.justify-content-between
+      .col-sm-4.col-xs-auto
+        %label End Date
+      .col-sm-8.col-xs-auto
+        .d-flex.justify-content-end.justify-content-md-start
+        %span
+          = client.active_subscription_period[:end_date]
+
+- if client.trialing_subscription&.account_id
+  .form-group
+    .row.d-flex.d-sm-block.justify-content-between
+      .col-sm-4.col-xs-auto
+        %label Trialing Plan
+      .col-sm-8.col-xs-auto
+        .d-flex.justify-content-end.justify-content-md-start
+          %span
+            = client.trialing_subscription.plan_name || '--'
+  .form-group
+    .row.d-flex.d-sm-block.justify-content-between
+      .col-sm-4.col-xs-auto
+        %label Subscription Id
+      .col-sm-8.col-xs-auto
+        .d-flex.justify-content-end.justify-content-md-start
+          %span
+            = client.trialing_subscription.account_id || '--'
+  .form-group
+    .row.d-flex.d-sm-block.justify-content-between
+      .col-sm-4.col-xs-auto
+        %label Trial End Date
+      .col-sm-8.col-xs-auto
+        .d-flex.justify-content-end.justify-content-md-start
+          %span
+            = client.trialing_subscription_period[:trial_end]
+- if client.active_subscription&.account_id.blank? && client.trialing_subscription&.account_id.blank?
+  .form-group
+    = form_for client, url: update_customer_super_admin_client_path(client.id), method: :patch, remote: true do |f|
+      .row.d-flex.d-sm-block.justify-content-between
+        .col-sm-4.col-xs-auto
+          %label{:for => "customer_id"} Customer Id
+        .col-sm-8.col-xs-auto
+          .d-flex.justify-content-end.justify-content-md-start.pl-n
+            = text_field_tag :customer_id, '', class: 'form-control login display-inline'
+            = f.submit 'Sync', class: 'btn btn-success ml-3'
+
+  .form-group.add_sub_account_client_form
+    = form_for client, url: add_subscription_account_super_admin_client_path(client.id), method: :patch, remote: true do |f|
+      .row.d-flex.d-sm-block.justify-content-between
+        .col-sm-4.col-xs-auto
+          %label{:for => "subscription_id"} Subscription Id
+        .col-sm-8.col-xs-auto
+          .d-flex.justify-content-end.justify-content-md-start.pl-n
+            = text_field_tag :subscription_id, '', class: 'form-control login display-inline'
+            = f.submit 'Sync', class: 'btn btn-success ml-3'
+  :javascript
+    $("*", ".add_sub_account_client_form form").prop('disabled',true);

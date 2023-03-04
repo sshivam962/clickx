@@ -1,0 +1,58 @@
+- content_for :title do
+  New Payment Link | Clickx
+
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    .col-xs-10.col-sm-10.col-lg-10
+      %h1 New Payment Link
+    .col-xs-2.col-sm-2.col-lg-2
+      %a.btn.btn-warning.pull-right.mt-lg.mb-lg{href: super_admin_payment_links_path} Back
+
+.uiv2
+  .clearfix
+  .content-card.p-md-5
+    = form_for @payment_link, url: super_admin_payment_links_path, method: :post do |f|
+      .form-group
+        .row
+          .col-sm-6
+            .form-group.mt-2
+              %label Name
+              = f.text_field :name, class: 'form-control mb-0 pt-0', placeholder: 'Name'
+          .col-sm-6
+            .form-group.mt-2
+              %label Email
+              = f.email_field :email, class: 'form-control mb-0 pt-0', placeholder: 'Email'
+      = f.fields_for :admin_plan do |p|
+        .form-group
+          %label A Description For The Payment Link
+          .row
+            .col-sm-6
+              .form-group.mt-2
+                = p.text_field :description_line_1, class: 'form-control mb-0 pt-0', placeholder: 'Line 1', required: true
+            .col-sm-6
+              .form-group.mt-2
+                = p.text_field :description_line_2, class: 'form-control mb-0 pt-0', placeholder: 'Line 2'
+        .form-group
+          %label Price
+          = p.number_field :amount, class: 'form-control', placeholder: 'Price', required: true, step: 0.01
+        .form-group
+          %label Select Your Subscription Type
+          .radio-buttons.radio-buttons--inline
+            .radio.radio-inline.radio-warning
+              %label
+                = p.radio_button :billing_category, 'subscription', checked: true
+                Monthly Recurring Charge
+            .radio.radio-inline.radio-warning
+              %label
+                = p.radio_button :billing_category, 'charge'
+                Fixed Price
+        .form-group
+          %label Implementation Fee
+          = p.number_field :implementation_fee, class: 'form-control', placeholder: 'Implementation Fee', step: 0.01
+        .checkbox.checkbox-inline.checkbox-warning.pl-0
+          %label.text-darkblue
+            = p.check_box :pay_with_implementation_fee
+            Will client be paying for both implementation and first month management at the same time?
+      .spacer40
+      %p.fs-14 Please confirm the above details before proceeding
+      = f.submit 'Create Link', class: 'btn-raised btn-primary btn btn--md', disable_with: 'Submitting...'

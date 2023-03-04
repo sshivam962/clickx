@@ -1,0 +1,42 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Local-Listings.title-icon>
+    Invite New User
+
+.container-fluid
+  %div
+    .row
+      .col-xs-12
+        .panel.panel-default
+          %form{ 'id': "new_user", 'name': 'userForm', 'novalidate': '' }
+            .panel-heading
+              %h2 User Details
+            .panel-body
+              .col-md-6
+                .form-group.no-margin-top{"ng-class":"{'has-error' : submitted && userForm.email.$invalid}"}
+                  %label.col-md-12.control-label{for: "email"} Email
+                  .col-md-12
+                    %input#email.form-control{autofocus: "autofocus", name: "email", 'ng-model':'user.email', required: true, type: "email"}
+              .col-md-6
+                .form-group.no-margin-top{"ng-class":"{'has-error' : submitted && userForm.first_name.$invalid}"}
+                  %label.col-md-12.control-label{for: "first_name"} First Name
+                  .col-md-12
+                    %input#first_name.form-control{name: "first_name", 'ng-model':'user.first_name', required: true, type: "text"}
+              .col-md-6
+                .form-group.no-margin-top{"ng-class":"{'has-error' : submitted && userForm.last_name.$invalid}"}
+                  %label.col-md-12.control-label{for: "last_name"} Last Name
+                  .col-md-12
+                    %input#last_name.form-control{name: "last_name", 'ng-model':'user.last_name', required: true, type: "text"}
+              .col-md-6
+                .form-group.no-margin-top{"ng-class":"{'has-error' : submitted && userForm.role.$invalid}"}
+                  %label.col-sm-12.control-label Role
+                  .col-sm-12
+                    %select.select.form-control{name: "role", 'ng-model':'user.role', required: true}
+                      %option{value: ""} Select a Role
+                      %option{value: "company_admin"} Company Admin
+                      %option{value: "company_user"} Company User
+            .panel-footer
+              .col-md-12
+                %button#invite_new_user.btn.btn-success.btn-raised.btn-label.btn-lg{ 'ng-click': 'invite_user(user)', onClick: "this.disabled=true; this.value='Sending…';" }
+                  .ripple-container
+                  Send An Invitation

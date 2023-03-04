@@ -1,0 +1,10 @@
+.header
+  %h1 Manage Permissions
+.row
+  .col-md-4.pt-md
+    - User.permission_collection.each do |name, key|
+      = link_to super_admin_permission_path(key), class: 'list-group-item', remote: true do
+        %li.list-unstyled= name
+  .col-md-8.pt-md
+    #users_listing_table
+#addUser

@@ -1,0 +1,58 @@
+.page-content
+  .page-heading.no-margin-bottom
+    %h1
+      %i.clickx-icon-user.title-icon>
+      User Management
+    .options
+      %a.btn.btn-white.btn-raised{ 'ng-href': "/#/{{current_business}}/invite_user" }
+        %i.fa.fa-plus.pr-xs
+        Add New User
+        .ripple-container
+.container-fluid
+  %div
+    .row
+      .col-xs-12{'st-table':"biz_users", 'st-safe-src':"copy_biz_users"}
+        .panel.panel-teal
+          .panel-heading
+          .panel-body.no-padding
+            %table.table.table-striped
+              %thead
+                %tr
+                  %th #
+                  %th Name
+                  %th Email
+                  %th Invitation Status
+                  %th Invitation Sent
+                  %th Last Seen At
+                  %th{'ng-show' => "current_role == 'company_admin'"} Action
+              %tbody
+                %tr{'ng-repeat' => "user in biz_users"}
+                  %td {{$index + 1}}
+                  %td {{user | full_name }}
+                  %td {{user.email}}
+                  %td{'ng-if': 'user.invitation_accepted_at != null'}
+                    Accepted
+                  %td{'ng-if': 'user.invitation_accepted_at == null'}
+                    %button.btn.btn-info.btn-raised.btn-xs.m-n{'ng-click' => 'resend_invitation(user)'}
+                      %i.fa.fa-paper-plane
+                      Resend Invitation
+                  %td
+                    %span{'ng-show' => "user.invitation_sent_at != null"}
+                      {{ user.invitation_sent_at | number_of_days }} days ago
+                    %span{'ng-show' => "user.invitation_sent_at == null "}
+                      N/A
+                  %td
+                    %span{'ng-show' => "user.last_seen != null "}
+                      {{ user.last_seen | number_of_days }} days ago
+                    %span{'ng-show' => "user.last_seen == null "}
+                      N/A
+                  %td{'ng-show' => "current_role == 'company_admin'"}
+                    %button.btn.btn-danger.btn-raised.btn-xs.m-n{'ng-click' => 'deleteUser(user.id)', 'ng-if': 'current_user_id != user.id'}
+                      %i.fa.fa-close
+                      .ripple-container
+
+          %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}
+
+%a.md-fab.md-fab-bottom-right.md-button.pull-right.fixed-element.accent_blue{ 'title': 'Add New User', 'title-direction': 'left',
+'ng-href': "/#/{{current_business}}/invite_user" }
+  %i.material-icons.md-fab--add add

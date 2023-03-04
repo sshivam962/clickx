@@ -1,0 +1,6 @@
+<% if current_user.errors.present? %>
+  toastr.error("<%= current_user.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success("Profie Picture Updated Sucessfully");
+  location.reload();
+<% end %>

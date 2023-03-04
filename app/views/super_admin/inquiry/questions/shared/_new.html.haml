@@ -1,0 +1,35 @@
+#new-question-modal.modal.fade{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg{role: 'document'}
+    = form_for question, url: super_admin_inquiry_questions_path, method: :post, remote: true do |f|
+      .modal-content
+        .modal-header
+          New Question
+          %a.close.pl-md{'data-dismiss': 'modal'}
+            %span ×
+        .modal-body
+          .row
+            .col-md-12
+              .form-group
+                %label{for: :question}
+                  Question
+                = f.text_area :question, class: 'form-control'
+              .form-group
+                %label{for: :blurb}
+                  Blurb
+                = f.text_area :blurb, class: 'form-control'
+              .form-group
+                %label{for: :required}
+                  Required
+                = f.check_box :required
+              .form-group.selectwebkit
+                %label{for: :required}
+                  Choose Element Type
+                = f.select :element_type, [['Text Area', 'text_area'], ['Check Box', 'check_box'], ['Radio Button', 'radio_button'], ['File Field', 'file_field'], ['Text Field', 'text_field']], class: 'form-control', required: true
+              .form-group.selectwebkit
+                %label{for: :required}
+                  Choose Show Tab
+                = f.select :tab_to_show, [['Background', 'background'], ['Goals', 'goals'], ['Audience', 'audience'], ['Ad Type', 'ad_type'], ['Creative', 'creative']], class: 'form-control', required: true
+        .modal-footer
+          = f.submit 'Create', class: 'btn btn-primary btn-raised'
+:css
+  .selectwebkit select{-webkit-appearance: revert; margin-left:10px;} 

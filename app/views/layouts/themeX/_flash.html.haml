@@ -1,0 +1,16 @@
+- flash.each do |key, value|
+  - if key.to_s.eql?('notice')
+    :javascript
+      toastr.info("#{value}")
+  - elsif key.to_s.eql?('alert')
+    :javascript
+      toastr.error("#{value}")
+  - elsif key.to_s.eql?('warning')
+    :javascript
+      %toastr.warning("#{value}")
+  - elsif key.to_s.eql?('error')
+    :javascript
+      toastr.error("#{value}")
+  - else
+    :javascript
+      toastr.success("#{value}")

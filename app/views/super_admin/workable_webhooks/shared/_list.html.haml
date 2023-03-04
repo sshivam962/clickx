@@ -1,0 +1,10 @@
+%tbody
+  %tr.centered-cols.row-header.text-black.d-none.d-xl-table-row
+    %th{width: '25%'} Webhook Url
+    %th{width: '25%'}
+    %th{width: '15%'}
+    %th{width: '15%'}
+    %th.text-xl-right Actions
+  - webhooks.each do |webhook|
+    %tr.centered-cols.row-card{id: "webhook_#{webhook.id}"}
+      = render '/super_admin/workable_webhooks/shared/webhook', webhook: webhook

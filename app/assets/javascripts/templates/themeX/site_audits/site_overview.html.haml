@@ -1,0 +1,39 @@
+.table-responsive
+  %table.table.table-hover.table-vam.table-striped.text-muted
+    %tbody
+      %tr
+        %td.p-md
+          %i.fa.fa-close.text-danger{ 'ng-if': "siteMap != 'Site contains xml sitemap'" }
+          %i.fa.fa-check.text-success{ 'ng-if': "siteMap == 'Site contains xml sitemap'",'title': 'Passed' }
+          Site contains XML Sitemap
+        %td.p-md
+          %label{ 'ng-class': "{'text-success': siteMap == 'Site contains xml sitemap',
+                  'text-danger': siteMap != 'Site contains xml sitemap'}" }
+            {{siteMapStatus == 200? (siteMap == 'Site contains xml sitemap'? 'Yes':'No'):'NA'}}
+      %tr
+        %td.p-md
+          %i.fa.fa-close.text-danger{ 'ng-if': "versionCheck != 'Supports both www version and non-www version'", 'title': 'Need to fix' }
+          %i.fa.fa-check.text-success{ 'ng-if': "versionCheck == 'Supports both www version and non-www version'" }
+          Supports both www and non-www version
+        %td.p-md
+          %label{ 'ng-class': "{'text-success': versionCheck == 'Supports both www version and non-www version',
+                  'text-danger': versionCheck != 'Supports both www version and non-www version'}" }
+            {{versionStatus == 200? (versionCheck == 'Supports both www version and non-www version'? 'Yes':'No'):'NA'}}
+      %tr
+        %td.p-md
+          %i.fa.fa-close.text-danger{ 'ng-if': "sslCheck != 'Your site uses SSL connection'" }
+          %i.fa.fa-check.text-success{ 'ng-if': "sslCheck == 'Your site uses SSL connection'",'title': 'Passed' }
+          Site uses SSL connection
+        %td.p-md
+          %label{ 'ng-class': "{'text-success': sslCheck == 'Your site uses SSL connection',
+                  'text-danger': sslCheck != 'Your site uses SSL connection'}" }
+            {{sslStatus == 200? (sslCheck == 'Your site uses SSL connection'? 'Yes':'No'):'NA' }}
+      %tr
+        %td.p-m
+          %i.fa.fa-close.text-danger{ 'ng-if': "robotsTxt != 'Your site uses robots.txt'" }
+          %i.fa.fa-check.text-success{ 'ng-if': "robotsTxt == 'Your site uses robots.txt'",'title': 'Passed' }
+          Site uses Robots.txt
+        %td.p-md
+          %label{ 'ng-class': "{'text-success': robotsTxt == 'Your site uses robots.txt',
+                  'text-danger': robotsTxt != 'Your site uses robots.txt'}" }
+            {{robotsStatus == 200? (robotsTxt == 'Your site uses robots.txt'? 'Yes':'No'):'NA' }}

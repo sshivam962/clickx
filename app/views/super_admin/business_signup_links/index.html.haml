@@ -1,0 +1,32 @@
+- content_for :title do
+  SMB Signup Links | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1
+      SMB Signup Links
+  .right.class-inline.col-xs-12.col-sm-12.col-lg-12.pr-n
+    %ul.marginleft-58px
+      %li
+        = text_field_tag :search_query, '', class: 'search login width250px select-box form-control mt-md', placeholder: 'Search By Amount or Plan'
+#business_signup_links_container
+  = render 'super_admin/business_signup_links/shared/list', links: @signup_links
+
+%a.btn.btn--add.pull-right{ 'href': new_super_admin_business_signup_link_path}
+  %i.glyphicon.glyphicon-plus.glyphplus
+
+:javascript
+  function search(){
+    var query = $('#search_query').val();
+    $.ajax({
+      url: "/s/business_signup_links",
+      type: 'get',
+      data: { q: query },
+      dataType: 'script',
+      async: false,
+      success:function(response){}
+    })
+  }
+
+  $('#search_query').on("change", function() {
+    search()
+  })

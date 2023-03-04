@@ -1,0 +1,7 @@
+<% if @error.present? %>
+  toastr.error("<%= @error %>")
+<% else %>
+  toastr.success('Addendum Signed Successfully');
+  window.location.href = "<%= root_url%>"
+<% end %>
+

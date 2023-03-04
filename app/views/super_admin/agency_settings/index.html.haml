@@ -1,0 +1,9 @@
+= form_for :setting, url: super_admin_agency_settings_path, method: :patch, remote: true do |f|
+  - Setting::AGENCY_SETTINGS.each do |var|
+    %h3
+      = var.to_s.titleize
+    = f.cktext_area var, value: Setting.find_by(var: var)&.value
+  = f.submit 'Update', class: 'btn btn-warning saveBtn'
+
+
+

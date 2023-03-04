@@ -1,0 +1,225 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Performance-Review.title-icon>
+    Reputation
+    %i.fa.fa-info-circle.tooltip-text-icon{'title': 'This tool lets you showcase the top reviews on your site and also view the reviews. '}
+    %small Reviews
+  .options
+    %a.btn.btn-white.btn-raised{type: "button", class:"btn btn-default btn-raised", "data-toggle": "modal", "data-target": "##{current_business.id}"}
+      Embed reviews to your site
+
+.container-fluid
+  %div
+    .row
+      .col-xs-12
+        .panel.panel-default
+          .panel-heading
+          .panel-body
+            %div
+              #googlemap.inline-flex
+          .locations
+            - @locations.each do |loc|
+              .col-md-12
+                %hr
+                .col-md-6
+                  %address
+                    %h4.addlocation
+                      %i.material-icons place
+                      %a.name{href: "/b/locations/#{loc.id}/reviews"} #{ loc.name }
+                    %span
+                      #{ loc.address } #{loc.address && ','}
+                      #{ loc.city } #{loc.city && ','}
+                      #{ loc.state } #{loc.state && ','}
+                    %span
+                      #{ loc.country },
+                    %span
+                      #{ loc.zip }
+                    %br
+                    %span
+                      %span.fa.fa-phone
+                      #{ loc.phone }
+                .col-md-6
+                  .fright.review-fright
+                    %input.copy-input-hide{ id:"copy-#{loc.id}", value: loc.short_url}
+                    .rater-inline.review-avg-rating
+                      .star-rating.pl-n
+                        - loc.average_rating.to_i.times do |star|
+                          %i.fa.gold-star.fa-star
+                        - (5 - loc.average_rating.to_i).times do |star|
+                          %i.fa.gold-star.fa-star-o
+                      -# %div{"jquery-rater":"","data-rater":"#{loc.average_rating}","data-id":"#{loc.id}",size:20,"rate-data":"#{loc.average_rating}"}
+                    .btn-group
+                      %a.btn.btn-default.btn-raised{class: "copy_text",  "data-toggle": "tooltip", "href":"#{loc.short_url}"}
+                        %i.fa.fa-paste.pr-xs{ 'title': 'Copy the URL where users can leave review on your company.',
+                        'title-direction': 'left' }
+                        .ripple-container
+                      %a.btn.btn-default.btn-raised{type: "button", class:"btn btn-default btn-raised", "data-toggle": "modal", "data-target": "##{loc.id}",
+                      'title': 'Display the embed code to showcase the top reviews on your site.', 'title-direction': 'left' }
+                        Top Reviews Embed
+                      %a.btn.btn-default.btn-raised{href: "/b/locations/#{loc.id}/reviews",
+                      'title': 'View all the reviews left on your listing.', 'title-direction': 'left' }
+                        %i.fa.fa-external-link.pr-xs
+                        View Reviews
+
+              .modal.fade.clx-modal.modal-darkstone-blue-bg{id: "#{loc.id}", tabindex: "-1", role: "dialog", "aria-labelledby": "myModalLabel"}
+                .modal-dialog{"role": "document"}
+                  %div.modal-content
+                    %div.modal-header
+                      %button.close{type: "button", "data-dismiss": "modal", "aria-label": "Close"}
+                        %span.fa.fa-times-circle-o{"aria-hidden": "true"}
+                      %h3.modal-title{id: "myModalLabel"}
+                        - if loc.name?
+                          %span #{loc.name} - Top Reviews Embed
+                    .modal-body
+                      %md-dialog-content
+                        .md-dialog-content
+                          .container-fluid
+                            .row
+                              %h4 Instructions :
+                              %p
+                                Use the following Url in an iframe tag to embed the all top reviews within your webpage.
+                              %p
+                                URL :
+                                %a{href: "#{loc.top_reviews_url}", target: '_target'}
+                                  #{ loc.top_reviews_url }
+
+                              %h4 Example Code :
+                              %p
+                                %pre
+                                  %code
+                                    &lt;iframe src="#{ loc.top_reviews_url }" width='100%' height='350px'&gt;&lt;/iframe&gt;
+                              %h4 Preview :
+                              %iframe{ src: "#{ loc.top_reviews_url }", width: '100%', height: '350px' }
+                    .modal-footer{layout:'row'}
+                      %a.btn.btn-default.btn-raised{type: "button", "data-dismiss": "modal"} Cancel
+
+.modal.fade.clx-modal.modal-darkstone-blue-bg{id: "#{current_business.id}", tabindex: "-1", role: "dialog", "aria-labelledby": "myModalLabel"}
+  .modal-dialog{"role": "document"}
+    .modal-content
+      .modal-header
+        %button.close{type: "button", "data-dismiss": "modal", "aria-label": "Close"}
+          %span.fa.fa-times-circle-o{"aria-hidden": "true"}
+        %h3.modal-title{id: "myModalLabel"}
+          %span Embed reviews to your site
+      .modal-body
+        %md-dialog-content
+          .md-dialog-content
+            .container-fluid
+              .row
+                %h4 Instructions :
+                %p
+                  Use the following Url in an iframe tag to embed the all top reviews within your webpage.
+                %p
+                  URL :
+                  %a{href: "#{current_business.top_reviews_url}", target: '_target'}
+                    #{ current_business.top_reviews_url }
+
+                %h4 Example Code :
+                %p
+                  %pre
+                    %code
+                      &lt;iframe src="#{ current_business.top_reviews_url }" width='100%' height='350px'&gt;&lt;/iframe&gt;
+                %h4 Preview :
+                %iframe{ src: "#{ current_business.top_reviews_url }", width: '100%', height: '350px' }
+      .modal-footer{layout:'row'}
+        %a.btn.btn-default.btn-raised{type: "button", "data-dismiss": "modal"} Cancel
+
+:javascript
+  $(document).ready(function() {
+    $('.copy_text').click(function (e) {
+    e.preventDefault();
+    var copyText = $(this).attr('href');
+
+    document.addEventListener('copy', function(e) {
+      e.clipboardData.setData('text/plain', copyText);
+      e.preventDefault();
+    }, true);
+
+    document.execCommand('copy');
+    });
+  })
+
+  var urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+  }
+
+  var initMap = function() {
+    var bounds = new google.maps.LatLngBounds();
+    var center = new google.maps.LatLng(40.0000, -98.0000)
+    var mapOptions = {
+      zoom: 4,
+      center: center,
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    }
+    var map = new google.maps.Map(document.getElementById('googlemap'), mapOptions);
+
+    zoomLevel = parseInt(urlParam('zoom'))
+
+    $.ajax({
+      url: "/pc/#{current_business.obfuscated_id}/map_info",
+      method: "GET",
+      headers: {"X-Requested-With": "XMLHttpRequest"},
+      dataType: 'json',
+      success: function(resp){
+        locations_fetched = true;
+        var locations = resp.locations;
+        locations.forEach(function(loc){
+          createMarker(map, bounds, loc);
+        })
+
+        map.fitBounds(bounds);
+        map.setCenter(bounds.getCenter());
+
+        if(locations.length == 1){
+          map.setZoom(15);
+        }
+        if(!isNaN(zoomLevel)){
+          map.setZoom(zoomLevel);
+        }
+      }
+    });
+    if("#{current_business.branded?}" == 'true'){
+      var clickxTM = document.createElement('p');
+      clickxTM.style.background = 'white';
+      clickxTM.style.padding = '5px';
+      clickxTM.innerHTML = "Powered By " +
+                           "<img src='https://s3.amazonaws.com/clickx-images/Clickx-Logo.png' type='image/png' style='height:auto;width:60px'></img>"
+      var TMdiv = document.createElement('div');
+      TMdiv.appendChild(clickxTM);
+
+      map.controls[google.maps.ControlPosition.TOP_RIGHT].push(TMdiv);
+    }
+  }
+
+  var createMarker = function (map, bounds, loc){
+    var marker = new google.maps.Marker({
+        map: map,
+        animation: google.maps.Animation.DROP,
+        position: new google.maps.LatLng(loc.lat, loc.lng),
+        title: loc.name
+    });
+    bounds.extend(marker.position);
+
+    marker.content = '<div class="infoWindowContent">' + loc.address + '<br>' +
+    '<a href = "http://' + loc.website +'">' + loc.website + '</a>' + '</div>';
+
+    var infoWindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(marker, 'click', function(){
+        infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+        infoWindow.open(map, marker);
+    });
+  }
+
+  initMap();
+
+  $(window).load(function(){
+    google.maps.event.addDomListener(window, "resize", function() {
+      initMap();
+    });
+  });

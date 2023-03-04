@@ -1,0 +1,27 @@
+%span.block.info
+  %a{'ng-if' => "ad.type == 'Text ad' || ad.type == 'Product listing ad'", href: '{{ad.final_url}}', target: '_blank'} {{ad.ad}}
+  %a{'ng-if' => "ad.type == 'Expanded text ad'", href: '{{ad.final_url}}', target: '_blank'} {{ad.heading1}} {{ad.heading2}}
+
+  %span{'ng-if' => "ad.type == 'Text ad'",'popover-placement' => "right", 'popover-template' => 'popover-ads.html', 'popover-trigger' => "focus","tabindex"=> 1}
+    %i.fa.fa-info-circle{"aria-hidden" => "true"}
+  %span{'ng-if' => "ad.type == 'Expanded text ad'",'popover-placement' => "right", 'popover-template' => 'popover-ads2.html', 'popover-trigger' => "focus","tabindex"=> 1}
+    %i.fa.fa-info-circle{"aria-hidden" => "true"}
+%script{:id => 'popover-ads.html', :type => "text/ng-template"}
+  %div{"ng-bind-html" => "getPopover(ad)"}
+%script{:id => 'popover-ads2.html', :type => "text/ng-template"}
+  %div{"ng-bind-html" => "getPopover2(ad)"}
+
+%a.display-block{'ng-if' => "ad.type == 'Image ad'", href: '{{ad.final_url}}', target: '_blank'}
+  .div.img-center{ "style": "max-width: 300px;max-height:150px;" }
+    %img{ 'ng-src': '{{ad.image_url}}',  "style": "max-width: 300px;cursor:pointer;max-height:150px;" }
+
+
+%span.block{'ng-if' => "ad.type != 'Expanded text ad'"} {{ad.ad_desp1}}
+%span.block{'ng-if' => "ad.type != 'Expanded text ad'"} {{ad.ad_desp2}}
+%span.block{'ng-if' => "ad.type == 'Expanded text ad'"} {{ad.ad_desp}}
+%a.display-block{'ng-if' => "ad.type == 'Image ad'",'ng-click' => 'view_image(ad.image_url)'}View full-sized Image
+%br
+%span.success {{ad.ad_url || ad.final_url}}
+%span
+  %a.btn.m-n.btn-default.btn-raised.btn-xs.pull-right{:href => "{{ad.final_url}}", target: '_blank', title: "{{ad.final_url}}"}
+    %i.fa.fa-link

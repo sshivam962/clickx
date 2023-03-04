@@ -1,0 +1,107 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Performance-Review.title-icon>
+    Clickx Reviews
+    %small Reviews
+
+.container-fluid
+  %div
+    .row
+      .col-md-12
+        %ul.nav.nav-tabs.material-nav-tabs.mb-lg
+          %li
+            %a{href: "/b/reviews"} All Locations
+          %li{role:'presentation', class: "active" }
+            %a{href: "/b/locations/#{@location.id}/reviews"} Latest Reviews
+          %li{role:'presentation'}
+            %a{href: "/b/locations/#{@location.id}/reviews/site"} Reviews by Site
+          %li{role:'presentation'}
+            %a{href: "/b/locations/#{@location.id}/reviews/ratings"} Reviews by Rating
+
+      .col-md-12
+        .tab-content
+          .dashboard
+            .row
+              .col-md-12
+                .page-heading.no-margin-bottom
+                  .options
+                    %a.btn.btn-white.btn-raised{type: "button", class: "btn-lg", "data-toggle": "modal", "data-target": "#send_email_modal"}
+                      %i.fa.fa-envelope.pr-xs
+                      Send Email
+                .tab-container
+                  %div{'st-table' => 'reviews', 'st-safe-src'=>'copyReviews'}
+                    - @reviews.each do |rev|
+                      .panel.panel-grey
+                        .panel-heading
+                          %img.panel-logo{:alt => "#{rev.name}", src: "/directories/#{rev.directory}.png"}
+                          %h2.intialtitle-panel #{ rev.author || rev.email }
+                          %span.pl  #{ rev.timestamp.strftime("%-dth %b %Y") }
+                          .panel-ctrls.dropdown
+                            .star-rating.pr-n
+                              - rev.rating.to_i.times do |star|
+                                %i.fa.gold-star.fa-star
+                              - (5 - rev.rating.to_i).times do |star|
+                                %i.fa.gold-star.fa-star-o
+                            - if rev.directory == 'clickx'
+                              %button.btn.btn-icon-rounded.dropdown-toggle{"data-toggle" => "dropdown"}
+                                %span.material-icons.inverted more_vert
+                              %ul.dropdown-menu{:role => "menu"}
+                                %li.p-sm
+                                  = link_to send_mail_business_location_reviews_path(id: rev.id), method: :post, remote: true do
+                                    %i.fa.fa-envelope.pr-xs>
+                                    Send Email
+                                %li.p-sm
+                                  %a{href: "", "data-toggle": "modal", "data-target": "#confirmModal"}
+                                    %i.fa.fa-trash.pr-xs>
+                                    Delete Review
+
+                        .panel-body
+                          - if rev.text?
+                            %blockquote
+                              %p.display-inline
+                                #{ rev.text }
+                              - if rev.url?
+                                %a{href: "#{rev.url}", target:'_blank'} View Profile
+                          - unless rev.text?
+                            %blockquote
+                              %p
+                                #{"This review on " + rev.name + " does not have any content."}
+
+                      %div.row.text-center.p-n.mgl-33{src: "'themeX/shared/_pagination_links.html'"}
+
+                      .modal.fade.clx-modal{id: "confirmModal", tabindex: "-1", role: "dialog", "aria-labelledby": "ModalLabel", "aria-hidden": "true"}
+                        .modal-dialog.modal-sm{role: "document"}
+                          .modal-content
+                            .modal-header
+                              %button.close{type: "button","data-dismiss": "modal", "aria-label": "Close"}
+                                %span.fa.fa-times-circle-o{"aria-hidden": "true"}
+                              %h4{class: "modal-title w-100", id: "ModalLabel"} Delete this Review
+                            .modal-body
+                              %p Are you sure?
+                            .modal-footer
+                              %button.btn.btn-secondary.btn-sm{type: "button", "data-dismiss": "modal"}Close
+                              = link_to "Delete", business_review_path(id: rev.id), class: "btn btn-primary btn-sm", "data-dismiss": "modal", :method => :delete
+
+.modal.fade.clx-modal.modal-darkstone-blue-bg.modal-compressed{id: "send_email_modal", tabindex: "-1", role: "dialog"}
+  .modal-dialog{role: "document"}
+    .modal-content
+      .modal-header
+        %button{ type: "button", class: "close", "data-dismiss": "modal", "aria-label": "Close"}
+          %span.fa.fa-times-circle-o{"aria-hidden": "true"}
+        %h4{class: "modal-title"} Send Email
+      = simple_form_for :send_mail, url: send_mail_with_id_business_location_reviews_path(location_id: @location.id), method: :post, remote: true do |f|
+        .modal-body
+          .form-group.clearfix
+            %label.col-md-12.control-label.m-n{:for => "fieldname"}
+            .col-md-12
+              = f.input :email, class: 'form-control'
+        .modal-footer
+          = f.submit 'Send', class: 'btn btn-raised btn-primary', id: 'submit_btn'
+
+:javascript
+
+  $(document).ready(function(){
+    $('#submit_btn').on('click', function() {
+      $('#send_email_modal').modal('hide');
+    });
+  });

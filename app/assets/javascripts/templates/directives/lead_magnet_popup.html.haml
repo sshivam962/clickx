@@ -1,0 +1,49 @@
+.lead-magnet-popup{ 'ng-style' => 'settings.leadbox.box.style' }
+  %a.lm-close-link{ 'ng-style' => 'settings.leadbox.close.style' }
+    %span
+  .lm-content{ 'ng-style' => 'settings.leadbox.content.style' }
+    .progress{ 'ng-show' => 'settings.has_progress_bar',
+    'ng-style' => 'settings.progress.barbox.style' }
+      .progress-bar.progress-bar-striped.progress-bar.active{ 'aria-valuemax' => '100', 'aria-valuemin' => '0',
+        'aria-valuenow' => '{{settings.progress.style.width}}', :role => 'progressbar',
+        'ng-style' => 'settings.progress.bar.style', :style => 'width:70%' }
+        %span.lm-span{ 'ng-style' => 'settings.progress.span.style' }
+          {{settings.progress.span.text}}
+    .l-mc-label
+      %span.l-mcl-conent{ 'ng-style' => 'settings.progress.text_span.style' }
+        {{settings.progress.text_span.text}}
+    .l-mc-content{ 'ng-class' => "{'l-mc-image':true}" }
+      .row.m-n.mb.mt
+        .l-mc-content-wrapper.inline-flex
+          .l-mc-image-wrapper{ 'ng-show' => 'settings.logo_url' }
+            %a{ 'href': '{{settings.image_link}}' }
+              %img.img-responsive{ 'ng-src': '{{ settings.logo_url }}', 'ng-style': 'settings.popup_image.style' }
+          .lt-form-group
+            %h2.lm-title{ 'ng-style' => 'settings.title.style' }
+              {{settings.title.text}}  
+        .field-wrapper    
+          .lt-lm-form
+            %form
+              .lt-form-group
+                %input.form-control#email-input{ placeholder: '{{settings.form.label.text}}',
+                 'ng-style' => 'settings.form.input.style', 'ng-class' => 'settings.form.placeholder_style' }      
+              .lt-field-group{ 'ng-if': " settings.form.fname_input.enable || settings.form.lname_input.enable" }
+                .lt-form-group{ 'ng-if': 'settings.form.fname_input.enable',
+                  'ng-class':  "{'mr-sm': settings.form.lname_input.enable == true }"}
+                  %input.form-control#fname-input{ placeholder: '{{settings.form.fname_input.placeholder}}',
+                    'ng-style' => 'settings.form.input.style' }
+                .lt-form-group{ 'ng-if': 'settings.form.lname_input.enable' }
+                  %input.form-control#lname-input{ placeholder: '{{settings.form.lname_input.placeholder}}',
+                    'ng-style' => 'settings.form.input.style' }
+              .lt-field-group{ 'ng-if': " settings.form.phone_input.enable || settings.form.company_input.enable" }
+                .lt-form-group{ 'ng-if': 'settings.form.phone_input.enable',
+                  'ng-class':  "{'mr-sm': settings.form.company_input.enable == true }"}
+                  %input.form-control#phone-input{ placeholder: '{{settings.form.phone_input.placeholder}}',
+                    'ng-style' => 'settings.form.input.style' }
+                .lt-form-group{ 'ng-if': 'settings.form.company_input.enable' }
+                  %input.form-control#company-input{ placeholder: '{{settings.form.company_input.placeholder}}',
+                    'ng-style' => 'settings.form.input.style' }
+              .lt-form-group
+                %button.lm-sumbit{ type: 'submit',
+                  'ng-style' => 'settings.button.style', 'ng-class' => "{ 'btn-block':settings.button.fit=='fit'}" }
+                  {{settings.button.text}}          

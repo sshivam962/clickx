@@ -1,0 +1,105 @@
+%table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+  %tr
+    %td{:valign => "top", :width => "100%"}
+      %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+        %tr
+          %td{:width => "100%"}
+            %table.table_scale{:bgcolor => "#FFF", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+              %tr
+                %td{:align => "center", :width => "100%"}
+                  %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                    %tr
+                      %td.spacer{:width => "30"}
+                      %td{:width => "540"}
+                        / START OF COLUMN
+                        %table.full{:align => "center", :border => "0", :cellpadding => "10", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "540"}
+                          %tr.cellpadd10{:style => "margin-bottom: 15px"}
+                            %td
+                              %h1.subhead.head-st-2 New Subscription Added
+                              %p
+                                Team,
+                                %br
+                                We have a new agency signup. Their info is as follows:
+                              %br
+                              %p.subhead.lnh-n{style: 'font-size: 16px !important;'}
+                                %b User Name:
+                                #{@user.name}
+                                %br
+                                %b Email:
+                                #{@user.email}
+                                %br
+                                %b Agency Name:
+                                #{@agency.name}
+                                %br
+                                %b Phone:
+                                #{@user.phone}
+                                %br
+                                %b Product Name:
+                                #{@subscription.package_name.titleize}
+                                %br
+                                %b
+                                  Amount :
+                                = number_to_currency(@subscription.amount)
+                                - if @subscription.onetime_charge.present?
+                                  %br
+                                  %b
+                                    One-time Charge:
+                                  = number_to_currency(@subscription.onetime_charge)
+
+                                - if @signup_link.present?
+                                  %br
+                                  %b
+                                    Signup Link URL : #{@signup_link.url}
+                                  - if @signup_link.down_payment?
+                                    %br
+                                    %b
+                                      Down payment:
+                                    = number_to_currency(@signup_link.down_payment, precision: 0)
+                                  %br
+                                  %b
+                                    Onboarding Onetime Charge:
+                                  = number_to_currency(@signup_link.onetime_charge, precision: 0)
+                                  - if @signup_link.onetime_charge_duration?
+                                    (charged for #{pluralize(@signup_link.onetime_charge_duration, 'month')} #{number_to_currency(@signup_link.onetime_charge, precision: 0)}#{@signup_link.onetime_charge_duration == 1 ? '' : '/mo'})
+                                  - else
+                                    = '/mo'
+                                  - if raw(@signup_link.title).present?
+                                    %br
+                                    %b
+                                      Signup Link Title
+                                    %p
+                                      = raw(@signup_link.title)
+
+                                - if @signup_link&.trial?
+                                  - sub_amount = 0
+                                  %br
+                                  %b
+                                    Free Trial for #{@signup_link.trial_info}
+                                - elsif @coupon.present?
+                                  - sub_amount = @subscription.amount - discount_by_coupon(@coupon, @subscription.amount, false)
+                                  - coupon_info = coupon_applied_info_for_mail(@coupon, @subscription.amount)
+                                  %br
+                                  %b
+                                    = coupon_info[:promo_msg]
+                                  %br
+                                  %b
+                                    = coupon_info[:discount_msg]
+                                - else
+                                  - sub_amount = @subscription.amount
+
+                                %br
+                                %b
+                                  - onetime_charge = @signup_link&.down_payment? ? 0 : @signup_link&.onetime_charge.to_i
+                                  - down_payment = @signup_link&.down_payment? ? @signup_link&.down_payment : 0
+                                  Total Amount Recieved:
+                                - total_amount = [sub_amount, @subscription.onetime_charge, onetime_charge, down_payment].flatten.compact.sum
+                                = number_to_currency(total_amount)
+
+                              %br
+                              %p
+                                Thanks,
+                                %br
+                                Solomon
+
+                      %td.spacer{:width => "30"}
+/ CTA

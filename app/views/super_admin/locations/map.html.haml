@@ -1,0 +1,61 @@
+- content_for :title do
+  Metrics | Clickx
+- content_for :gon_data do
+  = Gon::Base.render_data
+.header.uiv2
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1
+      Metrics
+    .options
+      %a.btn.btn-white.btn-raised.pull-right{href: '/s/clients/traction'}
+        Traction
+  .clearfix
+  .col-md-12
+    %div#location-map-all{style:'height:420px'}
+
+:javascript
+  function initMap() {
+
+    const map_center = { lat: 40.0, lng: -98.0 };
+    const map = new google.maps.Map(document.getElementById("location-map-all"), {
+      zoom: 4,
+      center: map_center,
+    });
+    var bounds = new google.maps.LatLngBounds();
+    $.each(gon.locations, function( index, location ) {
+      const contentString =
+        '<div id="content">' +
+        '<div id="siteNotice">' +
+        "</div>" +
+        '<h2 id="firstHeading" class="firstHeading">' +
+        location.name +
+        '</h2>' +
+        '<div id="bodyContent">' +
+        '<p>' + location.address + '</p>' +
+        '<p>' +
+        '<a href = "http://' +
+        location.website +
+        '">' +
+        location.website +
+        '</a>' +
+        '</p>' +
+        '</div>' +
+        '</div>';
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString,
+      });
+      const marker = new google.maps.Marker({
+        position: {
+          lat: parseFloat(location.lat),
+          lng: parseFloat(location.lng)
+        },
+        map,
+        title: location.name,
+      });
+      bounds.extend(marker.position);
+      marker.addListener("click", () => {
+        infowindow.open(map, marker);
+      });
+    });
+    map.fitBounds(bounds);
+  }

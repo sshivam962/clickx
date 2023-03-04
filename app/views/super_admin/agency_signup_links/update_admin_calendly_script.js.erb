@@ -1,0 +1,3 @@
+toastr.success('Success');
+$('#adminCalendlyScriptModal').modal('hide');
+$('#admin_calendly_scripts_container').html("<%= escape_javascript render( partial: '/super_admin/agency_signup_links/shared/calendly_script_list', locals: { links: @admin_calendly_scripts }) %>");

@@ -1,0 +1,61 @@
+- if @agency_niches_access.present?
+  - if @agency_niches_access.pluck(:full_access).include?(true)
+    - full_access = true
+    - industries_ids = []
+  - else
+    - full_access = false
+    - industries_ids = @agency_niches_access.first.industries_ids
+- else
+  - full_access = false
+  - industries_ids = []
+- has_access = policy(current_agency).case_study? == false || full_access
+
+/ .bg-sky-blue.rounded.border-1.border-blue.mb-4
+/   .bg-white.rounded-t-12.py-4.px-5
+/     .d-flex.justify-content-between.align-items-center
+/       .col-auto
+/         .fs-md.color-dark-blue.fw-m My Case Studies
+/       .col-auto
+/         - if @my_case_study_industries.present?
+/           %a.btn.btn--dark.btn--rounded-md.mb-2.mb-md-0{href: new_agency_case_study_path}
+/             %i.fa.fa-plus
+/             \&#160; Create
+/   .p-lg-5.p-4
+/     - if @my_case_study_industries.present?
+/       .niche-list.niche-list--preloader
+/         - (@my_case_study_industries.to_a - [Industry.other]).each do |industry|
+/           - next if industry.case_studies.published.size.zero?
+/           = render 'niche_my_item', has_access: has_access, industry: industry, my_case_study: 1, favorite: false, industries_ids: industries_ids
+/     - else
+/       -# %i.fa.fa-exclamation-triangle.mr-3.text-warning
+/       %a.btn.btn--dark.btn--rounded-md{href: new_agency_case_study_path}
+/         %i.fa.fa-plus
+/         \&#160; Create
+
+.bg-sky-blue.rounded.border-1.border-blue
+  .bg-white.rounded-t-12.py-4.px-5
+    .fs-md.color-dark-blue.fw-m Pinned
+  .p-lg-5.p-4
+    - if (has_access || industries_ids.present?) && @fav_industries.present?
+      .niche-list.niche-list--preloader
+        - (@fav_industries.to_a - [Industry.other]).each do |industry|
+          - next if industry.case_studies.published.size.zero?
+          - if industry.funnel_page.present?
+            = render 'niche_item', has_access: has_access, industry: industry, my_case_study: 0, favorite: true, industries_ids: industries_ids
+    - else
+      %i.fa.fa-heart.mr-3.text-red
+      %span.fs-xxs
+        Pin a niche for easy access
+.p-3
+.bg-sky-blue.p-lg-5.p-4.rounded.border-1.border-blue
+  .niche-list.niche-list--default.niche-list--preloader
+    - if @industries.present?
+      - (@industries.to_a - [Industry.other]).each do |industry|
+        - next if industry.case_studies.published.size.zero?
+        - if industry.funnel_page.present?
+          = render 'niche_item', has_access: has_access, industry: industry, my_case_study: 0, favorite: false, industries_ids: industries_ids
+    - else
+      %i.fa.fa-exclamation-triangle.mr-3.text-warning
+      %span.fs-xxs
+        Error - No Items Found
+.p-3

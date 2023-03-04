@@ -1,0 +1,9 @@
+<% if @user.errors.present? %>
+  toastr.error("<%= @user.errors.full_messages.to_sentence %>")
+<% elsif @error %>
+  toastr.error("<%= @msg %>")
+<% else %>
+  $('#user_form').html("<%= escape_javascript render( partial: '/network/signups/success') %>");
+  $('#user_form').removeClass('justify-center');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+<% end %>

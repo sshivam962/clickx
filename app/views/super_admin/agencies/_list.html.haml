@@ -1,0 +1,93 @@
+- agencies.each do |agency|
+  .pt-n{id: dom_id(agency)}
+    .clients-list
+      .clients-list__item.d-flex.flex-wrap
+        .col-stretch.clients-list__datas.pr-4.pt-3
+          .d-flex
+            .col-md-4.pl-0
+              %a.no-underline{ href: edit_super_admin_agency_path(agency) }
+                - if agency.logo.present?
+                  %img.mr-xs{alt: 'logo', src: agency.logo, width: '50'}
+                %span.name.blue
+                  = agency.name
+                  - if agency.growth_subscriptions.present?
+                    - subscription = agency.growth_subscriptions.last
+                    %a.no-underline{href: "https://dashboard.stripe.com/subscriptions/#{subscription.account_id}", target: "_blank"}
+                      %small
+                        = "(#{agency.growth_plan_key&.titleize})"
+                    .mt-3.ml-lg.pl-xl
+                      = "Recurring: #{number_to_currency(subscription.amount, precision: 0)}"
+                      %br
+                      = "Status: #{subscription.status.titleize}"
+                      %br
+                      = "Date: #{subscription.created_at.strftime('%b %d, %Y')}"
+                      %br
+                  - if agency.agency_status
+                    %br
+                    %span.label.label-text-success.small.px-0
+                      Status: Enabled
+                  - else
+                    %br
+                    %span.label.label-text-danger.small.px-0
+                      Status: Disabled
+            .col-md-3
+              %p
+                - if agency.active_domain == 'app.marketingportal.us'
+                  %span.label.label-text-danger.small.px-0
+                    = link_to agency.active_domain
+                - else
+                  %span.label.label-text-success.small.px-0
+                    = link_to agency.active_domain
+
+              - if agency.support_email.present?
+                %p
+                  Email:
+                  %a{href: "mailto:#{agency.support_email}"}= agency.support_email
+              - if agency.phone.present?
+                %p
+                  Phone:
+                  %a{href: "tel:#{agency.phone}"}= agency.phone
+              - if agency.state.present?
+                %p
+                  State:
+                  = agency.state
+              - if agency.niches.present?
+                %span.small.pr-sm
+                  %span.label.label-default
+                    = agency.niches
+            .col-md-3
+              %span.small
+                = days_since_last_logged_in agency
+            .col-md-3
+              - agency.label_list.each do |label|
+                %span.small.pr-sm
+                  %span.label.label-default
+                    = label
+        .col-auto.clients-list__actions.align-items-center
+          .btn-icon-list
+            = select_tag 'login_as', options_from_collection_for_select(agency.users, 'id', 'first_name'), class: 'login_as_user form-control select-box width200px', include_blank: 'Login as user..', 'data-target' => agency.id, "data-title" => "View Dashboard"
+            %a.btn-icon.btn-icon--login{"data-title" => "View Dashboard", href: "/switch_to_agency_user?user_id=#{agency.preview_users.first&.id}&agency_id=#{agency.id}", id: "view_dashboard_#{agency.id}" }
+              %i.fa.fa-sign-in
+            %a.btn-icon{"data-title" => "Agency Admins", href: agency_admins_super_admin_agency_path(agency) }
+              %i.fa.fa-user
+            %a.btn-icon{"data-title" => "Agency Profile", href: profile_super_admin_agency_path(agency) }
+              %i.fa.fa-files-o
+            - unless agency.signup_approved?
+              = link_to approve_signup_super_admin_agency_path(agency), method: :patch, data: { confirm: 'Are you sure?', title: 'Approve Signup' }, class: 'btn-icon btn-icon--approve' do
+                %i.fa.fa-thumbs-o-up
+            %a.btn-icon.btn-icon--edit{"data-title" => "Edit",  href: edit_super_admin_agency_path(agency) }
+              %i.fa.fa-edit
+            %a.btn-icon#niche_access{"data-title" => "Niches Access",  href: niches_access_super_admin_agency_niches_access_path(agency)}
+              %i.fa.fa-file
+            %a.btn-icon#niche_access{"data-title" => "Disable or Enable",  href: change_agency_status_super_admin_agency_path(agency)}
+              %i.fa.fa-archive
+            / = link_to super_admin_agency_path(agency), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn-icon btn-icon--delete' do
+            /   %i.fa.fa-archive
+.row.mt-md
+  .col-md-4.col-lg-4.col-sm-12
+    = page_entries_info agencies
+  .col-md-8.col-lg-8.col-sm-12.right_align
+    = will_paginate agencies, params: {name: params[:name], label: params[:label]}
+
+:javascript
+  $('.pagination a').attr('data-remote', 'true');

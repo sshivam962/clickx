@@ -1,0 +1,89 @@
+.panel.panel-info
+  .panel-heading
+    %h2 Comprehensive Digital Marketing Strategy & Recommendations
+  .panel-body.p-lg
+    .row
+      .col-sm-6
+        %ul.package-list
+          %li
+            Strategy Questionnaire
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext Strategy questionnaires help us gather key information about your client including their USP, target audience, and objectives for each campaign.
+          %li
+            Kick-Off Call with Agency
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext An account manager from Clickx will join you on a call to address initial objectives and timelines, previous hurdles and problems, creatives and copy objectives, and how we can help their business grow.
+          %li
+            Custom Strategy Development
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext We’ll take your clients' entire business into consideration when implementing a strategy that will yield the best results. That’s why a clear understanding of objectives is crucial to your clients success.
+          %li
+            SMART Goal Setting
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext Specific, Measurable, Achievable, Relevant, and Time-Bound goals for the campaign and map the strategy to execute.
+          %li
+            Audience Research
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext When conducting target audience research, we’ll explore different options for the services being advertised. We’ll use past targeting (if applicable), client recommendations, and our experience to build the initial targeting options to start testing.
+          %li
+            SWOT Analysis
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext We’ll create SWOT analysis to strategically plan and identify your clients strengths, weaknesses, opportunities, and threats related to their business competition and strategy.
+          %li
+            Keyword Research (if applicable)
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext We’ll use competitive research to determine which keywords your clients could be ranking for on search engines and build a content plan to support it.
+      .col-sm-6
+        %ul.package-list
+          %li
+            Define Campaign Objectives
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext Using your clients business goals we’ll define the objectives that will help them to achieve results.
+          %li
+            Organic & Paid Competitive Research
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext To determine the best plan of action for your client we will research how competitors are deploying their marketing tactics
+          %li Conversion Optimization Recommendations
+          %li
+            Digital Tactics and Best Practices
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext We’ll provide an overview into how the solution will affect your client’s business and which solutions will be most effective.
+          %li
+            Timeline Recommendations
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext We’ll map out short-term goals and solutions along with long-term goals and solutions to place their business on the road to success.
+          %li
+            Presentation Call with Agency
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext We’ll join you on the call through the entire scope of the digital strategy answering any questions
+          %li
+            Min 2 Weeks Turnaround
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext Please allow up to two weeks to complete a thorough strategy assessment.
+    .col-sm-12.mt-lg
+      .bdr-line.info-tile.info-tile-alt.mb-n.b-s-n
+        .info.p-lg
+          .tile-body
+            %b
+              #{in_currency(plan.amount, current_agency.display_currency)} One Time
+          .text-center
+            %span.plan-label
+              MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+    .col-sm-4.p-n.mt-lg.text-center.col-md-offset-4
+      %a.btn.btn-info.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'generate_lead_strategy', plan: plan.key)}
+        Get Started
+        %i.pl-sm.fa.fa-angle-double-right
+        .ripple-container

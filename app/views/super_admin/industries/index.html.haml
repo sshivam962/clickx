@@ -1,0 +1,46 @@
+- content_for :title do
+  Industries | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1 Industries
+.locations
+  - other_industry = Industry.other
+  - (@industries.to_a - [other_industry]).each do |industry|
+    %span
+      .address.row.ml-n.mr-n
+        .col-sm-3.col-md-4
+          %a.no-underline{href: edit_super_admin_industry_path(industry)}
+            %span.name.blue
+              = industry.title
+        .col-sm-3.col-md-3
+          =# image_tag industry.logo.medium.url || ''
+          %span.font-size-50{class: industry.icon_klass}
+        .col-sm-6.col-md-5
+          .col-sm-12.right.normal-edit-button.grey-btn-group.mb-md
+            = link_to super_admin_industry_path(industry), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn grey-btn-icon align-icon pull-right ml-sm mb-sm' do
+              %i.glyphicon.glyphicon-trash
+              Delete
+            %a.btn.grey-btn-icon.align-icon.pull-right.ml-sm.mb-sm{ href: edit_super_admin_industry_path(industry) }
+              %i.glyphicon.glyphicon-edit
+              Edit
+  - if other_industry.present?
+    %span
+      .address.row.ml-n.mr-n
+        .col-sm-3.col-md-4
+          %a.no-underline{href: edit_super_admin_industry_path(other_industry)}
+            %span.name.blue
+              = other_industry.title
+        .col-sm-3.col-md-3
+          =# image_tag industry.logo.medium.url || ''
+          %span.font-size-50{class: other_industry.icon_klass}
+        .col-sm-6.col-md-5
+          .col-sm-12.right.normal-edit-button.grey-btn-group.mb-md
+            = link_to super_admin_industry_path(other_industry), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn grey-btn-icon align-icon pull-right ml-sm mb-sm' do
+              %i.glyphicon.glyphicon-trash
+              Delete
+            %a.btn.grey-btn-icon.align-icon.pull-right.ml-sm.mb-sm{ href: edit_super_admin_industry_path(other_industry) }
+              %i.glyphicon.glyphicon-edit
+              Edit
+
+%a.btn.btn--add.pull-right{ 'href': new_super_admin_industry_path }
+  %i.glyphicon.glyphicon-plus.glyphplus

@@ -1,0 +1,32 @@
+= render 'page_header', daterange: daterange_picker_format(@start_date, @end_date)
+
+.container-fluid
+  .row
+    .col-md-12
+      = render 'tab_menu', active_tab: 'source_medium'
+    .col-md-12
+      .tab-content
+        = render 'business/google_analytics/source_medium', data: @data[:source_medium], total_sessions: @data[:total_sessions], total_new_users: @data[:total_new_users]
+
+:javascript
+  $(function() {
+    $('#date_filter').daterangepicker({
+      maxDate: new Date(),
+      locale: { format: 'MM-DD-YYYY' }
+    }).on("change", function() {
+      const date_range = $(this).val();
+      const [start_date, end_date] = date_range.split(' - ');
+      const request_url = `/b/google_analytics/source_medium?start_date=${start_date}&end_date=${end_date}`;
+
+      $.ajax({
+        url: request_url,
+        type: 'GET',
+        dataType: 'script',
+        success: function(data) {
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    });
+  });

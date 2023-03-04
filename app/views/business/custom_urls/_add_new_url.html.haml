@@ -1,0 +1,79 @@
+// Create and Edit modal can be used as single modal
+#addNewUrlModal.modal.fade.in{"aria-hidden" => "false", "aria-labelledby" => "addNewUrlModal", :role => "dialog", :tabindex => "-1", "data-spy" =>"scroll" }
+  .d-lg-flex.align-items-center.h-lg-cover.pt-5.pb-5
+    .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg
+      .modal-content.modal-content--rounded
+        .modal-header
+          Add URL
+          %a.close.pl-md{"data-dismiss" => "modal"}
+            %span
+              %i.material-icons close
+        = form_with url: business_custom_urls_path, method: :post, local: true, id: 'add_url_form' do |f|
+          .modal-body
+            .md-dialog-content
+              .form-group.clearfix
+                %label.col-md-12.control-label.m-n
+                Website URL
+                = f.text_field "custom_url[website_url]", class: "form-control login", value: current_business.site_url
+                %span.font-14{style: 'color: #777'}
+                  The full website URL (e.g.
+                  %code
+                    https://www.example.com
+                  )
+              .form-group.clearfix
+                %label.col-md-12.control-label.m-n
+                Campaign Source
+                %i.fa.fa-info-circle.tooltip-text-icon{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Use utm_source to identify a search engine, newsletter name, or other source. Example: google"}
+                = f.text_field "custom_url[campaign_source]", class: 'form-control login', required: true
+                %span.font-14{style: 'color: #777'}
+                  The referrer: (e.g.
+                  %code
+                    google
+                  ,
+                  %code
+                    newsletter
+                  )
+              .form-group.clearfix
+                %label.col-md-12.control-label.m-n.clearfix
+                Campaign Medium
+                %i.fa.fa-info-circle.tooltip-text-icon{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Use utm_medium to identify a medium such as email or cost-per- click. Example: cpc" }
+                = f.text_field "custom_url[campaign_medium]", class: 'form-control login'
+                %span.font-14{style: 'color: #777'}
+                  Marketing medium: (e.g.
+                  %code
+                    cpc
+                  ,
+                  %code
+                    banner
+                  ,
+                  %code
+                    email
+                  )
+              .form-group.clearfix
+                %label.col-md-12.control-label.m-n
+                Campaign Name
+                %i.fa.fa-info-circle.tooltip-text-icon{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Used for keyword analysis. Use utm_campaign to identify a specific product promotion or strategic campaign. Example: utm_campaign=spring_sale" }
+                = f.text_field "custom_url[campaign_name]", class: 'form-control login'
+                %span.font-14{style: 'color: #777'}
+                  Product, promo code, or slogan (e.g.
+                  %code
+                    spring_sale
+                  )
+              .form-group.clearfix
+                %label.col-md-12.control-label.m-n
+                Campaign Term
+                %i.fa.fa-info-circle.tooltip-text-icon{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Used for paid search. Use utm_term to note the keywords for this ad. Example: running+shoes" }
+                = f.text_field "custom_url[campaign_term]", class: 'form-control login'
+                %span.font-14{style: 'color: #777'}
+                  Identify the paid keywords
+              .form-group.clearfix
+                %label.col-md-12.control-label.m-n{:for => "fieldname"}
+                Campaign Content
+                %i.fa.fa-info-circle.tooltip-text-icon{ "data-placement" => "right", "data-toggle" => "tooltip", :title => "Used for A/B testing and content-targeted ads. Use utm_content to differentiate ads or links that point to the same URL. Examples: logolink or textlink" }
+                = f.text_field "custom_url[campaign_content]", class: 'form-control login'
+                %span.font-14{style: 'color: #777'}
+                  Use to differentiate ads
+          .modal-footer
+            %button.btn.btn-raised.btn-default
+              Cancel
+            = f.submit 'Save', class: 'btn btn-raised btn-primary'

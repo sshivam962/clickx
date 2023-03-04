@@ -1,0 +1,64 @@
+.header
+  .p-n.col-xs-12.col-sm-12.col-lg-12
+    %h1 Lead Strategies
+    = link_to 'Strategy Funnels', super_admin_strategy_funnels_path, class: 'btn pull-right'
+  .right.class-inline.col-xs-12.col-sm-12.col-lg-12.pr-n
+    %ul.marginleft-58px
+      %li
+        = text_field_tag :search_name, '', class: 'search login width250px select-box form-control mt-md', placeholder: 'Search By Name'
+      %li.pull-right
+        = select_tag 'search_agency', options_for_select(Agency.pluck(:name, :id)), include_blank: 'Filter By Agency', class: 'search login width250px select-box form-control mt-md'
+  .container-fluid
+    %div{"data-widget-group" => "group1"}
+      .row
+        .col-md-12.p-n
+          %ul.nav.nav-tabs.nav-justified.strategy-tabs
+            - Lead::Strategy.status_collection.each do |status|
+              %li{id: "leads_tab_#{status}"}
+                %a.w100{"data-toggle" => "tab", :href => "#sec-#{status}"}= status.titleize
+        .col-md-12.p-n
+          .tab-content.strategy-leads
+            - Lead::Strategy.status_collection.each do |status|
+              .tab-pane.pt-n.p-md{id: "sec-#{status}"}
+                = render 'super_admin/lead/strategies/shared/tab_content', status: status
+:javascript
+  $("#leads_tab_#{params[:status] || 'new_leads'} a").click()
+
+  $(document).on('click', '.copy_to_clipboard',function() {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).attr('href')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Link Copied");
+  });
+
+  $('#search_name').on("keyup", function() {
+    var agency = $('#search_agency').val();
+    var name = $('#search_name').val().toLowerCase();
+    $.ajax({
+      url: "/s/lead/strategies",
+      type: 'get',
+      data: { name: name, agency: agency },
+      dataType: 'script',
+      async: false,
+      success:function(response){
+        $('#tab_content').html(response.data)
+      }
+    })
+  });
+
+  $('#search_agency').on("change", function() {
+    var agency = $('#search_agency').val();
+    var name = $('#search_name').val().toLowerCase();
+    $.ajax({
+      url: "/s/lead/strategies",
+      type: 'get',
+      data: { name: name, agency: agency },
+      dataType: 'script',
+      async: false,
+      success:function(response){
+        $('#tab_content').html(response.data)
+      }
+    })
+  });

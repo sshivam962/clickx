@@ -1,0 +1,36 @@
+.signup-wrapper
+  .form-wrapper
+    - if @error.blank?
+      %main.theme-clickx.payment
+        .container-fluid
+          .payment-content-area.payment-content-area--thankyou
+            .payment-min-height--wrapper.payment-min-height--wrapper-center.thank-you-content
+              .text-center
+                .icon-check.mt-lg
+                  = image_tag 'tick.ico', width: '150px'
+                .spacer30.mb-lg
+                %h2 Congrats! 🎉
+                %h3 You will receive an invite email from us shortly.
+    - else
+      .row.mt-md
+        .col-md-12
+          .panel{"data-widget": {draggable: false}}
+            .panel-heading
+              %h2.regtitle{style: 'float:inherit;'} Something Went Wrong
+            .panel-body
+              %h4
+                %p
+                  = @error.message
+
+      %script{src: "https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js", :type => "text/javascript"}
+      %link{href: "https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.css", rel: "stylesheet"}
+
+      .row
+        .col-md-12
+          .tab-container
+            .tab-content
+              %iframe#freshwidget-embedded-form.freshwidget-embedded-form{frameborder: "0", height: "500px", scrolling: "no", src: "https://clickx.freshdesk.com/widgets/feedback_widget/new?&widgetType=embedded&formTitle=Clickx+Support&submitTitle=Submit&submitThanks=Thank+you%2C+we+will+get+back+to+you+shortly!&screenshot=no", title: "Feedback Form", width: "100%"}
+:javascript
+  $(function() {
+    $('.countdown-wrapper').remove()
+  })

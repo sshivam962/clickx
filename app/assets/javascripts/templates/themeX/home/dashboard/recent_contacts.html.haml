@@ -1,0 +1,30 @@
+.panel.panel-default.m-n#recent-contacts{ 'ng-if': 'marketing_performance_loaded && contactsOverviewStatus' }
+  .panel-heading.cursor-move
+    %h2
+      %a.l-grey{ 'href': "#/leads" }
+        Most Recent Contacts
+        %i.fa.fa-info-circle.tooltip-text-icon{ 'title': 'Most recent contacts' }
+    #onboarding-recent-contacts.on-boarding
+    .panel-ctrls
+      %button.Dbutton.btn.button-icon.mt-sm{ 'ng-click': 'pdf_export("recent-contacts")', 'title': 'Download report', 'ng-class': "{'disable-button': export_disabled}" }
+        %span.material-icons.inverted file_download
+      %button.btn.button-icon.mt-sm.refresh-panel{ 'ng-click': 'refresh_intelligence("contacts_overview")', 'title': 'Refresh report' }
+        %span.material-icons.inverted refresh
+  .panel-body.no-padding.scroll-pane{ 'style': 'height: 420px;' }
+    .panel.panel-white.no-shadow.scroll-content.p-n
+      .panel-body
+        .table-responsive
+          %table.table.table-hover.table-bordered.table-vam.mb-n.ten-rows-dashlets
+            %tbody
+              %tr
+                %th.text-left{ 'width': '240' }
+                  %b.l-grey Name
+                %th.text-left
+                  %b.l-grey Email
+                %th.text-left
+                  %b.l-grey Phone
+              %tr{ 'ng-repeat': 'contact in dashlets.contacts_overview.contacts_in_24_hours' }
+                %td.text-left{ 'width': '240' }
+                  %a.info{ 'ng-href': "/#/live/{{current_business}}/tracking/user/{{ contact.id }}" } {{ contact | fullName:true }}
+                %td.text-left {{ contact.email || 'NA' }}
+                %td.text-left {{ contact.phone || 'NA' }}

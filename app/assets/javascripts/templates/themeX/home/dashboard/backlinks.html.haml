@@ -1,0 +1,32 @@
+.panel.panel-default.m-n#backlinks_dashboard{ 'ng-if': 'marketing_performance_loaded && backlinksStatus' }
+  .panel-heading.cursor-move
+    %h2
+      %a.l-grey{href: "#/summary"}
+        Backlinks
+        %i.fa.fa-info-circle.tooltip-text-icon{ 'title': 'Denotes the Trust Flow, Citation Flow, number of backlinks, and referring domains of your site. For a full report, go to backlinks in the "SEO" section.' }
+    #onboarding-backlinks.on-boarding
+    .panel-ctrls
+      %button.Dbutton.btn.button-icon.pull-left.mt-sm{ 'ng-click': 'pdf_export("backlinks_dashboard")', 'title': 'Download report', 'ng-class': "{'disable-button': export_disabled}"}
+        %span.material-icons.inverted file_download
+      %button.btn.button-icon.mt-sm.refresh-panel{ 'ng-click': 'init_backlinks_page()', 'title': 'Refresh report' }
+        %span.material-icons.inverted refresh
+  .panel-body.no-padding.scroll-pane{style: 'height: 420px;'}
+    .scroll-content.p-n
+      .col-sm-12.p-n
+        .panel-body.pt-sm
+          %md-tabs{'md-border-bottom':'', 'md-dynamic-height':''}
+            %md-tab.active{label: 'Trust-Flow', index:'0', 'md-on-select':"resizeChart('donut-summary');"}
+              %md-content.mt
+                %draw-chart#donut-summary{ 'on-click-chart': '', 'on-load-chart': '', 'config': 'backlinksChart[0]' }
+            %md-tab{label: 'Citation-Flow', index:'1', 'md-on-select':"resizeChart('donut-citation');"}
+              %md-content.mt
+                %draw-chart#donut-citation{ 'on-click-chart': '', 'on-load-chart': '', 'config': 'backlinksChart[1]' }
+        .panel-footer.width100.p-sm{ 'ng-click': 'goTo("summary")' }
+          .col-lg-6.col-md-6.col-sm-6.col-xs-6.bdr-line.p-sm.text-center.bdr-b-green.btn-pointer
+            %h4.mt-n.mb-n.pt-xs
+              %small.mt-n.mb-sm> External Backlinks
+              {{ ExtBackLinks | toLocaleString }}
+          .col-lg-6.col-md-6.col-sm-6.col-xs-6.bdr-line.p-sm.text-center.bdr-b-blue.btn-pointer
+            %h4.mt-n.mb-n.pt-xs
+              %small.mt-n.mb-sm> Referring Domains
+              {{ RefDomains | toLocaleString }}

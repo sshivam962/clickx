@@ -1,0 +1,11 @@
+- if current_agency.cname_verified
+  .col-md-6.col-sm-12
+    .form-group.pt-md
+      %span
+        %i.fa.fa-check.verified
+        Verified
+- else
+  .col-md-6.col-sm-12
+    .form-group
+      %button.btn.btn-primary.btn-raised{ type: 'submit' }
+        Verify

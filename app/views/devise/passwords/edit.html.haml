@@ -1,0 +1,15 @@
+- content_for :title do
+  Set Password | #{app_name}
+
+.col-md-10.col-sm-12.col-xs-12.col-md-offset-1.col-sm-offset-0.col-xs-offset-0
+  .col-md-offset-3.col-sm-offset-3.col-md-6.col-sm-6.p-lg
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+      = f.hidden_field :reset_password_token
+      .form-group
+        %i.glyphicon.glyphicon-user
+        = f.password_field :password, class: 'form-control login', placeholder: 'Enter New Password', autofocus: true, autocomplete: 'off'
+      .form-group
+        %i.glyphicon.glyphicon-user
+        = f.password_field :password_confirmation, class: 'form-control password', placeholder: 'Confirm New Password'
+      %button.btn.btn-warning{type: 'submit'} Change My Password
+      %a.forgot.pull-right.inline{href: new_user_session_path} Log In

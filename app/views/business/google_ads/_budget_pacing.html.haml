@@ -1,0 +1,34 @@
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        %h2 Budget Pacing for current month
+        %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Money spent out of the budget you set for PPC ads'}
+        .panel-ctrls
+          %button.btn.button-icon.mt-sm.refresh-panel{'title': 'Refresh report'}
+            %span.material-icons.inverted refresh
+          - if current_business.ppc_budget.positive?
+            %a.btn.button-icon.mt-sm{href: "/b/settings/budget_pacing", 'title': 'Manage budget set for ads'}
+              %span.material-icons.inverted edit
+      .panel-body
+        - if current_business.ppc_budget.positive?
+          %row
+            .col-xs-12
+              .col-xs-12.border-bottom.p-sm.budget-pacing.text-center
+                %div{class: "w3-round", style: "text-shadow: black 0px 0px 2px;text-align: center;background-color: #444"}
+                  - cost_percentage = [(data[:total_details][:cost] / current_business.ppc_budget) * 100, 100].min
+                  %div{class: "w3-orange w3-round", style: "height:30px;width:#{cost_percentage}%"}
+                %span{style: "color:#616161;"}Ad spent: $#{data[:total_details][:cost]} of $#{current_business.ppc_budget}
+                .m-4
+                %div{class: "w3-round", style: "text-shadow: black 0px 0px 2px;text-align: center;background-color: #444"}
+                  - days_percentage = [(Time.current.strftime("%d").to_f / Time.current.end_of_month.day) * 100, 100].min
+                  %div{class: "w3-orange w3-round", style: "height:30px;width:#{days_percentage}%"}
+                %span{style: "color:#616161;"} #{Time.current.strftime("%B") } : #{Time.current.strftime("%d")} of #{Time.current.end_of_month.day} days
+          - unless current_business.ppc_budget.positive?
+            %row
+              .col-xs-12.center
+                %p.ml-sm.mb-n
+                  Set your monthly budget to manage your ads better
+                %a.btn.btn-white.btn-raised{href: "/b/settings/budget_pacing"}
+                  %i.fa.fa-cog.pr-xs
+                  Set Budget

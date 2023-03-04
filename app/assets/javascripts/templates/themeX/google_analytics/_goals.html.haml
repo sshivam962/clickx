@@ -1,0 +1,67 @@
+.row
+  .col-md-12
+    .tab-container
+      %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+        %li.active
+          %a{"data-toggle":"tab", 'data-target': "#completions", 'ng-click':"resizeChart('completion_chart'); goals()", 'title': 'Download chart'} Goal Completions
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#goal_value", 'ng-click':"resizeChart('value_chart'); goals()", 'title': 'Download chart'} Goal Value
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#conversion_rate", 'ng-click':"resizeChart('conversion_chart'); goals()", 'title': 'Download chart'} Conversion Rate
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#abandonment_rate", 'ng-click':"resizeChart('abandonment_chart'); goals()", 'title': 'Download chart'} % Abandonment Rate
+      .tab-content
+        #completions.tab-pane.active
+          .panel-body
+            .centered
+              #completion_chart
+        #goal_value.tab-pane
+          .panel-body
+            .centered
+              #value_chart
+        #conversion_rate.tab-pane
+          .panel-body
+            .centered
+              #conversion_chart
+        #abandonment_rate.tab-pane
+          .panel-body
+            .centered
+              #abandonment_chart
+        .row
+          .col-sm-12.text-center{ "ng-include": "", "src": "'themeX/google_analytics/_chartFilter.html'" }
+.row
+  .col-md-12
+    .tab-container
+      .tab-content{'st-table':"ga_sites", 'st-safe-src':"copy_ga_sites"}
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th{'st-sort':'site'}
+                  %u.help_pointer{ "title": "Name of the goals as per Google Analytics" }
+                    Goal
+                %th{'st-sort':'goal_completion', 'st-sort-default':'reverse'}
+                  %u.help_pointer{ "title": "Number of the visitors who have completed the goal" }
+                    Goal
+                    %br Completion
+                %th{'st-sort':'goal_value'}
+                  %u.help_pointer{ "title": "The value of the goals as per the monetary value you set for goals in Google Analytics" }
+                    Goal
+                    %br Value
+                %th{'st-sort':'goal_conversion'}
+                  %u.help_pointer{ "title": "Percent of visitors who converted by completing certain action set by you." }
+                    Goal
+                    %br Conversion
+                %th{'st-sort':'goal_abandonment'}
+                  %u.help_pointer{ "title": "Percent of visitors who have started your defined conversion process, but have failed to convert." }
+                    Goal
+                    %br Abandonment
+            %tbody
+              %tr{'ng-repeat':"site in ga_sites"}
+                %td{align: "left", "style":"max-width : 60% !important;"}
+                  {{ site.site || 'Not Available' }}
+                %td {{site.goal_completion}}
+                %td {{site.goal_value}}
+                %td {{site.goal_conversion}} %
+                %td {{site.goal_abandonment}} %
+        %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}

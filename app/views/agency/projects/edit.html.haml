@@ -1,0 +1,525 @@
+- content_for :title do
+  Edit Project | Clickx
+#wrapper.ui-2020
+  #layout-static
+    .static-content-wrapper
+      .static-content
+        .page-content
+          .page-heading
+            %h1
+              %i.clickx-icon-atom>
+              Edit Project
+          .container-fluid
+            = form_for @project, url: agency_project_path(@project), method: :patch do |f|
+              = f.hidden_field :specific_primary_skill
+              = f.hidden_field :specific_other_skill
+              = f.hidden_field :specific_other_skill_2
+              .row.d-flex.flex-wrap.cover-section.cover-section--form
+                .col-lg-6.col-xs-12.pb-4
+                  .bg-sky-blue.border-blue.rounded.border-1
+                    .bg-white.p-4.p-md-5.rounded-t-12
+                      .fw-m.fs-md.text-black Project Information
+                    .p-25
+                      .row.d-flex.flex-wrap
+                        .col-xs-12
+                          .input-wrapper
+                            .input-wrapper-label Project Type
+                            = f.select :project_type, options_for_select(Project::PROJECT_TYPES, f.object.project_type), { prompt: 'Select Project Type' }, { class: 'input-wrapper-input', required: true}
+                        .col-xs-12
+                          .input-wrapper
+                            .input-wrapper-label Project Title
+                            = f.text_field :title, class: 'input-wrapper-input', placeholder: 'Who do you need?', required: true
+                        .col-xs-12
+                          .input-wrapper
+                            .input-wrapper-label Short Description
+                            = f.text_area :short_desc, class: 'input-wrapper-input', placeholder: 'Describe to be done', rows: 4, required: true
+                        .col-xs-12
+                          .input-wrapper
+                            .input-wrapper-label Long Description
+                            = f.text_area :description, class: 'input-wrapper-input', placeholder: 'Describe to be done', rows: 4, required: true, minlength: 150
+                        .col-xs-12
+                          .input-wrapper
+                            .input-wrapper-label Budget
+                            = f.number_field :budget, class: 'input-wrapper-input', placeholder: 'Describe to be done', min: 0, required: true
+                .col-lg-6.col-xs-12.pb-4
+                  .bg-sky-blue.border-blue.rounded.border-1
+                    .bg-white.p-4.p-md-5.rounded-t-12
+                      .fw-m.fs-md.text-black Project Skills
+                    .p-25
+                      .pb-5
+                        .input-wrapper.mb-0
+                          .input-wrapper-label Primary Skill
+                          .input-wrapper-select
+                            = f.select :primary_skill,options_for_select(Project::PRIMARY_SKILLS.collect {|skill| [skill.second, skill.first]}, @project.primary_skill), { include_blank: 'No Primary Skill' }, { class: 'input-wrapper-input'}
+                        - secondary_skills = Project::SECONDARY_SKILLS[@project.primary_skill.to_sym].to_a
+                        #primary_skill
+                          - if @project.primary_skill.present?
+                            = render 'agency/projects/secondary_skills', secondary_skills: secondary_skills, field: 'primary_skill'
+                      .pb-5
+                        .input-wrapper.mb-0
+                          .input-wrapper-label Other Skills
+                          .input-wrapper-select
+                            = f.select :other_skill,options_for_select(Project::PRIMARY_SKILLS.collect {|skill| [skill.second, skill.first]}, @project.other_skill), { include_blank: 'No Primary Skill' }, { class: 'input-wrapper-input'}
+                        - secondary_skills = Project::SECONDARY_SKILLS[@project.other_skill.to_sym].to_a
+                        #other_skill
+                          - if @project.other_skill.present?
+                            = render 'agency/projects/secondary_skills', secondary_skills: secondary_skills, field: 'other_skill'
+                      .pb-5
+                        .input-wrapper.mb-0
+                          .input-wrapper-label Other Skills 2
+                          .input-wrapper-select
+                            = f.select :other_skill_2,options_for_select(Project::PRIMARY_SKILLS.collect {|skill| [skill.second, skill.first]}, @project.other_skill_2), { include_blank: 'No Primary Skill' }, { class: 'input-wrapper-input'}
+                        - secondary_skills = Project::SECONDARY_SKILLS[@project.other_skill_2.to_sym].to_a
+                        #other_skill_2
+                          - if @project.other_skill_2.present?
+                            = render 'agency/projects/secondary_skills', secondary_skills: secondary_skills, field: 'other_skill_2'
+              .pt-4.pb-5.text-center
+                = f.submit 'Post Project', class: 'btn btn-lg btn-warning'
+:css
+  .navbar-fixed-top-2020+#wrapper, .navbar-fixed-top-2020+#layout-fixed {padding-top: 64px !important;}
+
+:javascript
+  function SecondarySkills(primary_skill, field){
+    $.ajax({
+      url: "/a/projects/select_seconday_skills",
+      type: 'get',
+      data: {primary_skill: primary_skill, field: field, id: #{@project.id}, page: 'edit'},
+      dataType: 'script'
+    })
+  };
+
+  $('#project_primary_skill').change(function() {
+    primary_skill = $(this).val();
+    if(primary_skill == ''){
+      $('#primary_skill').empty();
+      $('#project_specific_primary_skill').val('');
+    } else {
+      field = 'primary_skill';
+      SecondarySkills(primary_skill, field);
+    }
+  });
+
+  $('#project_other_skill').change(function() {
+    primary_skill = $(this).val();
+    if(primary_skill == ''){
+      $('#other_skill').empty();
+      $('#project_specific_other_skill').val('');
+    } else {
+      field = 'other_skill';
+      SecondarySkills(primary_skill, field);
+    }
+  });
+
+  $('#project_other_skill_2').change(function() {
+    primary_skill = $(this).val();
+    if(primary_skill == ''){
+      $('#other_skill_2').empty();
+      $('#project_specific_other_skill_2').val('');
+    } else {
+      field = 'other_skill_2';
+      SecondarySkills(primary_skill, field);
+    }
+  });
+
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.plan-preloader').removeClass('plan-preloader');
+    }, 500);
+  });
+
+  document.querySelector('.styled-select-wrapper').addEventListener('click', function() {
+    this.querySelector('.styled-select').classList.toggle('open');
+  });
+
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      Highcharts.chart('chart_ganalytics', {
+        chart: {
+          type: 'areaspline',
+          height: 250
+        },
+        colors: ['#777', '#60BBEA'],
+        title: false,
+        yAxis: {
+          title: false
+        },
+        tooltip: {
+          shared: true,
+          valueSuffix: ' units'
+        },
+        credits: {
+          enabled: false
+        },
+        plotOptions: {
+          area: {
+            lineColor: '#EF5023',
+          },
+          areaspline: {
+            fillOpacity: 0.05
+          }
+        },
+        series: [{
+          name: "Previous Periods",
+          data: [1, 12, 18, 24, 33, 34]
+        }, {
+          name: "Visits",
+          data: [11, 46, 84, 120, 100, 160]
+        }]
+      });
+      Highcharts.chart('chart_fb-ads', {
+        chart: {
+          type: 'areaspline',
+          height: 250
+        },
+        colors: ['#777', '#BAD531'],
+        title: false,
+        yAxis: {
+          title: false
+        },
+        tooltip: {
+          shared: true,
+          valueSuffix: ' units'
+        },
+        credits: {
+          enabled: false
+        },
+        plotOptions: {
+          area: {
+            lineColor: '#EF5023',
+          },
+          areaspline: {
+            fillOpacity: 0.05
+          }
+        },
+        series: [{
+          name: "Previous Periods",
+          data: [1, 12, 18, 24, 33, 34]
+        }, {
+          name: "Visits",
+          data: [11, 46, 84, 120, 100, 160]
+        }]
+      });
+      Highcharts.chart('chart_gsearchconsole', {
+        chart: {
+          type: 'areaspline',
+          height: 250
+        },
+        colors: ['#777', '#EF5023'],
+        title: false,
+        yAxis: {
+          title: false
+        },
+        tooltip: {
+          shared: true,
+          valueSuffix: ' units'
+        },
+        credits: {
+          enabled: false
+        },
+        plotOptions: {
+          area: {
+            lineColor: '#EF5023',
+          },
+          areaspline: {
+            fillOpacity: 0.05
+          }
+        },
+        series: [{
+          name: "Previous Periods",
+          data: [1, 12, 18, 24, 33, 34]
+        }, {
+          name: "Visits",
+          data: [11, 46, 84, 120, 100, 160]
+        }]
+      });
+      Highcharts.chart('chart_display', {
+        chart: {
+          type: 'areaspline',
+          height: 250
+        },
+        colors: ['#777', '#F8B018'],
+        title: false,
+        yAxis: {
+          title: false
+        },
+        tooltip: {
+          shared: true,
+          valueSuffix: ' units'
+        },
+        credits: {
+          enabled: false
+        },
+        plotOptions: {
+          area: {
+            lineColor: '#EF5023',
+          },
+          areaspline: {
+            fillOpacity: 0.05
+          }
+        },
+        series: [{
+          name: "Previous Periods",
+          data: [1, 12, 18, 24, 33, 34]
+        }, {
+          name: "Visits",
+          data: [11, 46, 84, 120, 100, 160]
+        }]
+      });
+    }, 100);
+  });
+
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.dashboard-panels-preloader').removeClass('dashboard-panels-preloader');
+    }, 500);
+  });
+
+  $(document).on('click', '.support-accordion-header', function() {
+    if($(this).next('.support-accordion-content').is(':visible')) {
+      $(this).next('.support-accordion-content').slideUp();
+      $(this).parent('.support-accordion').addClass('support-accordion--collapsed');
+    } else {
+      $(this).next('.support-accordion-content').slideDown();
+      $(this).parent('.support-accordion').removeClass('support-accordion--collapsed');
+    }
+  });
+
+  $(document).ready(function() {
+    $(document).on('input', '.task-input', function() {
+      var newVal = $(this).html();
+      $(this).next('.task-input-input').val(newVal);
+      $(this).parents('.task-input-wrap').find('.task-action-btn--save').fadeIn();
+    });
+    $( "table.tasks-list-table tbody" ).sortable({
+        handle: '.move-handle',
+        update: function( event, ui ) {
+          // $(this).children().each(function(index) {
+          //  $(this).find('td').last().html(index + 1)
+          // });
+        }
+    });
+    $( ".calendar" ).datepicker({
+      dateFormat: 'mm/dd/yy',
+    });
+    $(".calendar").on("change",function(){
+      var $me = $(this),
+      $selected = $me.val(),
+      $parent = $me.parents('.date-picker-wrap');
+      $parent.find('.task-due-date').html($selected);
+      $parent.removeClass('open');
+    });
+  });
+
+  $(document).on('click', '.task-details-button', function() {
+    $('.slide-in--right').addClass('slidein-show');
+    setTimeout(function() {
+      $('.slide-in-bg').fadeIn();
+    }, 100);
+  })
+  $(document).on('click', '.task-details-close, .slide-in-bg', function() {
+    $('.slide-in--right').removeClass('slidein-show');
+    $('.slide-in-bg').fadeOut();
+  })
+  $(document).on('click','.edit-task-due-date', function() {
+    var $me = $(this);
+    $parent = $me.parents('.date-picker-wrap');
+    $parent.addClass('open');
+  });
+  $(document).on('click','.date-picker-bg', function() {
+    var $me = $(this);
+    $parent = $me.parents('.date-picker-wrap');
+    $parent.removeClass('open');
+  });
+  $(document).on('click', '.open-dd', function() {
+    $(this).next('.dd-wrap').addClass('open');
+  });
+  $(document).on('click', '.dd-bg', function() {
+    $('.dd-wrap').removeClass('open');
+  });
+
+  $(document).ready(function() {
+    $('#tokenfield').tokenfield({
+      autocomplete: {
+        source: ['Admin Assistant', 'Appointment Setter', 'Data Entry', 'Email Management', 'Event Planner', 'Excel', 'Human Resource Management', 'Personal Assistant', 'Project Coordinator', 'Quality Assurance', 'Recruitment Assistant', 'Research', 'Transcription', 'Travel Planning'],
+        delay: 100
+      },
+      showAutocompleteOnFocus: true
+    });
+
+    $('#project-title').change(function() {
+      $('#tokenfield').tokenfield('destroy');
+      value = $(this).val();
+      console.log(value);
+      if(value == 'office_admin') {
+        input_source = ['Admin Assistant', 'Appointment Setter', 'Data Entry', 'Email Management', 'Event Planner', 'Excel', 'Human Resource Management', 'Personal Assistant', 'Project Coordinator', 'Quality Assurance', 'Recruitment Assistant', 'Research', 'Transcription', 'Travel Planning'];
+        //input_val = input_source;
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'english') {
+        input_source = ['Speaking', 'Translation', 'Tutoring Teaching', 'Writing'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'writing') {
+        input_source = ['Blogging', 'Copywriting', 'Creative Writing', 'Ebook Writing', 'Editing Proofreading', 'Ghost Writing', 'Technical Writing', 'Web Content Writing'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'marketing') {
+        input_source = ['Affiliate Marketing', 'Classified Ads Marketing', 'Craigslist Marketing', 'Direct Mail Marketing', 'Email Marketing', 'Facebook Marketing', 'Instagram Marketing', 'Lead Generation', 'LinkedIn Marketing', 'Mobile Marketing', 'Private Blog Network', 'Sales Representative', 'SEM', 'SEO', 'Social Media Marketing', 'Telemarketing', 'Video Marketing', 'YouTube Marketing'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'advertising') {
+        input_source = ['Amazon Product Ads', 'Bing Ads', 'Creative advertising', 'Facebook Ads', 'Google AdWords', 'Instagram Ads', 'Media Buys', 'Other Ad Platforms', 'Scientific advertising', 'Youtube Ads'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'web_development') {
+        input_source = ['AngularJS', 'ASP.NET', 'ClickFunnels', 'Drupal Development', 'Infusionsoft', 'Javascript', 'Joomla Development', 'Laravel', 'Magento', 'Mysql', 'Node.js', 'PHP', 'React', 'Ruby on Rails', 'Shopify', 'VueJS', 'WooCommerce', 'Wordpress Development'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'web_master') {
+        input_source = ['Content Management', 'Cpanel', 'Css', 'Drupal', 'Ecommerce / Shopping Carts', 'Google analytics', 'HTML', 'Joomla', 'Managing Servers', 'PSD to HTML', 'Webmaster Tools', 'Wordpress'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'graphics_multimedia') {
+        input_source = ['3D Modeling', 'Adobe Indesign', 'Animation Specialist', 'Autocad', 'Graphics Editing', 'Illustrator', 'Logo Design', 'Photoshop', 'Print Design', 'Recording Audio', 'Shirt Design', 'Video Editing', 'Web page Design'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'software') {
+        input_source = ['Android development', 'C#', 'Desktop Applications', 'Game development', 'iOS development', 'Python', 'Software QA Testing'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'finance_management') {
+        input_source = ['Accounting', 'Bookkeeping', 'Business Plans', 'Financial Analysis', 'Financial Forecasting', 'Financial Management', 'Inventory Management', 'Investment Researching', 'Payroll', 'Quickbooks', 'Strategic Planning', 'Tax Preparation', 'Xero'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'customer_service') {
+        input_source = ['Community Forum Moderation', 'Content Moderation', 'Customer Support', 'Email Support', 'Phone Support', 'Social Media Moderation', 'Tech Support'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'professional_services') {
+        input_source = ['Architectural and Engineering Services', 'Legal Services', 'Medical Services', 'Real Estate Services'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'project_management') {
+        input_source = ['Design Project Management', 'Marketing Project Management', 'Other Project Management', 'Software Development Project Management', 'Web Development Project Management', 'Writing Project Management'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+    })
+  });
+
+  $(document).on('change', '#primary-skill-select-0', function() {
+    val = $(this).val();
+    console.log(val);
+    if(val.length != 0) {
+      $('.primary-skills-0').removeClass('hidden');
+    } else {
+      $('.primary-skills-0').addClass('hidden');
+    }
+  });
+  $(document).on('change', '#secondary-skill-select-1', function() {
+    val = $(this).val();
+    console.log(val);
+    if(val.length != 0) {
+      $('.secondary-skills-1').removeClass('hidden');
+    } else {
+      $('.secondary-skills-1').addClass('hidden');
+    }
+  });
+  $(document).on('change', '#secondary-skill-select-2', function() {
+    val = $(this).val();
+    if(val.length != 0) {
+      $('.secondary-skills-2').removeClass('hidden');
+    } else {
+      $('.secondary-skills-2').addClass('hidden');
+    }
+  });

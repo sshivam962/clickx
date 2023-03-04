@@ -1,0 +1,28 @@
+%html
+  %head
+    %h1 Pages
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+  %body
+    %table-responsive
+      %table.table.table-bordered.table-vam.table-left
+        %thead
+          %th PAGE
+          %th EXTERNAL BACKLINKS
+          %th REFERRING DOMAINS
+          %th TF
+          %th CF
+        %tbody
+          - @pages.each do |pages|
+            %tr
+              %td
+                = pages.page
+              %td
+                = pages.external_backlinks
+              %td
+                = pages.referring_domains
+              %td
+                = pages.trust_flow
+              %td
+                = pages.citation_flow
+            
+

@@ -1,0 +1,214 @@
+.fixed-sidebar{'ng-controller': 'ThemeXSidebarController'}
+  .static-sidebar
+    .sidebar
+      .widget.stay-on-collapse
+        %nav.widget-body{role: "navigation"}
+          %ul.acc-menu
+            %li.grader-link{'ng-if': 'free_service'}
+              %a.withripple{href: "/#/grader"}
+                %span.icon
+                  %i.clickx-icon-House
+                %span Grader
+            %li{'ng-if': '!free_service'}
+              %a.withripple{href: '/b/dashboard'}
+                %span.icon
+                  %i.clickx-icon-House
+                %span Dashboard
+
+
+            %li.li-block{'ng-class': "{'hidden': reputation_service != 'true'}"}
+              %a.withripple{href: "javascript:;"}
+                %span.icon
+                  %i.clickx-icon-CalltoAction
+                %span Campaigns
+              %ul.acc-menu
+                / %li.sub-li{'ng-class': "{'hidden': has_onboarding_procedures != true}"}
+                /   %a.withripple{href: '/#/onboarding_procedures' }
+                /     %span.icon
+                /       %i.clickx-icon-Reports
+                /     %span
+                /       Onboarding
+                %li.sub-li{'ng-class': "{'hidden': reputation_service != 'true'}"}
+                  %a.withripple{href: '/#/search_terms' }
+                    %span.icon
+                      %i.clickx-icon-Performance-Review
+                    %span
+                      Rep Management
+                / %li.sub-li{'ng-show': "activities_enabled == 'true'"}
+                /   %a.withripple{href: "/#/activities"}
+                /     %span.icon
+                /       %i.clickx-icon-Website
+                /     %span Activities
+
+            %li.li-block.hasChild{ 'ng-if': 'current_agency.name == "Clickx"' }
+              %a.withripple{href: "javascript:void(0);"}
+                %span.icon
+                  %i.clickx-icon-package
+                %span Plans
+              %ul.acc-menu
+                %li.sub-li
+                  %a.withripple{href: "/b/packages/facebook_ads"}
+                    %span.icon
+                      %i.clickx-icon-facebook
+                    %span Facebook Ads
+                %li.sub-li
+                  %a.withripple{href: "/b/packages/google_ads"}
+                    %span.icon
+                      %i.clickx-icon-adwords
+                    %span Google Ads
+                %li.sub-li
+                  %a.withripple{href: "/b/packages/seo_services"}
+                    %span.icon
+                      %i.clickx-icon-seo
+                    %span Advanced SEO
+                %li.sub-li
+                  %a.withripple{href: "/b/packages/local_seo"}
+                    %span.icon
+                      %i.clickx-icon-Page
+                    %span Local SEO
+                %li.sub-li
+                  %a.withripple{href: "/b/packages/social_media"}
+                    %span.icon
+                      %i.clickx-icon-SocialMedia
+                    %span Brand Building
+                -# %li.sub-li
+                -#   %a.withripple{href: "/b/packages/digital_pr"}
+                -#     %span.icon
+                -#       %i.clickx-icon-partner
+                -#     %span Digital PR
+                %li.sub-li
+                  %a.withripple{href: "/b/packages/ala_carte"}
+                    %span.icon
+                      %i.clickx-icon-SellSheet
+                    %span À La Carte
+                %li.sub-li{'ng-if': 'business_have_my_quotes == "true"'}
+                  %a.withripple{href: "/b/packages/custom_packages"}
+                    %span.icon
+                      %i.clickx-icon-CustomCMS
+                    %span My Quotes
+            %li.li-block
+              %a.withripple{href: "javascript:;"}
+                %span.icon
+                  %i.clickx-icon-seo
+                %span SEO
+              %ul.acc-menu
+                %li.sub-li{'ng-click': 'clickDisabledBtn($event)', 'ng-class': "{'side-menu-disable': seo_reports_enabled != 'true'}"}
+                  %a.withripple{href: "/b/keywords", 'ng-show': "semrush_project" }
+                    %span.icon
+                      %i.clickx-icon-PromoteSearch
+                    %span Keywords
+                  %a.withripple{href: "/#/rankings", 'ng-show': "!semrush_project" }
+                    %span.icon
+                      %i.clickx-icon-PromoteSearch
+                    %span Keywords
+                %li.sub-li
+                  %a.withripple{href: "/b/keywords_generator"}
+                    %span.icon
+                      %i.clickx-icon-Search
+                    %span Keyword Generator
+                / %li.sub-li{'ng-click': 'clickDisabledBtn($event)', 'ng-class': "{'side-menu-disable': site_audit_enabled != 'true'}"}
+                /   %a.withripple{ 'href': "/#/site_audit" }
+                /     %span.icon
+                /       %i.clickx-icon-GrowthDrivenSite
+                /     %span
+                /       Site Audit
+                -# %li.sub-li{'ng-click': 'clickDisabledBtn($event)', 'ng-class': "{'side-menu-disable': backlink_service_enabled != 'true'}"}
+                -#   %a.withripple{href: "/b/backlinks"}
+                -#     %span.icon
+                -#       %i.clickx-icon-LinkBuilding
+                -#     %span Backlinks
+                %li.sub-li{'ng-class': "{'side-menu-disable': ((search_console_enabled != 'true') || (!current_site_url)) && !non_managed_client_user, 'show_popup': ((search_console_enabled != 'true') || (!current_site_url)) && non_managed_client_user}", 'ng-click': "clickDisabledBtn($event, 'search_console')"}
+                  %a.withripple{href: "/b/search_console"}
+                    %span.icon
+                      %i.clickx-icon-Maintenance
+                    %span Search Console
+                -# %li.sub-li{'ng-click': 'clickDisabledBtn($event)', 'ng-class': "{'side-menu-disable': contents_enabled != 'true'}"}
+                -#   %a.withripple{href: "/#/contents"}
+                -#     %span.icon
+                -#       %i.clickx-icon-BlogWriting
+                -#     %span Content
+            %li{'ng-click': 'clickDisabledBtn($event)', 'ng-class': "{'side-menu-disable': competitors_service != 'true'}"}
+              %a.withripple{ href: '/b/competitions' }
+                %span.icon
+                  %i.clickx-icon-Strategy
+                %span Competitors
+
+            %li.li-block
+              %a.withripple{href: "javascript:;"}
+                %span.icon
+                  %i.clickx-icon-DisplayAd
+                %span Ads
+              %ul.acc-menu
+                %li.sub-li{'ng-class': "{'side-menu-disable': (!adword_client_id) && !non_managed_client_user, 'show_popup': (!adword_client_id) && non_managed_client_user}", 'ng-click': 'clickDisabledBtn($event, "adword")'}
+                  %a.withripple{href: "/b/google_ads"}
+                    %span.icon
+                      %i.clickx-icon-CalltoAction
+                    %span Google Ads
+                %li.sub-li{'ng-class': "{'side-menu-disable': ((!current_facebook_ad_account_id) || (facebook_ad_enabled != 'true')) && !non_managed_client_user, 'show_popup': ((!current_facebook_ad_account_id) || (facebook_ad_enabled != 'true')) && non_managed_client_user}", 'ng-click': 'clickDisabledBtn($event, "facebookads")'}
+                  %a.withripple{href: "/b/facebook_ads"}
+                    %span.icon
+                      %i.clickx-icon-DisplayAd
+                    %span Facebook Ads
+                %li.sub-li
+                  %a.withripple{href: "/#/campaigns"}
+                    %span.icon
+                      %i.clickx-icon-LinkBuilding
+                    %span UTM Builder
+            %li.li-block
+              %a.withripple{href: "javascript:;"}
+                %span.icon
+                  %i.clickx-icon-Reports
+                %span Analytics
+              %ul.acc-menu
+                %li.sub-li{'ng-class': "{'side-menu-disable': (!current_google_analytics_id) && !non_managed_client_user, 'show_popup': (!current_google_analytics_id) && non_managed_client_user}", 'ng-click': "clickDisabledBtn($event, 'google_analytics')"}
+                  %a.withripple{href: "/b/google_analytics"}
+                    %span.icon
+                      %i.clickx-icon-Measure
+                    %span Web Analytics
+                %li.sub-li{'ng-click': 'clickDisabledBtn($event)', 'ng-class': "{'side-menu-disable': call_analytics_enabled != 'true'}"}
+                  %a.withripple{ 'href': '/b/call_analytics' }
+                    %span.icon
+                      %i.clickx-icon-Mobile
+                    %span Call Analytics
+                %li.sub-li{ 'ng-if': '!demo_login', 'ng-class': "{'side-menu-disable': (!current_callrail_client_id) && !non_managed_client_user, 'show_popup': (!current_callrail_client_id) && non_managed_client_user}", 'ng-click': "clickDisabledBtn($event, 'callrail')" }
+                  %a.withripple{ href: "/b/callrail" }
+                    %span.icon
+                      %i.material-icons.title-icon.white settings_phone
+                    %span CallRail
+            %li.li-block{'ng-show': "local_profile_enabled == 'true'"}
+              %a.withripple{href: "javascript:;"}
+                %span.icon
+                  %i.clickx-icon-Local-Listings
+                %span Local
+              %ul.acc-menu{'ng-controller': 'LocalProfiles'}
+                %li.sub-li{'ng-if': '!free_service && !empty_location'}
+                  %a.withripple{href: "/#/{{current_business}}/locations_list"}
+                    %span.icon
+                      %i.clickx-icon-BoldLocal
+                    %span Local Profiles
+                %li.sub-li
+                  %a.withripple{href: "/b/reviews"}
+                    %span.icon
+                      %i.clickx-icon-Performance-Review
+                    %span Reputation
+                %li.sub-li
+                  %a.withripple{href: "/#/locations"}
+                    %span.icon
+                      %i.clickx-icon-Maintenance
+                    %span Location Management
+            %li{ 'ng-if': 'current_agency.name == "Clickx"' }
+              %a.withripple{href: '/b/courses'}
+                %span.icon
+                  %i.clickx-icon-academy
+                %span Academy
+            %li
+              %a.withripple{href: "/b/support"}
+                %span.icon
+                  %i.clickx-icon-Support
+                %span Support
+    %div{'ng-include': '', src: "'themeX/shared/_email_support_box.html'", 'ng-if': 'current_agency.support_popup'}
+
+
+%div{"ng-include" => "", :src => "'themeX/home/_time_schedule.html'"}
+%div{"ng-include" => "", :src => "'themeX/home/_google_analytics_modal.html'"}
+%div{"ng-include" => "", :src => "'themeX/home/_search_console_modal.html'"}

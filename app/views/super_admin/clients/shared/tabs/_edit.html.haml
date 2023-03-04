@@ -1,0 +1,314 @@
+.login-form.pop_client_edit
+  = form_for client, url: super_admin_client_path(client.id), remote: true, method: :patch do |f|
+    %div
+      #direct_upload.ng-pristine.ng-untouched.ng-valid
+        .client-form
+          .inputs-group
+            %h3.m-0
+              Client Info
+            %hr
+            .form-group
+              .row
+                .col-sm-4
+                  = f.label :name, 'Company Name'
+                .col-sm-8
+                  = f.text_field :name, class: 'form-control login display-inline', required: true, placeholder: 'Name'
+            .form-group
+              .row
+                .col-sm-4
+                  = f.label :agency_id, 'Agency'
+                .col-sm-8
+                  = f.select :agency_id, Agency.order(:name).pluck(:name, :id), { include_blank: 'Select Agency' }, required: true, class: 'form-control login display-inline'
+            .form-group
+              #menu-colour.row
+                .col-sm-4
+                  = f.label :label_list, 'Labels'
+                .col-sm-8
+                  = f.select :label_list, ActsAsTaggableOn::Tag.pluck(:name).uniq.reject(&:blank?), { include_blank: 'Select Labels'}, class: 'search login form-control', multiple: true
+
+            .form-group
+              .row
+                .col-sm-4
+                  = f.label :domain, 'Domain Name'
+                .col-sm-8
+                  = f.text_field :domain, class: 'form-control login display-inline', required: true, placeholder: 'Domain Name (eg: example.com)'
+
+            .form-group
+              .row
+                .col-sm-4
+                  = f.label :tracking_page_path, 'Page Path for Tracking'
+                .col-sm-8
+                  = f.text_field :tracking_page_path, class: 'form-control login display-inline', placeholder: 'Page Path for Tracking (eg: /us/new-york)'
+
+            .form-group
+              .row
+                .col-sm-4
+                  %label{:for => "country"} Country
+                .col-sm-8
+                  .input-group.width100per
+                    = f.select :locale, LOCALE_CODES.map{|l| [l['country'], l['locale']]}, {}, required: true, class: 'form-control'
+            .form-group
+              .row
+                .col-sm-4
+                  %label{:for => "business_target_city"} Target City
+                .col-sm-8
+                  = f.text_field :target_city, class: 'form-control login display-inline', required: true, placeholder: 'City Name (eg: Chicago)'
+            .form-group
+              .row
+                .col-sm-4
+                  %label{:for => "timezone"} TimeZone
+                .col-sm-8
+                  .input-group.width100per
+                    = f.select :timezone, ActiveSupport::TimeZone.all.collect{|z| z.name}.compact, {}, required: true, class: 'form-control'
+
+            .form-group
+              .row
+                .col-sm-4
+                  %label{:for => "custom_plan"} Custom Plan:
+                .col-sm-8.mt-2.mt-md-0
+                  = f.select :custom_plan_id, Subscription::Plan.client.only_private.pluck(:name, :id), {include_blank: 'Select Custom Plan'}, class: 'form-control'
+
+            - if client.logo.present?
+              .form-group
+                .row
+                  .col-sm-4
+                    %label{:for => "current-campaign-image"} Logo
+                  .col-sm-8
+                    .current-campaign-image
+                      %img#current-campaign-image{src: client.logo}
+
+          .inputs-group
+            %h3.m-0 Our Services
+            %hr
+            .form-group
+              .row.d-flex.d-sm-block.justify-content-between
+                .col-sm-4.col-xs-auto
+                  %label{:for => "business_local_profile_service"} Local Profiles
+                .col-sm-3.col-xs-auto
+                  .d-flex.justify-content-end.justify-content-md-start
+                    %label.toggle-control
+                      = f.check_box :local_profile_service, data: {target: '.yext_cache_refresh_block'}, class: 'show_on_check'
+                      %span.control
+                    %span.yext_cache_refresh_block{class: tf_h_klass(client.local_profile_service?)}
+                      %a.btn-circle.btn-green.ml-3.btn-success{href: clear_yext_cache_super_admin_client_path(client.id), data: { remote: true }}
+                        %i.glyphicon.glyphicon-refresh
+
+            .form-group
+              .row.d-flex.d-sm-block.justify-content-between
+                .col-sm-4.col-xs-auto
+                  %label{:for => "business_seo_service"} SEO Ranking
+                .col-sm-8.col-xs-auto
+                  .d-flex.justify-content-end.justify-content-md-start
+                    %label.toggle-control
+                      = f.check_box :seo_service, data: {target: '#semrush_project_id, #keyword_limit_group', required_input: '#business_keyword_limit'}, class: 'show_on_check'
+                      %span.control
+
+            .form-group#semrush_project_id{class: tf_h_klass(client.seo_service?)}
+              .row.d-flex.d-sm-block.justify-content-between
+                .col-sm-4.col-xs-auto
+                  %label.display-inline{:for => "semrush_project_id"} SEMrush Project ID
+                .col-sm-8.col-xs-auto
+                  .d-flex.justify-content-end.justify-content-md-start
+                    = f.text_field :semrush_project_id, class: 'form-control login display-inline', disabled: client.semrush_project_id.present? || !client.seo_service?
+                    #semrush_project_connection_button
+                      - if client.semrush_project_id.present?
+                        .btn.btn-success.ml-3.semrush-setup-button
+                          Disconnect
+                      - else
+                        .btn.btn-success.ml-3.semrush-setup-button
+                          Connect
+                  .project-id-message-text
+
+            .form-group#keyword_limit_group{class: tf_h_klass(client.seo_service?)}
+              .row.d-flex.d-sm-block.justify-content-between
+                .col-sm-4.col-xs-auto
+                  %label.display-inline{:for => "keyword_limit"} Keyword Limit
+                .col-sm-8.col-xs-auto
+                  .d-flex.justify-content-end.justify-content-md-start
+                    = f.number_field :keyword_limit, class: 'form-control login display-inline', required: client.seo_service?, disabled: !client.seo_service?
+
+            .form-group
+              .row.d-flex.d-sm-block.justify-content-between
+                .col-sm-4.col-xs-auto
+                  %label{:for => "business_competitors_service"} Competitor Tracking
+                .col-sm-8.col-xs-auto
+                  .d-flex.justify-content-end.justify-content-md-start
+                    %label.toggle-control
+                      = f.check_box :competitors_service, data: {target: '#competitors_limit_group'}, class: 'show_on_check'
+                      %span.control
+
+            .form-group#competitors_limit_group{class: tf_h_klass(client.competitors_service?)}
+              .row
+                .col-sm-4
+                  %label{:for => "competitors_limit"} Competitors Limit
+                .col-sm-8
+                  = f.number_field :competitors_limit, class: 'form-control login display-inline', placeholder: 'Max competitors', disabled: !client.competitors_service
+
+            .form-group
+              .row.d-flex.d-sm-block.justify-content-between
+                .col-sm-4.col-xs-auto
+                  %label{:for => "business_site_audit_service"} Site Audit
+                .col-sm-8.col-xs-auto
+                  .d-flex.justify-content-end.justify-content-md-start
+                    %label.toggle-control
+                      = f.check_box :site_audit_service, data: {target: '#total_pages_crawled_group', required_input: '#business_total_pages_crawled'}, class: 'show_on_check'
+                      %span.control
+
+            .form-group#total_pages_crawled_group{class: tf_h_klass(client.site_audit_service?)}
+              .row
+                .col-sm-4.col-xs-12
+                  %label.display-inline.mt-3 Pages to be crawled
+                .col-sm-8.col-xs-12
+                  = f.number_field :total_pages_crawled, class: 'form-control login display-inline', placeholder: 'Pages to be Crawled', required: client.site_audit_service?, disabled: !client.site_audit_service?
+
+            .form-group
+              .row.d-flex.d-sm-block.justify-content-between
+                .col-sm-4.col-xs-auto
+                  %label{:for => "business_reputation_service"} Reputation Management
+                .col-sm-8.col-xs-auto
+                  .d-flex.justify-content-end.justify-content-md-start
+                    %label.toggle-control
+                      = f.check_box :reputation_service
+                      %span.control
+
+            .form-group
+              .row.d-flex.d-sm-block.justify-content-between
+                .col-sm-4.col-xs-auto
+                  %label{:for => "business_call_analytics_service"} Call Analytics
+                .col-sm-8.col-xs-auto
+                  .d-flex.justify-content-end.justify-content-md-start
+                    %label.toggle-control
+                      = f.check_box :call_analytics_service, data: {target: '#call_analytics_id_group', required_input: '#business_call_analytics_id'}, class: 'show_on_check'
+                      %span.control
+            .form-group#call_analytics_id_group{class: tf_h_klass(client.call_analytics_service?)}
+              .row
+                .col-sm-4.col-xs-12
+                  %label{:for => "business_total_pages_crawled"} Marchex Call Analytics Id
+                  .input-info
+                    %span.glyphicon.glyphicon-info-sign.info-icon.ml-3.ttp-image
+                      %span.ttp-popover-image
+                        %img{alt: '', src: 'https://d5w5m6852eyee.cloudfront.net/assets/call_analytics_id-ccb502fe8b4e775bae3122da514ef5ef858fd63a032c697b6ef01cba7eab1966.png'}
+                .col-sm-8.col-xs-12
+                  = f.text_field :call_analytics_id, class: 'form-control login display-inline', placeholder: 'Marchex Call Analytics Id', required: client.call_analytics_service?, disabled: !client.call_analytics_service?
+
+            .form-group
+              .row.d-flex.d-sm-block.justify-content-between
+                .col-sm-4.col-xs-auto
+                  %label{:for => "business_backlink_service"} Backlinks
+                .col-sm-8.col-xs-auto
+                  .d-flex.justify-content-end.justify-content-md-start
+                    %label.toggle-control
+                      = f.check_box :backlink_service
+                      %span.control
+
+            .form-group
+              .row.d-flex.d-sm-block.justify-content-between
+                .col-sm-4.col-xs-auto
+                  %label{:for => "business_contents_service"} Content Service
+                .col-sm-3.col-xs-auto
+                  .d-flex.justify-content-end.justify-content-md-start
+                    %label.toggle-control
+                      = f.check_box :contents_service, data: {target: '#content_service_block'}
+                      %span.control
+                    / %span#content_service_block{class: tf_h_klass(client.contents_service?)}
+                    /   %a.btn-circle.btn-green.ml-3{href: '/#/contents'}
+                    /     %i.glyphicon.glyphicon-cog
+
+          .inputs-group
+            %h3.m-0 Google Services
+            %hr
+            .form-group
+              %h4.fw-m.mb-1 Ads
+              .row
+                .col-sm-4
+                  %label.display-inline{for: 'adword_cost_markup'} Ad Cost MarkUp
+                .col-sm-8
+                  .input-wrapper.input-wrapper--with-icon
+                    = f.number_field :adword_cost_markup, class: 'form-control login display-inline', readonly: true, placeholder: 'Ad Cost MarkUp'
+                    %span.input-icon
+                      %i.fa.fa-percent{"aria-hidden" => "true"}
+              .row.mt
+                .col-sm-4
+                  %label.display-inline{:for => "adword_cost_margin"} Ad Cost Margin
+                .col-sm-8
+                  .input-wrapper.input-wrapper--with-icon
+                    = number_field_tag :adword_margin, '', class: 'form-control login display-inline', placeholder: 'Ad Cost Margin', step: 0.01
+                    %span.input-icon
+                      %i.fa.fa-percent{"aria-hidden" => "true"}
+          .inputs-group
+            %h3.m-0 Fb Services
+            %hr
+            .form-group
+              %h4.fw-m.mb-1 Ads
+              .row
+                .col-sm-4
+                  %label.display-inline{for: 'fb_ad_cost_markup'} Ad Cost MarkUp
+                .col-sm-8
+                  .input-wrapper.input-wrapper--with-icon
+                    = f.number_field :fb_ad_cost_markup, class: 'form-control login display-inline', readonly: true, placeholder: 'Ad Cost MarkUp'
+                    %span.input-icon
+                      %i.fa.fa-percent{"aria-hidden" => "true"}
+              .row.mt
+                .col-sm-4
+                  %label.display-inline{:for => "fb_ad_margin"} Ad Cost Margin
+                .col-sm-8
+                  .input-wrapper.input-wrapper--with-icon
+                    = number_field_tag :fb_ad_margin, '', class: 'form-control login display-inline', placeholder: 'Ad Cost Margin', step: 0.01
+                    %span.input-icon
+                      %i.fa.fa-percent{"aria-hidden" => "true"}
+
+          .inputs-group
+            %h3.m-0 Settings
+            %hr
+            .form-group
+              .row.d-flex.d-sm-block.justify-content-between
+                .col-sm-4.col-xs-auto
+                  %label{:for => "business_free_service"} Free Client
+                .col-sm-8.col-xs-auto
+                  .d-flex.justify-content-end.justify-content-md-start
+                    %label.toggle-control
+                      = f.check_box :free_service
+                      %span.control
+            .form-group
+              .row.d-flex.d-sm-block.justify-content-between
+                .col-sm-4.col-xs-auto
+                  %label{:for => "business_trial_service"} Trial Period
+                .col-sm-8.col-xs-auto
+                  .d-flex.justify-content-end.justify-content-md-start
+                    %label.toggle-control
+                      = f.check_box :trial_service, data: {target: '#trial_expiry_date_block', required_input: '#business_trial_expiry_date'}, class: 'show_on_check'
+                      %span.control
+            .form-group#trial_expiry_date_block{class: tf_h_klass(client.trial_service?)}
+              .row.d-flex.d-sm-block.justify-content-between
+                .col-sm-4.col-xs-auto
+                  %label Trial Expiration Date
+                .col-sm-8.col-xs-auto
+                  .d-flex.justify-content-end.justify-content-md-start
+                    = f.date_field :trial_expiry_date, class: 'form-control',disabled: !client.trial_service?, required: client.trial_service?
+            .form-group
+              .row.d-flex.d-sm-block.justify-content-between
+                .col-sm-4.col-xs-auto
+                  %label{:for => "managed_seo_service"} Managed SEO/Inbound Service
+                .col-sm-8.col-xs-auto
+                  .d-flex.justify-content-end.justify-content-md-start
+                    %label.toggle-control
+                      = f.check_box :managed_seo_service
+                      %span.control
+            .form-group
+              .row.d-flex.d-sm-block.justify-content-between
+                .col-sm-4.col-xs-auto
+                  %label{:for => "managed_ppc_service"} Managed PPC/Retargeting Service
+                .col-sm-8.col-xs-auto
+                  .d-flex.justify-content-end.justify-content-md-start
+                    %label.toggle-control
+                      = f.check_box :managed_ppc_service
+                      %span.control
+
+          %button.invisible.client-form-actual-submit{type: 'submit'} Save Client
+
+  .inputs-group
+    %h3.m-0 Subscription Info
+    %hr
+    = render 'super_admin/clients/shared/info/subscription_info', client: client
+
+  %a.btn.btn-warning.saveBtn.m-n.client-form-dummy-submit{href: 'javascript:void(0)'} Save Client

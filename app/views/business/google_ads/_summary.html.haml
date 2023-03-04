@@ -1,0 +1,86 @@
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        %h2 Campaign Metrics
+        %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Average metrics for the PPC ads you are running'}
+        .panel-ctrls
+          %button.btn.button-icon.pull-left.mt-sm.refresh-panel{'title': 'Refresh report'}
+            %span.material-icons.inverted refresh
+      .panel-body
+        .row
+          .col-md-6
+            %table.table.table-hover
+              %tbody
+                %tr
+                  %td Impressions
+                  %td{align: 'right'} #{data[:total_details][:impressions]}
+                %tr
+                  %td Interactions
+                  %td{align: 'right'} #{data[:total_details][:interactions]}
+                %tr
+                  %td Clicks
+                  %td{align: 'right'} #{data[:total_details][:clicks]}
+                %tr
+                  %td Interaction Rate (CTR)
+                  %td{align: 'right'} #{data[:total_details][:ctr]}%
+          .col-md-6
+            %table.table.table-hover
+              %tbody
+                %tr
+                  %td Avg. Cost
+                  %td{align: 'right'} $#{data[:total_details][:average_cost]}
+                %tr
+                  %td Cost
+                  %td{align: 'right'} $#{data[:total_details][:cost]}
+                %tr
+                  %td Conversion
+                  %td{align: 'right'} #{data[:total_details][:conversions]}
+.row
+  .col-md-12
+    .tab-container
+      %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+        %li.active
+          %a{"data-toggle":"tab", 'data-target': "#ppc-clicks", id: "click_id", 'title': 'Number of times a user clicks on the headline of your Ad'} Clicks
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#ppc-impressions", id: "impression_id", 'title': 'Each time your ad is shown on a search result page or other site on the Google Network'} Impressions
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#ppc-conversions", id: "conversion_id", 'title': 'Shows you what happens after a customer clicks on your ads – whether they purchased a product, signed up for your newsletter, called your business, or submitted a form'} Conversions
+      .tab-content
+        #ppc-clicks.tab-pane.active
+          .panel-body
+            .centered
+              #clicks_line_chart
+        #ppc-impressions.tab-pane
+          .panel-body
+            .centered
+              #impressions_line_chart
+        #ppc-conversions.tab-pane
+          .panel-body
+            .centered
+              #conversions_line_chart
+
+:javascript
+  $(function() {
+    this_period = JSON.parse('#{raw(data[:this_period].to_json)}')
+    last_period = JSON.parse('#{raw(data[:last_period].to_json)}')
+
+    line_chart_data = GoogleAds.performance(
+      this_period,
+      last_period
+    );
+    $('#clicks_line_chart').highcharts(line_chart_data[0]);
+
+    $('#click_id').on('click', function() {
+      $('#clicks_line_chart').highcharts(line_chart_data[0]);
+    })
+
+    $('#impression_id').on('click', function() {
+      $('#impressions_line_chart').highcharts(line_chart_data[1]);
+    })
+
+    $('#conversion_id').on('click', function() {
+      $('#conversions_line_chart').highcharts(line_chart_data[5]);
+    })
+
+  });

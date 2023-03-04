@@ -1,0 +1,90 @@
+.bg-sky-blue.rounded.border-1.border-blue.mb-4
+  .bg-white.rounded-t-12.py-4.px-5
+    .fs-md.color-dark-blue.fw-m Edit Portfolio
+  .p-lg-5.p-4
+    .input-wrapper
+      %label.input-wrapper-label Thumbnail
+      .preview-images-list
+        .preview-images-list-item
+          .cs_image_card.cs_image_card--img
+            = f.fields_for :thumbnail do |t|
+              .preview-thumb{:style => "background-image: url(#{t.object.file.url});"}
+                .preview-thumb-edit
+                  %label.preview-thumb-edit--label{:for => 'portfolio_thumbnail_attributes_file', :title => 'Image Size 568 x 568'}
+                    = t.file_field :file
+                -# = image_tag t.object.file.url || '', width: '123px', class: 'portfolio_thumbnail_preview'
+
+    .input-wrapper
+      = f.label :category, class: 'input-wrapper-label'
+      .input-wrapper-select
+        = f.select :category, Portfolio.category_collection, { include_blank: 'Select Category' }, required: true, class: 'input-wrapper-input'
+    - iklass = 'hidden' if f.object.video?
+    .input-wrapper.images_wrapper{class: iklass}
+      %label.input-wrapper-label Images
+      .preview-images-list
+        = f.fields_for :images do |ff|
+          = render 'image_fields', f: ff
+        .cs_image_card.cs_image_card--add
+          = link_to_add_association '+', f, :images
+    - vklass = 'hidden' unless f.object.video?
+    .input-wrapper.video_embed_code_wrapper{class: vklass}
+      %label.input-wrapper-label Video Embed Code
+      = f.text_area :video_embed_code, class: 'input-wrapper-input login', rows: 3
+    .input-wrapper
+      = f.label :draft, class: 'input-wrapper-label'
+      .togglebutton
+        %span.mr-4 No
+        %label
+          = f.check_box :draft
+        Yes
+    .input-wrapper
+      = f.hidden_field :tier, value: 'starter'
+      = f.hidden_field :agency_id, value: current_agency.id
+      = f.submit "Save", class: 'btn btn-warning saveBtn'
+
+:javascript
+  $('#portfolio_image_attributes_file').change(function(event){
+    var input = $(event.currentTarget);
+    var file = input[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+       image_base64 = e.target.result;
+       $(".portfolio_image_preview").attr("src", image_base64);
+    };
+    reader.readAsDataURL(file);
+  });
+  $('#portfolio_thumbnail_attributes_file').change(function(event){
+    var input = $(event.currentTarget);
+    var file = input[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+       image_base64 = e.target.result;
+       $(".portfolio_thumbnail_preview").attr("src", image_base64);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  $('#portfolio_category').change(function(){
+    if($(this).val() == 'video'){
+      $('.images_wrapper').addClass('hidden')
+      $('.video_embed_code_wrapper').removeClass('hidden')
+    }else{
+      $('.images_wrapper').removeClass('hidden')
+      $('.video_embed_code_wrapper').addClass('hidden')
+    }
+  })
+
+  $(document).ready(()=>{
+  $(document).on('change', '.preview-thumb-edit input[type="file"]', function(){
+  const file = this.files[0];
+  if (file){
+  var it = $(this).parents('.cs_image_card');
+  let reader = new FileReader();
+  reader.onload = function(event){
+  var imageUrl = event.target.result;
+  $(it).find('.preview-thumb').css('background-image', 'url(' + imageUrl + ')');
+  }
+  reader.readAsDataURL(file, it);
+  }
+  });
+  });

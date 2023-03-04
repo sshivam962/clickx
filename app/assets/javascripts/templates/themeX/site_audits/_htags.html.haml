@@ -1,0 +1,22 @@
+.col-md-12{ 'ng-repeat': 'error in htags.data'}
+  .col-md-12.p-n.text-dark{ 'ng-repeat': '(key,value) in error' }
+    .col-md-12.inline-flex.pl-n{ 'ng-if': "!checkKeys(key, 'excludeKeys')" }
+      .div.pr-sm
+        %i.fa.fa-close.text-danger{ 'ng-if': "error.status == 'error'", 'title': 'Need to fix' }
+        %i.fa.fa-check.text-success{ 'ng-if': "error.status == 'passed'", 'title': 'Passed' }
+      .div.max-content-width
+        %p.max-content-width
+          {{error.status == 'passed'? error.passed_title : error.error_title}}
+      .div.text-muted.text-italic{ 'ng-if': "!(key == 'h1_tags' || key == 'h2_tags')" }
+        %p{ 'ng-if': "key == 'keywords'", 'ng-repeat': 'keyword in value' } : {{keyword}}
+        %p{ 'ng-if': "key != 'keywords'" } {{value? ': '+value : value}}
+      .div.text-muted.text-italic{ 'ng-if': "(key == 'h1_tags' || key == 'h2_tags')",
+        'ng-init': 'limit = 3'}
+        %p{ 'ng-class': "{'destination': key == 'h1_tags' || key == 'h2_tags', 'source': key == 'keywords' || key == 'keywords' }",
+          'ng-repeat': 'link in value | limitTo: limit track by $index' } : {{link}}
+        %a.text-italic.text-success{ 'ng-click': '(limit == value.length? limit = 3 : limit = value.length); wrapKeyWord()',
+          'ng-show': 'value.length > 3' }
+          {{limit == 3? 'Show more >>>' : 'Less <<<'}}
+    .div{ 'ng-if': "!checkKeys(key, 'excludeKeys')" }
+      %p.ml-md.text-muted.text-italic.pt-sm.pl-md.mb-n{ 'ng-if': "error.status == 'error'"}
+        {{error.error_description}}

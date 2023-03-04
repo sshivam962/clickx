@@ -1,0 +1,1 @@
+= select_tag (field_name.presence || 'billing[state]'), options_for_select(states.collect {|s| [s, s]}, state), include_blank: 'Select State', class: 'form-control', required: true, id: 'state_select'

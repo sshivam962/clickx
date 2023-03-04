@@ -1,0 +1,38 @@
+- if case_study.has_access?(@agency_active_package_name) && unlocked
+  %tr.text-center.centered-cols.row-card
+    %td.col-client
+      %a.client-url.d-lg-flex.align-items-center{href: agency_case_study_path(case_study, industry_id: case_study.case_study_industries[0].industry_id, my_case_study: 0, category_id: params[:category_id])}
+        %span.client-name-circle.mr-0.mb-5.mb-lg-0.mr-lg-3= case_study.title.strip.first
+        .text= case_study.title
+    %td.text-lg-left
+      %p.m-0= case_study.short_desc
+    %td.col-btn.text-right
+      .d-lg-flex.align-items-center.justify-content-center.justify-content-lg-end.flex-wrap.flex-lg-nowrap.mt-3.mt-lg-0
+        .d-block.d-lg-inline-block
+          %a.btn.btn-blue.d-block.d-lg-inline-block.mx-auto.mr-lg-3.mb-4.mb-lg-0{href: agency_case_study_path(case_study, industry_id: case_study.case_study_industries[0].industry_id, my_case_study: 0, category_id: params[:category_id])}
+            Read More
+            %i.pl-sm.fa.fa-angle-double-right
+        .d-flex.justify-content-center
+          %a.action-btn.action-btn--transparent{href: case_study_public_link(current_agency, case_study), target: '_blank', data: {link: case_study_public_link(current_agency, case_study)}}
+            %span.btn-icon
+              %i.fa.fa-external-link
+
+  %tr.row-spacer
+    %td{:colspan => "3"}
+- else
+  %tr.text-center.centered-cols.row-card
+    %td.col-client
+      .client-url.d-lg-flex.align-items-center{href: 'javascript:void(0)'}
+        %span.client-name-circle
+          %i.fa.fa-lock
+        .text= case_study.title
+    %td.text-lg-left.mt-3.mt-lg-0
+    %td.col-btn.text-right
+      .d-flex.align-items-center.justify-content-end
+        %a.btn.btn-blue.mr-3{ href: '/a/packages/growth/agency_infrastructure', target: '_blank' }
+          Upgrade
+        %a.action-btn.action-btn--transparent.disabled_row{href:'#', disabled: true}
+          %span.btn-icon.text-center
+            %i.fa.fa-heart-o
+  %tr.row-spacer
+    %td{:colspan => "3"}

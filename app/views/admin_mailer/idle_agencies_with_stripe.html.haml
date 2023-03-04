@@ -1,0 +1,18 @@
+%tr
+  %td{:align => "center", :style => "padding: 40px 0 0; text-align: center;"}
+%tr
+  %td{:style => "color: #646464; font-size: 25px; line-height: 25px; font-weight: bold; padding: 0 0 10px; text-align:center;"}
+    Idle Agencies with Stripe for #{@number_of_days} Days
+%tr
+  %td{:style => "color: #646464; font-size: 18px; line-height: 28px; font-weight: bold; padding: 0;"}
+    %table{:style => "width: 100%; max-width: 680px; margin: 20px auto;font-size: 15px; line-height: 25px; font-weight: normal;"}
+      %tbody
+        %tr{:bgcolor => "#fFF"}
+          %td{:style => "font-family:'Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif;line-height:15px;margin:0;padding:6px 3px;width:40%;"} Name
+          %td{:style => "font-family:'Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif;line-height:15px;margin:0;padding:6px 3px;width:35%;"} Labels
+          %td{:style => "font-family:'Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif;line-height:15px;margin:0;padding:6px 3px;width:25%;"} Last Contacted
+        - @agencies.each_with_index do |agency|
+          %tr
+            %td{:style => "font-size: 13px; color:#4f88bf;font-family:'Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif;margin:0;padding-left:5px;"}= agency[:name]
+            %td{:style => "font-size: 13px; font-family:'Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif;line-height:13px;margin:0;padding:6px 3px;"}= agency[:labels]
+            %td{:style => "font-size: 13px; font-family:'Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif;line-height:13px;margin:0;padding:6px 3px;"}= agency[:last_contacted]

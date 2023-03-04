@@ -1,0 +1,75 @@
+.panel-group.mt-md.content-settings
+  .page-header
+    %h3 Writer cost per word
+  .row
+    .col-xs-12
+      - @writer_form.writers_levels.each do |wl|
+        - level = wl[:key]
+        .col-xs-3.p-n
+          .writers-level-settings.clearfix
+            %ul.clearfix
+              %li
+                .level.mb-n
+                  .level-star
+                    - wl[:stars].times do
+                      %span.fa.fa-star.gold-star
+                  .level-price
+                    .popover-wrapper
+                      %span $
+                      %a.ng-scope.ng-binding.editable.editable-click{class: "editable_text_#{level}", data: {level: level}}
+                        = wl[wl[:key]]
+                      %span
+                        \/Words
+
+              .mb-md.pl-sm.star-input-group
+                .input-group.invisible.editable_form_level{id: "editable_form_#{level}"}
+                  = form_for @writer_form, url: super_admin_content_setting_path(@writer_form.id), method: :patch, remote: true do |f|
+                    = hidden_field_tag :level, level
+                    = f.number_field level, value: wl[level], class: 'form-control', step: 0.01
+                    .input-group-btn
+                      %button.btn.btn-default.reset-btn{type: "submit"}
+                        %span.fa.fa-check
+                        Save
+                      %a.btn.btn-default.reset-btn.star-form-close{"aria-label" => "Amount", href: 'javascript:void(0)'}
+                        %span.fa.fa-times
+
+
+
+  .row
+    .col-xs-12.col-sm-5.col-md-4.col-lg-3
+      .form-group
+        %h3 Proof reading Cost per hour
+        .input-group
+          = form_for @writer_form, url: super_admin_content_setting_path(@writer_form.id), method: :patch, remote: true do |f|
+            = f.number_field :proofreading_cost, class: 'form-control', value: "#{@writer_form.proofreading_cost}", step:"0.01"
+            .input-group-btn
+              %a.btn.btn-default.reset-btn{"aria-label" => "Amount", href: 'javascript:void(0)'}
+                %span.fa.fa-dollar
+              %button.btn.btn-default.reset-btn{type: "submit"}
+                %span.fa.fa-check
+                Save
+
+      .form-group
+        %h3 Markup Percentage
+        .input-group
+          = form_for @writer_form, url: super_admin_content_setting_path(@writer_form.id), method: :patch, remote: true do |f|
+            = f.number_field :markup_percentage, class: 'form-control', value: "#{@writer_form.markup_percentage}", step:"0.01"
+            .input-group-btn
+              %a.btn.btn-default.reset-btn{"aria-label" => "Amount", href: 'javascript:void(0)'}
+                %span.fa.fa-percent
+              %button.btn.btn-default.reset-btn{type: "submit"}
+                %span.fa.fa-check
+                Save
+:javascript
+  $('document').ready(function(){
+    $('.editable-click').on('click', function(){
+      level = $(this).data('level')
+      $(".editable_form_level").addClass('invisible')
+      $("#editable_form_" + level).removeClass('invisible')
+    });
+
+    $('.star-form-close').on('click', function(){
+      $(".editable_form_level").addClass('invisible')
+    });
+  });
+

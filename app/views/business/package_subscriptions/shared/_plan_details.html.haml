@@ -1,0 +1,24 @@
+- package_key = plan.custom? ? 'custom' : package.key
+= form_tag business_subscribe_package_path(package: package_key, plan: plan[:key]), method: :post, remote: true, id: 'new_package_subscription_form' do
+  = hidden_field_tag :card_id
+  = hidden_field_tag :plan_amount, plan.amount
+  = hidden_field_tag :expedited_onboarding_fees, plan.implementation_fee
+  = hidden_field_tag :plan, plan.key
+  = hidden_field_tag :package, package_key
+  .l-com-info.pt-n
+    %h4
+      = plan[:name]
+  .l-com-info.pt-n
+    %h4
+      = "Price: #{plan_price(plan)}"
+  - if plan[:implementation_fee].present?
+    %span
+      .l-com-info.pt-n
+        %h4
+          %span
+            = "Expedited Onboarding: #{number_to_currency(plan[:implementation_fee], precision: 0)}"
+      .l-com-info.pt-n
+        %h4
+          Total Amount Due Today:
+          %span.total_amount_due
+            = " #{number_to_currency(plan[:amount] + plan[:implementation_fee], precision: 0)}"

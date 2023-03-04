@@ -1,0 +1,25 @@
+%tr{id: "direct_lead_tr#{direct_lead.id}"}
+  %td 
+    = direct_lead.name
+  %td 
+    = direct_lead.base_domain
+    %a.action-btn.action-btn--light.action-btn--xs.mr-2.text-center{ href: "//#{direct_lead.base_domain}", target: "_blank", "title" => "Link To Domain"}
+      %span.btn-icon.fs-12
+        %i.fa.fa-external-link
+  %td
+    %div.table-leads-actions
+      %a.action-btn.action-btn--info.action-btn--xs.mr-2.text-center{"data-method" => "get", "data-remote" => "true", "title" => "Show", href: list_contacts_agency_direct_lead_path(direct_lead)}
+        %span.btn-icon.fs-12
+          %i.fa.fa-eye
+      %a.action-btn.action-btn--success.action-btn--xs.text-center{"data-method" => "get", "data-remote" => "true", "title" => "Add Contact", href: new_contact_agency_direct_lead_path(direct_lead)}
+        %span.btn-icon.fs-12
+          %i.fa.fa-plus
+      %a.action-btn.action-btn--light.action-btn--xs.mr-2.text-center{"data-method" => "get", href: "#{agency_single_direct_lead_path(direct_lead_id: direct_lead.id)}", target: "_blank", "title" => "Send Mail"}
+        %span.btn-icon.fs-12
+          %i.fa.fa-paper-plane
+      %a.action-btn.action-btn--light.action-btn--xs.mr-2.text-center{"data-method" => "get", "data-remote" => "true", href: edit_agency_direct_lead_path(direct_lead), "title" => "Edit"}
+        %span.btn-icon.fs-12
+          %i.fa.fa-edit
+      %a.action-btn.action-btn--danger.action-btn--xs.text-center{"data-confirm" => "Are you sure you want to delete?", "data-method" => "delete", "data-remote" => "true", href: agency_direct_lead_path(direct_lead), "title" => "Delete"}
+        %span.btn-icon.fs-12
+          %i.fa.fa-trash        

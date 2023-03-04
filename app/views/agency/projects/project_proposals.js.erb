@@ -1,0 +1,2 @@
+$('#project_proposals').html("<%= escape_javascript render( partial: '/agency/projects/project_proposals', locals: { project: @project, project_proposals: @project_proposals}) %>");
+$('#project_proposals').removeClass('d-flex justify-content-center align-items-center');

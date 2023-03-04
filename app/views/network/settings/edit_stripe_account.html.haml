@@ -1,0 +1,70 @@
+= form_with url: update_stripe_account_network_settings_path, id: 'edit_connect_stripe', local: false do |f|
+  .pagge-middle
+    .col.text-center.lg:text-left.flex-1.lg:pl-8.py-6
+      .text-lg.color-dark-blue.font-medium Date Of Birth
+      - dob = @stripe_account.individual.dob
+      .grid.sm:grid-cols-2.gap-4.pt-5.flex-wrap
+        %div{"class" =>"col"}
+          = label_tag 'Day'
+          = number_field_tag 'day', dob.day.presence || nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Day', min: 1, required: true
+        %div{"class" =>"col"}
+          = label_tag 'Month'
+          = number_field_tag 'month', dob.month.presence || nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Month', min: 1, required: true
+        %div{"class" =>"col"}
+          = label_tag 'Year'
+          = number_field_tag 'year', dob.year.presence || nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Year', min: 1, required: true
+    .col.text-center.lg:text-left.flex-1.lg:pl-8.py-6
+      .text-lg.color-dark-blue.font-medium Social Security Number
+      .grid.sm:grid-cols-2.gap-4.pt-5.flex-wrap
+        %div{"class" =>"col"}
+          = number_field_tag 'ssn', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'SSN', min: 0
+    .col.text-center.lg:text-left.flex-1.lg:pl-8.py-6
+      .text-lg.color-dark-blue.font-medium Industry
+      .grid.sm:grid-cols-2.gap-4.pt-5.flex-wrap
+        %div{"class" =>"col"}
+          = select_tag 'industry', options_for_select(industries, @stripe_account.business_profile.mcc), class: 'font-light leading-6 block w-full border px-2 rounded-md', include_blank: 'Select Industry', required: true
+    .col.text-center.lg:text-left.flex-1.lg:pl-8.py-6
+      .text-lg.color-dark-blue.font-medium Address
+      - address = @stripe_account.individual.address
+      .grid.sm:grid-cols-2.gap-4.pt-5.flex-wrap
+        %div{"class" =>"col"}
+          = label_tag 'City'
+          = text_field_tag 'city', address.city.presence || nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'City', required: true
+        %div{"class" =>"col"}
+          = label_tag 'Country'
+          = text_field_tag 'country', address.country.presence || nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Country', required: true
+        %div{"class" =>"col"}
+          = label_tag 'Line1'
+          = text_field_tag 'line1', address.line1.presence || nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Line-1', required: true
+        %div{"class" =>"col"}
+          = label_tag 'Line2'
+          = text_field_tag 'line2', address.line2.presence || nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Line-2'
+        %div{"class" =>"col"}
+          = label_tag 'Postal Code'
+          = number_field_tag 'postal_code', address.postal_code.presence || nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Postal Code', min: 1, required: true
+        %div{"class" =>"col"}
+          = label_tag 'State'
+          = text_field_tag 'state', address.state.presence || nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'State', required: true
+    .col.text-center.lg:text-left.flex-1.lg:pl-8.py-6
+      .text-lg.color-dark-blue.font-medium Bank Account Details
+      .grid.sm:grid-cols-2.gap-4.pt-5.flex-wrap
+        %div{"class" =>"col"}
+          = label_tag 'Current Account Number (Last 4 Digits)'
+          = text_field_tag 'account_number', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: "#{@stripe_account.external_accounts.data.first.last4}", disabled: true
+        %div{"class" =>"col"}
+          = label_tag 'Current Routing Number'
+          = text_field_tag 'routing_number', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: "#{@stripe_account.external_accounts.data.first.routing_number}", disabled: true
+        %div{"class" =>"col"}
+          = label_tag 'New Account Number'
+          = text_field_tag 'account_number', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Account Number'
+        %div{"class" =>"col"}
+          = label_tag 'Confirm New Account Number'
+          = text_field_tag 'confirm_account_number', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Confirm Account Number'
+        %div{"class" =>"col"}
+          = label_tag 'New Routing Number'
+          = text_field_tag 'routing_number', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Routing Number'
+        %div{"class" =>"col"}
+          = label_tag 'Account Holder Name'
+          = text_field_tag 'account_holder_name', @stripe_account.external_accounts.data.first.account_holder_name, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Account Holder Name'
+  .text-center.pb-10
+    = f.submit 'Update', class: 'btn btn-warning submit_button'

@@ -1,0 +1,10 @@
+.locations
+  - case_studies.each do |case_study|
+    = render 'super_admin/case_studies/shared/case', case_study: case_study, super_admins: @super_admins
+.row
+  .col-md-4.col-lg-4.col-sm-12.pt-md
+    = page_entries_info case_studies
+  .col-md-8.col-lg-8.col-sm-12.right_align
+    = will_paginate case_studies, params: {title: params[:title], status: params[:status], industry: params[:industry]}
+:javascript
+  $('.pagination a').attr('data-remote', 'true');

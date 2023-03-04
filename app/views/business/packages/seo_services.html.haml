@@ -1,0 +1,262 @@
+- content_for :title do
+  Advanced SEO
+.page-heading
+  %h1 Advanced SEO
+.container-fluid
+  %div{"data-widget-group" => "group1"}
+    .row
+      .col-sm-12
+        .panel.panel-default.p-lg
+          .panel-body.p-n
+            .row
+              .col-sm-12
+                - plans = @package.plans.group_by(&:key)
+                .table-responsive.table-pricing1
+                  %table.table.table-hover.mb-n
+                    %thead
+                      %tr
+                        %th.vat.pb-lg{:width => "300"}
+                          - plan = plans['starter'].first
+                          %h2.pt-header-caption.text-info= plan.title
+                          .pt-header-price
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                        %th.vat.pb-lg{:width => "300"}
+                          - plan = plans['pro'].first
+                          %h2.pt-header-caption.text-success= plan.title
+                          .pt-header-price
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                        %th.vat.pb-lg{:width => "300"}
+                          - plan = plans['advanced'].first
+                          %h2.pt-header-caption.text-warning= plan.title
+                          .pt-header-price
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                    %tbody
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          100% Customized Strategy
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          100% Customized Strategy
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          100% Customized Strategy
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Dedicated Campaign Manager
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Dedicated Campaign Manager
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Dedicated Campaign Manager
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          24/7 Reporting Dashboard
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          24/7 Reporting Dashboard
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          24/7 Reporting Dashboard
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Ongoing SEO Management
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Ongoing SEO Management
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Ongoing SEO Management
+                      %tr.bdr-b-line
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Backlinks Acquisition
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Backlinks Acquisition
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Backlinks Acquisition
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Keyword Research (5 Products or Services)
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Keyword Research (10 Products or Services)
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Keyword Research (15 Products or Services)
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          2 to 3 Keyword Categories Targeted
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          3 to 5 Keyword Categories Targeted
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          5 to 7 Keywords Categories Targeted
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Keywords Tracked: 100
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Keywords Tracked: 200
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Keywords Tracked: 300
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Competitors Monitored: 5
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Competitors Monitored: 10
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Competitors Monitored: 10
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Content Strategy Development
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Content Strategy Development
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Content Strategy Development
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Month to Month Commitment
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Quarterly Social Media Strategy
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Quarterly Social Media Strategy
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          30 Day Notice for Cancellation
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Digital PR Placement (3 per Quarter)
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Digital PR Placement (4 per Quarter)
+                      %tr
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Month to Month Commitment
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Quarterly SEO Video Strategy
+                      %tr
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          30 Day Notice for Cancellation
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Video Optimized on YouTube
+                      %tr
+                        %td.vam
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Quarterly Conversion Optimization Strategy
+                      %tr
+                        %td.vam
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Month to Month Commitment
+                      %tr
+                        %td.vam
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          30 Day Notice for Cancellation
+                      %tr
+                        %td.vam
+                          %a.btn.btn-info.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'seo_services', plan: 'starter')}
+                            Get Started
+                            %i.pl-sm.fa.fa-angle-double-right
+                            .ripple-container
+                        %td.vam
+                          %a.btn.btn-success.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'seo_services', plan: 'pro')}
+                            Get Started
+                            %i.pl-sm.fa.fa-angle-double-right
+                            .ripple-container
+                        %td.vam
+                          %a.btn.btn-warning.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'seo_services', plan: 'advanced')}
+                            Get Started
+                            %i.pl-sm.fa.fa-angle-double-right
+                            .ripple-container
+              - plan = @package.plans.first
+              - if plan.implementation_fee.present?
+                .col-sm-12.mt-lg
+                  .bdr-line.info-tile.info-tile-alt.mb-n.b-s-n
+                    .info.p-lg
+                      .tile-heading
+                        %b ONE-TIME: EXPEDITED ONBOARDING: #{number_to_currency(plan.implementation_fee, precision: 0)} USD
+                      %center.font-14
+                        Kick Off Call, Benchmark Report, Analyze Traffic Trends on Google Analytics Review, Analyze SEO
+                        %br
+                        on Google Search Console Review, Keyword Ranking Analysis, Backlink Analysis, UI/UX Analysis,
+                        %br
+                        Conversion Analysis, Technical SEO and Website Speed Analysis

@@ -1,0 +1,14 @@
+<% if @error.present? %>
+  toastr.error("<%= @error %>")
+  // $.rails.enableElement($('.payment-next-btn'));
+  $('input.payment-next-btn').removeAttr('disabled')
+  $('input.payment-next-btn').val('Pay Now')
+<% else %>
+  toastr.success("You have successfully subscribed for <%= @package[:name] %>");
+  var next_step = $('.payment-next-btn').data('next-step')
+  <% if @business.present? %>
+    $('#questionnaires_list').html("<%= escape_javascript render( partial: 'agency/package_subscriptions/shared/questionnaires', locals: { client: @business, package: @package}) %>");
+  <% end %>
+  $('.checkout_steps').addClass('hidden')
+  $('#step_' + next_step + '_content').removeClass('hidden')
+<% end %>

@@ -1,0 +1,95 @@
+= Gon::Base.render_data
+- if @google_data.present?
+  .d-panel.mb-4
+    .row.d-flex.flex-wrap
+      .col-xs-12.dpanel-item.mb-5
+        .bg-white.br-10.pl-lg.pr-lg.pt-2.pb-2.mb-4
+          .d-flex.justify-content-between.flex-wrap
+            .col.f-s-20.pt-2.pb-2.color-dark-blue.fw-sb
+              Google Analytics
+              / .custom-tooltip
+              /   %i.fa.fa-info-circle.color-dark-blue
+              /   %span.custom-tooltiptext Displays the analytics of the traffic on your site as per Google Analytics.
+            .col.pt-2.pb-2
+              .d-flex.align-items-center
+                .col.pl-4
+                  = link_to business_dashboard_google_analytics_path(start_date: @start_date&.strftime('%m/%d/%Y'), end_date: @end_date&.strftime('%m/%d/%Y')), class: 'icon-btn-circle', remote: true, method: :get do
+                    %i.fa.fa-refresh
+        .stat-cards-list
+          .stat-cards-list--item
+            .stat-card.stat-card--red
+              .stat-card-datas
+                .stat-data
+                  = number_with_delimiter(@google_data['sessions'], raise: false)
+                .stat-name Sessions
+                / .stat-more Increased by 60%
+              .stat-card-icon-wrap
+                .stat-card-icon
+                  %i.fa.fa-clock-o
+              .stat-bg-circle
+              .stat-bg-circle.stat-bg-circle2
+          .stat-cards-list--item
+            .stat-card.stat-card--blue
+              .stat-card-datas
+                .stat-data
+                  = number_with_delimiter(@google_data['totalUsers'], raise: false)
+                .stat-name Visitors
+                / .stat-more Decreased by 10%
+              .stat-card-icon-wrap
+                .stat-card-icon
+                  %i.fa.fa-users
+              .stat-bg-circle
+              .stat-bg-circle.stat-bg-circle2
+          .stat-cards-list--item
+            .stat-card.stat-card--green
+              .stat-card-datas
+                .stat-data
+                  = number_with_delimiter(@google_data['screenPageViews'], raise: false)
+                .stat-name Pageviews
+                / .stat-more Increased by 5%
+              .stat-card-icon-wrap
+                .stat-card-icon
+                  %i.fa.fa-eye
+              .stat-bg-circle
+              .stat-bg-circle.stat-bg-circle2
+        .bg-white.br-10.p-25
+          .row.d-flex.flex-wrap
+            .col-xs-12.col-12.col-lg-6.mb-3.pb-3.mb-xl-0
+              %ul.dpanel-datas-list.row.d-flex.flex-wrap
+                %li.col-sm-6.col-xs-12
+                  .d-flex.justify-content-between.bg-light-gray.br-10.p-4
+                    .col Active Users
+                    .col.fw-sb
+                      = number_with_delimiter(@google_data['activeUsers'], raise: false)
+                %li.col-sm-6.col-xs-12
+                  .d-flex.justify-content-between.bg-light-gray.br-10.p-4
+                    .col Bounce Rate
+                    .col.fw-sb
+                      - bounce_rate = number_with_precision(@google_data['bounceRate'], precision: 2, raise: false)
+                      = number_with_delimiter(bounce_rate, raise: false)
+                      \%
+                %li.col-sm-6.col-xs-12
+                  .d-flex.justify-content-between.bg-light-gray.br-10.p-4
+                    .col New Users
+                    .col.fw-sb
+                      = number_with_delimiter(@google_data['newUsers'], raise: false)
+                %li.col-sm-6.col-xs-12
+                  .d-flex.justify-content-between.bg-light-gray.br-10.p-4
+                    .col Page Views Per Session
+                    .col.fw-sb
+                      - avg_load = number_with_precision(@google_data['screenPageViewsPerSession'], precision: 2, raise: false)
+                      = number_with_delimiter(avg_load, raise: false)
+                %li.col-sm-6.col-xs-12
+                  .d-flex.justify-content-between.bg-light-gray.br-10.p-4
+                    .col Avg. Session Duration (sec)
+                    .col.fw-sb
+                      - avg_session = number_with_precision(@google_data['averageSessionDuration'], precision: 2, raise: false)
+                      = number_with_delimiter(avg_session, raise: false)
+                %li.col-sm-6.col-xs-12
+                  .d-flex.justify-content-between.bg-light-gray.br-10.p-4
+                    .col Events Per Session
+                    .col.fw-sb
+                      - avg_time = number_with_precision(@google_data['eventsPerSession'], precision: 2, raise: false)
+                      = number_with_delimiter(avg_time, raise: false)
+            .col-xs-12.col-12.col-lg-6
+              #chart_google_analytics

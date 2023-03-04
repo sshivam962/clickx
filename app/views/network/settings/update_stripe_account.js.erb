@@ -1,0 +1,6 @@
+<% if @errors.present? %>
+  toastr.error("<%= @errors %>")
+<% else %>
+  toastr.success("Updated Successfully")
+  window.location.href = "/n/settings"
+<% end %>

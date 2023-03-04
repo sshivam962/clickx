@@ -1,0 +1,34 @@
+= render 'business/facebook_ads/page_header', daterange: daterange_picker_format(@start_date, @end_date)
+
+.container-fluid
+  %div
+    .row
+      .col-md-12
+        = render 'business/facebook_ads/tab_menu', active_tab: 'ads'
+
+      .col-md-12
+        .tab-content.summary
+          = render 'business/facebook_ads/ads', data: @data, graph_data: @graph_data
+
+:javascript
+  $(function() {
+    $('#date_filter').daterangepicker({
+      maxDate: new Date(),
+      locale: { format: 'MM-DD-YYYY' }
+    }).on("change", function() {
+      const date_range = $(this).val();
+      const [start_date, end_date] = date_range.split(' - ');
+      const request_url = `/b/facebook_ads/ads?start_date=${start_date}&end_date=${end_date}`;
+
+      $.ajax({
+        url: request_url,
+        type: 'GET',
+        dataType: 'script',
+        success: function(data) {
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    });
+  });

@@ -1,0 +1,49 @@
+.page-content
+  %form{'ng-submit': 'updateOnboardingProcedure(onboarding_procedure)'}
+    .page-heading.no-margin-bottom
+      %h1
+        %i.clickx-icon-SellSheets.title-icon>
+        Edit Onboarding
+      .options
+        %a.btn.btn-white.btn-raised{href:"/#/agencies/service_onboarding"}
+          %i.fa.fa-arrow-left.pr-xs
+          Back
+    .container-fluid
+      %div
+        .row.onboarding-checklist
+          .col-sm-12
+            .panel.panel-default
+              .panel-heading
+                .panel-ctrls
+                  %button.btn.button-icon.pull-left.mt-sm{ type: 'submit'}
+                    %span.material-icons.inverted save
+              .panel-body.pl-xl
+                .form-group.mt-n
+                  %input.form-control.proc_title{placeholder: 'Onboarding procedure title', 'ng-model': 'onboarding_procedure.title'}
+                %ul.checklist-timeline.m-left-100{"dnd-list" => 'onboarding_procedure.onboarding_tasks_attributes'}
+                  %li.timeline-item{id: 'task_{{onboarding_procedure.onboarding_tasks_attributes[$index].id}}', "dnd-draggable" => "task", "dnd-moved" => 'onboarding_procedure.onboarding_tasks_attributes.splice($index, 1)', 'ng-repeat' => 'task in onboarding_procedure.onboarding_tasks_attributes'}
+                    %dnd-nodrag
+                      .name
+                        %i.fa.fa-cog.icon-item
+                        .panel.panel-default
+                          .panel-body.item-card
+                            .row
+                              .col-xs-12.col-sm-1.col-md-1.text-center
+                                %i.fa.fa-check-circle
+                              .col-xs-12.col-sm-11.col-md-11
+                                %input.form-control.mb{placeholder: 'Title', 'ng-model': 'onboarding_procedure.onboarding_tasks_attributes[$index].title'}
+                                %textarea.form-control.mb{placeholder: 'Description', 'ng-model': 'onboarding_procedure.onboarding_tasks_attributes[$index].description'}
+                                %input.onboarding-checklist-title.form-control.mb{placeholder: 'Task', 'ng-model': 'onboarding_procedure.onboarding_tasks_attributes[$index].task'}
+                                %a.btn.btn-white.btn-raised.pull-right{'ng-click':'removeTask(task)'} Remove
+                  %li.timeline-item.dndPlaceholder
+                    %i.fa.fa-cog.icon-item
+                    .panel.panel-default
+                      .panel-body.item-card
+                        .row
+                          .col-md-12
+                            %center
+                              %h4 Drop Task Here
+                  %li.timeline-item
+                    %a{'ng-click': 'addTaskForm()'}
+                      %i.fa.fa-plus.icon-item
+

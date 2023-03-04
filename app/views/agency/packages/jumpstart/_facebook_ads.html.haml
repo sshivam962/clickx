@@ -1,0 +1,307 @@
+- content_for :title do
+  Facebook Ads | Clickx
+.container-fluid
+  %div{"data-widget-group" => "group1"}
+    .row
+      .col-sm-12.mt-md
+        .panel.panel-default
+          .panel-body.p-n
+            .row
+              .col-sm-12
+                .table-responsive.table-pricing
+                  %table.table.table-hover.mb-n
+                    %thead
+                      %tr
+                        %th.vat{:style => 'padding-right:125px;width:40%'}
+                          %h2.pt-header-caption Facebook & Instagram Ads
+                        - plan = package.plans.group_by(&:key)['starter'].first
+                        %th.vat{bgcolor: plan_color(plan.key), :width => '30%'}
+                          %h2.pt-header-caption.text-info
+                            Jumpstart
+                          .pt-header-price.font-40
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                          %span.plan-label.f-s-xxs.bg-transparent.p-n MSRP: #{number_to_currency(plan.min_recommended_price, precision: 0)}
+                        - plan = package.plans.group_by(&:key)['plus'].first
+                        %th.vat{bgcolor: '#f0f7fd', :width => '30%'}
+                          %h2.pt-header-caption.text-info
+                            Jumpstart Plus
+                          .pt-header-price.font-40
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                          %span.plan-label.f-s-xxs.bg-transparent.p-n MSRP: #{number_to_currency(plan.min_recommended_price, precision: 0)}
+                    %tbody
+                      %tr
+                        %td.vam{:align => "left"} Ad Budgets
+                        %td.vam Under $1,500
+                        %td.vam Under $1,500
+                      %tr
+                        %td.vam{:align => "left"} Campaign Questionnaire
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Kick-Off Call with Client
+                        %td.vam With White Glove
+                        %td.vam With White Glove
+                      %tr
+                        %td.vam{:align => "left"} Email Support
+                        %td.vam With Agency
+                        %td.vam With Agency
+                      %tr
+                        %td.vam{:align => "left"} Campaign Launch Timeline
+                        %td.vam 15-20 Days
+                        %td.vam 15-20 Days
+                      %tr
+                        %td.vam{:align => "left"} Dedicated Facebook Ad Specialists
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr.bg-l-grey
+                        %td.vam{:align => "left"} Implementation
+                        %td.vam
+                        %td.vam
+                      %tr
+                        %td.vam{:align => "left"} 100% Customized Strategy per Client
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Pixel Setup
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Targeting & Audience Research
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Campaign Buildouts
+                        %td.vam
+                          1 Campaign/Offer
+                        %td.vam
+                          2 Campaigns/Offers
+                      %tr
+                        %td.vam{:align => "left"} Ad Sets Buildout
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Facebook Lead Ads
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Facebook Form Setup
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Initial Ad Creatives
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Initial Ad Creatives
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Additional Ad Creatives
+                        %td.vam Every 90 Days
+                        %td.vam Every 90 Days
+                      %tr
+                        %td.vam{:align => "left"} Ad Creative Approval
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} New Ad Creatives
+                        %td.vam Additional
+                        %td.vam Additional
+                      %tr
+                        %td.vam{:align => "left"} Initial Ads Copywriting
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Implementation of Initial Bids
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Implementation of Ad Scheduling
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"}
+                          24/7 Reporting Dashboard
+                          .custom-tooltip
+                            %i.fa.fa-info-circle
+                            %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+                        %td.vam
+                          %span
+                            .custom-tooltip
+                              %i.fa.fa-info-circle
+                              %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            .custom-tooltip
+                              %i.fa.fa-info-circle
+                              %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr.bg-l-grey
+                        %td.vam{:align => "left"} On-Going Support
+                        %td.vam
+                        %td.vam
+                      %tr
+                        %td.vam{:align => "left"} Dedicated Campaign Management Team
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Facebook Ad Management
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Feedback on Landing Page
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Monthly Performance Report
+                        %td.vam With Agency
+                        %td.vam With Agency
+                      %tr
+                        %td.vam{:align => "left"} Campaign Quality Audits
+                        %td.vam Weekly
+                        %td.vam Weekly
+                      %tr
+                        %td.vam{:align => "left"} Performance-Based Budget Pacing
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Month to Month Commitment
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} 30 Day Notice for Cancellation
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                        %td.vam
+                          %span
+                            %i.material-icons.text-success.tick-r.f-s-20 check
+                      %tr
+                        %td.vam{:align => "left"} Implementation Fee
+                        %td.vam
+                          %span
+                            $250 One Time
+                        %td.vam
+                          %span
+                            $250 One Time
+                      - unless @is_preview
+                        %tr
+                          %td.vam{:align => "left"}
+                          - package.plans.where(key: %w[starter plus]).order(:amount).each do |plan|
+                            %td.vam
+                              %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: package.key, plan: plan.key)}
+                                Get Started
+      .row.pt-5.pb-4.d-none.flex-wrap.row-p-5
+        .col-md-6.col-sm-6
+          .panel.panel-default.p-xxl
+            .panel-head
+              %i.clickx-icon-Support.ico-60.pr-sm.text-info
+              %h5.f-s-16.f-w-lg.l-s-2.text-muted OPTIONAL
+              %h2.pt-header-caption.text-info White-Glove™ Customer Service
+              .pt-header-price
+                $500
+                %span> /mo
+            .panel-body.pl-n.pr-n
+              %p.f-s-sm.mb-md In addition to our White Label Dashboard for Reporting, White-Glove™ Customer Service include day to day Account Management, Email Communication with our Account Managers as well as Monthly Strategy and Reporting Phone Call.
+        .col-md-6.col-sm-6
+          .panel.panel-default.p-xxl
+            .panel-head
+              %i.clickx-icon-partner.ico-60.ml-sm.n.pr-sm.text-info
+              %h5.f-s-16.f-w-lg.l-s-2.text-muted OPTIONAL
+              %h2.pt-header-caption.text-info Expedited Onboarding
+              .pt-header-price
+                $500
+                %span> /One Time
+            .panel-body.pl-n.pr-n
+              %p.f-s-sm Speedy Ad Setup and Approval. 2 Weeks Rush Turn Around.
+              %p.f-s-sm
+                Requesting Access to Business Manager as an Admin, Ad Account Creation, and Page Access,
+                Dashboard Provisioning, Campaign Funding and Launch Support
+      - if raw(package.sales_pitch).present?
+        .col-sm-12
+          .panel.panel-info
+            .panel-body.p-lg
+              .row
+                .col-sm-12.p-n
+                  .info-tile.info-tile-alt.mb-n.b-s-n
+                    .info.p-lg
+                      = raw(@package.sales_pitch)

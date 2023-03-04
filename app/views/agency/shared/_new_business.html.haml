@@ -1,0 +1,22 @@
+.col-md-12.p-n
+  .form-group.mt-n
+    %label.control-label Company Name
+    = text_field_tag 'business[name]', @lead&.company, class: 'form-control col-sm-5', required: true
+.col-md-12.p-n
+  .form-group.mt-n
+    %label.control-label Domain Name(eg: example.com)
+    = text_field_tag 'business[domain]', @lead&.domain, class: 'form-control col-sm-5', required: true
+.col-md-12.p-n
+  .form-group.mt-n
+    %label.control-label Country
+    = select_tag 'business[locale]', options_for_select(business_country_collection, 'en-us'), class: 'form-control'
+.col-md-12.p-n
+  .form-group.mt-n
+    %label.control-label Target Location(eg: Chicago)
+    = text_field_tag 'business[target_city]', 'United States', class: 'form-control col-sm-5', required: true
+:javascript
+  $('#business_locale').on('change', function (e) {
+    var country = $("option:selected", this).text();
+    target_city = country.split(' - ')[0]
+    $('#business_target_city').val(target_city)
+  });

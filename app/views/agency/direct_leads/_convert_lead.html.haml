@@ -1,0 +1,4 @@
+- if @direct_lead.converted?
+  = link_to 'Undo Add to Leads', convert_agency_direct_lead_path(id: direct_lead.id), method: :post, remote: true, class: 'btn btn-sm btn-success float-right', id: 'lead-mark-not-converted'
+- else
+  = link_to 'Add to Leads', convert_agency_direct_lead_path(id: direct_lead.id), method: :post, remote: true, class: 'btn btn-sm btn-success float-right', id: 'lead-mark-converted'

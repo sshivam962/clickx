@@ -1,0 +1,191 @@
+= link_to formatted_url(@agency.weburl), target: '_blank', class: 'lead-logo' do
+  - if @agency.logo.present?
+    = image_tag @agency.logo || '', height: '40px'
+  - else
+    %h1.m-n.p-n.white.logo-title
+      = @agency.name
+.container
+  .row.mt-xxl
+    .col-md-8.col-md-offset-2
+      = form_for (@lead || @agency.leads.new), url: register_lead_path(agency_slug: @agency.name_slug), method: :post, remote: true, class: 'form-vertical cardy clickx-parsley',"data-parsley-validate": '' do |f|
+        .panel.tranin.panel-midnightblue{style: 'visibility:visible'}
+          .panel-heading
+            %h2.regtitle Register New Lead
+          .panel-body
+            .col-sm-12.p-n
+              .form-group.m-n.p-n.col-sm-6
+                %label.col-md-12.control-label{for: 'user_first_name'}
+                  First Name
+                  .red.inline *
+                .col-md-12
+                  = f.text_field :first_name, required: true, class: 'form-control col-sm-5'
+              .form-group.m-n.p-n.col-sm-6
+                %label.col-md-12.control-label{for: 'user_last_name'}
+                  Last Name
+                .col-md-12
+                  = f.text_field :last_name, class: 'form-control col-sm-5'
+            .col-sm-12.p-n
+              .form-group.m-n.p-n.col-sm-6
+                %label.col-md-12.control-label{for: "user_email"}
+                  Email
+                  .red.inline *
+                .col-md-12
+                  = f.email_field :email, required: true, class: 'form-control'
+              .form-group.m-n.p-n.col-sm-6
+                %label.col-md-12.control-label{for: "business_name"}
+                  Company
+                  .red.inline *
+                .col-md-12
+                  = f.text_field :company, required: true, class: 'form-control col-sm-5'
+            .col-sm-12.p-n
+              .form-group.m-n.p-n.col-sm-6
+                %label.col-md-12.control-label{for: 'user_phone'}
+                  Phone
+                .col-md-12
+                  = f.phone_field :phone, class: 'form-control', placeholder: "+1 555 555 1234"
+              .form-group.m-n.p-n.col-sm-6
+                %label.col-md-12.control-label{for: "business_domain"}
+                  Domain
+                .col-md-12
+                  = f.text_field :domain, class: 'form-control col-sm-5'
+              .form-group.m-n.p-n.col-sm-6
+                %label.col-md-12.control-label
+                  Status
+                .col-md-12
+                  = f.select :status, ::Lead.status_collection, {}, class: 'form-control col-sm-5'
+              .form-group.m-n.p-n.col-sm-6
+                %label.col-md-12.control-label
+                  Monthly Marketing Budget (Including Ad Budget)
+                .col-md-12
+                  = f.text_field :value, class: 'form-control col-sm-5'
+              .form-group.m-n.p-n.col-sm-6
+                %label.col-md-12.control-label
+                  Next Meeting Date (discovery call)
+                .col-md-12
+                  = f.text_field :next_meeting_date, class: 'form-control col-sm-5', placeholder: 'MM-DD-YYYY', readonly: true, style: 'cursor:pointer;'
+
+        .panel.panel-default{style: 'visibility:visible'}
+          .panel-body
+            .col-sm-12.p-n
+              %h2.col-sm-12.mb-lg.regsubt
+                Client is Interested in
+                .red.inline *
+                %small.font-14 (select atleast one)
+              - Lead::CAMPAIGN_INFO.each do |info|
+                .form-group.m-n.p-n.col-sm-6
+                  .col-md-12
+                    .checkbox.checkbox-inline.checkbox-warning
+                      %label
+                        = check_box_tag "lead[campaign_info][#{info[:key]}]", '', false, class: 'lead_campaign_info_check'
+                        = info[:name]
+
+        .panel.panel-default{style: 'visibility:visible'}
+          .panel-body
+            %h2.col-sm-12.mb-lg.regsubt
+              = precede "Client's Current Marketing Tactics" do
+                %small.font-14 What marketing tactics are they currently doing?
+                %small.font-14 What is their current marketing budget?
+                %small.font-14 What have they done in the past for marketing? What worked? What did not work?
+                %small.font-14 What help are you looking for?
+            .form-group.m-n.col-sm-12.p-n
+              .col-sm-12
+                = f.text_area :current_info, class: 'form-control col-sm-5', rows: 10
+
+        .panel.panel-default{style: 'visibility:visible'}
+          .panel-body
+            %h2.col-sm-12.mb-lg.regsubt Competitor Information
+            .form-group.m-n.col-sm-6.p-n
+              %label.col-md-12.control-label{:for => "fieldname"} Competitor 1:
+              .col-md-12
+                %input.form-control{name: 'lead[competitor_info][]', :required => "", :type => "text"}
+            .form-group.m-n.col-sm-6.p-n
+              %label.col-md-12.control-label{:for => "fieldname"} Competitor 2:
+              .col-md-12
+                %input.form-control.col-sm-5{name: 'lead[competitor_info][]', :required => "", :type => "text"}
+            .form-group.m-n.col-sm-6.p-n
+              %label.col-md-12.control-label{:for => "fieldname"} Competitor 3:
+              .col-md-12
+                %input.form-control.col-sm-5{name: 'lead[competitor_info][]', :required => "", :type => "text"}/
+
+        .panel.tranin.panel-default{style: 'visibility:visible'}
+          .panel-body
+            %h2.col-sm-12.mb-lg.regsubt
+              = precede 'Client Goals & Expectations' do
+                %small.font-14 What are they looking to achieve from marketing? What are their goals?
+                %small.font-14 What are they looking to invest in marketing?
+                %small.font-14 What are your KPIs for which you measure success?
+                %small.font-14 What are your CPA/CPL aims?
+            .form-group.m-n.col-sm-12.p-n
+              .col-sm-12
+                = f.text_area :goals_and_expectations, class: 'form-control col-sm-5', rows: 10
+        .panel.panel-default{style: 'visibility:visible'}
+          .panel-body
+            %h2.col-sm-12.mb-lg.regsubt
+              = precede 'Next Steps' do
+                %small.font-14 We need Admin Access to perform any Audits.
+            - Lead::NEXT_STEPS.each do |info|
+              .form-group.m-n.p-n.col-sm-6
+                .col-md-12
+                  .checkbox.checkbox-inline.checkbox-warning
+                    - if lead_next_step_enabled?(info[:key], @agency)
+                      %label
+                        = check_box_tag "lead[next_steps][#{info[:key]}]", '', false, disabled: info[:disabled]
+                        = info[:name]
+                    - else
+                      %label
+                        = check_box_tag 'temp', '', false, disabled: true
+                        = info[:name]
+                        %span.custom-tooltip
+                          %i.fa.fa-lock
+                          %span.custom-tooltiptext
+                            Requires Pro Plan or Higher
+            .form-group.col-sm-6.audit_request.hidden
+              %label.col-md-12.control-label
+                Do you have access to the account?
+              .col-md-12
+                = f.select :audit_request, Lead::AUDIT_REQUESTS, { include_blank: 'Select Answer' }, class: 'form-control col-sm-5'
+
+        .panel.tranin.panel-default{style: 'visibility:visible'}
+          .panel-body
+            %h2.col-sm-12.mb-lg.regsubt
+              Call Notes
+              .red.inline *
+              %small.font-14 What is a client worth to you over the course of their lifespan with you?
+              %small.font-14 What is their budget?
+              %small.font-14 What is being sold? What is the price for the item(s) being sold?
+              %small.font-14 Who is the ideal customer?
+            .form-group.m-n.col-sm-12.p-n
+              .col-sm-12
+                = f.text_area :call_notes, class: 'form-control col-sm-5', rows: 10
+          .panel-footer.pt-n
+            .col-sm-12
+              = f.submit "Register", class: 'hidden form_submit'
+              %a.btn.btn-warning.btn-raised.btn-lg.mb-lg.save_lead{href: 'javascript:void(0)'}
+                Register
+
+:javascript
+  $(function() {
+    $("#lead_next_meeting_date").datepicker({
+      todayHighlight: true,
+      minDate: 0,
+      nextText: '',
+      prevText: '',
+      dateFormat: "mm-dd-yy"
+    });
+  });
+
+  $('.save_lead').click(function(){
+    if ($('.lead_campaign_info_check').filter(':checked').length < 1){
+      alert('Please Select any Interest.')
+    }else{
+      $('.form_submit').click();
+    }
+  })
+
+  $("input[name='lead[next_steps][account_campaign_audit]']").change(function() {
+    if(this.checked) {
+      $('.audit_request').removeClass('hidden')
+    }else{
+      $('.audit_request').addClass('hidden')
+    }
+  });

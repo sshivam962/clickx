@@ -1,0 +1,39 @@
+- content_for :title do
+  Login | #{app_name}
+
+.col-md-10.col-sm-12.col-xs-12.col-md-offset-1.col-sm-offset-0.col-xs-offset-0
+  .col-md-6.col-sm-6.p-lg
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .form-group
+        %i.glyphicon.glyphicon-user
+        = f.text_field :login, class: 'form-control login', placeholder: 'Email', autofocus: true
+      .form-group
+        %i.glyphicon.glyphicon-lock
+        = f.password_field :password, class: 'form-control password', placeholder: 'Password'
+      %button.btn.btn-warning.mb-md{type: 'submit'} Sign in to My Account
+      = link_to 'Request Magic Link', magic_link.new_magic_link_path, class: 'forgot mb-md'
+      .checkbox.pull-left.inline
+        = f.check_box :remember_me, id: 'remember'
+        %label{for: 'remember'} Remember Me
+      %a.forgot.pull-right.inline{href: new_password_path(resource_name)} Forgot Password?
+      / - unless  white_labeled_client?
+      /   .col-sm-12.mb-md.mt-n.alert-custom.alert.sign_up_link
+      /     %p
+      /       Don't have an account?
+      /       %a.text-info.pull-right.inline{'data-toggle': 'modal', 'data-target': "#signup-modal", href: 'javascript:void(0)'} Sign Up
+
+
+    / .row
+    /   .col-sm-12.p-lg.split-warp
+    /     .split
+    /       .or OR
+    /   .col-sm-12.f-s-sm.text-white.f-w-sm.inlineb
+    /     %p.social-link Sign in with
+    /     = link_to user_facebook_omniauth_authorize_path(auth: true, origin: request.host_with_port), class: 'social-signin facebook inlineb' do
+    /       %i.fa.fa-facebook.m-n
+    /     = link_to user_google_oauth2_omniauth_authorize_path(auth: true, origin: request.host_with_port), class: 'social-signin google inlineb' do
+    /       %i.fa.fa-google.m-n
+  .col-md-6.col-sm-6.p-lg.line-divider.hidden-xs
+    .jumbotron.bg-transparent.p-sm{role: 'alert'}
+      %h4.f-s-md.text-white.f-w-md.mb-md.title-border-y Happy #{current_day}!
+      %p.f-s-sm.text-white.f-w-sm Just enter your email address and we'll get you right into #{app_name || 'your Dashboard'}.

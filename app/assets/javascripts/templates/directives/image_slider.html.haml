@@ -1,0 +1,12 @@
+.slides
+  %div{ 'ng-repeat': 'slide in slides track by $index'}
+    .slide.slide-animation{ 'ng-show': 'isCurrent($index)' }
+      .image.col-sm-8.col-sm-offset-2
+        %img.img-responsive{ 'ng-src': '{{slide.src}}' }
+  .controls{ 'ng-if': 'slides.length > 1' }
+    .navigation
+      %a.prev.text-muted{ 'ng-click': 'prev()' }
+        %i.fa.fa-chevron-circle-left.fa-3x.text-muted
+      %a.next.text-muted{ 'ng-click': 'next()' }
+        %i.fa.fa-chevron-circle-right.fa-3x.text-muted
+%h4.text-muted.text-center Share this image

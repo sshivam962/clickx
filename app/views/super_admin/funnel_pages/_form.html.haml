@@ -1,0 +1,100 @@
+%div.col-md-12
+  .row.funnel_page_form
+    .form-group
+      %label{for: "funnel_page_title"} Title
+      = f.text_field :title, required: true, class: 'form-control login', placeholder: 'Enter Title'
+    .form-group
+      %label{for: "funnel_page_industry_id"} Industry
+      = f.select :industry_id, Industry.order(:title).pluck(:title, :id), { include_blank: 'Select Industry' }, required: true, class: 'form-control'
+    .form-group
+      %label{for: "funnel_page_draft"} Draft
+      = f.check_box :draft
+    .form-group
+      %label{for: "funnel_page_lead_form_required"} Lead Form Required
+      = f.check_box :lead_form_required
+    .form-group
+      %label{for: "funnel_page_css"} CSS File Link
+      = f.text_field :css, class: 'form-control login', placeholder: 'CSS File Link'
+    .panel.panel-default.mb-sm
+      %a{'data-toggle' => 'collapse', href: '#collapse_section_a'}
+        .panel-heading
+          %h2 Section A
+      .collapse#collapse_section_a
+        .panel-body
+          %b Dynamic Variables : &nbsp&nbsp&nbsp
+          - FunnelPage::PLACEHOLDERS.each do |key, value|
+            %a.copy_to_clipboard.si-placeholder.mr-md{href: 'javascrip:void(0)', data: {key: "{{#{key}}}"}}
+              {{#{key}}}
+          .form-group
+            = f.cktext_area :section_a, class: '', ckeditor: { toolbar: 'funnel' }
+    .panel.panel-default.mb-sm
+      %a{'data-toggle' => 'collapse', href: '#collapse_section_b'}
+        .panel-heading
+          %h2 Section B
+      .collapse#collapse_section_b
+        .panel-body
+          %b Dynamic Variables : &nbsp&nbsp&nbsp
+          - FunnelPage::PLACEHOLDERS.each do |key, value|
+            %a.copy_to_clipboard.si-placeholder.mr-md{href: 'javascrip:void(0)', data: {key: "{{#{key}}}"}}
+              {{#{key}}}
+          .form-group
+            = f.cktext_area :section_b, class: '', ckeditor: { toolbar: 'funnel' }
+    .panel.panel-default.mb-sm
+      %a{'data-toggle' => 'collapse', href: '#collapse_section_c'}
+        .panel-heading
+          %h2 Section C
+      .collapse#collapse_section_c
+        .panel-body
+          %b Dynamic Variables : &nbsp&nbsp&nbsp
+          - FunnelPage::PLACEHOLDERS.each do |key, value|
+            %a.copy_to_clipboard.si-placeholder.mr-md{href: 'javascrip:void(0)', data: {key: "{{#{key}}}"}}
+              {{#{key}}}
+          .form-group
+            = f.cktext_area :section_c, class: '', ckeditor: { toolbar: 'funnel' }
+    .panel.panel-default.mb-sm
+      %a{'data-toggle' => 'collapse', href: '#collapse_section_d'}
+        .panel-heading
+          %h2 Section D
+      .collapse#collapse_section_d
+        .panel-body
+          %b Dynamic Variables : &nbsp&nbsp&nbsp
+          - FunnelPage::PLACEHOLDERS.each do |key, value|
+            %a.copy_to_clipboard.si-placeholder.mr-md{href: 'javascrip:void(0)', data: {key: "{{#{key}}}"}}
+              {{#{key}}}
+          .form-group
+            = f.cktext_area :section_d, class: '', ckeditor: { toolbar: 'funnel' }
+    .panel.panel-default.mb-sm
+      %a{'data-toggle' => 'collapse', href: '#collapse_section_e'}
+        .panel-heading
+          %h2 Section E
+      .collapse#collapse_section_e
+        .panel-body
+          %b Dynamic Variables : &nbsp&nbsp&nbsp
+          - FunnelPage::PLACEHOLDERS.each do |key, value|
+            %a.copy_to_clipboard.si-placeholder.mr-md{href: 'javascrip:void(0)', data: {key: "{{#{key}}}"}}
+              {{#{key}}}
+          .form-group
+            = f.cktext_area :section_e, class: '', ckeditor: { toolbar: 'funnel' }
+    .panel.panel-default.mb-sm
+      %a{'data-toggle' => 'collapse', href: '#collapse_section_f'}
+        .panel-heading
+          %h2 Section F
+      .collapse#collapse_section_f
+        .panel-body
+          %b Dynamic Variables : &nbsp&nbsp&nbsp
+          - FunnelPage::PLACEHOLDERS.each do |key, value|
+            %a.copy_to_clipboard.si-placeholder.mr-md{href: 'javascrip:void(0)', data: {key: "{{#{key}}}"}}
+              {{#{key}}}
+          .form-group
+            = f.cktext_area :section_f, class: '', ckeditor: { toolbar: 'funnel' }
+    .form-group
+      = f.submit "Save", class: 'btn btn-warning saveBtn', name: 'Save'
+:javascript
+  $('.copy_to_clipboard').on('click', function (e) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).data('key')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Copied to Clipboard");
+  });

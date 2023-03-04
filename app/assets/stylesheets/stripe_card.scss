@@ -1,0 +1,74 @@
+.stripe-card-form .error svg {
+  margin-top: 0 !important;
+}
+
+.stripe-card-form .error svg .base {
+  fill: #e25950;
+}
+
+.stripe-card-form .error svg .glyph {
+  fill: #fff;
+}
+
+.stripe-card-form .error .card-message {
+  color: #e25950;
+}
+
+.stripe-card-form .success .icon .border {
+  stroke: #abe9d2;
+}
+
+.stripe-card-form .success .icon .checkmark {
+  stroke: #24b47e;
+}
+
+.stripe-card-form .success .title {
+  color: #32325d;
+  font-size: 16px !important;
+}
+
+.stripe-card-form .success .card-message {
+  color: #8898aa;
+  font-size: 13px !important;
+}
+.stripe-card-form .card-message {
+  color: #e25950;
+}
+
+.stripe-card-form .success .reset path {
+  fill: #24b47e;
+}
+
+.stripe-card-form .error {
+  display: -ms-flexbox;
+  display: flex;
+  // -ms-flex-pack: center;
+  // justify-content: center;
+  // padding: 0 15px;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  margin-top: 20px;
+  left: 0;
+  font-size: 13px !important;
+  opacity: 0;
+  transform: translateY(10px);
+  transition-property: opacity, transform;
+  transition-duration: 0.35s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.stripe-card-form .error.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.stripe-card-form .error .message {
+  font-size: inherit;
+}
+
+.stripe-card-form .error i {
+  margin-right: 10px;
+  color: #e25950;
+  font-size: 16px;
+}

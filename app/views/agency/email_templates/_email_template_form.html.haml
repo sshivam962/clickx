@@ -1,0 +1,142 @@
+- form_path = @email_template.new_record? ? agency_email_templates_path : agency_email_template_path
+
+= form_for @email_template, url: form_path do |f|
+  .row
+    .col-lg-4
+      .grid_list
+        .email-shortcodes
+          .email-shortcodes-item
+            .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'first_name', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+              %input.offscreen.first_name{value: '{{first_name}}', 'aria-hidden': true, placeholder:'{{first_name}}'}
+              .email-shortcodes-label {{first_name}}
+              .email-shortcodes-icon
+                %i.fa.fa-clipboard
+          .email-shortcodes-item
+            .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'lead_source_name', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+              %input.offscreen.lead_source_name{value: '{{lead_source_name}}', 'aria-hidden': true}
+              .email-shortcodes-label {{lead_source_name}}
+              .email-shortcodes-icon
+                %i.fa.fa-clipboard
+          .email-shortcodes-item
+            .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'domain', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+              %input.offscreen.domain{value: '{{domain}}', 'aria-hidden': true}
+              .email-shortcodes-label {{domain}}
+              .email-shortcodes-icon
+                %i.fa.fa-clipboard
+          .email-shortcodes-item
+            .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'company_name', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+              %input.offscreen.company_name{value: '{{company_name}}', 'aria-hidden': true}
+              .email-shortcodes-label {{company_name}}
+              .email-shortcodes-icon
+                %i.fa.fa-clipboard
+          .email-shortcodes-item
+            .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'screenshot', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+              %input.offscreen.screenshot{value: '{{screenshot}}', 'aria-hidden': true}
+              .email-shortcodes-label {{screenshot}}
+              .email-shortcodes-icon
+                %i.fa.fa-clipboard
+          .email-shortcodes-item
+            .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'instagram', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+              %input.offscreen.instagram{value: '{{instagram}}', 'aria-hidden': true}
+              .email-shortcodes-label {{instagram}}
+              .email-shortcodes-icon
+                %i.fa.fa-clipboard
+          .email-shortcodes-item
+            .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'intro', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+              %input.offscreen.intro{value: '{{intro}}', 'aria-hidden': true}
+              .email-shortcodes-label {{intro}}
+              .email-shortcodes-icon
+                %i.fa.fa-clipboard
+          .email-shortcodes-item
+            .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'tomorrow', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+              %input.offscreen.tomorrow{value: '{{tomorrow}}', 'aria-hidden': true}
+              .email-shortcodes-label {{tomorrow}}
+              .email-shortcodes-icon
+                %i.fa.fa-clipboard
+          .email-shortcodes-item
+            .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'wordpress', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+              %input.offscreen.wordpress{value: '{{wordpress}}', 'aria-hidden': true}
+              .email-shortcodes-label {{wordpress}}
+              .email-shortcodes-icon
+                %i.fa.fa-clipboard
+          .email-shortcodes-item
+            .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'city', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+              %input.offscreen.city{value: '{{city}}', 'aria-hidden': true}
+              .email-shortcodes-label {{city}}
+              .email-shortcodes-icon
+                %i.fa.fa-clipboard
+          .email-shortcodes-item
+            .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'prompt_1', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+              %input.offscreen.prompt_1{value: '{{prompt_1}}', 'aria-hidden': true}
+              .email-shortcodes-label {{prompt_1}}
+              .email-shortcodes-icon
+                %i.fa.fa-clipboard
+          .email-shortcodes-item
+            .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'prompt_2', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+              %input.offscreen.prompt_2{value: '{{prompt_2}}', 'aria-hidden': true}
+              .email-shortcodes-label {{prompt_2}}
+              .email-shortcodes-icon
+                %i.fa.fa-clipboard
+          .email-shortcodes-item
+            .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'prompt_3', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+              %input.offscreen.prompt_3{value: '{{prompt_3}}', 'aria-hidden': true}
+              .email-shortcodes-label {{prompt_3}}
+              .email-shortcodes-icon
+                %i.fa.fa-clipboard
+          
+
+    .col-lg-8
+      .input-wrapper
+        %label.input-wrapper-label.m-0.pb-3 Name
+        = f.text_field :name, class: 'input-wrapper-input', required: true
+      .input-wrapper
+        %label.input-wrapper-label.m-0.pb-3 Subject
+        = f.text_field :subject, class: 'input-wrapper-input', required: true
+      .input-wrapper
+        .btn.btn-sm.btn--dark.mr-2{"data-target": ".variables-modal", "data-toggle": "modal"} Variables
+      .input-wrapper
+        %label.input-wrapper-label.m-0.pb-3  Email Body
+        = f.cktext_area :content, cols: 40, ckeditor: { toolbar: 'mini' }
+      .input-wrapper
+        %label.input-wrapper-label.m-0.pb-3 WordPress Variable Sentence
+        = f.text_area :wordpress_site_custom_content, class: 'input-wrapper-input'
+        .fs-12 If the website is WordPress, you can enter a custom sentence to personalize the email. Example: Since your website is in WordPress, we can easily make the suggested changes.
+      = submit_tag 'Save', class: 'btn btn-raised btn-primary'
+      
+.modal.fade.in.variables-modal{role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-sm
+    .bg-white.p-4.p-sm-5.rounded
+      .fw-sb.pb-3 Variables
+      .bg-light.rounded.p-4
+        .email-shortcodes-item
+          .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'variable_1', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+            %input.offscreen.variable_1{value: '{{variable_1}}', 'aria-hidden': true}
+            .email-shortcodes-label {{variable_1}}
+            .email-shortcodes-icon
+              %i.fa.fa-clipboard
+        .email-shortcodes-item
+          .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'variable_2', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+            %input.offscreen.variable_2{value: '{{variable_2}}', 'aria-hidden': true}
+            .email-shortcodes-label {{variable_2}}
+            .email-shortcodes-icon
+              %i.fa.fa-clipboard
+        .email-shortcodes-item
+          .email-shortcodes-item--btn.copy_text.tooltips{'data-value': 'variable_3', 'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+            %input.offscreen.variable_3{value: '{{variable_3}}', 'aria-hidden': true}
+            .email-shortcodes-label {{variable_3}}
+            .email-shortcodes-icon
+              %i.fa.fa-clipboard
+
+:javascript
+  $('.tooltips').tooltip();
+  $('.copy_text').click(function(){
+    var copyText = $('.' + $(this).data('value'))
+    copyText.select();
+    document.execCommand('copy');
+    $('.tooltips').attr('data-original-title', 'Copied!');
+    $(this).find('.tooltips').tooltip('show');
+  })
+  $('.copy_text').hover(function(){
+    $('.tooltips').attr('data-original-title', 'Copy to clipboard');
+    $(this).find('.tooltips').tooltip('show');
+  })

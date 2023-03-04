@@ -1,0 +1,8 @@
+%tr
+  %td{:align => "left", :style => ""}
+    %b Non Service Clients
+%tr
+  %td{:align => "left", :style => ""}
+    - @non_service_businesses.each.with_index(1) do |b_name, i|
+      #{i}. #{b_name}
+      %br

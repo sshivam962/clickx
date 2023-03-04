@@ -1,0 +1,62 @@
+%ul.stages
+  - if steps.include?('plan')
+    %li.completed
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Plan
+  - if steps.include?('client')
+    %li.current
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Client
+  - if steps.include?('agreement')
+    %li
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Agreement
+  - if steps.include?('payment')
+    %li
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Payment
+  - if steps.include?('success')
+    %li
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Complete
+  - if steps.include?('kick_off')
+    %li
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Kick-Off
+  - if steps.include?('questionnaire')
+    %li
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Questionnaire
+.checkout-stages--content.mt-xxl
+  .panel.panel-default.p-xxl.p-lg--sm
+    .panel-body.pl-n.pr-n
+      .panel-heading
+        %h2 Select Client
+      .panel-body
+        %md-input-container.business_dropdown
+          .form-group.m-n
+            %label.md-no-float.md-container-ignore Clients
+            = select_tag "selected_business", options_for_select(business_collection(@businesses)), include_blank: 'Select/Add Client', required: true, class: 'form-control'
+        .lead_selection.hidden
+          #lead_select_content
+            %md-input-container.lead_dropdown
+              .form-group.m-n
+                %label.md-no-float.md-container-ignore Leads
+                = select_tag "selected_lead", options_for_select(lead_collection(current_agency.leads)), include_blank: 'Select Lead', required: true, class: 'form-control'
+        %md-input-container.add_business_form
+  .text-center
+    %a.btn.btn-lg.m-n.btn-warning.btn-raised.step_complete.client-next-btn{href: 'javascript:void(0)', data: {next_step: next_step, current_step: 'client'}} Continue

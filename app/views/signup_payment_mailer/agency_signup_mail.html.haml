@@ -1,0 +1,53 @@
+%p
+  %h4
+    New Subscription recieved:
+    = @subscription.package_name.humanize
+
+%p
+  Amount :
+  = number_to_currency(@subscription.amount)
+
+- if @subscription.onetime_charge.present?
+  %p
+    One-time Charge:
+    = number_to_currency(@subscription.onetime_charge)
+
+- if @signup_link.present?
+  - if @signup_link.down_payment?
+    %p
+      Down payment:
+      = number_to_currency(@signup_link.down_payment, precision: 0)
+  %p
+    Onboarding Onetime Charge:
+    = number_to_currency(@signup_link.onetime_charge, precision: 0)
+    - if @signup_link.onetime_charge_duration?
+      (charged for #{pluralize(@signup_link.onetime_charge_duration, 'month')} #{number_to_currency(@signup_link.onetime_charge, precision: 0)}#{@signup_link.onetime_charge_duration == 1 ? '' : '/mo'})
+    - else
+      = '/mo'
+
+- if @signup_link&.trial?
+  - sub_amount = 0
+  %p
+    Free Trial for #{@signup_link.trial_info}
+- elsif @coupon.present?
+  - sub_amount = @subscription.amount - discount_by_coupon(@coupon, @subscription.amount, false)
+  %p
+    - coupon_info = coupon_applied_info_for_mail(@coupon, @subscription.amount)
+    %p
+      = coupon_info[:promo_msg]
+    %p
+      = coupon_info[:discount_msg]
+- else
+  - sub_amount = @subscription.amount
+
+%p
+  - onetime_charge = @signup_link&.down_payment? ? 0 : @signup_link&.onetime_charge.to_i
+  - down_payment = @signup_link&.down_payment? ? @signup_link&.down_payment : 0
+  - total_amount = [sub_amount, @subscription.onetime_charge, onetime_charge, down_payment].flatten.compact.sum
+
+  Total Amount Recieved:
+  = number_to_currency(total_amount)
+
+%p
+  Agency :
+  = @agency.name

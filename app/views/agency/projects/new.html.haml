@@ -1,0 +1,313 @@
+- content_for :title do
+  Post a Project | Clickx
+#wrapper.ui-2020
+  #layout-static
+    .static-content-wrapper
+      .static-content
+        .page-content
+          .page-heading
+            %h1
+              %i.clickx-icon-Addition
+              Post a Project
+          .container-fluid
+            = form_for @project, url: :agency_projects, method: :post do |f|
+              = f.hidden_field :specific_primary_skill
+              = f.hidden_field :specific_other_skill
+              = f.hidden_field :specific_other_skill_2
+
+              .bg-sky-blue.border-blue.rounded.border-1.mb-5
+                .bg-white.p-4.p-md-5.rounded-t-12
+                  .fw-m.fs-md.text-black Project Information
+                .p-25
+                  .row.d-flex.flex-wrap
+                    .col-xs-12
+                      .input-wrapper
+                        .input-wrapper-label Project Type
+                        .buttons-list
+                          - Project::PROJECT_TYPES.each do |project_type|
+                            %label.buttons-list-item
+                              = radio_button_tag 'change_project', project_type, project_type.eql?(@project_type)
+                              %span
+                                = project_type
+                        -# = f.select :project_type, options_for_select(Project::PROJECT_TYPES), { prompt: 'Select Project Type' }, { class: 'input-wrapper-input', required: true}
+                    .col-xs-12
+                      .input-wrapper
+                        .input-wrapper-label Project Title
+                        = f.text_field :title, class: 'input-wrapper-input', placeholder: 'Who do you need?', required: true
+                    .col-xs-12
+                      .input-wrapper
+                        .input-wrapper-label Short Description
+                        = f.text_area :short_desc, class: 'input-wrapper-input', placeholder: '', rows: 2, required: true
+                    .col-xs-12
+                      .input-wrapper
+                        .input-wrapper-label
+                          Long Description
+                          %span.fs-14.text-muted (Minimum 150 characters)
+                        .min-counter
+                          = f.text_area :description, class: 'input-wrapper-input', placeholder: '', rows: 4, required: true, minlength: 150
+                          .min-counter-count
+                            %span.min-counter-charecter 0
+                            %span.min-counter-charecter-success
+                              %i.fa.fa-check
+                    .col-xs-12
+                      .input-wrapper
+                        .input-wrapper-label Budget
+                        = f.number_field :budget, class: 'input-wrapper-input', placeholder: '', min: 0, required: true
+
+                  .fw-m.fs-sm.text-black Project Skills
+                  .pt-4.pb-5
+                    .input-wrapper.mb-0
+                      .input-wrapper-label Primary Skill
+                      .input-wrapper-select
+                        = f.select :primary_skill, options_for_select(Project::PRIMARY_SKILLS.collect {|skill| [skill.second, skill.first]}), { prompt: 'Select Primary Skill' }, { class: 'input-wrapper-input'}
+                    #primary_skill
+
+                  .pb-5
+                    .input-wrapper.mb-0
+                      .input-wrapper-label Other Skills
+                      .input-wrapper-select
+                        = f.select :other_skill, options_for_select(Project::PRIMARY_SKILLS.collect {|skill| [skill.second, skill.first]}), { prompt: 'Select Primary Skill' }, { class: 'input-wrapper-input'}
+                    #other_skill
+
+                  .pb-5
+                    .input-wrapper.mb-0
+                      .input-wrapper-label Other Skills 2
+                      .input-wrapper-select
+                        = f.select :other_skill_2,options_for_select(Project::PRIMARY_SKILLS.collect {|skill| [skill.second, skill.first]}), { prompt: 'Select Primary Skill' }, { class: 'input-wrapper-input'}
+                    #other_skill_2
+                  .pt-4
+                    = f.submit 'Post Project', class: 'btn btn-lg btn-warning'
+:css
+  .navbar-fixed-top-2020+#wrapper, .navbar-fixed-top-2020+#layout-fixed {padding-top: 64px !important;}
+
+:javascript
+  $('textarea#project_description').keyup(function() {
+    var characterCount = $(this).val().length;
+    minLength = 250;
+    var counter = $(this).parent('.min-counter').find('.min-counter-count .min-counter-charecter');
+      $(counter).html(characterCount);
+    if(characterCount >= minLength) {
+      $(this).parent('.min-counter').addClass('min-counter-success');
+    } else {
+      $(this).parent('.min-counter').removeClass('min-counter-success');
+    }
+  });
+
+  function SecondarySkills(primary_skill, field){
+    $.ajax({
+      url: "/a/projects/select_seconday_skills",
+      type: 'get',
+      data: {primary_skill: primary_skill, field: field, page: 'new'},
+      dataType: 'script'
+    })
+  };
+
+  $('#project_primary_skill').change(function() {
+    primary_skill = $(this).val();
+    field = 'primary_skill';
+    SecondarySkills(primary_skill, field);
+  });
+
+  $('#project_other_skill').change(function() {
+    primary_skill = $(this).val();
+    field = 'other_skill';
+    SecondarySkills(primary_skill, field);
+  });
+
+  $('#project_other_skill_2').change(function() {
+    primary_skill = $(this).val();
+    field = 'other_skill_2';
+    SecondarySkills(primary_skill, field);
+  });
+
+
+  document.querySelector('.styled-select-wrapper').addEventListener('click', function() {
+    this.querySelector('.styled-select').classList.toggle('open');
+  });
+
+  $(document).ready(function() {
+    $('#tokenfield').tokenfield({
+      autocomplete: {
+        source: ['Admin Assistant', 'Appointment Setter', 'Data Entry', 'Email Management', 'Event Planner', 'Excel', 'Human Resource Management', 'Personal Assistant', 'Project Coordinator', 'Quality Assurance', 'Recruitment Assistant', 'Research', 'Transcription', 'Travel Planning'],
+        delay: 100
+      },
+      showAutocompleteOnFocus: true
+    });
+
+    $('#project-title').change(function() {
+      $('#tokenfield').tokenfield('destroy');
+      value = $(this).val();
+      console.log(value);
+      if(value == 'office_admin') {
+        input_source = ['Admin Assistant', 'Appointment Setter', 'Data Entry', 'Email Management', 'Event Planner', 'Excel', 'Human Resource Management', 'Personal Assistant', 'Project Coordinator', 'Quality Assurance', 'Recruitment Assistant', 'Research', 'Transcription', 'Travel Planning'];
+        //input_val = input_source;
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'english') {
+        input_source = ['Speaking', 'Translation', 'Tutoring Teaching', 'Writing'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'writing') {
+        input_source = ['Blogging', 'Copywriting', 'Creative Writing', 'Ebook Writing', 'Editing Proofreading', 'Ghost Writing', 'Technical Writing', 'Web Content Writing'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'marketing') {
+        input_source = ['Affiliate Marketing', 'Classified Ads Marketing', 'Craigslist Marketing', 'Direct Mail Marketing', 'Email Marketing', 'Facebook Marketing', 'Instagram Marketing', 'Lead Generation', 'LinkedIn Marketing', 'Mobile Marketing', 'Private Blog Network', 'Sales Representative', 'SEM', 'SEO', 'Social Media Marketing', 'Telemarketing', 'Video Marketing', 'YouTube Marketing'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'advertising') {
+        input_source = ['Amazon Product Ads', 'Bing Ads', 'Creative advertising', 'Facebook Ads', 'Google AdWords', 'Instagram Ads', 'Media Buys', 'Other Ad Platforms', 'Scientific advertising', 'Youtube Ads'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'web_development') {
+        input_source = ['AngularJS', 'ASP.NET', 'ClickFunnels', 'Drupal Development', 'Infusionsoft', 'Javascript', 'Joomla Development', 'Laravel', 'Magento', 'Mysql', 'Node.js', 'PHP', 'React', 'Ruby on Rails', 'Shopify', 'VueJS', 'WooCommerce', 'Wordpress Development'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'web_master') {
+        input_source = ['Content Management', 'Cpanel', 'Css', 'Drupal', 'Ecommerce / Shopping Carts', 'Google analytics', 'HTML', 'Joomla', 'Managing Servers', 'PSD to HTML', 'Webmaster Tools', 'Wordpress'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'graphics_multimedia') {
+        input_source = ['3D Modeling', 'Adobe Indesign', 'Animation Specialist', 'Autocad', 'Graphics Editing', 'Illustrator', 'Logo Design', 'Photoshop', 'Print Design', 'Recording Audio', 'Shirt Design', 'Video Editing', 'Web page Design'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'software') {
+        input_source = ['Android development', 'C#', 'Desktop Applications', 'Game development', 'iOS development', 'Python', 'Software QA Testing'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'finance_management') {
+        input_source = ['Accounting', 'Bookkeeping', 'Business Plans', 'Financial Analysis', 'Financial Forecasting', 'Financial Management', 'Inventory Management', 'Investment Researching', 'Payroll', 'Quickbooks', 'Strategic Planning', 'Tax Preparation', 'Xero'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'customer_service') {
+        input_source = ['Community Forum Moderation', 'Content Moderation', 'Customer Support', 'Email Support', 'Phone Support', 'Social Media Moderation', 'Tech Support'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'professional_services') {
+        input_source = ['Architectural and Engineering Services', 'Legal Services', 'Medical Services', 'Real Estate Services'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+      else if(value == 'project_management') {
+        input_source = ['Design Project Management', 'Marketing Project Management', 'Other Project Management', 'Software Development Project Management', 'Web Development Project Management', 'Writing Project Management'];
+        $('#tokenfield').val(input_source);
+        $('#tokenfield').tokenfield({
+          autocomplete: {
+            source: input_source,
+            delay: 100
+          },
+          showAutocompleteOnFocus: true
+        });
+      }
+    })
+  });
+
+  $(document).on('change', '#primary-skill-select-0', function() {
+    val = $(this).val();
+    console.log(val);
+    if(val.length != 0) {
+      $('.primary-skills-0').removeClass('hidden');
+    } else {
+      $('.primary-skills-0').addClass('hidden');
+    }
+  });
+  $(document).on('change', '#secondary-skill-select-1', function() {
+    val = $(this).val();
+    console.log(val);
+    if(val.length != 0) {
+      $('.secondary-skills-1').removeClass('hidden');
+    } else {
+      $('.secondary-skills-1').addClass('hidden');
+    }
+  });
+  $(document).on('change', '#secondary-skill-select-2', function() {
+    val = $(this).val();
+    if(val.length != 0) {
+      $('.secondary-skills-2').removeClass('hidden');
+    } else {
+      $('.secondary-skills-2').addClass('hidden');
+    }
+  });

@@ -1,0 +1,121 @@
+.ui-2020
+  .page-heading.pt-md.pb-md
+    %h1
+      %i.clickx-icon-money.title-icon
+      Payment
+  #dashboard-table.container-fluid.mt-md.pt-xs.payment-preloader
+    .panel.panel-bg.panel-br-10
+      .panel-body
+        .p-lg-4
+          = form_for @payment_link, url: agency_payment_links_path, method: :post, class: 'row-border' do |f|
+            .form-group.mt-0
+              %label Payment Type
+              .radio-buttons.radio-buttons--inline
+                .radio.radio-inline.radio-warning.mt-n
+                  %label
+                    = f.radio_button :resource_type, 'Lead', required: true, checked: true
+                    Lead
+                .radio.radio-inline.radio-warning
+                  %label
+                    = f.radio_button :resource_type, 'Business', required: true
+                    Client
+            #payment_links_resources_select
+              = render 'agency/payment_links/shared/resource_type_select', resource_type: f.object.resource_type || 'Lead', resource_id: f.object.resource_id
+            = f.fields_for :plan do |p|
+              .form-group
+                %label A Description For The Payment Link
+                .row
+                  .col-sm-6
+                    .form-group.mt-2
+                      = p.text_field :description_line_1, class: 'form-control mb-0 pt-0', placeholder: 'Line 1', required: true
+                  .col-sm-6
+                    .form-group.mt-2
+                      = p.text_field :description_line_2, class: 'form-control mb-0 pt-0', placeholder: 'Line 2'
+              .form-group
+                %label Price
+                = p.number_field :amount, class: 'form-control', placeholder: 'Price', required: true, step: 0.01
+              .form-group
+                %label Select Your Subscription Type
+                .radio-buttons.radio-buttons--inline
+                  .radio.radio-inline.radio-warning
+                    %label
+                      = p.radio_button :billing_category, 'subscription', checked: true
+                      Monthly Recurring Charge
+                  .radio.radio-inline.radio-warning
+                    %label
+                      = p.radio_button :billing_category, 'charge'
+                      Fixed Price
+              #implementation-fee.form-group
+                %label Implementation Fee
+                = p.number_field :implementation_fee, class: 'form-control', placeholder: 'Implementation Fee', step: 0.01
+              #pay_with_implementation_fee.checkbox.checkbox-inline.checkbox-warning.pl-0
+                %label.text-darkblue
+                  = p.check_box :pay_with_implementation_fee
+                  Will client be paying for both implementation and first month management at the same time?
+            .spacer40
+            %p.fs-14 Please confirm the above details before proceeding
+            = f.submit 'Create Link', class: 'btn-raised btn-primary btn btn--md', disable_with: 'Submitting...'
+
+    .spacer20
+
+:javascript
+  $('input[type=radio][name="payment_link[resource_type]"]').change(function() {
+    $.ajax({
+      url: "/a/payment_links/resource_dropdown",
+      type: 'get',
+      data: { resource_type: $(this).val() },
+      dataType: 'script',
+      async: false,
+      success:function(response){
+      }
+    })
+  });
+
+  $(document).on('change', '#payment_link_resource_id',function() {
+    if($('input[name="payment_link[resource_type]"]:checked').val() == 'Business'){
+      $.ajax({
+        url: "/a/payment_links/business_users_dropdown",
+        type: 'get',
+        data: { business_id: $(this).val() },
+        dataType: 'script',
+        async: false,
+        success:function(response){
+        }
+      })
+    }
+  });
+
+  $(document).on('change', '#payment_link_business_user_id',function() {
+    if($(this).val() == 'other'){
+      $.ajax({
+        url: "/a/payment_links/user_info",
+        type: 'get',
+        data: {},
+        dataType: 'script',
+        async: false,
+        success:function(response){
+        }
+      })
+    }else{
+      $('#user_info_section').html('')
+    }
+  });
+
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.payment-preloader').removeClass('payment-preloader');
+    }, 500);
+  });
+
+
+  $(document).on('change', 'input[name="payment_link[plan_attributes][billing_category]"]', function() {
+    if($(this).val() == 'charge') {
+      $('#implementation-fee').hide();
+      $('#pay_with_implementation_fee').hide();
+      $('#payment_link_plan_attributes_implementation_fee').val('');
+    }
+    else{
+      $('#implementation-fee').show();
+      $('#pay_with_implementation_fee').show();
+    }
+  });

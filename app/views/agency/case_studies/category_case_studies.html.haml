@@ -1,0 +1,38 @@
+- content_for :title do
+  Case Studies | Clickx
+.page-content
+  .container-fluid.mt-4
+    .searchform-wrapper
+      .search-form
+        %input.search-form__input#search_case_study{placeholder: 'Search', type: 'search'}
+        %button.search-form__btn
+          %i.fa.fa-search
+        %a.search-form-btn-clear.clear_filters{href: 'javascript:void(0)', 'data-title' => 'Clear Filters'}
+          %i.fa.fa-times
+    .case_studies_list
+      .spacer15
+      .bg-sky-blue.rounded.border-1.border-blue.mb-4
+        .bg-white.rounded-t-12.py-4.px-5
+          .d-flex.flex-wrap.justify-content-between
+            .col-auto
+              .fs-md.color-dark-blue.fw-m.py-2
+                = @category[:name]
+                = hidden_field_tag :category_id, params['category_id']
+        .p-lg-5.p-4
+          #case_studies_list
+            = render 'category_case_studies_list', case_studies: @case_studies
+:javascript
+  $('#search_case_study').on('keyup', function() {
+    var name = $('#search_case_study').val().toLowerCase();
+    var category_id = $('#category_id').val();
+    $.ajax({
+      url: "/a/case_study_categories/" + category_id,
+      type: 'get',
+      data: { name: name },
+      dataType: 'script',
+      async: false,
+      success:function(response){
+        $('#tab_content').html(response.data)
+      }
+    })
+  });

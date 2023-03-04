@@ -1,0 +1,56 @@
+.panel.panel-default
+  .panel-body.p-n.pt-md
+    .col-md-12
+      .col-sm-12.p-n
+        .table-responsive
+          %table.table.table-hover.table-vam.table-striped.text-muted
+            %thead
+              %tr
+                %th.f-w-md{:width => "300", 'st-sort': 'AnchorText', 'st-sort-default': 'true'}
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Anchor Texts." }
+                    = link_to 'ANCHOR TEXT', anchor_text_business_backlinks_path(order_by: 'AnchorText', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md{:width => "150"}
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Topics." }
+                    = link_to 'TOPICS', anchor_text_business_backlinks_path(order_by: 'TopicalTrustFlow_Topic_0', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Number of referring domains with these anchor texts." }
+                    = link_to 'REFERRING DOMAINS', anchor_text_business_backlinks_path(order_by: 'RefDomains', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Total Number of Links." }
+                    = link_to 'TOTAL LINKS', anchor_text_business_backlinks_path(order_by: 'TotalLinks', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Number of Deleted Links." }
+                    = link_to 'DELETED LINKS', anchor_text_business_backlinks_path(order_by: 'DeletedLinks', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Number of No Follow Links." }
+                    = link_to 'NO FOLLOW LINKS', anchor_text_business_backlinks_path(order_by: 'NoFollowLinks', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Trust Flow of your site for the anchor text." }
+                    = link_to 'TRUST FLOW', anchor_text_business_backlinks_path(order_by: 'EstimatedLinkTrustFlow', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Citation Flow of your site for the anchor text." }
+                    = link_to 'CITATION FLOW', anchor_text_business_backlinks_path(order_by: 'EstimatedLinkCitationFlow', order: sort_order), style: 'color:#949494;', remote: true
+            %tbody
+              - @anchor_text_pages.each do |page|
+                %tr
+                  %td
+                    = page.anchor_text
+                  %td
+                    = page.topics
+                  %td
+                    = page.referring_domains
+                  %td
+                    = page.total_links
+                  %td
+                    = page.deleted_links
+                  %td
+                    = page.no_follow_links
+                  %td
+                    = page.estimated_link_trust_flow
+                  %td
+                    = page.estimated_link_citation_flow
+
+      .ui-2020
+        .row.pagination-wrapper
+          .pagination
+            = will_paginate @anchor_text_pages

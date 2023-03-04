@@ -1,0 +1,338 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.rebrandly.com/v1/domains
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type,Accept,X-Access-Token,X-Key,apikey,Authorization,Workspace,Team
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Thu, 15 Mar 2018 09:54:23 GMT
+      Etag:
+      - W/"c-dAuDFQrdjS3hezqxDTNgW7AOlYk"
+      Vary:
+      - Accept-Encoding
+      X-Powered-By:
+      - Express
+      Content-Length:
+      - '12'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: Unauthorized
+    http_version:
+  recorded_at: Thu, 15 Mar 2018 09:54:23 GMT
+- request:
+    method: post
+    uri: https://api.marchex.io/api/jsonrpc/1
+    body:
+      encoding: UTF-8
+      string: '{"jsonrpc":"2.0","id":"1","method":"call.search","params":[null,{"extended":true,"start":null,"end":null}]}'
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic bWFyY2hleGFwaUBvbmVpbXMuY29tOk15WFZ6YzdsQjE=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '167'
+      X-Runtime:
+      - '0.022701'
+      Date:
+      - Thu, 15 Mar 2018 09:54:32 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"data":{"code":"unexpected_failure","desc":"unexpected failure","event_id":"Ch4NpVqqQtgfTwC1"},"error":{"code":-32500,"message":"unexpected
+        failure"},"jsonrpc":"2.0"}'
+    http_version:
+  recorded_at: Thu, 15 Mar 2018 09:54:32 GMT
+- request:
+    method: post
+    uri: https://api.marchex.io/api/jsonrpc/1
+    body:
+      encoding: UTF-8
+      string: '{"jsonrpc":"2.0","id":"1","method":"call.search","params":["CtjSZVGKa-dELQBN",{"extended":true,"start":"2018-02-13","end":"2018-03-15"}]}'
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic bWFyY2hleGFwaUBvbmVpbXMuY29tOk15WFZ6YzdsQjE=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '52654'
+      X-Runtime:
+      - '0.052757'
+      Date:
+      - Thu, 15 Mar 2018 09:54:37 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"jsonrpc":"2.0","id":"1","result":[{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"8889097265","inbound_ext":"","caller_number":"6104000746","custom19":"","custom12":"","duration":"00:00:08","custom1":"","call_id":"Ch6WIlqpfcYIgGYV","revenue":"","call_duration":8,"call_s":"2018-03-14
+        15:53:42","call_end":"2018-03-14T19:53:51Z","listenedto":1,"c_name":"Clickx
+        Toll Free (Website Phone)","custom2":"","caller_name":"Coatesville  PA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"CANCEL","status":"active","rating":"","cmpid":"Ch4NmVhljdo4MwCW","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        Toll Free (Website Phone)","custom5":"","dna_class":"IVR/Voicemail Abandon","disposition":"","call_start":"2018-03-14T19:53:42Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"7188396795","inbound_ext":"","caller_number":"2254753918","custom19":"","custom12":"","duration":"00:00:04","custom1":"","call_id":"Cs2XEFqpUE4InNmI","revenue":"","call_duration":4,"call_s":"2018-03-14
+        12:39:42","call_end":"2018-03-14T16:39:46Z","listenedto":0,"c_name":"Clickx
+        NY","custom2":"","caller_name":"Baton Rouge  LA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"CANCEL","status":"active","rating":"","cmpid":"Ch4NmVhljho4MwCa","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        NY","custom5":"","dna_class":"","disposition":"","call_start":"2018-03-14T16:39:42Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"8477986400","inbound_ext":"","caller_number":"6104000746","custom19":"","custom12":"","duration":"00:00:10","custom1":"","call_id":"Ch6XC1qpOSJ3oxXm","revenue":"","call_duration":10,"call_s":"2018-03-14
+        10:00:50","call_end":"2018-03-14T15:01:00Z","listenedto":0,"c_name":"Local
+        Maps - Skokie","custom2":"","caller_name":"Coatesville  PA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"NOANSWER","status":"active","rating":"","cmpid":"CtjSZ1GKbBAfFADb","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Skokie","custom5":"","dna_class":"Ring Transfer Abandon","disposition":"","call_start":"2018-03-14T15:00:50Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"3238949307","custom19":"","custom12":"","duration":"00:00:24","custom1":"","call_id":"Cs2XElqjEF4nhv-b","revenue":"","call_duration":24,"call_s":"2018-03-09
+        16:53:18","call_end":"2018-03-09T22:53:42Z","listenedto":1,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"Los Angeles  CA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"IVR/Voicemail Abandon","disposition":"","call_start":"2018-03-09T22:53:18Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"3238949307","custom19":"","custom12":"","duration":"00:02:33","custom1":"","call_id":"Cs2XDlqi9KUH8y1i","revenue":"","call_duration":153,"call_s":"2018-03-09
+        14:55:01","call_end":"2018-03-09T20:57:34Z","listenedto":0,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"Los Angeles  CA","custom18":"","custom13":"","keyword":"","billable_minutes":3,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-03-09T20:55:01Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"3238949307","custom19":"","custom12":"","duration":"00:00:10","custom1":"","call_id":"Ch6XH1qhyeU7eat2","revenue":"","call_duration":10,"call_s":"2018-03-08
+        17:40:21","call_end":"2018-03-08T23:40:32Z","listenedto":1,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"Los Angeles  CA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"NOANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Ring Transfer Abandon","disposition":"","call_start":"2018-03-08T23:40:21Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":13,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"3238949307","custom19":"","custom12":"","duration":"00:00:58","custom1":"","call_id":"Cs2XEVqhuEsnrML1","revenue":"","call_duration":58,"call_s":"2018-03-08
+        16:25:15","call_end":"2018-03-08T22:26:14Z","listenedto":0,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"Los Angeles  CA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-03-08T22:25:15Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"3238949307","custom19":"","custom12":"","duration":"00:00:38","custom1":"","call_id":"Cs2XDVqhp0BODUpj","revenue":"","call_duration":38,"call_s":"2018-03-08
+        15:12:32","call_end":"2018-03-08T21:13:10Z","listenedto":0,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"Los Angeles  CA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-03-08T21:12:32Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":13,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"3238949307","custom19":"","custom12":"","duration":"00:00:31","custom1":"","call_id":"Cs2WJlqhpxpzAQOT","revenue":"","call_duration":31,"call_s":"2018-03-08
+        15:11:54","call_end":"2018-03-08T21:12:26Z","listenedto":0,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"Los Angeles  CA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"IVR/Voicemail Abandon","disposition":"","call_start":"2018-03-08T21:11:54Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":4,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"3238949307","custom19":"","custom12":"","duration":"00:02:20","custom1":"","call_id":"Cs2XDVqgasxODRS6","revenue":"","call_duration":140,"call_s":"2018-03-07
+        16:42:20","call_end":"2018-03-07T22:44:40Z","listenedto":0,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"Los Angeles  CA","custom18":"","custom13":"","keyword":"","billable_minutes":3,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-03-07T22:42:20Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"3238949307","custom19":"","custom12":"","duration":"00:01:15","custom1":"","call_id":"Cs2XE1qgWUAkY4Gw","revenue":"","call_duration":75,"call_s":"2018-03-07
+        15:27:28","call_end":"2018-03-07T21:28:44Z","listenedto":0,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"Los Angeles  CA","custom18":"","custom13":"","keyword":"","billable_minutes":2,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-03-07T21:27:28Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"3238949307","custom19":"","custom12":"","duration":"00:02:44","custom1":"","call_id":"Cs2XC1qfH7dMaNmU","revenue":"","call_duration":164,"call_s":"2018-03-06
+        17:09:43","call_end":"2018-03-06T23:12:27Z","listenedto":0,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"Los Angeles  CA","custom18":"","custom13":"","keyword":"","billable_minutes":3,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-03-06T23:09:43Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"8889097265","inbound_ext":"","caller_number":"5713491259","custom19":"","custom12":"","duration":"00:00:05","custom1":"","call_id":"Ch6WJ1qeylgIwQax","revenue":"","call_duration":5,"call_s":"2018-03-06
+        12:05:28","call_end":"2018-03-06T17:05:33Z","listenedto":1,"c_name":"Clickx
+        Toll Free (Website Phone)","custom2":"","caller_name":"ARCOLA       VA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"CANCEL","status":"active","rating":"","cmpid":"Ch4NmVhljdo4MwCW","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        Toll Free (Website Phone)","custom5":"","dna_class":"","disposition":"","call_start":"2018-03-06T17:05:28Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"8477986400","inbound_ext":"","caller_number":"7744255742","custom19":"","custom12":"","duration":"00:00:09","custom1":"","call_id":"Ch6XEVqdy7khMJMg","revenue":"","call_duration":9,"call_s":"2018-03-05
+        16:59:05","call_end":"2018-03-05T22:59:14Z","listenedto":0,"c_name":"Local
+        Maps - Skokie","custom2":"","caller_name":"New Bedford  MA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"CANCEL","status":"active","rating":"","cmpid":"CtjSZ1GKbBAfFADb","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Skokie","custom5":"","dna_class":"IVR/Voicemail Abandon","disposition":"","call_start":"2018-03-05T22:59:05Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"8478058001","inbound_ext":"","caller_number":"5713491259","custom19":"","custom12":"","duration":"00:00:04","custom1":"","call_id":"Cs2XGlqdwwFSIgeh","revenue":"","call_duration":4,"call_s":"2018-03-05
+        17:21:53","call_end":"2018-03-05T22:21:58Z","listenedto":0,"c_name":"Local
+        Maps - Schaumburg","custom2":"","caller_name":"Sterling VA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"CANCEL","status":"active","rating":"","cmpid":"CtjSZ1GKbEcfZwDc","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Schaumburg","custom5":"","dna_class":"","disposition":"","call_start":"2018-03-05T22:21:53Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"3232759603","custom19":"","custom12":"","duration":"00:01:22","custom1":"","call_id":"Ch6XHFqdvk90lFg8","revenue":"","call_duration":82,"call_s":"2018-03-05
+        16:01:51","call_end":"2018-03-05T22:03:14Z","listenedto":0,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"Los Angeles  CA","custom18":"","custom13":"","keyword":"","billable_minutes":2,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-03-05T22:01:51Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"7188396795","inbound_ext":"","caller_number":"8452059971","custom19":"","custom12":"","duration":"00:00:09","custom1":"","call_id":"Cs2XAlqZeHkGpHhe","revenue":"","call_duration":9,"call_s":"2018-03-02
+        11:14:49","call_end":"2018-03-02T16:14:59Z","listenedto":0,"c_name":"Clickx
+        NY","custom2":"","caller_name":"North Salem  NY","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"NOANSWER","status":"active","rating":"","cmpid":"Ch4NmVhljho4MwCa","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        NY","custom5":"","dna_class":"IVR/Voicemail Abandon","disposition":"","call_start":"2018-03-02T16:14:49Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"+441133886132","custom19":"","custom12":"","duration":"00:00:36","custom1":"","call_id":"Cs2XD1qZOj0JFmKr","revenue":"","call_duration":36,"call_s":"2018-03-02
+        05:49:17","call_end":"2018-03-02T11:49:53Z","listenedto":1,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-03-02T11:49:17Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"4133200245","custom19":"","custom12":"","duration":"00:00:58","custom1":"","call_id":"Cs2XElqYY-onhlAQ","revenue":"","call_duration":58,"call_s":"2018-03-01
+        14:35:06","call_end":"2018-03-01T20:36:05Z","listenedto":0,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"Cell Phone   MA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-03-01T20:35:06Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"4133200245","custom19":"","custom12":"","duration":"00:00:07","custom1":"","call_id":"Cs2XCVqYY_s_ZN5u","revenue":"","call_duration":7,"call_s":"2018-03-01
+        14:34:51","call_end":"2018-03-01T20:34:58Z","listenedto":1,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"Cell Phone   MA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"CANCEL","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"IVR/Voicemail Abandon","disposition":"","call_start":"2018-03-01T20:34:51Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"7188396795","inbound_ext":"","caller_number":"3313008485","custom19":"","custom12":"","duration":"00:00:04","custom1":"","call_id":"Ch6XCVqYLdwG5B8Y","revenue":"","call_duration":4,"call_s":"2018-03-01
+        11:44:12","call_end":"2018-03-01T16:44:16Z","listenedto":0,"c_name":"Clickx
+        NY","custom2":"","caller_name":"Aurora       IL","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"CANCEL","status":"active","rating":"","cmpid":"Ch4NmVhljho4MwCa","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        NY","custom5":"","dna_class":"","disposition":"","call_start":"2018-03-01T16:44:12Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"8006189939","inbound_ext":"","caller_number":"3044092728","custom19":"","custom12":"","duration":"00:00:28","custom1":"","call_id":"Cs2XD1qXSMQJFiXH","revenue":"","call_duration":28,"call_s":"2018-02-28
+        18:26:44","call_end":"2018-03-01T00:27:12Z","listenedto":0,"c_name":"AdWords
+        Click2Call","custom2":"","caller_name":"Bluefield    WV","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVKVEUQfWwCo","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"AdWords
+        Click2Call","custom5":"","dna_class":"WrongNumber","disposition":"","call_start":"2018-03-01T00:26:44Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"8889097265","inbound_ext":"","caller_number":"7325398461","custom19":"","custom12":"","duration":"00:02:36","custom1":"","call_id":"Cs2XD1qVx74JFuBf","revenue":"","call_duration":156,"call_s":"2018-02-27
+        16:03:58","call_end":"2018-02-27T21:06:34Z","listenedto":0,"c_name":"Clickx
+        Toll Free (Website Phone)","custom2":"","caller_name":"WIRELESS CALLER","custom18":"","custom13":"","keyword":"","billable_minutes":3,"call_status":"ANSWER","status":"active","rating":"","cmpid":"Ch4NmVhljdo4MwCW","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        Toll Free (Website Phone)","custom5":"","dna_class":"IVR/Voicemail Abandon","disposition":"","call_start":"2018-02-27T21:03:58Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"8889097265","inbound_ext":"","caller_number":"9209124564","custom19":"","custom12":"","duration":"00:02:17","custom1":"","call_id":"Ch6XEFqVlj5sjmg9","revenue":"","call_duration":137,"call_s":"2018-02-27
+        12:32:45","call_end":"2018-02-27T17:35:03Z","listenedto":0,"c_name":"Clickx
+        Toll Free (Website Phone)","custom2":"","caller_name":"McCabe Mark","custom18":"","custom13":"","keyword":"","billable_minutes":3,"call_status":"ANSWER","status":"active","rating":"","cmpid":"Ch4NmVhljdo4MwCW","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        Toll Free (Website Phone)","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-02-27T17:32:45Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"8477986400","inbound_ext":"","caller_number":"5612104996","custom19":"","custom12":"","duration":"00:00:01","custom1":"","call_id":"Ch6XHFqVhoIdAn4b","revenue":"","call_duration":1,"call_s":"2018-02-27
+        10:25:38","call_end":"2018-02-27T16:25:40Z","listenedto":0,"c_name":"Local
+        Maps - Skokie","custom2":"","caller_name":"Boca Raton   FL","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"CANCEL","status":"active","rating":"","cmpid":"CtjSZ1GKbBAfFADb","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Skokie","custom5":"","dna_class":"","disposition":"","call_start":"2018-02-27T16:25:38Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"8477986400","inbound_ext":"","caller_number":"5612104996","custom19":"","custom12":"","duration":"00:00:23","custom1":"","call_id":"Cs2XB1qVhoI1bsuq","revenue":"","call_duration":23,"call_s":"2018-02-27
+        10:25:38","call_end":"2018-02-27T16:26:01Z","listenedto":0,"c_name":"Local
+        Maps - Skokie","custom2":"","caller_name":"Boca Raton   FL","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZ1GKbBAfFADb","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Skokie","custom5":"","dna_class":"Unknown","disposition":"","call_start":"2018-02-27T16:25:38Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"8889097265","inbound_ext":"","caller_number":"5516557761","custom19":"","custom12":"","duration":"00:01:08","custom1":"","call_id":"Cs2XC1qVe3FMaFWd","revenue":"","call_duration":68,"call_s":"2018-02-27
+        10:38:25","call_end":"2018-02-27T15:39:34Z","listenedto":0,"c_name":"Clickx
+        Toll Free (Website Phone)","custom2":"","caller_name":"WIRELESS CALLER","custom18":"","custom13":"","keyword":"","billable_minutes":2,"call_status":"ANSWER","status":"active","rating":"","cmpid":"Ch4NmVhljdo4MwCW","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        Toll Free (Website Phone)","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-02-27T15:38:25Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"5127925819","custom19":"","custom12":"","duration":"00:00:08","custom1":"","call_id":"Ch6XFlqQNowFyQAC","revenue":"","call_duration":8,"call_s":"2018-02-23
+        09:43:08","call_end":"2018-02-23T15:43:17Z","listenedto":0,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"Austin       TX","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"CANCEL","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"IVR/Voicemail Abandon","disposition":"","call_start":"2018-02-23T15:43:08Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"8478058001","inbound_ext":"","caller_number":"2243536543","custom19":"","custom12":"","duration":"00:01:16","custom1":"","call_id":"Cs2XGlqPbMVSIvos","revenue":"","call_duration":76,"call_s":"2018-02-22
+        20:22:13","call_end":"2018-02-23T01:23:30Z","listenedto":0,"c_name":"Local
+        Maps - Schaumburg","custom2":"","caller_name":"SCHAUMBURG REPU","custom18":"","custom13":"","keyword":"","billable_minutes":2,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZ1GKbEcfZwDc","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Schaumburg","custom5":"","dna_class":"VoiceMail","disposition":"","call_start":"2018-02-23T01:22:13Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"6467765835","custom19":"","custom12":"","duration":"00:00:47","custom1":"","call_id":"Ch6XC1qPNmh3o41d","revenue":"","call_duration":47,"call_s":"2018-02-22
+        15:30:16","call_end":"2018-02-22T21:31:03Z","listenedto":0,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"New York     NY","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Unknown","disposition":"","call_start":"2018-02-22T21:30:16Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"8477986400","inbound_ext":"","caller_number":"5093176850","custom19":"","custom12":"","duration":"00:00:09","custom1":"","call_id":"Cs2XDFqPBO0RP9nd","revenue":"","call_duration":9,"call_s":"2018-02-22
+        11:59:09","call_end":"2018-02-22T17:59:18Z","listenedto":0,"c_name":"Local
+        Maps - Skokie","custom2":"","caller_name":"Yakima       WA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"CANCEL","status":"active","rating":"","cmpid":"CtjSZ1GKbBAfFADb","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Skokie","custom5":"","dna_class":"IVR/Voicemail Abandon","disposition":"","call_start":"2018-02-22T17:59:09Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"8478058001","inbound_ext":"","caller_number":"4703004260","custom19":"","custom12":"","duration":"00:00:05","custom1":"","call_id":"Ch6WJFqNzFcICk8y","revenue":"","call_duration":5,"call_s":"2018-02-21
+        14:45:27","call_end":"2018-02-21T19:45:32Z","listenedto":0,"c_name":"Local
+        Maps - Schaumburg","custom2":"","caller_name":"Atlanta      GA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"CANCEL","status":"active","rating":"","cmpid":"CtjSZ1GKbEcfZwDc","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Schaumburg","custom5":"","dna_class":"","disposition":"","call_start":"2018-02-21T19:45:27Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"8889097265","inbound_ext":"","caller_number":"7064008038","custom19":"","custom12":"","duration":"00:00:47","custom1":"","call_id":"Ch6XIFqNUB0s0YzR","revenue":"","call_duration":47,"call_s":"2018-02-21
+        05:55:25","call_end":"2018-02-21T10:56:13Z","listenedto":0,"c_name":"Clickx
+        Toll Free (Website Phone)","custom2":"","caller_name":"ETHAN PETTY","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"Ch4NmVhljdo4MwCW","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        Toll Free (Website Phone)","custom5":"","dna_class":"IVR/Voicemail Abandon","disposition":"","call_start":"2018-02-21T10:55:25Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"8889091911","inbound_ext":"","caller_number":"5137150864","custom19":"","custom12":"","duration":"00:03:46","custom1":"","call_id":"Ch6XAlqNP3FadUAC","revenue":"","call_duration":226,"call_s":"2018-02-21
+        03:44:16","call_end":"2018-02-21T09:48:03Z","listenedto":0,"c_name":"Clickx
+        Support","custom2":"","caller_name":"HARRISON     OH","custom18":"","custom13":"","keyword":"","billable_minutes":4,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CA6prFYK-oxk3ACN","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        Support","custom5":"","dna_class":"VoiceMail","disposition":"","call_start":"2018-02-21T09:44:16Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"8889097265","inbound_ext":"","caller_number":"2133061352","custom19":"","custom12":"","duration":"00:00:04","custom1":"","call_id":"Cs2XEFqMlJUInIU-","revenue":"","call_duration":4,"call_s":"2018-02-20
+        16:35:17","call_end":"2018-02-20T21:35:22Z","listenedto":0,"c_name":"Clickx
+        Toll Free (Website Phone)","custom2":"","caller_name":"WIRELESS CALLER","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"CANCEL","status":"active","rating":"","cmpid":"Ch4NmVhljdo4MwCW","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        Toll Free (Website Phone)","custom5":"","dna_class":"","disposition":"","call_start":"2018-02-20T21:35:17Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"8889097265","inbound_ext":"","caller_number":"","custom19":"","custom12":"","duration":"00:06:46","custom1":"","call_id":"Ch6XClqMVPp3uyeq","revenue":"","call_duration":406,"call_s":"2018-02-20
+        12:03:54","call_end":"2018-02-20T17:10:40Z","listenedto":0,"c_name":"Clickx
+        Toll Free (Website Phone)","custom2":"","caller_name":"UNAVAILABLE","custom18":"","custom13":"","keyword":"","billable_minutes":7,"call_status":"ANSWER","status":"active","rating":"","cmpid":"Ch4NmVhljdo4MwCW","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        Toll Free (Website Phone)","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-02-20T17:03:54Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"8889097265","inbound_ext":"","caller_number":"","custom19":"","custom12":"","duration":"00:00:15","custom1":"","call_id":"Ch6XD1qL85VbVLo_","revenue":"","call_duration":15,"call_s":"2018-02-20
+        05:08:21","call_end":"2018-02-20T10:08:36Z","listenedto":0,"c_name":"Clickx
+        Toll Free (Website Phone)","custom2":"","caller_name":"","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"Ch4NmVhljdo4MwCW","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        Toll Free (Website Phone)","custom5":"","dna_class":"IVR/Voicemail Abandon","disposition":"","call_start":"2018-02-20T10:08:21Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"8889097265","inbound_ext":"","caller_number":"","custom19":"","custom12":"","duration":"00:00:01","custom1":"","call_id":"Cs2XDlqL8yMH81yz","revenue":"","call_duration":1,"call_s":"2018-02-20
+        05:06:27","call_end":"2018-02-20T10:06:29Z","listenedto":0,"c_name":"Clickx
+        Toll Free (Website Phone)","custom2":"","caller_name":"","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"CANCEL","status":"active","rating":"","cmpid":"Ch4NmVhljdo4MwCW","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        Toll Free (Website Phone)","custom5":"","dna_class":"","disposition":"","call_start":"2018-02-20T10:06:27Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"+1441133886132","custom19":"","custom12":"","duration":"00:00:28","custom1":"","call_id":"Cs2XIFqL8s8JDAgx","revenue":"","call_duration":28,"call_s":"2018-02-20
+        04:05:03","call_end":"2018-02-20T10:05:31Z","listenedto":0,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-02-20T10:05:03Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"+118668288038","custom19":"","custom12":"","duration":"00:01:55","custom1":"","call_id":"Cs2XClqLJSEQiD8j","revenue":"","call_duration":115,"call_s":"2018-02-19
+        13:27:29","call_end":"2018-02-19T19:29:24Z","listenedto":0,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"","custom18":"","custom13":"","keyword":"","billable_minutes":2,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-02-19T19:27:29Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"+118668288038","custom19":"","custom12":"","duration":"00:02:32","custom1":"","call_id":"Cs2XE1qK_H4kYzUS","revenue":"","call_duration":152,"call_s":"2018-02-19
+        10:17:02","call_end":"2018-02-19T16:19:34Z","listenedto":0,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"","custom18":"","custom13":"","keyword":"","billable_minutes":3,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-02-19T16:17:02Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"+441133886132","custom19":"","custom12":"","duration":"00:00:17","custom1":"","call_id":"Ch6WJlqK7vIIji66","revenue":"","call_duration":17,"call_s":"2018-02-19
+        09:36:18","call_end":"2018-02-19T15:36:35Z","listenedto":0,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"IVR/Voicemail Abandon","disposition":"","call_start":"2018-02-19T15:36:18Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"7188396795","inbound_ext":"","caller_number":"9142668624","custom19":"","custom12":"","duration":"00:00:04","custom1":"","call_id":"Cs2XDVqK7EwZOSgs","revenue":"","call_duration":4,"call_s":"2018-02-19
+        10:25:00","call_end":"2018-02-19T15:25:04Z","listenedto":0,"c_name":"Clickx
+        NY","custom2":"","caller_name":"Chappaqua    NY","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"CANCEL","status":"active","rating":"","cmpid":"Ch4NmVhljho4MwCa","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        NY","custom5":"","dna_class":"","disposition":"","call_start":"2018-02-19T15:25:00Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":"","custom20":"","assigned_to":"","inboundno":"7188396795","inbound_ext":"","caller_number":"5859939701","custom19":"","custom12":"","duration":"00:00:04","custom1":"","call_id":"Cs2XE1qHLgcGJtcM","revenue":"","call_duration":4,"call_s":"2018-02-16
+        14:16:23","call_end":"2018-02-16T19:16:28Z","listenedto":0,"c_name":"Clickx
+        NY","custom2":"","caller_name":"Batavia      NY","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"CANCEL","status":"active","rating":"","cmpid":"Ch4NmVhljho4MwCa","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        NY","custom5":"","dna_class":"","disposition":"","call_start":"2018-02-16T19:16:23Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":"","custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"8889097265","inbound_ext":"","caller_number":"","custom19":"","custom12":"","duration":"00:00:19","custom1":"","call_id":"Ch6XC1qGpCJ3o2Ts","revenue":"","call_duration":19,"call_s":"2018-02-16
+        04:28:02","call_end":"2018-02-16T09:28:22Z","listenedto":0,"c_name":"Clickx
+        Toll Free (Website Phone)","custom2":"","caller_name":"","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"Ch4NmVhljdo4MwCW","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        Toll Free (Website Phone)","custom5":"","dna_class":"IVR/Voicemail Abandon","disposition":"","call_start":"2018-02-16T09:28:02Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"4133200245","custom19":"","custom12":"","duration":"00:00:44","custom1":"","call_id":"Ch6XDlqF1kpRwAes","revenue":"","call_duration":44,"call_s":"2018-02-15
+        12:49:45","call_end":"2018-02-15T18:50:30Z","listenedto":1,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"Cell Phone   MA","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-02-15T18:49:45Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"8889097265","inbound_ext":"","caller_number":"","custom19":"","custom12":"","duration":"00:00:26","custom1":"","call_id":"Cs2WJlqFb-8ItTWh","revenue":"","call_duration":26,"call_s":"2018-02-15
+        06:33:19","call_end":"2018-02-15T11:33:45Z","listenedto":1,"c_name":"Clickx
+        Toll Free (Website Phone)","custom2":"","caller_name":"","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"Ch4NmVhljdo4MwCW","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        Toll Free (Website Phone)","custom5":"","dna_class":"IVR/Voicemail Abandon","disposition":"","call_start":"2018-02-15T11:33:19Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"7188396795","inbound_ext":"","caller_number":"9549056525","custom19":"","custom12":"","duration":"00:00:24","custom1":"","call_id":"Cs2XEFqEnv5XHWzl","revenue":"","call_duration":24,"call_s":"2018-02-14
+        15:41:34","call_end":"2018-02-14T20:41:59Z","listenedto":1,"c_name":"Clickx
+        NY","custom2":"","caller_name":"V2141541280001420678","custom18":"","custom13":"","keyword":"","billable_minutes":1,"call_status":"ANSWER","status":"active","rating":"","cmpid":"Ch4NmVhljho4MwCa","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Clickx
+        NY","custom5":"","dna_class":"Ring Transfer Abandon","disposition":"","call_start":"2018-02-14T20:41:34Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""},{"redacted":false,"ass_user":"","numlookup_p":0,"forwardno":"9252986303","custom16":"","custom3":"","acct":"CtjSZVGKa-dELQBN","grpid":"CtjSZVGKa-dELQBP","custom17":"","answer_offset":12,"custom20":"","assigned_to":"","inboundno":"3129457150","inbound_ext":"","caller_number":"+441133886132","custom19":"","custom12":"","duration":"00:01:21","custom1":"","call_id":"Ch6XB1qET6c2hhHv","revenue":"","call_duration":81,"call_s":"2018-02-14
+        09:03:03","call_end":"2018-02-14T15:04:24Z","listenedto":1,"c_name":"Local
+        Maps - Merchandise Mart","custom2":"","caller_name":"","custom18":"","custom13":"","keyword":"","billable_minutes":2,"call_status":"ANSWER","status":"active","rating":"","cmpid":"CtjSZVTIUOU-JgBk","custom6":"","g_name":"default","a_name":"Clickx","recorded":true,"camp_kw":"Local
+        Maps - Merchandise Mart","custom5":"","dna_class":"Conversation","disposition":"","call_start":"2018-02-14T15:03:03Z","custom_id":"","custom4":"","custom9":"","custom15":"","custom10":"","ring_duration":3,"custom11":"","numlookup":"","note":"","custom7":"","custom14":"","custom8":""}]}'
+    http_version:
+  recorded_at: Thu, 15 Mar 2018 09:54:38 GMT
+- request:
+    method: post
+    uri: https://api.marchex.io/api/jsonrpc/1
+    body:
+      encoding: UTF-8
+      string: '{"jsonrpc":"2.0","id":"1","method":"call.get","params":["Ch6WIlqpfcYIgGYV"]}'
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic bWFyY2hleGFwaUBvbmVpbXMuY29tOk15WFZ6YzdsQjE=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '581'
+      X-Runtime:
+      - '0.024584'
+      Date:
+      - Thu, 15 Mar 2018 09:54:42 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"jsonrpc":"2.0","id":"1","result":{"forwardno":"","acct":"CtjSZVGKa-dELQBN","assigned_to":"","inboundno":"8889097265","inbound_ext":"","billing_acct":"CtjSZVEs6RwjsQDN","caller_number":"6104000746","call_id":"Ch6WIlqpfcYIgGYV","revenue":"","call_duration":8,"call_end":"2018-03-14T19:53:51Z","caller_name":"Coatesville  PA","c2cid":"","keyword":"","call_status":"CANCEL","custom":["","","","","","","","","","","","","","","","","","","",""],"rating":"","cmpid":"Ch4NmVhljdo4MwCW","recorded":true,"disposition":"","call_start":"2018-03-14T19:53:42Z","ring_duration":"","note":""}}'
+    http_version:
+  recorded_at: Thu, 15 Mar 2018 09:54:42 GMT
+- request:
+    method: post
+    uri: https://api.marchex.io/api/jsonrpc/1
+    body:
+      encoding: UTF-8
+      string: '{"jsonrpc":"2.0","id":"1","method":"call.audio.url","params":[["Ch6WIlqpfcYIgGYV"],"mp3"]}'
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic bWFyY2hleGFwaUBvbmVpbXMuY29tOk15WFZ6YzdsQjE=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '201'
+      X-Runtime:
+      - '0.020363'
+      Date:
+      - Thu, 15 Mar 2018 09:54:44 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"jsonrpc":"2.0","id":"1","result":[{"url":"https://www.marchex.io/calls/audio?token=15f6ea3ca289063be324c4a4927216a7.mp3","token":"15f6ea3ca289063be324c4a4927216a7.mp3","call_id":"Ch6WIlqpfcYIgGYV"}]}'
+    http_version:
+  recorded_at: Thu, 15 Mar 2018 09:54:44 GMT
+recorded_with: VCR 4.0.0

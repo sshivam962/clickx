@@ -1,0 +1,21 @@
+- content_for :title do
+  = "Edit #{@funnel_page.title} | Clickx"
+.page-heading.bg-white.mb-4
+  .container-fluid
+    .d-md-flex.justify-content-between.align-items-center.flex-wrap
+      .col 
+        %h1
+          Edit #{@funnel_page.title}
+      .col.pt-3.pt-md-0
+        .d-flex
+          .px-1 
+            = link_to agency_funnel_page_path(@funnel_page), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger btn-reset-m-0" do
+              %span.btn-icon
+                %i.fa.fa-archive
+                Revert To Previous
+          .px-1
+            %a.btn.btn-sm.btn--dark.btn-reset-m-0{href: agency_industries_path } Back
+.container-fluid
+  .agency-form
+    = form_for @funnel_page, url: agency_funnel_page_path(@funnel_page), method: :patch do |f|
+      = render 'form', f: f, funnel_page_id: @funnel_page.funnel_page_id

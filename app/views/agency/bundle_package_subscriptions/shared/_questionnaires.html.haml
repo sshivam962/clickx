@@ -1,0 +1,15 @@
+- client&.questionnaires_by_categories(package.questionnaire_categories).each do |questionnaire|
+  .row
+    .col-sm-8
+      .author
+        = questionnaire[:category]
+    .col-sm-4
+      %a.btn.btn-raised.btn-default.btn-sm.mt-n.copy_to_clipboard{href: questionnaire[:link], target: '_blank'}
+        %i.icfont.material-icons{'title': 'Copy the URL'}
+          content_copy
+        Copy URL
+      - if questionnaire[:answered]
+        %a.btn.btn-raised.btn-default.btn-sm.mt-n{href: "/a/client_questionnaires/#{questionnaire[:id]}"}
+          %i.icfont.material-icons{'title': 'View Answers'}
+            question_answer
+          View Answers

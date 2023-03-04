@@ -1,0 +1,53 @@
+- content_for :title do
+  = "#{@agency.name} | #{@funnel_page.title}"
+- if @agency.facebook_pixel.present?
+  = raw(@agency.facebook_pixel)
+
+- if raw(@funnel_page.section_a).present? || @funnel_page.lead_form_required
+  %section.hero-banner-wrapper{:style => "background:url(#{asset_path('funnel_pages/hero-bg.jpg')});"}
+    .container
+      - template  = Liquid::Template.parse(@funnel_page.section_a)
+      - parsed_funnel = template.render({'agency_name' => @agency.name})
+      = raw(parsed_funnel)
+      - if @agency&.funnel_calendlie.present?
+        .col-md-6.col-12
+          = raw(@agency.funnel_calendlie)
+      - elsif @funnel_page.lead_form_required
+        = render 'public/funnel_pages/shared/lead_form', funnel_page: @funnel_page
+- if raw(@funnel_page.section_b).present?
+  %section.section-wrapper.good-news-section
+    .container
+      - template  = Liquid::Template.parse(@funnel_page.section_b)
+      - parsed_funnel = template.render({'agency_name' => @agency.name})
+      = raw(parsed_funnel)
+- if raw(@funnel_page.section_b).present?
+  %section.section-wrapper.note-section{:style => "background:url(#{asset_path('funnel_pages/section-bg.jpg')});"}
+    .container
+      - template  = Liquid::Template.parse(@funnel_page.section_c)
+      - parsed_funnel = template.render({'agency_name' => @agency.name})
+      = raw(parsed_funnel)
+- if raw(@funnel_page.section_b).present?
+  %section.section-wrapper.guarantee-section
+    .container
+      - template  = Liquid::Template.parse(@funnel_page.section_d)
+      - parsed_funnel = template.render({'agency_name' => @agency.name})
+      = raw(parsed_funnel)
+- if raw(@funnel_page.section_b).present?
+  %section.section-wrapper.good-fit-wrapper{:style => "background:url(#{asset_path('funnel_pages/section-bg.jpg')});"}
+    .container
+      - template  = Liquid::Template.parse(@funnel_page.section_e)
+      - parsed_funnel = template.render({'agency_name' => @agency.name})
+      = raw(parsed_funnel)
+- if raw(@funnel_page.section_b).present?
+  %section.section-wrapper.believe-us-wrapper
+    .container
+      - template  = Liquid::Template.parse(@funnel_page.section_f)
+      - parsed_funnel = template.render({'agency_name' => @agency.name})
+      = raw(parsed_funnel)
+%footer.site-footer
+  .container
+    .footer-content.text-center
+      %p Copyright #{Date.current.year}. All Rights Reserved
+      -if @privacy_policy.present?
+        %p
+          = link_to 'Privacy Policy', public_privacy_policy_path(agency_id: @agency.id, id: @funnel_page), target: "_blank", style: 'color:white;'

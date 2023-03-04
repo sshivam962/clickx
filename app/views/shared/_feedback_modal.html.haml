@@ -1,0 +1,17 @@
+%a.btn.help-cta-fab.mb-n.pb-md.pt-md{'data-target' => "#feedbackModal", 'data-toggle' => 'modal'}
+  %i.material-icons.text-white email
+#feedbackModal.modal.fade{'aria-hidden' => true, 'aria-labelledby' => 'myModalLabel', role: 'dialog', tabindex: '-1'}
+  .modal-dialog
+    .modal-content
+      = form_tag feedback_path, id: 'feedback_form', method: :post, remote: true do
+        .modal-header
+          %button.close{'aria-hidden' => true, 'data-dismiss' => 'modal', type: 'button'} &#215;
+          %h3.modal-title Send Feedback
+          %p Let us know how we can improve your experience
+          %hr.mt-md.mb-n
+        .modal-body.pb-sm
+          .form-group.mt-n
+            %textarea.form-control.border#feedback_suggestion{placeholder: 'Enter your suggestions here.', rows: 10, name: 'suggestion', required: true}
+        .modal-footer.pb-lg.pr-lg
+          %a.btn.btn-default{"data-dismiss" => 'modal', href: '#'} Cancel
+          %button.btn.btn-raised.btn-primary{type: 'submit'} Send

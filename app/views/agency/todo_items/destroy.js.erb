@@ -1,0 +1,2 @@
+$("#list-<%= @list.id %>").html("<%= escape_javascript render( partial: 'agency/todo_lists/list', locals: { list: @list }) %>");
+$('.edit-todo-form-overlay').modal('hide')

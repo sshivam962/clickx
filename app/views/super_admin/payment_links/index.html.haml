@@ -1,0 +1,15 @@
+- content_for :title do
+  Payment Links | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    .col-xs-10.col-sm-10.col-lg-10
+      %h1 Payment Links
+    .col-xs-2.col-sm-2.col-lg-2
+      %a.btn.btn-warning.pull-right.mt-lg.mb-lg{href: new_super_admin_payment_link_path}
+        %i.fa.fa-plus
+        New Payment Link
+.row
+  .col-md-12
+    %div
+      %table.table.table--xl
+        = render 'super_admin/payment_links/shared/list', payment_links: @payment_links

@@ -1,0 +1,53 @@
+- threads.each do |thread|
+  - @unread_cls = ''
+  - if thread.unread == true
+    - @unread_cls = 'messenger-message-item--unread'
+  - if thread.messages.present?
+    .messenger-message-item.chat_item{'data-thread_id': thread.id, :class => @unread_cls}
+      %button.d-block.messenger-message-item-link
+        %span.messenger-message-avatar
+          - if thread.user_name.present?
+            = thread.user_name[0]
+          - else
+            %i.fa.fa-user
+        .d-flex.justify-content-between
+          .col
+            .text-block.messenger-message-item-name= thread.display_name
+          .col
+            .messenger-message-item-time= thread.updated_at.strftime('%d %b')
+        - if thread.latest_message.present?
+          .messenger-message-excerpt.mt-1= thread.body rescue ''
+:javascript
+  $(function() {
+    $('.chat_item').on('click', function(e){
+      var thread_id = $(this).data('thread_id');
+      $.ajax({
+        url: '/s/chats/' + thread_id + '/message_history',
+        type: 'GET',
+        success: function(response){
+          $(".chat_item").removeClass('active_chat')
+          $(".chat_item[data-thread_id='" + thread_id + "']").removeClass('messenger-message-item--unread')
+          $(".chat_item[data-thread_id='" + thread_id + "']").addClass('active_chat');
+          $('.messenger-chat').scrollTop($('.messenger-chat')[0].scrollHeight);
+        }
+      })
+    });
+
+    var scrolled = false;
+    var total_pages = #{threads.total_pages};
+    var current_page = #{threads.current_page};
+    var next_page = current_page + 1;
+    $('.messenger-messages-list').scroll(function() {
+      if(($('.messenger-messages-list').scrollTop() > 300) && !scrolled && (total_pages != current_page)) {
+        var query = $('#search_query').val();
+        scrolled = true;
+        $.ajax({
+          url: "/s/chats",
+          type: 'GET',
+          data: { page: next_page, query: query },
+          dataType: 'script',
+          success: function(response){}
+        });
+      }
+    })
+  })

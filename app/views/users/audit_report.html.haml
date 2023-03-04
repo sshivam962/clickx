@@ -1,0 +1,22 @@
+- content_for :title do
+  Audit Report | Clickx
+%table.table
+  %tr
+    %th Name
+    %th Total pages crawled
+    %th Last updated at
+    %th Crawl data present or not?
+  - @reports.each do |report|
+    %tr
+      %td
+        = report[:name]
+      %td
+        = report[:total_pages_crawled]
+      %td
+        = report[:last_updated_at]
+      %td
+        - if report[:status]
+          Yes
+        - else
+          No
+    %tr

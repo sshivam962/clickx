@@ -1,0 +1,15 @@
+.container-fluid
+  .col-sm-12{ "ng-repeat": "(date, keywords) in deleted_keywords" }
+    %h4.text-muted
+      %i.fa.fa-calendar.mr-sm>
+      {{ date }}
+    %ul.activity-timeline
+      %li{ "ng-repeat": "keyword in keywords" }
+        .activity-r
+          .activity-wrapper
+            .activity-info
+              {{ keyword.deleted_by }} deleted the keyword
+              %code{ "style": "color: #60BBEA;" }
+                {{ keyword.name }}
+              at
+              %b {{ keyword.deleted_time }}

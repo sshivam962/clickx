@@ -1,0 +1,7 @@
+.col-md-3.cs_image_card
+  .nested-fields
+    .field
+      = f.file_field :file
+      %a{"data-gallery" => "gallery", "data-toggle" => "lightbox", href: f.object.file.url}
+        = image_tag f.object.file.url || '', class: 'descriptive_preview'
+    = link_to_remove_association 'remove', f

@@ -1,0 +1,6 @@
+= hidden_field_tag :stripe_publishable_key, ENV['STRIPE_PUBLISHABLE_KEY']
+- content_for :custom_assets do
+  = stylesheet_link_tag 'stripe_card'
+  %script{src: 'https://js.stripe.com/v3/'}
+  = javascript_include_tag 'stripe_card', 'data-turbolinks-track': false
+  = javascript_include_tag 'checkout', 'data-turbolinks-track': false

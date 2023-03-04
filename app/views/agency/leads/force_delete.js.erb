@@ -1,0 +1,6 @@
+<% if @lead.errors.present? %>
+  toastr.error("<%= @lead.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success("Lead Deleted");
+  $("#lead_<%= @lead.id%>").remove();
+<% end %>

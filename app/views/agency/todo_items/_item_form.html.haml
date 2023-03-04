@@ -1,0 +1,16 @@
+.modal-bg{"data-dismiss" => "modal", :type => "button"}
+.d-flex.align-items-center.justify-content-center.h-100.w-100.pr-4
+  .modal-dialog{role: 'document'}
+    .modal-content.bg-white.p-5.rounded
+      %button.btn-close-overlay{"data-dismiss" => "modal", :type => "button"}
+        %i.fa.fa-times
+      .modal-body.pb-0.pt-0
+        = form_with(model: item, url: agency_todo_list_todo_items_path(list), method: :post, class: "form-horizontal", local: false) do |f|
+          .form-group.mt-0
+            .fw-lg List Item
+            = f.text_field :content, class: 'form-control'
+          .form-group.mt-0
+            .fw-lg Item Description
+            = f.text_area :description, class: 'form-control', rows: 5
+          .form-group
+            = f.submit 'Add Item', class: 'btn btn-raised btn--dark m-0'

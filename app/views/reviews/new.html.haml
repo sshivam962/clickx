@@ -1,0 +1,44 @@
+.page.review-page
+  .review-container
+    .row
+      .col-sm-12
+        #header.aligncenter
+          .logo
+            -if @business.logo.present?
+              %img{src: (@business.logo), alt: (@business.name), class: "business_logo"}
+            -else
+              %h1.business-name
+                =(@business.name)
+          %h1 Tell us what you think
+      .col-sm-8.col-sm-offset-2
+        = form_for @review, html: { onsubmit: "return checkform()" } do |form|
+          = form.hidden_field :location_id
+          .rate-wrapper
+            .rating-inner-wrapper
+              #review-rating-rateit.bigstars{'data-rateit-resetable': 'false', 'data-rateit-min': 0, 'data-rateit-starwidth': '32', 'data-rateit-starheight': '32', 'data-rateit-ispreset': true}
+              = form.range_field :rating, in: 0..5, required: true, id:"review-rating", step: 1, value: 0
+              = form.hidden_field :name, required: true, id:"review-name", value: 'Clickx'
+              = form.hidden_field :directory, required: true, id:"review-directory", value: 'clickx'
+          .form-group
+            %label{:for => "review_content"}
+              Give us your review
+              %span.required *
+            = form.text_area :text, required: true, rows: 10 ,class:"form-control", placeholder:"Review Message"
+          .form-group
+            %label{:for => "review_email"}
+              Email
+              %span.required *
+            = form.email_field :email, required: true, class:'form-control', placeholder:"Email eg: john@doe.com"
+          .form-group
+            %label{:for => "review_phone_number"}
+              Phone Number
+            = form.text_field :phone_number, class:'form-control', placeholder:"Phone eg: 9876456321"
+          .form-group
+            %input.btn.btn-primary{:type => "submit", :value => "Send Feedback"}/
+    -if @business.branded?
+      .row
+        .col-sm-8.col-sm-offset-2
+          .powered.clearfix
+            %a.pull-right{:href => "http://clickx.io", target: '_blank'}
+              Powered by
+              %img{src: "#{image_path('Clickx-Logo.svg')}", type: "image/svg+xml"}

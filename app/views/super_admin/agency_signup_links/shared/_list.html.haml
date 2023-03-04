@@ -1,0 +1,69 @@
+.locations
+  - links.each do |link|
+    %span
+      .address.row.ml-n.mr-n
+        .col-sm-6.col-md-5
+          = link.name
+          = link.plan_key.titleize
+          \ -
+          = number_to_currency(link.onetime_charge, precision: 0)
+          - if link.disabled?
+            %br
+            %small.red (disabled)
+          - if link.enabled? && !link.expired?
+            %br
+            %code= link.url
+        .col-sm-4.col-md-3
+          - if link.reusable_link?
+            .label.label-success Re-Usable
+            %br
+          - if link.paid?
+            .label.label-success Paid
+          - elsif link.expires_on.present?
+            - if link.expired?
+              .red
+                Expired On: #{link.expires_on.strftime('%b %d, %Y')}
+            - else
+              Expires On: #{link.expires_on.strftime('%b %d, %Y')}
+        .col-sm-4.col-md-2
+          - if link.trial?
+            Free Trial for #{link.trial_info}
+          - else
+            = link.coupon_code
+        .col-sm-4.col-md-2
+          .col-sm-12.right.normal-edit-button.grey-btn-group.mb-md
+            - if link.paid == false
+              = link_to edit_super_admin_agency_signup_link_path(link), class: 'btn grey-btn-icon align-icon pull-right ml-sm mb-sm' do
+                %i.glyphicon.glyphicon-edit
+                Edit
+              = link_to super_admin_agency_signup_link_path(link), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn grey-btn-icon align-icon pull-right ml-sm mb-sm' do
+                %i.glyphicon.glyphicon-trash
+                Delete
+              - if link.enabled? && !link.expired?
+                %a.copy_text.btn.align-icon.pull-right.ml-sm.mb-sm.grey-btn-icon{'data-link': link.url}
+                  %i.fa.fa-clipboard{'data-toggle': 'tooltip', title: 'Copy to clipboard'}
+                  Copy Link
+              = form_for link, url: super_admin_agency_signup_link_path(link), method: :patch do |f|
+                = f.hidden_field :disabled, value: !link.disabled?
+                - btn_text = link.disabled? ? 'Enable' : 'Disable'
+                = f.submit btn_text, class: 'btn grey-btn-icon align-icon pull-right ml-sm mb-sm', data: { confirm: 'Are you sure?' }
+            = link_to new_super_admin_agency_signup_link_path(copy_from: link.id), target: '_blank', class: 'btn grey-btn-icon align-icon pull-right ml-sm mb-sm' do
+              %i.glyphicon.glyphicon-duplicate
+              Duplicate
+.row
+  .col-md-4.col-lg-4.col-sm-12.pt-md
+    = page_entries_info links
+  .col-md-8.col-lg-8.col-sm-12.right_align
+    = will_paginate links, params: {q: params[:q]}
+:javascript
+  $('.pagination a').attr('data-remote', 'true');
+
+  $(document).on('click', '.copy_text',function() {
+    value = $(this).data('link')
+    var $temp = $("<textarea>");
+    $("body").append($temp);
+    $temp.val(value).select();
+    document.execCommand("copy");
+    $temp.remove();
+    $(this).attr('data-title', 'Copied!').tooltip('show');
+  })

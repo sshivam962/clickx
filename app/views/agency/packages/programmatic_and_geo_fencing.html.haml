@@ -1,0 +1,827 @@
+- content_for :title do
+  Programmatic & Geo-Fencing | Clickx
+.ui-2020.package-page
+  .page-content.page-plan
+    .page-heading.pt-md.pb-md
+      %h1
+        .d-flex.justify-content-between
+          .col-auto
+            %i.clickx-icon-user-settings
+            Programmatic & Geo-Fencing
+          = render 'agency/packages/shared/msrp_percentage'
+    .container-fluid
+      .table-responsive.table-plan.text-center
+        %table.table.table-hover.mb-n.overflow-h.plan-preloader.pt-xxl
+          %thead
+            %tr
+              %th.col-label{"vertical-align" => "top"}
+                .pt-col-content
+              - @plans.order(:amount).each do |plan|
+                %th.col-package
+                  .pt-col-content
+                    - if plan.title == 'Pro'
+                      .best-seller-badge.fw-m Best Seller
+                    .pt-header-caption= plan.title
+                    .pt-header-price
+                      = in_currency(plan.amount, current_agency.display_currency)
+                      - if plan.interval.eql?('month')
+                        %span> /mo
+                      = hidden_field_tag(:hidden_plan_amount, plan.amount, class: 'hidden_plan_amount', id: plan.key)
+                    %span.plan-label 
+                      - @msrp_class = "msrp_#{plan.key}"
+                      %span.d-inline-block{:class => @msrp_class} MSRP: #{in_currency(plan.amount + (plan.amount * 0.5), current_agency.display_currency)}
+                    .mt-4
+                      %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'programmatic_and_geo_fencing', plan: plan.key)}
+                        Get Started
+          %tbody
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Ad Budgets
+              %td
+                .pt-col-content
+                  %span.pl-label Ad Budgets
+                  %span.pl-val Up to #{in_currency(2000, current_agency.display_currency)}
+              %td
+                .pt-col-content
+                  %span.pl-label Ad Budgets
+                  %span.pl-val #{in_currency(2001, current_agency.display_currency)} - #{in_currency(5000, current_agency.display_currency)}
+              %td
+                .pt-col-content
+                  %span.pl-label Ad Budgets
+                  %span.pl-val #{in_currency(5001, current_agency.display_currency)} - #{in_currency(7500, current_agency.display_currency)}
+              %td
+                .pt-col-content
+                  %span.pl-label Ad Budgets
+                  %span.pl-val #{in_currency(7500, current_agency.display_currency)} #{in_currency(10000, current_agency.display_currency)}
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Implementation Fee
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation Fee
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation Fee
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation Fee
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation Fee
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Campaign Questionnaire
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Questionnaire
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Questionnaire
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Questionnaire
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Questionnaire
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Kick-Off Call with Agency
+              %td
+                .pt-col-content
+                  %span.pl-label Kick-Off Call with Agency
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Kick-Off Call with Agency
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Kick-Off Call with Agency
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Kick-Off Call with Agency
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Unlimited Email Support
+              %td
+                .pt-col-content
+                  %span.pl-label Unlimited Email Support
+                  %span With Agency
+              %td
+                .pt-col-content
+                  %span.pl-label Unlimited Email Support
+                  %span With Agency
+              %td
+                .pt-col-content
+                  %span.pl-label Unlimited Email Support
+                  %span With Agency
+              %td
+                .pt-col-content
+                  %span.pl-label Unlimited Email Support
+                  %span With Agency
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Campaign Launch Timeline
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Launch Timeline
+                  %span 2 Weeks
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Launch Timeline
+                  %span 2 Weeks
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Launch Timeline
+                  %span 2 Weeks
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Launch Timeline
+                  %span 2 Weeks
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Dedicated Ad Specialists
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Ad Specialists
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Ad Specialists
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Ad Specialists
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Ad Specialists
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Implementation
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span 100% Customized Strategy
+              %td
+                .pt-col-content
+                  %span.pl-label 100% Customized Strategy
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label 100% Customized Strategy
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label 100% Customized Strategy
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label 100% Customized Strategy
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Demographic Geo-Fencing
+              %td
+                .pt-col-content
+                  %span.pl-label Demographic Geo-Fencing
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Demographic Geo-Fencing
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Demographic Geo-Fencing
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Demographic Geo-Fencing
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Psychographic Geo-Fencing
+              %td
+                .pt-col-content
+                  %span.pl-label Psychographic Geo-Fencing
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Psychographic Geo-Fencing
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Psychographic Geo-Fencing
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Psychographic Geo-Fencing
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Precise GPS Data
+              %td
+                .pt-col-content
+                  %span.pl-label Precise GPS Data
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Precise GPS Data
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Precise GPS Data
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Precise GPS Data
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Category Contextual Targeting
+              %td
+                .pt-col-content
+                  %span.pl-label Category Contextual Targeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Category Contextual Targeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Category Contextual Targeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Category Contextual Targeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Keyword Contextual Targeting
+              %td
+                .pt-col-content
+                  %span.pl-label Keyword Contextual Targeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Keyword Contextual Targeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Keyword Contextual Targeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Keyword Contextual Targeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Keyword Search Retargeting
+              %td
+                .pt-col-content
+                  %span.pl-label Keyword Search Retargeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Keyword Search Retargeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Keyword Search Retargeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Keyword Search Retargeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Loyalty Fences
+              %td
+                .pt-col-content
+                  %span.pl-label Loyalty Fences
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Loyalty Fences
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Loyalty Fences
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Loyalty Fences
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Competitor Fences
+              %td
+                .pt-col-content
+                  %span.pl-label Competitor Fences
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Competitor Fences
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Competitor Fences
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Competitor Fences
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Site Retargeting
+              %td
+                .pt-col-content
+                  %span.pl-label Site Retargeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Site Retargeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Site Retargeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Site Retargeting
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Customer List Targeting (CRM)
+              %td
+                .pt-col-content
+                  %span.pl-label Customer List Targeting (CRM)
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Customer List Targeting (CRM)
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Customer List Targeting (CRM)
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Customer List Targeting (CRM)
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span 1st Party Data Targeting (Emails)
+              %td
+                .pt-col-content
+                  %span.pl-label 1st Party Data Targeting (Emails)
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label 1st Party Data Targeting (Emails)
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label 1st Party Data Targeting (Emails)
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label 1st Party Data Targeting (Emails)
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Prospect Targeting (Emails)
+              %td
+                .pt-col-content
+                  %span.pl-label Prospect Targeting (Emails)
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Prospect Targeting (Emails)
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Prospect Targeting (Emails)
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Prospect Targeting (Emails)
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Implementation of Creatives
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation of Creatives
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation of Creatives
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation of Creatives
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation of Creatives
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Implementation of Ad Scheduling
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation of Ad Scheduling
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation of Ad Scheduling
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation of Ad Scheduling
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation of Ad Scheduling
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span 24/7 Reporting Dashboard
+              %td
+                .pt-col-content
+                  %span.pl-label 24/7 Reporting Dashboard
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label 24/7 Reporting Dashboard
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label 24/7 Reporting Dashboard
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label 24/7 Reporting Dashboard
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span On-Going Support
+              %td
+                .pt-col-content
+                  %span.pl-label On-Going Support
+              %td
+                .pt-col-content
+                  %span.pl-label On-Going Support
+              %td
+                .pt-col-content
+                  %span.pl-label On-Going Support
+              %td
+                .pt-col-content
+                  %span.pl-label On-Going Support
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Dedicated Campaign Management Team
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Campaign Management Team
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Campaign Management Team
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Campaign Management Team
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Campaign Management Team
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Landing Page Feedback
+              %td
+                .pt-col-content
+                  %span.pl-label Landing Page Feedback
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Landing Page Feedback
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Landing Page Feedback
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Landing Page Feedback
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Monthly Performance Report
+              %td
+                .pt-col-content
+                  %span.pl-label Monthly Performance Report
+                  %span With Agency
+              %td
+                .pt-col-content
+                  %span.pl-label Monthly Performance Report
+                  %span With Agency
+              %td
+                .pt-col-content
+                  %span.pl-label Monthly Performance Report
+                  %span With Agency
+              %td
+                .pt-col-content
+                  %span.pl-label Monthly Performance Report
+                  %span With Agency
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Campaign Quality Audits
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Quality Audits
+                  %span Weekly
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Quality Audits
+                  %span Weekly
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Quality Audits
+                  %span Weekly
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Quality Audits
+                  %span Weekly
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Performance-Based Ad Spend Allocation
+              %td
+                .pt-col-content
+                  %span.pl-label Performance-Based Ad Spend Allocation
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Performance-Based Ad Spend Allocation
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Performance-Based Ad Spend Allocation
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Performance-Based Ad Spend Allocation
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Month to Month Commitment
+              %td
+                .pt-col-content
+                  %span.pl-label Month to Month Commitment
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Month to Month Commitment
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Month to Month Commitment
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Month to Month Commitment
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Client Cancellation Policy
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content
+                  %span.pl-label Client Cancellation Policy
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content
+                  %span.pl-label Client Cancellation Policy
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content
+                  %span.pl-label Client Cancellation Policy
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content
+                  %span.pl-label Client Cancellation Policy
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+            - unless @is_preview
+              %tr.pt-row-footer
+                %td.col-label.text-left
+                  .pt-col-content
+                - @plans.each do |plan|
+                  %td
+                    .pt-col-content
+                      %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'programmatic_and_geo_fencing', plan: plan.key)}
+                        Get Started
+      .pt-5.pb-4.d-none
+        .panel-body.bg-white.panel-br-10.p-5.h-100
+          .panel-head.pb-5
+            %i.clickx-icon-Support.ico-60.pr-sm.text-info
+            %h5.f-s-16.f-w-lg.l-s-2.text-muted OPTIONAL
+            .pt-header-caption.text-info White-Glove™ Customer Service
+            .pt-header-price
+              #{in_currency(500, current_agency.display_currency)}
+              %span> /mo
+          .panel-content.pl-n.pr-n
+            %p In addition to our White Label Dashboard for Reporting, White-Glove™ Customer Service include day to day Account Management, Email Communication with our Account Managers as well as Monthly Strategy and Reporting Phone Call.
+      .spacer15
+:javascript
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.plan-preloader').removeClass('plan-preloader');
+    }, 500);
+  });

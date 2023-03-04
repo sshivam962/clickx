@@ -1,0 +1,9 @@
+.panel.panel-default.strategy_item
+  .panel-heading
+    .col-md-11.p-n.mt-sm.mb-sm
+      - template  = Liquid::Template.parse(strategy)
+      - parsed_strategy = template.render({'company_name' => @lead.company})
+      = cktext_area_tag 'lead_strategy[strategies][]', parsed_strategy, id: "strategy_item_text_#{uniq_id}", ckeditor: { toolbar: 'lead_strategy' }
+    .col-md-1
+      %a.remove_strategy.pull-right{href: 'javascript:void(0)'}
+        %i.fa.fa-times

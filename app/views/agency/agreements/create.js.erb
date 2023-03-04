@@ -1,0 +1,12 @@
+<% if @error.present? %>
+  toastr.error("<%= @error %>")
+<% else %>
+  toastr.success('Agreement Signed Successfully');
+  <% if @section.eql?('checkout') %>
+    $('.checkout_steps').addClass('hidden')
+    $('#step_' + $('.agreement-next-btn').data('next-step') + '_content').removeClass('hidden')
+  <% else %>
+    window.location.href = "<%= root_url%>"
+  <% end %>
+<% end %>
+

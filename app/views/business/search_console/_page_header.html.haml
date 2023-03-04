@@ -1,0 +1,12 @@
+.ui-2020
+  .pb-md.page-heading.no-margin-bottom
+    %h1
+      %i.clickx-icon-Maintenance.title-icon>
+      Search Console
+      %i.fa.fa-info-circle.tooltip-text-icon{'title': 'This tool lets you analyze the data collected in your Google Search Console right inside Clickx. It lets you easily analyze the keywords you are ranking for, positions, impressions, top pages, crawl errors and also manage sitemaps.', "data-toggle" => "tooltip", "data-placement" => "top"}
+    .options
+      .form-group
+        -# %span{'ng-class': "{'disable-button': export_disabled}"}
+        -#   %export-button{ 'pdf': 'true' }
+        %md-button.md-raised.md-primary
+          = text_field_tag :date_filter, daterange, class: 'btn btn--dark'

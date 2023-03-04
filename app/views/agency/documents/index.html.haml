@@ -1,0 +1,131 @@
+= content_for :title, 'Documents | Clickx'
+.container-fluid.py-4
+  .d-flex.w-100
+    .flex-col
+      .searchform-wrapper.pb-4
+        .search-form
+          = text_field_tag :search_title, '', class: 'search-form__input', placeholder: 'Search By Title'
+          %button.search-form__btn
+            %i.fa.fa-search
+          %a.search-form-btn-clear.clear_filters{href: 'javascript:void(0)', 'data-title' => 'Clear Filters'}
+            %i.fa.fa-times
+    .col.pl-4
+      %a.btn.btn--dark.btn--lg{href: new_agency_document_path}
+        %span.fs-xs
+          %i.fa.fa-plus.mr-3
+          Create Document
+  .bg-sky-blue.rounded.border-1.border-blue
+    .bg-white.rounded-t-12.pt-4.pb-md-4.px-lg-5.px-4
+      .d-md-flex.justify-content-between.align-items-center
+        .col-auto
+          .fs-md.color-dark-blue.fw-m Documents
+        .col-auto.pb-4.pb-sm-0
+          %ul.tabs-nav.justify-content-start.mt-4.mt-md-0
+            %li.mx-1.mx-lg-2{class: '', id: "my_document"}
+              %a.load_my_documents{href: 'javascript:void(0)', data: {category: "my_document"}}
+                %span.fs-14
+                  MY DOCUMENTS
+            - Document::categories.keys.each do |category|
+              - klass = @category.eql?(category) ? 'active' : ''
+              %li.mx-1.mx-lg-2{class: klass, id: "document_#{category}"}
+                %a.load_documents.fs-14{href: 'javascript:void(0)', data: {category: category}}
+                  %span.fs-14
+                    = Document::CATEGORY_INFO[category].upcase
+            - klass = @category.eql?('miscellaneous') ? 'active' : ''
+
+    %div.ui-sortable.bg-transparent.pb-0{"data-widget-group" => "group1"}
+      .documents-body
+        #document_content.documents_list.row.d-flex.flex-wrap
+          = render 'agency/documents/shared/list', documents: @documents
+      .documents_list.row.d-flex.flex-wrap
+        #search-list.hidden.w-100
+-# .page-heading.mb-n.pb-md.mt-sm
+-#   %h1 Documents
+-#   .options
+-#     .ui-2020.mr-md
+-#       .row.row--v-center.row--wrap
+-#         .search-form
+-#           = text_field_tag :search_title, '', class: 'search-form__input', placeholder: 'Search By Title'
+
+= hidden_field_tag :search_state, 'all'
+
+:css
+  .card img {
+    position: inherit;
+    display:table-header-group;
+  }
+  .card .card-footer a {
+      left: inherit;
+      bottom: inherit;
+  }
+
+:javascript
+  $('#search_title').on("keyup", function() {
+    var title = $('#search_title').val().toLowerCase();
+    var search = false
+    if(title.length >= 3){
+      $('.documents-body, .tabs-nav').addClass('hidden');
+      $('#search-list').removeClass('hidden');
+      $('#search_state').val('search')
+      search = true
+    }else if(title.length == 0){
+      $('.documents-body, .tabs-nav').removeClass('hidden');
+      $('#search-list').addClass('hidden');
+      if($('#search_state').val() == 'search'){
+        $('#search_state').val('all')
+        search = true
+      }else{
+        search = false
+      }
+    }
+    if(search == true){
+      $.ajax({
+        url: "/a/documents/search",
+        type: 'get',
+        data: { title: title },
+        dataType: 'json',
+        async: false,
+        success:function(response){
+          $('#search-list').html(response.data.content)
+        }
+      })
+    }
+  });
+
+  $(document).on("click", '[data-toggle="lightbox"]', function(event) {
+    event.preventDefault();
+    $(this).ekkoLightbox();
+  });
+
+  $(document).on("click",".load_documents",function() {
+    category = $(this).data('category');
+    $.ajax({
+      url: "/a/documents/load_documents",
+      type: 'post',
+      data: {category: category},
+      dataType: 'json',
+      success:function(response){
+        if(response.status == 200){
+          $('li').removeClass('active')
+          $('#document_' + category).addClass('active')
+          $('#document_content').html(response.data.content)
+        }
+      }
+    })
+  });
+
+  $(document).on("click",".load_my_documents",function() {
+    $.ajax({
+      url: "/a/documents/load_my_documents",
+      type: 'post',
+      data: {},
+      dataType: 'json',
+      success:function(response){
+        if(response.status == 200){
+          $('li').removeClass('active')
+          $('#my_document').addClass('active')
+          $('#document_content').html(response.data.content)
+        }
+      }
+    })
+  });

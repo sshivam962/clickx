@@ -1,0 +1,66 @@
+- content_for :title do
+  Grader | Clickx
+- reports_count = current_agency.this_month_grader_reports.size
+.page-heading
+  %h1
+    %i.clickx-icon-Support.title-icon
+    Grader
+#dashboard-table.container-fluid.mt-md.pt-xs.ui-2020
+  .row.row--v-center.row--wrap
+    - if reports_count < current_agency.grader_report_limit
+      .col-md-6.col-sm-12.col-xs-12.pr-lg-3
+        .new_grader_report__wrapper
+          = render 'agency/grader_reports/shared/new'
+      .col-md-6.col-sm-12.col-xs-12.pl-lg-3.mt-4.mt-lg-0
+        = render 'agency/grader_reports/shared/report_progress', reports_count: reports_count
+    - else
+      .col-md-12.col-sm-12.col-xs-12.pr-lg-3
+        = render 'agency/grader_reports/shared/report_progress', reports_count: reports_count
+  .spacer25
+  .row
+    .col-md-12
+      %div
+        %table.table
+          %tbody
+            %tr.text-left.centered-cols.row-header.text-black.d-none.d-lg-table-row
+              %th Domain
+              %th Status
+              %th Created At
+              %th.text-xl-right Actions
+            - @grader_reports.each do |report|
+              %tr.centered-cols.row-card{id: dom_id(report)}
+                %td.col-client
+                  = link_to "//#{report.domain}", target: '_blank', class: 'client-url' do
+                    %span.client-name-editable
+                      %span.client-name__name= report.domain
+                      -# %span.edit-button.edit-button--show-on-hover
+                      -#   = image_tag 'icons/icon-edit.svg'
+                %td.col-data
+                  %span= report.status.titleize
+                %td.col-data
+                  %span= report.created_at.strftime('%m-%d-%Y')
+                %td.col-btns.text-xl-right
+                  %a.action-btn.action-btn--light.text-center{"data-original-title" => "View", "data-toggle" => "tooltip", :title => "", href: agency_grader_report_path(report)}
+                    %span.btn-icon
+                      %i.fa.fa-eye
+                  %a.action-btn.action-btn--light.text-center{"data-original-title" => "Open in new tab", "data-toggle" => "tooltip", :title => "", href: grader_report_public_link(current_agency, report), target: '_blank', data: { link: grader_report_public_link(current_agency, report) }}
+                    %span.btn-icon
+                      %i.fa.fa-external-link
+                  = link_to agency_grader_report_path(report), class: 'action-btn action-btn--light text-center', remote: true, method: :delete, data: { confirm: "Are you sure?", 'original-title': 'Archive', toggle: 'tooltip'} do
+                    %span.btn-icon
+                      %i.fa.fa-archive
+              %tr.row-spacer
+                %td{colspan: "4"}
+
+      .row.text-center.p-n.pagination-wrapper
+        = will_paginate @grader_reports
+
+:javascript
+  $('.copy_to_clipboard').on('click', function (e) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).data('link')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Grader Link Copied");
+  });

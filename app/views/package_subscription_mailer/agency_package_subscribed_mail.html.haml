@@ -1,0 +1,45 @@
+%p
+  %h4
+    New subscription recieved:
+    = @package_name
+
+%p
+  Amount :
+  = number_to_currency(@package.amount)
+
+- if @package.onetime_charge.present?
+  %p
+    One-time Charge:
+    = number_to_currency(@package.onetime_charge)
+
+- if @signup_link.present?
+  %p
+    Signup Link One-Time Charge
+    = number_to_currency(@signup_link.onetime_charge)
+
+- if @addon_plans.present?
+  %br
+  %p
+    %b
+      Addon Plans
+  - @addon_plans.each do |plan|
+    %p
+      = plan.product_name
+      = "#{number_to_currency(plan.amount)}#{plan.interval_text}"
+      - if plan.implementation_fee.present?
+        = ", Implementation Fee : #{number_to_currency(plan.implementation_fee, precision: 0)}"
+  %br
+
+- if @package.expedited_onboarding
+  %p
+    Expedited Onboarding fee:
+    = number_to_currency(@package.expedited_onboarding_fee)
+
+%p
+  - total_amount = [@package.amount, @package.onetime_charge, @package.expedited_onboarding_fee, @addon_plans.pluck(:amount), @addon_plans.pluck(:implementation_fee), @signup_link&.onetime_charge.to_i].flatten.compact.sum
+  Total Amount:
+  = number_to_currency(total_amount)
+
+%p
+  Agency :
+  = @agency.name

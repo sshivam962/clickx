@@ -1,0 +1,115 @@
+.p-n
+  %table.table.table--agencies
+    %thead
+      %th{ class: "col-agency#{is_active_sortable_column_class?(@sort_column , 'Agency', @sort_direction)}" }
+        Agency
+        = show_button_for_sort(@sort_column , 'Agency', @sort_direction)
+      %th{ class: "col-client#{is_active_sortable_column_class?(@sort_column , 'Client', @sort_direction)}" }
+        Client
+        = show_button_for_sort(@sort_column , 'Client', @sort_direction)
+      %th{ class: "col-plan#{is_active_sortable_column_class?(@sort_column , 'Plan', @sort_direction)}" }
+        Plan
+        = show_button_for_sort(@sort_column , 'Plan', @sort_direction)
+      %th.col-amount Amount
+      %th{ class: "col-date#{is_active_sortable_column_class?(@sort_column , 'Date', @sort_direction)}" }
+        Date
+        = show_button_for_sort(@sort_column , 'Date', @sort_direction)
+      %th Actions
+    %tbody#leads_container
+      - subscriptions.each do |subscription|
+        - agency = subscription.agency
+        - client = subscription.business
+        %tr{id: dom_id(subscription)}
+          %td.col-agency
+            - if agency.present?
+              = agency.name
+              .pull-right
+                - if agency.home_link.present?
+                  %a.text-info{href: agency.home_link, target: '_blank'}
+                    Home Link
+                = link_to load_home_link_super_admin_package_subscription_path(subscription, resource_class: 'agency', resource_id: agency.id, category: 'agency'), method: :get, remote: true do
+                  %i.fa.fa-edit
+                  Home Link
+              .home_link_form{id: "hl_agency_#{agency.id}_#{subscription.id}"}
+          %td.col-plan
+            = client&.name
+            .pull-right
+              - if client&.home_link.present?
+                %a.text-info{href: client.home_link, target: '_blank'}
+                  Home Link
+              = link_to load_home_link_super_admin_package_subscription_path(subscription, resource_class: 'business', resource_id: client.id, category: 'client'), method: :get, remote: true do
+                %i.fa.fa-edit
+                Home Link
+            .home_link_form{id: "hl_business_#{client.id}_#{subscription.id}"}
+          %td.col-plan
+            = subscription.package_name.titleize
+            - if subscription.funnel_platform.present?
+              %br
+              %small.text-info.badge
+                Platform: #{subscription.funnel_platform}
+          %td.col-amount
+            - if subscription.package_type.eql?('bundle')
+              - subscription.payments.group_by(&:billing_category).each do |bc, payments|
+                - if bc.eql?('charge')
+                  %span.amount-onetime
+                    = "One-Time: #{number_to_currency(payments.sum(&:amount), precision: 0)}"
+                - if bc.eql?('subscription')
+                  %span.amount-recurring
+                    = "Recurring: #{number_to_currency(payments.sum(&:amount), precision: 0)}"
+              = link_to more_info_super_admin_package_subscription_path(subscription, category: 'agency'), method: :get, remote: true do
+                %i.fa.fa-info
+                More info
+            - else
+              - if subscription.amount.present?
+                - if subscription.billing_category.eql?('charge')
+                  %span.amount-onetime
+                    = "Charge: #{number_to_currency(subscription.amount, precision: 0)}"
+                - else
+                  %span.amount-recurring
+                    = "Recurring: #{number_to_currency(subscription.amount, precision: 0)}"
+              - if subscription.onetime_charge.present?
+                %span.amount-onetime
+                  = "One-Time: #{number_to_currency(subscription.onetime_charge, precision: 0)}"
+          %td
+            = subscription.created_at.strftime('%b %d, %Y')
+          %td.text-center.p-sm
+            %a.btn.btn-info.btn-sm{href: questionnaires_super_admin_client_path(subscription.business_id, subscription_id: subscription.id), data: { toggle: 'tooltip', 'original-title' => 'Questionnaire Links', remote: true}}
+              %i.fa.fa-question
+            - if subscription.onboarding_procedures.present?
+              %a.btn.btn-info.btn-sm{href: list_op_super_admin_package_subscription_path(subscription.id, category: 'client' ), data: { toggle: 'tooltip', 'original-title' => 'List Onboarding Procedures', remote: true}}
+                %i.fa.fa-list-ul
+
+            %a.btn.btn-danger.btn-sm{href: new_op_super_admin_package_subscription_path(subscription.id, category: 'client'), data: { toggle: 'tooltip', 'original-title' => 'Add Onboarding Procedures', remote: true}}
+              %i.fa.fa-list-ul
+  .pt-5.pagination-wrapper.text-center
+    = will_paginate subscriptions, params: {name: params[:name]}
+    = hidden_field_tag :sort_direction,  @sort_direction
+    = hidden_field_tag :sort_column, @sort_column
+.cleafix
+:javascript
+  $("th.col-agency, th.col-client, th.col-plan, th.col-date").on("click", function() {
+    $('.loading-spinner-wrapper').show();
+    var name = $('#search_name').val().toLowerCase();
+    var category = $('#category').val();
+    var sort_direction =get_sort_direction(this.className.split(" "));
+    var sort_column = this.innerText.trim();
+    $.ajax({
+      url: "/s/"+category+"/package_subscriptions",
+      type: 'get',
+      data: { name: name, category: category,
+              sort_direction: sort_direction, sort_column: sort_column },
+      dataType: 'script',
+      success:function(response){
+        $('.loading-spinner-wrapper').hide();
+      }
+    })
+  });
+
+  $('.pagination a').attr('data-remote', 'true');
+  function get_sort_direction(selected_class){
+    var direction = 'asc';
+    if(selected_class.length > 1 && selected_class[1] == "asc"){
+      direction = 'desc';
+    }
+    return direction;
+  }

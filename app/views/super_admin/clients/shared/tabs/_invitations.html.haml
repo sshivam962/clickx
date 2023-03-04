@@ -1,0 +1,19 @@
+.mt-4
+  %h3.m-0 Invite New User
+  %hr
+  .login-form.inputs-group
+    .row
+      .col-sm-6.col-lg-8
+        = form_for client.admin_users.new, url: user_invitation_path, method: :post, remote: true do |f|
+          = f.hidden_field :ownable_id
+          = f.hidden_field :ownable_type
+          .form-group
+            = f.email_field :email, class: 'form-control login display-inline', placeholder: 'Email', autofocus: true, required: true
+          .form-group
+            = f.text_field :first_name, class: 'form-control login display-inline', placeholder: 'First Name', autofocus: true, required: true
+          .form-group
+            = f.text_field :last_name, class: 'form-control login display-inline', placeholder: 'Last Name', autofocus: true, required: true
+          .form-group
+            .custom-select
+              = f.select :role, company_roles_collection, {prompt: 'Select a Role'}, class: 'form-control login display-inline', required: true
+          %button.btn.btn-warning.m-0{"ng-click" => "", :type => "submit"} Send An Invitation

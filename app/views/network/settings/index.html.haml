@@ -1,0 +1,65 @@
+.py-8
+  .lg:container.mx-auto.px-4
+    .card.bg-white.shadow-xl.p-8.rounded-xl.mb-12
+      .section-title
+        %h4 User Information
+      %table.mb-4
+        %tbody
+          %tr
+            %th Name
+            %td= @user.first_name
+          %tr
+            %th Email
+            %td= @user.email
+          %tr
+            %th Phone
+            %td= @user.phone
+
+      = link_to edit_user_registration_path, class: 'btn inline-block' do
+        %i.fa.fa-pencil.pr-2
+        Edit User Information
+      = link_to network_download_agreement_path, class: 'btn inline-block ml-1' do
+        %i.fa.fa-download
+        Agreement
+
+  .lg:container.mx-auto.px-4
+    - stripe_user_id = current_user.stripe_user_id.present?
+    .card.bg-white.shadow-xl.p-8.rounded-xl.mb-12
+      .section-title
+        %h4 Stripe Account
+        - if stripe_user_id
+          (Connected)
+      %table.mb-4
+        %tbody
+          - if stripe_user_id
+            - if @account_balance.pending.first.amount.eql?(0)
+              - klass = 'hidden'
+            %tr#bank_account{data:{account: @bank_account}}
+              %th Pending Balance
+              %td{class: klass}
+                .tooltip
+                  %i.fa.fa-info-circle
+                  %span.tooltiptext The balance is being processed and will be available in 7 business days.
+              %td= number_to_currency(@account_balance.pending.first.amount/100)
+            %tr
+              %th Available Balance
+              %td{class: klass}
+              %td= number_to_currency(@account_balance.available.first.amount/100)
+      - if !stripe_user_id
+        = link_to 'Connect With Stripe', connect_with_stripe_network_settings_path, class: 'btn inline-block ml-1'
+      - if stripe_user_id
+        - stripe_account = Stripe::Account.retrieve(current_user.stripe_user_id)
+        - payout_enabled = !@account_balance.available.first.amount.eql?(0) && stripe_account.requirements.errors.blank?
+        - disabled = payout_enabled ? false : true
+        - style = payout_enabled ? '' : 'cursor:not-allowed; background-color:grey;'
+        = form_with url: payout_network_settings_path, method: :post, local: false do |f|
+          = f.text_field :payout_amount,class: 'block border px-2 rounded-lg mb-4', placeholder: 'Amount', disabled: disabled
+          = f.submit 'Payout', class: 'btn inline-block ml-1', style: style, disabled: disabled
+          = link_to 'Edit', edit_stripe_account_network_settings_path, class: 'btn inline-block ml-1'
+        %br
+        - if stripe_account.requirements.errors.present?
+          %b
+            %u Errors
+            (Edit Stripe Account Info)
+          %br
+          = stripe_account.requirements.errors.first.reason

@@ -1,0 +1,58 @@
+/**
+*  Author : Clickx
+*/
+
+.clickx-parsley{
+  .parsley-errors-list{
+    clear: both;
+    &.filled{
+      padding: 0;
+      margin: 0;
+      li.parsley-required{
+        padding: 10px 15px;
+        background: #404252;
+        color: #f6b01a;
+        list-style: none;
+      }
+    }
+  }
+}
+
+.red{
+  color: red;
+}
+
+.green{
+  color: green;
+}
+
+.w-200{
+  width: 200px
+}
+.countdown-wrapper {
+  background: #f5950c;
+  padding: 10px 15px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 9;
+}
+.countdown {
+  color:#fff;
+  text-align:center;
+  font-size:18px;
+  line-height:1.1em;
+}
+#timeLeft {
+  font-size: 18px;
+  color:#fff;
+  text-align:center;
+}
+#timeLeft span {
+  font-size: 22px;
+  font-weight:700;
+  display:inline-block;
+  text-transform:uppercase;
+}

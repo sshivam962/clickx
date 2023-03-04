@@ -1,0 +1,89 @@
+= Gon::Base.render_data
+- if @search_ads_data.present?
+  - search_ads_data = calculated_search_ads_data(@search_ads_data)
+  - if is_visible_ads_data(search_ads_data)
+    .d-panel.mb-4
+      .row.d-flex.flex-wrap
+        .col-xs-12.dpanel-item.mb-5
+          .bg-white.br-10.pl-lg.pr-lg.pt-2.pb-2.mb-4
+            .d-flex.justify-content-between.flex-wrap
+              .col.f-s-20.pt-2.pb-2.color-dark-blue.fw-sb
+                Google Ads
+                / .custom-tooltip
+                /   %i.fa.fa-info-circle.color-dark-blue
+                /   %span.custom-tooltiptext Displays the analytics of the traffic on your site as per Search Ads.
+              .col.pt-2.pb-2
+                .d-flex.align-items-center
+                  .col.pl-4
+                    = link_to business_dashboard_search_ads_path(start_date: @start_date&.strftime('%m/%d/%Y'), end_date: @end_date&.strftime('%m/%d/%Y')), class: 'icon-btn-circle', remote: true, method: :get do
+                      %i.fa.fa-refresh
+          .stat-cards-list
+            .stat-cards-list--item
+              .stat-card.stat-card--red
+                .stat-card-datas
+                  .stat-data
+                    = number_with_delimiter(search_ads_data[:clicks])
+                  .stat-name Clicks
+                .stat-card-icon-wrap
+                  .stat-card-icon
+                    %i.fa.fa-clock-o
+                .stat-bg-circle
+                .stat-bg-circle.stat-bg-circle2
+            .stat-cards-list--item
+              .stat-card.stat-card--blue
+                .stat-card-datas
+                  .stat-data
+                    = number_with_delimiter(search_ads_data[:impressions])
+                  .stat-name Impressions
+                .stat-card-icon-wrap
+                  .stat-card-icon
+                    %i.fa.fa-users
+                .stat-bg-circle
+                .stat-bg-circle.stat-bg-circle2
+            .stat-cards-list--item
+              .stat-card.stat-card--green
+                .stat-card-datas
+                  .stat-data
+                    = number_with_delimiter(search_ads_data[:conversion])
+                  .stat-name Conversions
+                .stat-card-icon-wrap
+                  .stat-card-icon
+                    %i.fa.fa-eye
+                .stat-bg-circle
+                .stat-bg-circle.stat-bg-circle2
+          .bg-white.br-10.p-25
+            .row.d-flex.flex-wrap
+              .col-xs-12.col-12.col-lg-6.mb-3.pb-3.mb-xl-0
+                %ul.dpanel-datas-list.row.d-flex.flex-wrap
+                  %li.col-sm-6.col-xs-12
+                    .d-flex.justify-content-between.bg-light-gray.br-10.p-4
+                      .col Click Through Rate (CTR)
+                      .col.fw-sb
+                        = search_ads_data[:ctr]
+                  %li.col-sm-6.col-xs-12
+                    .d-flex.justify-content-between.bg-light-gray.br-10.p-4
+                      .col Cost Per Click (CPC)
+                      .col.fw-sb
+                        = search_ads_data[:cpc]
+                  %li.col-sm-6.col-xs-12
+                    .d-flex.justify-content-between.bg-light-gray.br-10.p-4
+                      .col Cost/Conv
+                      .col.fw-sb
+                        = search_ads_data[:cost_per_conv]
+                  %li.col-sm-6.col-xs-12
+                    .d-flex.justify-content-between.bg-light-gray.br-10.p-4
+                      .col Conversion Rate
+                      .col.fw-sb
+                        = search_ads_data[:conversion_rate]
+                  %li.col-sm-6.col-xs-12
+                    .d-flex.justify-content-between.bg-light-gray.br-10.p-4
+                      .col Avg. Cost
+                      .col.fw-sb
+                        = search_ads_data[:avg_cost]
+                  %li.col-sm-6.col-xs-12
+                    .d-flex.justify-content-between.bg-light-gray.br-10.p-4
+                      .col Cost
+                      .col.fw-sb
+                        = search_ads_data[:cost]
+              .col-xs-12.col-12.col-lg-6
+                #chart_search_ads

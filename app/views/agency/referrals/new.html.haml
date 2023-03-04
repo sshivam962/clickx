@@ -1,0 +1,33 @@
+.page-wrapper
+  .container-sm
+    .form-wrapper.referral_form_fields
+      = form_tag agency_referrals_path(referral_code: @referrer.referral_code, tier: @plan.key), method: :post, remote: true, class: 'form-vertical cardy clickx-parsley',"data-parsley-validate": '' do |f|
+        .mb-5
+          %div
+            %h3.m-0.fw-b.text-black
+              #{@referrer.first_name} Thinks You're a Great Fit For
+          .pt-3
+            %a.logo-small{href: '#'}
+              = image_tag 'referral/logo.svg'
+        .d-sm-flex.pb-3
+          .w-sm-50.pr-sm-3.pb-sm-0.pb-3.referral-input
+            %label.input-label{for: 'referral_first_name'}
+              First Name
+              %span.danger *
+            = text_field_tag 'referral[first_name]', '', required: true, class: 'form-input'
+          .w-sm-50.pl-sm-3.referral-input
+            %label.input-label{for: 'referral_email'}
+              Email
+              %span.danger *
+            = email_field_tag 'referral[email]', '', required: true, class: 'form-input'
+        .pb-3.referral-input
+          %label.input-label{for: 'referral_company_name'}
+            Company Name
+            %span.danger *
+          = text_field_tag 'referral[company_name]', '', required: true, class: 'form-input'
+        .mb-5.referral-input
+          %label.input-label{for: 'referral_phone'}
+            Phone Number
+            %span.danger *
+          = text_field_tag 'referral[phone]', '', required: true, class: 'form-input'
+        %input.btn-input{type: 'submit', value: 'Apply to Become a Partner'}

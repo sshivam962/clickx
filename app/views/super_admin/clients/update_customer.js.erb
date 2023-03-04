@@ -1,0 +1,6 @@
+<% if @error.present? %>
+  toastr.error("<%= @error %>")
+<% else %>
+  toastr.success('Customer Id updated successfully');
+  $("*", ".add_sub_account_client_form form").prop('disabled', false);
+<% end %>

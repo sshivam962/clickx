@@ -1,0 +1,4 @@
+$('#new_direct_lead_modal').modal('hide')
+$('#new_direct_lead').trigger('reset')
+$('#direct_leads_listing_table').html("<%= escape_javascript render( partial: 'agency/lead_sources/direct_leads_listing_table')%>")
+

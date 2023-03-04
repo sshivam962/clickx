@@ -1,0 +1,18 @@
+%table#leads_listing.table.mb-0.table-leads-listing
+  -if @direct_leads&.length.to_i > 0
+    %thead
+      %tr
+        %th.col-name Name
+        %th.col-domain Base Domain
+        %th.col-actions Actions
+      %tbody.bg-white.rounded-8.overflow-h.shadow
+        - @direct_leads.each do |direct_lead|
+          = render 'agency/lead_sources/direct_leads_listing_table_tr',  direct_lead: direct_lead
+  -else
+    %p No leads available
+    %a.btn.btn--dark.btn-raised{'data-toggle': 'modal', 'data-target': '#new_direct_lead_modal'} Add Lead
+.pagination-wrapper.mb-0.mt-5
+  -if @direct_leads&.length.to_i > 0
+    = will_paginate @direct_leads, id: 'leads_listing_paginate', class: 'pagination', :params => {:controller => :lead_sources , action: :show, id: @lead_source.id}
+:javascript
+  $('#leads_listing_paginate a').attr('data-remote', 'true');

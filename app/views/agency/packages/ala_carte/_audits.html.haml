@@ -1,0 +1,272 @@
+- plan = plans['seo_audit_lite']&.first
+- if plan.present?
+  .ala_carte-list--item.audits{"data-filter" => "audits"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black SEO Audit - Lite
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Actionable Strategy in Google Slides
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Full Site Analysis
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span On-Site Evaluation
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Off-Site Evaluation
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Technical SEO Audit
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Maximum Pages &lt; 250
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+- plan = plans['seo_audit_advanced']&.first
+- if plan.present?
+  .ala_carte-list--item.audits{"data-filter" => "audits"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black SEO Audit - Advanced
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Actionable Strategy in Google Slides
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Full Site Analysis
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span On-Site Evaluation
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Off-Site Evaluation
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Technical SEO Audit
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Maximum Pages &lt; 1,000
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+- plan = plans['google_ads_audit']&.first
+- if plan.present?
+  .ala_carte-list--item.audits{"data-filter" => "audits"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Google Ads Audit
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Actionable Strategy in Google Slides
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Campaigns Audit
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Audience/Targeting Audit
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Keyword &amp; Ad Group Audit
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Settings Audit (Location/Device)
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Ad Spend &lt; #{in_currency(10000, current_agency.display_currency)}/mo
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+- plan = plans['facebook_ads_audit']&.first
+- if plan.present?
+  .ala_carte-list--item.audits{"data-filter" => "audits"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Facebook Ads Audit
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Actionable Strategy in Google Slides
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Full Account Analysis
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Campaign &amp; Ads Evaluation
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Conversion Evaluation
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Landing Page Audit
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Ad Spend &lt; #{in_currency(10000, current_agency.display_currency)}/mo
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+- plan = plans['funnel_audit']&.first
+- if plan.present?
+  .ala_carte-list--item.audits{"data-filter" => "audits"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Funnel Audit
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Personal &amp; Messaging Review
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Product/Offer Audit
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Development Review
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Competitor Review
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Conversion Path Review
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Mobile Rendering Review
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+- plan = plans['done_for_you_strategy_recommendations']&.first
+- if plan.present?
+  .ala_carte-list--item.audits{"data-filter" => "audits"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Done-For-You (DFY) Strategy & Recommendations
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Understand Lead Notes
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Understand Services / Products
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Custom Recommendations per Lead
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Custom Strategy Document
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Delivered in 2-3 Business Days
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+- plan = plans['done_for_you_account_audits']&.first
+- if plan.present?
+  .ala_carte-list--item.audits{"data-filter" => "audits"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Done-For-You (DFY) Ad Account Audits
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Facebook or Google Platform Audit
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Target Audience Findings
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Performance Findings
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Custom Quick Audit Document
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Delivered in 2-3 Business Days
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+- plan = plans['done_for_you_seo_audits']&.first
+- if plan.present?
+  .ala_carte-list--item.audits{"data-filter" => "audits"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Done-For-You (DFY) SEO Audits
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span High Level SEO Issues
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Domain Characteristics
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Title & Meta Description
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Image Analysis
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Content Analysis
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Link Analysis
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Page Load Analysis
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Delivered in 2-3 Business Days
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started

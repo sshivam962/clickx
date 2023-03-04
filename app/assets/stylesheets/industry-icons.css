@@ -1,0 +1,513 @@
+@font-face {
+  font-family: 'clickx-industries-icons';
+  src: font-url('clickx-industries-icons.eot');
+  src: font-url('clickx-industries-icons.eot#iefix') format('embedded-opentype'),
+    font-url('clickx-industries-icons.ttf') format('truetype'),
+    font-url('clickx-industries-icons.woff') format('woff'),
+    font-url('clickx-industries-icons.svg#clickx-industries-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="clickx-Industries-"], [class*=" clickx-Industries-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'clickx-industries-icons' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.clickx-Industries-Accounting:before {
+  content: "\e9d6";
+}
+.clickx-Industries-Acupuncturist:before {
+  content: "\e9d7";
+}
+.clickx-Industries-Assisted-Living:before {
+  content: "\e9d8";
+}
+.clickx-Industries-Attorney-Law-Firm:before {
+  content: "\e9d9";
+}
+.clickx-Industries-Auto-Repair:before {
+  content: "\e9da";
+}
+.clickx-Industries-Beauty-Salon-Hair-Stylist:before {
+  content: "\e9db";
+}
+.clickx-Industries-Bigcommerce:before {
+  content: "\e9dc";
+}
+.clickx-Industries-Business:before {
+  content: "\e9dd";
+}
+.clickx-Industries-Carpet-Cleaning:before {
+  content: "\e9de";
+}
+.clickx-Industries-Catering:before {
+  content: "\e9df";
+}
+.clickx-Industries-Child-Care:before {
+  content: "\e9e0";
+}
+.clickx-Industries-Chiropractor:before {
+  content: "\e9e1";
+}
+.clickx-Industries-Dance-School:before {
+  content: "\e9e2";
+}
+.clickx-Industries-Dentist:before {
+  content: "\e9e3";
+}
+.clickx-Industries-Doctor:before {
+  content: "\e9e4";
+}
+.clickx-Industries-eCommerceRetail:before {
+  content: "\e9e5";
+}
+.clickx-Industries-Electrician:before {
+  content: "\e9e6";
+}
+.clickx-Industries-Fence-Contractor:before {
+  content: "\e9e7";
+}
+.clickx-Industries-Financial-Advisor:before {
+  content: "\e9e8";
+}
+.clickx-Industries-Fitness-Personal-Trainer:before {
+  content: "\e9e9";
+}
+.clickx-Industries-Fitness-Yoga:before {
+  content: "\e9ea";
+}
+.clickx-Industries-Flooring:before {
+  content: "\e9eb";
+}
+.clickx-Industries-Franchises:before {
+  content: "\e9ec";
+}
+.clickx-Industries-Garbage-Waste:before {
+  content: "\e9f7";
+}
+.clickx-Industries-Funeral-Home:before {
+  content: "\e9ed";
+}
+.clickx-Industries-General-Contractor:before {
+  content: "\ea0a";
+}
+.clickx-Industries-Glass-Company:before {
+  content: "\ea38";
+}
+.clickx-Industries-Handyman:before {
+  content: "\ea42";
+}
+.clickx-Industries-Home-Health-Care:before {
+  content: "\ea48";
+}
+.clickx-Industries-House-Cleaning:before {
+  content: "\ea51";
+}
+.clickx-Industries-HVAC:before {
+  content: "\ea5d";
+}
+.clickx-Industries-Interior-Design:before {
+  content: "\ea64";
+}
+.clickx-Industries-Janitorial:before {
+  content: "\ea70";
+}
+.clickx-Industries-Landscaping:before {
+  content: "\ea7d";
+}
+.clickx-Industries-Lawn-Care:before {
+  content: "\ea87";
+}
+.clickx-Industries-Limo-Service:before {
+  content: "\ea92";
+}
+.clickx-Industries-Locksmith:before {
+  content: "\ea99";
+}
+.clickx-Industries-Massage-Therapist:before {
+  content: "\ea9f";
+}
+.clickx-Industries-Medical:before {
+  content: "\eaba";
+}
+.clickx-Industries-Medspa:before {
+  content: "\eac5";
+}
+.clickx-Industries-Moving-Service:before {
+  content: "\eacc";
+}
+.clickx-Industries-Optometrist-Eye-Doctor:before {
+  content: "\ead6";
+}
+.clickx-Industries-Painting:before {
+  content: "\eadc";
+}
+.clickx-Industries-Pest-Control:before {
+  content: "\eae1";
+}
+.clickx-Industries-Plastic-Surgeon:before {
+  content: "\eaf1";
+}
+.clickx-Industries-Plumbing:before {
+  content: "\eb0c";
+}
+.clickx-Industries-Private-Investigator:before {
+  content: "\eb13";
+}
+.clickx-Industries-Real-Estate:before {
+  content: "\eb1f";
+}
+.clickx-Industries-Restaurant:before {
+  content: "\eb2a";
+}
+.clickx-Industries-Roofer:before {
+  content: "\eb2d";
+}
+.clickx-Industries-Self-Storage:before {
+  content: "\eb3a";
+}
+.clickx-Industries-Sign-Company:before {
+  content: "\eb4a";
+}
+.clickx-Industries-Spa:before {
+  content: "\eb53";
+}
+.clickx-Industries-Swimming-Pool-Service:before {
+  content: "\eb59";
+}
+.clickx-Industries-Therapist-Psychiatrist:before {
+  content: "\eb5d";
+}
+.clickx-Industries-Tree-Care:before {
+  content: "\eb5e";
+}
+.clickx-Industries-Veterinarian:before {
+  content: "\eb68";
+}
+.clickx-Industries-Car-1:before {
+  content: "\e900";
+}
+.clickx-Industries-Car:before {
+  content: "\e901";
+}
+.clickx-Industries-Professions-And-Jobs:before {
+  content: "\e902";
+}
+.clickx-Industries-Online-Class:before {
+  content: "\e903";
+}
+.clickx-Industries-Video-Lecture:before {
+  content: "\e904";
+}
+.clickx-Industries-Luggage:before {
+  content: "\e905";
+}
+.clickx-Industries-Travel:before {
+  content: "\e906";
+}
+.clickx-Industries-Camera:before {
+  content: "\e907";
+}
+.clickx-Industries-Tourism:before {
+  content: "\e908";
+}
+.clickx-Industries-Tour-Bus:before {
+  content: "\e909";
+}
+.clickx-Industries-Electricity-Tower:before {
+  content: "\e90a";
+}
+.clickx-Industries-Solar-Energy-2:before {
+  content: "\e90b";
+}
+.clickx-Industries-Solar-Energy:before {
+  content: "\e90c";
+}
+.clickx-Industries-Wind-Power:before {
+  content: "\e90d";
+}
+.clickx-Industries-Software:before {
+  content: "\e90e";
+}
+.clickx-Industries-SaaS:before {
+  content: "\e90f";
+}
+.clickx-Industries-Online-Course:before {
+  content: "\e910";
+}
+.clickx-Industries-Motivational-Coaches:before {
+  content: "\e911";
+}
+.clickx-Industries-Mentor:before {
+  content: "\e912";
+}
+.clickx-Industries-Retail:before {
+  content: "\e913";
+}
+.clickx-Industries-Veterinary-Services:before {
+  content: "\e914";
+}
+.clickx-Industries-Manufacturing:before {
+  content: "\e915";
+}
+.clickx-Industries-Veterinary-Services-2:before {
+  content: "\e916";
+}
+.clickx-Industries-Travel1:before {
+  content: "\e917";
+}
+.clickx-Industries-Transportation-2:before {
+  content: "\e918";
+}
+.clickx-Industries-Telecommunications-2:before {
+  content: "\e919";
+}
+.clickx-Industries-Telecommunications:before {
+  content: "\e91a";
+}
+.clickx-Industries-Transportation:before {
+  content: "\e91b";
+}
+.clickx-Industries-Sports:before {
+  content: "\e91c";
+}
+.clickx-Industries-Sports-2:before {
+  content: "\e91d";
+}
+.clickx-Industries-Solar-Energy1:before {
+  content: "\e91e";
+}
+.clickx-Industries-Shipping:before {
+  content: "\e91f";
+}
+.clickx-Industries-Roofing:before {
+  content: "\e920";
+}
+.clickx-Industries-Roofing-2:before {
+  content: "\e921";
+}
+.clickx-Industries-Retail-2:before {
+  content: "\e922";
+}
+.clickx-Industries-Real-Estate1:before {
+  content: "\e923";
+}
+.clickx-Industries-Real-Estate-2:before {
+  content: "\e924";
+}
+.clickx-Industries-Plumbing1:before {
+  content: "\e925";
+}
+.clickx-Industries-Plumbing-2:before {
+  content: "\e926";
+}
+.clickx-Industries-Personal-Development:before {
+  content: "\e927";
+}
+.clickx-Industries-Personal-Development-2:before {
+  content: "\e928";
+}
+.clickx-Industries-Online-Business:before {
+  content: "\e929";
+}
+.clickx-Industries-Online-Business-2:before {
+  content: "\e92a";
+}
+.clickx-Industries-Non-Profit:before {
+  content: "\e92b";
+}
+.clickx-Industries-Music:before {
+  content: "\e92c";
+}
+.clickx-Industries-Music-2:before {
+  content: "\e92d";
+}
+.clickx-Industries-Medical1:before {
+  content: "\e92e";
+}
+.clickx-Industries-Medical-2:before {
+  content: "\e92f";
+}
+.clickx-Industries-Manufacturing-2:before {
+  content: "\e930";
+}
+.clickx-Industries-Machinery:before {
+  content: "\e931";
+}
+.clickx-Industries-Machinery-2:before {
+  content: "\e932";
+}
+.clickx-Industries-Legal:before {
+  content: "\e933";
+}
+.clickx-Industries-Legal-2:before {
+  content: "\e934";
+}
+.clickx-Industries-Landscaping1:before {
+  content: "\e935";
+}
+.clickx-Industries-Jewelry:before {
+  content: "\e936";
+}
+.clickx-Industries-Jewelry-2:before {
+  content: "\e937";
+}
+.clickx-Industries-Insurance:before {
+  content: "\e938";
+}
+.clickx-Industries-Insurance-2:before {
+  content: "\e939";
+}
+.clickx-Industries-Information-Technology:before {
+  content: "\e93a";
+}
+.clickx-Industries-Industrial:before {
+  content: "\e93b";
+}
+.clickx-Industries-Industrial-2:before {
+  content: "\e93c";
+}
+.clickx-Industries-HVAC1:before {
+  content: "\e93d";
+}
+.clickx-Industries-HVAC-3:before {
+  content: "\e93e";
+}
+.clickx-Industries-HVAC-2:before {
+  content: "\e93f";
+}
+.clickx-Industries-Hospitality:before {
+  content: "\e940";
+}
+.clickx-Industries-Home-Services:before {
+  content: "\e941";
+}
+.clickx-Industries-Home-Services-2:before {
+  content: "\e942";
+}
+.clickx-Industries-Healthcare:before {
+  content: "\e943";
+}
+.clickx-Industries-Healthcare-2:before {
+  content: "\e944";
+}
+.clickx-Industries-Health-Wellness:before {
+  content: "\e945";
+}
+.clickx-Industries-Franchises1:before {
+  content: "\e946";
+}
+.clickx-Industries-Franchises-2:before {
+  content: "\e947";
+}
+.clickx-Industries-Food-Beverage-Manufacturing:before {
+  content: "\e948";
+}
+.clickx-Industries-Fitness:before {
+  content: "\e949";
+}
+.clickx-Industries-Fitness-2:before {
+  content: "\e94a";
+}
+.clickx-Industries-Financial:before {
+  content: "\e94b";
+}
+.clickx-Industries-Financial-2:before {
+  content: "\e94c";
+}
+.clickx-Industries-Engineering:before {
+  content: "\e94d";
+}
+.clickx-Industries-Energy:before {
+  content: "\e94e";
+}
+.clickx-Industries-Electronics:before {
+  content: "\e94f";
+}
+.clickx-Industries-Education:before {
+  content: "\e950";
+}
+.clickx-Industries-Ecommerce:before {
+  content: "\e951";
+}
+.clickx-Industries-Dating:before {
+  content: "\e952";
+}
+.clickx-Industries-Dance:before {
+  content: "\e953";
+}
+.clickx-Industries-Dance-2:before {
+  content: "\e954";
+}
+.clickx-Industries-Construction:before {
+  content: "\e955";
+}
+.clickx-Industries-Computers:before {
+  content: "\e956";
+}
+.clickx-Industries-Cleaning:before {
+  content: "\e957";
+}
+.clickx-Industries-Child-Care1:before {
+  content: "\e958";
+}
+.clickx-Industries-Business-Services:before {
+  content: "\e959";
+}
+.clickx-Industries-Beauty:before {
+  content: "\e95a";
+}
+.clickx-Industries-Aviation:before {
+  content: "\e95b";
+}
+.clickx-Industries-Arts-Entertainment:before {
+  content: "\e95c";
+}
+.clickx-Industries-Architecture:before {
+  content: "\e95d";
+}
+.clickx-Industries-Apparel:before {
+  content: "\e95e";
+}
+.clickx-Industries-agriculture:before {
+  content: "\e95f";
+}
+.clickx-Industries-Auto:before {
+  content: "\e960";
+}
+.clickx-Industries-Home-Renovation:before {
+  content: "\e961";
+}
+.clickx-Industries-Garage-2:before {
+  content: "\e962";
+}
+.clickx-Industries-Garage-1:before {
+  content: "\e963";
+}
+.clickx-Industries-Gas-Detection:before {
+  content: "\e964";
+}
+.clickx-Industries-Gas-Bottle:before {
+  content: "\e965";
+}
+.clickx-Industries-Gas-Pump:before {
+  content: "\e966";
+}
+.clickx-Industries-Home-Decor:before {
+  content: "\e967";
+}
+.clickx-Industries-Home-Decor-2:before {
+  content: "\e968";
+}

@@ -1,0 +1,13 @@
+.question-lis-item{id: dom_id(question)}
+  .question-item
+    .d-flex.flex-wrap.justify-content-between
+      .question-title
+        = question.question
+      %div.question-actions
+        .action-buttons
+          = link_to edit_super_admin_inquiry_question_path(question), class: 'action-btn action-btn--light-bg mx-1', remote: true do
+            %i.glyphicon.glyphicon-pencil
+          = link_to new_super_admin_inquiry_linked_question_path(question_id: question.id), method: :get, class: 'action-btn action-btn--light-bg mx-1', remote: true do
+            %i.glyphicon.glyphicon-tasks
+          = link_to super_admin_inquiry_question_path(question), method: :delete, data: { confirm: 'Are you sure?' }, class: 'action-btn action-btn--light-bg mx-1 text-danger', remote: true do
+            %i.glyphicon.glyphicon-trash

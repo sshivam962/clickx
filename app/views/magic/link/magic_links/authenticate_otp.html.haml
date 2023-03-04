@@ -1,0 +1,13 @@
+.row
+  .col-sm-3
+  .col-sm-6
+    %h2.f-s-md.text-white.f-w-md.mb-md Click on the login link sent to your email or enter the 4-digit code here to login
+    %br/
+    = form_with url: authenticate_path, local: true do |f|
+      = hidden_field_tag :email, @magic_link.email
+      .form-group
+        = f.text_field :otp_token, autofocus: true, class: 'form-control', placeholder: 'OTP'
+      .actions
+        = f.submit 'Login', class: "btn btn-warning"
+    = link_to "Back Home", main_app.root_path, class: 'forgot pull-right'
+  .col-sm-3

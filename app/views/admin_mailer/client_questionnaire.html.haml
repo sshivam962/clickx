@@ -1,0 +1,42 @@
+%table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+  %tr
+    %td{:valign => "top", :width => "100%"}
+      %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+        %tr
+          %td{:width => "100%"}
+            %table.table_scale{:bgcolor => "#FFF", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+              %tr
+                %td{:align => "center", :width => "100%"}
+                  %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                    %tr
+                      %td.spacer{:width => "30"}
+                      %td{:width => "540"}
+                        / START OF COLUMN
+                        %table.full{:align => "center", :border => "0", :cellpadding => "10", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "540"}
+                          %tr.cellpadd10{:style => "margin-bottom: 15px"}
+                            %td
+                              %br
+                              Client: #{@client.name}
+                              %br
+                              Agency: #{@agency.name}
+                              %br
+                              category: #{@questionnaire.category}
+        %tr
+          %td{:width => "100%"}
+            %table.table_scale{:bgcolor => "#FFF", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+              %tr
+                %td{:align => "center", :width => "100%"}
+                  %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                    %tr
+                      %td{:width => "540"}
+                        / START OF COLUMN
+                        %table.full{:align => "center", :border => "0", :cellpadding => "10", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "540"}
+                          - @questionnaire.answers.each do |answer|
+                            %tr.cellpadd10.content{:style => "margin-bottom: 15px"}
+                              %td
+                                %p
+                                  %br
+                                  Q: #{answer&.question&.question}
+                                  %br
+                                  A: #{answer&.answer}
+                                  %br

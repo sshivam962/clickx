@@ -1,0 +1,30 @@
+:css
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border: 1px solid black;
+    text-align: center;
+  }
+%table
+  %thead
+    %th Date
+    %th Clicks
+    %th Impression
+    %th Conversions
+    %th Avg. Cost
+    %th CTR
+    %th Cost
+  %tbody
+    - if @adword_data[:this_period]
+      - @adword_data[:this_period].each do |ad_summary|
+        %tr
+          %td= ad_summary[0].to_date
+          %td= ad_summary[1][:clicks]
+          %td= ad_summary[1][:impressions]
+          %td= ad_summary[1][:conversions]
+          %td= ad_summary[1][:avg_cost]
+          %td= ad_summary[1][:ctr]
+          %td= ad_summary[1][:cost]

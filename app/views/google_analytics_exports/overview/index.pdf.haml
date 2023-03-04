@@ -1,0 +1,90 @@
+%html
+  %head
+    %h1 Overview
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+  %body
+    .container.summary
+      .sides
+        %h3 Traffic Summary
+        %table-responsive
+          %table.table.table-bordered.table-vam.table-left
+            %tr
+              %td
+                %b Sessions
+              %td
+                = @data.sessions
+            %tr
+              %td
+                %b Users
+              %td
+                = @data.users
+            %tr
+              %td
+                %b PageViews
+              %td
+                = @data.page_views
+        .sides-right
+          %h3 Visit Status
+          %table-responsive
+            %table.table.table-bordered.table-vam.table-left
+              %tr
+                %td
+                  %b Referral
+                %td
+                  = @data.referral
+              %tr
+                %td
+                  %b Organic
+                %td
+                  = @data.organic
+              %tr
+                %td
+                  %b Direct
+                %td
+                  = @data.direct
+              %tr
+                %td
+                  %b Paid
+                %td
+                  = @data.paid
+              %tr
+                %td
+                  %b Social
+                %td
+                  = @data.social
+              %tr
+                %td
+                  %b Email
+                %td
+                  = @data.email
+              %tr
+                %td
+                  %b Others
+                %td
+                  = @data.others
+    %table-responsive
+      %table.table.table-bordered.table-vam.table-left
+        %thead
+          %th Date
+          %th Users
+          %th Pages/Session
+          %th Avg. Session Duration
+          %th % New Sessions
+          %th Bounce Rate
+        %tbody
+          - @data.decorated_user_data do |analytics|
+            %tr
+              %td.align-center
+                = analytics.formatted_date
+              %td.align-center
+                = analytics.users_count
+              %td.align-center
+                = analytics.pages_per_session
+              %td.align-center
+                = analytics.avg_session_duration
+              %td.align-center
+                = analytics.new_sessions
+              %td.align-center
+                = analytics.bounce_rate
+
+

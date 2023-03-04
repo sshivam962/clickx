@@ -1,0 +1,25 @@
+.container
+  = link_to 'http://www.clickx.io', target: '_blank', class: 'login-logo' do
+    = image_tag "logo-dark.svg"
+  .row
+    .col-md-8.col-md-offset-2
+      = form_tag signup_path, method: :post, class: 'form-vertical cardy' do
+        .panel.tranin.panel-midnightblue{"data-widget": {draggable: false}}
+          .panel-heading
+            - if @error
+              %h2.regtitle Something Went Wrong
+            - else
+              %h2.regtitle Thank You!
+          .panel-body
+            %h2.col-sm-12.regsubt.text-center= @msg
+          .panel-footer
+  - if @error
+
+    %script{src: "https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js", :type => "text/javascript"}
+    %link{href: "https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.css", rel: "stylesheet"}
+
+    .row
+      .col-md-8.col-md-offset-2
+        .tab-container
+          .tab-content
+            %iframe#freshwidget-embedded-form.freshwidget-embedded-form{frameborder: "0", height: "500px", scrolling: "no", src: "https://clickx.freshdesk.com/widgets/feedback_widget/new?&widgetType=embedded&formTitle=Clickx+Support&submitTitle=Submit&submitThanks=Thank+you%2C+we+will+get+back+to+you+shortly!&screenshot=no", title: "Feedback Form", width: "100%"}

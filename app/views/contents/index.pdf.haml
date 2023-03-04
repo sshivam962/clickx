@@ -1,0 +1,24 @@
+%html
+  %head
+    %h1 Contents
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+  %body
+    %table-responsive
+      %table.table.table-bordered.table-vam.table-left
+        %thead
+          %th Title
+          %th Date Created
+          %th Last Modified
+          %th Status
+
+        %tbody
+          - @content.each do |search|
+            %tr
+              %td.align-center
+                = search.show_title
+              %td.align-center
+                = search.created_at
+              %td.align-center
+                = search.updated_at
+              %td.align-center
+                = search.state

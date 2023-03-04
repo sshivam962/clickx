@@ -1,0 +1,14 @@
+%h2 Invite New Admin User
+.row
+  .col-sm-5
+    = form_with model: @user, url: user_invitation_path, local: true do |f|
+      = f.hidden_field :role
+      .form-group
+        = f.email_field :email, class: 'form-control', placeholder: 'Email'
+      .form-group
+        = f.text_field :first_name, class: 'form-control', placeholder: 'First Name'
+      .form-group
+        = f.text_field :last_name, class: 'form-control', placeholder: 'Last Name'
+      .form-group
+        = f.submit 'Send An Invitation', class: 'btn btn-warning'
+        = link_to 'Back', super_admin_admin_users_path, class: 'btn btn-primary'

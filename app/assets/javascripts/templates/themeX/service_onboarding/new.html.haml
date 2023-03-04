@@ -1,0 +1,27 @@
+.page-content
+  %form{'ng-submit': 'createOnboardingProcedure(onboarding_procedure)'}
+    .page-heading.no-margin-bottom
+      %h1
+        %i.clickx-icon-SellSheets.title-icon>
+        Create Onboarding
+      .options
+        %a.btn.btn-white.btn-raised{href:"/#/agencies/service_onboarding"}
+          %i.fa.fa-arrow-left.pr-xs
+          Back
+    .container-fluid
+      %div
+        .row.onboarding-checklist
+          .col-sm-12
+            .panel.panel-default
+              .panel-body.pl-xl
+                %input.form-control.proc_title{placeholder: 'Title', 'ng-model': 'onboarding_procedure.title'}
+                %ul.checklist-timeline.m-left-100
+                  %div{'ng-repeat': 'task in onboarding_procedure.onboarding_tasks_attributes'}
+                    %div{'ng-include': "'themeX/service_onboarding/_form.html'"}
+                    .form-group
+                      %button.btn.btn-primary.btn-raised.pull-right{ 'type': 'submit' }
+                        Save
+                  %li.timeline-item
+                    %a{'ng-click': 'addTaskForm()'}
+                      %i.fa.fa-plus.icon-item
+

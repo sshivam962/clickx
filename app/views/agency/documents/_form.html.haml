@@ -1,0 +1,89 @@
+.bg-sky-blue.rounded.border-1.border-blue.mb-4
+  .bg-white.rounded-t-12.py-4.px-5
+    .fs-md.color-dark-blue.fw-m  Document
+  .p-lg-5.p-4
+    .input-wrapper
+      %label.input-wrapper-label{for: "title"} Document Title
+      = f.text_field :title, required: true, class: 'input-wrapper-input', placeholder: 'Document Title'
+    
+    .input-wrapper
+      - description_value = ""
+      - if @document.description.present?
+        - description_value = @document.description
+      = f.cktext_area :description, value: description_value
+      
+    .input-wrapper
+      = f.label :category, class: 'input-wrapper-label'
+      .input-wrapper-select
+        = f.select :category, Document.category_collection, { include_blank: 'Select Category' }, required: true, class: 'input-wrapper-input'
+
+    .input-wrapper.images_wrapper
+      %label.input-wrapper-label Document Attachment
+      .col-md-12
+        = f.fields_for :document_attachment do |ff|
+          - if f.object.new_record?
+            = ff.file_field :file
+          - else
+            = ff.file_field :file
+          = image_tag ff.object.file.url || '', width: '123px', class: 'document_attachment_preview'
+
+    .input-wrapper
+      %label.input-wrapper-label{for: "document_link"} Document Link
+      = f.text_field :document_link, class: 'input-wrapper-input', placeholder: 'Document Link'
+
+    .input-wrapper.mb-0
+      = f.hidden_field :agency_id, value: current_agency.id
+      = f.submit "Save", class: 'btn btn-warning saveBtn'
+
+:javascript
+  $(document).on('click', '.remove_document_attachment', function() {
+    $('.document_attachment').find('.preview-thumb').css('background-image','');
+    $('.document_attachment').find('.preview-thumb').find('input[type="file"]').attr('value', null);
+    $(this).hide();
+  })
+  $('#document_image_attributes_file').change(function(event){
+    var input = $(event.currentTarget);
+    var file = input[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+       image_base64 = e.target.result;
+       $(".document_image_preview").attr("src", image_base64);
+    };
+    reader.readAsDataURL(file);
+  });
+  $('#document_thumbnail_attributes_file').change(function(event){
+    var input = $(event.currentTarget);
+    var file = input[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+       image_base64 = e.target.result;
+       $(".document_thumbnail_preview").attr("src", image_base64);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  $('#document_category').change(function(){
+    if($(this).val() == 'video'){
+      $('.images_wrapper').addClass('hidden')
+      $('.video_embed_code_wrapper').removeClass('hidden')
+    }else{
+      $('.images_wrapper').removeClass('hidden')
+      $('.video_embed_code_wrapper').addClass('hidden')
+    }
+  })
+
+  $(document).ready(()=>{
+    $(document).on('change', '.preview-thumb-edit input[type="file"]', function(){
+      const file = this.files[0];
+      if (file){
+          var it = $(this).parents('.cs_image_card');
+          let reader = new FileReader();
+          reader.onload = function(event){
+            var imageUrl = event.target.result;
+            $(it).find('.preview-thumb').css('background-image', 'url(' + imageUrl + ')');
+            $('.remove_document_attachment').show();
+          }
+        reader.readAsDataURL(file, it);
+      }
+    });
+  });

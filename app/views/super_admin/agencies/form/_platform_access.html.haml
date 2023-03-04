@@ -1,0 +1,178 @@
+.bg-white.px-md-5.pt-5.pb-3.p-3.rounded.mb-4.shadow
+  %h3.mt-0 Access
+  %hr
+  .d-md-flex.flex-wrap.mx-n3.gap-y-25
+    .col.w-xl-33.w-lg-50.w-100.px-4
+      %h4.mb-4 Platform $299
+      %h5.fs-xs.mb-4.fw-m Features
+      .mb-lg
+        .pb-3
+          .togglebutton.toggle-info
+            %label.word-break.fw-n
+              = f.check_box :white_labeled
+              %span.toggle
+              White Label(Courses, Documents, ROI Calc, Grader)
+        .pb-3
+          .togglebutton.toggle-info
+            %label.word-break.fw-n
+              = f.check_box :payment_links_enabled
+              %span.toggle
+              Payments
+        .pb-3
+          .togglebutton.toggle-info
+            %label.word-break.fw-n
+              = f.check_box :plans_enabled
+              %span.toggle
+              Plans
+        - disabled = (current_user.email == 'admin@clickx.io' ? nil : 'disabled');
+        .pb-3
+          .togglebutton.toggle-info
+            %label.word-break.fw-n{class: disabled}
+              = f.check_box(:onetime_charge, { disabled: disabled })
+              %span.toggle
+              One-Time Charge($250)
+        .pb-3
+          .togglebutton.toggle-info
+            %label.word-break.fw-n
+              = f.check_box :support_prospecting_call
+              %span.toggle
+              Support Prospecting Call
+        .pb-3
+          .togglebutton.toggle-info
+            %label.word-break.fw-n
+              = f.check_box :is_social_media_ad
+              %span.toggle
+              Social Posts
+        .pb-3
+          .togglebutton.toggle-info
+            %label.word-break.fw-n
+              = f.check_box :value_hook
+              %span.toggle
+              Value Hooks
+        .pb-3
+          .togglebutton.toggle-info
+            %label.word-break.fw-n
+              = f.check_box :case_study_limited_access
+              %span.toggle
+              Case Study (Limited Access)
+        .pb-3
+          .togglebutton.toggle-info
+            %label.word-break.fw-n
+              = f.check_box :portfolio_limited_access
+              %span.toggle
+              Portfolio (Limited Access)
+        .pb-3
+          .togglebutton.toggle-info
+            %label.word-break.fw-n
+              = f.check_box :coaching_calls_in_support_page
+              %span.toggle
+              Coaching Calls In Support Page
+
+      .mb-lg
+        %h5.fs-xs.mb-4.fw-m Academy
+        %div
+          = f.collection_check_boxes :course_ids, Course.agency.acadamics.order_by_title, :id, :title do |b|
+            .pb-3
+              .togglebutton.toggle-info
+                %label.word-break.fw-n
+                  = b.check_box
+                  %span.toggle
+                  = b.text
+
+      .mb-lg
+        %h5.fs-xs.mb-4.fw-m Documents
+        %div
+          = f.collection_check_boxes :enabled_document_categories, Document::PLAN_299.map { |c| [Document::CATEGORY_INFO[c], c] }, :last, :first do |b|
+            .pb-3
+              .togglebutton.toggle-info
+                %label.word-break-all
+                  = b.check_box
+                  %span.toggle
+                = b.text
+
+    .col.w-xl-33.w-lg-50.w-100.px-4
+      %h4.mb-4 Platform $799
+      %h5.fs-xs.mb-4.fw-m Features
+      .mb-lg
+        .pb-3
+          .togglebutton.toggle-info
+            %label.word-break.fw-n
+              = f.check_box :case_study_enabled
+              %span.toggle
+              Case Study
+        .pb-3
+          .togglebutton.toggle-info
+            %label.word-break.fw-n
+              = f.check_box :portfolio_enabled
+              %span.toggle
+              Portfolio
+
+      .mb-lg
+        %h5.fs-xs.mb-4.fw-m Documents
+        %div
+          = f.collection_check_boxes :enabled_document_categories, (Document::PLAN_799 - Document::PLAN_299).map { |c| [Document::CATEGORY_INFO[c], c] }, :last, :first do |b|
+            .pb-3
+              .togglebutton.toggle-info
+                %label.word-break-all
+                  = b.check_box
+                  %span.toggle
+                = b.text
+
+      %h4.mb-4 Platform $999
+      %h5.fs-xs.mb-4.fw-m Features
+      .mb-lg
+        -# List features here
+
+    .col.w-xl-33.w-lg-50.w-100.px-4
+      - if @agency.persisted?
+        %h4.mb-2 START Program
+        %h5.mb-2 0-10K SCALE Coaching
+        %h5.mb-4.pb-2.fw-m $4997 One Time
+        .mb-lg
+          .pb-3
+            .togglebutton.toggle-info
+              %label.word-break.fw-n
+                = f.check_box :start_agency_program
+                %span.toggle
+                START Program
+        %h4.mb-2 SCALE Program
+        %h5.mb-4.pb-2.fw-m $9800, $15K, $20K, $25K
+        .mb-lg
+          .mb-lg
+            .pb-3
+              .togglebutton.toggle-info
+                %label.word-break.fw-n
+                  = f.check_box :scale_program
+                  %span.toggle
+                  SCALE Program
+            .pl-5.pb-4
+              .togglebutton.toggle-info#scale_zoom_info
+                %label.word-break.fw-n
+                  = f.check_box :scale_zoom_info
+                  %span.toggle
+                  - disable = @agency.scale_zoom_expiry_date.nil? ? 'hidden' : ''
+                  - edit_button = @agency.scale_zoom_info? ? '' : 'hidden'
+                  = f.hidden_field :scale_zoom_expiry_date
+                  %span
+                    SCALE Zoom Info
+                    = link_to scale_zoom_super_admin_agency_path(@agency), class: "scale_zoom_btn #{edit_button} grey-btn-icon", remote: true do
+                      %i.glyphicon.glyphicon-edit.font-14.ml-2
+                    #zoom_expiry_date
+                      - if @agency.scale_zoom_expiry_date.present?
+                        %p{class: disable}= "(Expiry Date: #{@agency.scale_zoom_expiry_date.strftime('%a, %d %b %Y') })"
+            .pb-3
+              .togglebutton.toggle-info
+                %label.word-break.fw-n
+                  = f.check_box :moment_call
+                  %span.toggle
+                  Momentum Call
+            -# .pb-3
+            -#   .togglebutton.toggle-info
+            -#     %label.word-break.fw-n
+            -#       = f.check_box :coaching_recordings
+            -#       %span.toggle
+            -#       Coaching Recordings
+
+        -# %h4.mb-4 SCALE 2497
+        -# .mb-lg
+          -# List here

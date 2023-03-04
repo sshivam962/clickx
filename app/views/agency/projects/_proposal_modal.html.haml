@@ -1,0 +1,26 @@
+#contract-modal.modal.fade{role: "dialog", tabindex: '-1', data: {backdrop: 'true'}}
+  .modal-backdrop.fade
+  .modal-dialog
+    .modal-content.rounded
+      .d-flex.align-items-center.justify-content-center.pt-4.px-4.pb-10.text-center
+        .inline-block.align-bottom.bg-white.rounded.text-left.overflow-hidden.w-100{'data-dismiss': 'modal'}
+          .bg-white.px-4.pt-3.pb-4.sm:p-6.sm:pb-4
+            .relative.text-center.d-flex.justify-content-between.align-items-center.pb-4
+              .fs-md.fw-m.text-blue
+                Proposal
+              %button.btn.px-4
+                %i.fa.fa-close
+
+            .pt-4.pb-4
+              Proposal Amount:
+              %span.font-medium.py-8.pl-2.text-center.project-budget= number_to_currency(proposal.amount)
+            .d-flex.justify-continue-between.align-items-center.text-gray-500.pb-4
+              .col-auto.text-sm.font-light
+                20% Clickx fee
+              .col-auto.clickx-fee.pl-5= number_to_currency(proposal.clickx_fee)
+            .d-flex.justify-continue-between.align-items-center
+              .col-auto.text-sm.font-light.text-xl Final Amount
+              .col-auto.fw-m.fs-md.final-amount.pl-5= number_to_currency(proposal.total_amount)
+            .pt-5.pb-3.text-center.pt-3
+              - unless proposal.project.accepted_proposal.present?
+                %a.btn.btn--dark.w-48.min-w-20{href: proposal_accepted_agency_projects_path(proposal_id: proposal.id), data: {remote: true}} Accept Proposal

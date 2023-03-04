@@ -1,0 +1,8 @@
+<% if @lead.blank? %>
+  toastr.error('Lead not found')
+<% elsif @lead.errors.present? %>
+  toastr.error("<%= @lead.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success('Lead Unarchived');
+  $("#lead_<%= @lead.id%>").remove();
+<% end %>

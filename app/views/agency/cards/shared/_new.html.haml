@@ -1,0 +1,57 @@
+- billing_address = current_agency.billing_address
+#new_card_form
+  .input-wrapper
+    %label.input-wrapper-label{:for => "Name"} Name
+    = text_field_tag 'card[name]', billing_address&.name, class: 'input-wrapper-input', required: true
+  .input-wrapper
+    %label.input-wrapper-label{:for => "address_line1"} Address 1
+    = text_field_tag 'card[address_line1]', billing_address&.address_line_1, class: 'input-wrapper-input', required: true
+  .input-wrapper
+    %label.input-wrapper-label{:for => "address_line2"} Address 2
+    = text_field_tag 'card[address_line2]', billing_address&.address_line_2, class: 'input-wrapper-input'
+  .row
+    .col-md-6
+      .input-wrapper
+        %label.input-wrapper-label{:for => "address_city"} City
+        = text_field_tag 'card[address_city]', billing_address&.city, class: 'input-wrapper-input', required: true
+    .col-md-6.pr-n
+      .input-wrapper
+        %label.input-wrapper-label{:for => "address_zip"} Zip
+        = text_field_tag 'card[address_zip]', billing_address&.zip, class: 'input-wrapper-input', required: true
+  - country = billing_address&.country || 'United States'
+  .row 
+    .col-md-6
+      .input-wrapper
+        %label.input-wrapper-label{:for => "address_country"} Country
+        .input-wrapper-select
+          = select_tag 'card[address_country]', options_for_select(ISO3166::Country.all_translated.collect {|c| [c, c]}, country), class: 'input-wrapper-input', required: true, data: {url: "/p/states?state=#{billing_address&.state}", partial: 'agency/cards/shared/states'}, id: 'country_select'
+    .col-md-6
+      .input-wrapper
+        %label.input-wrapper-label{:for => "address_state"} State
+        .input-wrapper-select
+          #state_div
+            = render 'agency/cards/shared/states', states: {}, state: billing_address&.state
+  #card-container1
+    .input-wrapper
+      %label.input-wrapper-label{:for => "number"} Card Number
+      = text_field_tag 'card[number]', nil, class: 'input-wrapper-input', required: true, placeholder: 'Card Number'
+    .row
+      .col-md-6
+        .input-wrapper
+          %label.input-wrapper-label{:for => "expiry"} Expiration Date
+          = text_field_tag 'card[expiry]', nil, class: 'input-wrapper-input', required: true, placeholder: 'MM/YYYY'
+      .col-md-6
+        .input-wrapper
+          %label.input-wrapper-label{:for => "cvc"} CVC
+          = text_field_tag 'card[cvc]', nil, class: 'input-wrapper-input', required: true, placeholder: '123'
+:javascript
+  $('#new_card_form').card({
+    container: '#new_card_form',
+    formSelectors: {
+      numberInput: 'input#card_number',
+      expiryInput: 'input#card_expiry',
+      cvcInput: 'input#card_cvc'
+    }
+  });
+
+  CountrySelect.changeStateAccordingToCountry()

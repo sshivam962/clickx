@@ -1,0 +1,7 @@
+%div.col-md-12
+  .row
+    .form-group
+      %label.font-size18 Sales Pitch
+      = f.cktext_area :sales_pitch, required: true
+    .form-group
+      = f.submit "Save Package", class: 'btn btn-warning saveBtn'

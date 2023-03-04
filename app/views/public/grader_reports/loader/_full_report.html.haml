@@ -1,0 +1,149 @@
+.bg-dark.pt-5.pb-5.overall_grade
+  .panel.no-shadow
+    .panel-body.pb-0.pb-lg-xxl.pt-xxl
+      .container.mw-100.pl-0.pr-0
+        #overall_grade
+          .clearfix
+          .d-lg-flex.flex-wrap.d-block
+            .col.col-stretch.d-lg-flex.d-block.align-items-center
+              .grader-message
+                %div
+            .col.col-graph
+              .panel
+                .panel-body.panel-br-10.bg-white.color-dark.p-lg-5.p-4
+                  .relative
+                    #graderChart{"data-highcharts-chart" => "0"}
+                    .grader-chart-title 
+                  .fs-xs.fs-sm-sm Overall grade for:
+                  .fs-sm.fs-sm-md.fs-md-24.fw-m.word-break.lh-12
+                    = @grader_report.domain
+            .col.d-flex.align-items-center.col-stretch
+              .col-stretch.grader-stats
+                .grader-stats__item
+                  %h3.text-info
+                    %span
+                  .progress.mb-sm
+                  %p On-Page Optimization
+                .grader-stats__item
+                  %h3.text-danger
+                    %span
+                  .progress.mb-sm
+                  %p Off-Page Optimization
+                .grader-stats__item
+                  %h3.text-success
+                    %span
+                  .progress.mb-sm
+                  %p Website Performance
+          .clearfix
+.container.mw-100
+  .row.grader.ff2
+    .pt-5.mt-5.col-sm-12
+      %h2.pb-5.m-0 Grade Breakdown
+      #onpage_optimization.row.mb-5
+        .col-md-12
+          .panel.panel-grader
+            .panel-heading
+              %h2.f-s-lg On-Page Optimization
+            .panel-body.bg-white
+              .panel-section
+                %h4.mb-md.f-s-md.mt-0 Title Tag
+                .border-panel.tooltips.no-shadow
+                .spacer20
+                  #collapseExample1.panel-body.bg-white.collapse
+                    .form-group.mt-n.pb-n
+              .panel-section.bg-silver
+                %h4.mb-md
+                  Description
+                  %span.badge.tooltips{"data-original-title" => "Details", "data-trigger" => "hover"}
+                .border-panel.tooltips.no-shadow.bg-white
+                .spacer20
+              .panel-section
+                %h4.mb-md
+                  H1
+                  %span.badge.tooltips{"data-original-title" => "Details", "data-trigger" => "hover"}
+                .border-panel
+                .spacer20
+              .panel-section.bg-silver
+                %h4.mb-md
+                  Security
+                  %span.badge.tooltips{"data-original-title" => "Details", "data-trigger" => "hover"}
+                .border-panel.bg-white
+              .panel-section
+                %h4.mb-md
+                .border-panel
+            .panel-footer
+      #offpage_optimization.row.mb-5
+        .col-md-12
+          .panel.panel-grader
+            .panel-heading
+              %h2.text-darkblue Off-page Optimization
+            .panel-body.bg-white
+              .panel-section
+                .row
+                  .col-lg-7.col-md-6
+                    .data-list
+                      .data-list-header Backlinks
+                      .data-list-body
+                        .data-list--item
+
+                  .col-lg-5.col-md-6.pl-lg-5.pb-lg-0
+                    .percentage-card
+                      .percentage-card__row
+                    .spacer20
+                    .chart-card.bg-warning.text-white.br-8
+                      .d-flex.justify-content-between.align-items-center
+                    .spacer20
+                    .chart-card.bg-d-grey.text-white.br-8
+                      .d-flex.justify-content-between.align-items-center
+            .panel-footer
+              %div
+      #web_performance.mb-5
+        .panel.panel-grader
+          .panel-heading
+            %h2.text-darkblue Website Performance
+          .panel-body.bg-white
+            .panel-section
+              .d-flex.row.flex-wrap
+                .col-sm-6.col-xs-12
+                  .icon-listing.icon-listing--fh
+                    .listing-header Desktop
+                    .listing-body
+                    .listing-footer
+                      %h2
+                        %span.inlineb.f-s-60
+                .col-sm-6.mt-5.mt-md-0.col-xs-12
+                  .icon-listing.icon-listing--fh
+                    .listing-header Mobile
+                    .listing-body
+                    .listing-footer
+                      %h2
+                        %span.inlineb.f-s-60
+          .panel-footer
+      #competitors.mb-5
+        .panel.panel-grader
+          .panel-heading
+            %h2.text-darkblue Competitors
+          .panel-body.bg-white
+            .panel-section
+              .row
+                .col-lg-6
+                  %h4.mt-0.mb-lg.f-s-20 Organic Competitors
+                  .table-responsive
+                    %table.table.table--stats
+                      %thead
+                        %tr.inverse
+                          %th.bg-l-grey.col-url{:width => "100%"} Keyword
+                          %th.bg-l-grey Competitor Relevance
+                          %th.bg-l-grey Common Keywords
+                          %th.bg-l-grey Organic Keywords
+                .col-lg-6.mt-5.mt-xl-0
+                  %h4.mt-0.mb-lg.f-s-20 Paid Competitors
+                  .table-responsive
+                    %table.table.table--stats
+                      %thead
+                        %tr.inverse
+                          %th.bg-l-grey{:width => "100%"} Keyword
+                          %th.bg-l-grey Competitor Relevance
+                          %th.bg-l-grey Common Keywords
+                          %th.bg-l-grey Organic Keywords
+          .panel-footer

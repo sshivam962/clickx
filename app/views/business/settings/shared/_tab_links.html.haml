@@ -1,0 +1,13 @@
+- general_path = general_business_settings_path
+- budget_path = budget_pacing_business_settings_path
+- content_order_path = content_ordering_business_settings_path
+- mailing_list_path = email_notifications_business_settings_path
+.row
+  .col-md-12
+    %ul.nav.nav-tabs.material-nav-tabs.mb-lg
+      %li{class: get_active_class(general_path)}
+        %a{href: general_path} General
+      %li{class: get_active_class(budget_path)}
+        %a{href: budget_path} Budget Pacing
+      %li{class: get_active_class(mailing_list_path)}
+        %a{href: mailing_list_path} Email Notifications

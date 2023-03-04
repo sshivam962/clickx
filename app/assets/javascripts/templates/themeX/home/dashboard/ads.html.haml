@@ -1,0 +1,43 @@
+.panel.panel-default.m-n#adwords{ 'ng-if': 'marketing_performance_loaded && adwordsStatus' }
+  .panel-heading.cursor-move
+    %h2
+      %a.l-grey{href: "#/adwords"}
+        Ads
+        %i.fa.fa-info-circle.tooltip-text-icon{ 'title': 'Graph denoting the clicks you received on your Google Ads PPC keywords, impressions, and conversions. You can also view the full report in PPC Reports in the "Ads" section in the sidebar.' }
+    #onboarding-adwords.on-boarding
+    .panel-ctrls
+      %button.Dbutton.btn.button-icon.pull-left.mt-sm{ 'ng-click': 'pdf_export("adwords")', 'title': 'Download report', 'ng-class': "{'disable-button': export_disabled}" }
+        %span.material-icons.inverted file_download
+      %button.btn.button-icon.mt-sm.refresh-panel{ 'ng-click': 'init_adwords_page()', 'title': 'Refresh report' }
+        %span.material-icons.inverted refresh
+  .panel-body.no-padding.scroll-pane{style: 'height: 420px;'}
+    .scroll-content.p-n
+      .col-sm-12.p-n
+        .panel-body.pt-sm
+          %md-tabs{'md-border-bottom':'', 'md-dynamic-height':''}
+            %md-tab.active{label: 'Clicks', index:'0', 'md-on-select':"resizeChart('clicks_line_chart');" }
+              %md-content.mt
+                %draw-chart#clicks_line_chart{ 'on-click-chart': '', 'on-load-chart': '', 'config': 'adwords_chart_data[0]' }
+            %md-tab{label: 'Impressions', index:'1', 'md-on-select':"resizeChart('impressions_line_chart');" }
+              %md-content.mt
+                %draw-chart#impressions_line_chart{ 'on-click-chart': '', 'config': 'adwords_chart_data[1]' }
+            %md-tab{label: 'Conversions', index:'3', 'md-on-select':"resizeChart('conversions_line_chart');" }
+              %md-content.mt
+                %draw-chart#conversions_line_chart{ 'on-click-chart': '', 'config': 'adwords_chart_data[2]' }
+        .panel-footer.width100.p-sm{ 'ng-click' => "goTo('/adwords')" }
+          .col-lg-3.col-md-6.col-sm-6.col-xs-6.bdr-line.p-sm.text-center.bdr-b-blue.btn-pointer
+            %h4.mt-n.mb-n.pt-xs
+              %small.mt-n.mb-sm> Impressions
+              {{ Impressions | toLocaleString }}
+          .col-lg-3.col-md-6.col-sm-6.col-xs-6.bdr-line.p-sm.text-center.bdr-b-red.btn-pointer
+            %h4.mt-n.mb-n.pt-xs
+              %small.mt-n.mb-sm> Interactions
+              {{ Interactions | toLocaleString }}
+          .col-lg-3.col-md-6.col-sm-6.col-xs-6.bdr-line.p-sm.text-center.bdr-b-yellow.btn-pointer
+            %h4.mt-n.mb-n.pt-xs
+              %small.mt-n.mb-sm> Interaction Rate
+              {{adwords_data[6]}}
+          .col-lg-3.col-md-6.col-sm-6.col-xs-6.bdr-line.p-sm.text-center.bdr-b-green.btn-pointer
+            %h4.mt-n.mb-n.pt-xs
+              %small.mt-n.mb-sm> Conversion
+              {{ Conversion | toLocaleString }}

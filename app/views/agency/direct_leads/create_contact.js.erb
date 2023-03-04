@@ -1,0 +1,6 @@
+$('.bs-lead-contacts-create-modal-sm1').modal('hide');
+<% if @status %>
+  toastr['success']("<%=escape_javascript @message %>");
+<% else %>
+  toastr['error']("<%=escape_javascript @message %>");
+<% end %>  

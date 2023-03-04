@@ -1,0 +1,121 @@
+%div.col-md-12
+  .row.course_form
+    = f.hidden_field :resource_type
+    .form-group
+      = f.label :title
+      = f.text_field :title, required: true, class: 'form-control login', placeholder: 'Enter Title'
+    - if f.object.agency?
+      .form-group
+        = f.label :week, 'Pillar'
+        = f.number_field :week, class: 'form-control login', placeholder: 'Enter Pillar', min: "0", max: "50"
+      .form-group
+        = f.label :show_on_recording, 'Show In Recordings'
+        = f.check_box :show_on_recording, class: 'login ml-3'
+      .form-group
+        = f.label :show_on_recording, 'Enable the Challenge'
+        = f.check_box :enable_challenge, class: 'login ml-3'
+
+    .form-group
+      = f.label :thumbnail
+      .col-md-12
+        = f.fields_for :thumbnail do |t|
+          = t.file_field :file
+          = image_tag t.object.file.url || '', width: '123px', class: 'course_thumbnail_preview'
+    .form-group
+      = f.label :access_tip
+      = f.text_field :access_tip, required: true, class: 'form-control', placeholder: 'Enter Tip for getting access to this course'
+
+    - if f.object.agency? && f.object.acadamics?
+      .form-group
+        = f.label :permitted_agencies
+        &nbsp;&nbsp;&nbsp;&nbsp;(
+        = check_box_tag 'permitted_agencies', '', false
+        Select All Agency)
+        = f.select :agency_ids, options_for_select(Agency.order(:name).pluck(:name, :id), f.object.agency_ids), {include_blank: true}, {class: 'form-control', multiple: true}
+
+    - if f.object.admin?
+      .form-group
+        %label.md-no-float.md-container-ignore.font-size18 Department
+        = select_tag "department", options_for_select(User.department_collection), include_blank: 'Select Department', class: 'form-control'
+      .form-group
+        = f.label :permitted_users
+        &nbsp;&nbsp;&nbsp;&nbsp;(
+        = check_box_tag 'permitted_users', '', false
+        Select All Users)
+        = f.select :user_ids, options_for_select(User.where(role: 'admin').order(:first_name).pluck(:first_name, :id), f.object.user_ids), {include_blank: true}, {class: 'form-control', multiple: true}
+    .form-group
+      = f.submit "Save Course", class: 'btn btn-warning saveBtn'
+:javascript
+  $('#course_agency_ids').select2({
+    width: '100%',
+    multiple: true
+  });
+
+  $('#course_user_ids').select2({
+    width: '100%',
+    multiple: true
+  });
+  $('#course_thumbnail_attributes_file').change(function(event){
+    var input = $(event.currentTarget);
+    var file = input[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+       image_base64 = e.target.result;
+       $(".course_thumbnail_preview").attr("src", image_base64);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  $("#permitted_agencies").click(function(){
+    if($("#permitted_agencies").is(':checked') ){
+      $("#course_agency_ids > option").prop("selected","selected");
+      $("#course_agency_ids").trigger("change");
+    }
+    else{
+        $("#course_agency_ids > option").removeAttr("selected");
+        $("#course_agency_ids").trigger("change");
+     }
+  });
+
+  $("#permitted_users").click(function(){
+    if($("#permitted_users").is(':checked') ){
+      $("#course_user_ids > option").prop("selected","selected");
+      $("#course_user_ids").trigger("change");
+    }
+    else{
+        $("#course_user_ids > option").removeAttr("selected");
+        $("#course_user_ids").trigger("change");
+     }
+  });
+
+  $("#department").change(function(e){
+    e.preventDefault();
+    $("#course_user_ids > option").removeAttr("selected");
+    $("#course_user_ids").trigger("change");
+
+    var department =  $("#department").val();
+    if(department != "")
+    {
+      $.ajax({
+        url: "/s/courses/department_wise_user",
+        type: 'post',
+        data: {department: department},
+        dataType: 'json',
+        success:function(response){
+          if(response.status == 200){
+            if(response.data.users.length != 0){
+              var users = response.data.users
+              var selectedValues = new Array();
+              for(i=0; i<users.length; i++)
+              {
+                console.log(users[i].first_name)
+                selectedValues[i] = users[i].id;
+
+              }
+              $('#course_user_ids').val(selectedValues).change();
+            }
+          }
+        }
+      })
+    }
+  });

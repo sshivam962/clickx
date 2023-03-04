@@ -1,0 +1,19 @@
+%md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-compressed{ 'aria-label': 'Ads Campaigns' }
+  .modal-header
+    %button.close{ 'ng-click': 'close()' }
+      %span.fa.fa-times-circle-o{ 'aria-hidden': 'true' }
+    %h4.modal-title
+      CallRail Integration
+  %md-dialog-content
+    .md-dialog-content
+      %md-input-container.width100.mb-n
+        %input{ 'placeholder': 'Enter API key - CallRail', 'ng-model': 'business.callrail_id' }
+        %button.btn.btn-sm.btn-raised.btn-primary.pull-right.m-n{ 'ng-click': 'authenticateCallrail(business)', 'ng-if': '!callrail_api_key' } Authenticate
+        %button.btn.btn-sm.btn-raised.btn-primary.pull-right.m-n{ 'ng-click': 'integrateCallRail(business)', 'ng-if': 'callrail_api_key'} Fetch accounts
+      %md-input-container.width100{ 'ng-if': 'accounts.length && business.callrail_id' }
+        %label Select Account
+        %md-select{ 'ng-model': 'selectedAccount', 'ng-change': 'selectDetails("callrail_account_id", selectedAccount)' }
+          %md-option{ 'ng-repeat': 'account in accounts', 'ng-value': 'account' }
+            {{account.name}}
+  %md-dialog-actions{ 'layout': 'row' }
+    %button.btn.btn-raised.mt-md.mb-md.btn-primary{ 'ng-click': 'saveDetails()', 'ng-if': 'callrail_account_id_dup'} Save

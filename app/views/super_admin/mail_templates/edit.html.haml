@@ -1,0 +1,25 @@
+- content_for :title do
+  = "Edit #{@template.subject} | Clickx"
+.page-header
+  %h3
+    Update - #{@template.subject}
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: super_admin_mail_templates_path } Back
+
+.login-form
+  = form_for @template, url: super_admin_mail_template_path(@template) do |t|
+    .form-group
+      = t.label :subject, "Subject of Email"
+      = t.text_field :subject, class: 'form-control'
+    .form-group
+      = t.label :welcome_text, "Welcome/Greeting Text"
+      = t.cktext_area :welcome_text, class: 'form-control', ckeditor: { toolbar: 'mini' }
+    .form-group
+      = t.label :agency_note, "Agency Note"
+      %i (This text will come below greetings section, followed by agency name.)
+      = t.cktext_area :agency_note, class: 'form-control', ckeditor: { toolbar: 'mini' }
+    .form-group
+      = t.label :paragraph1, "Welcome/Greeting Text"
+      = t.cktext_area :paragraph1, class: 'form-control', ckeditor: { toolbar: 'mini' }
+    .form-group
+      = t.submit 'Update', class: 'btn btn-warning'

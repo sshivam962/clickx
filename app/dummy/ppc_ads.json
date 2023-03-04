@@ -1,0 +1,608 @@
+{
+  "status": 200,
+  "data": {
+    "this_period": {
+      "2018-03-31": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-01": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-02": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-03": {
+        "clicks": 0,
+        "impressions": 5,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-04": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-05": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-06": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-07": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-08": {
+        "clicks": 0,
+        "impressions": 1,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-09": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-10": {
+        "clicks": 0,
+        "impressions": 5,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-11": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-12": {
+        "clicks": 0,
+        "impressions": 4,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-13": {
+        "clicks": 0,
+        "impressions": 6,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-14": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-15": {
+        "clicks": 0,
+        "impressions": 1,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-16": {
+        "clicks": 0,
+        "impressions": 5,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-17": {
+        "clicks": 0,
+        "impressions": 1,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-18": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      }
+    },
+    "total_details": [
+      {
+        "ad": null,
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": null,
+        "clicks": 10,
+        "impressions": 88,
+        "cost": 13390000.0,
+        "cost_markup": 13390000,
+        "avg_cost": "1339000",
+        "ctr": 11.36,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Expanded text ad",
+        "image_url": " --",
+        "final_url": "http://clickx.io",
+        "heading1": "Clickx Comprehensive Software",
+        "heading2": "All-In-One Marketing Platform",
+        "ad_desp":
+          "Plan, Execute, \u0026 Measure. Streamline Your Marketing. Learn More Today!",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": null,
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": null,
+        "clicks": 0,
+        "impressions": 247,
+        "cost": 0.0,
+        "cost_markup": 0,
+        "avg_cost": "0",
+        "ctr": 0.0,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Expanded text ad",
+        "image_url": " --",
+        "final_url": "http://Clickx.io",
+        "heading1": "Clickx SEO Platform",
+        "heading2": "Dominate The Competition",
+        "ad_desp":
+          "The All-In-One Platform For You To Control Your Digital Marketing!",
+        "ad_grp_name": "SEO"
+      },
+      {
+        "ad": null,
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": null,
+        "clicks": 0,
+        "impressions": 21,
+        "cost": 0.0,
+        "cost_markup": 0,
+        "avg_cost": "0",
+        "ctr": 0.0,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Expanded text ad",
+        "image_url": " --",
+        "final_url": "http://Clickx.io",
+        "heading1": "Clickx Marketing Software",
+        "heading2": "Dominate The Competition",
+        "ad_desp":
+          "The All-In-One Platform For You To Control Your Digital Marketing!",
+        "ad_grp_name": "SEO"
+      },
+      {
+        "ad": null,
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": null,
+        "clicks": 2,
+        "impressions": 88,
+        "cost": 9410000.0,
+        "cost_markup": 9410000,
+        "avg_cost": "4705000",
+        "ctr": 2.27,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Expanded text ad",
+        "image_url": " --",
+        "final_url": "http://Clickx.io",
+        "heading1": "Clickx SEO Software",
+        "heading2": "Dominate The Competition",
+        "ad_desp":
+          "The All-In-One Platform For You To Control Your Digital Marketing!",
+        "ad_grp_name": "SEO"
+      },
+      {
+        "ad": null,
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": null,
+        "clicks": 0,
+        "impressions": 13,
+        "cost": 0.0,
+        "cost_markup": 0,
+        "avg_cost": "0",
+        "ctr": 0.0,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Expanded text ad",
+        "image_url": " --",
+        "final_url": "https://app.clickx.io/signup",
+        "heading1": "Generate More Traffic",
+        "heading2": "Dominate The Competition",
+        "ad_desp":
+          "All-In-One Platform To Control Your Digital Marketing. Free Trial!",
+        "ad_grp_name": "Platform"
+      },
+      {
+        "ad": null,
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": null,
+        "clicks": 7,
+        "impressions": 490,
+        "cost": 37020000.0,
+        "cost_markup": 37020000,
+        "avg_cost": "5288571",
+        "ctr": 1.43,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Expanded text ad",
+        "image_url": " --",
+        "final_url": "http://Clickx.io",
+        "heading1": "Less Hassle, Meaningful Data",
+        "heading2": "Better ROI For Your Clients",
+        "ad_desp":
+          "The All-In-One Platform For You To Control Your Digital Marketing!",
+        "ad_grp_name": "Agency Software"
+      },
+      {
+        "ad": null,
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": null,
+        "clicks": 1,
+        "impressions": 354,
+        "cost": 5940000.0,
+        "cost_markup": 5940000,
+        "avg_cost": "5940000",
+        "ctr": 0.28,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Expanded text ad",
+        "image_url": " --",
+        "final_url": "https://app.clickx.io/signup",
+        "heading1": "All-In-One Marketing Platform",
+        "heading2": "Dominate The Competition",
+        "ad_desp":
+          "Control Your Marketing - Everything Needed to Generate Traffic. Free Trial!",
+        "ad_grp_name": "Platform"
+      },
+      {
+        "ad": null,
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": null,
+        "clicks": 0,
+        "impressions": 12,
+        "cost": 0.0,
+        "cost_markup": 0,
+        "avg_cost": "0",
+        "ctr": 0.0,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Expanded text ad",
+        "image_url": " --",
+        "final_url": "http://Clickx.io",
+        "heading1": "Top Marketing Platform",
+        "heading2": "Promote Your Company",
+        "ad_desp": "Take Control Of Your Digital Marketing And See Results!",
+        "ad_grp_name": "SEO"
+      },
+      {
+        "ad": null,
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": null,
+        "clicks": 0,
+        "impressions": 53,
+        "cost": 0.0,
+        "cost_markup": 0,
+        "avg_cost": "0",
+        "ctr": 0.0,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Expanded text ad",
+        "image_url": " --",
+        "final_url": "http://Clickx.io",
+        "heading1": "Clickx Marketing Software",
+        "heading2": "Engineer Your SEO Strategy",
+        "ad_desp":
+          "The All-In-One Platform For You To Control Your Digital Marketing!",
+        "ad_grp_name": "SEO"
+      }
+    ],
+    "last_period": {
+      "2018-02-28": {
+        "clicks": 1,
+        "impressions": 11,
+        "cost": 1090000.0,
+        "avg_cost": 1090000.0,
+        "ctr": 9.09,
+        "conversions": 0.0
+      },
+      "2018-03-01": {
+        "clicks": 0,
+        "impressions": 10,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-02": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-03": {
+        "clicks": 1,
+        "impressions": 2,
+        "cost": 520000.0,
+        "avg_cost": 520000.0,
+        "ctr": 50.0,
+        "conversions": 0.0
+      },
+      "2018-03-04": {
+        "clicks": 0,
+        "impressions": 6,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-05": {
+        "clicks": 1,
+        "impressions": 6,
+        "cost": 1830000.0,
+        "avg_cost": 1830000.0,
+        "ctr": 16.67,
+        "conversions": 0.0
+      },
+      "2018-03-06": {
+        "clicks": 1,
+        "impressions": 4,
+        "cost": 1430000.0,
+        "avg_cost": 1430000.0,
+        "ctr": 25.0,
+        "conversions": 0.0
+      },
+      "2018-03-07": {
+        "clicks": 1,
+        "impressions": 7,
+        "cost": 1150000.0,
+        "avg_cost": 1150000.0,
+        "ctr": 14.29,
+        "conversions": 0.0
+      },
+      "2018-03-08": {
+        "clicks": 0,
+        "impressions": 6,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-09": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-10": {
+        "clicks": 2,
+        "impressions": 4,
+        "cost": 1260000.0,
+        "avg_cost": 630000.0,
+        "ctr": 50.0,
+        "conversions": 0.0
+      },
+      "2018-03-11": {
+        "clicks": 2,
+        "impressions": 3,
+        "cost": 840000.0,
+        "avg_cost": 420000.0,
+        "ctr": 66.67,
+        "conversions": 0.0
+      },
+      "2018-03-12": {
+        "clicks": 0,
+        "impressions": 4,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-13": {
+        "clicks": 0,
+        "impressions": 5,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-14": {
+        "clicks": 0,
+        "impressions": 6,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-15": {
+        "clicks": 0,
+        "impressions": 6,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-16": {
+        "clicks": 1,
+        "impressions": 5,
+        "cost": 760000.0,
+        "avg_cost": 760000.0,
+        "ctr": 20.0,
+        "conversions": 0.0
+      },
+      "2018-03-17": {
+        "clicks": 0,
+        "impressions": 1,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-18": {
+        "clicks": 0,
+        "impressions": 5,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-19": {
+        "clicks": 0,
+        "impressions": 4,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-20": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-21": {
+        "clicks": 2,
+        "impressions": 7,
+        "cost": 1770000.0,
+        "avg_cost": 885000.0,
+        "ctr": 28.57,
+        "conversions": 0.0
+      },
+      "2018-03-22": {
+        "clicks": 4,
+        "impressions": 10,
+        "cost": 2560000.0,
+        "avg_cost": 640000.0,
+        "ctr": 40.0,
+        "conversions": 0.0
+      },
+      "2018-03-23": {
+        "clicks": 1,
+        "impressions": 2,
+        "cost": 1590000.0,
+        "avg_cost": 1590000.0,
+        "ctr": 50.0,
+        "conversions": 0.0
+      },
+      "2018-03-24": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-25": {
+        "clicks": 0,
+        "impressions": 9,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-26": {
+        "clicks": 0,
+        "impressions": 4,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-27": {
+        "clicks": 2,
+        "impressions": 16,
+        "cost": 1460000.0,
+        "avg_cost": 730000.0,
+        "ctr": 12.5,
+        "conversions": 0.0
+      },
+      "2018-03-28": {
+        "clicks": 0,
+        "impressions": 4,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-29": {
+        "clicks": 1,
+        "impressions": 9,
+        "cost": 880000.0,
+        "avg_cost": 880000.0,
+        "ctr": 11.11,
+        "conversions": 0.0
+      },
+      "2018-03-30": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      }
+    }
+  }
+}

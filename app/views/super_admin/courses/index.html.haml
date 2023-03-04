@@ -1,0 +1,29 @@
+- content_for :title do
+  Courses | Clickx
+.header
+  .d-flex.justify-content-between.align-items-center.mb-md.flex-wrap
+    .col-auto.pr-3
+      %h1
+        #{@resource_type.titleize} Academy
+    - if @resource_type == "agency"
+      .col-auto
+        .d-flex.flex-wrap
+          .col-auto.pr-3.py-1
+            %a.btn.px-4.text-white.my-0{href:"/s/scale_program"} Manage Scale Program
+          .col-auto.pr-3.py-1
+            %a.btn.px-4.text-white.my-0{href:"/s/start_agency_courses"} Manage Start Program
+
+= render 'courses_tabs'
+
+:javascript
+  $("#courses").sortable({
+    update: function(e, ui) {
+      $.ajax({
+        url: ui.item.data('url'),
+        type: 'patch',
+        data: { position: ui.item.index() + 1 },
+        dataType: 'script',
+        success:function(response){}
+      })
+    }
+  });

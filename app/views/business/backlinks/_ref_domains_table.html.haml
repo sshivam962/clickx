@@ -1,0 +1,46 @@
+.panel.panel-default
+  .panel-body.p-n.pt-md
+    .col-md-12
+      .col-sm-12.p-n
+        .table-responsive
+          %table.table.table-hover.table-vam.table-striped.text-muted
+            %thead
+              %tr
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => 'The name of the referring domains.' }
+                    = link_to 'REFERRING DOMAINS', referring_domains_business_backlinks_path(order_by: 'Domain', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => 'Topic of the referring domain.' }
+                    = link_to 'PRIMARY TOPICAL TF', referring_domains_business_backlinks_path(order_by: 'TopicalTrustFlow_Value_0', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => 'Number of backlinks from referring domains.' }
+                    = link_to 'BACKLINKS', referring_domains_business_backlinks_path(order_by: 'ExtBackLinks', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => 'Alexa rank for the referring domains.' }
+                    = link_to 'ALEXA RANK', referring_domains_business_backlinks_path(order_by: 'AlexaRank', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => 'Trust Flow.' }
+                    = link_to 'TF', referring_domains_business_backlinks_path(order_by: 'TrustFlow', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => 'Citation Flow.' }
+                    = link_to 'CF', referring_domains_business_backlinks_path(order_by: 'CitationFlow', order: sort_order), style: 'color:#949494;', remote: true
+            %tbody
+              - @domains.each do |domain|
+                %tr
+                  %td
+                    = domain.referring_domains
+                  %td
+                    = domain.primary_topical_tf
+                  %td
+                    = domain.backlinks
+                  %td
+                    = domain.alexa_rank
+                  %td
+                    = domain.trust_flow
+                  %td
+                    = domain.citation_flow
+
+  .ui-2020
+    .row.pagination-wrapper
+      .pagination
+        = will_paginate @domains

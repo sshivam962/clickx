@@ -1,0 +1,10 @@
+- content_for :title do
+  = "Edit #{@user.name} | Clickx"
+.page-header
+  %h3
+    = @user.name
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: '/s/admin_users' } Back
+.agency-form
+  = form_for @user, url: super_admin_user_path(@user), method: :patch, remote: true do |f|
+    = render 'super_admin/users/shared/form', f: f

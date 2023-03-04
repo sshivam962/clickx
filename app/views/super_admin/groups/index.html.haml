@@ -1,0 +1,41 @@
+- content_for :title do
+  Groups | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1 Groups
+    %a.btn.pull-right.grpBtn{href:"/s/questions"} Back
+
+.locations
+  %button.add-group{type: "button", class: 'btn btn-warning'}
+    Add Group
+
+  #group-field
+    = form_with model: Group.new, url: super_admin_groups_path do |f|
+      .row.mb-md
+        .col-sm-5
+          = f.text_field :name, class: 'form-control', placeholder: 'Name'
+        .col
+          = f.submit 'Add', class: 'btn btn-warning m-n'
+
+
+
+  - @groups.each do |group|
+    = form_with model: group, url: super_admin_group_path(group) do |f|
+      .row.mb-md
+        .col-sm-5
+          = f.text_field :name, class: 'form-control'
+        .col
+          = f.submit 'Save', class: 'btn btn-warning m-n'
+          = link_to super_admin_group_path(group) ,class: 'btn btn-info', method: :delete, data: { confirm: 'Are you sure ?'} do
+            %i.glyphicon.glyphicon-trash.font-size12
+            Delete
+
+:css
+  #group-field{
+    display: none;
+  }
+
+:javascript
+  $('.add-group').on('click', function(){
+    $('#group-field').show()
+  })

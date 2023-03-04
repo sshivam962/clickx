@@ -1,0 +1,253 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Performance-Review.title-icon>
+    Clickx Reviews
+    %small Reviews
+
+.container-fluid
+  %div
+    .row
+      .col-md-12
+        %ul.nav.nav-tabs.material-nav-tabs.mb-lg
+          %li
+            %a{href: "/b/reviews"} All Locations
+          %li{role:'presentation'}
+            %a{href: "/b/locations/#{location.id}/reviews"} Latest Reviews
+          %li{role:'presentation'}
+            %a{href: "/b/locations/#{location.id}/reviews/site"} Reviews by Site
+          %li{role:'presentation', class: "active"}
+            %a{href: "/b/locations/#{location.id}/reviews/ratings"} Reviews by Rating
+
+      .col-md-12
+        .tab-content
+          .dashboard
+            .row
+              .col-md-7
+                .panel.panel-default
+                  .panel-body.no-padding{:style => "height:500px"}
+                    #chart_div
+              .col-md-5
+                .panel.panel-default
+                  .panel-heading
+                    %h2 Average Ratings
+                  .panel-body{:style => "height:450px"}
+                    .text-center
+                      .star-rating2
+                        - avg_rating.to_i.times do |star|
+                          %i.fa.gold-star{ class: "fa-star" }
+                        - (5 - avg_rating.to_i).times do |star|
+                          %i.fa.gold-star{ class: "fa-star-o" }
+                      %span.rateltext #{ avg_rating }
+                    %hr
+                    .block
+                      %h4.inlineb Total reviews (all time)
+                      %h4.fright.inlineb #{reviews_count}
+                    .block
+                      %h4.inlineb New reviews
+                      %h4.fright.inlineb #{reviews_growth["number"] }
+                    .block
+                      %h4.inlineb Growth
+                      %h4.fright.inlineb.rat-per #{'%.2f' % reviews_growth["percent"] }
+                    %hr
+                    -# %h4.inlineb Top Ratings
+                    -# .block
+                    -#   .input-group
+                    -#     %span.input-group-btn.pl-n
+                    -#       %a.btn.btn-inverse.btn-raised{'ng-href' => "/locations/{{location.id}}/top_reviews.pdf?limit={{limit}}", target: '_blank'}
+                    -#         %i.fa.fa-file-pdf-o.pr
+                    -#         Export as PDF
+                    -#     %input.form-control{:placeholder => "Reviews Limit ", :style => "margin-top: 7px !important;", :type => "text", "ng-model" => "limit"}
+              .col-md-12
+                .tab-container
+                  %ul.nav.panel-warning.nav-tabs{value: location.id, :style => "background:#515965;"}
+                    %li.active
+                      %a{"data-toggle" => "tab", 'data-target': "#rating-five", id: "5-star", class: "star-review-class" }
+                        .star-rating.p-n.m-n.fsize16
+                          %i.fa.fa-star
+                          %i.fa.fa-star
+                          %i.fa.fa-star
+                          %i.fa.fa-star
+                          %i.fa.fa-star
+                    %li
+                      %a{"data-toggle" => "tab", 'data-target': "#rating-four", id: "4-star", class: "star-review-class"}
+                        .star-rating.p-n.m-n.fsize16
+                          %i.fa.fa-star
+                          %i.fa.fa-star
+                          %i.fa.fa-star
+                          %i.fa.fa-star
+                          %i.fa.fa-star-o
+                    %li
+                      %a{"data-toggle" => "tab", 'data-target': "#rating-three",id: "3-star", class: "star-review-class" }
+                        .star-rating.p-n.m-n.fsize16
+                          %i.fa.fa-star
+                          %i.fa.fa-star
+                          %i.fa.fa-star
+                          %i.fa.fa-star-o
+                          %i.fa.fa-star-o
+                    %li
+                      %a{"data-toggle" => "tab", 'data-target': "#rating-two", id: "2-star", class: "star-review-class"}
+                        .star-rating.p-n.m-n.fsize16
+                          %i.fa.fa-star
+                          %i.fa.fa-star
+                          %i.fa.fa-star-o
+                          %i.fa.fa-star-o
+                          %i.fa.fa-star-o
+                    %li
+                      %a{"data-toggle" => "tab", 'data-target': "#rating-one", id: "1-star", class: "star-review-class"}
+                        .star-rating.p-n.m-n.fsize16
+                          %i.fa.fa-star
+                          %i.fa.fa-star-o
+                          %i.fa.fa-star-o
+                          %i.fa.fa-star-o
+                          %i.fa.fa-star-o
+                    %li
+                      %a{"data-toggle" => "tab", 'data-target': "#rating-zero", id: "0-star", class: "star-review-class"}
+                        .star-rating.p-n.m-n.fsize16
+                          %i.fa.fa-star-o
+                          %i.fa.fa-star-o
+                          %i.fa.fa-star-o
+                          %i.fa.fa-star-o
+                          %i.fa.fa-star-o
+                  .tab-content#star-review-content
+                    = render "stared_reviews", reviews: reviews
+
+:javascript
+
+  $(document).ready(function(){
+
+    $(".star-review-class").click(function(){
+      var location_id = $(this).parent().parent().attr('value');
+      var html_id = $(this).attr("id")
+      var star_number = html_id.replace(/\D+/,"");
+      $.ajax({
+        type: 'GET',
+        url: "/b/locations/" + location_id + "/reviews/reviews_with_star",
+        data: new URLSearchParams({'star_count': star_number}).toString()
+      });
+    });
+
+    var colors = [
+      '#c0392b',
+      '#e74c3c',
+      '#d35400',
+      '#d35400',
+      '#f39c12',
+      '#f1c40f'
+    ];
+
+    var ratings_data = #{reviews_star_count.values}
+
+    console.log(ratings_data)
+    var ratings_bar_chart_data = {
+        chart: {
+          type: 'bar',
+          marginTop: 50
+        },
+        title: {
+          text: 'Reviews Chart'
+        },
+        subtitle: {
+          text: ''
+        },
+        xAxis: {
+          categories: [
+            '5stars',
+            '4stars',
+            '3stars',
+            '2stars',
+            '1stars',
+            '0stars'
+          ],
+          title: {
+            text: null
+          },
+          labels: {
+            useHTML: true,
+            style: {
+              fontSize: '21px'
+            },
+            distance: 15,
+            formatter: function() {
+              return {
+                '5stars':
+                  '<i class="fa fa-star gold-star"></i><i class="fa fa-star gold-star"></i><i class="fa fa-star gold-star"></i><i class="fa fa-star gold-star"></i><i class="fa fa-star gold-star"></i>',
+                '4stars':
+                  '<i class="fa fa-star gold-star"></i><i class="fa fa-star gold-star"></i><i class="fa fa-star gold-star"></i><i class="fa fa-star gold-star"></i><i class="fa fa-star-o gold-star"></i>',
+                '3stars':
+                  '<i class="fa fa-star gold-star"></i><i class="fa fa-star gold-star"></i><i class="fa fa-star gold-star"></i><i class="fa fa-star-o gold-star"></i><i class="fa fa-star-o gold-star"></i>',
+                '2stars':
+                  '<i class="fa fa-star gold-star"></i><i class="fa fa-star gold-star"></i><i class="fa fa-star-o gold-star"></i><i class="fa fa-star-o gold-star"></i><i class="fa fa-star-o gold-star"></i>',
+                '1stars':
+                  '<i class="fa fa-star gold-star"></i><i class="fa fa-star-o gold-star"></i><i class="fa fa-star-o gold-star"></i><i class="fa fa-star-o gold-star"></i><i class="fa fa-star-o gold-star"></i>',
+                '0stars':
+                  '<i class="fa fa-star-o gold-star"></i><i class="fa fa-star-o gold-star"></i><i class="fa fa-star-o gold-star"></i><i class="fa fa-star-o gold-star"></i><i class="fa fa-star-o gold-star"></i>'
+              }[this.value];
+            }
+          }
+        },
+        yAxis: {
+          min: 0,
+          title: {
+            text: null
+          },
+          labels: {
+            overflow: 'justify'
+          }
+        },
+        tooltip: {
+          enabled: false
+        },
+
+        plotOptions: {
+          bar: {
+            dataLabels: {
+              enabled: true
+            }
+          },
+          series: {
+            borderRadius: 3,
+            pointWidth: 40
+          }
+        },
+        legend: {
+          enabled: false
+        },
+        credits: {
+          enabled: false
+        },
+        series: [
+          {
+            data: [[5, ratings_data[0]]],
+            name: '5stars',
+            color: colors[0]
+          },
+          {
+            data: [[4, ratings_data[1]]],
+            name: '4stars',
+            color: colors[1]
+          },
+          {
+            data: [[3, ratings_data[2]]],
+            name: '3stars',
+            color: colors[2]
+          },
+          {
+            data: [[2, ratings_data[3]]],
+            name: '2stars',
+            color: colors[3]
+          },
+          {
+            data: [[1, ratings_data[4]]],
+            name: '1stars',
+            color: colors[4]
+          },
+          {
+            data: [[0, ratings_data[5]]],
+            name: '0stars',
+            color: colors[5]
+          }
+        ]
+      };
+
+    $('#chart_div').highcharts(ratings_bar_chart_data);
+  });

@@ -1,0 +1,15 @@
+%table.table.table-bordered.users.reports
+  %thead
+    %th Name
+    %th Email
+    %th Phone
+    %th.text-center Admin Action
+  %tbody
+    - users.each do |user|
+      %tr
+        %td= user.first_name
+        %td= user.email
+        %td= user.phone
+        %td.center
+          %span
+            = link_to 'Delete', remove_user_super_admin_contractors_path(id:user.id), class: 'btn btn-danger m-0 btn--xs px-4', method: :delete, data: { confirm: "Are you sure you'd like to delete this user" }

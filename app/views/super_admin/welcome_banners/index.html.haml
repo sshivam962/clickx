@@ -1,0 +1,102 @@
+- content_for :title do
+  Welcome Banner | Clickx
+.page-header
+  %h3
+    Welcome Banner
+= render 'super_admin/welcome_banners/welcome_bar'
+.bg-white.px-md-5.py-5.p-3.rounded.mb-4.shadow
+  .agency-form
+    = simple_form_for @welcome_banner,url: super_admin_welcome_banners_path, method: :post do |f|
+      .d-flex.align-items-center
+        .col.pr-4
+          %h4 Enable Welcome Banner
+        .col
+          .togglebutton.toggle-info
+            %label.word-break.fw-n
+              = f.check_box :active
+              %span.toggle
+        .col
+          - if @welcome_banner.expired?
+            %span.red Expired
+      .welcome-banner-settings
+        %label.mt Body
+        .input-wrapper
+          = f.input_field :body_text, class: 'input-wrapper-input', as: :string, required: true, placeholder: 'Next Coaching Call: Tuesday'
+        %label.mt Call to Action
+        .d-md-flex.mb-4.flex-wrap.mx-n3
+          .w-md-50.px-3
+            .input-wrapper
+              = f.input_field :call_to_action, class: 'input-wrapper-input', as: :string, required: true, placeholder: 'Call to Action Text'
+          .w-md-50.px-3
+            .input-wrapper
+              = f.input_field :body_link, class: 'input-wrapper-input', as: :string, required: true, placeholder: 'Call to Action Link'
+        %label.mt Welcome Bar Expiry
+        .d-md-flex.mb-4.flex-wrap.mx-n3
+          .w-md-50.px-3
+            .input-wrapper
+              = f.input_field :expiry_date_time, class: 'input-wrapper-input input-time-picker', id: 'datetimepicker', as: :string, required: true, placeholder: 'Welcome Bar Expiry Date And Time'
+        .mt-0
+          %label.mt.mb-3 Theme
+          .d-flex.align-items-center.mb-3
+            .col.mr-3
+              .input-wrapper.input-color-picker
+                = f.input_field :body_bg_color, class: 'input-wrapper-input', as: :string, required: true, placeholder: "#ff9800"
+            .col 
+              Background
+
+          .d-flex.align-items-center.mb-3
+            .col.mr-3
+              .input-wrapper.input-color-picker
+                = f.input_field :body_text_color, class: 'input-wrapper-input', as: :string, required: true, placeholder: "#ff9800"  
+            .col 
+              Text Color
+
+          .d-flex.align-items-center.mb-3
+            .col.mr-3
+              .input-wrapper.input-color-picker
+                = f.input_field :body_link_color, class: 'input-wrapper-input', as: :string, required: true, placeholder: "#000" 
+            .col
+              Link Color
+          
+      .pt-5
+        = submit_tag 'Save', class: 'btn btn-raised btn-primary btn-lg'
+:javascript
+  $('#welcome_banner_body_bg_color').minicolors({
+    defaultValue: $('#welcome_banner_body_bg_color').val(),
+    swatches: ['#000', '#fff', '#f8af17', '#4C4E60', '#01A7F1', '#BAD531', '#EF5023'],
+    change: function(value) {
+      $('#welcome-bar').css('background-color', value);
+    },
+  });
+
+  $('#welcome_banner_body_text_color').minicolors({
+    defaultValue: $('#welcome_banner_body_text_color').val(),
+    swatches: ['#000', '#fff', '#f8af17', '#4C4E60', '#01A7F1', '#BAD531', '#EF5023'],
+    change: function(value) {
+      $('#welcome-bar').css('color', value);
+    },
+  });
+
+  $('#welcome_banner_body_link_color').minicolors({
+    defaultValue: $('#welcome_banner_body_link_color').val(),
+    swatches: ['#000', '#fff', '#f8af17', '#4C4E60', '#01A7F1', '#BAD531', '#EF5023'],
+    change: function(value) {
+      $('#welcome-bar a').css('color', value);
+    },
+  });
+  $(function() {
+    $('input#datetimepicker').daterangepicker({
+      timePicker: true,
+      singleDatePicker: true,
+      autoUpdateInput: false,
+      timePickerIncrement: 15,
+      locale: {
+        cancelLabel: 'Clear',
+        format: 'M/DD/Y hh:mm A'
+      }
+    });
+    $('input#datetimepicker').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('M/DD/Y hh:mm A'));
+    });
+  });
+  

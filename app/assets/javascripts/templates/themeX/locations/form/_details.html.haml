@@ -1,0 +1,122 @@
+.panel.panel-default{ 'ng-init': 'show_details = true' }
+  .panel-heading.pointer{ 'ng-click': 'show_details = !show_details;' }
+    Details
+    %span.pull-right
+      %i.fa{ 'ng-class': ' show_details ? "fa-chevron-down" : "fa-chevron-right" ' }
+  %span
+    .progress.form-progress
+      .progress-bar.progress-bar-success{ 'aria-valuemax': '100', 'aria-valuemin': '0',
+      'aria-valuenow': '{{ progress_width(location) }}', 'role': 'progressbar', 'style': 'width:{{ progress_width(location) }}%' }
+  .panel-body.Details{ 'ng-show': 'show_details' }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Mobile Phone
+        .col-md-12
+          %input#field_mobile.form-control{ :name => "field_mobile", "ng-model": "location.mobile_phone", "data-parsley-trigger": "mouseup input focusin focusout keydown keyup",
+            "data-parsley-type": "digits", "data-parsley-debounce":"500" }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Number of Employees
+        .col-md-12
+          %input#field_number_of_employees.form-control{ :name => "field_number_of_employees", "ng-model": "location.number_of_users",
+            "data-parsley-trigger": "mouseup input focusin focusout keydown keyup", "data-parsley-type": "digits", "data-parsley-debounce":"500" }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Toll Free
+        .col-md-12
+          %input#field_toll_free.form-control{ :name => "field_toll_free", "ng-model": "location.toll_free", "data-parsley-trigger": "mouseup input focusin focusout keydown keyup",
+            "data-parsley-type": "digits", "data-parsley-debounce":"500" }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Year Established
+        .col-md-12
+          %input#field_year.form-control{ :name => "field_year", "ng-model": "location.year_established", "data-parsley-trigger": "mouseup input focusin focusout keydown keyup",
+            "data-parsley-type": "digits", "data-parsley-debounce":"500", "data-parsley-max": "{{ max_year }}", "data-parsley-maxlength":"4", "data-parsley-minlength":"4" }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Enquiry Email
+        .col-md-12
+          %input#field_email.form-control{:name => "field_email", "ng-model": "location.enquiry_email", "data-parsley-trigger": "mouseup input focusin focusout keydown keyup",
+            "data-parsley-type": "email", "data-parsley-debounce":"500" }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Fax
+        .col-md-12
+          %input#field_fax.form-control{ :name => "field_fax", "ng-model": "location.fax", "data-parsley-trigger": "mouseup input focusin focusout keydown keyup",
+            "data-parsley-type": "number", "data-parsley-debounce":"500" }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Categories
+        .col-md-12
+          %md-chips{ "md-autocomplete-snap": "", "md-require-match": "true", "ng-model": "location.categories" }
+            %md-autocomplete{ "md-item-text": "item", "md-items": "item in category_chips | filter:searchText", "md-search-text": "searchText",
+              "md-selected-item": "selectedItem", "placeholder": "" }
+              %span{ "md-highlight-text": "searchText" } {{item}}
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Payment Methods
+        .col-md-12
+          %md-chips{ "md-autocomplete-snap": "", "md-require-match": "true", "ng-model": "location.payment_methods" }
+            %md-autocomplete{ "md-item-text": "item", "md-items": "item in payment_chips | filter:searchText", "md-search-text": "searchText",
+              "md-selected-item": "selectedItem", "placeholder": "" }
+              %span{ "md-highlight-text": "searchText" } {{item}}
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Products Services
+        .col-md-12
+          %input#field_products.form-control.mask{ :name => "field_products", "ng-model": "location.products_services", :type => "text", "ng-list": ""}
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Brands
+        .col-md-12
+          %input#field_brands.form-control.mask{ :name => "field_brands", "ng-model": "location.brands", :type => "text"}
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-3.control-label Languages
+        .col-md-12
+          %input#field_languages.form-control.mask{ :name => "field_languages", "ng-model": "location.languages", :type => "text", "ng-list": ""}
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Professional Associations
+        .col-md-12
+          %input#field_associations.form-control.mask{ :name => "field_associations", "ng-model": "location.professional_associations", :type => "text"}
+    .col-md-12
+      .col-md-4
+        %md-checkbox{"aria-label" => "Checkbox 1", "ng-model": "location.operational_hours", "ng-change": "!location.operational_hours"}
+          Business Hours
+      .col-md-4{ "ng-show": "location.working_hours[0]" }
+        %a.btn.btn-lg.btn-primary.btn-raised.btn-label{ "ng-click": "sameTimeForAllDays()", "ng-show": "showApplyAllLink" }
+          %i.material-icons.white swap_vert
+          Apply To All
+          .ripple-container
+    .col-md-12{ "ng-show": "location.operational_hours", "ng-repeat": "label in working_days track by $index" }
+      .col-md-6.form-group
+        .col-md-4
+          %label {{ label }}
+        .col-md-8
+          %md-select{ "aria-label": "$index", "ng-model": "location.working_hours[$index].status", "ng-change": "workingDayChanges(location.working_hours[$index].status,$index)",
+            "ng-init": "location.working_hours[$index].status='Open'", "style": "width: 100%; margin: 0px;" }
+            %md-option{ "ng-repeat": "option in ['open','24 hour','closed']", "ng-value": "option" } {{ option }}
+      .form-group.col-md-3
+        .col-md-12
+          .input-group
+            .input-group-addon
+              %i.material-icons query_builder
+            %input.form-control{:name => "from", :type => "text","ng-model"=> "location.working_hours[$index].from",
+              "ng-blur"=>"workingDayChanges(location.working_hours[$index].status, $index)","ng-keyup"=>"workingDayChanges(location.working_hours[$index].status, $index)",
+              "value"=>"{{location.working_hours[$index].from}}","dataIndex"=> "{{$index}}","maxlength"=>11, "ng-disabled" => "location.working_hours[$index].status != 'open'", "mask-2" => ""}
+        %span.material-input
+      .form-group.col-md-3
+        .col-md-12
+          .input-group
+            .input-group-addon
+              %i.material-icons query_builder
+            %input.form-control{:name => "to", :type => "text ","ng-model"=> "location.working_hours[$index].to",
+              "ng-blur"=>"workingDayChanges(location.working_hours[$index].status, $index)","ng-keyup"=>"workingDayChanges(location.working_hours[$index].status, $index)",
+              "value"=>"{{location.working_hours[$index].to}}", "dataIndex"=> "{{$index}}","maxlength"=>11, "ng-disabled" => "location.working_hours[$index].status != 'open'", "mask-2" => ""}
+        %span.material-input
+    .col-md-12.m-t-40
+      %span.text-gray
+        %button.btn.btn-success.btn-raised.btn-label.btn-lg{ "type": "submit" }
+          = succeed "Save" do
+            .ripple-container

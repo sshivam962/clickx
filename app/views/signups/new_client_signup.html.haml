@@ -1,0 +1,222 @@
+.container
+  = link_to 'http://www.clickx.io', target: '_blank', class: 'login-logo' do
+    = image_tag "logo-dark.svg"
+  .row
+    .col-md-8.col-md-offset-2
+      = form_tag signup_path, method: :post, class: 'form-vertical cardy clickx-parsley',"data-parsley-validate":"" do
+        .panel.tranin.panel-midnightblue{"data-widget": {draggable: false}}
+          .panel-heading
+            - if @is_trial
+              %h2.regtitle Start your #{@plan.trial_period_days} day Free Trial
+            - else
+              %h2.regtitle Start your #{@plan.name} Plan
+          .panel-body
+            %h2.col-sm-12.regsubt Create Your Clickx Profile
+            .row
+              .col-xs-12
+                .form-group.m-n.col-sm-6
+                  %label.col-md-12.control-label{for: 'user_first_name'}
+                    .pull-left First Name
+                    .red *
+                  .col-md-12
+                    = text_field_tag 'user[first_name]', '', required: true, class: 'form-control'
+                .form-group.m-n.col-sm-6
+                  %label.col-md-12.control-label{for: 'user_last_name'}
+                    .pull-left Last Name
+                    .red *
+                  .col-md-12
+                    = text_field_tag 'user[last_name]', '', required: true, class: 'form-control'
+            .row
+              .col-xs-12
+                .form-group.m-n.col-sm-6
+                  %label.col-md-12.control-label{for: "user_email"}
+                    .pull-left Email
+                    .red *
+                  .col-md-12
+                    = email_field_tag 'user[email]', '', required: true, class: 'form-control'
+                .form-group.m-n.col-sm-6
+                  %label.col-md-12.control-label{for: "business_name"}
+                    .pull-left Company/Organization
+                    .red *
+                  .col-md-12
+                    = text_field_tag 'business[name]', '', required: true, class: 'form-control'
+            .row
+              .col-xs-12
+                .form-group.m-n.col-sm-6
+                  %label.col-md-12.control-label{for: 'user_phone'}
+                    .pull-left Phone
+                    .red *
+                  .col-md-12
+                    = phone_field_tag 'user[phone]', '', required: true, class: 'form-control', placeholder: "+1 555 555 1234"
+                .form-group.m-n.col-sm-6
+                  %label.col-md-12.control-label{for: "business_domain"}
+                    .pull-left Domain
+                    .red *
+                  .col-md-12
+                    = text_field_tag 'business[domain]', '', required: true, class: 'form-control'
+            .row
+              .col-xs-12
+                .form-group.m-n.col-sm-6
+                  %label.col-md-12.control-label{for: "business_target_city"}
+                    .pull-left Target City
+                    .red *
+                  .col-md-12
+                    = text_field_tag 'business[target_city]', '', required: true, class: 'form-control'
+
+          .panel-footer
+        .panel.panel-default{"data-widget": {draggable: false}}
+          .panel-body
+            %h2.col-sm-12.mb-lg.regsubt Enter Your Payment Info
+            .row
+              .col-xs-12
+                .form-group.col-sm-12
+                  %label.col-md-3.control-label{for: 'number'}
+                    .pull-left Card Number
+                    .red *
+                  .col-md-9
+                    = text_field_tag 'number', '', placeholder: 'Card Number', required: true, class: 'form-control'
+                .form-group.col-sm-12
+                  %label.col-md-3.control-label{for: 'expiry'}
+                    .pull-left Expiration Date
+                    .red *
+                  .col-md-9
+                    = text_field_tag 'expiry', '', placeholder: 'MM/YY', required: true, class: 'form-control'
+            .row
+              .col-xs-12
+                .form-group.col-sm-12
+                  %label.col-md-3.control-label{for: 'cvc'}
+                    .pull-left CVC
+                    .red *
+                  .col-md-9
+                    = text_field_tag 'cvc', '', placeholder: 'CVC', required: true, class: 'form-control'
+          .panel-footer
+        .panel.tranin.panel-default{"data-widget": {draggable: false}}
+          .panel-body
+            %h2.col-sm-12.mb-lg.regsubt Billing Address
+            .row
+              .col-xs-12
+                .form-group.m-n.col-sm-6
+                  %label.col-md-12.control-label{for: 'billing_first_name'}
+                    .pull-left First Name
+                    .red *
+                  .col-md-12
+                    = text_field_tag 'billing[first_name]', '', required: true, class: 'form-control'
+                .form-group.m-n.col-sm-6
+                  %label.col-md-12.control-label{for: 'billing_last_name'}
+                    .pull-left Last Name
+                    .red *
+                  .col-md-12
+                    = text_field_tag 'billing[last_name]', '', required: true, class: 'form-control'
+            .row
+              .col-xs-12
+                .form-group.m-n.col-sm-6
+                  %label.col-md-12.control-label{for: 'billing_address'}
+                    .pull-left Address 1
+                    .red *
+                  .col-md-12
+                    = text_field_tag 'billing[address]', '', required: true, class: 'form-control'
+                .form-group.m-n.col-sm-6
+                  %label.col-md-12.control-label{for: 'billing_address_2'} Address 2
+                  .col-md-12
+                    = text_field_tag 'billing[address_2]', '', class: 'form-control'
+            .row
+              .col-xs-12
+                .form-group.m-n.col-sm-6
+                  %label.col-md-12.control-label{for: 'billing_city'}
+                    .pull-left City
+                    .red *
+                  .col-md-12
+                    = text_field_tag 'billing[city]', '', required: true, class: 'form-control'
+                .form-group.m-n.col-sm-6
+                  %label.col-md-12.control-label{for: 'billing_state'}
+                    .pull-left State
+                    .red *
+                  .col-md-12
+                    %select.select.form-control{placeholder: "This is a placeholder", name: 'billing[state]',required:""}
+                      %option{value:""} Select State
+                      - CS.states(:us).each do |i, v|
+                        %option= v
+            .row
+              .col-xs-12
+                .form-group.m-n.col-sm-6
+                  %label.col-md-12.control-label{for: 'billing_zip'}
+                    .pull-left Zip
+                    .red *
+                  .col-md-12
+                    = text_field_tag 'billing[zip]', '', required: true, class: 'form-control'
+                .form-group.m-n.col-sm-6
+                  %label.col-md-12.control-label{for: 'billing_country'}
+                    .pull-left Country
+                    .red *
+                  .col-md-12
+                    %select.select.form-control{placeholder: "This is a placeholder", name: 'billing[country]',required:""}
+                      %option{value:""} Select Country
+                      %option United States
+          .panel-footer
+        .panel.panel-default{"data-widget": {draggable: false}}
+          .panel-body
+            .form-group.m-n.col-sm-12
+              .checkbox.checkbox-inline.checkbox-primary
+                %label
+                  %input#tnc{checked: "checked", name: "checkboxs1", type: "checkbox", disabled: true, readonly: true}
+                  \&#160;&#160;I accept the
+                  %a{href: "http://www.clickx.io/terms/", target: "_blank"} User Agreement
+        .panel.panel-default{"data-widget": {draggable: false}}
+          .panel-body
+            %h2.col-sm-12.regsubt Purchase Summary
+            = hidden_field_tag 'plan', @plan.plan_id , required: true, class: 'form-control'
+            = hidden_field_tag 'trial_plan', @is_trial, required: true
+            = hidden_field_tag 'plan_price', @plan.amount, required: true
+            %h1.col-sm-12.regsumtitl= @plan.name
+            - content_for :coupon_code do
+              .coupon_details
+                %p#coupon_applied.green.col-sm-12.mb-xs.regpara
+                %p#coupon_offer.green.col-sm-12.mb-lg.regpara
+                .form-group.m-n.col-sm-6
+                  %label.control-label{for: 'coupon_code'} Promo Code (if applicable)
+                  %br
+                  = text_field_tag 'coupon_code', '', required: false, class: 'form-control pull-left w-200'
+                  %input#apply_coupon.btn.btn-default.btn-raised.m-n.pull-right{type: "button", value: "Apply"}
+            - @plan_price = "#{'%.02f' % (@plan.amount/100.00)}"
+            / - @onboarding_price = "#{'%.02f' % 0}"
+            - if @is_trial
+              - @trial_price = "#{'%.02f' % 0}"
+              %h2.col-sm-12.regamout Today's Charge: $#{@trial_price}
+              %p.col-sm-12.mb-lg.regpara
+                After #{@plan.trial_period_days} days #{@plan.price_text}
+                %br
+                / Required Onboarding: $#{@onboarding_price}
+                = yield :coupon_code
+                .col-sm-12
+                  %input.btn.btn-inverse.btn-raised.pull-left{type: "submit", value: "Start My Free #{@plan.trial_period_days}-Day Trial"}
+            - else
+              %h2.col-sm-12.regamout
+                Today's Charge: #{@plan.price_text}
+              %p.col-sm-12.mb-lg.regpara
+                / Required Onboarding: $#{@onboarding_price}
+                = yield :coupon_code
+                .col-sm-12
+                  %input.btn.btn-inverse.btn-raised.pull-left{type: "submit", value: "Apply Now"}
+
+:javascript
+  $('#apply_coupon').on('click', function(){
+    var trial_plan = $("input[name='trial_plan'").val()
+    var plan_price = $("input[name='plan_price'").val()
+    var coupon_code = $("input[name='coupon_code']").val()
+    var onboarding = $("input[name='onboarding']").val()
+    $.ajax({
+      url: '/check_coupon',
+      method: "GET",
+      data: {
+        coupon_code: coupon_code,
+        trial_plan: trial_plan,
+        plan_price: plan_price,
+        onboarding: onboarding
+      },
+      headers: {"X-Requested-With": "XMLHttpRequest"},
+      success: function(resp){
+        $('#coupon_applied').text(resp.message)
+        $('#coupon_offer').text(resp.offer_msg)
+      }
+    });
+  })

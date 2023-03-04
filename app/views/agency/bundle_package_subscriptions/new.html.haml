@@ -1,0 +1,38 @@
+- content_for :title do
+  Checkout
+= render 'stripe/assets'
+.page-heading
+  %h1 Checkout - Package Detail
+- steps = checkout_steps(current_agency, @package)
+= hidden_field_tag :base_route, '/a/package_subscriptions'
+= hidden_field_tag :package_category, 'bundle'
+.container.container--sm.container--contained
+  .checkout-stages.pt-xl
+    - steps.each_with_index do |step, index|
+      .checkout_steps{id: "step_#{step}_content", class: "#{'hidden' unless step.eql?('plan')}"}
+        = render "agency/bundle_package_subscriptions/shared/step_#{step}", next_step: (steps[index + 1] || 'finish'), steps: steps
+
+:javascript
+  $(document).on('change', '.bundle_payment_checks',function() {
+    amount = parseFloat($('#basic_total').val(), 10);
+    eo_val = $('#expedited_onboarding_fees').val();
+    wg_val = $('#white_glove_fees').val();
+
+    if($('#expedited_onboarding').is(":checked") && $.isNumeric(eo_val)){
+      eo_fees = parseFloat(eo_val, 10)
+    }else{
+      eo_fees = 0
+    }
+    if($('#white_glove_service').is(":checked")){
+      wg_fees = 500.00
+      wg_fees = parseFloat(wg_val, 10)
+    }else{
+      wg_fees = 0
+    }
+    addon_amount = 0
+    $('.addon_plans:checkbox:checked').each(function() {
+      addon_amount = addon_amount + parseFloat($(this).data('amount'))
+    });
+    total = amount + eo_fees + wg_fees + addon_amount
+    $(".total_amount_due").text('$' + parseFloat(total, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+  });

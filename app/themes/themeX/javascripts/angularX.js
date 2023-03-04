@@ -1,0 +1,12 @@
+//= require angular/angular.min
+//= require angular-animate/angular-animate.min
+//= require angular-route/angular-route.min
+//= require angular-resource/angular-resource.min
+//= require angular-aria/angular-aria.min
+//= require angular-messages/angular-messages.min
+//= require angular-material/angular-material.min
+//= require md-date-range-picker/dist/md-date-range-picker.min
+//= require card/dist/card
+//= require angular-card/src/card
+//= require angular-bind-html-compile/angular-bind-html-compile
+//= require angular-drag-and-drop-lists.min

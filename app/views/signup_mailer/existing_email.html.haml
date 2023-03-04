@@ -1,0 +1,23 @@
+%tr
+  %td{:align => "left", :style => ""}
+    Hi there!
+
+%tr
+  %td{:align => "left", :style => "padding:10px 0 3px"}
+    It looks like you already have a Clickx account for #{@email}
+
+%tr
+  %td{:align => "left", :style => "padding:10px 0 3px"}
+    %b
+      %a{href: new_user_session_url} Login
+
+%tr
+  %td{:align => "left", :style => "padding:10px 0 3px"}
+    If you forgot your password,
+    %a{href: new_user_password_url} request a new password!
+
+%tr
+  %td{:align => "left", :style => "padding:10px 0 3px"}
+    Thanks,
+    %br
+    #{@agency.name} Team

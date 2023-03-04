@@ -1,0 +1,2 @@
+$('#payment_links_list').html("<%= escape_javascript render( partial: 'agency/payment_links/shared/list', locals: { payment_links: @payment_links }) %>");
+$('html, body').animate({ scrollTop: 0 }, 'slow');

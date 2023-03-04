@@ -1,0 +1,2 @@
+$("#ul-<%= @c_key%>-<%= @f_key%>").append("<%= escape_javascript render( partial: 'super_admin/lead/strategy_funnels/funnel_item', locals: { funnel: @funnel }) %>");
+$('.funnel-input').val('')

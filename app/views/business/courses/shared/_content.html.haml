@@ -1,0 +1,33 @@
+= hidden_field_tag :course_id, course.id
+- if next_chapter
+  = hidden_field_tag :chapter_id, next_chapter.id
+.col-lg-3.col-md-4.col-sm-5.pl-xl.pt-lg.bdr-r.vertical-a-top
+  - progress = course.progress(current_user)
+  %span.font-12.mb-sm
+    Progress (#{progress}%)
+  .progress.progress-striped.active.m-n
+    .progress-bar.progress-bar-info{ 'style': "width: #{progress}%"}
+  %hr
+  %ul.timeline
+    - course.chapters.each do |chapter|
+      - if chapter_watched?(current_user, chapter)
+        %li.timeline-orange{id: "chapter_li_#{chapter.id}"}
+          %a.load_chapter{href: 'javascript:void(0)', data: {chapter: chapter.id, course: course.id}}
+            .timeline-icon
+              %i.material-icons{style: 'margin-top: -1px;'} ondemand_video
+            .timeline-body
+              .timeline-header.video-training
+                %span.author.mt-xs
+                  = chapter.title
+      - else
+        %li{id: "chapter_li_#{chapter.id}"}
+          %a.load_chapter{href: 'javascript:void(0)', data: {chapter: chapter.id, course: course.id}}
+            .timeline-icon
+              %i.material-icons{style: 'margin-top: -1px;'} ondemand_video
+            .timeline-body
+              .timeline-header.video-training
+                %span.author.mt-xs
+                  = chapter.title
+
+.col-sm-7.col-md-8.col-lg-9.p-xxl.vertical-a-top.chapter_content
+  = render 'business/courses/shared/chapter_video', chapter: next_chapter || current_chapter

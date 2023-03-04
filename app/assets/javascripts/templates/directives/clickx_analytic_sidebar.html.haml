@@ -1,0 +1,13 @@
+.lt-campaign-info
+  %h4 {{trackerDetails.title}}
+  .well
+    {{trackerDetails.description}}
+  %hr/
+  %a{:href => "/#/{{b_id}}/live/tracking/{{t_id}}/activities"} Tracker Activities
+  %hr/
+  .lt-analytic-section.rp-analytic-section
+    %ul.analytic-link-list
+      %li{"ng-repeat" => "link in defaultLinks"}
+        %a{:href => "{{ link.linkHref }}"}
+          %span{:class => "{{link.linkIcon}}"}
+          {{link.linkTitle}}

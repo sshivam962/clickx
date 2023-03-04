@@ -1,0 +1,38 @@
+= hidden_field_tag :stripe_publishable_key, ENV['STRIPE_PUBLISHABLE_KEY']
+= hidden_field_tag :base_route, '/payment_links/create_card'
+= hidden_field_tag :current_page, 'payment_link'
+
+%header.payment-header
+  .container-fluid
+    .row
+      .col-sm-3
+        %a{href: "https://www.clickx.io/"}
+          = image_tag 'logo.png', height: '45px', class: 'payment-logo'
+      .col-sm-9
+        #social.payment-social
+          %ul
+            %li
+              %a{:href => "#", :target => "_blank"}
+                %i.fa.fa-facebook
+            %li
+              %a{:href => "#", :target => "_blank"}
+                %i.fa.fa-twitter
+            %li
+              %a{:href => "#", :target => "_blank"}
+                %i.fa.fa-linkedin
+            %li
+              %a{:href => "#", :target => "_blank"}
+                %i.fa.fa-youtube
+            %li
+              %a{:href => "#", :target => "_blank"}
+                %i.fa.fa-instagram
+            %li
+              %a{:href => "#", :target => "_blank"}
+                %i.fa.fa-envelope
+
+#step_content_plan
+  = render 'public/admin_payment_links/shared/plan'
+#step_content_card.hidden
+  = render 'public/admin_payment_links/shared/card'
+#step_content_success.hidden
+  = render 'public/admin_payment_links/shared/success'

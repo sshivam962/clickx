@@ -1,0 +1,54 @@
+.panel.panel-info
+  .panel-heading
+    %h2 Facebook Ads
+  .panel-body.p-lg
+    .row
+      .col-sm-6
+        %ul.package-list
+          %li Dedicated Facebook Ad Specialists
+          %li Facebook Ad Management
+          %li Instagram Ads Management
+          %li 100% Customized Strategy
+          %li Dedicated Campaign Management Team
+          %li Campaign setup
+          %li Targeting research and implementation
+          %li Creation of ads and ad sets
+      .col-sm-6
+        %ul.package-list
+          %li Implementation of initial bids, and ad scheduling
+          %li 24/7 Reporting Dashboard
+          %li Budget recommendation
+          %li One campaign and up to 3 ad sets
+          %li Retargeting Campaign Setup
+          %li Monthly Performance Report
+          %li Month to Month Commitment
+          %li 30 Day Notice for Cancellation
+    .col-sm-12.mt-lg
+      .bdr-line.info-tile.info-tile-alt.mb-n.b-s-n
+        .info.p-lg
+          .tile-body
+            %b
+              = number_to_currency(plan.amount, precision: 0)
+            %span
+              %b /mo
+          .tile-heading
+            %span Or 20% of Ad Spend (whichever is higher)
+          .text-center
+            %span.plan-label
+              = "MSRP: #{number_to_currency(plan.min_recommended_price, precision: 0)}"
+          %br
+          .tile-heading
+            %b OPTIONAL: EXPEDITED ONBOARDING: $500 USD
+          %center.font-14
+            Speedy Ad Setup and Approval. 2 Weeks Rush Turn Around.
+            %br
+            Requesting Access to Business Manager as an Admin, Ad Account Creation, and Page Access,
+            %br
+            Dashboard Provisioning, Campaign Funding and Launch Support
+          .text-center
+            %span.plan-label MSRP: #{number_to_currency(plan.min_recommended_price, precision: 0)}
+    .col-sm-4.p-n.mt-lg.text-center.col-md-offset-4
+      %a.btn.btn-info.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'facebook_ads', plan: plan.key)}
+        Get Started
+        %i.pl-sm.fa.fa-angle-double-right
+        .ripple-container

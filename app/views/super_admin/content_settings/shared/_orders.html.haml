@@ -1,0 +1,27 @@
+.panel-group.mt-md
+  .page-header
+    %h3 Content Order
+  .container-fluid
+    .row
+      .col-xs-12
+        %table.table
+          %thead
+            %tr
+              %th # ID
+              %th.text-left Title
+              %th Order Status
+              %th Payment Status
+          - @content_orders.each do |order|
+            %tbody
+              %tr
+                %td= order.id
+                %td.text-left
+                  = link_to "#{order.form_data["title"]}", super_admin_content_order_path(order)
+                %td
+                  %span.text-capitalize= "#{order.order_status == 'waiting_for_content'? "Waiting for Content" : order.order_status}"
+                %td
+                  %span.text-capitalize= order.payment_status
+            %tfoot
+              %tr
+                %td{colspan:"4"}
+                  %div{"st-pagination":"","st-displayed-pages":"10","st-items-by-page":"10"}

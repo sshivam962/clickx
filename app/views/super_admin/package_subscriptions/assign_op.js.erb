@@ -1,0 +1,7 @@
+<% if @procedure.errors.present? %>
+  toastr.error("<%= @procedure.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success("Onboarding Procedure Assigned");
+  $('#new-op-modal').modal('hide')
+  window.location.reload();
+<% end %>

@@ -1,0 +1,273 @@
+- content_for :title do
+  Digital PR
+.page-heading
+  %h1 Digital PR
+.container-fluid
+  %div{"data-widget-group" => "group1"}
+    .row
+      .col-sm-12
+        .panel.panel-default.p-lg
+          .panel-body.p-n
+            .row
+              .col-sm-12
+                - plans = @package.plans.group_by(&:key)
+                .table-responsive.table-pricing1
+                  %table.table.table-hover.mb-n
+                    %thead
+                      %tr
+                        %th.vat.pb-lg{:width => "300"}
+                          - plan = plans['starter'].first
+                          %h2.pt-header-caption.text-info= plan.title
+                          .pt-header-price
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                        %th.vat.pb-lg{:width => "300"}
+                          - plan = plans['pro'].first
+                          %h2.pt-header-caption.text-success= plan.title
+                          .pt-header-price
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                        %th.vat.pb-lg{:width => "300"}
+                          - plan = plans['advanced'].first
+                          %h2.pt-header-caption.text-warning= plan.title
+                          .pt-header-price
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                    %tbody
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          100% Customized Outreach Strategy
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          100% Customized Outreach Strategy
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          100% Customized Outreach Strategy
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Dedicated Campaign Manager
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Dedicated Campaign Manager
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Dedicated Campaign Manager
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Dedicated Content Specialists
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Dedicated Content Specialists
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Dedicated Content Specialists
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Assess Industry Journals
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Assess Industry Journals
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Assess Industry Journals
+                      %tr.bdr-b-line
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Extensive Journalist Research
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Extensive Journalist Research
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Extensive Journalist Research
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Develop Relevant Media Lists
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Develop Relevant Media Lists
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Develop Relevant Media Lists
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Develop Editorial Calendar
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Develop Editorial Calendar
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Develop Editorial Calendar
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          1+ Abstracts Developed
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          2+ Abstracts Developed
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          2+ Abstracts Developed
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Thought Leadership
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Thought Leadership
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Thought Leadership
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          PR Content Creation
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          PR Content Creation
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          PR Content Creation
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Secure Placements Based on Content Approvals
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Secure Placements Based on Content Approvals
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Secure Placements Based on Content Approvals
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          \~2 PR Placements Per Quarter
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Strategic PR Planning
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Strategic PR Planning
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          30 Day Notice for Cancellation
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Monitor HARO Opportunities
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Conduct Discovery Sessions
+                      %tr
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          2-3 PR Placements Per Quarter
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Monitor HARO Opportunities
+                      %tr
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          30 Day Notice for Cancellation
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Personal Branding Strategy
+                      %tr
+                        %td.vam
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Monthly PR Strategy Calls
+                      %tr
+                        %td.vam
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          4-5 PR Placements Per Quarter
+                      %tr
+                        %td.vam
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          30 Day Notice for Cancellation
+                      %tr
+                        %td.vam
+                          %a.btn.btn-info.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'digital_pr', plan: 'starter')}
+                            Get Started
+                            %i.pl-sm.fa.fa-angle-double-right
+                            .ripple-container
+                        %td.vam
+                          %a.btn.btn-success.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'digital_pr', plan: 'pro')}
+                            Get Started
+                            %i.pl-sm.fa.fa-angle-double-right
+                            .ripple-container
+                        %td.vam
+                          %a.btn.btn-warning.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'digital_pr', plan: 'advanced')}
+                            Get Started
+                            %i.pl-sm.fa.fa-angle-double-right
+                            .ripple-container
+              - plan = @package.plans.first
+              - if plan.implementation_fee.present?
+                .col-sm-12.mt-lg
+                  .bdr-line.info-tile.info-tile-alt.mb-n.b-s-n
+                    .info.p-lg
+                      .tile-heading
+                        %b ONE-TIME: EXPEDITED ONBOARDING: #{number_to_currency(plan.implementation_fee, precision: 0)} USD
+                      %center.font-14
+                        Kick Off Call, Build Initial PR Lists, Provide Abstract Recommendations,
+                        %br
+                        Review Client’s Published Content/Materials

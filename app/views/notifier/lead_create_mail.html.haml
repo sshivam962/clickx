@@ -1,0 +1,58 @@
+%table.layout.display.responsive-table{:align => "center", :bgcolor => "#f7f8f9"}
+  %tbody
+    - if @lead.first_name.present?
+      %tr
+        %td.organisationnumber First Name
+        %td.organisationname #{@lead.first_name}
+    - if @lead.last_name.present?
+      %tr
+        %td.organisationnumber Last Name
+        %td.organisationname #{@lead.last_name}
+    - if @lead.email.present?
+      %tr
+        %td.organisationnumber Email
+        %td.organisationname #{@lead.email}
+    - if @lead.company.present?
+      %tr
+        %td.organisationnumber Company
+        %td.organisationname #{@lead.company}
+    - if @lead.phone.present?
+      %tr
+        %td.organisationnumber Phone Number
+        %td.organisationname #{@lead.phone}
+    - if @lead.domain.present?
+      %tr
+        %td.organisationnumber Domain
+        %td.organisationname #{@lead.domain}
+    - if @lead.next_meeting_date.present?
+      %tr
+        %td.organisationnumber Next Meeting Date(Discovery Call)
+        %td.organisationname #{@lead.next_meeting_date.strftime('%B %d, %Y')}
+    - if @lead.audit_request.present?
+      %tr
+        %td.organisationnumber Access to Audit account
+        %td.organisationname #{@lead.audit_request}
+    - if @lead.goals_and_expectations.present?
+      %tr
+        %td.organisationnumber Client Goals and Expectations
+        %td.organisationname #{@lead.goals_and_expectations}
+    - if @lead.comment.present?
+      %tr
+        %td.organisationnumber Comment
+        %td.organisationname #{@lead.comment}
+    - if @lead.status.present?
+      %tr
+        %td.organisationnumber Status
+        %td.organisationname #{@lead.status.titleize}
+    - if @lead.value.to_f.positive?
+      %tr
+        %td.organisationnumber Value
+        %td.organisationname #{number_to_currency(@lead.value, precision: 2)}
+    - if @lead.audit_request.present?
+      %tr
+        %td.organisationnumber Audit Request
+        %td.organisationname #{@lead.audit_request}
+    %tr
+      %td.organisationnumber Submitted By
+      %td.organisationname
+        = @user.name_with_email

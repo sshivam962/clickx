@@ -1,0 +1,24 @@
+%tr{class: ' block lg:table-row row-card rounded-xl lg:shadow lg:bg-transparent w-full sm:w-1/2 lg:w-auto p-2'}
+  %td.block.lg:table-cell.px-3.lg:pr-0.pt-5.lg:py-3.bg-white.rounded-t-xl.lg:rounded-l-xl
+    %a.flex.items-center.justify-center.lg:justify-start{href: network_case_study_path(case_study, industry_id: @industry)}
+      %span.w-10.h-10.rounded-full.mr-4.inline-block.bg-gray-200.text-center.leading-10= case_study.title.strip.first
+      .text-gray-800= case_study.title
+  %td.block.lg:table-cell.py-3.px-2.bg-white.text-center.lg:text-left
+    = case_study.short_desc
+  %td.block.lg:table-cell.py-3.px-2.lg:pr-5.bg-white.rounded-b-xl.lg:rounded-r-xl
+    .lg:flex.items-center.justify-center.lg:justify-end
+      .block.lg:mr-3.text-center.lg:text-left.pb-4.lg:pb-0
+        %a.btn.btn--sm{href: network_case_study_path(case_study, industry_id: @industry)}
+          Read More
+          %i.pl-sm.fa.fa-angle-double-right
+      .flex.justify-center
+        = link_to edit_network_case_study_path(case_study), class: " w-8 h-8 leading-8 text-center mr-2 bg-gray-200 text-gray-600 rounded-full hover:bg-gray-400 hover:text-gray-800 transition-all #{checked}" do
+          %span.btn-icon
+            %i.fa.fa-edit
+
+        = link_to network_case_study_path(case_study), method: :delete, data: { confirm: 'Are you sure?' }, class: " w-8 h-8 leading-8 text-center text-red-700 bg-red-200 hover:bg-red-200 hover:text-red-800 rounded-full transition-all #{checked}" do
+          %span.btn-icon
+            %i.fa.fa-archive
+%tr.spacer-row.hidden.lg:table-row
+  %td.p-2{colspan:3}
+

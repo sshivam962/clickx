@@ -1,0 +1,5 @@
+<% if @lead_strategy.errors.present? %>
+  toastr.error("<%= @lead_strategy.errors.full_messages.to_sentence %>")
+<% else %>
+  $('#strategies_body_container').html("<%= escape_javascript render( partial: 'agency/leads/shared/strategies_body') %>");
+<% end %>

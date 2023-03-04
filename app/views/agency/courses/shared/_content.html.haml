@@ -1,0 +1,48 @@
+= hidden_field_tag :course_id, course.id
+- if next_chapter
+  = hidden_field_tag :chapter_id, next_chapter.id
+.row
+  .col-lg-4.col-md-5.chapter_content_nav
+    .rounded.border-1.border-blue.chapter_content_nav_inner
+      .bg-white.rounded-t-12.p-20.chapter_content_nav_inner_header
+        .fs-12.pb-2
+          - if @course.enable_challenge
+            = "#{@course.chapters.where(course_challenge_id: @course_challenge_id).count} Modules"
+          - else
+            = "#{@course.chapters.count} Modules"
+        .mb-4.fw-m.text-darkblue.lh-12 
+          = @course.title
+        %hr.my-3
+        - progress =  @course.enable_challenge ? course.challenge_progress(current_user, @course_challenge_id) : course.progress(current_user)
+        .d-flex
+          .col.flex-col.pr-4
+            .course-progress
+              .course-progress-bar{style: "width:#{progress}%"}
+          .col.fs-xxs
+            .course-percentage
+              #{progress} %
+      .bg-light.p-20.rounded-b-12.chapter_content_nav_body
+        .relative.overflow-h.sp__courses__nav--wrapper
+          %ul.sp__courses__nav.sp__courses__nav--parent.relative
+            - course_chapters_items = @course.enable_challenge ? course.chapters.where(course_challenge_id: @course_challenge_id) : course.chapters
+            - course_chapters_items.each do |chapter|
+              - if chapter_watched?(current_user, chapter)
+                %li.sp__courses__nav__item.watched{id: "chapter_li_#{chapter.id}"}
+                  %a.load_chapter{href: 'javascript:void(0)', data: {chapter: chapter.id, course: course.id}}
+                    .d-flex.align-items-center.w-100
+                      .col.pr-4
+                        .icon-watched
+                          %i.material-icons check
+                      .col.flex-col.d-flex.align-items-center
+                        .fw-m #{chapter.title}
+              - else
+                %li.sp__courses__nav__item{id: "chapter_li_#{chapter.id}"}
+                  %a.load_chapter{href: 'javascript:void(0)', data: {chapter: chapter.id, course: course.id}}
+                    .d-flex.align-items-center.w-100
+                      .col.pr-4
+                        %i.fa.fa-youtube-play
+                      .col.flex-col.d-flex.align-items-center
+                        .fw-m #{chapter.title}
+  .col-lg-8.col-md-7.pl-lg-0.pt-5.pt-lg-0.chapter_content
+    - if next_chapter.present? || current_chapter.present?
+      = render 'agency/courses/shared/chapter_video', chapter: next_chapter || current_chapter

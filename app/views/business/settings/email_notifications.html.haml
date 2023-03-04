@@ -1,0 +1,66 @@
+- content_for :title do
+  Settings | Mailing List
+.clickx-breadcrumb-wrapper.ng-scope
+  %ol.breadcrumb.clx-breadcrumb.ng-isolate-scope
+    %li
+      %a{:href => "/b/dashboard"} Home
+    %li
+      %span Email Notifications
+.page-content
+  .page-heading.no-margin-bottom
+    %h1
+      %i.clickx-icon-page-cog.title-icon>
+      Settings
+.container-fluid
+  = render '/business/settings/shared/tab_links'
+  .row
+    .col-sm-12
+      .panel.panel-default{ 'data-widget': { draggable: 'false' } }
+        = form_for current_business, url: :update_mailing_list_business_settings, method: :patch, remote: true do |f|
+          .panel-heading
+            %h2 Notification Emails
+            %i.fa.fa-info-circle.tooltip-text-icon.tooltips{ 'title': 'Add email list for notifications' }
+            .panel-ctrls
+              %button.btn.button-icon.pull-left.mt-sm{ type: 'submit', 'title': 'Save'}
+                %span.material-icons.inverted save
+              %button.btn.button-icon.pull-left.mt-sm.email_notifications_button{"aria-controls" => "collapseEmailNotifications", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseEmailNotifications", :role => "button"}
+                #email_notifications_chevron_down.hidden
+                  %i.fa.fa-chevron-down
+                #email_notifications_chevron_up
+                  %i.fa.fa-chevron-up
+          .panel-body.fadeInLeft.collapse.in#collapseEmailNotifications
+            .row
+              .col-md-12
+                .form-group.no-margin-top.add-email
+                  %p Add Emails
+                  = text_field_tag :contact_mailing_list, current_business.contact_mailing_list.join(','), class: 'form-control tagsinput', multiple: true, 'data-role':"tagsinput"
+
+:css
+  .tagsinput {
+    width: 100%!important;
+    height: auto!important;
+  }
+  .tag {
+    background: rgb(224,224,224) !important;
+    color: rgb(66,66,66) !important;
+    border: none !important;
+  }
+  .tag a {
+    color: rgb(66,66,66) !important;
+  }
+
+:javascript
+  $(document).ready(function() {
+    $('.email_notifications_button').on('click', function() {
+      if($('#email_notifications_chevron_down').hasClass('hidden')){
+        $('#email_notifications_chevron_up').addClass('hidden');
+        $('#email_notifications_chevron_down').removeClass('hidden');
+      } else {
+        $('#email_notifications_chevron_up').removeClass('hidden');
+        $('#email_notifications_chevron_down').addClass('hidden');
+      }
+    })
+  });
+  $('#contact_mailing_list').tagsInput({
+    'defaultText':''
+  });

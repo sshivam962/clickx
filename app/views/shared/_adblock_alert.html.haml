@@ -1,0 +1,4 @@
+- if ENV['ADBLOCK_ALERT_ENABLED'].present?
+  = stylesheet_link_tag 'adblock_checker', media: 'all'
+  %link{:href => "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700", :rel => "stylesheet"}
+  = javascript_include_tag 'adblock_checker'

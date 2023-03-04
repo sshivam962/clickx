@@ -1,0 +1,21 @@
+- if @agency.thank_you_facebook_pixel.present?
+  = raw(@agency.thank_you_facebook_pixel)
+.thank-you-page
+  .page-wrapper
+    %header.header-bar{style: "background:#{@agency.case_study_portfolio_header_color}"}
+      .logo
+        - if @agency.weburl.present?
+          %a{href: formatted_url(@agency.weburl), target: '_blank'}
+            = image_tag @agency.logo || ''
+        - else
+          = image_tag @agency.logo || ''
+    .middle
+      .container
+        .content-card.text-center
+          .thank-you-image
+            = image_tag 'thank-you.svg'
+          %h4 Thank You
+          %p Thank you for your interest. We’ll be in touch with you shortly.
+    .footer
+      .container
+        Copyright #{Time.now.year}. All Rights Reserved

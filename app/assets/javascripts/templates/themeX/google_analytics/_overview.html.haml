@@ -1,0 +1,73 @@
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        %h2 Traffic Summary
+        .panel-ctrls
+          %button.btn.button-icon.pull-left.mt-sm.refresh-panel{'title': 'Refresh report'}
+            %span.material-icons.inverted refresh
+      .panel-body
+        %table.table.table-hover.m-n
+          %tbody
+            %tr
+              %td Sessions
+              %td{align: "right"} {{analytics_data['sessions'] | number}}
+            %tr
+              %td Users (Visitors)
+              %td{align: "right"} {{analytics_data['totalUsers'] | number}}
+            %tr
+              %td Pageviews
+              %td{align: "right"} {{analytics_data['screenPageViews'] | number}}
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        %h2 Traffic Summary
+        .panel-ctrls
+          %button.btn.button-icon.pull-left.mt-sm.refresh-panel{'title': 'Refresh report'}
+            %span.material-icons.inverted refresh
+      .panel-body
+        .centered
+          #analytics_pie_chart
+.row
+  .col-md-12
+    .tab-container
+      %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+        %li.active
+          %a{"data-toggle":"tab", 'data-target': "#visits", 'ng-click':"resizeChart('visits_chart'); overview()"} Visits
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#visitors", 'ng-click':"resizeChart('visitors_chart'); overview()"} Visitors
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#pages-session", 'ng-click':"resizeChart('page_per_visit_chart'); overview()"} Pages/Session
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#session-duration", 'ng-click':"resizeChart('avg_session_chart'); overview()"} Avg. Session Duration
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#new-session", 'ng-click':"resizeChart('new_visits_chart'); overview()"} Session Coversion Rate
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#bounce-rate", 'ng-click':"resizeChart('bounce_chart'); overview()"} Bounce Rate
+      .tab-content
+        #visits.tab-pane.active
+          .panel-body
+            .centered
+              #visits_chart
+        #visitors.tab-pane
+          .panel-body
+            .centered
+              #visitors_chart
+        #pages-session.tab-pane
+          .panel-body
+            .centered
+              #page_per_visit_chart
+        #session-duration.tab-pane
+          .panel-body
+            .centered
+              #avg_session_chart
+        #new-session.tab-pane
+          .panel-body
+            .centered
+              #new_visits_chart
+        #bounce-rate.tab-pane
+          .panel-body
+            .centered
+              #bounce_chart
+        .row
+          .col-sm-12.text-center{ "ng-include": "", "src": "'themeX/google_analytics/_chartFilter.html'" }

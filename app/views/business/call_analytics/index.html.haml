@@ -1,0 +1,50 @@
+- content_for :custom_assets do
+  %script{src: 'https://code.highcharts.com/highcharts.js'}
+
+.ui-2020
+  .pb-md.page-heading.no-margin-bottom
+    %h1
+      %i.clickx-icon-Mobile.title-icon
+      Call Analytics
+      %i.fa.fa-info-circle.tooltip-text-icon.tooltip-text-icon-pos{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "This report shows you the analytics and recordings of all the calls made to your company. The calls are recorded in real time." }
+    .options
+      .form-group
+        %md-button.md-raised.md-primary
+          = text_field_tag :date_filter, daterange_picker_format(@start_date, @end_date), class: 'btn btn--dark'
+
+.container-fluid
+  %div
+    .row.mt-lg#call_analytics
+      #pie-chart
+        = render 'calls_status'
+      #unique-calls
+        = render 'unique_calls_chart'
+      #leads-per-day
+        = render 'leads_per_day'
+
+:javascript
+  $('.minus-button').click(function(){
+    var minus_sign_id = this.id
+    $("#" + minus_sign_id).addClass('hidden');
+    var split_id = minus_sign_id.split("_");
+    var plus_sign_id = 'plus_' + split_id[1] + '_' + split_id[2];
+    $("#" + 'collapse_container_' + split_id[2]).addClass('hidden');
+    $("#" + plus_sign_id).removeClass('hidden');
+  });
+
+  $('#date_filter').daterangepicker({
+    maxDate: new Date(),
+    locale: { format: 'MM-DD-YYYY' }
+  }).on("change", function() {
+    daterange = $(this).val();
+    $.ajax({
+      url: '/b/call_analytics',
+      type: 'get',
+      data: {
+        start_date: daterange.split(' - ')[0],
+        end_date: daterange.split(' - ')[1]
+      },
+      dataType: 'script',
+      success:function(response){}
+    })
+  });

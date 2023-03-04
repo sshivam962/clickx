@@ -1,0 +1,91 @@
+- content_for :title do
+  = "#{@case_study.title} | Clickx"
+.container.mx-auto.px-4.my-12
+  .case-study-wrapper.case-study-wrapper-preloader.rounded-md
+    .csw-sub-header.pl-lg-4.pr-lg-4.rounded-t-md
+      .px-5
+        .text-xl.font-medium Case Study
+        = @case_study.title
+    .py-6.bg-white.rounded-b-md
+      .px-5
+        .flex.flex-wrap.mb-5
+          %div{class:'w-full lg:w-2/3 lg:pr-6'}
+            - if show_stats?(@case_study)
+              .case_study-stats.mb-10
+                .case_study-stats-col
+                  .flex.items-center.justify-center.flex-wrap
+                    .case_study-stats-icon
+                      %i.fa.fa-caret-up
+                    .case_study-stats-percentage= @case_study.stat1_value
+                    .case_study-stats-name= @case_study.stat1_text
+                .case_study-stats-col
+                  .flex.items-center.justify-center.flex-wrap
+                    .case_study-stats-icon
+                      %i.fa.fa-caret-up
+                    .case_study-stats-percentage= @case_study.stat2_value
+                    .case_study-stats-name= @case_study.stat2_text
+                .case_study-stats-col
+                  .flex.items-center.justify-center.flex-wrap
+                    .case_study-stats-icon
+                      %i.fa.fa-caret-up
+                    .case_study-stats-percentage= @case_study.stat3_value
+                    .case_study-stats-name= @case_study.stat3_text
+
+            .sepline.sepline-light
+            - if @case_study.images.present?
+              .case_study-slider.pb-10
+                - @case_study.images.each_with_index do |image, index|
+                  .item{class: "#{'active' if index.zero?}"}
+                    .case_study-slide{style:"background-image: url(" + image.file.url + ")"}
+                -#   - if (@case_study.images.count > 1)
+                -#     %a.left.carousel-control{'data-slide': 'prev', href: '#carousel-example-captions'}
+                -#       %span
+                -#         %i.fa.fa-chevron-left
+                -#     %a.right.carousel-control{'data-slide': 'next', href: '#carousel-example-captions'}
+                -#       %span
+                -#         %i.fa.fa-chevron-right
+                -# %ol.carousel-indicators.flex.justify-center
+                -#   - @case_study.images.each_with_index do |image, index|
+                -#     %li{class: "#{'active' if index.zero?}", data: { 'slide-to': "#{index}", target: '#carousel-example-captions'}}
+            - if raw(@case_study.detailed_description).present?
+              .p-4.p-lg-5
+                = raw(@case_study.detailed_description)
+          - if raw(@case_study.description).present?
+            %div{class:'w-full lg:w-1/3'}
+              .csw-sidebar
+                .csw-widget
+                  = raw(@case_study.description)
+        .text-lg-left.text-center
+          -#%ul.pagination.m-n.pagination-lg.text-center.flex.flex-wrap.justify-center
+            - if agency_case_study_path(@previous, industry_id: @industry).present?
+              Present
+            - else
+              No
+            %li.previous
+              %a.block{href: agency_case_study_path(@previous, industry_id: @industry)} Previous
+            %li.next
+              %a.block{href: agency_case_study_path(@next, industry_id: @industry)} Next
+
+:javascript
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.case-study-wrapper-preloader').removeClass('case-study-wrapper-preloader');
+    }, 500);
+    jQuery('.csw-widget p:first-child + ul, .csw-widget p:first-child + h4 + ul, .csw-widget h4:first-child + ul').slideDown();
+    jQuery('.csw-widget p:first-child, .csw-widget h4:first-child').addClass('active');
+  });
+  jQuery(document).on('click', '.csw-widget p, .csw-widget h4', function() {
+    if(jQuery(this).next('ul').is(':visible')) {
+      jQuery(this).removeClass('active');
+      jQuery(this).next('ul').slideUp();
+    } else {
+      jQuery('.csw-widget').find('ul').slideUp();
+      jQuery(this).addClass('active');
+      jQuery(this).next('ul').slideDown();
+    }
+  });
+
+  $(document).ready(function(){
+    $('.case_study-slider').slick({
+    });
+  });

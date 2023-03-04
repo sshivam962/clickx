@@ -1,0 +1,7 @@
+<% if @error.present? %>
+  toastr.error("<%= @error %>")
+<% else %>
+  toastr.success("Payment Succesfull");
+  $('.checkout_form').addClass('hidden')
+  $('.submit_branding_form').click();
+<% end %>

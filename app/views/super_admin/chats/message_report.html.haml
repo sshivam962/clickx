@@ -1,0 +1,28 @@
+.uiv2
+  .clearfix
+    .d-flex.justify-content-between.align-items-center.flex-wrap
+      %h3 Message Report
+  .right.class-inline.col-xs-12.col-sm-12.col-lg-12.pr-n
+    %ul.marginleft-58px
+      %li
+        = form_tag message_report_super_admin_chats_path, method: :get, enforce_utf8: false do 
+          = date_field_tag :search_date, @search_date, class: 'search login width250px select-box form-control mt-md search_date_field', placeholder: 'Search By Date'
+  %div#admin_users_list
+    = render 'super_admin/chats/report_list', message_report_list: @message_report_list
+
+:javascript
+  $('.search_date_field').on('change', function (e) {
+    $(this).closest('form').submit();
+  });
+
+  $('#search_name').on("keyup", function() {
+    var name = $('#search_name').val().toLowerCase();
+    $.ajax({
+      url: "/s/admin_users",
+      type: 'get',
+      data: { name: name },
+      dataType: 'script',
+      async: false,
+      success:function(response){}
+    })
+  });

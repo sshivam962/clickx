@@ -1,0 +1,49 @@
+.header.no-bottom-border
+  %h2 Update plan
+
+= form_with model: @plan, url: super_admin_plan_path(@plan)  do |f|
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :trial_period_days, 'Plan Trail Period Days'
+      .col-sm-3
+        = f.number_field :trial_period_days, class: ' form-control login display-inline', placeholder: 'Plan Trail Period Days', type: 'number', min: '0'
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :plan_statement_descriptor, 'Plan Statement Descriptor'
+      .col-sm-3
+        = f.text_field :statement_descriptor, class: ' form-control login display-inline', placeholder: 'Plan Statement Descriptor'
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :plan_type, 'Plan Type'
+      .col-sm-3
+        = f.radio_button :plan_type, '-', class: 'mr-sm'
+        None
+        = f.radio_button :plan_type, 'client', class: 'ml-lg mr-sm'
+        End User
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :public, 'Visibility'
+      .col-sm-3
+        = f.radio_button :public,'false', class: 'mr-sm'
+        Private
+        = f.radio_button :public, 'true', class: 'ml-lg mr-sm'
+        Public
+
+  .form-group
+    .row
+      .col-sm-5
+        = f.submit 'Update Plan', class: 'btn btn-warning saveBtn'
+        = link_to 'Back', super_admin_plans_path, class: 'btn btn-default'
+
+:javascript
+  $('#labels').tagsInput();
+
+:css
+  .tagsinput{
+    width: 100%!important;
+    height: auto!important;
+  }

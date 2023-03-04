@@ -1,0 +1,63 @@
+- content_for :title do
+  Badging | Clickx
+.page-content
+  .page-heading
+    %h1
+      %i.clickx-icon-certification.title-icon>
+      Badging
+  .container-fluid
+    %div
+      .row
+        .col-sm-12
+          .panel.panel-default.mb-5
+            .panel-body
+              %span.font-14 To help you spread the word about being Clickx Certified Partner, use the badges below for your off-line and online marketing materials.
+      .row.d-flex.mb-5.flex-wrap
+        .col-xs-12.col-sm-6.col-lg-8.mb-3.mb-md-0
+          .panel.panel-default.h-100
+            .panel-heading
+              Badge
+            .fadeInLeft.panel-body
+              .form-group.mt-n.pb-n
+                %center
+                  %a{:href => "https://clickx.io", target: '_blank'}
+                    %img{:src => "/images/badges/200x200/Clickx_Badges_200x200_#{current_agency.level.titleize}.png"}
+        .col-xs-12.col-sm-6.col-lg-4
+          .panel.panel-default.h-100
+            .panel-heading
+              Select Size
+            .panel-body
+              - @badge_sizes.each do |badge_size, badge|
+                %button.btn.btn-warning.btn-raised.m-2.fw-m{data: {badge_size: badge_size}}
+                  = badge_size
+      .row
+        .col-sm-12
+          .panel.panel-default.mb-5
+            .panel-heading
+              Embed code:
+              %button.btn.btn-warning.btn-raised.copy_to_clipboard.fw-m.btn-sm.ml-5
+                %i.fa.fa-copy
+                Copy
+
+            .panel-body.badge
+              .col-sm-12
+                - default_size = '100x100'
+                - @badge_sizes.each do |badge_size, badge|
+                  %textarea.font-14.badgeurl{class: "#{badge_size} #{badge_size.eql?(default_size) ? 'active' : 'hidden'}"}
+                    = badge
+
+:javascript
+  $('.badge-size-btn').on('click', function (e) {
+    selected_size = $(this).data('badge-size')
+    $('.badgeurl').addClass('hidden')
+    $('.badgeurl').removeClass('active')
+    $('.badgeurl.' + selected_size).removeClass('hidden')
+    $('.badgeurl.' + selected_size).addClass('active')
+  });
+  $('.copy_to_clipboard').on('click', function (e) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($('.badgeurl.active').text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+  });

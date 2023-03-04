@@ -1,0 +1,172 @@
+{
+  "status": 200,
+  "data": {
+    "this_period": {
+      "2018-03-31": {
+        "clicks": 2,
+        "impressions": 84,
+        "cost": 10050000.0,
+        "avg_cost": 5025000.0,
+        "ctr": 2.38,
+        "conversions": 0.0
+      },
+      "2018-04-01": {
+        "clicks": 0,
+        "impressions": 1,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-02": {
+        "clicks": 0,
+        "impressions": 8,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-03": {
+        "clicks": 1,
+        "impressions": 106,
+        "cost": 5430000.0,
+        "avg_cost": 5430000.0,
+        "ctr": 0.94,
+        "conversions": 0.0
+      },
+      "2018-04-04": {
+        "clicks": 2,
+        "impressions": 114,
+        "cost": 11310000.0,
+        "avg_cost": 5655000.0,
+        "ctr": 1.75,
+        "conversions": 0.0
+      },
+      "2018-04-05": {
+        "clicks": 0,
+        "impressions": 6,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-06": {
+        "clicks": 1,
+        "impressions": 5,
+        "cost": 1920000.0,
+        "avg_cost": 1920000.0,
+        "ctr": 20.0,
+        "conversions": 0.0
+      },
+      "2018-04-07": {
+        "clicks": 2,
+        "impressions": 63,
+        "cost": 10850000.0,
+        "avg_cost": 5425000.0,
+        "ctr": 3.17,
+        "conversions": 0.0
+      },
+      "2018-04-08": {
+        "clicks": 1,
+        "impressions": 3,
+        "cost": 330000.0,
+        "avg_cost": 330000.0,
+        "ctr": 33.33,
+        "conversions": 0.0
+      },
+      "2018-04-09": {
+        "clicks": 0,
+        "impressions": 74,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-10": {
+        "clicks": 0,
+        "impressions": 62,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-11": {
+        "clicks": 0,
+        "impressions": 8,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-12": {
+        "clicks": 1,
+        "impressions": 8,
+        "cost": 2410000.0,
+        "avg_cost": 2410000.0,
+        "ctr": 12.5,
+        "conversions": 0.0
+      },
+      "2018-04-13": {
+        "clicks": 0,
+        "impressions": 46,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-14": {
+        "clicks": 0.0,
+        "impressions": 20.0,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-15": {
+        "clicks": 1,
+        "impressions": 1,
+        "cost": 980000.0,
+        "avg_cost": 980000.0,
+        "ctr": 100.0,
+        "conversions": 0.0
+      },
+      "2018-04-16": {
+        "clicks": 0,
+        "impressions": 48,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-17": {
+        "clicks": 0,
+        "impressions": 4,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-18": {
+        "clicks": 0,
+        "impressions": 22,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      }
+    },
+    "total_details": [
+      "Total",
+      " --",
+      "20",
+      "1366",
+      "65760000",
+      "3288000",
+      "1.46%",
+      "0.00",
+      65760000,
+      3288000
+    ],
+    "last_period": {}
+  }
+}

@@ -1,0 +1,1258 @@
+{
+  "status": 200,
+  "backlinks_history": [
+    {
+      "id": null,
+      "gained": 203,
+      "lost": 3,
+      "tracked_date": "2017-11-01",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 166,
+      "lost": 21,
+      "tracked_date": "2017-11-02",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 1407,
+      "lost": 8,
+      "tracked_date": "2017-11-03",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 350,
+      "lost": 16,
+      "tracked_date": "2017-11-04",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 2022,
+      "lost": 7,
+      "tracked_date": "2017-11-05",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 20,
+      "lost": 47,
+      "tracked_date": "2017-11-06",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 37,
+      "lost": 72,
+      "tracked_date": "2017-11-07",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 31,
+      "lost": 102,
+      "tracked_date": "2017-11-08",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 70,
+      "lost": 59,
+      "tracked_date": "2017-11-09",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 150,
+      "lost": 134,
+      "tracked_date": "2017-11-10",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 15,
+      "lost": 315,
+      "tracked_date": "2017-11-11",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 174,
+      "lost": 208,
+      "tracked_date": "2017-11-12",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 98,
+      "lost": 167,
+      "tracked_date": "2017-11-13",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 428,
+      "lost": 28,
+      "tracked_date": "2017-11-14",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 679,
+      "lost": 34,
+      "tracked_date": "2017-11-15",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 133,
+      "lost": 86,
+      "tracked_date": "2017-11-16",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 168,
+      "lost": 380,
+      "tracked_date": "2017-11-17",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 135,
+      "lost": 228,
+      "tracked_date": "2017-11-18",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 0,
+      "lost": 0,
+      "tracked_date": "2017-11-19",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 568,
+      "lost": 146,
+      "tracked_date": "2017-11-20",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 58,
+      "lost": 59,
+      "tracked_date": "2017-11-21",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 106,
+      "lost": 36,
+      "tracked_date": "2017-11-22",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 0,
+      "lost": 22,
+      "tracked_date": "2017-11-23",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 43,
+      "lost": 22,
+      "tracked_date": "2017-11-24",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 88,
+      "lost": 67,
+      "tracked_date": "2017-11-25",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 2,
+      "lost": 5,
+      "tracked_date": "2017-11-26",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 26,
+      "lost": 4,
+      "tracked_date": "2017-11-27",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 10,
+      "lost": 6,
+      "tracked_date": "2017-11-28",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 17,
+      "lost": 18,
+      "tracked_date": "2017-11-29",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 0,
+      "lost": 0,
+      "tracked_date": "2017-11-30",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 46,
+      "lost": 74,
+      "tracked_date": "2017-12-01",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 2,
+      "lost": 2,
+      "tracked_date": "2017-12-02",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 19,
+      "lost": 30,
+      "tracked_date": "2017-12-03",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 35,
+      "lost": 35,
+      "tracked_date": "2017-12-04",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 51,
+      "lost": 66,
+      "tracked_date": "2017-12-05",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 0,
+      "lost": 0,
+      "tracked_date": "2017-12-06",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 186,
+      "lost": 32,
+      "tracked_date": "2017-12-07",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 84,
+      "lost": 60,
+      "tracked_date": "2017-12-08",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 63,
+      "lost": 38,
+      "tracked_date": "2017-12-09",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 0,
+      "lost": 1,
+      "tracked_date": "2017-12-10",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 7,
+      "lost": 2,
+      "tracked_date": "2017-12-11",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 8,
+      "lost": 21,
+      "tracked_date": "2017-12-12",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 16,
+      "lost": 12,
+      "tracked_date": "2017-12-13",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 21,
+      "lost": 57,
+      "tracked_date": "2017-12-14",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 87,
+      "lost": 65,
+      "tracked_date": "2017-12-15",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 89,
+      "lost": 46,
+      "tracked_date": "2017-12-16",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 0,
+      "lost": 1,
+      "tracked_date": "2017-12-17",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 2,
+      "lost": 1,
+      "tracked_date": "2017-12-18",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 44,
+      "lost": 255,
+      "tracked_date": "2017-12-19",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 53,
+      "lost": 133,
+      "tracked_date": "2017-12-20",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 2,
+      "lost": 19,
+      "tracked_date": "2017-12-21",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 15,
+      "lost": 1,
+      "tracked_date": "2017-12-22",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 43,
+      "lost": 16,
+      "tracked_date": "2017-12-23",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 23,
+      "lost": 30,
+      "tracked_date": "2017-12-24",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 26,
+      "lost": 40,
+      "tracked_date": "2017-12-25",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 26,
+      "lost": 61,
+      "tracked_date": "2017-12-26",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 68,
+      "lost": 64,
+      "tracked_date": "2017-12-27",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 0,
+      "lost": 1,
+      "tracked_date": "2017-12-28",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 17,
+      "lost": 5,
+      "tracked_date": "2017-12-29",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 9,
+      "lost": 133,
+      "tracked_date": "2017-12-30",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 160,
+      "lost": 124,
+      "tracked_date": "2017-12-31",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 27,
+      "lost": 168,
+      "tracked_date": "2018-01-01",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 32,
+      "lost": 93,
+      "tracked_date": "2018-01-02",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 50,
+      "lost": 90,
+      "tracked_date": "2018-01-03",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 1,
+      "lost": 0,
+      "tracked_date": "2018-01-04",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 19,
+      "lost": 14,
+      "tracked_date": "2018-01-05",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 11,
+      "lost": 7,
+      "tracked_date": "2018-01-06",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 13,
+      "lost": 34,
+      "tracked_date": "2018-01-07",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 89,
+      "lost": 46,
+      "tracked_date": "2018-01-08",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 51,
+      "lost": 22,
+      "tracked_date": "2018-01-09",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 52,
+      "lost": 25,
+      "tracked_date": "2018-01-10",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 9,
+      "lost": 6,
+      "tracked_date": "2018-01-11",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 12,
+      "lost": 46,
+      "tracked_date": "2018-01-12",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 65,
+      "lost": 45,
+      "tracked_date": "2018-01-13",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 125,
+      "lost": 60,
+      "tracked_date": "2018-01-14",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 4,
+      "lost": 0,
+      "tracked_date": "2018-01-15",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 22,
+      "lost": 58,
+      "tracked_date": "2018-01-16",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 51,
+      "lost": 43,
+      "tracked_date": "2018-01-17",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 110,
+      "lost": 46,
+      "tracked_date": "2018-01-18",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 45,
+      "lost": 25,
+      "tracked_date": "2018-01-19",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 15,
+      "lost": 12,
+      "tracked_date": "2018-01-20",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 3,
+      "lost": 1,
+      "tracked_date": "2018-01-21",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 2,
+      "lost": 19,
+      "tracked_date": "2018-01-22",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 25,
+      "lost": 34,
+      "tracked_date": "2018-01-23",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 11,
+      "lost": 17,
+      "tracked_date": "2018-01-24",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 101,
+      "lost": 62,
+      "tracked_date": "2018-01-25",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 24,
+      "lost": 9,
+      "tracked_date": "2018-01-26",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 178,
+      "lost": 154,
+      "tracked_date": "2018-01-27",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 20,
+      "lost": 17,
+      "tracked_date": "2018-01-28",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 19,
+      "lost": 9,
+      "tracked_date": "2018-01-29",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 146,
+      "lost": 47,
+      "tracked_date": "2018-01-30",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 42,
+      "lost": 33,
+      "tracked_date": "2018-01-31",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 582,
+      "lost": 40,
+      "tracked_date": "2018-02-01",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 1076,
+      "lost": 187,
+      "tracked_date": "2018-02-02",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 0,
+      "lost": 1,
+      "tracked_date": "2018-02-03",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 2,
+      "lost": 4,
+      "tracked_date": "2018-02-04",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 5,
+      "lost": 35,
+      "tracked_date": "2018-02-05",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 7,
+      "lost": 5,
+      "tracked_date": "2018-02-06",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 393,
+      "lost": 47,
+      "tracked_date": "2018-02-07",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 41,
+      "lost": 86,
+      "tracked_date": "2018-02-08",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 595,
+      "lost": 18,
+      "tracked_date": "2018-02-09",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 1707,
+      "lost": 131,
+      "tracked_date": "2018-02-10",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 132,
+      "lost": 40,
+      "tracked_date": "2018-02-11",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 518,
+      "lost": 99,
+      "tracked_date": "2018-02-12",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 278,
+      "lost": 142,
+      "tracked_date": "2018-02-13",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 168,
+      "lost": 42,
+      "tracked_date": "2018-02-14",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 39,
+      "lost": 1,
+      "tracked_date": "2018-02-15",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 151,
+      "lost": 9,
+      "tracked_date": "2018-02-16",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 192,
+      "lost": 31,
+      "tracked_date": "2018-02-17",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 45,
+      "lost": 27,
+      "tracked_date": "2018-02-18",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 96,
+      "lost": 88,
+      "tracked_date": "2018-02-19",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 3,
+      "lost": 6,
+      "tracked_date": "2018-02-20",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 32,
+      "lost": 12,
+      "tracked_date": "2018-02-21",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 126,
+      "lost": 36,
+      "tracked_date": "2018-02-22",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 73,
+      "lost": 58,
+      "tracked_date": "2018-02-23",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 139,
+      "lost": 55,
+      "tracked_date": "2018-02-24",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 3,
+      "lost": 0,
+      "tracked_date": "2018-02-25",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 16,
+      "lost": 3,
+      "tracked_date": "2018-02-26",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 17,
+      "lost": 5,
+      "tracked_date": "2018-02-27",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 19,
+      "lost": 13,
+      "tracked_date": "2018-02-28",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 49,
+      "lost": 16,
+      "tracked_date": "2018-03-01",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 77,
+      "lost": 13,
+      "tracked_date": "2018-03-02",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 332,
+      "lost": 19,
+      "tracked_date": "2018-03-03",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 45,
+      "lost": 121,
+      "tracked_date": "2018-03-04",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 65,
+      "lost": 36,
+      "tracked_date": "2018-03-05",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 165,
+      "lost": 654,
+      "tracked_date": "2018-03-06",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 49,
+      "lost": 131,
+      "tracked_date": "2018-03-07",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 200,
+      "lost": 220,
+      "tracked_date": "2018-03-08",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 0,
+      "lost": 1,
+      "tracked_date": "2018-03-09",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 17,
+      "lost": 23,
+      "tracked_date": "2018-03-10",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 44,
+      "lost": 118,
+      "tracked_date": "2018-03-11",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 98,
+      "lost": 147,
+      "tracked_date": "2018-03-12",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 88,
+      "lost": 137,
+      "tracked_date": "2018-03-13",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 42,
+      "lost": 54,
+      "tracked_date": "2018-03-14",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 67,
+      "lost": 145,
+      "tracked_date": "2018-03-15",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 0,
+      "lost": 1,
+      "tracked_date": "2018-03-16",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 10,
+      "lost": 70,
+      "tracked_date": "2018-03-17",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 23,
+      "lost": 442,
+      "tracked_date": "2018-03-18",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 35,
+      "lost": 185,
+      "tracked_date": "2018-03-19",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 0,
+      "lost": 1,
+      "tracked_date": "2018-03-20",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 35,
+      "lost": 104,
+      "tracked_date": "2018-03-21",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 151,
+      "lost": 169,
+      "tracked_date": "2018-03-22",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 81,
+      "lost": 59,
+      "tracked_date": "2018-03-23",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 33,
+      "lost": 86,
+      "tracked_date": "2018-03-24",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 72,
+      "lost": 150,
+      "tracked_date": "2018-03-25",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 0,
+      "lost": 1,
+      "tracked_date": "2018-03-26",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 10,
+      "lost": 17,
+      "tracked_date": "2018-03-27",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 26,
+      "lost": 81,
+      "tracked_date": "2018-03-28",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 9,
+      "lost": 34,
+      "tracked_date": "2018-03-29",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 18,
+      "lost": 53,
+      "tracked_date": "2018-03-30",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 42,
+      "lost": 104,
+      "tracked_date": "2018-03-31",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 42,
+      "lost": 106,
+      "tracked_date": "2018-04-01",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 2,
+      "lost": 3,
+      "tracked_date": "2018-04-02",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 60,
+      "lost": 122,
+      "tracked_date": "2018-04-03",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 133,
+      "lost": 44,
+      "tracked_date": "2018-04-04",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 1064,
+      "lost": 44,
+      "tracked_date": "2018-04-05",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 7952,
+      "lost": 135,
+      "tracked_date": "2018-04-06",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 5,
+      "lost": 2,
+      "tracked_date": "2018-04-07",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 21,
+      "lost": 20,
+      "tracked_date": "2018-04-08",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 43,
+      "lost": 106,
+      "tracked_date": "2018-04-09",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 114,
+      "lost": 108,
+      "tracked_date": "2018-04-10",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 3,
+      "lost": 4,
+      "tracked_date": "2018-04-11",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 6,
+      "lost": 20,
+      "tracked_date": "2018-04-12",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 7,
+      "lost": 108,
+      "tracked_date": "2018-04-13",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 27,
+      "lost": 347,
+      "tracked_date": "2018-04-14",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 110,
+      "lost": 165,
+      "tracked_date": "2018-04-15",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 13,
+      "lost": 121,
+      "tracked_date": "2018-04-16",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 4,
+      "lost": 40,
+      "tracked_date": "2018-04-17",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 122,
+      "lost": 246,
+      "tracked_date": "2018-04-18",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 16,
+      "lost": 7,
+      "tracked_date": "2018-04-19",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 27,
+      "lost": 105,
+      "tracked_date": "2018-04-20",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 44,
+      "lost": 202,
+      "tracked_date": "2018-04-21",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 0,
+      "lost": 2,
+      "tracked_date": "2018-04-22",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 9,
+      "lost": 583,
+      "tracked_date": "2018-04-23",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 585,
+      "lost": 269,
+      "tracked_date": "2018-04-24",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 528,
+      "lost": 840,
+      "tracked_date": "2018-04-25",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 14,
+      "lost": 1,
+      "tracked_date": "2018-04-26",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 14,
+      "lost": 216,
+      "tracked_date": "2018-04-27",
+      "business_id": 166
+    },
+    {
+      "id": null,
+      "gained": 0,
+      "lost": 0,
+      "tracked_date": "2018-04-28",
+      "business_id": 166
+    }
+  ]
+}

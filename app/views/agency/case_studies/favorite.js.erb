@@ -1,0 +1,10 @@
+$(".case_studies_list").html("<%= escape_javascript render( partial: 'agency/case_studies/case_studies_list') %>");
+
+if( "<%= @favorite %>" == "true" ) {
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+else{
+  $('html, body').animate({
+    scrollTop: $(".rem_case_studies").offset().top
+  }, 2000);
+}

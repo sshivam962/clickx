@@ -1,0 +1,40 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Performance-Review.title-icon
+    Ranking Position Changes
+    %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Ranking Position Changes.', 'title-direction': 'bottom'}
+  .options
+    %span{'ng-class': "{'disable-button': export_disabled}"}
+      %export-template{ 'pdf': 'true', 'csv': 'true' }
+
+.container-fluid
+  %div#ranking_positions
+    .row
+      .col-md-12
+        .panel.panel-default
+          .panel-heading
+            Keyword : {{search_term.name}}
+          .panel-body
+            %center{'ng-if': 'latest_rankings.length == 0'}
+              %p We are fetching your report for you.. please check back again after sometime
+            .table-responsive{'ng-if': 'latest_rankings.length > 0'}
+              %table.table.table-hover.table-bordered.table-vam{style: 'table-layout: fixed'}
+                %thead
+                  %tr
+                    %th{style: 'width: 52%;'} Search Result
+                    %th Current Position Ranking
+                    %th Last 7 Days
+                    %th Last 14 Days
+                    %th Last 30 Days
+                %tbody
+                  %tr{'ng-repeat': 'ranking in latest_rankings'}
+                    %td{style: 'word-wrap: break-word;'}
+                      .gs-title
+                        %a{href: "{{ranking.href}}", target: '_blank'} {{ranking.title}}
+                      .gsc-url {{ranking.href}}
+                      .gs-snippet
+                        {{ranking.description}}
+                    %td.rank {{ranking.rank}}
+                    %td.rank {{ranking.last_7_days | numberWithSign}}
+                    %td.rank {{ranking.last_14_days | numberWithSign}}
+                    %td.rank {{ranking.last_30_days | numberWithSign}}

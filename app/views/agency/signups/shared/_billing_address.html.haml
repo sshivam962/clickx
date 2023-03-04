@@ -1,0 +1,24 @@
+.d-sm-flex.pb-3
+  .w-sm-50.pr-sm-3.pb-sm-0.pb-3
+    %label.input-label{for: 'billing_address_line_1'} Address
+    = text_field_tag 'billing[address_line_1]', '', required: true, class: 'form-input'
+  .w-sm-50.pl-sm-3
+    %label.input-label{for: 'billing_address_line_2'} Address 2
+    = text_field_tag 'billing[address_line_2]', '', class: 'form-input'
+.d-sm-flex.pb-3
+  .w-sm-50.pr-sm-3.pb-sm-0.pb-3
+    %label.input-label{for: 'billing_city'} City
+    = text_field_tag 'billing[city]', '', required: true, class: 'form-input'
+  .w-sm-50.pl-sm-3
+    %label.input-label{for: 'billing_state'} State/Province/Region
+    #state_div
+      = render 'agency/signups/shared/states', states: {}
+.d-sm-flex.pb-3
+  .w-sm-50.pr-sm-3.pb-sm-0.pb-3
+    %label.input-label{for: 'billing_zip'} ZIP/Postal Code
+    = text_field_tag 'billing[zip]', '', class: 'form-input', required: true
+  .w-sm-50.pl-sm-3
+    %label.input-label{for: 'billing_country'} Country
+    .custom-select
+      = select_tag 'billing[country]', options_for_select(ISO3166::Country.all_translated.collect {|c| [c, c]}, 'United States'), class: 'form-input select', required: true, data: {url: '/p/states', partial: 'agency/signups/shared/states'}, id: 'country_select'
+.pb-5

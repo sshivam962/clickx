@@ -1,0 +1,23 @@
+- content_for :title do
+  Academy
+.page-content.ui-2020
+  .page-heading.pt-md.pb-md
+    .row.align-items-center
+      .col-md-6
+        %h1
+          %i.clickx-icon-SellSheets
+          Academy
+  .container-fluid
+    .panel
+      .panel-body.bg-white.panel-br-10.pt-0.pb-0
+        .row.d-flex.flex-wrap
+          - @courses.each do |course|
+            .col-xs-12.col-sm-6.col-lg-4
+              .academy-item
+                %a.academy-item__link{href: business_course_path(course)}
+                  - if course.thumbnail_file_url.present?
+                    = image_tag course.thumbnail_file_url
+                  %h2.academy-item__name
+                    = course.title
+                  = course_progress(course)
+    .spacer15

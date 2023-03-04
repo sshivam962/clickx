@@ -1,0 +1,15 @@
+.panel
+  .panel-body
+    %table.table.table-bordered.users.reports.table-condensed.table-hover.table-clickable
+      %thead
+        %th User
+        %th Action
+
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td
+              = user.email
+            %td
+              = link_to super_admin_permission_path(user.id, permission: @permission), method: :delete, remote: true, data: { confirm: 'Are you sure you want to remove access to this user?' } do
+                %button.btn.btn-danger.primary-button Remove access

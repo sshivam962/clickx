@@ -1,0 +1,132 @@
+- total_avg_score = @grader_report.total_avg_score
+= hidden_field_tag :total_avg_score, total_avg_score
+.clearfix
+.d-lg-flex.flex-wrap.d-block
+  .col.col-stretch.d-lg-flex.d-block.align-items-center
+    .grader-message
+      %div
+        = total_avg_score_message(@grader_report)
+  .col.col-graph
+    .panel
+      .panel-body.panel-br-10.bg-white.color-dark.p-lg-5.p-4
+        .relative
+          #graderChart{"data-highcharts-chart" => "0"}
+          .grader-chart-title
+        .fs-xs.fs-sm-sm Overall grade for:
+        .fs-sm.fs-sm-md.fs-md-24.fw-m.word-break.lh-12
+          = @grader_report.domain_url
+  .col.d-flex.align-items-center.col-stretch
+    .col-stretch.grader-stats
+      -# .grader-stats__item
+      -#   - score = @grader_report.backlinks_info.score
+      -#   %h3.text-info
+      -#     %h3{class: "text-#{overall_grade_klass(score)}"}
+      -#       = score
+      -#       %span / 100
+      -#   .progress.mb-sm
+      -#     .progress-bar{class: "progress-bar-#{overall_grade_klass(score)}", style: "width: #{score}%"}
+      -#   %p On-Page Optimization
+
+      -# .grader-stats__item
+      -#   - score = @grader_report.backlinks_info.score
+      -#   %h3{class: "text-#{overall_grade_klass(score)}"}
+      -#     = score
+      -#     %span / 100
+      -#   .progress.mb-sm
+      -#     .progress-bar{class: "progress-bar-#{overall_grade_klass(score)}", style: "width: #{score}%"}
+      -#   %p Off-Page Optimization
+
+      .grader-stats__item
+        - score = @grader_report.website_performance_avg_score
+        %h3{class: "text-#{overall_grade_klass(score)}"}
+          = score
+          %span / 100
+        .progress.mb-sm
+          .progress-bar{class: "progress-bar-#{overall_grade_klass(score)}", style: "width: #{score}%"}
+        %p Website Performance
+.clearfix
+
+:javascript
+  total_avg_score = parseFloat($('#total_avg_score').val())
+  var winWidth = jQuery(window).width();
+  var containerWidth = jQuery('#graderChart').width();
+  if(winWidth > 460) {
+    var size = 380;
+    var innerSize = 350;
+    var fontSize = '70px';
+    var textTop = 25;
+  } else {
+    var size = containerWidth;
+    var innerSize = size - 30;
+    var fontSize = '50px';
+    var textTop = size / 4 - 40;
+  }
+  function chart() {
+    $('.grader-chart-title').html(total_avg_score);
+    $('#graderChart').highcharts({
+      chart: {
+        type: 'pie',
+        backgroundColor:'transparent'
+      },
+      exporting: { enabled: false },
+      title: {
+        text: ''
+      },
+      plotOptions: {
+        pie: {
+          innerSize: '60%',
+          showInLegend: false,
+          dataLabels: {
+            enabled: false
+          }
+        },
+        series: {
+          states: {
+            hover: {
+              enabled: false
+            }
+          }
+        }
+      },
+      legend: {
+        align: 'right',
+        layout: 'vertical',
+        verticalAlign: 'bottom',
+        itemMarginBottom: 0,
+        itemStyle: { fontWeight: 'normal' },
+        labelFormatter: function() {
+          return this.info ;
+        }
+      },
+      tooltip: { enabled: false },
+      series: [
+      {
+        data: [
+          {
+            name: total_avg_score,
+            y: total_avg_score,
+            x: 200,
+            color: '#EF5023',
+            className:'chart-percentage'
+          },
+          {
+            name: 100 - total_avg_score,
+            y: 100 - total_avg_score,
+            x: 100,
+            color: '#E0E0E0',
+            className:'chart-line'
+          }
+        ],
+        name: '',
+        size: size,
+        innerSize: innerSize,
+        pointPadding: 0,
+        groupPadding: 0
+      }
+      ],
+      template: 'donut',
+      title: false
+    });
+  }
+  chart();
+  window.addEventListener('resize', chart);

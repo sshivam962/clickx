@@ -1,0 +1,21 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1 Site Audit
+  %i.fa.fa-info-circle.tooltip-text-icon.tooltip-text-icon-pos{ 'title': 'This tool helps you analyze your site pages taking on-Page SEO, crawlability, backlinks and keywords into consideration.It lets you easily know how good your pages are optimized for SEO.It gives you suggestions on the things you can improve and the things that need your immediate attention.', 'title-direction': 'bottom' }
+  .options
+    .inlineb.mr-md
+      %span.text-info.pr-sm [ as of {{updated_at}} ]
+  .col-sm-12.p-n.mt-md
+    %span.text-muted.pr-sm.text-bold.pr-md Page Analysis:
+    %a.text-info{ 'ng-href': '{{page_uri}}', 'target': '_blank' }
+      {{page_uri | urlPath}}
+.container-fluid
+  .row
+    .col-md-12.mb-sm{ 'ng-init': "loadTemplate('errors')" }
+      %ul.nav.nav-tabs.material-nav-tabs.mb-lg.menu.overview
+        %li{ 'role': 'presentation', 'ng-class': "{ 'active': settings_tab == template }",
+          'ng-repeat': 'template in templates' }
+          %a{ 'ng-click': 'loadTemplate(template)' } {{ template | humanize }}
+
+    .col-md-12.mb-sm
+      .tab-content
+        .settings{ 'ng-include': '', 'src': 'current_template' }

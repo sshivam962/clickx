@@ -1,0 +1,111 @@
+.header.no-bottom-border.container
+  %h1 Add New Plan
+
+= form_with model: @plan, url: super_admin_plans_path  do |f|
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :Name, 'Name'
+      .col-sm-3
+        = f.text_field :name, class: ' form-control login display-inline', placeholder: "Name"
+
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :plan_id, 'Plan ID'
+      .col-sm-3
+        = f.text_field :plan_id, class: ' form-control login display-inline', placeholder: "Plan ID"
+
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :interval, 'Interval'
+      .col-sm-3
+        = f.select :interval, options_for_select([['Select Interval',''],['Day','day'],['Week','week'],['Month','month'],['Year','year']]), {}, class: 'form-control',id: 'interval'
+
+  .form-group.interval_count
+    .row
+      .col-sm-2
+        = f.label :interval_count, 'Interval Count'
+      .col-sm-3
+        = f.number_field :interval_count, class: ' form-control login display-inline', placeholder: "Interval Count", min: 1
+
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :currency, 'Currency'
+      .col-sm-3
+        = f.select :currency, options_for_select([['USD','usd']]), {}, class: 'form-control',id: 'currency'
+
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :amount, 'Amount'
+      .col-sm-3
+        = f.number_field :amount, class: ' form-control login display-inline', placeholder: "99.99"
+
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :statement_descriptor, 'Statement Descriptor'
+      .col-sm-3
+        = f.text_field :statement_descriptor, class: ' form-control login display-inline', placeholder: "Statement Descriptor"
+
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :trial_period_days, 'Trial Period Days'
+      .col-sm-3
+        = f.number_field :trial_period_days, class: ' form-control login display-inline', placeholder: "Trial Period Days", min: 0
+
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :public, 'Visibility'
+      .col-sm-3
+        = f.radio_button :public,'Private', class: 'mr-sm', checked: true
+        Private
+        = f.radio_button :public, 'Public', class: 'ml-lg mr-sm'
+        Public
+
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :plan_type, 'Plan Type'
+      .col-sm-3
+        = f.radio_button :plan_type, '-', class: 'mr-sm', value: '-', checked: true
+        None
+        = f.radio_button :plan_type, 'client', class: 'ml-lg mr-sm', value: 'client'
+        End User
+
+  .form-group
+    .row
+      .col-sm-5
+        = f.submit 'Save Plan', class: 'btn btn-warning saveBtn'
+        = link_to 'Back', super_admin_plans_path, class: 'btn btn-default'
+
+:css
+  .interval_count {
+    display:none;
+  }
+  .feature {
+    width: 100px!important;
+  }
+
+:javascript
+  $(document).ready(function(){
+    $('#interval').on('change', function(){
+      if($('#interval').val() == 'day'){
+        $('.interval_count').show()
+      } else if($('#interval').val() == 'week'){
+        $('.interval_count').show()
+      }else if($('#interval').val() == 'month'){
+        $('.interval_count').show()
+      }else if($('#interval').val() == 'year'){
+        $('.interval_count').show()
+      }else{
+        $('.interval_count').hide()
+      }
+    });
+  });
+  $('#feature').tagsInput();

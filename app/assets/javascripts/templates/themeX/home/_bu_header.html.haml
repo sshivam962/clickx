@@ -1,0 +1,124 @@
+.logo-area
+  %a.navbar-brand.navbar-brand-primary{ href: "{{dashboard_url}}" }
+    %image{'ng-src': "{{agency_logo}}", class: 'show-on-collapse img-logo-white', 'ng-if': 'agency_logo'}
+    %image{'ng-src': "{{agency_square_logo}}", class: 'img-white', 'ng-if': 'agency_square_logo'}
+  %span#trigger-sidebar.toolbar-trigger.toolbar-icon-bg.stay-on-search.hidden-sm
+    %a{"data-placement":"right", "data-toggle":"tooltips", title: "Toggle Sidebar"}
+      %span.icon-bg
+        %i.material-icons menu
+  .userdetailsclick.hidden-xs.toolbar-trigger.toolbar-icon-bg.ov-h
+    %h4.title-fix
+      .target-title
+        %x{'ng-if' => "selected_business != undefined "}
+          {{ selected_business.name }} :
+        {{ current_user_email }}
+  .upgrade-button.pl-xxl.p-xs.mt{'ng-if': 'business.is_clickx && business.free_service'}
+    %a.btn.md-raised.md-primary.pr-md.pl-md.md-button.md-ink-ripple{href: "/#/billing" }
+      Upgrade Now
+%div.pull-right
+  .mt.pull-left{ 'ng-if': 'business.dummy' }
+    %small.label.label-danger.p-sm
+      DEMO CAMPAIGN
+  %ul.nav.navbar-nav.toolbar.pull-right
+    / %li.dropdown.toolbar-icon-bg{ 'ng-include': "'themeX/home/_notifications.html'"}
+    %li.dropdown.toolbar-icon-bg{'ng-class': "{'nav--item' : current_agency.growth_plan_key}"}
+      %a.nav-account.dropdown-toggle{"aria-expanded" => "false", "data-placement" => "right", "data-toggle" => "dropdown", :title => "My account"}
+        .nav-user-info.d-flex.align-items-center
+          .nav-user__username.d-none.d-lg-block
+            {{ is_system_user ? 'System User' : current_user_name | limitTo:20 }}
+            %br
+            %span ID # : {{ header_unique_id() }}
+          .avatar
+            .avatar-img{'ng-if': 'current_user_logo'}
+              %image{'ng-src': "{{current_user_logo}}", alt: "{{current_user_initials}}", class: 'media-object'}
+            .avatar-text{'ng-if': '!current_user_logo'}
+              {{current_user_initials}}
+          %span.nav-user__icon{ 'ng-if': '!demo_login' }
+            %i.material-icons arrow_drop_down
+        .ripple-container
+      %ul.dropdown-menu.users{role: "menu", 'ng-if': '!demo_login' }
+        %li
+          %a{href: '/profile'}
+            %span.myaccicon>
+              %i.clickx-icon-user
+            My Profile
+        %li
+          %a{href: "", 'ng-click': "select_campaign($event)"}
+            %span.myaccicon
+              %i.clickx-icon-switch2
+            Select A Campaign
+        %li{'ng-if':'(is_admin_session() || is_agency_admin())'}
+          %a{href: "", 'ng-click': "select_ownable_business($event)"}
+            %span.myaccicon.sign-in-icon
+              %i.fa.fa-sign-in
+            Switch Accounts
+        %li.divider{'ng-if':'is_admin_session() || is_agency_admin()'}
+        .topnav-dropdown-header{'ng-if':'is_admin_session() || is_agency_admin()'}
+          %span Switch Users
+        .scroll-pane
+          .scroll-content
+            %li{'ng-repeat':"user in current_business_users", 'ng-if':'is_admin_session() || is_agency_admin()' }
+              %a{href: "/switch_to_business_user?business_id={{current_business}}&user_id={{user.id}}", 'ng-class':"{'fw-800': current_user_id == user.id}"} {{user.preview_user ? 'System User' : user.first_name}}
+    %li.dropdown.nav--item
+      %a.myaccounticon.nav--dots.dropdown-toggle{"aria-expanded" => "false", "data-placement" => "right", "data-toggle" => "dropdown"}
+        %span.icon-bg.pull-right
+          %i.material-icons more_vert
+        .ripple-container
+      %ul.dropdown-menu{role: "menu"}
+        %li{ 'ng-if': '!demo_login' }
+          %a{href: "/b/settings/general"}
+            %span.myaccicon>
+              %i.clickx-icon-Gear
+            Settings
+        %li{ 'ng-if': '!demo_login && current_agency_name == "Clickx" && subscription_plans_available == "true"' }
+          %a{href: "/#/billing"}
+            %span.myaccicon>
+              %i.clickx-icon-Reports
+            Billing
+        %li{ 'ng-if': '!demo_login' }
+          %a{href: "/b/users"}
+            %span.myaccicon>
+              %i.clickx-icon-user-management
+            User Management
+        %li.divider{ 'ng-if': '!demo_login' }
+        %li{'ng-show': "!demo_login && (intelligence_enabled || preview_user)"}
+          %a{href: "/#/{{current_business}}/questionnaire"}
+            %span.myaccicon
+              %i.clickx-icon-IntelligentStrategies
+            Campaign Intelligence
+        %li{ 'ng-hide': "demo_login || is_dummy_business || ( !is_system_user && is_managed_service == 'true' )" }
+          %a{href: "/#/integrations"}
+            %span.myaccicon>
+              %i.clickx-icon-Maintenance
+            Integrations
+        %li.divider
+        %li.py-3
+          .toggle-darkmode.d-flex.align-items-center.text-black.pl-3
+            .darkmode-switcher.d-inline-block.my-0.mr-3
+              .darkmode-switch
+                %span.darkmode-switch-circle
+                .col 
+                  %i.clx-icon-sun
+                .col 
+                  %i.clx-icon-moon
+            Darkmode
+        %li.divider{ 'ng-if': '!demo_login' }
+        %li{'ng-if':"is_admin_session()"}
+          %a{href: "/switch_to_admin_user"}
+            %span.myaccicon
+              %i.clickx-icon-Convert
+            Switch To Admin User
+        %li{'ng-if':"is_agency_admin()"}
+          %a{href: "/switch_to_agency_user"}
+            %span.myaccicon
+              %i.clickx-icon-Convert
+            Switch To Agency Admin
+
+        %li
+          %a{href: '', 'ng-click':'sign_out()'}
+            %span.myaccicon>
+              %i.clickx-icon-power-button
+            Logout
+
+%div{'ng-include': '', src: "'themeX/home/_change_business.html'"}
+%div{'ng-include': '', src: "'themeX/home/_select_ownable_business.html'"}

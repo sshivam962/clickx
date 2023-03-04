@@ -1,0 +1,85 @@
+.row{'ng-show':'false'}
+  .col-md-12
+    .tab-container
+      %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+        %li.active
+          %a{"data-toggle":"tab", 'data-target': "#visits", 'ng-click':"resizeChart('visits_chart'); referrals()"} Visits
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#visitors", 'ng-click':"resizeChart('visitors_chart'); referrals()"} Visitors
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#pages-session", 'ng-click':"resizeChart('page_per_visit_chart'); referrals()"} Pages/Session
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#session-duration", 'ng-click':"resizeChart('avg_session_chart'); referrals()"} Avg. Session Duration
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#new-session", 'ng-click':"resizeChart('new_visits_chart'); referrals()"} % New Sessions
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#bounce-rate", 'ng-click':"resizeChart('bounce_chart'); referrals()"} Bounce Rate
+      .tab-content
+        #visits.tab-pane.active
+          .panel-body
+            .centered
+              #visits_chart
+        #visitors.tab-pane
+          .panel-body
+            .centered
+              #visitors_chart
+        #pages-session.tab-pane
+          .panel-body
+            .centered
+              #page_per_visit_chart
+        #session-duration.tab-pane
+          .panel-body
+            .centered
+              #avg_session_chart
+        #new-session.tab-pane
+          .panel-body
+            .centered
+              #new_visits_chart
+        #bounce-rate.tab-pane
+          .panel-body
+            .centered
+              #bounce_chart
+        .row
+          .col-sm-12.text-center{ "ng-include": "", "src": "'themeX/google_analytics/_chartFilter.html'" }
+
+.row
+  .col-md-12
+    .tab-container
+      .tab-content{'st-table':"referrals", 'st-safe-src':"copy_referrals"}
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th{'st-sort':'site'}
+                  %u.help_pointer{ "title": "Source from where users visited your site" }
+                    Source
+                %th{ 'st-sort':'totalUsers', 'st-sort-default':'reverse'}
+                  %u.help_pointer{ "title": "Number of unique visitors to your site from a source"  }
+                    Users
+                %th{ 'st-sort': 'sessions', 'st-sort-default': 'reverse' }
+                  %u.help_pointer{ 'title': 'Number of sessions your top pages are getting. We have also included the percent of total sessions a given page getting is' }
+                    Sessions
+                %th{'st-sort':'screenPageViews'}
+                  %u.help_pointer{ 'title': 'Number of page views your top page are getting. We have also included the percent of total page views a given page is getting' }
+                    Page Views
+                %th{'st-sort':'screenPageViewsPerSession'}
+                  %u.help_pointer{ "title": "Number of pages a user from a source visited in your site per session on average" }
+                    Pages/Session
+                %th{'st-sort':'averageSessionDuration'}
+                  %u.help_pointer{ "title": "Average time spent by users from a source on your site" }
+                    Avg. Session
+                    %br Duration
+                %th{'st-sort':'bounceRate'}
+                  %u.help_pointer{ "title": "Percent of users from a source who directed away from your site after visiting a single page" }
+                    Bounce Rate
+            %tbody
+              %tr{'ng-repeat':"site in referrals"}
+                %td{align: "left"}
+                  {{site.sessionSource}}
+                %td {{site.totalUsers | number}}
+                %td {{site.sessions | number}}
+                %td {{site.screenPageViews | number}}
+                %td {{site.screenPageViewsPerSession | number}}
+                %td {{site.averageSessionDuration | date:'HH:mm:ss'}}
+                %td {{site.bounceRate}} %
+        %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}

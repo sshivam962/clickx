@@ -1,0 +1,83 @@
+.bg-white.px-md-5.pt-5.pb-3.p-3.rounded.mb-4.shadow
+  .d-md-flex.mb-4.flex-wrap.mx-n3
+    .w-md-50.pb-4.px-3.mb-2
+      .input-wrapper
+        %label{for: 'agency_name'} Agency Name
+        = f.text_field :name, required: true, class: 'input-wrapper-input login', placeholder: 'Agency Name'
+    .w-md-50.pb-4.px-3.mb-2
+      .input-wrapper
+        %label{for: 'agency_name'} Agency Legal Name (Used in )
+        = f.text_field :legal_name, class: 'input-wrapper-input login', placeholder: 'Agency Legal Name', readonly: true
+    .w-md-50.pb-4.px-3.mb-2
+      .input-wrapper
+        %label{for: 'agency_support_email'} Support Email
+        = f.text_field :support_email, class: 'input-wrapper-input login', placeholder: 'support@clickx.io'
+    .w-md-50.pb-4.px-3.mb-2
+      .input-wrapper
+        %label{for: 'agency_phone'} Phone
+        = f.text_field :phone, class: 'input-wrapper-input login', placeholder: 'Phone'
+    .w-md-50.pb-4.px-3.mb-2
+      .input-wrapper
+        %label{for: 'agency_address'} Address
+        = f.text_field :address, class: 'input-wrapper-input login', placeholder: 'Address'
+    .w-md-50.pb-4.px-3.mb-2
+      .subscription_block.input-wrapper
+        %label{for: 'agency_package'} Package
+        = render 'super_admin/agencies/shared/subscription_form', agency: @agency, active_subscription: @active_subscription, subscription_schedule: @subscription_schedule
+    - if f.object.persisted?
+      .w-md-50.pb-4.px-3.mb-2
+        .input-wrapper
+          %label{for: 'fixed_plan_id'} FB Fixed Plan
+          - plans_collection = fb_fixed_plans.map{|p| [p.name, p.id]}
+          = select_tag 'agency[fixed_plan_id]', options_for_select(plans_collection, f.object.fb_fixed_plan&.id), include_blank: 'Select Plan', class: 'input-wrapper-input'
+    .w-md-50.pb-4.px-3.mb-2
+      = f.label :labels
+      .custom-select
+        = f.select :labels, ActsAsTaggableOn::Tag.order(:name).pluck(:name), { selected: f.object.labels&.split(',') }, class: 'input-wrapper-input', multiple: true
+    .w-md-50.pb-4.px-3.mb-2
+      %label{for: 'timezone_name'} Time Zone
+      .d-flex
+        .pb-4.mb-2.pr-4.width150
+          - zone_hash = ActiveSupport::TimeZone::MAPPING.sort_by {|k, v| v}.to_h
+          - zone_collection = zone_hash.map{|zone_key, zone_value| [zone_value, zone_key]}
+          = select_tag 'agency[time_zone_name]', options_for_select(zone_collection, f.object.time_zone_name), class: 'input-wrapper-input'
+        .pb-4.mb-2.width150
+          .input-wrapper
+            %input.input-wrapper-input{:type => "text" , value: f.object.start_time, id: 'agency_time_zone_start_time', name: 'agency[start_time]'}
+    
+
+  %hr/
+  .d-md-flex.mb-4.flex-wrap.mx-n3
+    .w-md-50.pb-4.px-3.mb-2
+      .input-wrapper
+        %label{for: 'agency_clients_limit'} Clients Limit
+        = f.number_field :clients_limit, class: 'input-wrapper-input login'
+    .w-md-50.pb-4.px-3.mb-2
+      .input-wrapper
+        %label{for: 'agency_keywords_limit'} Keywords Limit
+        = f.number_field :keywords_limit, class: 'input-wrapper-input login'
+    .w-md-50.pb-4.px-3.mb-2
+      .input-wrapper
+        %label{for: "agency_competitors_limit"} Competitors Limit
+        = f.number_field :competitors_limit, class: 'input-wrapper-input login'
+    .w-md-50.pb-4.px-3.mb-2
+      .input-wrapper
+        %label{for: "agency_lead_strategy_limit"} Lead Strategy Limit
+        = f.number_field :lead_strategy_limit, class: 'input-wrapper-input login'
+    .w-md-50.pb-4.px-3.mb-2
+      .input-wrapper
+        %label{for: "agency_number_of_users"} Number of users
+        = f.number_field :number_of_users, class: 'input-wrapper-input login'
+    .w-md-50.pb-4.px-3.mb-2
+      .input-wrapper
+        %label{for: "agency_connect_call_link"} Connect Call Link
+        = f.text_field :connect_call_link, class: 'input-wrapper-input login'
+    .w-md-50.pb-4.px-3.mb-2
+      .input-wrapper
+        %label{for: "agency_prospecting_call_link" } Prospecting Call Link
+        = f.text_field :prospecting_call_link, class: 'input-wrapper-input login'
+    .w-md-50.pb-4.px-3.mb-2
+      .input-wrapper
+        %label{for: "agency_kickoff_call_link"} Kick-Off Call Link
+        = f.text_field :kickoff_call_link, class: 'input-wrapper-input login'
+    

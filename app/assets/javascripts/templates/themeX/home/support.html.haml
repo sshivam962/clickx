@@ -1,0 +1,37 @@
+%script{src: "https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js", :type => "text/javascript"}
+%link{href: "https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.css", rel: "stylesheet"}
+
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Support.title-icon>
+    Support
+  .options
+    .form-group
+      %a.btn.btn-warning.btn-raised{ 'title': 'Go to knowledge base',
+      'href': "https://support.clickx.io/support/home", 'target': '_blank',
+      'ng-if': 'current_agency_name == "Clickx" || is_agency_admin_user' }
+        %i.fa.fa-support
+        Knowledge Base
+.container-fluid
+  .row
+    .col-md-12
+      .tab-container
+        .tab-content{ 'ng-if': 'current_agency_name == "Clickx" || is_agency_admin_user' }
+          %iframe#freshwidget-embedded-form.freshwidget-embedded-form{ frameborder: "0", height: "500px", scrolling: "no", src: "https://clickx.freshdesk.com/widgets/feedback_widget/new?&widgetType=embedded&formTitle=Clickx+Support&submitTitle=Submit&submitThanks=Thank+you%2C+we+will+get+back+to+you+shortly!&screenshot=no", title: "Feedback Form", width: "100%"}
+        .tab-content{ 'ng-if': 'current_agency_name != "Clickx" && !is_agency_admin_user' }
+          .container-fluid
+            .row
+              .col-sm-3.p-n{ 'style': 'border-right: solid 3px grey;' }
+                %img.img-responsive{ 'ng-src': '{{ current_agency.square_logo || current_agency.logo || current_agency.email_logo }}',
+                'style': 'height: 80px;width: auto;' }
+              .col-sm-9
+                %h4.text-muted.ml-xs
+                  %i.fa.fa-map-marker
+                  {{ current_agency.name + ', ' + current_agency.address }}
+                %h4.text-muted
+                  %a{ 'href': '{{ "mailto:" + current_agency.support_email }}' }
+                    %i.fa.fa-envelope
+                    {{ current_agency.support_email }}
+                %h4.text-info
+                  %i.fa.fa-phone
+                  {{ current_agency.phone }}

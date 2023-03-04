@@ -1,0 +1,145 @@
+.pagge-middle
+  .profile-top
+    - cover_image_url = @profile.background_image.present? ? @profile.background_image : image_path('network/cover-image.png')
+    .profile-cover{:style => "background: url(#{cover_image_url});"}
+    .bg-white.shadow-md
+      .container.mx-auto.px-4.pb-6
+        .lg:flex.items-starting.profile-details.text-center.sm:text-left.relative.z-10
+          - logo_url = @profile.user.logo.present? ? @profile.user.logo : image_path('network/profile-avatar.png')
+          .profile-avatar.mx-auto.lg:mx-0.bg-no-repeat{:style => "background-image: url(#{logo_url});"}
+          .col.text-center.lg:text-left.flex-1.lg:pl-8.pt-8
+            .lg:flex.items-end
+              .flex-1.pr-4
+                .text-4xl.font-light.leading-6.mb-3= current_user.name
+                - description = @profile.description.present? ? @profile.description : ''
+                .text-gray-700= description
+                .pb-5
+                - if @profile.available_hours.present? && @profile.time_period.present?
+                  .flex.justify-center.lg:justify-start.text-gray-700
+                    .col.pr-5 Availability
+                    .col.text-blue-400= "#{@profile.available_hours} hr/#{@profile.time_period}"
+
+                %ul.flex.justify-center.lg:justify-start.pt-5
+                  - if @profile.linkedin.present?
+                    %li.mr-1
+                      %a.bg-white.hover:bg-gray-200.text-gray-700.hover:bg-gray-700.hover:text-white.w-8.h-8.leading-8.inline-block.text-center.rounded-full.transition.duration-300{:href => @profile.linkedin}
+                        %i.fa.fa-linkedin
+                  - if @profile.facebook.present?
+                    %li.mr-1
+                      %a.bg-white.hover:bg-gray-200.text-gray-700.hover:bg-gray-700.hover:text-white.w-8.h-8.leading-8.inline-block.text-center.rounded-full.transition.duration-300{:href => @profile.facebook}
+                        %i.fa.fa-facebook
+                  - if @profile.instagram.present?
+                    %li.mr-1
+                      %a.bg-white.hover:bg-gray-200.text-gray-700.hover:bg-gray-700.hover:text-white.w-8.h-8.leading-8.inline-block.text-center.rounded-full.transition.duration-300{:href => @profile.instagram}
+                        %i.fa.fa-instagram
+                  - if @profile.dribbble.present?
+                    %li.mr-1
+                      %a.bg-white.hover:bg-gray-200.text-gray-700.hover:bg-gray-700.hover:text-white.w-8.h-8.leading-8.inline-block.text-center.rounded-full.transition.duration-300{:href => @profile.dribbble}
+                        %i.fa.fa-dribbble
+              .col-auto.pt-6.lg:pt-0
+                = link_to 'Edit Profile', edit_network_profile_path, class: 'btn uppercase shadow-md text-center'
+  .pt-12.bg-cover{:style => "background: url(#{image_path('network/profile-section-bg.png')});"}
+    .container.mx-auto.px-4
+      .border.bg-light-blue.border-blue-200.rounded-md.mb-8
+        .bg-white.py-4.px-4.rounded-t-md
+          .text-lg.color-dark-blue.font-medium Overview
+        .lg:p-5.p-4
+          - if @profile.overview.present?
+            %p= raw(@profile.overview.html_safe)
+          - else
+            %a.btn.btn--secondary{href: edit_network_profile_path}
+              %i.fa.fa-pencil.mr-2
+              Edit Overview
+          .text-center.pt-8.pb-3
+            %a.btn.btn--md.btn--blue.uppercase.shadow-md{href: download_cv_network_profile_path} Download My Resume
+
+      .border.bg-light-blue.border-blue-200.rounded-md.mb-8
+        .bg-white.py-4.px-4.rounded-t-md
+          .text-lg.color-dark-blue.font-medium What I Do
+        .lg:p-5.p-4
+          - if @profile.work_profiles.present?
+            .grid.grid-cols-1.md:grid-cols-2.gap-4
+              - @profile.work_profiles.each.with_index(1) do |work_profile, index|
+                %div
+                  .icon-box.md:px-4.text-lg.mb-8
+                    .text-2xl.text-dark.mb-3
+                      %span.text-2xl.text-blue.mr-3= "#{index}".length == 1 ? "0#{index}" : index
+                      = work_profile.title
+                    %p= raw(work_profile.description.html_safe)
+          - else
+            %a.btn.btn--secondary{href: edit_network_profile_path}
+              %i.fa.fa-plus.mr-2
+              Add What I Do
+      .border.bg-light-blue.border-blue-200.rounded-md.mb-8
+        .bg-white.py-4.px-4.rounded-t-md
+          .text-lg.color-dark-blue.font-medium Professional Skills
+        .lg:p-5.p-4
+          - if @profile.skills.present?
+            .grid.grid-cols-1.sm:grid-cols-2.gap-10.md:px-4
+              - @profile.skills.each do |skill|
+                .skill-item
+                  .flex.justify-between.mb-3.text-sm
+                    .col-auto= skill.name
+                    .col-auto= "#{skill.value}%"
+                  .skill-range
+                    .skill-range-percentage{:style => "width:#{skill.value}%"}
+          - else
+            %a.btn.btn--secondary{href: edit_network_profile_path}
+              %i.fa.fa-plus.mr-2
+              Add Skills
+      .border.bg-light-blue.border-blue-200.rounded-md.mb-8
+        .bg-white.py-4.px-4.rounded-t-md
+          .flex.justify-between
+            .col-auto
+              .text-lg.color-dark-blue.font-medium My Case Studies
+            .col-auto
+              - if @my_case_study_industries.present?
+                %a.btn.btn--secondary.btn--sm{href: new_network_case_study_path}
+                  %i.fa.fa-plus.mr-2
+                  Add Casestudy
+        .lg:px-5.px-4
+          - if @my_case_study_industries.present?
+            #industry_list.p-5
+              = render 'niche_list'
+          - else
+            .py-5
+              %a.btn.btn--secondary{href: new_network_case_study_path}
+                %i.fa.fa-plus.mr-2
+                Add Casestudy
+      .pb-12
+  - if @profile.stats.present?
+    .bg-light-blue
+      .mx-auto.px-8
+        .grid.grid-cols-2.lg:grid-cols-4.text-center.gap-2.lg:gap-10.text-gray-700.py-12.lg:py-0
+          - if @profile.stats['1'].present?
+            .col.lg:py-12.py-4
+              - icon = @profile.stats['1']['icon']
+              .pb-1.md:pb-2.lg:pb-1
+                .iconpicker-icon.text-5xl
+                  %i{class: icon}
+              .text-xl.lg:text-3xl= @profile.stats['1']['title']
+              .text-sm.lg:text-lg= @profile.stats['1']['value']
+          - if @profile.stats['2'].present?
+            .col.lg:py-12.py-4
+              - icon = @profile.stats['2']['icon']
+              .pb-1.md:pb-2.lg:pb-1
+                .iconpicker-icon.text-5xl
+                  %i{class: icon}
+              .text-xl.lg:text-3xl= @profile.stats['2']['title']
+              .text-sm.lg:text-lg= @profile.stats['2']['value']
+          - if @profile.stats['3'].present?
+            .col.lg:py-12.py-4
+              - icon = @profile.stats['3']['icon']
+              .pb-1.md:pb-2.lg:pb-1
+                .iconpicker-icon.text-5xl
+                  %i{class: icon}
+              .text-xl.lg:text-3xl= @profile.stats['3']['title']
+              .text-sm.lg:text-lg= @profile.stats['3']['value']
+          - if @profile.stats['4'].present?
+            .col.lg:py-12.py-4
+              - icon = @profile.stats['4']['icon']
+              .pb-1.md:pb-2.lg:pb-1
+                .iconpicker-icon.text-5xl
+                  %i{class: icon}
+              .text-xl.lg:text-3xl= @profile.stats['4']['title']
+              .text-sm.lg:text-lg= @profile.stats['4']['value']

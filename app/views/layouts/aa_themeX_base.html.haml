@@ -1,0 +1,46 @@
+!!!
+%html
+  %head
+    = render 'layouts/themeX/meta_tags'
+    %title
+      = yield(:title) || 'Clickx'
+
+    = stylesheet_link_tag 'themeX_base', media: 'all', 'data-turbolinks-track': false
+    = stylesheet_link_tag "https://www.authy.com/form.authy.min.css"
+    = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css'
+    = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/jquery-minicolors/2.3.4/jquery.minicolors.min.css'
+    %script{:src => "https://js.pusher.com/4.1/pusher.min.js"}
+    = javascript_include_tag "https://www.authy.com/form.authy.min.js"
+    = javascript_include_tag 'themeX_base', 'data-turbolinks-track': false
+    = javascript_include_tag 'jquery.card', 'data-turbolinks-track': false
+    = javascript_include_tag 'highcharts', 'data-turbolinks-track': false
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js', 'data-turbolinks-track': false
+    = javascript_include_tag Ckeditor.cdn_url
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/jquery-minicolors/2.3.4/jquery.minicolors.min.js'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js'
+    = csrf_meta_tags
+    = render partial: "layouts/favicon", locals: { agency_logo: current_agency&.favicon }
+
+    = javascript_include_tag 'country_states', 'data-turbolinks-track': false
+
+    = javascript_include_tag 'mail_country_states', 'data-turbolinks-track': false
+
+    = yield(:custom_assets)
+
+    = render 'layouts/themeX/fonts'
+    = render 'layouts/themeX/ie_support'
+    / = render 'layouts/themeX/freshwidget'
+    = render 'shared/google_analytics'
+  %body.sidebar-scroll.ui-2020.slidein-nav{"cz-shortcut-listen" => "true", class: welcome_banner_body_class(@welcome_banner), :style => ""}
+    = render 'layouts/themeX/flash'
+    = render 'layouts/themeX/welcome_bar' if @welcome_banner&.active && !@welcome_banner&.expired?
+    = render 'layouts/themeX/aa_header'
+    #wrapper.master-wrapper
+      #layout-static
+        = render 'layouts/themeX/aa_sidebar'
+        .static-content-wrapper
+          .static-content
+            .page-content
+              = yield
+    = render 'shared/feedback_modal'
+    = render 'layouts/agency/chat_init'

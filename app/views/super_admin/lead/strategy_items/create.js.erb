@@ -1,0 +1,7 @@
+<% if @strategy_item.errors.present? %>
+  toastr.error("<%= @strategy_item.errors.full_messages.to_sentence %>")
+<% else %>
+  $(".strategy_items#strategy_item_<%= @strategy_item.category%>").prepend("<%= escape_javascript render( partial: 'super_admin/lead/strategy_items/shared/item', locals: { item: @strategy_item }) %>");
+  $('.lead_strategy_item_text').val('');
+  toastr.success("Strategy Added");
+<% end %>

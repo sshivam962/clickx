@@ -1,0 +1,11 @@
+#manage-subscriptions-modal.modal.fade{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg{role: 'document'}
+    .modal-content
+      .modal-header
+        Manage #{agency.name} Subscription
+        %a.close.pl-md{'data-dismiss': 'modal'}
+          %span ×
+      .modal-body
+        .panel
+          .panel-body#manage_subscriptions_body
+            = render 'super_admin/agencies/shared/manage_subscriptions_body', active_subscription: active_subscription, agency: agency, subscription_schedule: subscription_schedule

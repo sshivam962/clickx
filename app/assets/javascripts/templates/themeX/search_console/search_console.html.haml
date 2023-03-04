@@ -1,0 +1,33 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Maintenance.title-icon>
+    Search Console
+    %i.fa.fa-info-circle.tooltip-text-icon{'title': 'This tool lets you analyze the data collected in your Google Search Console right inside Clickx. It lets you easily analyze the keywords you are ranking for, positions, impressions, top pages, crawl errors and also manage sitemaps.', 'title-direction': 'bottom'}
+  .options{ 'ng-if': '!demo_login' }
+    .form-group
+      %span{'ng-class': "{'disable-button': export_disabled}"}
+        %export-button{ 'pdf': 'true' }{ 'ng-if': 'ga_tab == "overview"' }
+      %md-button.md-raised.md-primary{'ng-click': 'load_datewise_analytics($event)', 'ng-hide' => "ga_tab == 'crawl_errors' || ga_tab == 'sitemaps' "} {{selectedRange.dateStart | date}} - {{selectedRange.dateEnd | date}}
+.container-fluid
+  %div
+    .row
+      .col-md-12
+        %ul.nav.nav-tabs.material-nav-tabs.mb-lg
+          %li{role: "presentation", 'ng-class' => "{'active' : ga_tab == 'overview'}"}
+            %a{'href' => "/#/{{current_business}}/search_console/queries"} Top Queries
+          %li{ 'ng-if': '!demo_login', role: "presentation", 'ng-class' => "{'active' : ga_tab == 'pages'}"}
+            %a{'href' => "/#/{{current_business}}/search_console/pages"} Top Pages
+          %li{ 'ng-if': '!demo_login', role: "presentation", 'ng-class' => "{'active' : ga_tab == 'sitemaps'}"}
+            %a{'href' => "/#/{{current_business}}/sitemaps"} Sitemaps
+
+
+
+      .col-md-12
+        .tab-content
+          .queries{'ng-if' => "ga_tab == 'overview'"}
+            %div{"ng-include" => "", :src => "'themeX/search_console/_search_console_queries.html'"}
+          .pages{'ng-if' => "!demo_login && (ga_tab == 'pages')"}
+            %div{"ng-include" => "", :src => "'themeX/search_console/_search_console_pages.html'"}
+          .sitemaps{'ng-if' => "!demo_login && (ga_tab == 'sitemaps')"}
+            %div{"ng-include" => "", :src => "'themeX/search_console/_sitemaps.html'"}
+

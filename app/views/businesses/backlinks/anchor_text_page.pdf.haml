@@ -1,0 +1,31 @@
+%html
+  %head
+    %h1 Anchor Text
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+  %body
+    %table-responsive
+      %table.table.table-bordered.table-vam.table-left
+        %thead
+          %th ANCHOR TEXT
+          %th TOPICS
+          %th REFERRING DOMAINS
+          %th TOTAL LINKS
+          %th DELETED LINKS
+          %th NO FOLLOW LINKS
+        %tbody
+          - @anchor_text.each do |anchor_text|
+            %tr
+              %td
+                = anchor_text.anchor_text
+              %td
+                = anchor_text.topics
+              %td
+                = anchor_text.referring_domains
+              %td
+                = anchor_text.total_links
+              %td
+                = anchor_text.deleted_links
+              %td
+                = anchor_text.no_follow_links
+            
+

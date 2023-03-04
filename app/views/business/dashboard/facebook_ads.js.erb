@@ -1,0 +1,68 @@
+<% if @error.present? || @fb_ads_data.blank? %>
+  console.log("<%= @error %>")
+  console.log("<%= @fb_ads_data %>")
+  $('#facebook_ads_section').html("<%= escape_javascript render( partial: 'business/dashboard/error/facebook_ads', locals: {}) %>");
+<% else %>
+  $('#facebook_ads_section').html("<%= escape_javascript render( partial: 'business/dashboard/shared/facebook_ads', locals: {}) %>");
+
+  Highcharts.chart('chart_fb-ads', {
+    chart: {
+      type: 'column',
+      height: 350
+    },
+    title: {
+      text: ''
+    },
+    xAxis: [
+      {
+        categories: gon.fb_graph_data.keys,
+        lineColor: '#ffaa80',
+        lineWidth: 3,
+        tickColor: '#ffaa80',
+        tickWidth: 3
+      }
+    ],
+    yAxis: {
+      plotLines: [
+        {
+          value: 0,
+          width: 1,
+          color: '#808080'
+        }
+      ],
+      title: {
+        text: 'Clicks'
+      },
+      min: 0
+    },
+    navigation: {
+      buttonOptions: {
+        align: 'left'
+      }
+    },
+    tooltip: {
+      formatter: function() {
+        return this.x + '<br><b>Clicks : ' + this.y.toFixed(2).toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</b>';
+      }
+    },
+    credits: {
+      enabled: false
+    },
+    plotOptions: {
+      areaspline: {
+        fillOpacity: 0.5,
+        marker: {
+          enabled: false
+        }
+      }
+    },
+    series: [
+      {
+        name: 'Current Period',
+        data: gon.fb_graph_data.clicks,
+        color: '#ffccb3',
+        lineColor: '#ffaa80'
+      }
+    ],
+  });
+<% end %>

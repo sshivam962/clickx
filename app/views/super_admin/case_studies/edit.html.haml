@@ -1,0 +1,10 @@
+- content_for :title do
+  = "Edit #{@case_study.title} | Clickx"
+.page-header
+  %h3
+    = @case_study.title
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: super_admin_case_studies_path } Back
+.agency-form
+  = form_for @case_study, url: super_admin_case_study_path(@case_study), method: :patch do |f|
+    = render 'form', f: f, super_admins: @super_admins

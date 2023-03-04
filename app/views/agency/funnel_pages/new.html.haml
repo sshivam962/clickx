@@ -1,0 +1,12 @@
+- content_for :title do
+  New Funnel Page | Clickx
+.page-heading.bg-white.mb-4
+  .container-fluid
+    .d-sm-flex.justify-content-between.align-items-center.flex-wrap
+      .col 
+        %h1 Edit #{@funnel_page.title}
+      .col.pt-3.pt-sm-0
+        %small
+          %a.btn.btn-sm.btn-reset-sm.btn--dark.btn-reset-m-0{href: agency_industries_path } Back
+= form_for @funnel_page, url: agency_funnel_pages_path, method: :post do |f|
+  = render 'form', f: f, funnel_page_id: @funnel_page.id

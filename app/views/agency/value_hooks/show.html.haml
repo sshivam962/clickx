@@ -1,0 +1,21 @@
+- content_for :custom_assets do
+  = stylesheet_link_tag 'themeX_base', media: 'all', 'data-turbolinks-track': false
+  = stylesheet_link_tag 'public/case_study', media: 'all', 'data-turbolinks-track': false
+.social-media-ad-image
+  .px-lg-4
+    .page-heading.mb-n.pb-md.mt-sm
+      .d-flex.justify-content-between.align-items-center
+        .col-auto
+          %h1
+            Value Hooks
+        .col-auto
+          %a.btn.btn-warning.btn-raised.m-n.f-w-lg{href: agency_value_hooks_path }
+            %i.fa.fa-arrow-left.pr-xs
+            Back
+  .content-container.text-center
+    .bg-white.rounded.shadow.p-4.my-5
+      = @value_hook.video_embed_code.html_safe
+      .mt-5.pt-3
+      - if raw(@value_hook.title).present?
+        %h2.fw-sb.mb-4.mt-0
+          = @value_hook.title

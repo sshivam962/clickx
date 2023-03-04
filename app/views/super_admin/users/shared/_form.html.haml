@@ -1,0 +1,54 @@
+%div.col-md-6
+  .row.course_form
+    .form-group
+    .form-group
+      = f.label :permissions
+      &nbsp;&nbsp;&nbsp;&nbsp;( 
+      = check_box_tag 'permitted_users', '', false
+      Select All Permission)
+      = select_tag 'user[permissions][]', options_for_select(User.permission_collection, f.object.roles.pluck(:name)), include_blank: true, class: 'form-control', multiple: true
+    .form-group
+      = f.label :academy
+      &nbsp;&nbsp;&nbsp;&nbsp;( 
+      = check_box_tag 'permitted_academy', '', false
+      Select All Academy)
+      = f.select :course_ids, options_for_select(Course.where(resource_type: 'admin').order(:title).pluck(:title, :id), f.object.course_ids), {include_blank: true}, {class: 'form-control', multiple: true}
+    .form-group
+      = f.label :department, class: 'font-size18'
+      = f.select :department, User.department_collection, { include_blank: 'Select Department' }, required: true, class: 'form-control'
+    .form-group
+      = f.submit "Save Permissions", class: 'btn btn-warning saveBtn'
+:javascript
+  $('#user_permissions_').select2({
+    width: '100%',
+    multiple: true
+  });
+
+  $('#user_course_ids').select2({
+    width: '100%',
+    multiple: true
+  });
+
+  $("#permitted_users").click(function(){
+    if($("#permitted_users").is(':checked') ){
+      $("#user_permissions_ > option").prop("selected","selected");
+      $("#user_permissions_").trigger("change");
+    }
+    else{
+        $("#user_permissions_ > option").removeAttr("selected");
+        $("#user_permissions_").trigger("change");
+     }
+  });
+
+
+
+  $("#permitted_academy").click(function(){
+    if($("#permitted_academy").is(':checked') ){
+      $("#user_course_ids > option").prop("selected","selected");
+      $("#user_course_ids").trigger("change");
+    }
+    else{
+        $("#user_course_ids > option").removeAttr("selected");
+        $("#user_course_ids").trigger("change");
+     }
+  });

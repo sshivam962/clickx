@@ -1,0 +1,103 @@
+.header.no-bottom-border.container
+
+  %h1 Add New Coupon
+
+= form_with model: @coupon, url: super_admin_coupons_path  do |f|
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :percent_off, 'Percent Off'
+      .col-sm-3
+        = f.number_field :percent_off, class: ' form-control login display-inline', placeholder: "Percent Off",min: 1, max: 100
+
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :currency, 'Currency'
+      .col-sm-3
+        = f.select :currency, options_for_select([['USD','usd']]), {}, class: 'form-control',id: 'currency'
+
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :amount_off, 'Amount Off'
+      .col-sm-3
+        = f.number_field :amount_off, class: ' form-control login display-inline', placeholder: "Amount"
+
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :duration, 'Duration'
+      .col-sm-3
+        = f.select :duration, options_for_select([['Select Duration',''],['forever','forever'],['once','once'],['repeating','repeating']]), {}, class: 'form-control',id: 'duration'
+
+  .form-group.duration_in_months
+    .row
+      .col-sm-2
+        = f.label :duration_in_months, 'Duration in months'
+      .col-sm-3
+        = f.number_field :duration_in_months, class: ' form-control login display-inline', placeholder: "Duration in months", min: 1, max: 12
+
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :coupon_id, 'Coupon ID'
+      .col-sm-3
+        = f.text_field :coupon_id, class: ' form-control login display-inline', placeholder: "Coupon ID"
+
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :max_redemptions, 'Max redemptions'
+      .col-sm-3
+        = f.number_field :max_redemptions, class: ' form-control login display-inline', placeholder: "Max redemptions", min: 1
+
+  .form-group
+    .row
+      .col-sm-2
+        = f.label :redeem_by, 'Redeem by'
+      .col-sm-3
+        = f.text_field :redeem_by, class: ' form-control login display-inline', "data-date-format":"mm-dd-yyyy", placeholder: "Redeem by", id: 'redeem_by'
+        %i.form-control-feedback.glyphicon.glyphicon-calendar.fa.fa-calendar.pr-lg
+
+  .form-group
+    .row
+      .col-sm-5
+        = f.submit 'Save Coupon', class: 'btn btn-warning saveBtn'
+        = link_to 'Back', super_admin_coupons_path, class: 'btn btn-default'
+
+:css
+  .duration_in_months {
+    display:none;
+  }
+  #redeem_by > span:hover{cursor: pointer;}
+
+  .form-control-feedback {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    display: block;
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    pointer-events: none;
+    font-weight: bold;
+  }
+
+:javascript
+  $(document).ready(function(){
+    $('#duration').on('change', function(){
+      if($('#duration').val() == 'repeating'){
+        $('.duration_in_months').show()
+      } else {
+        $('.duration_in_months').hide()
+      }
+    });
+    $("#redeem_by").datepicker({
+        autoclose: true,
+        todayHighlight: true
+    }).datepicker('update', new Date());
+  });
+

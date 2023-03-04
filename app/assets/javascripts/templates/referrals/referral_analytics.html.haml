@@ -1,0 +1,29 @@
+/ .header1
+/   %ul
+/     %li
+/       %a.btn.btn-success.pull-right.newBtn{ 'ng-click': 'go_back()' }
+/         %i.fa.fa-arrow-left.pr-xs
+/         Back
+/   %h1 Referral Analytics
+/ .container-fluid
+/   .row
+/     .col-xs-12.col-sm-12.col-md-12{ 'st-table': 'referral_analytics', 'st-pipe': 'getReferralAnalytics' }
+/       .referred-signups{ 'style': 'margin-top:50px', 'ng-if': 'referral_analytics' }
+/         %table.table.table-bordered.users.reports
+/           %thead
+/             %th{ 'ng-click': 'sortBy("referrer")' } Referrer
+/             %th Referral Code
+/             %th{ 'ng-click': 'sortBy("visits")' } Visits
+/             %th{ 'ng-click': 'sortBy("signups")' } Signups
+/             %th Convertion Rate(%)
+/           %tbody
+/             %tr{ 'ng-repeat': 'referral in referral_analytics' }
+/               %td.text-center {{ referral.referrer }}
+/               %td.text-center {{ referral.referral_code || 'Not Available' }}
+/               %td.text-center {{ referral.visits || '0' }}
+/               %td.text-center {{ referral.signups || '0' }}
+/               %td.text-center {{ (referral.signups/referral.visits*100 | number:0) || ' - ' }}
+/         .row.text-center.p-n.mgl-33
+/           .pagination-links{ 'st-pagination': '', 'st-items-by-page': 'itemsByPage' }
+/       .jumbotron{ 'ng-if': '!referral_analytics' }
+/         %h3.text-center No analytics data to be shown.

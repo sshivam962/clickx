@@ -1,0 +1,24 @@
+.col-lg-12.col-md-12.col-sm-12.col-xs-12.invoice
+  .panel.panel-default
+    .panel-heading
+      Invoices for
+      %b
+        = @package_subscription.package_name.humanize.titleize
+    - @invoices.each do |invoice|
+      %hr.m-n
+      .panel-body
+        %p
+          Payment Status:
+          = invoice.status.titleize
+        - if invoice.due_date.present?
+          %p
+            Due Date:
+            = Time.at(invoice.due_date).strftime('%m/%d/%Y')
+        - if invoice&.status_transitions&.paid_at
+          %p
+            Paid Date:
+            = Time.at(invoice.status_transitions.paid_at).strftime('%m/%d/%Y')
+        %p
+          Amount:
+          = number_to_currency(invoice.amount_paid / 100, precision: 0)
+        %a.invoice_download{:href => invoice['invoice_pdf']} Download

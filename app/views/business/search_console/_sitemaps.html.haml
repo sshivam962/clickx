@@ -1,0 +1,79 @@
+.row
+  .col-md-12
+    .panel.panel-default{'data-widget': {draggable: 'false'}}
+      .panel-body
+        .centered
+          #sitemap_all
+.row
+  .col-md-12
+    .tab-container
+      .tab-content{'st-table':'sitemaps', 'st-safe-src':'all_sitemaps'}
+        .table-responsive
+          %table#sitemaps_table.table.table-hover.table-bordered.table-vam
+            %thead
+              %tr
+                %th.vam{style: 'padding-right:190px;', 'st-sort':'path'}
+                  %u.help_pointer{ 'title': 'Name of the slug in your sitemap URL' }
+                    Sitemap
+                %th.text-center{'st-sort':'type'}
+                  %u.help_pointer{'title': 'Type of sitemap'}
+                    Type
+                %th.text-center{'st-sort':'processed'}
+                  %u.help_pointer{ 'title': 'The date when your sitemap was last processed by Google' }
+                    Processed
+                %th.text-center{'st-sort':'issues'}
+                  %u.help_pointer{ 'title': 'This data will show up if there are any issues with your sitemap' }
+                    Issues
+                %th{ colspan: 4 }
+                  .row.font15
+                    .col-xs-4.text-center
+                      %u.help_pointer{ 'title': 'Items present in your sitemap' }
+                        Items
+                    .col-xs-4.text-center
+                      %u.help_pointer{ 'title': 'Number of pages and images you submitted to Google via sitemaps' }
+                        Submitted
+                    .col-xs-4.text-center
+                      %u.help_pointer{ 'title': 'Number of pages and images Google has indexed out of the things you submitted' }
+                        Indexed
+            %tbody
+              - data["sitemap"].each do |site|
+                %tr
+                  %td #{site["path"]}
+                  %td.text-center
+                    - if (site["isSitemapsIndex"] == true)
+                      %span Sitemap Index
+                    - if (site["isSitemapsIndex"] == false)
+                      %span Sitemap
+                  %td.text-center #{site["lastDownloaded"]}
+                  %td.text-center
+                    - if (site["errors"].to_i > 0)
+                      %span #{site["errors"]} Errors
+                    - if (site["warnings"].to_i > 0)
+                      %span #{site["warnings"]} Warnings
+                  %td{ colspan: 4 }
+                    - site["contents"].each do |content|
+                      .row.font15
+                        .col-xs-4.text-center
+                          = content["type"].capitalize
+                        .col-xs-4.text-center
+                          #{ content["submitted"] }
+                        .col-xs-4.text-center
+                          #{ content["indexed"] }
+
+
+:javascript
+  $(function() {
+
+    var chart_data = JSON.parse('#{raw(data["sitemap"].to_json)}');
+    var graph_data = SearchConsole.all_sitemaps(
+      chart_data
+    );
+    $('#sitemap_all').highcharts(graph_data);
+
+    /*var table = $('#sitemaps_table').DataTable({
+      "pageLength": 25
+    });
+    $('#sitemaps_table_filter input').on('keyup change', function () {
+      table.column(0).search($(this).val()).draw();
+    });*/
+  });

@@ -1,0 +1,47 @@
+%table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+  %tr
+    %td{:valign => "top", :width => "100%"}
+      %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+        %tr
+          %td{:width => "100%"}
+            %table.table_scale{:bgcolor => "#FFF", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+              %tr
+                %td{:align => "center", :width => "100%"}
+                  %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                    %tr
+                      %td.spacer{:width => "30"}
+                      %td{:width => "540"}
+                        / START OF COLUMN
+                        %table.full{:align => "center", :border => "0", :cellpadding => "10", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "540"}
+                          %tr.cellpadd10{:style => "margin-bottom: 15px"}
+                            %td
+                              %h1.subhead.head-st-2 New Subscription Added
+                              %p
+                                Team,
+                                %br
+                                We have a new agency signup. Their info is as follows:
+                              %br
+                              %p.subhead.lnh-n{style: 'font-size: 16px !important;'}
+                                %b User Name:
+                                #{@user.name}
+                                %br
+                                %b Email:
+                                #{@user.email}
+                                %br
+                                %b Agency Name:
+                                #{@agency.name}
+                                %br
+                                %b Phone:
+                                #{@user.phone}
+                                %br
+                                %b Product Name:
+                                Free
+                                %br
+                              %br
+                              %p
+                                Thanks,
+                                %br
+                                Solomon
+
+                      %td.spacer{:width => "30"}
+/ CTA

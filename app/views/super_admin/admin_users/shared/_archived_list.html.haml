@@ -1,0 +1,9 @@
+- users.each do |user|
+  = render 'super_admin/admin_users/shared/archived_user.html.haml', user: user
+.row.mt-md
+  .col-md-4.col-lg-4.col-sm-12
+    = page_entries_info users
+  .col-md-8.col-lg-8.col-sm-12.right_align
+    = will_paginate users, params: {name: params[:name]}
+:javascript
+  $('.pagination a').attr('data-remote', 'true');

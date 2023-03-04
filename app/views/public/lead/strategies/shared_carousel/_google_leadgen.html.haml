@@ -1,0 +1,183 @@
+- content_for :title do
+  Lead Generation & Customer Acquisition
+.strategy_carousel
+  .section-cards-wrapper.bg-light
+    .section-container
+      .section-card.section-card--top.section-card--cover.mCustomScrollbar
+        .text-center
+          .pt-5.pb-5
+          .pt-5.pb-5
+          .sticky-logo{style: "background:#{agency.strategy_product_header_color}"}
+            - if agency.weburl.present?
+              %a{href: formatted_url(agency.weburl), target: '_blank'}
+                = image_tag agency.logo || ''
+            - else
+              = image_tag agency.logo || ''
+          .pb-5.pt-5
+          = image_tag 'lead_strategy/lead-gen.svg', class: 'img-responsive'
+          .pb-5.pt-3
+          %h4 Google Ads Lead Generation
+          %h1
+            Lead Generation
+            %br/
+            = precede '& ' do
+              Customer Acquisition
+          .pb-5.pt-3
+
+  - if @lead_strategy.strategies.present?
+    .section-cards-wrapper
+      .section-container
+        .section-card.section-card--cover.mCustomScrollbar
+          .text-center
+            .pb-5.pt-3
+            %h2.pb-xl.text-black Strategy
+            .pb-5
+            %ul.arrow-list.px-0.px-md-3
+              - @lead_strategy.strategies.each do |strategy|
+                %li
+                  = raw(strategy)
+
+  - if @lead_strategy.strategy_images.present?
+    .section-cards-wrapper.bg-color-gray
+      .section-container
+        .section-card.section-card--cover.mCustomScrollbar
+          .swiper-container.image-carousel
+            .swiper-wrapper
+              - @lead_strategy.strategy_images.order_by_created.each do |image|
+                .swiper-slide
+                  .card-new.p-xl
+                    %img.img-responsive{alt: '', src: image.file&.url}
+            .pb-5
+            - if @lead_strategy.strategy_images.count > 1
+              .swiper-pagination
+
+  - if @lead_strategy.ad_spend_info.present?
+    .section-cards-wrapper
+      .section-container
+        .section-card.section-card--cover.mCustomScrollbar
+          .text-center
+            .img-circle.img-circle--light.mx-auto
+              = image_tag 'lead_strategy/ad-spend.svg', class: 'img-responsive img-align-center--md strategies_carousel_image'
+            %div
+              %h2.pb-5 Budget Recommendations
+              .row.v-center--lg
+                %ul.arrow-list.px-0.px-md-3
+                  - @lead_strategy.ad_spend_info.split(/\r?\n/).each do |info|
+                    %li= info
+
+  .section-cards-wrapper.bg-color-gray
+    .section-container
+      .section-card.section-card--cover.mCustomScrollbar
+        .text-center
+          .img-circle.img-circle--light.mx-auto
+            = image_tag 'lead_strategy/top-funnel.svg', class: 'img-responsive img-align-center--md strategies_carousel_image'
+          %div
+            %h2.pb-5
+              %span.color-light Top of Funnel —
+              %br/
+              Awareness Stage:
+            .row.v-center--lg
+              %ul.arrow-list.px-0.px-md-3
+                - Lead::StrategyFunnel.funnels(category: 'Google Lead Gen', funnel_type: 'top_funnel').each do |funnel|
+                  %li= funnel.content
+
+  .section-cards-wrapper
+    .section-container
+      .section-card.section-card--cover.mCustomScrollbar
+        .text-center
+          .img-circle.img-circle--light.mx-auto
+            = image_tag 'lead_strategy/middle-funnel.svg', class: 'img-responsive img-align-center--md strategies_carousel_image'
+          %div
+            %h2.pb-5
+              %span.color-light Middle of Funnel —
+              %br/
+              Consideration Stage:
+            .row.v-center--lg
+              %ul.arrow-list.px-0.px-md-3
+                - Lead::StrategyFunnel.funnels(category: 'Google Lead Gen', funnel_type: 'middle_funnel').each do |funnel|
+                  %li= funnel.content
+
+  .section-cards-wrapper.bg-color-gray
+    .section-container
+      .section-card.section-card--cover.mCustomScrollbar
+        .text-center
+          .img-circle.img-circle--light.mx-auto
+            = image_tag 'lead_strategy/bottom-funnel.svg', class: 'img-responsive img-align-center--md strategies_carousel_image'
+          %div
+            %h2.pb-5
+              %span.color-light Bottom of Funnel —
+              %br/
+              Decision Stage:
+            .row.v-center--lg
+              %ul.arrow-list.px-0.px-md-3
+                - Lead::StrategyFunnel.funnels(category: 'Google Lead Gen', funnel_type: 'bottom_funnel').each do |funnel|
+                  %li= funnel.content
+
+  .section-cards-wrapper
+    .section-container
+      .section-card.section-card--cover.mCustomScrollbar
+        .text-center
+          .text-center
+            %h2.pb-4 Next Steps...
+            %div
+              .methods
+                .methods-col
+                  .methods-icon
+                    = image_tag 'lead_strategy/step-icon-1.svg', class: 'img-responsive'
+                  .methods-name
+                    Accept
+                    = succeed "Proposed Solution" do
+                      %br/
+                .methods-col
+                  .methods-icon
+                    = image_tag 'lead_strategy/step-icon-2.svg', class: 'img-responsive'
+                  .methods-name
+                    Ad Account
+                    = succeed "Access" do
+                      %br/
+                .methods-col
+                  .methods-icon
+                    = image_tag 'lead_strategy/step-icon-3.svg', class: 'img-responsive'
+                  .methods-name
+                    Schedule
+                    = succeed "Kick Off Call" do
+                      %br/
+                .methods-col
+                  .methods-icon
+                    = image_tag 'lead_strategy/step-icon-4.svg', class: 'img-responsive'
+                  .methods-name
+                    Approve
+                    = succeed "Campaign Creative" do
+                      %br/
+                .methods-col
+                  .methods-icon
+                    = image_tag 'lead_strategy/step-icon-5.svg', class: 'img-responsive'
+                  .methods-name
+                    Campaign
+                    = succeed "Launch" do
+                      %br/
+
+  .section-cards-wrapper.bg-color-gray
+    .section-container
+      .section-card.section-card--cover.mCustomScrollbar
+        .text-center
+          %h2.pb-4 Campaign Reporting
+          .pb-5
+          %script{:async => "", :src => "https://fast.wistia.com/embed/medias/9rpo4u2k5e.jsonp"}
+          %script{:async => "", :src => "https://fast.wistia.com/assets/external/E-v1.js"}
+          .wistia_responsive_padding{:style => "padding:56.25% 0 0 0;position:relative;"}
+            .wistia_responsive_wrapper{:style => "height:100%;left:0;position:absolute;top:0;width:100%;"}
+              .wistia_embed.wistia_async_9rpo4u2k5e{:class => "videoFoam=true", :style => "height:100%;position:relative;width:100%"}
+                .wistia_swatch{:style => "height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"}
+                  %img{:alt => "", "aria-hidden" => "true", :onload => "this.parentNode.style.opacity=1;", :src => "https://fast.wistia.com/embed/medias/9rpo4u2k5e/swatch", :style => "filter:blur(5px);height:100%;object-fit:contain;width:100%;"}/
+
+  - if raw(agency.calendly_script).present?
+    .section-cards-wrapper.bg-calendly
+      .section-container
+        .section-card.pb-0.section-card--cover.section-card--calendly.mCustomScrollbar
+          .text-center.pt-3.pt-md-0
+            %h2.pb-4 Schedule a Call
+            = raw(agency.calendly_script)
+            .p-5
+          .sticky-footer
+            = "© #{Date.current.year} #{agency&.name}. All Rights Reserved."

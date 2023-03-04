@@ -1,0 +1,13 @@
+.panel.panel-default{id: dom_id(item)}
+  .panel-heading
+    %h2{style: 'text-transform: none;'}= raw(item.strategy)
+    %a.pull-right.ml-md{href: edit_super_admin_strategy_item_path(item), data: { remote: true }}
+      %i.fa.fa-edit
+    %a.pull-right.ml-md{href: super_admin_strategy_item_path(item), 'data-method': :delete, 'data-confirm': 'Are you sure you want to delete this Strategy?' , data: {remote: true}}
+      %i.fa.fa-trash
+    - if item.favorite?
+      %a.pull-right.ml-md{href: favorite_super_admin_strategy_item_path(item), data: { remote: true }}
+        %i.fa.fa-star{class: "star-#{item.id}"}
+    - else
+      %a.pull-right.ml-md{href: favorite_super_admin_strategy_item_path(item), data: { remote: true }}
+        %i.fa.fa-star-o{class: "star-#{item.id}"}

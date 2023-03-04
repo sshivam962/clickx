@@ -1,0 +1,12 @@
+<svg id="Facebook_Messenger_logo_2020" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="39.433" height="39.437" viewBox="0 0 39.433 39.437">
+  <defs>
+    <radialGradient id="radial-gradient" cx="0.192" cy="0.994" r="1.09" gradientTransform="matrix(1, 0, 0, -1, 0, 2.022)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#09f"/>
+      <stop offset="0.61" stop-color="#a033ff"/>
+      <stop offset="0.935" stop-color="#ff5280"/>
+      <stop offset="1" stop-color="#ff7061"/>
+    </radialGradient>
+  </defs>
+  <path id="Path_1" data-name="Path 1" d="M19.717,0C8.611,0,0,8.138,0,19.125A18.714,18.714,0,0,0,6.191,33.272,1.558,1.558,0,0,1,6.718,34.4l.108,3.51A1.576,1.576,0,0,0,9.04,39.3l3.914-1.725a1.585,1.585,0,0,1,1.055-.079,21.568,21.568,0,0,0,5.708.759c11.105,0,19.717-8.138,19.717-19.125S30.822,0,19.717,0Z" fill="url(#radial-gradient)"/>
+  <path id="Path_2" data-name="Path 2" d="M156.854,280.715l5.792-9.188a2.959,2.959,0,0,1,4.279-.789l4.609,3.455a1.183,1.183,0,0,0,1.425,0l6.221-4.722a.938.938,0,0,1,1.36,1.247l-5.8,9.183a2.959,2.959,0,0,1-4.278.789l-4.609-3.455a1.183,1.183,0,0,0-1.425.005l-6.221,4.722A.934.934,0,0,1,156.854,280.715Z" transform="translate(-148.977 -255.995)" fill="#fff"/>
+</svg>

@@ -1,0 +1,9 @@
+<%if @list.nil?%>
+  toastr['info']("No list found")
+<%else%>
+  <% if @list.enable_automate %>
+    $("<%=escape_javascript "#autopilot_#{@list.id}" %>").addClass("active");
+  <% else %>
+    $("<%=escape_javascript "#autopilot_#{@list.id}" %>").removeClass("active");
+  <% end %>  
+<%end%> 

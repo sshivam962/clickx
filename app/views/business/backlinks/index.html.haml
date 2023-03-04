@@ -1,0 +1,231 @@
+.clickx-breadcrumb-wrapper.ng-scope
+  %ol.breadcrumb.clx-breadcrumb.ng-isolate-scope
+    %li
+      %a{:href => "/b/dashboard"} Home
+    %li
+      %span Overview
+
+.page-heading.no-margin-bottom.no-pad-bottom
+  %h1
+    %i.clickx-icon-LinkBuilding.title-icon
+    Summary
+
+= render 'business/backlinks/shared/nav'
+.col-md-12
+  .tab-content
+    .summary
+      %div#backlinks-tabs
+        .panel.panel-default
+          .panel-body.p-n.pt-md.backlinks-summary
+            .col-sm-6.col-md-3.text-center.bdr-r
+              %h4.mb-xs
+                Backlinks
+                %i.fa.fa-info-circle.tooltip-text-icon{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "A backlink is an incoming link from a different website or referring domain. Within the SEO industry a 'backlink' can sometimes be referred to as an 'in link'." }
+              %h1.mb-sm.mt-sm.f-w-md.f-s-xl
+                = @backlinks["ExtBackLinks"] || 0
+              / %span.increase-rate 15%
+            .col-sm-6.col-md-3.text-center.bdr-r
+              %h4.mb-xs
+                Referring Domains
+                %i.fa.fa-info-circle.tooltip-text-icon{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Referring domain, also known as 'ref domain', is a website which has a backlink pointing to a page, or link, to the site you are analysing." }
+              %h1.mb-sm.mt-sm.f-w-md.f-s-xl
+                = @backlinks["RefDomains"] || 0
+              / %span.decrease-rate -25%
+            .col-sm-6.col-md-3.text-center.bdr-r
+              %h4.mb-xs
+                Trust Flow
+                %i.fa.fa-info-circle.tooltip-text-icon{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Trust Flow is one of the Majestic Flow Metrics, which is weighted by the number of clicks from a seed set of trusted sites to a given URL, or Domain." }
+              %h1.mb-sm.mt-sm.f-w-md.f-s-xl
+                = @backlinks["TrustFlow"] || 0
+            .col-sm-6.col-md-3.text-center
+              %h4.mb-xs
+                Citation Flow
+                %i.fa.fa-info-circle.tooltip-text-icon{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Citation Flow is one of the Majestic Flow Metrics, which is weighted by the number citations to a given URL, or Domain." }
+              %h1.mb-sm.mt-sm.f-w-md.f-s-xl
+                = @backlinks["CitationFlow"] || 0
+            .col-md-12
+              %hr.mt-xs.mb-md
+              .col-sm-6.text-center
+                %h4.mb-lg
+                  New Backlinks
+                  %i.fa.fa-info-circle.tooltip-text-icon{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Details" }
+                .col-sm-12.p-n.mb-xl
+                  #new_backlinks{style: "min-width: 310px; height: 400px; margin: 0 auto"}
+              .col-sm-6.text-center
+                %h4.mb-lg
+                  Lost Backlinks
+                  %i.fa.fa-info-circle.tooltip-text-icon{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Details" }
+                .col-sm-12.p-n.mb-xl
+                  #lost_backlinks{style: "min-width: 310px; height: 400px; margin: 0 auto"}
+              .col-sm-6.text-center
+                %h4.mb-lg
+                  Backlinks Growth
+                  %i.fa.fa-info-circle.tooltip-text-icon{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Details" }
+                .col-sm-12.p-n.mb-xl
+                  #rainfall_backlinks{style: "min-width: 310px; height: 400px; margin: 0 auto"}
+            .col-md-12{ 'ng-if': '!demo_login' }
+              .col-sm-12.p-n.mb-lg
+                .centered
+                  - if @word_cloud.present?
+                    .well.jqcloud-well
+                      %h4.mb-xs.center
+                        Anchor Texts
+                      #anchor_words.jqcloud{:style => "height: 450px;"}
+
+:css
+  .main-color2 .highcharts-graph {
+    stroke: #F8B018
+  }
+
+  .main-color2,
+  .main-color2 .highcharts-point {
+    fill: #F8B018
+  }
+
+  .highcharts-graph.highcharts-negative {
+    stroke: #F8B018
+  }
+
+  .highcharts-graph.highcharts-negative {
+    stroke: #CCC
+  }
+
+  .highcharts-area.highcharts-negative {
+    fill: #CCC
+  }
+
+  .highcharts-point.highcharts-negative {
+    fill: #CCC
+  }
+
+  .jqcloud-well {
+    background-color: white
+  }
+
+:javascript
+  $(document).ready(function() {
+    $("#overview-tab").addClass('active');
+  });
+
+  var words = #{@word_cloud.to_json.html_safe};
+
+  $('#anchor_words').jQCloud(words, {
+    delay:10,
+    steps:20,
+    autoResize: true
+  });
+
+  var new_backlinks = #{@new_backlinks.to_json.html_safe}
+  var lost_backlinks = #{@lost_backlinks.to_json.html_safe}
+  var rainfall_backlinks = #{@rainfall_backlinks.to_json.html_safe}
+
+  $('#new_backlinks').highcharts({
+    title: { text: '' },
+    xAxis: {
+      type: 'datetime'
+    },
+    yAxis: {
+      title: { enabled: false }
+    },
+    exporting: { enabled: false },
+    plotOptions: {
+      series: {
+        className: 'main-color2',
+        negativeColor: !0,
+        groupPadding: 0,
+        cursor: 'pointer',
+        point: {
+          events: {
+            click: function() {
+              $location.search({});
+              tracked_date = Highcharts.dateFormat(
+                '%Y-%m-%d',
+                this.category
+              );
+              count = this.y;
+              window.location.href =
+                '/#/new_backlinks?tracked_date=' +
+                tracked_date +
+                '&count=' +
+                count;
+            }
+          }
+        }
+      }
+    },
+    series: [
+      {
+        name: 'New Backlinks',
+        type: 'column',
+        data: new_backlinks
+      }
+    ]
+  });
+
+  $('#lost_backlinks').highcharts({
+    title: { text: '' },
+    xAxis: {
+      type: 'datetime'
+    },
+    yAxis: {
+      title: { enabled: false }
+    },
+    exporting: { enabled: false },
+    plotOptions: {
+      series: {
+        className: 'main-color2',
+        negativeColor: !0,
+        groupPadding: 0,
+        cursor: 'pointer',
+        point: {
+          events: {
+            click: function() {
+              $location.search({});
+              tracked_date = Highcharts.dateFormat(
+                '%Y-%m-%d',
+                this.category
+              );
+              count = this.y;
+              window.location.href =
+                '/#/lost_backlinks?tracked_date=' +
+                tracked_date +
+                '&count=' +
+                count;
+            }
+          }
+        }
+      }
+    },
+    series: [
+      {
+        name: 'Lost Backlinks',
+        type: 'column',
+        data: lost_backlinks
+      }
+    ]
+  });
+
+  $('#rainfall_backlinks').highcharts({
+    title: { text: '' },
+    xAxis: {
+      type: 'datetime'
+    },
+    yAxis: {
+      title: { enabled: false }
+    },
+    exporting: { enabled: false },
+    plotOptions: {
+      series: {
+        className: 'main-color2',
+        negativeColor: !0,
+        groupPadding: 0
+      }
+    },
+    series: [
+      {
+        name: 'Growth',
+        type: 'line',
+        data: rainfall_backlinks
+      }
+    ]
+  });

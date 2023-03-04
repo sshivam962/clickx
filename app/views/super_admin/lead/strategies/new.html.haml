@@ -1,0 +1,80 @@
+- content_for :title do
+  New Lead Strategy | Clickx
+.page-header
+  %h3
+    #{@lead.agency.name} | #{@lead.full_name}
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: super_admin_strategy_leads_path } Back
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: info_super_admin_lead_path(@lead), target: '_blank' } Lead Info
+- if raw(@lead.call_notes).present?
+  .col-md-12
+    .panel
+      .panel-body
+        = raw(@lead.call_notes)
+.col-md-6
+  .agency-form
+    = form_for @lead_strategy, url: super_admin_lead_strategies_path, method: :post do |f|
+      .col-md-12
+        .row.lead_strategy_form
+          .form-group
+            %label{for: "lead_strategy_category"} Type
+            = f.select :category, Lead::Strategy::CATEGORIES.keys, {}, required: true, class: 'form-control', disabled: true
+            = f.hidden_field :category
+          .form-group
+            %label{for: "lead_strategy_ad_spend_info"} Ad Spend Info.
+            = f.text_area :ad_spend_info, required: true, class: 'form-control'
+          .form-group
+            %label{for: 'lead_strategy_strategies'} Strategy
+            .panel-group
+              #strategies.p-n
+                - f.object.strategies.each_with_index do |strategy, index|
+                  = render 'super_admin/lead/strategies/shared/strategy_item', strategy: strategy, uniq_id: "#{f.object.id}_#{index}"
+                #no_items_added{class: "#{'hidden' if f.object.strategies.present?}"}
+                  No Items Added..
+          .form-group
+            %label Images
+            .col-md-12
+              .col-md-3.cs_image_card
+                = link_to_add_association '+', f, :strategy_images
+          .form-group
+            %button.btn.btn-default.saveBtn{value: 'save', name: 'submit'}
+              Save
+            %button.btn.btn-warning.saveBtn{value: 'pending_approval', name: 'submit'}
+              Submit for Approval
+            %button.btn.btn-primary.saveBtn{value: 'approved', name: 'submit'}
+              Submit & Approve
+.col-md-6.strategy_items
+  %h2
+    Strategy Items
+  .panel-group.mt-md
+    - @strategy_items.each do |item|
+      .panel.panel-default
+        .panel-heading
+          %h2{style: 'text-transform: none;'}
+            = raw(item.strategy)
+          %a.pull-right#add_strategy_item{href: 'javascript:void(0)', data: {item: item.id}}
+            %i.fa.fa-plus
+
+:javascript
+  $(function() {
+    $(document).on('click', '#add_strategy_item',function() {
+      $('#no_items_added').addClass('hidden');
+      item_id = $(this).data('item')
+      $.ajax({
+        url: "/s/lead/strategy_items/" + item_id + "/load_item?lead_id=#{@lead.id}",
+        type: 'get',
+        data: {},
+        dataType: 'script',
+        async: false,
+        success:function(response){}
+      })
+    })
+
+    $(document).on('click', '.remove_strategy',function() {
+      $(this).closest('.strategy_item').remove();
+      if($('#strategies .strategy_item').length == 0){
+        $('#no_items_added').removeClass('hidden');
+      }
+    })
+  });

@@ -1,0 +1,16 @@
+#new_direct_lead_modal.modal.fade{"aria-labelledby": "mySmallModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md
+    .bg-white.p-4.p-sm-5.rounded
+      .fw-sb.text-darkblue.pb-4.lh-12
+        #{lead_source.name.upcase} - CREATE DIRECT LEAD
+      = form_tag agency_direct_leads_path, remote: true, id: 'new_direct_lead' do |f|
+        .pt-2
+          = hidden_field_tag 'direct_lead[lead_source_id]', lead_source.id
+          .input-wrapper-label.fs-14 Company Name
+          .input-wrapper.mb-4
+            = text_field_tag 'direct_lead[name]', '', class: 'input-wrapper-input', placeholder: 'Company Name', required: true
+
+          .input-wrapper-label.fs-14 URL
+          .input-wrapper.mb-4
+            = text_field_tag 'url', '', class: 'input-wrapper-input', placeholder: 'http://www.example.com', required: true
+          %button.btn.btn-primary.btn-raised.conf_lead_submit{type: 'submit'} Submit

@@ -1,0 +1,10 @@
+.row
+  .form-group
+    .col-sm-6
+      %label
+        Name
+      = text_field_tag 'payment_link[user_name]', '', class: 'form-control mb-0 pt-0', placeholder: 'Full Name', required: true
+    .col-sm-6
+      %label
+        Email
+      = text_field_tag 'payment_link[user_email]', '', class: 'form-control mb-0 pt-0', placeholder: 'Email', required: true

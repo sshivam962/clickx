@@ -1,0 +1,34 @@
+.form-group.col-md-6.m-n
+  = f.label :first_name, class: 'control-label m-n'
+  = f.input_field :first_name, class: 'form-control', required: true
+
+.form-group.col-md-6.m-n
+  = f.label :last_name, class: 'control-label m-n'
+  = f.input_field :last_name, class: 'form-control', required: true
+
+.form-group.col-md-6.m-n
+  = f.label :company, class: 'control-label m-n'
+  = f.input_field :company, class: 'form-control'
+
+.form-group.col-md-6.m-n
+  = f.label :title, class: 'control-label m-n'
+  = f.input_field :title, class: 'form-control'
+
+.form-group.col-md-6.m-n
+  = f.label :email, class: 'control-label m-n'
+  = f.email_field :email, class: 'form-control', required: true
+
+.form-group.col-md-6.m-n
+  = f.label :instagram, class: 'control-label m-n'
+  = f.input_field :instagram, class: 'form-control'  
+
+.form-group.col-md-6.m-n
+  = f.label :phone, class: 'control-label m-n'
+  = f.phone_field :phone, class: 'form-control'
+
+.form-group.col-md-6.m-n
+  = f.label :city, class: 'control-label m-n'
+  = f.phone_field :city, class: 'form-control'  
+
+.form-group.col-md-12
+  = f.submit 'Save', class: 'btn btn-sm btn-raised btn-primary pull-right'

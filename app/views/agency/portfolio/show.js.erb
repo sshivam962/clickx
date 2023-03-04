@@ -1,0 +1,8 @@
+$('#pf_modal_body').html("<%= escape_javascript render( partial: 'agency/portfolio/shared/item', locals: { next_portfolio: @next_portfolio, previous_portfolio: @previous_portfolio, portfolio: @portfolio}) %>");
+
+$(".slider image").load(function(){
+  $(window).trigger('resize');
+});
+$('.slider').bxSlider({
+  adaptiveHeight: true,
+});

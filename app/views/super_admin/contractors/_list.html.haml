@@ -1,0 +1,33 @@
+%table.table.table-bordered.users.reports
+  %thead
+    %th Name
+    %th Email
+    %th Phone
+    %th LinkedIn
+    %th Invitation Status
+    %th Invitation Sent
+    %th Login
+    %th.text-center Admin Action
+  %tbody
+    - users.each do |user|
+      %tr
+        %td= user.name
+        %td= user.email
+        %td= user.phone
+        %td
+          .word-break
+            - linekdin_link = user.network_profile&.linkedin
+            - if linekdin_link.present?
+              = link_to linekdin_link, linekdin_link, target: '_blank'
+        %td= user.invitation_status
+        %td= days_since(user.invitation_sent_at)
+        %td= link_to "Login As", masquerade_path(user), class: 'btn btn-sm btn-info'
+        %td.center
+          .d-flex
+            .col.pr-3
+              - if !user.admin_approved?
+                = link_to 'Approve', approve_user_super_admin_contractor_path(user), class: 'btn btn-default m-0 btn--xs px-4', remote: true, method: :patch
+              - else
+                = link_to 'Approved', '#', class: 'btn btn-success m-0 btn--xs px-4', remote: true, method: :patch
+            .col
+              = link_to 'Delete', super_admin_contractor_path(user), class: 'btn btn-danger m-0 btn--xs px-4', method: :delete, data: { confirm: "Are you sure you'd like to delete this user" }

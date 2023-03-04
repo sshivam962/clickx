@@ -1,0 +1,10 @@
+- content_for :title do
+  New Onboarding Procedure | Clickx
+.page-header
+  %h3
+    Add Onaboarding Procedure
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: super_admin_procedures_path } Back
+.agency-form
+  = form_for @procedure, url: super_admin_procedures_path, method: :post do |f|
+    = render 'form', f: f

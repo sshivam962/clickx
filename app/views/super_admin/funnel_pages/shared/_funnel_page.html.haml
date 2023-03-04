@@ -1,0 +1,17 @@
+%span{id: dom_id(funnel_page)}
+  .clients-list
+    .clients-list__item.d-flex.flex-wrap
+      .col-stretch.clients-list__datas.pt-3
+        .d-flex
+          .col-md-4.pl-0
+            = funnel_page.title
+      .col-auto.clients-list__actions.align-items-center
+        .btn-icon-list
+          %a.btn-icon.btn-icon--edit{href: preview_super_admin_funnel_page_path(funnel_page.id), target: '_blank', data: { toggle: 'tooltip', 'title' => 'Preview'}}
+            %i.fa.fa-eye
+          %a.btn-icon.btn-icon--edit{href: edit_super_admin_funnel_page_path(funnel_page.id), data: { toggle: 'tooltip', 'title' => 'Edit Funnel Page'}}
+            %i.fa.fa-edit
+          %a.btn-icon.btn-icon--edit{href: new_super_admin_funnel_page_path(copy_from: funnel_page.id), target: '_blank', data: { toggle: 'tooltip', 'title' => 'Make a Copy'}}
+            %i.fa.fa-clone
+          = link_to super_admin_funnel_page_path(funnel_page.id), class: 'btn-icon btn-icon--delete', remote: true, method: :delete, data: { confirm: "Are you sure you'd like to permanently delete #{funnel_page.title}?"} do
+            %i.fa.fa-trash

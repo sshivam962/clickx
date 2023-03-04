@@ -1,0 +1,68 @@
+.header.shadow-md
+  .container.mx-auto.px-4
+    .flex.justify-between.items-center
+      .col
+        .flex.items-center
+          .col-auto
+            %a{href: network_dashboard_path}
+              = image_tag 'network/network-logo.svg', class: 'w-16 mx-auto'
+          .col-auto.pl-4
+            .header-nav-wrapper
+              %ul.header-navigation.flex
+                %li.px-3
+                  %a.inline-block{href: network_dashboard_path, :class => get_active_class(network_dashboard_path)}
+                    %span.nav-label Projects
+                %li#nav-membership.px-3
+                  %a.inline-block{href: network_memberships_path, :class => get_active_class(network_memberships_path)}
+                    %span.nav-label Membership
+                %li#nav-branding.px-3
+                  %a.inline-block{href: network_branding_index_path, :class => get_active_class(network_branding_index_path)}
+                    %span.nav-label Branding
+                %li#nav-profile.px-3
+                  %a.inline-block{href: network_profile_path, :class => get_active_class(network_profile_path)}
+                    %span.nav-label My Profile
+                %li#nav-add-case-study.px-3
+                  %a.inline-block{href: new_network_case_study_path, :class => get_active_class(new_network_case_study_path)}
+                    %span.nav-label Add Case Study
+              .header-nav-bg
+      .col
+        %ul.header-nav.flex
+          %li#nav-feedback
+            %span.bg-white.hover:bg-gray-200.text-gray-700.hover:text-gray-900.w-8.h-8.leading-8.inline-block.text-center.rounded-full.overlay-show{:data => 'feedback_overlay'}
+              %i.fa.fa-envelope
+          %li#nav-notifications
+            %span.bg-white.hover:bg-gray-200.text-gray-700.hover:text-gray-900.w-8.h-8.leading-8.inline-block.text-center.rounded-full.beamer-notifications.show-beamer-notifications
+              %i.fa.fa-bell
+          %li#nav-messages
+            %a.nav-messages.unread-messages-notification.bg-white.hover:bg-gray-200.text-gray-700.hover:text-gray-900.w-8.h-8.leading-8.inline-block.text-center.rounded-full{href: network_chats_path}
+              %i.fa.fa-paper-plane
+              - if current_user.chat_threads.map {|chat_thread| chat_thread.chat_messages.unread.present?}.include?(true) && !current_page?('/n/messages')
+                .red-bubble.text-white.text-xs= current_user.chat_threads.select {|chat_thread| chat_thread.chat_messages.unread.present?}.count
+          %li#nav-options.relative.dropdown
+            %button.toggle-dropdown.flex.items-center.focus:outline-none
+              - logo_url = current_user.logo.present? ? current_user.logo : image_path('network/profile-avatar.png')
+              .avatar.w-8.h-8.bg-cover.bg-norepeat.rounded-full.ring{style: "background-image: url(#{logo_url});"}
+              %i.fa.fa-angle-down.ml-2
+            .menu-dropdown.border.absolute.right-0.bg-white.w-48.rounded-md.shadow.z-30
+              %a.text-center.block.py-4.px-3.group{href: network_profile_path}
+                .avatar.w-16.h-16.bg-cover.bg-norepeat.rounded-full.ring.mx-auto.block{style: "background-image: url(#{logo_url});"}
+                .font-medium.leading-6.mt-3.hover:bg-white.hover:text-blakc.block= current_user.name
+                .text-xs.text-gray-700= current_user.network_profile&.description
+              %hr.m-0
+              .py-4.px-3
+                %ul.dropdown-nav.text-sm.text-center
+                  %li
+                    %a{href: network_settings_path}
+                      %span.nav-label Settings
+                  - if user_masquerade?
+                    %li
+                      %a{href: back_masquerade_path(current_user)}
+                        %span.nav-label Back As Super Admin
+                  %li
+                    %a{href: destroy_user_session_path}
+                      %span.nav-label Logout
+          %li.md:hidden
+            .hamburger.toggle-nav
+              %span.line
+              %span.line
+              %span.line

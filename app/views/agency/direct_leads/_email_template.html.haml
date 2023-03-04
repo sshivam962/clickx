@@ -1,0 +1,427 @@
+.row.px-3
+  .col-sm-12.col-md-6.px-2
+    .input-wrapper.mb-3
+      %input#mail_contact_first_name.width-100.fsize16{type: 'text', class: 'input-wrapper-input text-darkblue', style: 'background-image:none', autocomplete: 'off', placeholder: 'First Name', value: contact&.first_name, required: true}
+  .col-sm-12.col-md-6.px-2
+    // %p.mt-sm.inline-block.pull-left.mr Last Name
+    .input-wrapper.mb-3
+      %input#mail_contact_last_name.width-100.fsize16{type: 'text', class: 'input-wrapper-input text-darkblue', placeholder:'Last Name', style: 'background-image:none', autocomplete: 'off', value: contact&.last_name, required: true}
+  .col-sm-12.col-md-6.px-2.mail_phone.hide
+    //%p.mt-sm.inline-block.pull-left.mr Phone
+    .input-wrapper.mb-3
+      %input#mail_contact_phone.width-100.fsize16{type: 'text', class: 'input-wrapper-input text-darkblue', style: 'background-image:none', autocomplete: 'off', placeholder:'Phone', value: contact&.phone, required: true}
+  .col-sm-12.col-md-6.px-2
+    .input-wrapper.mb-3
+      // %p.mt-sm.inline-block.pull-left.mr To Email
+      %input#contact_emails.width-100.fsize16{type: 'email', class: 'input-wrapper-input text-darkblue', placeholder:'To Email', style: 'background-image:none', autocomplete: 'off', required: true, value: contact&.email}
+  .col-sm-12.col-md-6.px-2.mail_instagram.hide
+    .input-wrapper.mb-3
+      %input#mail_contact_instagram{placeholder: 'Instagram', class: 'input-wrapper-input text-darkblue', value: contact&.instagram}
+  .col-sm-12.col-md-6.px-2.mail_city.hide
+    .input-wrapper.mb-3
+      %input#mail_contact_city{placeholder: 'City', class: 'input-wrapper-input text-darkblue', value: contact&.city}
+  .col-sm-12.col-md-6.px-2.var_1.hide
+    .input-wrapper.mb-3
+      %input.variable_1{placeholder: 'Variable 1', class: 'input-wrapper-input text-darkblue',}
+  .col-sm-12.col-md-6.px-2.var_2.hide
+    .input-wrapper.mb-3
+      %input.variable_2{placeholder: 'Variable 2', class: 'input-wrapper-input text-darkblue',}
+  .col-sm-12.col-md-6.px-2.var_3.hide
+    .input-wrapper.mb-3
+      %input.variable_3{placeholder: 'Variable 3', class: 'input-wrapper-input text-darkblue',}
+
+  .col-sm-12.col-md-12.px-2.ai_bot_intro.mb-3.hide
+    %a.text-info.fs-12.underline{:href => "#0", "data-target": ".ai-bot-intro-modal", "data-toggle": "modal"} Change AI Bot Intro  
+.row.px-3
+  .col-sm-12.col-md-12.px-2.var_ai_intro.hide
+    .d-flex.align-items-center
+      .input-wrapper.mb-3.flex-col.pr-3
+        %textarea.intro{placeholder: 'AI Intro', class: 'input-wrapper-input text-darkblue font-12', rows:4}
+        .spinner-overlay.spinner-overlay-intro
+          .nb-spinner
+      .input-wrapper.mb-3
+        %a.btn.btn-raised.btn-success.email_intro_create
+          %i.fa.fa-rocket.white.font-14
+          AI Intro
+  .col-sm-12.col-md-12.px-2
+    .input-wrapper.mb-3
+      - if @template.present?
+        %a.btn.btn-raised.btn-primary.email_preview_modal
+          %i.fa.fa-envelope.white.font-14
+          Preview & Send
+      - else
+        %a.btn.btn-raised.btn-primary.disabled.email_preview_modal
+          %i.fa.fa-envelope.white.font-14
+          Preview & Send
+        %small.text-danger No Template Found.
+  .col-sm-12.col-md-12.px-2.mb-4
+    .d-flex
+      .column.pr-3.prompt-1-button.hide
+        %button.btn.btn-sm.btn--dark.mr-2{"data-target": ".prompt-1-modal", "data-toggle": "modal"} Prompt 1
+      .column.pr-3.prompt-2-button.hide
+        %button.btn.btn-sm.btn--dark.mr-2{"data-target": ".prompt-2-modal", "data-toggle": "modal"} Prompt 2
+      .column.pr-3.prompt-3-button.hide
+        %button.btn.btn-sm.btn--dark.mr-2{"data-target": ".prompt-3-modal", "data-toggle": "modal"} Prompt 3
+
+
+#email_template
+  = cktext_area :direct_lead, :email_template, cols: 40, ckeditor: { toolbar: 'mini'}, value: raw(@template)
+.hidden
+  #current_contact_id{'data-id': contact&.id || 0}
+.text-left.pt-4
+  - if @template.present?
+    %a.btn.btn-raised.btn-primary.email_preview_modal
+      %i.fa.fa-envelope.white.font-14
+      Preview & Send
+  - else
+    %a.btn.btn-raised.btn-primary.disabled.email_preview_modal
+      %i.fa.fa-envelope.white.font-14
+      Preview & Send
+    %small.text-danger No Template Found.
+
+.modal.fade.in.ai-bot-intro-modal{role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md
+    .bg-white.p-4.p-sm-5.rounded
+      .fw-sb.pb-3 AI Bot Intro
+      .input-wrapper.mb-3
+        %textarea.icebreaker_sentence{placeholder: 'AI Bot Intro', rows: 6, class: 'input-wrapper-input text-darkblue'}
+          = current_agency.icebreaker_sentence
+      %button.btn.btn-warning{"data-dismiss": "modal", type: "button"} Update
+.modal.fade.in.prompt-1-modal{role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md
+    .bg-white.p-4.p-sm-5.rounded
+      .fw-sb.pb-3 Prompt 1
+      .input-wrapper.mb-3
+        %input.input-wrapper-input.text_prompt_1{'type' => "text", 'placeholder' => "Write prompt 1", 'value' => current_agency.ai_bot_prompt_1}
+      .d-flex.align-items-center
+        .input-wrapper.mb-3.flex-col.pr-3
+          %textarea.prompt_1{placeholder: 'AI Prompt 1', class: 'input-wrapper-input text-darkblue font-12', rows:4}
+          .spinner-overlay.spinner-overlay-prompt-1
+            .nb-spinner
+        .input-wrapper.mb-3.email_prompt_1
+          %a.btn.btn-success
+            %i.fa.fa-rocket.white.font-14
+            AI Prompt 1
+      %button.btn.btn-warning{"data-dismiss": "modal", type: "button"} Apply
+.modal.fade.in.prompt-2-modal{role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md
+    .bg-white.p-4.p-sm-5.rounded
+      .fw-sb.pb-3 Prompt 2
+      .input-wrapper.mb-3
+        %input.input-wrapper-input.text_prompt_2{'type' => "text", 'placeholder' => "Write prompt 2", 'value' => current_agency.ai_bot_prompt_2}
+      .d-flex.align-items-center
+        .input-wrapper.mb-3.flex-col.pr-3
+          %textarea.prompt_2{placeholder: 'AI Prompt 2', class: 'input-wrapper-input text-darkblue font-12', rows:4}
+          .spinner-overlay.spinner-overlay-prompt-2
+            .nb-spinner
+        .input-wrapper.mb-3.email_prompt_2
+          %a.btn.btn-success
+            %i.fa.fa-rocket.white.font-14
+            AI Prompt 2
+      %button.btn.btn-warning{"data-dismiss": "modal", type: "button"} Apply
+.modal.fade.in.prompt-3-modal{role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md
+    .bg-white.p-4.p-sm-5.rounded
+      .fw-sb.pb-3 Prompt 3
+      .input-wrapper.mb-3
+        %input.input-wrapper-input.text_prompt_3{'type' => "text", 'placeholder' => "Write prompt 3", 'value' => current_agency.ai_bot_prompt_1}
+      .d-flex.align-items-center
+        .input-wrapper.mb-3.flex-col.pr-3
+          %textarea.prompt_3{placeholder: 'AI Prompt 2', class: 'input-wrapper-input text-darkblue font-12', rows:4}
+          .spinner-overlay.spinner-overlay-prompt-3
+            .nb-spinner
+        .input-wrapper.mb-3.email_prompt_3
+          %a.btn.btn-success
+            %i.fa.fa-rocket.white.font-14
+            AI Prompt 3
+      %button.btn.btn-warning{"data-dismiss": "modal", type: "button"} Apply
+:javascript
+
+  email_body =
+    CKEDITOR.instances.direct_lead_email_template.element.getValue()
+
+  if(email_body.includes('{{variable_1}}')){
+    $('.var_1').removeClass('hide')
+  }
+
+  if(email_body.includes('{{variable_2}}')){
+    $('.var_2').removeClass('hide')
+  }
+
+  if(email_body.includes('{{variable_3}}')){
+    $('.var_3').removeClass('hide')
+  }
+
+  if($("#mail_contact_phone").val() != ''){
+    $('.mail_phone').removeClass('hide')
+  }
+
+  if(email_body.includes('{{city}}')){
+    $('.mail_city').removeClass('hide')
+  }
+  
+
+  if(email_body.includes('{{instagram}}')){
+    $('.mail_instagram').removeClass('hide')
+  }
+
+  if(email_body.includes('{{intro}}')){
+    $('.var_ai_intro').removeClass('hide');
+    $('.ai_bot_intro').removeClass('hide');
+    setTimeout(function () {
+      $(".email_intro_create").trigger("click");
+    }, 100);
+  }
+
+  if(email_body.includes('{{prompt_1}}')){
+    
+    $('.prompt-1-button').removeClass('hide');
+    setTimeout(function () {
+      $(".email_prompt_1").trigger("click");
+    }, 100);
+  }
+
+  if(email_body.includes('{{prompt_2}}')){
+    
+    $('.prompt-2-button').removeClass('hide');
+    setTimeout(function () {
+      $(".email_prompt_2").trigger("click");
+    }, 100);
+  }
+
+  if(email_body.includes('{{prompt_3}}')){
+    
+    $('.prompt-3-button').removeClass('hide');
+    setTimeout(function () {
+      $(".email_prompt_3").trigger("click");
+    }, 100);
+  }
+
+  CKEDITOR.instances['direct_lead_email_template'].on('blur', function(){
+    for (instance in CKEDITOR.instances) {
+      CKEDITOR.instances[instance].updateElement();
+    }
+    email_body = CKEDITOR.instances.direct_lead_email_template.element.getValue()
+  })
+
+  $('.email_preview_modal').click(function(e){
+    e.preventDefault()
+    for (instance in CKEDITOR.instances) {
+      CKEDITOR.instances[instance].updateElement();
+    }
+    email_body = CKEDITOR.instances.direct_lead_email_template.element.getValue()
+    if(!email_body){
+      toastr['info']('Please add email content')
+    }
+    else if(email_body.includes('{{variable_1}}') && !$('.variable_1').val()){
+      toastr['info']('Please add variable 1')
+    } else if(email_body.includes('{{variable_2}}') && !$('.variable_2').val()){
+      toastr['info']('Please add variable 2')
+    } else if(email_body.includes('{{variable_3}}') && !$('.variable_3').val()){
+      toastr['info']('Please add variable 3')
+    } else {
+      $.ajax({
+        url: '/a/direct_leads/' + #{direct_lead&.id} + '/preview_mail',
+        type: 'post',
+        data: {
+          first_name: $('#mail_contact_first_name').val().trim(),
+          variable_1: $('.variable_1').val(),
+          variable_2: $('.variable_2').val(),
+          variable_3: $('.variable_3').val(),
+          intro: $('.intro').val(),
+          prompt_1: $('.prompt_1').val(),
+          prompt_2: $('.prompt_2').val(),
+          prompt_3: $('.prompt_3').val(),
+          email: $("#contact_emails").val(),
+          instagram: $('#mail_contact_instagram').val(),
+          city: $('#mail_contact_city').val(),
+          body: email_body
+        },
+        dataType: 'json',
+        success:function(response){
+          $('.subject').html(response.subject)
+          $('.preview').html(response.template)
+          $('#email_preview').modal('show');
+        }
+      })
+    }
+  })
+
+  
+  $('.email_intro_create').click(function(e){
+    e.preventDefault()
+    $('.spinner-overlay-intro').css('opacity',1).show()
+    for (instance in CKEDITOR.instances) {
+      CKEDITOR.instances[instance].updateElement();
+    }
+    email_body = CKEDITOR.instances.direct_lead_email_template.element.getValue()
+    if(!email_body){
+      toastr['info']('Please add email content')
+    } else {
+      $.ajax({
+        url: '/a/direct_leads/' + #{direct_lead&.id} + '/create_intro',
+        type: 'post',
+        data: {
+          first_name: $('#mail_contact_first_name').val().trim(),
+          email: $("#contact_emails").val(),
+          instagram: $('#mail_contact_instagram').val(),
+          city: $('#mail_contact_city').val(),
+          last_name: $('#mail_contact_last_name').val(),
+          icebreaker_sentence: $(".icebreaker_sentence").val(),
+          body: email_body
+        },
+        dataType: 'json',
+        success:function(response){
+          $('.spinner-overlay-intro').css('opacity',0).hide()
+
+          if (typeof response.data.content !== 'undefined' && response.data.content.length > 0) {
+
+            var content = JSON.parse(response.data.content);
+            words = content[0].replace(/\n/g, "");
+            words = words.replace(/\[.*\]/g, '');
+
+            $('.intro').val(words)
+            
+          }
+          
+        }
+      })
+    }
+  })
+
+
+  $('.email_prompt_1').click(function(e){
+    e.preventDefault()
+    $('.spinner-overlay-prompt-1').css('opacity',1).show()
+    for (instance in CKEDITOR.instances) {
+      CKEDITOR.instances[instance].updateElement();
+    }
+    email_body = CKEDITOR.instances.direct_lead_email_template.element.getValue()
+    text_prompt_1 = $('.text_prompt_1').val()
+    if(!email_body){
+      toastr['info']('Please add email content')
+    }
+    else if(!text_prompt_1){
+      toastr['info']('Please add prompt 1')
+    }
+    else {
+      $.ajax({
+        url: '/a/direct_leads/' + #{direct_lead&.id} + '/create_intro',
+        type: 'post',
+        data: {
+          first_name: $('#mail_contact_first_name').val().trim(),
+          email: $("#contact_emails").val(),
+          instagram: $('#mail_contact_instagram').val(),
+          city: $('#mail_contact_city').val(),
+          last_name: $('#mail_contact_last_name').val(),
+          icebreaker_sentence: text_prompt_1,
+          body: email_body
+        },
+        dataType: 'json',
+        success:function(response){
+          $('.spinner-overlay-prompt-1').css('opacity',0).hide()
+
+          if (typeof response.data.content !== 'undefined' && response.data.content.length > 0) {
+
+            var content = JSON.parse(response.data.content);
+            words = content[0].replace(/\n/g, "");
+            words = words.replace(/\[.*\]/g, '');
+            $('.prompt_1').val(words)
+            
+          }
+          
+        }
+      })
+    }
+  })
+
+  $('.email_prompt_2').click(function(e){
+    e.preventDefault()
+    $('.spinner-overlay-prompt-2').css('opacity',1).show()
+    for (instance in CKEDITOR.instances) {
+      CKEDITOR.instances[instance].updateElement();
+    }
+    email_body = CKEDITOR.instances.direct_lead_email_template.element.getValue()
+    text_prompt_2 = $('.text_prompt_2').val()
+    if(!email_body){
+      toastr['info']('Please add email content')
+    }
+    else if(!text_prompt_2){
+      toastr['info']('Please add prompt 1')
+    }
+    else {
+      $.ajax({
+        url: '/a/direct_leads/' + #{direct_lead&.id} + '/create_intro',
+        type: 'post',
+        data: {
+          first_name: $('#mail_contact_first_name').val().trim(),
+          email: $("#contact_emails").val(),
+          instagram: $('#mail_contact_instagram').val(),
+          city: $('#mail_contact_city').val(),
+          last_name: $('#mail_contact_last_name').val(),
+          icebreaker_sentence: text_prompt_2,
+          body: email_body
+        },
+        dataType: 'json',
+        success:function(response){
+          $('.spinner-overlay-prompt-2').css('opacity',0).hide()
+
+          if (typeof response.data.content !== 'undefined' && response.data.content.length > 0) {
+
+            var content = JSON.parse(response.data.content);
+            words = content[0].replace(/\n/g, "");
+            words = words.replace(/\[.*\]/g, '');
+            $('.prompt_2').val(words)
+            
+          }
+          
+        }
+      })
+    }
+  })
+
+  $('.email_prompt_3').click(function(e){
+    e.preventDefault()
+    $('.spinner-overlay-prompt-3').css('opacity',1).show()
+    for (instance in CKEDITOR.instances) {
+      CKEDITOR.instances[instance].updateElement();
+    }
+    email_body = CKEDITOR.instances.direct_lead_email_template.element.getValue()
+    text_prompt_3 = $('.text_prompt_3').val()
+    if(!email_body){
+      toastr['info']('Please add email content')
+    }
+    else if(!text_prompt_3){
+      toastr['info']('Please add prompt 1')
+    }
+    else {
+      $.ajax({
+        url: '/a/direct_leads/' + #{direct_lead&.id} + '/create_intro',
+        type: 'post',
+        data: {
+          first_name: $('#mail_contact_first_name').val().trim(),
+          email: $("#contact_emails").val(),
+          instagram: $('#mail_contact_instagram').val(),
+          city: $('#mail_contact_city').val(),
+          last_name: $('#mail_contact_last_name').val(),
+          icebreaker_sentence: text_prompt_3,
+          body: email_body
+        },
+        dataType: 'json',
+        success:function(response){
+          $('.spinner-overlay-prompt-3').css('opacity',0).hide()
+
+          if (typeof response.data.content !== 'undefined' && response.data.content.length > 0) {
+
+            var content = JSON.parse(response.data.content);
+            words = content[0].replace(/\n/g, "");
+            words = words.replace(/\[.*\]/g, '');
+            $('.prompt_3').val(words)
+            
+          }
+          
+        }
+      })
+    }
+  })
+

@@ -1,0 +1,59 @@
+.page-content
+  .page-heading.no-margin-bottom.pt-5.pb-4.mb-4
+    %h1
+      %i.clickx-icon-Strategy.title-icon
+      Agency Profile
+  .container-fluid
+    = simple_form_for @agency.agency_profile, url: agency_profile_path, method: :patch  do |f|
+      .bg-white.rounded.p-4.p-sm-5.mb-4
+        %h4.mb-5.mt-0 Agency Information
+        .form-group.mt-n
+          = f.label :estd_date, 'Date Agency Established', class: 'control-label mt-n'
+          = f.input :estd_date, label: false
+        .form-group.mt-n
+          = f.label :core_services, 'Core Services', class: 'control-label mt-n'
+          = f.input :core_services, label: false
+        .form-group.mt-n
+          = f.label :value_proposition, 'Unique Value Proposition', class: 'control-label mt-n'
+          %p.small.text-muted Why would clients choose your agency over competing agencies
+          = f.input :value_proposition, label: false
+        .form-group.mt-sm
+          %input.btn.btn-primary.btn-raised.btn-lg{"data-disable-with" => "Save", :name => "commit", :type => "submit", :value => "Save"}/
+      .bg-white.rounded.p-4.p-sm-5.mb-4
+        %h4.mb-5.mt-0 Niche Information
+        .form-group.mt-n
+          = f.label :preferred_niche, 'Preferred Niche', class: 'control-label mt-n'
+          = f.input :preferred_niche, label: false
+        .form-group.no-margin-top
+          = f.label :niche_description, 'How would you describe your niche?', class: 'control-label mt-n'
+          = f.input :niche_description, label: false
+        .form-group.no-margin-top
+          = f.label :niche_lookup_keyword, 'Type any keyword you would use to look up a niche company on Google', class: 'control-label mt-n'
+          = f.input :niche_lookup_keyword, label: false
+        .form-group.no-margin-top
+          = f.label :customer_pain_points, 'Identify the pain points that your niche customers have', class: 'control-label mt-n'
+          = f.input :customer_pain_points, label: false
+        .form-group.no-margin-top
+          = f.label :decision_makers, 'List the positions and titles of the decision makers', class: 'control-label mt-n'
+          = f.input :decision_makers, label: false
+        .form-group.no-margin-top
+          = f.label :niche_directories, 'Identify directories that have your niche customers listed', class: 'control-label mt-n'
+          = f.input :niche_directories, label: false
+        .form-group.mt-sm
+          %input.btn.btn-primary.btn-raised.btn-lg{"data-disable-with" => "Save", :name => "commit", :type => "submit", :value => "Save"}/
+      .bg-white.rounded.p-4.p-sm-5.mb-4
+        %h4.mb-5.mt-0 Agency Growth
+        .form-group.mt-n
+          = f.label :client_call_source, 'How and where does you agency currently book new client calls?', class: 'control-label mt-n'
+          = f.input :client_call_source, label: false
+        .form-group.no-margin-top
+          = f.label :challenges, 'What challenges are you experiencing when trying to sell to new clients? What are their objections?', class: 'control-label mt-n'
+          = f.input :challenges, label: false
+        .form-group.no-margin-top
+          = f.label :monthly_revenue, 'What is your agency’s current monthly revenue?', class: 'control-label mt-n'
+          = f.input :monthly_revenue, label: false
+        .form-group.no-margin-top
+          = f.label :monthly_revenue_goal, 'What is your agency’s monthly revenue goal in the next three months?', class: 'control-label mt-n'
+          = f.input :monthly_revenue_goal, label: false
+        .form-group.mt-sm
+          %input.btn.btn-primary.btn-raised.btn-lg{"data-disable-with" => "Save", :name => "commit", :type => "submit", :value => "Save"}/

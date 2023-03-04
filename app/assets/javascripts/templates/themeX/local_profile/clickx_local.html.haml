@@ -1,0 +1,72 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-BlogWriting.title-icon>
+    Local Listings
+    %small
+      %b {{location.name}}
+.container-fluid
+  %div
+    .row
+      .col-sm-6
+        .panel.panel-white
+          .panel-body
+            %h1.t-error.m-n {{error_count}}
+            %h2.t-p-error.m-n Location Data Errors Detected
+      .col-sm-6
+        .panel.panel-white
+          .panel-body
+            .l-com-info.pt-n
+              %h3 {{location.name}}
+            .l-com-info
+              %span.icon
+                %i.fa.fa-map-marker
+              %span.ln-h-28
+                {{location.address}}, {{location.city}}, {{location.state}} {{location.zip}}
+                %br
+                {{location.phone}}
+.container-fluid
+  %div
+    .row
+      .col-md-12
+        .tab-container
+          .tab-content{'st-table':"competitions", 'st-safe-src':"all_competition_data"}
+            .table-responsive
+              %table.table.table-bordered.table-vam.table-hover.mb-n
+                %thead
+                  %tr.light-grey
+                    %th{style: "padding-right: 150px;"} Platform
+                    %th Business Name
+                    %th Address
+                    %th Phone
+                    %th{width: '150px'} Status
+                %tbody
+                  %tr{'ng-repeat':'listing in listings track by $index'}
+                    %td
+                      .row-picture.com-loc-icon{'ng-show':'!!listing.directory'}
+                        %img{'ng-src':"/directories/{{listing.directory}}.png", class: 'img-circle loclisticon fleft'}
+                      .fleft
+                        %p.loc-ta-ti {{listing.site_id}}
+                        %a.loc-a{'ng-if': "!!listing.body.url", 'ng-href': "{{listing.body.url}}", target: '_blank'} View Listing
+                    %td{'ng-if': "listing.status != 200 && listing.status != 404 && listing.status != 400", colspan: 3}
+                      %p.text-center {{listing.body}}
+                    %td{'ng-if': "listing.status == 404 || listing.status == 400", colspan: 3}
+                      %p.text-center No results found for platform.
+                    %td{'ng-if': "listing.status == 200"}
+                      %p.loc-ta-ti{'ng-class': "{'red': !listing.match_name}"}
+                        {{listing.body.name}}
+                    %td{'ng-if': "listing.status == 200"}
+                      %p.loc-ta-ti{'ng-class': "{'red': !listing.match_address}"}
+                        {{listing.body.address}}, {{listing.body.city}}, {{listing.body.state}}
+                    %td{'ng-if': "listing.status == 200"}
+                      %p.loc-ta-ti{'ng-class': "{'red': !listing.match_phone}"}
+                        {{listing.body.phone | tel}}
+                    %td
+                      .loc-status-alert{'ng-if': "listing.status == 200"}
+                        %span.loc-status-icon-suc
+                        Found
+                      .loc-status-alert{'ng-if': "listing.status == 400"}
+                        %span.loc-status-icon-al
+                        Alert
+                      .loc-status-alert{'ng-if': "listing.status != 200 && listing.status != 400"}
+                        %span.loc-status-icon-no
+                        Not Found

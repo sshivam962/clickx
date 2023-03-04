@@ -1,0 +1,29 @@
+%div.col-md-12
+  .row.industry_form
+    .form-group
+      %label{:for => "industry_title"} Title
+      = f.text_field :title, required: true, class: 'form-control login', placeholder: 'Enter Title'
+    .form-group
+      %label{for: 'industry_icon_klass'} Icon
+      %span.industry_logo_preview
+      %br
+      = f.select :icon_klass, options_for_select(industry_icons_collection, @industry.icon_klass)
+    .form-group
+      = f.submit "Save industry", class: 'btn btn-warning saveBtn'
+:javascript
+  function formatState (state) {
+    var $state = $(
+      '<span class=' + state.id + '>' + state.text +  '</span>'
+    );
+    return $state;
+  };
+
+  $("#industry_icon_klass").select2({
+    templateResult: formatState
+  });
+  $('#industry_icon_klass').on('change', function (e) {
+    var optionSelected = $("option:selected", this);
+    var valueSelected = this.value;
+    preview = "<div><span class='" + valueSelected + "'></span></div>"
+    $('.industry_logo_preview').html(preview)
+  })

@@ -1,0 +1,22 @@
+.d-flex.justify-content-between.flex-wrap.align-items-center.mt-4.mb-5
+  .col-auto
+    %h3.m-0
+      Edit Agency
+  .col-auto
+    .d-flex.align-items-center
+      .custom-select
+        = select_tag 'login_as', options_from_collection_for_select(@agency.users, 'id', 'first_name'), class: 'login_as_user form-control select-box width200px mb-0', include_blank: 'Login as user..', 'data-target' => @agency.id, "data-title" => "View Dashboard"
+      .btn-icon-list.pl-3
+        %a.btn.btn-sm.btn-reset-sm.btn-info.m-0{"data-title" => "View Dashboard", href: "/switch_to_agency_user?user_id=#{@agency.preview_users.first&.id}&agency_id=#{@agency.id}", id: "view_dashboard_#{@agency.id}" }
+          %i.fa.fa-sign-in
+      .pl-3
+        %a.btn.btn-sm.btn-reset-sm.btn-warning.m-0{href:"/s/agencies"} Back
+
+.agency-form
+  = form_for @agency, url: super_admin_agency_path(@agency) do |f|
+    = render 'form', f: f
+    %button.btn.btn-warning.saveBtn.m-0{type: 'submit'} Save Agency
+
+- if policy([:super_admin, :agency_package_subscription]).index?
+  = render 'super_admin/agencies/shared/subscriptions', subscriptions: @subscriptions
+  #modal_container

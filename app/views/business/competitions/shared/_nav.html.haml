@@ -1,0 +1,30 @@
+.clickx-breadcrumb-wrapper.ng-scope
+  %ol.breadcrumb.clx-breadcrumb.ng-isolate-scope
+    %li
+      %a{:href => "/b/dashboard"} Home
+    %li
+      %a{:href => "/b/competitions"} Competitor Insights
+    %li
+      %span Details
+
+.page-heading.no-margin-bottom.no-pad-bottom
+  %h1
+    Competitor Analysis
+.container-fluid
+  %h4.no-margin-bottom.pb-md.no-margin-top
+    %a
+      #{@competition.name}
+
+-# .container-fluid
+-#   %div
+-#     .row
+-#       .col-md-12
+-#         %ul.nav.nav-tabs.material-nav-tabs.mb-lg
+-#           %li#overview-tab
+-#             = link_to 'Overview', business_client_competition_path(@competition)
+-#           %li#fresh-backlinks-tab
+-#             = link_to 'Fresh Backlinks', fresh_backlinks_business_client_competition_path(@competition)
+-#           %li#anchor-text-tab
+-#             = link_to 'Anchor Text', anchor_text_business_client_competition_path(@competition)
+-#           %li#competitors-rank-tab
+-#             = link_to 'Competitors Rank', competitors_rank_business_client_competition_path(@competition)

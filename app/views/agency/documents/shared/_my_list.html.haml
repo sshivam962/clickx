@@ -1,0 +1,59 @@
+-# .col-lg-12.col-md-12.col-sm-12.col-xs-12.mb-5
+-#   .d-md-flex.justify-content-between.align-items-center
+-#     .col-auto
+-#       %a.btn.btn--dark.btn--rounded-md.mb-2.mb-md-0{href: new_agency_document_path}
+-#         %i.fa.fa-plus
+-#         \&#160; Create
+- my_documents.each do |document|
+  .col-lg-3.col-md-4.col-sm-6.col-xs-12.mb-5
+    .relative
+      .awesome-card-actions
+        %a.awesome-card-actions-btn{ href: edit_agency_document_path(document) }
+          %i.fa.fa-edit{"aria-hidden" => "true"}
+        = link_to agency_document_path(document), method: :delete, data: { confirm: 'Are you sure?' }, class: "awesome-card-actions-btn awesome-card-actions-btn--remove" do
+          %i.fa.fa-trash
+      - link = '#'
+      - target = ''
+      - if document.document_link?
+        -link = document.document_link
+        - target = '_blank'
+      - else
+        -link = document&.document_attachment&.file&.url
+        - target = '_blank'
+      %a(href=link target=target)
+        .card.card--document.h-100.mb-0.d-flex.flex-column
+          .card-image.br-10
+            .card-image-thumb{:style => "background-image:url(#{document.thumbnail&.file&.url});"}
+            -# %img.document-image.br-10{:alt => "Loading image...", src: document.thumbnail&.file&.url}
+          .px-4.pt-5.flex-col
+            .fwn
+              %span.no-underline.color-dark-blue= document.title
+            .pt-2.mt-1
+              %small.fs-12
+                = precede 'Updated ' do
+                  = document.updated_at.strftime('%b %d, %Y')
+          .px-3.py-4.mt-4
+            - if document.document_link?
+              %button{'class' => 'button btn width100 btn-lg btn--dark f-w-lg'} View
+            - else
+              %button{'class' => 'button btn width100 btn-lg btn--dark f-w-lg'} Download
+
+.col-lg-3.col-md-4.col-sm-6.col-xs-12.mb-5
+  .card.card--document.h-100.mb-0.d-flex.flex-column
+    %a.create-document{href: new_agency_document_path}
+      .card-image.br-10
+        .create-document-icon
+      %h4 Create Document
+
+:javascript
+  $(document).on('click', '.load-pf-modal', function() {
+    pf_id = $(this).data('id');
+    $.ajax({
+      url: "/a/document/" + pf_id,
+      type: 'get',
+      data: {},
+      dataType: 'script',
+      success:function(response){}
+    })
+    $('.document-modal').modal('show')
+  });

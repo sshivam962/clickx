@@ -1,0 +1,41 @@
+%div.col-md-12
+  .row.chapter_form
+    .form-group
+      = f.label :title
+      = f.text_field :title, required: true, class: 'form-control login', placeholder: 'Enter Title'
+    %br
+    .form-group
+      %label{for: 'tasks'} Onboarding Tasks
+      = link_to_add_association '+ Add', f, :onboarding_tasks, 'data-association-insertion-method': 'append', 'data-association-insertion-node': '#onboaring_tasks_row', class: 'add_new_task_top btn btn-primary btn-xs'
+      .row#onboaring_tasks_row
+        = f.fields_for :onboarding_tasks do |ot|
+          = render 'onboarding_task_fields', f: ot
+      = link_to_add_association '+ Add Task', f, :onboarding_tasks, 'data-association-insertion-method': 'append', 'data-association-insertion-node': '#onboaring_tasks_row', class: 'btn btn-primary btn-sm'
+    .form-group
+      = f.submit "Save Procedure", class: 'btn btn-warning saveBtn'
+
+:javascript
+  function sortTasks() {
+    $('#onboaring_tasks_row').sortable({
+      update: function(event, ui) {
+        reorderTasks();
+      }
+    });
+  }
+  function reorderTasks() {
+    $('.task_position').each(function(index) {
+      $(this).val(index + 1)
+    });
+  }
+
+  sortTasks();
+
+  $('.add_new_task_top').click( function() {
+    $('html, body').animate({ scrollTop: $('#onboaring_tasks_row')[0].scrollHeight }, 'slow');
+  });
+
+  $('#onboaring_tasks_row').bind('DOMSubtreeModified', function(){
+    reorderTasks();
+    sortTasks();
+  });
+

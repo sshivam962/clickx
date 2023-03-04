@@ -1,0 +1,54 @@
+- @projects.each_with_index do |project, index|
+  .project-card.bg-white.shadow-lg.rounded-lg.p-6.mb-8{class: "project-index-#{index}", id: dom_id(project), data:{id: project.id}}
+    .text-lg.font-bold= project.title
+    -# .text-lg= project.agency.name
+    .text-sm.text-gray-600 Posted by: Name
+    - if project.short_desc.present?
+      .project-data-list.text-gray-600.pt-5.text-base
+        - if (project.short_desc || '').length > 250
+          = truncate(project.short_desc, length: 250)
+          = link_to '...Read more', '', class: "read-more-#{project.id} text-black view-project-details"
+        - else
+          = project.short_desc
+    .flex.text-sm.text-gray-600.pt-3
+      - if project.created_at.to_date == Date.today
+        .col-auto Today
+      - else
+        .col-auto= "#{pluralize( (Date.today - project.created_at.to_date).round, 'day')} ago"
+      / .col-auto.px-2 .
+      / .col-auto
+      /   %a.text-gray-800.over:text-secondary{:href => "#"} More...
+  :javascript
+    $(document).ready(function(){
+      var winWIdth = $(window).width();
+      if(winWIdth > 1023) {
+        $(".project-index-0").click();
+      }
+    });
+
+    $('.read-more-#{project.id}').on('click', function(e) {
+      e.preventDefault()
+      $(this).parent().html('#{escape_javascript project.short_desc}')
+    });
+
+    $("#project_#{project.id}").on('click', function(e) {
+      var project_id = $(this).data('id');
+      $.ajax({
+        url: "/n/projects/" + project_id + "/details",
+        type: 'get',
+        dataType: 'script',
+        success: function(e){
+          setTimeout(function(){
+            $('.project-deatils-wrapper').fadeIn();
+          }, 100)
+        }
+      });
+    });
+
+.row.text-center.p-n.pagination-wrapper
+  = will_paginate @projects, params: { page: params[:page] }
+
+:javascript
+  $('.pagination a').attr('data-remote', 'true');
+
+  

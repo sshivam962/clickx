@@ -1,0 +1,25 @@
+%p
+  Clickx Fullfillment Team,
+%p
+  Please fill out the sales oboarding form for:
+%p
+  Agency: #{@agency.name}
+  %br
+  Client:  #{@package.business.name}
+  %br
+  Product purchased: #{@package_name}
+  %br
+  Price: #{number_to_currency(@package.amount)}
+
+%p
+  Onboarding Form:
+  %a{href: 'https://home.oneims.info/agencies'}
+    https://home.oneims.info/agencies
+%p
+  Following that, please add the templated onboarding task for the client.
+%p
+  Due: #{Date.current.strftime('%B %d, %Y')}
+%p
+  Thanks,
+  %br
+  Sales Team

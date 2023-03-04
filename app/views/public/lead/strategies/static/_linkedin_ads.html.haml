@@ -1,0 +1,101 @@
+- content_for :title do
+  Linkedin Ads
+- text_color = agency.strategy_product_text_color
+.section.p-tb-60{style: "background:#{agency.strategy_product_background_color}"}
+  .container
+    .row.v-center--lg.text-center--md.col-centered--md
+      .col-md-5.col-md-offset-1.text-center
+        = image_tag 'linkedin_ads/linkedin-ads.svg', class: 'img-responsive'
+        .p-lg--md
+      .col-md-6
+        %h1{style: "color:#{text_color}"}
+          Linkedin Ads
+          %br
+          %span.f-w-lg= @lead.company
+        %p{style: "color:#{text_color}"}
+          Prepared For
+          - if @lead.full_name.present?
+            %br
+            = @lead.full_name
+          - if @lead.email.present?
+            %br
+            = @lead.email
+.section.p-tb-80.p-tb-md-40
+  .container.container--sm
+    .card.p-n.m-n
+      .card--title Linkedin Ads Implementation
+      .card--contents
+        %ul.spec-list
+          %li Campaign Kick Off Call
+          %li Campaign Launch Timeline
+          %li Pre Kick off Strategy Call
+          %li Dedicated LinkedIn Ad Specialists
+          %li 100% Customized Strategy
+          %li Insight Tag Setup & Implmentation
+          %li Campaign Buildout (Budget, Duration)
+          %li Campaign Audience Research (Company, Title, Industry)
+          %li Laser Focused Targeting
+          %li Ad Copywriting & Call To Actions
+          %li Engaging Ad Creatives (Image, Carousel, Video)
+          %li Ad Copy Approval
+          %li Ad Creative Approval
+          %li Sponsored InMail
+          %li Implementation of Initial Competitive Bids & Budget
+          %li Implementation of Ad Scheduling
+          %li Retargeting Campaign Setup
+          %li Retargeting Ad Copywriting
+          %li Retargeting Ads Creatives
+          %li 24/7 Reporting Dashboard
+.section.bg-light.p-tb-80.p-tb-md-40
+  .container.container--sm
+    .card.p-n.m-n
+      .card--title.card--title-primary On-Going Support
+      .card--contents
+        %ul.spec-list
+          %li Dedicated Campaign Management Team
+          %li Optimization of Targeting and Offer
+          %li Conversion Tracking
+          %li Multiple Ad Copy Split Tests
+          %li Multiple Ad Creatives Split Tests
+          %li Monthly Performance Report
+          %li Campaign Quality Audits
+          %li Performance-Based Budget Pacing
+          %li Month to Month Commitment
+          %li 30 Day Notice for Cancellation
+          %li One Time Implementation Fee Applies
+
+.section.p-tb-80.p-tb-md-40
+  .container.container--sm
+    %h3.f-w-lg.pb-xl.text-center Campaign Launch Process
+    %ul.steps.mt-xl
+      .steps-line
+      %li
+        .step-icon
+          = image_tag 'linkedin_ads/step-icon-1.svg'
+        %div
+          .step-title Questionnaire
+          %p Document the objective for the campaign, strategy for audience and the offer
+      %li
+        .step-icon
+          = image_tag 'linkedin_ads/step-icon-2.svg'
+        %div
+          .step-title Ad Creation
+          %p Create thumb stopping creatives and offers to capture the audience’s attention
+      %li
+        .step-icon
+          = image_tag 'linkedin_ads/step-icon-3.svg'
+        %div
+          .step-title Landing Pages
+          %p Define landing pages and funnels that will convert traffic into leads and sales
+      %li
+        .step-icon
+          = image_tag 'linkedin_ads/step-icon-4.svg'
+        %div
+          .step-title Launch
+          %p Build out campaigns, ad sets, and ads prior to launch. Define budget and publish ads for review
+      %li
+        .step-icon
+          = image_tag 'linkedin_ads/step-icon-5.svg'
+        %div
+          .step-title Optimize
+          %p Optimize ads and targeting for maximum conversions and cost per conversions

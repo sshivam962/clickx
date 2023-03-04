@@ -1,0 +1,15 @@
+%script{type:"text/ng-template",id:"_ads.html"}
+  %md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-md{'aria-label':'Ad Preview'}
+    .modal-header
+      %button.close{ 'aria-hidden': 'true', 'ng-click':'closeDialog()', 'type': 'button' }
+        %span.fa.fa-times-circle-o
+      %h2.modal-title Ad Preview
+    %md-dialog-content
+      .md-dialog-content
+        .row
+          .col-xs-12
+            #adPreview
+
+    %md-dialog-actions{layout:"row"}
+      %button.btn.btn-default.btn-raised{ 'data-dismiss': 'modal',
+      'type': 'button', 'ng-click':'closeDialog()' } Close

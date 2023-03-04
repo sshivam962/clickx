@@ -1,0 +1,40 @@
+- content_for :title do
+  Inquiry Questionnaires | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1
+      Questionnaires
+    .options
+      %a.btn.btn-white.btn-raised.pull-right{href: super_admin_inquiry_questions_path}
+        Questions
+        .ripple-container
+.locations
+  %div.address.questions
+    - @questionnaires.each do |questionnaire|
+      %span{id: dom_id(questionnaire)}
+        %div
+          %h3.blue
+            = questionnaire.category
+          %span{id: "#{dom_id(questionnaire)}_items"}
+            - if questionnaire.linked_questions.blank?
+              %p.pl-sm No Questions
+            - questionnaire.linked_questions.each do |question|
+              %div.as-sortable-item{data: {url: change_position_super_admin_inquiry_linked_question_path(question)}, style: 'cursor:pointer'}
+                %row.name.left20
+                  %span
+                    = question.question&.question
+        %hr
+#modal_container
+- @questionnaires.each do |questionnaire|
+  :javascript
+    $(document).ready(function(){
+      $("#inquiry_questionnaire_#{questionnaire.id}_items").sortable({
+        update: function(e, ui) {
+          $.ajax({
+            url: ui.item.data('url'),
+            type: "patch",
+            data: { position: ui.item.index() + 1 }
+          });
+        }
+      });
+    });

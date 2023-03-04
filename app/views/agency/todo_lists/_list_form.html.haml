@@ -1,0 +1,14 @@
+.modal-bg{"data-dismiss" => "modal", :type => "button"}
+.d-flex.align-items-center.justify-content-center.h-100.w-100.pr-4
+  .modal-dialog{role: 'document'}
+    .modal-content.bg-white.p-5.rounded
+      %button.btn-close-overlay{"data-dismiss" => "modal", :type => "button"}
+        %i.fa.fa-times
+      .modal-body.pb-0.pt-0
+        = form_with(model: list, url: agency_todo_list_path(list), method: :patch, class: "form-horizontal", local: false) do |f|
+          .form-group.mt-0
+            .fw-lg To-Do List
+            = f.text_field :title, class: 'form-control'
+          .form-group
+            = f.submit 'Update List', class: 'btn btn-raised btn--dark m-0'
+            = link_to "Delete List", agency_todo_list_path(list), class: "btn btn-raised btn-danger add-todo-item pull-right", data: { method: :delete, confirm: "Are you sure you want to delete this item?" }, remote: true

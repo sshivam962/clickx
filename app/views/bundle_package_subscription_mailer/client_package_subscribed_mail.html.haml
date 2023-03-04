@@ -1,0 +1,44 @@
+%p
+  %h4
+    New Bundle subscription recieved:
+    = @package_name
+
+- @package.bundle_plans.each do |plan|
+  - next if plan.white_glove_service
+
+  %p
+    = plan.name
+    = number_to_currency(plan.amount)
+    - if plan.onetime_charge.present?
+      %small
+        One-time Charge: #{number_to_currency(plan.onetime_charge)}
+
+- if @addon_plans.present?
+  %br
+  %p
+    %b
+      Addon Plans
+  - @addon_plans.each do |plan|
+    %p
+      = plan.product_name
+      = "#{number_to_currency(plan.amount)}#{plan.interval_text}"
+      - if plan.implementation_fee.present?
+        = ", Implementation Fee : #{number_to_currency(plan.implementation_fee, precision: 0)}"
+
+- if @expedited_onboarding
+  %br
+  %p
+    Expedited Onboarding fee:
+    = number_to_currency(@package.implementation_fee)
+
+- if @white_glove_service
+  %p
+    White Glove Service: #{number_to_currency(@package.white_glove_plan.amount)}
+
+%p
+  Total Amount:
+  = number_to_currency(@total_amount)
+
+%p
+  Client :
+  = @business.name

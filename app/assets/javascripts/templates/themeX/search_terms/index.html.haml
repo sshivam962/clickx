@@ -1,0 +1,47 @@
+%div{ "st-table": "keywords", "st-pipe": "fetchKeywordData", "trigger-st-table-after-events": "" }
+  .page-heading.no-margin-bottom
+    %h1
+      %i.clickx-icon-SellSheets.title-icon
+      Reputation Management
+      %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Reputation Management.', 'title-direction': 'bottom'}
+    .options
+      %input#ksearch-table.bg-white.mt-xs{ 'placeholder': "Search keywords", 'type': "search", 'style': 'font-size: 14px;border: solid lightgrey 1px;width: 250px;', 'st-search': '' }
+      %a.btn.btn-white.btn-raised{'ng-click': 'openCreateKeywordModal()'}
+        %span.fa.fa-plus
+        Add Keyword
+
+  .container-fluid
+    %div
+      .row
+        .col-md-12
+          .tab-container
+            .tab-content
+              .table-responsive
+                %table.table.table-hover.table-bordered.table-vam#search_terms_list
+                  %thead
+                    %tr
+                      %th.pointer{ :align => "left", 'ng-click': 'sortBy("name")'}
+                        %u.help_pointer{ "title": "Name of keyword" }
+                          %a.sort-by{'ng-class': "{sortasc: sort_order.name === true, sortdesc: sort_order.name === false}"} Name
+                      %th.pointer{ :align => "left", 'ng-click': 'sortBy("city")'}
+                        %u.help_pointer{ "title": "Location of keyword" }
+                          %a.sort-by{'ng-class': "{sortasc: sort_order.city === true, sortdesc: sort_order.city === false}"} Location
+                      %th Locale
+                      %th Action
+                  %tbody
+                    %tr{'ng-repeat': 'keyword in keywords', id: "{{'keyword_' + keyword.id}}" }
+                      %td
+                        {{keyword.name}}
+                      %td
+                        {{keyword.city}}
+                      %td
+                        {{keyword.locale}}
+                      %td.text-center
+                        %a.btn.btn-success.btn-sm{href: '/#/search_terms/{{keyword.id}}/ranking_positions'}
+                          %span.fa.fa-eye
+                          View
+                        %a.btn.btn-danger.del-btn.btn-sm{href: "", 'ng-click': 'deleteKeyword(keyword.id)'}
+                          %span.fa.fa-trash-o
+                          Delete
+              %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}
+  %div{"ng-include" => "", :src => "'themeX/search_terms/new.html'"}

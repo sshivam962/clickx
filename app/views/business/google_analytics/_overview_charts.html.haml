@@ -1,0 +1,155 @@
+.row
+  .col-md-12
+    .tab-container
+      %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+        %li.active
+          %a{"data-toggle":"tab", 'data-target': "#visits", id: "visits_id"} Visits
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#visitors", id: "visitors_id"} Visitors
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#pages-session", id: "pagesession_id"} Pages/Session
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#session-duration", id: "avgsession_id"} Avg. Session Duration
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#new-session", id: "conversion_id"} Session Coversion Rate
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#bounce-rate", id: "bounce_id"} Bounce Rate
+      .tab-content
+        #visits.tab-pane.active
+          .panel-body
+            .centered
+              #visits_chart
+        #visitors.tab-pane
+          .panel-body
+            .centered
+              #visitors_chart
+        #pages-session.tab-pane
+          .panel-body
+            .centered
+              #page_per_visit_chart
+        #session-duration.tab-pane
+          .panel-body
+            .centered
+              #avg_session_chart
+        #new-session.tab-pane
+          .panel-body
+            .centered
+              #new_visits_chart
+        #bounce-rate.tab-pane
+          .panel-body
+            .centered
+              #bounce_chart
+        .row
+          .col-sm-12.text-center
+            .btn-group
+              %label.btn.btn-sm.grey_button{class: graph_option.eql?('date') ? 'active' : ''}
+                %input.hidden{ "type": "checkbox", id: "date_id"}
+                  Day
+              %label.btn.btn-sm.grey_button{class: graph_option.eql?('week') ? 'active' : ''}
+                %input.hidden{ "type": "checkbox",id: "week_id" }
+                  Week
+              %label.btn.btn-sm.grey_button{class: graph_option.eql?('month') ? 'active' : ''}
+                %input.hidden{ "type": "checkbox", id: "month_id" }
+                  Month
+              %label.btn.btn-sm.grey_button{class: graph_option.eql?('year') ? 'active' : ''}
+                %input.hidden{ "type": "checkbox", id: "year_id"}
+                  Year
+
+:javascript
+  $(function() {
+    var graph_option = "#{graph_option}" || graph_option;
+    var charts = JSON.parse('#{raw(chart_data[:charts_data].to_json)}');
+    var charts_data = GoogleAnalytics.users_chart(
+      charts, graph_option
+    );
+    $("#visits_chart").highcharts(charts_data[0]);
+
+    $("#visits_id").on("click", function() {
+      $("#visits_chart").highcharts(charts_data[0]);
+    })
+
+    $("#visitors_id").on("click", function() {
+      $("#visitors_chart").highcharts(charts_data[1]);
+    })
+
+    $("#pagesession_id").on("click", function() {
+      $("#page_per_visit_chart").highcharts(charts_data[2]);
+    })
+
+    $("#avgsession_id").on("click", function() {
+      $("#avg_session_chart").highcharts(charts_data[3]);
+    })
+
+    $("#conversion_id").on("click", function() {
+      $("#new_visits_chart").highcharts(charts_data[4]);
+    })
+
+    $("#bounce_id").on("click", function() {
+      $("#bounce_chart").highcharts(charts_data[5]);
+    })
+
+    $("#date_id").on("click", function() {
+      const date_range = $('#date_filter').val();
+      const [start_date, end_date] = date_range.split(' - ');
+
+      $.ajax({
+        url: `/b/google_analytics/overview_charts?chart_type=default&end_date=${end_date}&graph_option=date&start_date=${start_date}`,
+        type: 'GET',
+        dataType: 'script',
+        success: function(data) {
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    })
+
+    $("#week_id").on("click", function() {
+      const date_range = $('#date_filter').val();
+      const [start_date, end_date] = date_range.split(' - ');
+
+      $.ajax({
+        url: `/b/google_analytics/overview_charts?chart_type=default&end_date=${end_date}&graph_option=week&start_date=${start_date}`,
+        type: 'GET',
+        dataType: 'script',
+        success: function(data) {
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    })
+
+    $("#month_id").on("click", function() {
+      const date_range = $('#date_filter').val();
+      const [start_date, end_date] = date_range.split(' - ');
+
+      $.ajax({
+        url: `/b/google_analytics/overview_charts?chart_type=default&end_date=${end_date}&graph_option=month&start_date=${start_date}`,
+        type: 'GET',
+        dataType: 'script',
+        success: function(data) {
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    })
+
+    $("#year_id").on("click", function() {
+      const date_range = $('#date_filter').val();
+      const [start_date, end_date] = date_range.split(' - ');
+
+      $.ajax({
+        url: `/b/google_analytics/overview_charts?chart_type=default&end_date=${end_date}&graph_option=year&start_date=${start_date}`,
+        type: 'GET',
+        dataType: 'script',
+        success: function(data) {
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    })
+
+  });

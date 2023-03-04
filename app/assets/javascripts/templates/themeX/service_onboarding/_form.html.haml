@@ -1,0 +1,15 @@
+%li.timeline-item{id: 'task_{{onboarding_procedure.onboarding_tasks_attributes[$index].id}}'}
+  %i.fa.fa-cog.icon-item
+  .panel.panel-default
+    .panel-body.item-card
+      .row
+        .col-xs-12.col-sm-1.col-md-1.text-center
+          %i.fa.fa-check-circle
+        .col-xs-12.col-sm-11.col-md-11
+          .form-group.mt-n
+            %input.form-control.mb.mt-n{placeholder: 'Title', 'ng-model': 'onboarding_procedure.onboarding_tasks_attributes[$index].title'}
+          .form-group.mt-n
+            %textarea.form-control.mb.mt-n{placeholder: 'Description', 'ng-model': 'onboarding_procedure.onboarding_tasks_attributes[$index].description'}
+          .form-group.mt-n
+            %input.onboarding-checklist-title.form-control.mb.mt-n{placeholder: 'Task', 'ng-model': 'onboarding_procedure.onboarding_tasks_attributes[$index].task'}
+          %a.btn.btn-white.btn-raised.pull-right{'ng-click':'removeTask(task)'} Remove

@@ -1,0 +1,213 @@
+
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-BlogWriting.title-icon
+    Edit Content
+
+.container-fluid
+  .row
+    .col-md-12
+      .panel.panel-default{"data-widget" => "{\"draggable\": \"false\"}"}
+        .panel-body
+          #content-header
+            .col-xs-5ths
+              .edit-step-wrapper{'ng-class' => "{'active': content.state == 'draft'}"}
+                %h5 Draft
+                .font-14.orange.center.italic-font{'ng-if' => "state_trackers.draft"}
+                  on {{state_trackers.draft.transition_date}}
+                  %br
+                  by {{state_trackers.draft.user_name}}
+
+            .col-xs-5ths
+              .edit-step-wrapper{'ng-class' => "{'active': content.state == 'review'}"}
+                %h5 Submit for Review
+                .font-14.orange.center.italic-font{'ng-if' => "state_trackers.review"}
+                  on {{state_trackers.review.transition_date}}
+                  %br
+                  by {{state_trackers.review.user_name}}
+
+            .col-xs-5ths
+              .edit-step-wrapper{'ng-class' => "{'active': content.state == 'review_submitted'}"}
+                %h5 Feedback Submitted
+                .font-14.orange.center.italic-font{'ng-if' => "state_trackers.review_submitted"}
+                  on {{state_trackers.review_submitted.transition_date}}
+                  %br
+                  by {{state_trackers.review_submitted.user_name}}
+
+            .col-xs-5ths
+              .edit-step-wrapper{'ng-class' => "{'active': content.state == 'final_proof'}"}
+                %h5 Final Proof
+                .font-14.orange.center.italic-font{'ng-if' => "state_trackers.final_proof"}
+                  on {{state_trackers.final_proof.transition_date}}
+                  %br
+                  by {{state_trackers.final_proof.user_name}}
+
+            .col-xs-5ths
+              .edit-step-wrapper{'ng-class' => "{'active': content.state == 'approved'}"}
+                %h5 Approved
+                .font-14.orange.center.italic-font{'ng-if' => "state_trackers.approved"}
+                  on {{state_trackers.approved.transition_date}}
+                  %br
+                  by {{state_trackers.approved.user_name}}
+
+
+          %form{"accept-charset" => "UTF-8", id: "content_form", name:'contentForm', "ng-submit" => "content.id == undefined ? create() : save()", "novalidate" => "", 'data-parsley-validate': "" }
+            .row.mgb-15
+              .col-sm-12
+                .form-group
+                  %label.sr-only{for: "subject"} Title
+                  %input#title.form-control{name: 'title', type: "text", placeholder: "Title", 'ng-model' => 'content.title', 'ng-required': 'true', "data-parsley-trigger": "input focusin focusout"}
+
+            .row
+              .col-sm-12
+                %textarea#editor1{'ng-model' => 'content.content', rows: 20, cols: 80, id: 'content_content', 'redactor' => "redactorOptions"}
+
+            .row
+              .col-sm-12
+                #word-count-wrapper-button
+                  Content Word Count:
+                  %span#word_count
+
+            .row
+              .col-sm-12
+                Meta Title
+                %input#title.form-control{name: 'title', type: "text", maxlength: "67", id: "title", placeholder: "Meta Title", 'ng-model' => 'content.meta_title'}
+            .row
+              .col-sm-12
+                #word-count-wrapper-button
+                  Meta Title Character Count:
+                  %span#title_character_count
+            %br
+            .row
+              .col-sm-12
+                Meta Description
+                %textarea.form-control{name: 'description', placeholder: " Meta Description", maxlength: "155", id: "description", 'ng-model' => 'content.meta_description', rows: 2, cols: 182 }
+
+            .row
+              .col-sm-12
+                #word-count-wrapper-button
+                  Meta Description Character Count:
+                  %span#description_character_count
+
+
+
+            .row{'ng-if' => "content.state == 'approved'"}
+              .col-sm-12
+                .form-group
+                  %label.sr-only{for: "link"} Link
+                  %input.form-control{type: "text", placeholder: "Link", 'ng-model' => 'content.link'}
+                  %span.help-inline Add http/https along with the url
+
+            .row.marginTop10
+              .content_buttons
+                .col-sm-12
+                  .row
+                    .col-xs-12.col-sm-4
+                      %button.btn.btn-raised.btn-success.btn-block.btn-lg{type: "submit", 'ng-click' => "submitted=true"}
+                        %span.fa.fa-floppy-o
+                        Save
+                    .col-xs-12.col-sm-4
+                      %div{'ng-if' => "content.state == 'draft'"}
+                        %a.btn.btn-raised.btn-success.btn-block.btn-lg{'ng-click' => "changeState(content.id, 'review')", "ng-disabled" => "content.id == undefined"}
+                          %span.fa.fa-legal
+                          Submit for Review
+                      %div{'ng-if' => "content.state == 'review'"}
+                        %a.btn.btn-raised.btn-success.btn-block.btn-lg{'ng-click' => "changeState(content.id, 'review_submitted')"}
+                          %span.fa.fa-bullhorn
+                          Submit Feedback
+                      %div{'ng-if' => "content.state == 'review_submitted'"}
+                        %a.btn.btn-raised.btn-success.btn-block.btn-lg{'ng-click' => "changeState(content.id, 'final_proof')"}
+                          %span.fa.fa-cloud-upload
+                          Submit for Final Proof
+                    .col-xs-12.col-sm-4
+                      %a.btn.btn-white.btn-raised.btn-block.btn-lg{'ng-click' => "view_history()"}
+                        = image_tag('history_track.png', {alt: 'Track Changes', height: '17px;'})
+                        Track Changes
+                .clearfix
+                .col-sm-12
+                  %a.btn.btn-info.btn-raised.btn-lg.btn-block.marginTop20{'ng-click' => "changeState(content.id, 'approved')", 'ng-if' => "content.state != 'draft' && content.state != 'approved'"}
+                    %span.fa.fa-check-circle
+                    Approve
+
+
+  .row{'ng-if'=> "content.created_at != undefined"}
+    .col-md-12
+      .panel.panel-default{"data-widget" => "{\"draggable\": \"false\"}"}
+        .panel-heading
+          %h2 Editorial Comments
+        .panel-body
+          #comments
+            %span{'ng-show' => "comments.length",  'ng-repeat' => "comment in comments track by $index"}
+              .profile-tab
+                .media
+                  %a.media-left{:href => "#"}
+                    %img.media-object{"gravatar-size": "100", "gravatar-src": "comment.email", alt: "User Image"}
+                  .media-body.pb-md
+                    %h5.media-heading {{ comment.user_name }}
+                    said on {{comment.created_at | amDateFormat:'MMMM D, YYYY'}} at {{comment.created_at | amDateFormat: 'h:mm a'}}
+                  .pb-md.pt-md.media-desc
+                    {{ comment.comment | commentHtmlSafe }}
+
+  .row{'ng-if'=> "content.created_at != undefined"}
+    .col-md-12
+      .panel.panel-default{"data-widget" => "{\"draggable\": \"false\"}"}
+        .panel-heading
+          %h2 Leave a Comment
+        .panel-body
+          #leave-comments
+            %form{"accept-charset" => "UTF-8", id: "comment_form", name:'commentForm', "ng-submit" => "addComment()", "novalidate" => "" , 'data-parsley-validate': ""}
+              .form-group
+                %label.sr-only{for: "comment-box"} Your comment
+                %textarea.form-control.comment-box{placeholder: "Write your comment here", cols: "30", rows: "10", 'ng-model' => 'new_comment.comment', name: 'comment', 'ng-required': 'true', "data-parsley-trigger": "input focusin focusout"}
+              .form-group
+                %button.btn.btn-raised.btn-primary.m-n.pull-right{type: "submit",'ng-click' => ""}
+                  %span.fa.fa-cloud
+                  Submit
+
+
+%script{type: "text/ng-template", id: "history"}
+  %md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-lg{"aria-label":"Previous Content Changes"}
+    %md-toolbar
+      .md-toolbar-tools
+        %h2.modal-title Previous Content Changes
+        %span.flex
+        %button.close{"aria-hidden" => "true", "ng-click"=>"closeModal($event)", :type => "button"}
+          %span.fa.fa-times-circle-o
+    %md-dialog-content
+      .md-dialog-content
+        .content-diff-section
+          .orange Title
+          .row
+            .col-xs-12
+              %p.word-wrap-break{"ng-bind-html" => "content.content_difference.title"}
+              .orange Content
+              %p.word-wrap-break{"ng-bind-html" => "content.content_difference.content"}
+              .orange Meta Title
+              %p.word-wrap-break{"ng-bind-html" => "content.content_difference.meta_title"}
+              .orange Meta Description
+              %p.word-wrap-break{"ng-bind-html" => "content.content_difference.meta_description"}
+    %md-dialog-actions
+      .left-date-info
+        %p
+          %span.clx-text.text-color-accent-red Updated on
+          %span{"ng-bind-html" => "content.content_difference.updated_at"}
+          %span.clx-text.text-color-accent-red By
+          %span{"ng-bind-html" => "content.content_difference.user"}
+      %span.flex
+      %button.btn.btn-raised.mt-md.mb-md.btn-primary{'ng-click' => "closeModal($event)"} OK
+
+
+%script
+  window.ParsleyConfig = {
+  validationThreshold: 0,
+  successClass: 'has-success',
+  errorClass: 'has-error',
+  errorElem: '<span></span>',
+  errorsWrapper: '<span class="help-block"></span>',
+  errorTemplate: "<div></div>",
+  classHandler: function(el) {
+  return el.$element.closest(".form-group");
+  }
+  };
+
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.2/parsley.min.js"}

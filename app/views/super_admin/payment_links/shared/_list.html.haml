@@ -1,0 +1,12 @@
+%tbody#payment_links_list
+  %tr.centered-cols.row-header.text-black.d-none.d-xl-table-row
+    %th{width: '25%'} Prepared For
+    %th{width: '25%'} Description
+    %th{width: '15%'} Price
+    %th{width: '15%'} Implementation Fee
+    %th.text-xl-right Actions
+  - payment_links.each do |payment_link|
+    - plan = payment_link.admin_plan
+    - next unless plan
+    %tr.centered-cols.row-card{id: "admin_payment_link_#{payment_link.id}"}
+      = render 'super_admin/payment_links/shared/payment_link', payment_link: payment_link, plan: plan

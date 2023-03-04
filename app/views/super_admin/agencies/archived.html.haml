@@ -1,0 +1,45 @@
+- content_for :title do
+  Archived Agencies | Clickx
+.uiv2
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1 Archived Agencies
+  .clearfix
+  .content-card.p-md-5
+    .content-card__header
+      .d-flex.justify-content-between.flex-wrap
+        .col-search
+          .input-wrapper
+            = text_field_tag :search_name, '', class: 'form-control', placeholder: 'Search By Name'
+            .inner-glyph.glyph-align
+              %i.glyphicon.glyphicon-search
+
+    .archived_agencies_list
+      = render 'super_admin/agencies/archived/list', agencies: @agencies
+
+= hidden_field_tag :search_state, 'all'
+:javascript
+  $('#search_name').on("keyup", function() {
+    var name = $('#search_name').val().toLowerCase();
+    var search = false
+    if(name.length >= 3){
+      $('#search_state').val('search')
+      search = true
+    }else if(name.length == 0){
+      if($('#search_state').val() == 'search'){
+        $('#search_state').val('all')
+        search = true
+      }else{
+        search = false
+      }
+    }
+    if(search == true){
+      $.ajax({
+        url: "/s/agencies/archived",
+        type: 'get',
+        data: { name: name },
+        dataType: 'script',
+        async: false,
+        success:function(response){}
+      })
+    }
+  });

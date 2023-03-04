@@ -1,0 +1,4 @@
+%div.left.pagination-links{'st-pagination' => "", 'st-items-by-page' => "rows_per_page", 'st-displayed-pages' => "3"}
+%div.pagination-left.pagination-size
+  %md-select.md-no-underline.form-control.mt-xs.n{name:'rows_per_page', 'ng-model':'rows_per_page', style: 'width:92px;', 'ng-init':'show_rows=[5,10,25,50]'}
+    %md-option{'ng-repeat':"row in show_rows track by $index", value:"{{row}}", 'ng-selected':'row==rows_per_page'} {{row}}

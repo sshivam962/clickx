@@ -1,0 +1,112 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "name": "Nomad",
+      "kdi": null,
+      "id": 17518,
+      "googleRanking": 1,
+      "google_ranking_change": 0,
+      "googleRankingUrl": "https://www.nomad.io/comparison",
+      "lastGoogleRankingDate": "2018-04-27 08:15:02.556961",
+      "searchVolume": null,
+      "cpc": null,
+      "rank_date": "2018-04-27",
+      "googleSerpUrl":
+        "https://www.google.com/search?gws_rd=ssl,cr\u0026pws=0\u0026uule=w+CAIQICISQ2hnbywgSWxsaW5vaXMsIFVT\u0026num=100\u0026q=https://www.nomad.io/comparison/",
+      "tags": null
+    },
+    {
+      "name": "Exelcior",
+      "kdi": -1.0,
+      "id": 9134,
+      "googleRanking": 1,
+      "google_ranking_change": 0,
+      "googleRankingUrl": "https://www.exelcior.io/stan/",
+      "lastGoogleRankingDate": "2018-04-27 08:08:32.649049",
+      "searchVolume": 480,
+      "cpc": "0.00",
+      "rank_date": "2018-04-27",
+      "googleSerpUrl":
+        "https://www.google.com/search?gws_rd=ssl,cr\u0026pws=0\u0026uule=w+CAIQICISQ2hnbywgSWxsaW5vaXMsIFVT\u0026num=100\u0026q=exelcior",
+      "tags": null
+    },
+    {
+      "name": "Infinity Stones",
+      "kdi": -1.0,
+      "id": 10750,
+      "googleRanking": 1,
+      "google_ranking_change": 0,
+      "googleRankingUrl": "https://www.thanos.co/infinity_stones/",
+      "lastGoogleRankingDate": "2018-04-27 08:09:36.183933",
+      "searchVolume": null,
+      "cpc": null,
+      "rank_date": "2018-04-27",
+      "googleSerpUrl":
+        "https://www.google.com/search?gws_rd=ssl,cr\u0026pws=0\u0026uule=w+CAIQICISQ2hnbywgSWxsaW5vaXMsIFVT\u0026num=100\u0026q=infinity+stones",
+      "tags": null
+    },
+    {
+      "name": "Loki",
+      "kdi": -1.0,
+      "id": 15918,
+      "googleRanking": 1,
+      "google_ranking_change": 0,
+      "googleRankingUrl": "https://www.loki.com/tesseract/",
+      "lastGoogleRankingDate": "2018-04-27 08:13:43.606052",
+      "searchVolume": null,
+      "cpc": null,
+      "rank_date": "2018-04-27",
+      "googleSerpUrl":
+        "https://www.google.com/search?gws_rd=ssl,cr\u0026pws=0\u0026uule=w+CAIQICISQ2hnbywgSWxsaW5vaXMsIFVT\u0026num=100\u0026q=mind_stone",
+      "tags": null
+    },
+    {
+      "name": "gotham",
+      "kdi": -1.0,
+      "id": 10478,
+      "googleRanking": 1,
+      "google_ranking_change": 0,
+      "googleRankingUrl": "https://www.gotham.it/dark-knight/",
+      "lastGoogleRankingDate": "2018-04-27 08:09:23.363157",
+      "searchVolume": null,
+      "cpc": null,
+      "rank_date": "2018-04-27",
+      "googleSerpUrl":
+        "https://www.google.com/search?gws_rd=ssl,cr\u0026pws=0\u0026uule=w+CAIQICISQ2hnbywgSWxsaW5vaXMsIFVT\u0026num=100\u0026q=dark_night",
+      "tags": null
+    },
+    {
+      "name": "walker",
+      "kdi": -1.0,
+      "id": 10472,
+      "googleRanking": 1,
+      "google_ranking_change": 0,
+      "googleRankingUrl": "https://www.walker.io/jw/",
+      "lastGoogleRankingDate": "2018-04-27 08:09:22.933087",
+      "searchVolume": 50,
+      "cpc": "0.00",
+      "rank_date": "2018-04-27",
+      "googleSerpUrl":
+        "https://www.google.com/search?gws_rd=ssl,cr\u0026pws=0\u0026uule=w+CAIQICISQ2hnbywgSWxsaW5vaXMsIFVT\u0026num=100\u0026q=jw",
+      "tags": null
+    },
+    {
+      "name": "luthor",
+      "kdi": 49.33,
+      "id": 15595,
+      "googleRanking": 7,
+      "google_ranking_change": 0,
+      "googleRankingUrl": "https://www.lex.io/luthor/",
+      "lastGoogleRankingDate": "2018-04-27 08:13:25.626275",
+      "searchVolume": 110,
+      "cpc": "0.00",
+      "rank_date": "2018-04-27",
+      "googleSerpUrl":
+        "https://www.google.com/search?gws_rd=ssl,cr\u0026pws=0\u0026uule=w+CAIQICISQ2hnbywgSWxsaW5vaXMsIFVT\u0026num=100\u0026q=luthor",
+      "tags": null
+    }
+  ],
+  "keyword_limit": 1000,
+  "total_size": 10
+}

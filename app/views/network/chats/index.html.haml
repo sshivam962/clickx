@@ -1,0 +1,48 @@
+.py-8
+  .lg:container.mx-auto.px-4
+    .border.bg-light-blue.border-blue-200.rounded-md.messaging-wrapper
+      .messaging-messages-list-wrap.bg-white.sm:border-r.border-gray-200.rounded.sm:rounded-l-md.overflow-hidden.sm:flex.flex-col
+        .bg-white.py-3.px-4.sm:py-4.sm:px-8.rounded-t-md.sm:rounded-none.sm:rounded-tl-md.text-base.sm:text-md.font-medium.border-b.border-gray-200  Messages
+        .flex-1.overflow-auto
+          .messaging-messages-list.divide-y.divide-gray-200
+            = render 'chat_list', chat_threads: @chat_threads
+      #chat_box.messaging-chat-area-wrap.h-full.hidden.sm:block
+        .messaging-chat-area.flex.flex-col.chat-box-empty
+          %h5 No Chat Selected
+
+:javascript
+  var winWidth = $(window).width();
+  if(winWidth < 640) {
+    $(document).on('click', '.messaging-messages-list-item > a', function() {
+      $('.messaging-messages-list-wrap').fadeOut();
+      $('.messaging-chat-area-wrap').fadeIn();
+    })
+    $(document).on('click', '.backto-messages', function() {
+      $('.messaging-messages-list-wrap').fadeIn();
+      $('.messaging-chat-area-wrap').fadeOut();
+    });
+  }
+
+  $(function() {
+    if(#{params[:chat_thread_id].present?}){
+      setTimeout(function() {
+        $("#chat_thread_#{params[:chat_thread_id]}").click();
+      },10);
+    };
+
+    $('.messaging-messages-list').on('click', '.chat_item', function(){
+      var thread_id = $(this).data('thread_id');
+      $.ajax({
+        url: '/n/messages/chat_history?thread_id=' + thread_id,
+        type: 'GET',
+        success: function(response){
+          $(".chat_item").removeClass('active-chat')
+          $(".chat_item[data-thread_id='" + thread_id + "']").addClass('active-chat');
+          var winWidth = $(window).width();
+          if(winWidth < 640) {
+            $('.messaging-chat-area-wrap').fadeIn();
+          }
+        }
+      })
+    });
+  });

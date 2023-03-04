@@ -1,0 +1,30 @@
+.panel.panel-default.m-n#top-10-keywords{ 'ng-if': 'marketing_performance_loaded && topKeywordsStatus' }
+  .panel-heading.cursor-move
+    %h2
+      %a.l-grey{ 'href': "#/rankings" }
+        Top 10 Keywords
+        %i.fa.fa-info-circle.tooltip-text-icon{ 'title': 'For more keywords, go to keywords in the "SEO" section in the sidebar.' }
+    #onboarding-top-10-keywords.on-boarding
+    .panel-ctrls
+      %button.Dbutton.btn.button-icon.pull-left.mt-sm{ 'ng-click': 'pdf_export("top-10-keywords")', 'title': 'Download report', 'ng-class': "{'disable-button': export_disabled}" }
+        %span.material-icons.inverted file_download
+      %button.btn.button-icon.mt-sm.refresh-panel{ 'ng-click': 'refresh_intelligence("top_keywords")', 'title': 'Refresh report' }
+        %span.material-icons.inverted refresh
+  .panel-body.no-padding.scroll-pane{ 'style': 'height: 420px;' }
+    .panel.panel-white.no-shadow.scroll-content.p-n
+      .panel-body
+        .table-responsive
+          %table.table.table-hover.table-bordered.table-vam.mb-n.ten-rows-dashlets
+            %tbody
+              %tr
+                %th.text-left{ 'width': '240' }
+                  %b.l-grey Keyword
+                %th.text-left
+                  %b.l-grey Rank
+                %th.text-left
+                  %b.l-grey Search Volume
+              %tr{ 'ng-repeat': 'keyword in dashlets.top_10_keywords' }
+                %td.text-left{ 'width': '240' }
+                  .info {{ keyword.name }}
+                %td.text-left {{ keyword.google_rank || 'NA' }}
+                %td.text-left {{ (keyword.search_volume | toLocaleString) || 'NA' }}

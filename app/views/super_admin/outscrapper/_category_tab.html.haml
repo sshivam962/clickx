@@ -1,0 +1,9 @@
+-categories.each do |c|
+  %label.outscrapper-category
+    %span.d-none
+      =c.id
+    %input(type="checkbox")
+    .outscrapper-category--name
+      = c.category
+    %span.outscrapper-category--remove
+      %i.fa.fa-times

@@ -1,0 +1,8 @@
+.modal.fade{id: "pf-video-modal-#{portfolio.id}", "aria-hidden" => "true", "aria-labelledby" => "pf-video-modal", :tabindex => "-1", :role => "dialog", data: {backdrop: 'false'}}
+  .modal-dialog.modal-dialog-centered{role: "document"}
+    .modal-content
+      .modal-body
+        .embed-responsive.embed-responsive-16by9
+          = raw portfolio.video_embed_code
+      .modal-footer
+        %button.btn.btn-info{"data-dismiss" => "modal", :type => "button"} Close

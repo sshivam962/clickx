@@ -1,0 +1,6 @@
+<% if @proposal.errors.present? %>
+  toastr.error("<%= @proposal.errors.full_messages.to_sentence %>");
+<% else %>
+  $('#contract-modal').modal('hide');
+  toastr.success("Accepted");
+<% end %>

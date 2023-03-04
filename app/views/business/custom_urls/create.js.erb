@@ -1,0 +1,8 @@
+<% if @error.present? %>
+  toastr.error("<%= @error %>")
+<% elsif @success.present? %>
+  $("#add_url_form").trigger("reset");
+  $('#addNewUrlModal').modal('hide');
+  window.location.replace(window.location.href);
+  toastr.success("<%= @success %>");
+<% end %>

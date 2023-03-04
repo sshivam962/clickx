@@ -1,0 +1,14 @@
+.course-actions-list-item{id: dom_id(action_step)}
+  .d-flex
+    .col.col-stretch
+      = action_step.title
+    .col
+      .course-actions-list-buttons
+        = link_to destroy_action_step_super_admin_course_path(id: action_step), class: "course-actions-item-delete", method: :delete, remote: true, data: { confirm: 'Are you sure?' } do
+          %i.fa.fa-trash
+
+        = link_to move_up_super_admin_course_path(action_step, chapter_id: chapter.id), class: "", method: :patch, remote: true do
+          %i.fa.fa-arrow-up
+
+        = link_to move_down_super_admin_course_path(action_step, chapter_id: chapter.id), class: "", method: :patch, remote: true do
+          %i.fa.fa-arrow-down

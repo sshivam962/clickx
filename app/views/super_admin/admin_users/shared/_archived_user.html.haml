@@ -1,0 +1,22 @@
+%span{id: dom_id(user)}
+  .clients-list
+    .clients-list__item.d-flex.flex-wrap
+      .col-stretch.clients-list__datas.pt-3
+        .d-flex
+          .col-md-4.pl-0
+            - if user.logo.present?
+              %img.mr-md{alt: 'logo', src: user.logo, width: '50'}
+            %span.name.blue
+              = user.name
+          .col-sm-4.col-md-4
+            %p= user.email
+          .col-md-1.col-sm-1.p-n
+            %span.small
+              = days_since user.last_seen
+      .col-auto.clients-list__actions.align-items-center
+        .btn-icon-list
+          = link_to unarchive_super_admin_admin_user_path(user.id), class: "btn-icon", remote: true, method: :patch, data: { confirm: "Are you sure you'd like to Unarchive #{user.name}?"} do
+            %i.glyphicon.glyphicon-folder-close
+
+          = link_to force_delete_super_admin_admin_user_path(user.id), class: 'btn-icon btn-icon--delete', remote: true, method: :delete, data: { confirm: "Are you sure you'd like to permanently delete #{user.name}?"} do
+            %i.fa.fa-trash

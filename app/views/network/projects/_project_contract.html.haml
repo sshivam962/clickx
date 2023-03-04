@@ -1,0 +1,98 @@
+#project_contract.fixed.z-10.inset-0.overflow-y-auto.overlay
+  = form_with model: ProjectProposal.new, url: proposal_network_project_path(project.id), local: false, method: :post do |f|
+    .flex.items-center.justify-center.min-h-screen.pt-4.px-4.pb-10.text-center
+      .fixed.inset-0.bg-gray-500.bg-opacity-75.transition-opacity.overlay-close
+      .inline-block.align-bottom.bg-white.rounded-lg.text-left.overflow-hidden.shadow-xl.transform.transition-all.sm:align-middle.sm:max-w-3xl.sm:w-full
+        .bg-white.px-4.pt-5.pb-4.sm:p-6.sm:pb-4
+          .relative.text-center
+            .mt-3.sm:mt-0
+              #modal-title.text-xl.font-medium.leading-6.font-light.text-blue
+                Submit Proposal
+            %button.modal-close-button.overlay-close.absolute.right-0.top-0.text-blue.w-8.h-8.leading-8.text-center.hover:bg-gray-200.hover:text-gray-800.-mt-1.rounded.transition-colors
+              %i.fa.fa-close
+
+          .pt-4.pb-3
+            Client Budget:
+            %span.font-medium.py-8.pl-2.text-center.project-budget{data:{amount: project.budget}}= number_to_currency(project.budget, strip_insignificant_zeros: true)
+          .mt-4
+            .border.bg-light-blue.border-blue-100.rounded-md.mb-2
+              .bg-white.py-3.px-4.rounded-t-md My Proposal
+              = f.number_field :amount, class: 'text-5xl font-bold text-blue py-8 text-center w-full bg-light-blue negotiable-amount', placeholder: "#{number_to_currency(project.budget, strip_insignificant_zeros: true)}"
+
+            / .border.bg-light-blue.border-blue-100.rounded-md.mb-2
+            /   .bg-white.rounded-t-md
+            /     .btn--slide-toggle.py-3.px-4.cursor-pointer{:data => 'milestone'}
+            /       .flex.justify-between
+            /         .col-auto
+            /           Milestone
+            /         .col-auto
+            /           %i.fa.fa-angle-down
+            /     %ul#milestone.hidden.border-t.border-gray-200.mt-2.pt-3.px-4
+            /       %li.text-sm.pb-3
+            /         %span.w-8.h-8.bg-gray-100.rounded-full.inline-block.text-center.leading-8.mr-1.text-sm.font-semibold 1
+            /         Week 1 Kick Off
+            /       %li.text-sm.pb-3
+            /         %span.w-8.h-8.bg-gray-100.rounded-full.inline-block.text-center.leading-8.mr-1.text-sm.font-semibold 2
+            /         Week 2 - Delivery of Plugin
+            /       %li.text-sm.pb-3
+            /         %span.w-8.h-8.bg-gray-100.rounded-full.inline-block.text-center.leading-8.mr-1.text-sm.font-semibold 3
+            /         Week 3 - Documentation & Final Delivery
+
+            .border.bg-light-blue.border-blue-100.rounded-md.mb-2
+              .py-3.px-4
+                - clickx_fee = project.budget * 20/100
+                .flex.justify-between.items-center.text-gray-500.pb-3
+                  .col-auto.text-sm.font-light
+                    20% Clickx fee
+                    %span.text-lg.text-primary.ml-3
+                      %i.fa.fa-question-circle-o
+                  .col-auto.clickx-fee{data:{clickxfee: clickx_fee}}= "+ #{number_to_currency(clickx_fee, strip_insignificant_zeros: true)}"
+                .sm:flex.justify-between.items-center
+                  .col-auto.text-sm.font-light.text-xl Final Amount
+                  .col-auto.font-light.text-3xl.final-amount{data:{finalamount: project.budget + clickx_fee}}= number_to_currency(project.budget + clickx_fee, strip_insignificant_zeros: true)
+            .py-5.text-center
+              = f.submit "Submit Proposal", class: 'btn btn--primary w-48 min-w-20'
+
+            -# #contract_negotiate.mb-2.hidden
+            -#   .border.bg-light-blue.border-blue-100.rounded-md
+            -#     .bg-white.py-3.px-4.rounded-t-md
+            -#       .flex.justify-between.items-center
+            -#         .col-auto Negotiable Amount
+            -#         .col-auto
+            -#           %button.w-6.h-6.leading-6.text-center.hover:bg-gray-200.hover:text-gray-800.-mt-1.rounded-full.transition-colors.btn--slide-toggle{:data => 'contract_negotiate', id: 'negotiable_amount_field_close'}
+            -#             %i.fa.fa-close
+            -#     .price-input
+            -#       = f.number_field :amount, class: 'text-5xl font-bold text-blue py-8 text-center w-full bg-light-blue negotiable-amount', placeholder: "#{number_to_currency(project.budget, strip_insignificant_zeros: true)}"
+            -#   .text-center.pt-4.pb-5
+            -#     = f.submit "Submit Proposal", class: 'btn btn--blue'
+
+            -# .text-sm.text-center.py-3
+            -#   By continuing, you're agreeing to the
+            -#   %a{:href => "#", :class => "text-primary"} ClickxTM Customer Terms of Service
+            -#   %span &
+            -#   %a{:href => "#", :class => "text-primary"} Privacy Policy
+
+  :javascript
+    $(document).ready(function(){
+      $('.negotiable-amount').on('keyup', function(){
+        var amount = $(this).val();
+        if(amount.length == ''){
+          var clickx_fee = $('.clickx-fee').data('clickxfee');
+          var final_amount = $('.final-amount').data('finalamount');
+          $('.clickx-fee').text( "+ $" + parseFloat(clickx_fee).toFixed(2) );
+          $('.final-amount').text( "$" + parseFloat(final_amount).toFixed(2) );
+        }
+        else {
+          var clickx_fee = (parseFloat(amount) * 20/100);
+          $('.clickx-fee').text( "+ $" + clickx_fee.toFixed(2).toString() );
+          $('.final-amount').text( "$" + (parseFloat(amount) + clickx_fee).toFixed(2).toString() );
+        }
+      });
+      $('#negotiable_amount_field_close').on('click', function(){
+        $('.negotiable-amount').val('');
+        var clickx_fee = $('.clickx-fee').data('clickxfee');
+        var final_amount = $('.final-amount').data('finalamount');
+        $('.clickx-fee').text( "+ $" + parseFloat(clickx_fee).toFixed(2) );
+        $('.final-amount').text( "$" + parseFloat(final_amount).toFixed(2) );
+      })
+    });

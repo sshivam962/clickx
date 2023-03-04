@@ -1,0 +1,3 @@
+$('#contact-email-template').html("<%= escape_javascript render(partial: 'agency/direct_leads/email_template', locals: { contact: @contact, direct_lead: @direct_lead })%>");
+$('.lead_contact_item').removeClass('lead_contact_item--selected');
+$("#contact_panel_<%= @contact.id %>").addClass('lead_contact_item--selected');

@@ -1,0 +1,2 @@
+$('#modal_container').html("<%= escape_javascript render( partial: 'super_admin/agencies/shared/manage_growth_subscription_modal', locals: { active_subscription: @active_subscription, agency: @agency, subscription_schedule: @subscription_schedule }) %>");
+$('#manage-subscriptions-modal').modal('show')

@@ -1,0 +1,45 @@
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1
+      Outscrapper Data
+.locations
+  %span
+    .address.row.ml-n.mr-n
+      .col-sm-12{style: "width: 5%"}
+        %b Serial no
+      .col-sm-12{style: "width: 10%"}
+        %b Company Name
+      .col-sm-6{style: "width: 10%"}
+        %b City
+      .col-sm-6{style: "width: 10%"}
+        %b State
+      .col-sm-6{style: "width: 25%"}
+        %b Website
+      .col-sm-6{style: "width: 20%"}
+        %b Type
+      .col-sm-6.text-center{style: "width: 20%"}
+        %b Emails
+  - @cleaned_data.each_with_index do |data, i|
+    %span
+      .address.row.ml-n.mr-n
+        .col-sm-12{style: "width: 5%"}
+          = i+1
+        .col-sm-12{style: "width: 10%"}
+          = data["company_name"]
+        .col-sm-6{style: "width: 10%"}
+          = data["city"]
+        .col-sm-6{style: "width: 10%"}
+          = data["state"]
+        .col-sm-6.col-md-1{style: "width: 25%"}
+          = link_to data["site"], data["site"], {target: "_blank"}
+        .col-sm-6.col-md-1{style: "width: 20%"}
+          = data["type"]
+        .col-sm-6.col-md-1.text-center{style: "width: 20%"}
+          -emails = []
+          -data["emails"].each { |e| emails.push(e["email"])}
+          = emails.join(", ")
+
+.ui-2020
+  .row.pagination-wrapper
+    .pagination
+      = will_paginate @cleaned_data

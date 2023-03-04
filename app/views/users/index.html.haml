@@ -1,0 +1,28 @@
+- content_for :title do
+  Users 
+
+.header
+  = link_to '/#/businesses/new', class: 'btn btn-warning pull-right' do
+    %i.glyphicon.glyphicon-plus
+    Add new Business 
+  = link_to new_user_invitation_path, class: 'btn btn-warning pull-right' do
+    %i.glyphicon.glyphicon-plus
+    Invite New User 
+
+.locations
+  - @users.each do |user|
+    .address
+      %p.name 
+        Name:
+        = user.name
+      %p
+        - if user.invitation_accepted?
+          %a.blue=user.email
+        - else
+          %a.red=user.email
+      %p
+        Phone:
+        = user.phone 
+      %p
+        Address:
+        = user.address

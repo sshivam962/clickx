@@ -1,0 +1,16 @@
+.locations
+  - links.each do |link|
+    %span{id: dom_id(link)}
+      .address.row.ml-n.mr-n
+        .col-sm-6.col-md-4
+          = link.user&.name
+        .col-sm-4.col-md-4
+          = link.calendly_script
+        .col-sm-4.col-md-4
+          .col-sm-12.right.normal-edit-button.grey-btn-group.mb-md
+            = link_to delete_admin_calendly_script_super_admin_agency_signup_links_path(link_id: link.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn grey-btn-icon align-icon pull-right ml-sm mb-sm', remote: true do
+              %i.glyphicon.glyphicon-trash
+              Delete
+            = link_to edit_admin_calendly_script_super_admin_agency_signup_links_path(link_id: link.id), class: 'btn grey-btn-icon align-icon pull-right ml-sm mb-sm', remote: true do
+              %i.glyphicon.glyphicon-edit
+              Edit

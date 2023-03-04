@@ -1,0 +1,10 @@
+- content_for :title do
+  New Case Study | Clickx
+.page-header
+  %h3
+    Add New Case Study
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: super_admin_case_studies_path } Back
+.agency-form
+  = form_for @case_study, url: super_admin_case_studies_path, method: :post do |f|
+    = render 'form', f: f, super_admins: @super_admins

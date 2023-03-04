@@ -1,0 +1,38 @@
+.panel.panel-default.m-n#competitors{ 'ng-if': 'marketing_performance_loaded && competitorsStatus' }
+  .panel-heading.cursor-move
+    %h2
+      %a.l-grey{href: "/b/competitions"}
+        Competitors
+        %i.fa.fa-info-circle.tooltip-text-icon{ 'title': 'List of your competitors who have similar traffic to your site\'s traffic. For more competitor reports, go to the "Competitors" section in the sidebar.' }
+    #onboarding-competitors.on-boarding
+    .panel-ctrls
+      %button.Dbutton.btn.button-icon.pull-left.mt-sm{ 'ng-click': 'pdf_export("competitors")', 'title': 'Download report', 'ng-class': "{'disable-button': export_disabled}"}
+        %span.material-icons.inverted file_download
+      %button.btn.button-icon.mt-sm.refresh-panel{ 'ng-click': 'init_competition_page()','title': 'Refresh report'}
+        %span.material-icons.inverted refresh
+  .panel-body.no-padding.scroll-pane{style: 'height: 420px;'}
+    .scroll-content.p-n
+      .panel-body
+        .table-responsive
+          %table.table.table-hover.table-bordered.table-vam.mb-n{'st-table':'competitions', 'st-safe-src':'all_competition_data'}
+            %tbody
+              %tr{'ng-repeat':'row in competitions'}
+                %td.text-left
+                  %a.info{'ng-href' => "{{ row.name | web_link}}", target: '_blank'}
+                    .text-bold {{row.name}}
+
+                %td.text-left
+                  %a.btn.btn-success.btn-raised.btn-sm{href: "#/{{row.business_id}}/competitions/{{row.id}}"}
+                    View
+                  %a.btn.btn-danger.btn-raised.btn-sm{"data-id"=>"{{row.id}}","ng-click"=>"openCompetitionDelete(row)"}
+                    Delete
+        .boxes-cover{"ng-show"=>"competitions.length == 0"}
+          .boxes.clearfix.pd-t-95
+            .col-lg-12.col-md-12.col-xs-12.box
+              %a.block-link{ href: '/b/competitions' }
+                .item.text-center
+                  .img
+                    %img{'ng-src' => "/hub_images/ic-competitors.png"}
+                  %a.btn.btn-white.btn-raised.btn-md{"ng-click"=>"openAddCompetition($event)"}
+                    %i.fa.fa-plus
+                    Add Competitors

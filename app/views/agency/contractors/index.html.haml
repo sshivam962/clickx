@@ -1,0 +1,15 @@
+.page-heading.pt-md.pb-md.ui-2020
+  .row.align-items-center
+    .col-md-4
+      %h1
+        %i.clickx-icon-SellSheets.title-icon
+        Contractors
+
+.container-fluid
+  .row.d-flex.flex-wrap.cover-section
+    .col-lg-12.col-xs-12.pb-4
+      .bg-sky-blue.border-blue.p-4.p-md-5.rounded.border-1
+        #dashboard-table.ui-2020
+          .row
+            .col-md-12
+              = render 'list'

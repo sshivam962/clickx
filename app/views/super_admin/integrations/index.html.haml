@@ -1,0 +1,30 @@
+%div.clearfix
+  %h3
+    Third Party Integrations
+%div
+  %table.table.table-bordered.users.reports
+    %thead
+      %th Provider
+      %th Action
+
+    %tbody
+      %tr
+        %td Keyword Planner
+        %td.center
+          %span
+          - if @keyword_planner_token.blank?
+            = link_to 'Connect', super_admin_integrations_keyword_planner_connect_path, class: "btn btn-success btn-xs"
+          - else
+            %div
+              = link_to 'Disconnect', super_admin_integrations_keyword_planner_disconnect_path, class: "btn btn-success btn-xs"
+              = link_to 'Select Account', super_admin_integrations_keyword_planner_accounts_path, class: "btn btn-success btn-xs"
+      %tr
+        %td HubSpot
+        %td.center
+          %span
+          - if @hubspot_token.blank?
+            = link_to 'Connect', super_admin_integrations_hubspot_connect_path, class: "btn btn-success btn-xs"
+          - else
+            %div
+              = link_to 'Disconnect', super_admin_integrations_hubspot_disconnect_path, class: "btn btn-success btn-xs"
+              = link_to 'Reconnect', super_admin_integrations_hubspot_connect_path, class: "btn btn-success btn-xs"

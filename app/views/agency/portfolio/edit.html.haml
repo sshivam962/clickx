@@ -1,0 +1,9 @@
+-# .page-header
+  -# %h3
+  -#   Edit Portfolio
+  -#   %small.pull-right
+  -#     %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: agency_portfolio_index_path } Back
+.container-fluid.pt-4
+  .agency-form
+    = form_for @portfolio, url: agency_portfolio_path, method: :put do |f|
+      = render 'form', f: f

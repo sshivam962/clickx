@@ -1,0 +1,12 @@
+%table.table.table-bordered.users.reports
+  %thead
+    %th Name
+    %th Email
+    %th Message count
+  %tbody
+    - message_report_list.each do |report,report_val|
+      - @user = User.find report
+      %tr
+        %td= @user.first_name
+        %td= @user.email
+        %td= report_val

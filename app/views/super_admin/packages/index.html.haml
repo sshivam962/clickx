@@ -1,0 +1,26 @@
+- content_for :title do
+  Packages | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1
+      Packages
+.locations#packages
+  - @packages.each do |package|
+    %row
+      %span
+        .address.row.ml-n.mr-n
+          .col-sm-12.col-md-6
+            %span.name.blue
+              = package.name
+          .col-sm-12.col-md-6
+            .col-sm-12.right.normal-edit-button.grey-btn-group.mb-md
+              %a.btn.grey-btn-icon.align-icon.pull-right.ml-sm.mb-sm{href: preview_super_admin_packages_path(key: package.key), target: '_blank'}
+                %i.fa.fa-eye
+                Preview
+              - if package.sales_pitch_enabled
+                %a.btn.grey-btn-icon.align-icon.pull-right.ml-sm.mb-sm{ href: edit_super_admin_package_path(package) }
+                  %i.glyphicon.glyphicon-edit
+                  Edit Sales Pitch
+              %a.btn.grey-btn-icon.align-icon.pull-right.ml-sm.mb-sm{ href: checklist_super_admin_package_path(package) }
+                %i.glyphicon.glyphicon-edit
+                Checklist

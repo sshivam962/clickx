@@ -1,0 +1,29 @@
+- [dummy_lead].each do |lead|
+  %tr.centered-cols.row-card
+    %td.col-client
+      %a.client-url{href: 'javascript:void(0)'}
+        %span.client-logo
+          = lead.initials
+        %span.client-name-editable
+          %span.client-name__name
+            = lead.full_name
+          %span.edit-button.edit-button--show-on-hover
+            = image_tag 'icons/icon-edit.svg'
+    %td.col-data
+      %span.email
+        = lead.email
+    %td.col-data
+      %span
+        = lead.company
+    %td.col-btns.text-xl-right
+      %a.action-btn.action-btn--light.text-center{href: 'javascript:void(0)', data: { toggle: 'tooltip', 'original-title' => 'Strategies'}}
+        %span.btn-icon
+          %i.fa.fa-lightbulb-o
+      %a.action-btn.action-btn--light.text-center{href: 'javascript:void(0)', data: { toggle: 'tooltip', 'original-title' => 'Product Pages'}}
+        %span.btn-icon
+          %i.fa.fa-link
+      %a.action-btn.action-btn--light.text-center{"data-original-title" => "Edit", "data-toggle" => "tooltip", :title => "", href: 'javascript:void(0)'}
+        %span.btn-icon
+          %i.fa.fa-edit
+  %tr.row-spacer
+    %td{colspan: 7}

@@ -1,0 +1,27 @@
+= content_for :title, 'Apply to Become a Partner'
+.container
+  = link_to 'http://www.clickx.io', target: '_blank', class: 'login-logo' do
+    = image_tag "logo-dark.svg"
+  .row
+    .col-md-8.col-md-offset-2
+      = form_tag agency_signup_path, method: :post, class: 'form-vertical cardy clickx-parsley',"data-parsley-validate":"" do
+        = hidden_field_tag :referral_code, @referral_code
+        = hidden_field_tag :tyler, true
+        .panel.tranin.panel-midnightblue{"data-widget": {draggable: false}}
+          .panel-heading
+            %h2.regtitle Apply to Become a Partner
+
+        = render 'agency/signups/shared/profile'
+        = render 'agency/signups/shared/billing_address'
+
+        .panel.panel-default
+          .panel-body
+            .col-sm-9.mt-xs
+              .form-group.m-n
+                .checkbox.checkbox-inline.checkbox-primary
+                  %label
+                    %input#tnc{checked: "checked", name: "checkboxs1", type: "checkbox", disabled: true, readonly: true}
+                    \&#160;&#160;I accept the
+                    %a{href: "http://www.clickx.io/terms/", target: "_blank"} User Agreement
+            .col-sm-3
+              %input.btn.btn-inverse.btn-raised{type: "submit", value: "Start Now"}

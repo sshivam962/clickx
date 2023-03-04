@@ -1,0 +1,103 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css);
+
+@import 'rateit';
+@import "fonts";
+@import "styles.min";
+
+.login-page{
+  background-color: #f7f8f9;
+}
+
+.business_logo{
+  max-width: 260px;
+  max-height: 100px;
+  img{max-width: 100%}
+}
+
+.business-name{
+  font-weight: bold;
+}
+
+.review-page {
+  display: block;
+  .rate-wrapper{
+    text-align: center;
+    position: relative;
+    &:after{
+      display: block;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background: #000;
+      z-index: 1;
+      top: 15px;
+    }
+    .rating-inner-wrapper{
+      display: table;
+      margin: 5px auto;
+      padding-left: 10px;
+      padding-right: 8px;
+      position: relative;
+      z-index: 2;
+      background: #fff;
+    }
+    .raterater-wrapper{
+      position: relative;
+      .raterater-bg-layer{
+        color: #e3e3e3;
+      }
+      .raterater-outline-layer{
+        color: transparent!important;
+      }
+      .raterater-hover-layer{
+        color: #FDE16D;
+      }
+      .raterater-rating-layer{
+        color: #FDE16D;
+      }
+    }
+  }
+}
+
+
+
+div.bigstars div.rateit-range
+{
+  background: url(asset-path('star-white32.png'));
+  height: 32px;
+}
+
+div.bigstars div.rateit-hover
+{
+  background: url(asset-path('star-red32.png'));
+}
+
+div.bigstars div.rateit-selected
+{
+  background: url(asset-path('star-gold32.png'));
+}
+
+div.bigstars div.rateit-reset
+{
+  background: url(asset-path('star-black32.png'));
+  width: 32px;
+  height: 32px;
+}
+
+div.bigstars div.rateit-reset:hover
+{
+  background: url(asset-path('star-white32.png'));
+}
+
+.greatness .fa {
+  font-size: 140px;
+  line-height: 190px;
+}
+
+.greatness {
+  width: 200px;
+  height: 200px;
+}

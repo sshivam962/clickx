@@ -1,0 +1,7 @@
+<% if @email_template_response[:status] == 200 %>
+  $('<%= "#email-templates-list-item_#{@email_template_response[:id]}"%>').remove()
+  toastr['success']("<%=escape_javascript @email_template_response[:message] %>");
+<% else %>
+  $('#remove-emial-template-modal').html("<%= escape_javascript render(partial: 'disable_email_template', locals: {lead_source_names: @email_template_response[:lead_source_names]}) %> ");
+  $('.remove-emial-template-modal').modal('show')
+<% end %> 

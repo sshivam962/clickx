@@ -1,0 +1,2 @@
+$('.clients_list').html("<%= escape_javascript render( partial: 'super_admin/clients/shared/list', locals: { clients: @clients }) %>");
+$('html, body').animate({ scrollTop: 0 }, 'slow');

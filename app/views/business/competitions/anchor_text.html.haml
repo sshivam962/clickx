@@ -1,0 +1,73 @@
+= render 'business/competitions/shared/nav'
+.col-md-12
+  .tab-content
+    .summary
+      %div#competition-tabs
+        - if @anchor_texts.present?
+          .panel.panel-default
+            .panel-heading.bg-white.pt-sm
+              %h4.inlineb.f-w-md Anchor Text
+              .panel-ctrls.dropdown
+                %button.btn.button-icon.refresh-panel
+                  %i.material-icons.inverted refresh
+                = link_to export_anchor_texts_csv_business_client_competitions_path(id: @competition.id), class: 'btn btn-white no-border m-sm ml-n mr-n pr-sm pl-sm', target: '_blank' do
+                  %i.material-icons.text-muted.pr-sm> file_download
+                  %b.text-muted Export
+            %hr.mb-md.mr-md.ml-md
+            .panel-body.p-n
+              .col-md-12
+                .col-sm-12.p-n
+                  .table-responsive
+                    %table.table.table-hover.table-vam.table-striped.text-muted
+                      %thead
+                        %tr
+                          %th.f-w-md{:width => "300"}
+                            %u.help_pointer{ "title": "Anchor Texts" }
+                              ANCHOR TEXT
+                          %th.f-w-md{:width => "150"}
+                            %u.help_pointer{ 'title': 'Topics' }
+                              TOPICS
+                          %th.f-w-md
+                            %u.help_pointer{ "title": "Number of referring domains with these anchor texts" }
+                              REFERRING DOMAINS
+                          %th.f-w-md
+                            %u.help_pointer{ 'title': 'Total Number of Links' } TOTAL LINKS
+                          %th.f-w-md
+                            %u.help_pointer{ 'title': 'Number of Deleted Links' } DELETED LINKS
+                          %th.f-w-md
+                            %u.help_pointer{ 'title': 'Number of No Follow Links' }
+                              NO FOLLOW LINKS
+                          %th.f-w-md
+                            %u.help_pointer{ 'title': 'Trust Flow of your site for the anchor text' }
+                              TRUST FLOW
+                          %th.f-w-md
+                            %u.help_pointer{ 'title': 'Citation Flow of your site for the anchor text' }
+                              CITATION FLOW
+                      %tbody
+                        - @anchor_texts.each do |anchor_text|
+                          %tr
+                            %td.text-left{:width => "300"}
+                              #{anchor_text.anchor_text}
+                            %td{:width => "150"}
+                              #{anchor_text.topics}
+                            %td
+                              #{anchor_text.referring_domains}
+                            %td
+                              #{anchor_text.total_links}
+                            %td
+                              #{anchor_text.deleted_links}
+                            %td
+                              #{anchor_text.no_follow_links}
+                            %td
+                              #{anchor_text.estimated_link_trust_flow}
+                            %td
+                              #{anchor_text.estimated_link_citation_flow}
+        - elsif @anchor_texts.empty?
+          .panel.panel-default
+            .panel-heading.bg-white.pt-sm
+              %h4.text-center.f-w-md No Data Available
+
+:javascript
+  $(document).ready(function() {
+    $("#anchor-text-tab").addClass('active');
+  });

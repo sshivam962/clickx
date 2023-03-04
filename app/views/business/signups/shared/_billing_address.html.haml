@@ -1,0 +1,26 @@
+.d-sm-flex.pb-3
+  .w-sm-50.pr-sm-3.pb-sm-0.pb-3
+    %label.input-label{for: 'billing_address_line_1'} Address
+    = text_field_tag 'billing[address_line_1]', '', required: true, class: 'form-input'
+  .w-sm-50.pl-sm-3
+    %label.input-label{for: 'billing_address_line_2'} Address 2
+    = text_field_tag 'billing[address_line_2]', '', class: 'form-input'
+.d-sm-flex.pb-3
+  .w-sm-50.pr-sm-3.pb-sm-0.pb-3
+    %label.input-label{for: 'billing_city'} City
+    = text_field_tag 'billing[city]', '', required: true, class: 'form-input'
+  .w-sm-50.pl-sm-3
+    %label.input-label{for: 'billing_state'} State/Province/Region
+    %select.select.form-input{placeholder: "This is a placeholder", name: 'billing[state]',required:""}
+      %option{value:""} Select State
+      - CS.states(:us).each do |i, v|
+        %option= v
+.d-sm-flex.pb-3
+  .w-sm-50.pr-sm-3.pb-sm-0.pb-3
+    %label.input-label{for: 'billing_zip'} ZIP/Postal Code
+    = text_field_tag 'billing[zip]', '', class: 'form-input', required: true
+  .w-sm-50.pl-sm-3
+    %label.input-label{for: 'billing_country'} Country
+    .custom-select
+      %select.select.form-input{name: 'billing[country]', required: true}
+        %option{selected: true} United States

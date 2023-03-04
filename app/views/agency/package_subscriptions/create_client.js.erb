@@ -1,0 +1,7 @@
+<% if @business.errors.present? %>
+  toastr.error("<%= @business.errors.full_messages.to_sentence %>")
+<% else %>
+  $('#business_id').val("<%= @business.id%>")
+  $('.checkout_steps').addClass('hidden')
+  $('#step_' + $('.client-next-btn').data('next-step') + '_content').removeClass('hidden')
+<% end %>

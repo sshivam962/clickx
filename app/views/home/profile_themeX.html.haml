@@ -1,0 +1,168 @@
+.container-fluid
+  %div
+    .row
+      .col-md-12.profile-area
+        .media.col-md-12.col-sm-12.col-xs-12
+          %label.media-left.pr-n.profileicon
+            %input.cloudinary-fileupload{ :name => "file", :type => "file","style":"display:none", 'onchange': 'upload(this.files[0]);' }
+            - if current_user.logo?
+              = image_tag(current_user.logo, class: 'media-object', height: '75', width: '75' )
+            - else
+              %svg{:height => "75", :style => "display: table;", :width => "75"}
+                %rect{:height => "75", :style => "fill:#F8B018;", :width => "75"}
+                %text#upload{:fill => "white", :style => "font-family:Verdana; font-size:25; font-weight:bold", :x => "21", :y => "47"}= current_user.initials
+          .media-body.pl-xl
+            %h4.media-heading= current_user.name
+            = current_user.email
+      .col-md-12.mt-md
+        .tab-content
+          .panel.panel-profile
+            .tab-content
+              .tab-pane.active.p-md
+                .about-area
+                  .row
+                    .options
+                      = link_to edit_user_registration_path, class: 'btn btn-sm btn-default btn-raised pull-right mr-sm' do
+                        %i.fa.fa-pencil.pr-sm>
+                        Edit User Information
+                    %h4.mt-md.pl-md User Information
+                  .table-responsive
+                    %table.table
+                      %tbody
+                        %tr
+                          %th First Name
+                          %td= current_user.first_name
+                        %tr
+                          %th Last Name
+                          %td= current_user.last_name
+                        %tr
+                          %th Phone
+                          %td= current_user.phone
+                        %tr
+                          %th Address
+                          %td= current_user.address
+                .about-area
+                  .row
+                    .options
+                      - if current_user.authy_enabled?
+                        = link_to user_disable_authy_path, class: 'btn btn-sm btn-default btn-raised pull-right mr-sm', method: :post do
+                          %i.fa.fa-pencil.pr-sm>
+                          Disable
+                      - else
+                        = link_to user_enable_authy_path, class: 'btn btn-sm btn-default btn-raised pull-right mr-sm', method: :get do
+                          %i.fa.fa-pencil.pr-sm>
+                          Enable
+                    %h4.mt-md.pl-md Two Factor Authentication
+                  .table-responsive
+                    %table.table
+                      %tbody
+                        %tr
+                          %th.col-sm-3 Enabled
+                          %td= current_user.authy_enabled?.to_s.titleize
+                          %td
+                          %td
+                - if current_user.normal? && current_user.business_user?
+                  .about-area
+                    .row
+                      .options
+                        = link_to email_settings_user_path(current_user), class: 'btn btn-sm btn-default btn-raised pull-right mr-sm' do
+                          %i.fa.fa-pencil.pr-sm>
+                          Edit
+                      %h4.mt-md.pl-md Email Preferences
+                    .table-responsive
+                      %table.table.about-table
+                        %tbody
+                          - EmailPreference::BUSINESS_FEATURES.each do |feature, value|
+                            %tr
+                              //FIXME remove inline css
+                              %td{'style' => 'font-weight: bold;'}
+                                = feature.to_s.humanize
+                            - value[:mailers].each do |key,value|
+                              - preference = current_user.email_preferences.find_or_initialize_by(feature: feature, key: key)
+                              %tr
+                                %th.col-sm-3= value[:name]
+                                %td= preference.enabled? ? 'Enabled' : 'Disabled'
+                                %td
+                - if current_user.normal? && current_user.agency_admin?
+                  .about-area
+                    .row
+                      .options
+                        = link_to email_settings_user_path(current_user), class: 'btn btn-sm btn-default btn-raised pull-right mr-sm' do
+                          %i.fa.fa-pencil.pr-sm>
+                          Edit
+                      %h4.mt-md.pl-md Agency Email Preferences
+                    .table-responsive
+                      %table.table.about-table
+                        %tbody
+                          - EmailPreference::AGENCY_FEATURES.each do |feature, value|
+                            %tr
+                              %td= feature.to_s.humanize
+
+                            - value[:mailers].each do |key,value|
+                              - preference = current_user.email_preferences.find_or_initialize_by(feature: feature, key: key)
+                              %tr
+                                %th.col-sm-3= value[:name]
+                                %td= preference.enabled? ? 'Enabled' : 'Disabled'
+                                %td
+                - if current_user.normal?
+                  .about-area
+                  .row
+                    %h4.mt-md.pl-md Push Notification
+                    %label.mt-md.pl-md{ 'for': 'enable-push-checkbox' }
+                      Enable push Notifications
+                      %input#enable-push-checkbox.js-push-toggle-checkbox{ 'type': 'checkbox', 'disabled': 'true' }
+                / - if current_user.referral_code && !white_labeled_client?
+                /   .referral-area
+                /     .row
+                /       .col-sm-12
+                /         .row-fluid
+                /           .well
+                /             %h4.text-muted.text-center
+                /               You can earn free months by referring your friends to Clickx! You’ll get a bonus month when they sign up for a paid version.
+                /             %p.text-center
+                /               %a.btn.btn-info.btn-raised#copy-button{ 'data-clipboard-text': "#{current_user.referral_link}" }
+                /                 %i.fa.fa-link
+                /                 Copy Link
+                /             %p
+                /               .round-shares#shareRoundIcons.text-center
+  = javascript_include_tag 'serviceworker-companion'
+
+:javascript
+  var copy_button = new Clipboard('#copy-button');
+  copy_button.on('success', function(e) {
+    $('#copy-button').html('Copied!');
+    setTimeout(function () {
+      $('#copy-button').html('<i class="fa fa-link"></i> Copy Link');
+    }, 1500);
+  });
+  var upload = function(file) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      var params = {
+        user: {
+          logo: reader.result
+        }
+      };
+      $.ajax({
+        url: "/users/#{current_user.id}/update_logo",
+        type: 'PUT',
+        data: params,
+        success: function(result) {
+          location.reload();
+        }
+      });
+   };
+  };
+/ var init_referral_link = function () {
+/   var url  = "http://#{current_user.referral_link}";
+/   var text = 'Signup Today & Get Your Rewards';
+/   $('#shareRoundIcons').jsSocials({
+/     url: url,
+/     text: text,
+/     showLabel: false,
+/     showCount: false,
+/     shares: ['email', 'twitter', 'facebook', 'googleplus', 'linkedin']
+/   });
+/ }
+/ init_referral_link();

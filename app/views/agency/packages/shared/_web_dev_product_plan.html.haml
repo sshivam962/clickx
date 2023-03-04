@@ -1,0 +1,52 @@
+.panel.panel-info
+  .panel-heading
+    %h2 Includes
+  .panel-body.p-lg
+    .row
+      .col-sm-6
+        %ul.package-list
+          %li
+            Semi-custom OR Full-custom Design Options
+          %li
+            WordPress CMS Website
+          %li
+            Conversion Focused Design
+          %li
+            1-time Foundational SEO
+          %li
+            Optimized Meta Titles and Description
+          %li
+            Image Alt/Title Tags
+          %li
+            Expert Copywriting ($0.20/word)
+          %li
+            Custom Lead Forms
+          %li
+            Sitemap Submission to Google Search Console
+          %li
+            Conversion Tracking Setup (Google Analytics 4, FB Pixel)
+          %li
+            30-day Post-launch Support
+          %li
+            Hyper-optimized Performance (90+ core web vitals)
+
+      .col-sm-6
+        %p.small.italic
+          The average cost of a website is between $3,500 and $7,500. Please fill out the form below to receive an exact quote for your project. 
+        = form_tag agency_packages_set_web_develop_path, method: :post do
+          .col-md-12.p-n
+            .form-group.mt-n
+              %label.control-label Project Name
+              = text_field_tag 'project_name', @web_development&.project_name, class: 'form-control col-sm-5', required: true
+          .col-md-12.p-n
+            .form-group.mt-n
+              %label.control-label Project URL(eg: example.com)
+              = text_field_tag 'project_url', @web_development&.project_url, class: 'form-control col-sm-5', required: true
+          .col-md-12.p-n
+            .form-group.mt-n
+              %label.control-label Project Detail
+              = text_area_tag 'project_detail', @web_development&.project_detail, class: 'form-control col-sm-5', required: true
+              = hidden_field_tag 'agency_id', current_agency.id
+              = hidden_field_tag 'user_id', current_user.id
+          = submit_tag 'Submit', class: 'btn btn-warning'
+

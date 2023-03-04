@@ -1,0 +1,9 @@
+<% if @error.present? %>
+  toastr.error("<%= @error %>");
+<% elsif @errors.present? %>
+  toastr.error("<%= @errors %>");
+<% elsif @success.present? %>
+  toastr.success("<%= @success %>");
+  $('#add-keywords-modal').modal('hide')
+<% end %>
+

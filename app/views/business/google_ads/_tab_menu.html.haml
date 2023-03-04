@@ -1,0 +1,11 @@
+%ul.nav.nav-tabs.material-nav-tabs.mb-lg
+  %li{role:'presentation', class: active_tab.eql?('summary') ? 'active' : ''}
+    %a{href: "/b/google_ads"} Summary
+  %li{role:'presentation', class: active_tab.eql?('keyword') ? 'active' : ''}
+    %a{href: "/b/google_ads/keywords"} Keywords
+  -# %li{role:'presentation', class: active_tab.eql?('ads') ? 'active' : ''}
+  -#   %a{href: "/b/google_ads/ads"} Ads
+  %li{role:'presentation', class: active_tab.eql?('search') ? 'active' : ''}
+    %a{href: "/b/google_ads/search_terms"} Search Terms
+  %li{role:'presentation', class: active_tab.eql?('campaign') ? 'active' : ''}
+    %a{href: "/b/google_ads/campaigns"} Campaigns

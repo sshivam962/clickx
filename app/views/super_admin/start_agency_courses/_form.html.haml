@@ -1,0 +1,38 @@
+%div.col-md-12
+  .row.course_form
+    = f.hidden_field :resource_type
+    = f.hidden_field :video_category_type, value: 'start_agency'
+    .form-group
+      = f.label :title
+      = f.text_field :title, required: true, class: 'form-control login', placeholder: 'Enter Title'
+    .form-group
+      = f.label :show_on_recording, 'Show In Recordings'
+      = check_box_tag :move_to_recording, 1, f.object.video_category_type == 'start_agency_recording'
+    .form-group
+      = f.label :thumbnail
+      .col-md-12
+        = f.fields_for :thumbnail do |t|
+          = t.file_field :file
+          = image_tag t.object.file.url || '', width: '123px', class: 'course_thumbnail_preview'
+    .form-group
+      = f.label :access_tip
+      = f.text_field :access_tip, required: true, class: 'form-control', placeholder: 'Enter Tip for getting access to this course'
+
+    .form-group
+      = f.submit "Save Course", class: 'btn btn-warning saveBtn'
+:javascript
+  $('#course_agency_ids').select2({
+    width: '100%',
+    multiple: true
+  });
+
+  $('#course_thumbnail_attributes_file').change(function(event){
+    var input = $(event.currentTarget);
+    var file = input[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+       image_base64 = e.target.result;
+       $(".course_thumbnail_preview").attr("src", image_base64);
+    };
+    reader.readAsDataURL(file);
+  });

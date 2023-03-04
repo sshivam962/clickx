@@ -1,0 +1,23 @@
+%script{type: "text/ng-template", id: "changeBusiness"}
+  %md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-compressed{'aria-label':'Select a Campaign'}
+    %form.new_task{"accept-charset" => "UTF-8", name:'userForm', "ng-submit" => "change_business()", "novalidate" => "" }
+      .modal-header
+        %button.close{'aria-label':'Close','ng-click':'closeModal()'}
+          %span.fa.fa-times-circle-o
+        %h3.modal-title Select a Campaign
+      %md-dialog-content
+        .modal-dialog-content
+          .container-fluid
+            .row.m-t-50
+              .col-xs-12
+                .form-group{"ng-class" => "{'has-error' : submitted && userForm.business_id.$invalid}"}
+                  %md-input-container.form-control
+                    %label{:for => "business_id"} Campaign Name
+                    %md-select{"ng-model" => "new_business", :name => "new_business", required: true, id: 'business_id'}
+                      %md-option{'ng-value': 'undefined'}
+                        %em Select a Campaign
+                      %md-option{"ng-repeat" => "business in current_user_businesses", "ng-value" => "business"}
+                        {{business.expired_name}}
+                    %span.help-inline{"ng-show" => " submitted && userForm.business_id.$invalid"} not a valid business
+      %md-dialog-actions{layout:'row'}
+        %button.btn.btn-raised.btn-primary{type:"submit", 'ng-click' => "submitted=true"} Change Campaign

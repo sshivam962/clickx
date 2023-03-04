@@ -1,0 +1,2 @@
+$('.agency_list').html("<%= escape_javascript render( partial: 'super_admin/agencies/list', locals: { agencies: @agencies }) %>");
+$('html, body').animate({ scrollTop: 0 }, 'slow');

@@ -1,0 +1,87 @@
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        %h2 Campaign Metrics
+        %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Average metrics for the PPC ads you are running', "data-toggle" => "tooltip", "data-placement" => "top"}
+        .panel-ctrls
+          %button.btn.button-icon.pull-left.mt-sm.refresh-panel{'title': 'Refresh report'}
+            %span.material-icons.inverted refresh
+      .panel-body
+        .row
+          .col-md-6
+            %table.table.table-hover
+              %tbody
+                %tr
+                  %td Impressions
+                  %td{align: 'right'} {{adwords_data.impressions}}
+                %tr
+                  %td Interactions
+                  %td{align: 'right'} {{adwords_data.interactions}}
+                %tr
+                  %td Clicks
+                  %td{align: 'right'} {{adwords_data.clicks}}
+                %tr
+                  %td Interaction Rate (CTR)
+                  %td{align: 'right'} {{adwords_data.ctr}}%
+          .col-md-6
+            %table.table.table-hover
+              %tbody
+                %tr
+                  %td Avg. Cost
+                  %td{align: 'right'} ${{adwords_data.average_cost/1000000|number:2}}
+                %tr
+                  %td Cost
+                  %td{align: 'right'} ${{adwords_data.cost/1000000 |number:2}}
+                %tr
+                  %td Conversion
+                  %td{align: 'right'} {{adwords_data.conversions |number:2}}
+.row
+  .col-md-12
+    .tab-container
+      %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+        %li.active
+          %a{"data-toggle":"tab", 'data-target': "#ppc-clicks", 'ng-click':"resizeChart('clicks_line_chart'); summary()", 'title': 'Number of times a user clicks on the headline of your Ad'} Clicks
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#ppc-impressions", 'ng-click':"resizeChart('impressions_line_chart'); summary()", 'title': 'Each time your ad is shown on a search result page or other site on the Google Network'} Impressions
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#ppc-conversions", 'ng-click':"resizeChart('conversions_line_chart'); summary()", 'title': 'Shows you what happens after a customer clicks on your ads – whether they purchased a product, signed up for your newsletter, called your business, or submitted a form'} Conversions
+      .tab-content
+        #ppc-clicks.tab-pane.active
+          .panel-body
+            .centered
+              #clicks_line_chart
+        #ppc-impressions.tab-pane
+          .panel-body
+            .centered
+              #impressions_line_chart
+        #ppc-conversions.tab-pane
+          .panel-body
+            .centered
+              #conversions_line_chart
+.row{ 'ng-if': '!demo_login' }
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        %h2 Budget Pacing for current month
+        %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Money spent out of the budget you set for PPC ads'}
+        .panel-ctrls
+          %button.btn.button-icon.mt-sm.refresh-panel{'title': 'Refresh report'}
+            %span.material-icons.inverted refresh
+          %a.btn.button-icon.mt-sm{'ng-href':"/b/settings/budget_pacing", 'title': 'Manage budget set for ads', 'ng-show':'ppc_budget != 0.0'}
+            %span.material-icons.inverted edit
+      .panel-body
+        %row{'ng-show':'ppc_budget != 0.0'}
+          .col-xs-12
+            .col-xs-12.border-bottom.p-sm.budget-pacing
+              %div{'current-style':'currentStyle', 'max-style':'maxStyle', 'current-value':'cost', 'isteven-omni-bar':'', 'max-value':'ppc_budget'}
+                Ad spent: ${{cost | decimalFilter}} of ${{ppc_budget | decimalFilter}}
+              %div{'current-style':'currentStyle', 'max-style':'maxStyle', 'current-value':'today', 'isteven-omni-bar':'', 'max-value':'month_last_day'}
+                {{this_month}} : {{today}} of {{month_last_day}} days
+        %row{'ng-show':'!(ppc_budget > 0.0)'}
+          .col-xs-12.center
+            %p.ml-sm.mb-n
+              Set your monthly budget to manage your ads better
+            %a.btn.btn-white.btn-raised{'ng-href':"/b/settings/budget_pacing"}
+              %i.fa.fa-cog.pr-xs
+              Set Budget

@@ -1,0 +1,85 @@
+- clients.each do |client|
+  - reports = client.fb_ad_reports.group_by(&:report_date)
+  %tr
+    %td
+      = client.name
+      .grey-btn-group
+        %a.btn.grey-btn-icon.align-icon{href: switch_to_business_user_path(business_id: client.id)}
+          %i.fa.fa-sign-in.blue.font-size12.color-white
+            Login
+    - if reports.present?
+      - report = reports[Date.today.beginning_of_month]&.first
+      - if report.present?
+        %td
+          = report.clicks&.round(2) || '-'
+        %td
+          = report.inline_link_clicks&.round(2) || '-'
+        %td
+          = report.impressions&.round(2) || '-'
+        %td
+          = "#{report.ctr&.round(2)}%" || '-'
+        %td
+          = report.cpc ? number_to_currency(report.cpc, precision: 2) : '-'
+        %td
+          = report.spend ? number_to_currency(report.spend, precision: 2) : '-'
+        %td
+          = report.reach&.round(2) || '-'
+        %td
+          = report.frequency&.round(2) || '-'
+        %td
+          = report.conversion ? number_to_currency(report.conversion, precision: 2) : '-'
+      - else
+        %td{colspan: 9}
+          No data available
+
+
+      - report = reports[1.month.ago.beginning_of_month.to_date]&.first
+      - if report.present?
+        %td
+          = report.clicks&.round(2) || '-'
+        %td
+          = report.inline_link_clicks&.round(2) || '-'
+        %td
+          = report.impressions&.round(2) || '-'
+        %td
+          = "#{report.ctr&.round(2)}%" || '-'
+        %td
+          = report.cpc ? number_to_currency(report.cpc, precision: 2) : '-'
+        %td
+          = report.spend ? number_to_currency(report.spend, precision: 2) : '-'
+        %td
+          = report.reach&.round(2) || '-'
+        %td
+          = report.frequency&.round(2) || '-'
+        %td
+          = report.conversion ? number_to_currency(report.conversion, precision: 2) : '-'
+      - else
+        %td{colspan: 9}
+          No data available
+
+      - report = reports[2.month.ago.beginning_of_month.to_date]&.first
+      - if report.present?
+        %td
+          = report.clicks&.round(2) || '-'
+        %td
+          = report.inline_link_clicks&.round(2) || '-'
+        %td
+          = report.impressions&.round(2) || '-'
+        %td
+          = "#{report.ctr&.round(2)}%" || '-'
+        %td
+          = report.cpc ? number_to_currency(report.cpc, precision: 2) : '-'
+        %td
+          = report.spend ? number_to_currency(report.spend, precision: 2) : '-'
+        %td
+          = report.reach&.round(2) || '-'
+        %td
+          = report.frequency&.round(2) || '-'
+        %td
+          = report.conversion ? number_to_currency(report.conversion, precision: 2) : '-'
+      - else
+        %td{colspan: 9}
+          No data available
+    - else
+      %td{colspan: 27}
+        Please try reconnecting your account

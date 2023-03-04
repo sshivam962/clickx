@@ -1,0 +1,20 @@
+%div.col-md-12
+  .row.faq_form
+    .form-group
+      %label.font-size18 Section
+      = f.select(:section, options_for_select(Faq::SECTIONS, @faq.section), {include_blank: false}, {class: 'add-section inline font-14'})
+    .form-group
+      %label.font-size18 Question
+      = f.text_field :question, required: true, class: 'form-control login', placeholder: 'Enter Question'
+    .form-group
+      %label.font-size18 Answer
+      = f.cktext_area :answer
+    .form-group
+      = f.submit "Save Faq", class: 'btn btn-warning saveBtn'
+
+:javascript
+
+  $('.select').dropdown()
+  $('.add-section').select2({
+    width: '100%'
+  });

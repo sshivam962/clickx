@@ -1,0 +1,6 @@
+<% if @error.present? %>
+  toastr.error("<%= @error %>")
+<% else %>
+  toastr.success('Lead updated successfully');
+  window.location.href = "<%= @redirect_url %>"
+<% end %>

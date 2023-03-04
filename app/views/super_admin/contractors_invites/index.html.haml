@@ -1,0 +1,15 @@
+.uiv2
+  .clearfix
+    %h3 Contractor Invites
+  .spacer30
+  = form_tag super_admin_contractors_invites_path, :method => 'get', :id => "contractors_invites" do  
+    %p
+      = text_field_tag :search, params[:search], placeholder: "Name"
+      = submit_tag "Search", :name => nil
+    .pull-right
+      = select_tag(:contractors_invite_option, options_for_select([["All",'all'],["Not Emailed", 'not_emailed'],["Emailed",'emailed']], params[:contractors_invite_option]) ,data:{remote: true}, class: 'width250px select-box form-control mt-md' )
+      
+  %div#contractors_list
+    = render '/super_admin/contractors_invites/upload_list', users: @users
+%a.btn.btn--add.pull-right{ 'href': new_super_admin_contractors_invite_path }
+  %i.glyphicon.glyphicon-plus.glyphplus

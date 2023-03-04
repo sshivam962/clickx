@@ -1,0 +1,6 @@
+<% if @question.errors.present? %>
+  toastr.error("<%= @question.errors.full_messages.to_sentence %>")
+<% else %>
+  $('#linked-question-modal').modal('hide')
+  toastr.success("Question linked");
+<% end %>

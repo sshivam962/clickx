@@ -1,0 +1,44 @@
+%ul.stages
+  - if steps.include?('background')
+    %li.completed
+      .stage-data
+        .stages-number
+        .stages-title Background
+  - if steps.include?('goals')
+    %li.completed
+      .stage-data
+        .stages-number
+        .stages-title Goals
+  - if steps.include?('audience')
+    %li.completed
+      .stage-data
+        .stages-number
+        .stages-title Audience
+  - if steps.include?('ad_type')
+    %li.completed
+      .stage-data
+        .stages-number
+        .stages-title Ad Type
+  - if steps.include?('creative')
+    %li.current
+      .stage-data
+        .stages-number
+          -# %i.material-icons check
+        .stages-title Creative
+  
+.questionnaire-card.mt-5
+  = f.fields_for :answers do |fa|
+    - answer = fa.object
+    - question = answer.question
+    - next if question.blank?
+    - if question.tab_to_show.present?
+      - if question.tab_to_show == "creative"
+        = render "public/inquiry/client_questionnaires/shared/form_elements", question: question, fa: fa
+  .py-4
+  .button-wrapper
+    .d-flex.justify-content-between.align-items-center
+      .col-auto
+        %a.btn.btn--back.step_complete{href: 'javascript:void(0)', data: {next_step: prev_step, current_step: 'creative'}} Back
+      .col-auto
+        %button.btn.step_complete{type: :submit, data: {disable_with: "Submitting.."}}
+          Submit

@@ -1,0 +1,65 @@
+%div.clearfix
+  %h3
+    Plans
+  .right.editBtns.topN75
+    = link_to 'New Plan', new_super_admin_plan_path, class: 'btn btn-warning pull-right padLeft38'
+
+  .right.editBtns.topN75
+    = link_to 'Back', super_admin_billing_index_path, class: 'btn btn-warning pull-right padLeft38'
+
+%div
+  %table.table.table-bordered.users.reports
+    %thead
+      %th Name
+      %th Plan ID
+      %th Interval
+      %th Interval Count
+      %th Amount
+      %th Statement Descriptor
+      %th Trial Period Days
+      %th Plan Type
+      %th Visibility
+
+    %tbody
+      - @plans.each do |plan|
+        %tr
+          %td= plan.name
+          %td= plan.plan_id
+          %td= plan.interval
+          %td= plan.interval_count
+          %td= "$#{plan.amount/100.00}"
+          %td= plan.statement_descriptor
+          %td= plan.trial_period_days
+          %td= plan.plan_type
+          %td= plan.public ? 'Public' : 'Private'
+          %td
+            %span
+              - if plan.plan_type == "client"
+                = button_tag 'Copy Plan Link', class: 'btn btn-primary btn-xs copy-b copy_to_clipboard', id: 'copy-b', data: {link: "#{ROOT_URL}/signup?plan=" + "#{plan.plan_id}"}
+              - elsif plan.plan_type == "-"
+                %span{class:'tool-tip',"data-placement" => "top", "data-toggle" => "tooltip", :title => "Please add a plan type!"}
+                  = button_tag 'Copy Plan Link', {class: 'btn btn-primary btn-xs copy-b copy_to_clipboard', id: 'copy-b1', data: {link: "#{ROOT_URL}/signup?plan=" + "#{plan.plan_id}"}, "disabled":"disabled"}
+
+            %span#coupon-edit
+              = link_to 'Edit', edit_super_admin_plan_path(plan.id), class: 'btn btn-danger btn-xs'
+
+:css
+  .tool-tip {
+  display: inline-block;
+  }
+  .tool-tip [disabled] {
+    pointer-events: none;
+  }
+
+:javascript
+  $('.copy_to_clipboard').on('click', function (e) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).data('link')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Link Copied");
+  });
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  });

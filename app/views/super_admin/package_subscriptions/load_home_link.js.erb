@@ -1,0 +1,2 @@
+$('.home_link_form').html('')
+$("#hl_<%=@resource.class.name.downcase%>_<%=@resource.id%>_<%=@subscription.id%>").html("<%= escape_javascript render( partial: 'super_admin/package_subscriptions/shared/home_link_form', locals: { resource: @resource }) %>");

@@ -1,0 +1,49 @@
+%p.clx-text.text-color-accent-red.text-center{ 'ng-if': 'uncrawled' }
+  {{uncrawled}}
+.table-responsive{ 'ng-if': '!uncrawled' }
+  %table.table.table-hover.table-vam.table-striped.text-muted
+    %thead
+      %tr
+        %th
+        %th.f-w-md
+          %small
+            %u.help_pointer{ 'title': 'List of audited pages.' } PAGE
+        %th.f-w-md
+          %small
+            %u.help_pointer{ 'title': 'Number of visits for the given page.' } VISITS
+        %th.f-w-md
+          %small
+            %u.help_pointer{ 'title': 'Number of keywords that are driving traffic to the given page.' } KEYWORDS
+        %th.f-w-md
+          %small
+            %u.help_pointer{ 'title': 'Number of backlinks that a given page has.' } LINKS
+        %th.f-w-md
+          %small
+            %u.help_pointer{ 'title': 'The Flesch-Kincaid readability score of the content on the page.' } READABILITY
+    %tbody
+      %tr{ 'ng-repeat': "overview in overViews | orderBy: '-'+sort_by" }
+        %td {{(($index + (paginationStart || 0)) +1)}}.
+        %td
+          %a.text-info.block{ 'ng-click': 'viewError($event,overview)',
+           target: '_blank', 'title': '{{overview.url | urlPath}}' }
+            {{ overview.url | limitTo: 50  | urlPath }}{{overview.url.length > 50 ? '...' : ''}}
+          %span.text-muted
+            %small
+              %span.text-italic Title:
+              {{overview.title}}
+        %td {{overview.traffic_metrics? overview.traffic_metrics.toLocaleString() : 0}}
+        %td {{overview.keywords? overview.keywords.toLocaleString() : 0}}
+        %td {{overview.backlinks_count? overview.backlinks_count.toLocaleString() : 0}}
+        %td
+          %span{'popover-placement' => "bottom",
+                'popover-template-a' => 'popover-readability.html', 'popover-trigger'=>'mouseenter',
+                'popover-classname':'clx-popover clx-bg popover-darkstone-blue-bg'}
+            {{overview.readability_score? overview.readability_score : 0}}
+          %script{:id => 'popover-readability.html', :type => "text/ng-template"}
+            %popover_readability{:note => '{{overview.readability_note}}'}
+        %td{'title': 'View audit report'}
+          %a.btn.btn-info.btn-raised.m-n{ 'ng-click': 'viewError($event,overview)' }
+            View
+            %i.pl-sm.fa.fa-angle-double-right
+.panel-footer.width100.p-sm{ 'ng-show': '!uncrawled' }
+  %div.content-middle{"st-pagination": "","st-items-by-page": "limit_overview_rows"}

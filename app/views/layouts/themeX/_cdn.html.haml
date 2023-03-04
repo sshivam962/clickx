@@ -1,0 +1,7 @@
+/ %script{src: "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"}
+/ %script{src: "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"}
+/ %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
+/ %script{src: "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"}
+
+= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_KEY']}&libraries=places", defer: true
+= javascript_include_tag "https://fast.wistia.net/assets/external/E-v1.js", defer: true, cache: true

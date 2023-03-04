@@ -1,0 +1,6 @@
+= form_for Lead::StrategyItem.new(category: category), url: super_admin_strategy_items_path, method: :post, remote: true do |f|
+  = f.hidden_field :category
+  .col-sm-11.pl-n
+    = f.cktext_area :strategy, class: 'form-control lead_strategy_item_text', placeholder: 'Strategy', id: "lead_strategy_item_text_#{category}", ckeditor: { toolbar: 'lead_strategy' }
+  .col-sm-1
+    = f.submit 'Add', class: 'btn btn-warning pull-right pr-lg pl-lg mt-n'

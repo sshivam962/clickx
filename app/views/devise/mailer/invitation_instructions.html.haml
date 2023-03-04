@@ -1,0 +1,57 @@
+!!!
+%html{xmlns: "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %meta{content: "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0", name: "viewport"}
+    %title Clickx - Welcome
+    %link{href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500,700&display=swap", rel: "stylesheet"}
+    :css
+      html { width: 100%; }
+      body { background-color: #F6F6F7; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif;}
+      .ExternalClass,.ReadMsgBody { background-color: #F6F6F7; width: 100%; }
+      a { color: #F8B018; font-style: normal;font-family: 'Montserrat', sans-serif; font-weight: 300; text-decoration: none; }
+      a:hover { color: #adb2bb; font-style: normal; font-weight: 300; text-decoration: underline; }
+      div,p { margin: 0; font-family: 'Montserrat', sans-serif; }
+      table { border-collapse: collapse; }
+      h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif;}
+      .table { max-width: 600px; border: 1px solid #e6e6e6; margin: 30px auto; border-radius: 4px; display: table;}
+      .subhead { color: #555555; font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 400; margin: 0; padding: 0; text-align: left; }
+      .sub-title {color: #555555; font-family: 'Montserrat', sans-serif; font-weight: 600;}
+      .subhead--sm {font-size: 16px; line-height: 1.2em;}
+      .mhead { color: #333333; font-family: 'Montserrat', sans-serif; font-size: 23px; font-weight: 600; margin: 0; padding: 0; text-align: left; }
+      .f-head { color: #333333; font-family: 'Montserrat', sans-serif; font-size: 19px; font-weight: 600; margin: 0; padding: 0; text-align: left; }
+      .cellpadd10 { display: table; padding: 10px 20px; }
+      .cellpadd-t-20 { display: table; padding: 20px 20px; }
+      .link-a { color: #2196F3; font-family: 'Montserrat', sans-serif; font-size: 18px; text-decoration: none; }
+      .link-a:hover { color: #4aafff; text-decoration: none;}
+      .divider { border-bottom: 1px solid #e0e0e0; display: block; margin: 0 auto; width: 90%; }
+      .margt-20 { margin-top: 20px !important }
+      .txtcenter { text-align: center !important }
+      .head-st-2 { padding: 20px 0; font-size: 24px; font-weight: 600; line-height: 40px; }
+      .lnh-n { line-height: 1.6em; letter-spacing: 0px; padding-bottom: 20px; }
+      .link-2 { color:  #F8B018; font-weight: 600px; border-bottom: dashed 1px #f0f0f0 }
+      .link-2:hover { border-bottom: solid 1px #f0f0f0; text-decoration: none }
+
+      @media only screen and (max-width:640px) {   table table,td[class=full_width] {  width : 100% !important;
+      } } @media only screen and (max-width:640px) {  div[class=div_scale],table[class=table_scale],td[class=td_scale] {   margin : 0 auto !important;   width : 440px !important;
+      } } @media only screen and (max-width:640px) {  img[class=img_scale] {  height : auto !important;  width : 100% !important;
+      } } @media only screen and (max-width:640px) {  table[class=spacer],td[class=spacer] {    display : none !important;
+      } } @media only screen and (max-width:640px) {  td[class=center] {   text-align : center !important;
+      } } @media only screen and (max-width:640px) {  table[class=full] {  margin-left : 20px !important;   margin-right : 20px !important;  width : 400px !important;
+      } } @media only screen and (max-width:640px) {  img[class=divider] {    height : 1px !important;   width : 400px !important;
+      } } @media only screen and (max-width:479px) {  table table,td[class=full_width] {  width : 100% !important;
+      } } @media only screen and (max-width:479px) {  div[class=div_scale],table[class=table_scale],td[class=td_scale] {   margin : 0 auto !important;   width : 100% !important;
+      } } @media only screen and (max-width:479px) {  img[class=img_scale] {  height : auto !important;  width : 100% !important;
+      } } @media only screen and (max-width:479px) {  table[class=spacer],td[class=spacer] {    display : none !important;
+      } } @media only screen and (max-width:479px) {  td[class=center] {   text-align : center !important;
+      } } @media only screen and (max-width:479px) {  table[class=full] {  margin-left : 20px !important;   margin-right : 20px !important;  width : auto !important;
+      } } @media only screen and (max-width:479px) {  img[class=divider] {    height : 1px !important;   width : 100% !important;
+      } }
+
+  %body{bgcolor: "#F6F6F7"}
+    - if @resource.agency_user?
+      = render 'devise/mailer/invite/agency_users'
+    - elsif @resource.business_user?
+      = render 'devise/mailer/invite/business_users'
+    - else
+      = render 'devise/mailer/invite/fallback_template'

@@ -1,0 +1,12 @@
+- if @privacy_policy.present?
+  %h2.text-center Privacy Policy
+  .container-fluid
+    - if raw(@privacy_policy.content).present?
+      %section.section-wrapper.good-news-section
+        - template  = Liquid::Template.parse(@privacy_policy.content)
+        - parsed_content = template.render({'agency_name' => @agency.name})
+        = raw(parsed_content)
+%footer.site-footer
+  .container
+    .footer-content.text-center
+      %p Copyright #{Date.current.year}. All Rights Reserved

@@ -1,0 +1,87 @@
+.container-fluid.py-4
+  .border-1.border-blue.rounded.messaging-wrapper.bg-sky-blue
+    .messaging-messages-list-wrap
+      .p-4.border-b.border-light.fw-m.text-dark Messages
+      .flex-col.overflow-auto
+        .messaging-messages-list
+          - @chat_threads.each do |chat_thread|
+            .messaging-messages-list-item.chat_item{id: "chat_thread_#{chat_thread.id}", 'data-thread_id': chat_thread.id}
+              %a.p-3.d-block.text-grey
+                .d-flex
+                  .col-auto.pr-4.unread-messages-notification
+                    - if chat_thread.chat_messages.unread.where(receiver_id: nil).present?
+                      %span.text-xxs{class: 'bubble', id: "bubble_#{chat_thread.id}"}= chat_thread.chat_messages.unread.where(receiver_id: nil).count
+                    .avatar.bg-gray.text-center.p-3.lh-14.text-dark.fw-m
+                      = chat_thread.user.name[0]
+                  .flex-col.overflow-h.pt-1.fs-14
+                    .d-flex.justify-between.pb-2
+                      .fw-m.truncate= chat_thread.user.name
+                      .div{id: "message_time_#{chat_thread.id}"}
+                        - if chat_thread.chat_messages.exists?
+                          - last_message = chat_thread.chat_messages.last
+                          .col-auto.pl-3.whitespace-no-wrap.fs-12{id:"message_time_#{chat_thread.id}"}= last_message.created_at.to_date ==Date.current ? last_message.created_at.strftime("%l:%M %p") : last_message.created_at.strftime("%m/%d/%y")
+                    .lh-12.truncate{id:"latest_message_#{chat_thread.id}"}= chat_thread.latest_message&.message
+    #chat_box
+      .messaging-chat-area-wrap.h-full
+        .messaging-chat-area.d-flex.flex-column.chat-box-empty
+          %h4 No Chat Selected
+
+:css
+  .unread-messages-notification {
+    position: relative;
+    display: inline-block;
+  }
+  .unread-messages-notification .bubble {
+    top: -6px;
+    left: -2px;
+    position: absolute;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: lightblue;
+  }
+  .text-xxs {
+    font-size: 10px;
+  }
+
+:javascript
+  $(function() {
+    if(#{params[:chat_thread_id].present?}){
+      setTimeout(function() {
+        $("#chat_thread_#{params[:chat_thread_id]}").click();
+      },10);
+    };
+    $('.messaging-messages-list').on('click', '.chat_item', function(){
+      var thread_id = $(this).data('thread_id');
+      $.ajax({
+        url: '/a/messages/chat_history?thread_id=' + thread_id,
+        type: 'GET',
+        success: function(response){
+          $(".chat_item").removeClass('active-chat')
+          $(".chat_item[data-thread_id='" + thread_id + "']").addClass('active-chat');
+          var winWidth = $(window).width();
+          if(winWidth < 640) {
+            $('.messaging-chat-area-wrap').fadeIn();
+          }
+        }
+      })
+    })
+  });
+
+  var winWidth = $(window).width();
+  if(winWidth < 639) {
+   $(document).on('click', '.messaging-messages-list-item > a', function() {
+     $('.messaging-messages-list-wrap').fadeOut();
+     $('.messaging-chat-area-wrap').fadeIn();
+   })
+   $(document).on('click', '.backto-messages', function() {
+     $('.messaging-messages-list-wrap').fadeIn();
+     $('.messaging-chat-area-wrap').fadeOut();
+   });
+  }
+
+  $(document).ready(function(){
+   $('.auto-height').autoheight();
+  });
+  $(window).resize(function(){
+   $('.auto-height').autoheight();
+  });

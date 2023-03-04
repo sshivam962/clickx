@@ -1,0 +1,3 @@
+$('#package_subscriptions_list').html("<%= escape_javascript render( 
+  partial: "super_admin/package_subscriptions/shared/#{params[:category]}",
+  locals: { subscriptions: @package_subscriptions}) %>");

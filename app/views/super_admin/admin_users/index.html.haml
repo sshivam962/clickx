@@ -1,0 +1,31 @@
+.uiv2
+  .clearfix
+    .d-flex.justify-content-between.align-items-center.flex-wrap
+      %h3 Admin Users
+      %a.btn.btn-warning.px-4.text-white.my-0{href:"/s/permissions"} Manage Permissions
+  .right.class-inline.col-xs-12.col-sm-12.col-lg-12.pr-n
+    %ul.marginleft-58px
+      %li
+        = text_field_tag :search_name, '', class: 'search login width250px select-box form-control mt-md', placeholder: 'Search By Name/Email'
+  %div#admin_users_list
+    = render 'super_admin/admin_users/shared/list', users: @users
+  %a.btn.btn--add.pull-right{ 'href': "/#/#{current_user.id}/invite_admin_user" }
+  %a.btn.btn--add.pull-right{ 'href': "/s/admin_users/new"}
+    %i.glyphicon.glyphicon-plus.glyphplus
+
+:javascript
+  $('.email_alert_check').on('change', function (e) {
+    $(this).closest('form').submit();
+  });
+
+  $('#search_name').on("keyup", function() {
+    var name = $('#search_name').val().toLowerCase();
+    $.ajax({
+      url: "/s/admin_users",
+      type: 'get',
+      data: { name: name },
+      dataType: 'script',
+      async: false,
+      success:function(response){}
+    })
+  });

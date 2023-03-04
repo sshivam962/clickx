@@ -1,0 +1,23 @@
+.page
+  .container
+    .row
+      .col-sm-12
+        #header.aligncenter.white
+          %h1 Whitelist IP's
+      .col-sm-12
+        %table.table.table-striped.table-left.table-anchortext
+          %thead
+            %tr
+              %th IP Address
+              %th Actions
+
+          %tbody
+            - @ip_addresses.each do |ip|
+              %tr
+                %td= ip.ip
+                %td= link_to 'Delete', destroy_ip_path(ip), method: :delete
+    .row
+      .col-sm-12
+        = form_for @ip_address, url: admin_path, method: :post do |f|
+          = f.text_field :ip
+          = f.submit "Add IP Address"

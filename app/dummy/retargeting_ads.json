@@ -1,0 +1,783 @@
+{
+  "status": 200,
+  "data": {
+    "this_period": {
+      "2018-03-31": {
+        "clicks": 1,
+        "impressions": 7,
+        "cost": 70000.0,
+        "avg_cost": 70000.0,
+        "ctr": 14.29,
+        "conversions": 0.0
+      },
+      "2018-04-01": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-02": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-03": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-04": {
+        "clicks": 1,
+        "impressions": 17,
+        "cost": 5640000.0,
+        "avg_cost": 5640000.0,
+        "ctr": 5.88,
+        "conversions": 0.0
+      },
+      "2018-04-05": {
+        "clicks": 0,
+        "impressions": 94,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-06": {
+        "clicks": 0,
+        "impressions": 1,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-07": {
+        "clicks": 0,
+        "impressions": 4,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-08": {
+        "clicks": 0,
+        "impressions": 66,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-09": {
+        "clicks": 0,
+        "impressions": 1,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-10": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-11": {
+        "clicks": 0,
+        "impressions": 5,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-12": {
+        "clicks": 0,
+        "impressions": 1,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-13": {
+        "clicks": 0,
+        "impressions": 1,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-14": {
+        "clicks": 0,
+        "impressions": 1,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-15": {
+        "clicks": 0,
+        "impressions": 4,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-16": {
+        "clicks": 0,
+        "impressions": 88,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-17": {
+        "clicks": 0,
+        "impressions": 4,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-04-18": {
+        "clicks": 0,
+        "impressions": 46,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      }
+    },
+    "total_details": [
+      {
+        "ad": "Ad name: Ad 5",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 0,
+        "impressions": 32,
+        "cost": 0.0,
+        "cost_markup": 0,
+        "avg_cost": "0",
+        "ctr": 0.0,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLyvbVPhDAAhhkKAEyCHO9DIyrpR5t",
+        "final_url":
+          "http://www.clickx.io/?utm_source=google\u0026utm_medium=remarketing\u0026utm_campaign=brandingconnectthedots",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: CD Free trial 4.3",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 11,
+        "impressions": 2080,
+        "cost": 17800000.0,
+        "cost_markup": 17800000,
+        "avg_cost": "1618182",
+        "ctr": 0.53,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLqrWZuAEQrAIY-gEoATIIyqzevBCUZD0",
+        "final_url":
+          "http://www.clickx.io/?utm_source=google\u0026utm_medium=remarketing\u0026utm_campaign=brandingconnectthedots",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: Ad 2",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 0,
+        "impressions": 125,
+        "cost": 0.0,
+        "cost_markup": 0,
+        "avg_cost": "0",
+        "ctr": 0.0,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLyvbL1gEQ2AUYWigBMgg35WmJrqpLgA",
+        "final_url":
+          "http://www.clickx.io/?utm_source=google\u0026utm_medium=remarketing\u0026utm_campaign=brandingconnectthedots",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: Ad 4",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 1,
+        "impressions": 1379,
+        "cost": 760000.0,
+        "cost_markup": 760000,
+        "avg_cost": "760000",
+        "ctr": 0.07,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLyvbROhDYBRhaKAEyCH2XD7jcAe9n",
+        "final_url":
+          "http://www.clickx.io/?utm_source=google\u0026utm_medium=remarketing\u0026utm_campaign=brandingconnectthedots",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: Ad 8",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 3,
+        "impressions": 612,
+        "cost": 6140000.0,
+        "cost_markup": 6140000,
+        "avg_cost": "2046667",
+        "ctr": 0.49,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLyvbp-gEQ2AUYWigBMggQ5UWc_BM8Bg",
+        "final_url":
+          "http://www.clickx.io/?utm_source=google\u0026utm_medium=remarketing\u0026utm_campaign=brandingconnectthedots",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: CD Free trial 7",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 0,
+        "impressions": 37,
+        "cost": 0.0,
+        "cost_markup": 0,
+        "avg_cost": "0",
+        "ctr": 0.0,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLqrWFvwEQwAIYZCgBMgjeO47Yy9BsvQ",
+        "final_url":
+          "http://www.clickx.io/?utm_source=google\u0026utm_medium=remarketing\u0026utm_campaign=brandingconnectthedots",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: CD Free Trial 1.2",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 1,
+        "impressions": 437,
+        "cost": 5370000.0,
+        "cost_markup": 5370000,
+        "avg_cost": "5370000",
+        "ctr": 0.23,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLqrX_jQEQoAEY2AQoATIIJ6f7cnFkd7M",
+        "final_url":
+          "http://www.clickx.io/?utm_source=google\u0026utm_medium=remarketing\u0026utm_campaign=brandingconnectthedots",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: Ad 3",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 0,
+        "impressions": 328,
+        "cost": 0.0,
+        "cost_markup": 0,
+        "avg_cost": "0",
+        "ctr": 0.0,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLyvbzERDYBRhaKAEyCBK8JRs0Wytk",
+        "final_url":
+          "http://www.clickx.io/?utm_source=google\u0026utm_medium=remarketing\u0026utm_campaign=brandingconnectthedots",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: CD Free trial 6",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 2,
+        "impressions": 917,
+        "cost": 770000.0,
+        "cost_markup": 770000,
+        "avg_cost": "385000",
+        "ctr": 0.22,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLqrX_vQEQ2AUYWigBMgiMgYqVNA-FTA",
+        "final_url":
+          "http://www.clickx.io/?utm_source=google\u0026utm_medium=remarketing\u0026utm_campaign=brandingconnectthedots",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: Ad 7",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 0,
+        "impressions": 34,
+        "cost": 0.0,
+        "cost_markup": 0,
+        "avg_cost": "0",
+        "ctr": 0.0,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLyvbzkQEQwAIYZCgBMghN8TEpBEVslg",
+        "final_url":
+          "http://www.clickx.io/?utm_source=google\u0026utm_medium=remarketing\u0026utm_campaign=brandingconnectthedots",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: Ad 6",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 0,
+        "impressions": 45,
+        "cost": 0.0,
+        "cost_markup": 0,
+        "avg_cost": "0",
+        "ctr": 0.0,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLyvbR5gEQwAIYZCgBMgim9iEvHdJYlg",
+        "final_url":
+          "http://www.clickx.io/?utm_source=google\u0026utm_medium=remarketing\u0026utm_campaign=brandingconnectthedots",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: Ad 10",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 1,
+        "impressions": 108,
+        "cost": 70000.0,
+        "cost_markup": 70000,
+        "avg_cost": "70000",
+        "ctr": 0.93,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLyvbOmAEQwAIYZCgBMghq2YOiiBet2Q",
+        "final_url": "http://www.clickx.io/features/",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: Tackle SEO The Right Way 320x50",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 5,
+        "impressions": 2814,
+        "cost": 2560000.0,
+        "cost_markup": 2560000,
+        "avg_cost": "512000",
+        "ctr": 0.18,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLyvbTSxDAAhgyKAEyCJkLsVg4qmwL",
+        "final_url": "http://www.clickx.io/features/",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: CD Free trial 7.3",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 0,
+        "impressions": 109,
+        "cost": 0.0,
+        "cost_markup": 0,
+        "avg_cost": "0",
+        "ctr": 0.0,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLqrWj6gEQwAIYZCgBMgi8BEygo2mQ8g",
+        "final_url":
+          "http://www.clickx.io/?utm_source=google\u0026utm_medium=remarketing\u0026utm_campaign=brandingconnectthedots",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: CD Free trial 5",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 8,
+        "impressions": 672,
+        "cost": 21000000.0,
+        "cost_markup": 21000000,
+        "avg_cost": "2625000",
+        "ctr": 1.19,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLqrWtRhDQAhiYAigBMghETOTnmhJGwQ",
+        "final_url":
+          "http://www.clickx.io/?utm_source=google\u0026utm_medium=remarketing\u0026utm_campaign=brandingconnectthedots",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: CD Free trial 4",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 5,
+        "impressions": 985,
+        "cost": 10430000.0,
+        "cost_markup": 10430000,
+        "avg_cost": "2086000",
+        "ctr": 0.51,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLqrWZ2AEQrAIY-gEoATII3psSE92Fv5I",
+        "final_url":
+          "http://www.clickx.io/?utm_source=google\u0026utm_medium=remarketing\u0026utm_campaign=brandingconnectthedots",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      },
+      {
+        "ad": "Ad name: CD Free trial 6.2",
+        "ad_desp1": null,
+        "ad_desp2": null,
+        "ad_url": "www.clickx.io",
+        "clicks": 0,
+        "impressions": 236,
+        "cost": 0.0,
+        "cost_markup": 0,
+        "avg_cost": "0",
+        "ctr": 0.0,
+        "conversion": 0.0,
+        "markup_value": 0,
+        "type": "Image ad",
+        "image_url": "CICAgKDLqrWcGhDYBRhaKAEyCOMOS3kcQhor",
+        "final_url":
+          "http://www.clickx.io/?utm_source=google\u0026utm_medium=remarketing\u0026utm_campaign=brandingconnectthedots",
+        "heading1": " --",
+        "heading2": " --",
+        "ad_desp": " --",
+        "ad_grp_name": "Clickx"
+      }
+    ],
+    "last_period": {
+      "2018-02-28": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-01": {
+        "clicks": 0,
+        "impressions": 25,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-02": {
+        "clicks": 0,
+        "impressions": 1,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-03": {
+        "clicks": 0,
+        "impressions": 8,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-04": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-05": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-06": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-07": {
+        "clicks": 0,
+        "impressions": 1,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-08": {
+        "clicks": 0,
+        "impressions": 4,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-09": {
+        "clicks": 0,
+        "impressions": 6,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-10": {
+        "clicks": 0,
+        "impressions": 6,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-11": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-12": {
+        "clicks": 0,
+        "impressions": 6,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-13": {
+        "clicks": 0,
+        "impressions": 5,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-14": {
+        "clicks": 0,
+        "impressions": 9,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-15": {
+        "clicks": 0,
+        "impressions": 4,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-16": {
+        "clicks": 0,
+        "impressions": 5,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-17": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-18": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-19": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-20": {
+        "clicks": 0,
+        "impressions": 5,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-21": {
+        "clicks": 0,
+        "impressions": 1,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-22": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-23": {
+        "clicks": 0,
+        "impressions": 1,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-24": {
+        "clicks": 1,
+        "impressions": 13,
+        "cost": 1290000.0,
+        "avg_cost": 1290000.0,
+        "ctr": 7.69,
+        "conversions": 0.0
+      },
+      "2018-03-25": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-26": {
+        "clicks": 0,
+        "impressions": 2,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-27": {
+        "clicks": 0,
+        "impressions": 7,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-28": {
+        "clicks": 0,
+        "impressions": 20,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-29": {
+        "clicks": 0,
+        "impressions": 3,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      },
+      "2018-03-30": {
+        "clicks": 0,
+        "impressions": 32,
+        "cost": 0.0,
+        "avg_cost": 0.0,
+        "ctr": 0.0,
+        "conversions": 0.0
+      }
+    }
+  }
+}

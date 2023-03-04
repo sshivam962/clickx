@@ -1,0 +1,29 @@
+%ul.nav.panel-warning.nav-tabs.bdt{:style => "background: #F44336;"}
+  %li.active
+    %a{"data-toggle" => "tab", 'data-target' => "#sc-server-error2", 'ng-click' => "change_error_type('serverError')"}
+      Server Error
+      .pull-right
+        %b.left10 {{get_error_count('smartphoneOnly', 'serverError')}}
+  %li
+    %a{"data-toggle" => "tab", 'data-target' => "#sc-access-denied2", 'ng-click' => "change_error_type('authPermissions')"}
+      Access Denied
+      .pull-right
+        %b.left10 {{get_error_count('smartphoneOnly', 'authPermissions')}}
+  %li
+    %a{"data-toggle" => "tab", 'data-target' => "#sc-not-found2", 'ng-click' => "change_error_type('notFound')"}
+      Not Found
+      .pull-right
+        %b.left10 {{get_error_count('smartphoneOnly', 'notFound')}}
+.tab-content
+  #sc-server-error2.tab-pane.active
+    .panel-body
+      .centered
+        #smartphoneOnly_serverError_errors
+  #sc-access-denied2.tab-pane
+    .panel-body
+      .centered
+        #smartphoneOnly_authPermissions_errors
+  #sc-not-found2.tab-pane
+    .panel-body
+      .centered
+        #smartphoneOnly_notFound_errors

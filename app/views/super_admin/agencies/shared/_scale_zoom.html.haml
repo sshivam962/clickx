@@ -1,0 +1,12 @@
+#scale-zoom-modal.modal.fade{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg{role: 'document'}
+    = form_for agency, url: update_scale_zoom_weeks_super_admin_agency_path(agency), method: :patch, remote: true do |f|
+      .modal-content
+        .modal-header
+          %b Scale Zoom Info
+        .modal-body
+          %h5 Enable Scale zoom info for the number of weeks below:
+          = number_field_tag 'scale_zoom_weeks', nil, class: 'form-control', min: 0, step: 1, required: true
+        .modal-footer
+          = f.submit 'Save', class: 'btn btn-primary btn-raised submit'
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close

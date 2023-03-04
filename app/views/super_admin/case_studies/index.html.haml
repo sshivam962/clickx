@@ -1,0 +1,73 @@
+- content_for :title do
+  Case Studies | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1
+      Case Studies
+    .options
+      %a.btn.btn-white.btn-raised.pull-right{href: super_admin_industries_path}
+        %i.fa.fa-industry.pr-xs
+        Industries
+        .ripple-container
+  .right.class-inline.col-xs-12.col-sm-12.col-lg-12.pr-n
+    %ul.marginleft-58px
+      %li
+        = text_field_tag :search_title, '', class: 'search login width250px select-box form-control mt-md', placeholder: 'Search By Title'
+      %li.pull-right
+        = select_tag 'search_assignee', options_for_select(@super_admins.collect {|super_admin| [super_admin.name, super_admin.id]  }), include_blank: 'Filter by Assignee', class: 'search login width250px select-box form-control mt-md'
+      %li.pull-right
+        = select_tag 'search_industries', options_for_select(Industry.order(:title).pluck(:title, :id)), include_blank: 'Filter by Industry', class: 'search login width250px select-box form-control mt-md'
+      %li.pull-right
+        = select_tag 'search_status', options_for_select(CaseStudy.statuses.map{|k,v| [k.titleize, v] }), include_blank: 'Filter By Status', class: 'search login width250px select-box form-control mt-md'
+      %li.pull-right
+        = select_tag 'search_service', options_for_select(CaseStudy::SERVICES), include_blank: 'Filter By Service', class: 'search login width250px select-box form-control mt-md'
+      %li.pull-right
+        = select_tag 'sort_by', options_for_select([['Title ASC', 'title ASC'], ['Title DESC', 'title DESC'], ['Created Date ASC', 'created_at ASC'], ['Created Date DESC', 'created_at DESC']]), include_blank: 'Sort By', class: 'search login width250px select-box form-control mt-md'
+
+#case_studies_container
+  = render 'super_admin/case_studies/shared/list', case_studies: @case_studies, super_admins: @super_admins
+
+%a.btn.btn--add.pull-right{ 'href': new_super_admin_case_study_path}
+  %i.glyphicon.glyphicon-plus.glyphplus
+
+:javascript
+  function search(){
+    var industry = $('#search_industries').val();
+    var status = $('#search_status').val();
+    var title = $('#search_title').val();
+    var service = $('#search_service').val();
+    var sort_by = $('#sort_by').val();
+    var assignee = $('#search_assignee').val();
+    $.ajax({
+      url: "/s/case_studies",
+      type: 'get',
+      data: { industry: industry, status: status, title: title, service: service, sort_by: sort_by, assignee: assignee },
+      dataType: 'script',
+      async: false,
+      success:function(response){}
+    })
+  }
+
+  $('#search_industries').on("change", function() {
+    search()
+  })
+
+  $('#search_status').on("change", function() {
+    search()
+  })
+
+  $('#search_title').on("change", function() {
+    search()
+  })
+
+  $('#search_service').on("change", function() {
+    search()
+  })
+
+  $('#sort_by').on("change", function() {
+    search()
+  })
+
+  $('#search_assignee').on("change", function() {
+    search()
+  })

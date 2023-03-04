@@ -1,0 +1,24 @@
+%li.dropdown.toolbar-icon-bg
+  %a.hasnotifications.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+    %span.icon-bg
+      - if (current_user.notifications.unread.count > 0)
+        %span.badge.badge-danger.white.notification-icon
+          %b #{current_user.notifications.unread.count}
+      %i.material-icons notifications
+  .dropdown-menu.animated.notifications
+    .topnav-dropdown-header
+      %span #{current_user.notifications.unread.count} new notifications
+    .scroll-pane
+      %ul.media-list.scroll-content
+        - current_user.notifications.includes(target: :business,actor: :business).unread.order(created_at: :desc).limit(10).each do |notification|
+          %li.media.notification-success
+            %a{href: view_notification_path(notification)}
+              .media-left
+                %span.notification-icon
+                  %i.material-icons remove_red_eye
+              .media-body
+                %h4.notification-heading #{notification.content}
+                %span.notification-time #{time_ago_in_words(notification.created_at)}
+    - if (current_user.notifications.unread.count > 10)
+      .topnav-dropdown-footer
+        %a{href: '/notifications'} See all notifications

@@ -1,0 +1,56 @@
+- content_for :title do
+  Grader | #{@grader_report&.domain}
+- if @grader_report.completed?
+  .pt-4.pb-4.text-center.bg-white
+    - if raw(@agency.calendly_script).present?
+      %a.btn.btn-warning.btn-raised.pull-right.mr{href: "#schedule-call-modal"}
+        Schedule a Call
+    .container.mw-100
+      - logo = @agency.grader_logo || @agency.logo
+      - if logo.present?
+        - if @agency.weburl.present?
+          %a{href: formatted_url(@agency.weburl), target: '_blank'}
+            = image_tag logo || '', class: 'img-hcenter img-responsive m-auto text-center', width: '200px'
+        - else
+          = image_tag logo || '', class: 'img-hcenter img-responsive m-auto text-center', width: '200px'
+  #report_container
+    = render partial: 'public/grader_reports/loader/full_report'
+
+  :javascript
+    $(document).on('ready', function (e) {
+      $.ajax({
+        url: window.location.pathname + '/full_report',
+        type: 'get',
+        data: {},
+        dataType: 'json',
+        success:function(response){
+          $('#report_container').html(response.data)
+          jQuery('.grader-preloader').removeClass('grader-preloader');
+        }
+      })
+    });
+
+- else
+  .page-heading
+    %h1
+      = @grader_report.domain
+  .container-fluid
+    %div{"data-widget-group" => "group1"}
+      .row
+        .col-sm-12
+          .panel.panel-default.p-xxl
+            .panel-body.p-n
+              .row
+                .col-sm-12
+                  - progress = @grader_report.progress
+                  %span.font-12.mb-sm
+                    Progress (#{progress}%)
+                  .progress.progress-striped.active.m-n
+                    .progress-bar.progress-bar-info{ 'style': "width: #{progress}%"}
+                .col-sm-12
+                  Report is still being generated.. Please check back later
+.section.bg-muted.text-muted
+  .container.container--sm
+    .mt-xl.mb-xl.text-center
+      %p
+        = "© #{Date.current.year} #{@agency.name}. All Rights Reserved."

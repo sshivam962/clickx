@@ -1,0 +1,52 @@
+.panel.panel-default
+  .panel-heading.pointer{role: "tab", id: "headingOne"}
+    %h4{class: "panel-title"}
+      %a{role: "button", "data-toggle": "collapse", "data-parent": "#accordion", href: "#collapseOne", "aria-expanded": "true", "aria-controls": "collapseOne"}
+        Basic Information
+
+  #collapseOne{ class: "panel-collapse collapse in", role: "tabpanel", "aria-labelledby": "headingOne"}
+    .panel-body
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Organization Name
+          .col-md-12
+            = f.text_field :name, class: "form-control", required: true, "data-parsley-trigger": "input focusin focusout"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Address
+          .col-md-12
+            = f.text_field :address, class: "form-control", required: true, "data-parsley-trigger": "input focusin focusout"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label City
+          .col-md-12
+            = f.text_field :city, class: "form-control"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label State
+          .col-md-12
+            = f.text_field :state, class: "form-control"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Country
+          .col-md-12
+            = f.text_field :country, class: "form-control", required: true, "data-parsley-trigger": "input focusin focusout"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Zip
+          .col-md-12
+            = f.text_field :zip, class: "form-control"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Phone
+          .col-md-12
+            = f.text_field :phone, class: "form-control"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Website
+          .col-md-12
+            = f.text_field :website, class: "form-control", required: true, "data-parsley-trigger": "input focusin focusout", "data-parsley-debounce":"500"
+      .col-md-12.m-t-20
+        %button#save_basic.btn.btn-success.btn-raised.btn-label{ "type": "submit" }
+          = succeed "Save" do
+            .ripple-container

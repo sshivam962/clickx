@@ -1,0 +1,32 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Timely.title-icon>
+    {{ selectedIndex == 0? 'Keyword Rank History' : 'Competitors Rank' }}
+    %small
+      Keyword :
+      %b {{ keyword_name }}
+  .options
+    .form-group
+      %a.btn.btn-default.btn-raised{"href":"{{csv_all_url}}", target: "_blank",
+        'ng-if': 'selectedIndex == 0 && history.length > 0' }
+        %i.fa.fa-download.icpadd-r10
+        Download CSV
+      .inlineb.keyword-ranking-dropdown-12.pl-md.pull-right
+        %md-select.md-no-underline.form-control.mt-sm.keyword-ranking-dropdown{'ng-change':'changeTimeSpan(timespan)', 'ng-model':'timespan'}
+          %md-option{value:'', style:"height: 36px !important; font: 14px !important"} Select
+          %md-option{value:'30_days', style:"height: 36px !important; font: 14px !important"} Last 30 days
+          %md-option{value:'6_months', style:"height: 36px !important; font: 14px !important"} Last 6 months
+          %md-option{value:'1_year', style:"height: 36px !important; font: 14px !important"} Last 1 year
+          %md-option{value:'all_time', style:"height: 36px !important; font: 14px !important"} All time
+
+.container-fluid
+  .row
+    .col-xs-12
+      %md-content
+        %md-tabs.bg-white{ 'md-border-bottom': '', 'md-dynamic-height': '', 'md-selected': 'selectedIndex' }
+          %md-tab{ 'label': 'Rank History' }
+            %md-content.mt-xl
+              %div{ 'ng-include': '', 'src': "'themeX/keywords/rank_history.html'" }
+          %md-tab{ 'label': 'Competitors Rank' }
+            %md-content.mt-xl
+              %div{ 'ng-include': '', 'src': "'themeX/keywords/competitors_rank.html'" }

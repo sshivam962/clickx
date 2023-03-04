@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}
+    %meta{charset: "utf-8"}
+    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
+    %title= yield(:title)
+    = stylesheet_link_tag 'leads', media: 'all', 'data-turbolinks-track': true
+    %link{crossorigin: 'anonymous', href: 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css', integrity: 'sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=', rel: 'stylesheet'}
+    %link{:href => "//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css", :rel => "stylesheet"}
+    = csrf_meta_tags
+    = javascript_include_tag 'leads', 'data-turbolinks-track': true
+    %script{crossorigin: 'anonymous', integrity: 'sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=', src: 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js'}
+    = render partial: "layouts/favicon", locals: { agency_logo: @agency&.favicon }
+
+  %body.focused-form.animated-content
+    = yield

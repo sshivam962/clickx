@@ -1,0 +1,165 @@
+- content_for :custom_assets do
+  %script{src: 'https://code.highcharts.com/highcharts.js'}
+.container-fluid
+  .panel.panel-default
+    .panel-heading.bg-white.pt-sm
+      %h4.inlineb.f-w-md Summary
+    %hr.mt-xs.mb-md.mr-md.ml-md
+    .panel-body.p-n
+      .col-sm-6.col-md-3.text-center.bdr-r
+        %h4.mb-xs
+          Total Calls
+          %i.fa.fa-info-circle.tooltip-text-icon.tooltips{ title: "Total number of calls"}
+        %h1.mb-sm.mt-sm.f-w-md.f-s-xl
+          = @summary["total_results"]["total_calls"]
+        / %span.increase-rate 15%
+      .col-sm-6.col-md-3.text-center.bdr-r
+        %h4.mb-xs
+          Answered Calls
+          %i.fa.fa-info-circle.tooltip-text-icon.tooltips{ title: "Number of answered calls"}
+        %h1.mb-sm.mt-sm.f-w-md.f-s-xl#answered_calls
+          = @summary["total_results"]["answered_calls"]
+        / %span.decrease-rate -25%
+      .col-sm-6.col-md-3.text-center.bdr-r
+        %h4.mb-xs
+          Missed Calls
+          %i.fa.fa-info-circle.tooltip-text-icon.tooltips{ title: "Number of missed calls"}
+        %h1.mb-sm.mt-sm.f-w-md.f-s-xl#missed_calls
+          = @summary["total_results"]["missed_calls"]
+      .col-sm-6.col-md-3.text-center
+        %h4.mb-xs
+          First Time Calls
+          %i.fa.fa-info-circle.tooltip-text-icon.tooltips{ title: "Number of first time callers"}
+        %h1.mb-sm.mt-sm.f-w-md.f-s-xl
+          = @summary["total_results"]["first_time_callers"]
+    %hr.mt-xs.mb-md.mr-md.ml-md
+    .row-fluid.mt-lg
+      .col-md-4
+        .panel.panel-default
+          .panel-heading
+            %h2 Calls By Status
+            .panel-ctrls
+              %button.btn.button-icon.pull-left.mt-sm.refresh-panel.tooltips{'title': 'Refresh report'}
+                %span.material-icons.inverted refresh
+          .panel-body.no-padding.table-responsive
+            .col-md-12
+              #calls_by_status_chart
+      .col-md-12
+        .table-responsive
+          %table.table.table-bordered.table-hover
+            %thead
+              %tr.info
+                %th{style: "width:20px;"}
+                %th Caller
+                %th Caller Name
+                %th Time
+                %th Duration
+                %th Status
+            %tbody
+              - @calls["calls"].each do |call|
+                %tr
+                  %td{align: 'left'}
+                    %button.btn.m-n.btn-inverse.btn-raised.btn-xs{id: "expand-#{call['id']}", type: "button", data:{callid: call["id"], callstart: "#{call["call_start"]}", callinboundno: "#{call["inboundno"]}", caller_name: "#{call["caller_name"]}", call_end: "#{call["call_end"]}", callforwardno: "#{call["forwardno"]}", caller_number: "#{call["caller_number"]}"}}
+                      %i.fa.fa-plus
+                    :javascript
+                      $("#expand-#{call["id"]}").on('click', function(){
+                        call_id = $(this).data('callid');
+                        call_start = $(this).data('callstart');
+                        call_inboundno = $(this).data('callinboundno');
+                        caller_name = $(this).data('caller_name');
+                        call_end = $(this).data('call_end');
+                        call_forwardno = $(this).data('callforwardno');
+                        caller_number = $(this).data('caller_number');
+                        $.ajax({
+                          url: "/b/callrail/recording",
+                          type: 'get',
+                          data: {call_id:call_id, call_start:call_start, call_inboundno:call_inboundno, caller_name:caller_name, call_end:call_end, call_forwardno:call_forwardno, caller_number:caller_number},
+                          dataType: 'script'
+                        })
+                      });
+
+                    %button.btn.m-n.btn-inverse.btn-raised.btn-xs.hidden{id: "collapse-#{call['id']}"}
+                      %i.fa.fa-minus
+                    :javascript
+                      $("#collapse-#{call['id']}").on('click', function() {
+                        $("#collapse_container_#{call['id']}").addClass('collapse');
+                        $(this).addClass('hidden');
+                        $("#expand-#{call['id']}").removeClass('hidden');
+                      })
+
+                  %td= call["customer_phone_number"]
+                  %td= call["customer_name"]
+                  %td= call["start_time"].to_date.strftime("%d-%b-%Y %I:%M %P")
+                  %td= set_duration(call["duration"])
+                  %td= call["answered"] ? 'ANSWERED' : 'MISSED'
+                %tr.collapse_container{id: "collapse_container_#{call['id']}"}
+
+              / .row.p-n.pagination-wrapper.pull-left
+              /   .left.pagination-links
+              /     .pagination
+              /       = will_paginate @calls, params: { page: params[:page], per_page: params[:per_page] }
+              /       = select_tag :per_page, options_for_select([["5","5"],["10","10"],["25","25"],["50","50"]],params[:per_page]), class: 'per-page-select'
+:javascript
+  var answered_calls = $('#answered_calls').text();
+  var missed_calls = $('#missed_calls').text();
+
+  $('#calls_by_status_chart').highcharts(call_status_pie_chart_data(answered_calls, missed_calls));
+
+  function call_status_pie_chart_data(answered_calls, missed_calls){
+    return {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        backgroundColor: '#fff',
+        height: 200
+      },
+      exporting: { enabled: false },
+      title: { text: '' },
+      tooltip: {
+        formatter: function() {
+          return this.y;
+        }
+      },
+      plotOptions: {
+        pie: {
+          size: 100,
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: false
+          },
+          showInLegend: true
+        },
+        series: {
+          point: {
+            events: {
+              legendItemClick: function() {
+                return false;
+              }
+            }
+          }
+        }
+      },
+      legend: {
+        align: 'center',
+        layout: 'horizontal',
+        verticalAlign: 'bottom',
+        labelFormatter: function() {
+          return this.name + '  ' + this.y;
+        }
+      },
+      series: [
+        {
+          type: 'pie',
+          innerSize: '60%',
+          name: 'Calls_By_Status',
+          data: [
+            ['Answered', parseInt(answered_calls) || 0],
+            ['Missed', parseInt(missed_calls) || 0]
+          ]
+        }
+      ],
+      credits: { enabled: false }
+    };
+  };

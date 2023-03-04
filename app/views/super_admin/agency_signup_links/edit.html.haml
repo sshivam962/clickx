@@ -1,0 +1,44 @@
+- content_for :title do
+  Edit Agency Signup Link | Clickx
+.page-header
+  %h3
+    Edit Agency Signup Link
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: super_admin_agency_signup_links_path } Back
+    %small
+      = @signup_link.plan_key.titleize
+      (
+      - if @signup_link.trial?
+        Free Trial for #{@signup_link.trial_info}
+      - else
+        = @signup_link.coupon_code
+      )
+.agency-form
+  = form_for @signup_link, url: super_admin_agency_signup_link_path(@signup_link), method: :patch do |f|
+    %div.col-md-12
+      .row.signup_link_form
+        .form-group
+          %label{for: "signup_link_first_name"} First Name
+          = f.text_field :first_name, class: 'form-control login halfWidth', placeholder: 'First Name'
+        .form-group
+          %label{for: "signup_link_last_name"} Last Name
+          = f.text_field :last_name, class: 'form-control login halfWidth', placeholder: 'Last Name'
+        .form-group
+          %label{for: "signup_link_email"} Email
+          = f.email_field :email, class: 'form-control login halfWidth', placeholder: 'Email'
+        .form-group
+          %label{for: "signup_link_company"} Company
+          = f.text_field :company, class: 'form-control login halfWidth', placeholder: 'Company'
+        .form-group
+          %label{for: "signup_link_title"} Title
+          .halfWidth
+            = f.cktext_area :title, required: true, class: 'form-control login halfWidth', ckeditor: { toolbar: 'support' }
+        .form-group
+          %label{for: "signup_link_expires_on"} Expires On
+          = f.date_field :expires_on, class: 'form-control login halfWidth', placeholder: 'Expires On', min: Date.today
+        .form-group
+          %label{for: "signup_link_calendly_script"} Calendly Script
+          .halfWidth
+            = f.text_area :calendly_script, class: 'form-control login', ckeditor: { toolbar: 'support' }, rows: 5
+        .form-group
+          = f.submit "Save Link", class: 'btn btn-warning saveBtn'

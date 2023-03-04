@@ -1,0 +1,41 @@
+.py-8
+  .lg:container.mx-auto.px-4
+    .mb-4
+      = link_to network_settings_path, class: 'btn btn-white btn-raised' do
+        %i.fa.fa-arrow-left.pr-3
+        Back
+    .card.bg-white.shadow-xl.p-6.p:md-8.rounded-xl.mb-12
+      = form_for(resource, as: resource_name, url: registration_path(resource), html: { method: :patch, class: 'form-horizontal tabular-form' }) do |f|
+        .grid.grid-cols-1.md:grid-cols-2.gap-8
+          .w-96
+            .section-title
+              %h4
+                Edit User Profile
+            .input-wrapper.mb-4
+              %label.input-wrapper-label.pr-4 Name
+              = f.text_field :first_name, class: 'input-wrapper-input'
+
+            .input-wrapper.mb-4
+              %label.input-wrapper-label.pr-4 Phone
+              = f.text_field :phone, class: 'input-wrapper-input'
+
+            - if resource.identities.blank?
+              .input-wrapper
+                %label.input-wrapper-label Current Password
+                = f.password_field :current_password, required: true, class: 'input-wrapper-input passwordincus'
+
+          .w-96
+            .section-title
+              %h4
+                Change Your Password
+            %p.text-sm.text-gray-600 (Enter New Password only if you wish to change it)
+            .input-wrapper.mb-4
+              %label.input-wrapper-label New Password
+              = f.password_field :password, class: 'input-wrapper-input passwordincus'
+            .input-wrapper
+              %label.input-wrapper-label Confirm Password
+              = f.password_field :password_confirmation, class: 'input-wrapper-input passwordincus'
+
+          .input-wrapper-submit.pt-6
+            = f.submit 'Save', class: 'btn'
+            = link_to 'Cancel', network_settings_path, class: 'btn inline-block btn--grey'

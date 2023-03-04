@@ -1,0 +1,39 @@
+= content_for :title, 'Scale Program Resources | Clickx'
+.container-fluid.py-4
+  .bg-sky-blue.rounded.border-1.border-blue
+    .bg-white.rounded-t-12.pt-4.pb-md-4.px-lg-5.px-4
+      .d-md-flex.justify-content-between.align-items-center
+        .col-auto
+          .fs-md.color-dark-blue.fw-m Resources
+        .col-auto.pb-4.pb-sm-0
+          %ul.tabs-nav.justify-content-center.mt-4.mt-md-0.documents-tab
+            %li.mx-1.mx-lg-2.active{class: '', id: "my_document"}
+              %a.load_my_documents{href: 'javascript:void(0)', data: {category: "scale_docs"}}
+                %span.fs-14
+                  SCALE DOCUMENTS
+            %li.mx-1.mx-lg-2{class: '', id: "my_document"}
+              %a.load_my_documents{href: 'javascript:void(0)', data: {category: "coaching_call_docs"}}
+                %span.fs-14
+                  COACHING CALL DOCUMENTS
+    .p-5
+      // #document_content
+      #scale_docs.scale_docs_list
+        .documents_list.row.d-flex.flex-wrap
+          = render 'agency/scale_program/shared/scale_docs'
+      #coaching_call_docs.hidden.scale_docs_list
+        .documents_list.row.d-flex.flex-wrap
+          = render 'agency/scale_program/shared/coaching_call_docs'
+:css
+  .card img {
+    position: inherit;
+    display:table-header-group;
+  }
+:javascript
+  $(document).on('click', '.documents-tab .load_my_documents', function() {
+    var document_type = $(this).data('category');
+    $('.load_my_documents').parent('li').removeClass('active');
+    $(this).parent('li').addClass('active');
+    console.log(document_type);
+    $('.scale_docs_list').addClass('hidden')
+    $('#'+document_type).removeClass('hidden');
+  })

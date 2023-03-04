@@ -1,0 +1,98 @@
+.row
+  .col-md-12
+    .tab-container
+      %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+        / %li.active
+        /   %a{"data-toggle" => "tab", 'data-target' => "#sc-top-avg-position", 'ng-click' => "resizeChart('position'); searchConsole()"} Avg Position
+        %li.active
+          %a{"data-toggle" => "tab", 'data-target' => "#sc-top-impressions", id: "impression_id"} Impressions
+        %li
+          %a{"data-toggle" => "tab", 'data-target' => "#sc-top-clicks", id: "clicks_id"} Clicks
+        / %li
+        /   %a{"data-toggle" => "tab", 'data-target' => "#sc-top-ctr", 'ng-click' => "resizeChart('ctr'); searchConsole()"} CTR
+
+      .tab-content
+        / #sc-top-avg-position.tab-pane.active
+        /   .panel-body
+        /     .centered
+        /       #position
+
+        #sc-top-impressions.tab-pane.active
+          .panel-body
+            .centered
+              #impression
+
+        #sc-top-clicks.tab-pane
+          .panel-body
+            .centered
+              #clicks
+
+        / #sc-top-ctr.tab-pane
+        /   .panel-body
+        /     .centered
+        /       #ctr
+
+.row
+  .col-md-12
+    .tab-container
+      .tab-content{'st-table'=>"search_console_data", 'st-safe-src' => "all_search_console_data"}
+        .table-responsive
+          %table#query_table.table.table-hover.table-bordered.table-vam
+            %thead
+              %tr
+                %th.vam{'st-sort'=>'keys', :style => "padding-right:190px;"}
+                  %u.help_pointer{ 'title': 'List of keywords for which you are ranking for on Google' }
+                    Keywords
+                %th.text-center{'st-sort'=>'position'}
+                  %u.help_pointer{ 'title': 'The average position of where you are ranking for these keywords on Google' }
+                    Avg. Position
+                %th.text-center{'st-sort'=>'impressions'}
+                  %u.help_pointer{ 'title': 'Number of times people came across your site while searching for the given keywords in Google' }
+                    Impressions
+                %th.text-center{'st-sort'=>'clicks'}
+                  %u.help_pointer{ 'title': 'Number of times your site has been clicked while searching for the given keywords on Google' }
+                    Clicks
+                %th.text-center{'st-sort'=>'ctr'}
+                  %u.help_pointer{ 'title': 'Percent of people who clicked on your site when they came across it on Google for the keywords' }
+                    CTR
+            %tbody
+              - data["totals"]["rows"].each do |data|
+                %tr
+                  %td
+                    #{data["keys"]}
+                    %add-remove-keywords{"keyword":"data"}
+                  %td{:align => "center"} #{ data["position"] }
+                  %td{:align => "center"} #{ data["impressions"] }
+                  %td{:align => "center"} #{ data["clicks"] }
+                  %td{:align => "center"} #{data["ctr"]} %
+
+        .pagination.pagination-lg.pagination-download
+          %li{ 'title': 'Download report' }
+            %a{ id: "download_csv_id", "style": "border-radius: 5px;" }
+              %i.fa.fa-download.pr>
+              Download CSV
+
+:javascript
+  $(function() {
+    var table = $('#query_table').DataTable({
+      "pageLength": 25
+    });
+    $('#query_table_filter input').on('keyup change', function () {
+      table.column(0).search($(this).val()).draw();
+    });
+
+    var chart_data = JSON.parse('#{raw(data["graph_data"].to_json)}');
+    var graph_data = SearchConsole.get_datewise_graph(
+      chart_data
+    );
+    $('#impression').highcharts(graph_data.impressions);
+
+    $("#impression_id").on("click", function() {
+      $("#impression").highcharts(graph_data.impressions);
+    })
+
+    $("#clicks_id").on("click", function() {
+      $("#clicks").highcharts(graph_data.clicks);
+    })
+
+  });

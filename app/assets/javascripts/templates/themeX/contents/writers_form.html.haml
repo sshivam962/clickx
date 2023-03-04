@@ -1,0 +1,270 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-BlogWriting.title-icon>
+    Content Order
+    %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Content order tool lets you order content for your buisness. This page lets you choose what kind of content you require including the word count and the quality of the writers.Publishing regualr content on your company\'s blog is crucial for attracting laser targeted traffic, educating prospect customers, and finally converting them. If you are an online business, never estimate the power of content marketing. ', 'title-direction': 'bottom'}
+
+.container-fluid
+  %div
+    .row
+      .col-md-12.full-width.panel.panel-default.no-shadow.pb-lg.pt-lg
+        .col-sm-8
+          %section#timeline2.timeline-outer
+            #content.col-sm-12
+              .row
+                %form#writers-form-submit{name:"writers_form","ng-submit":"saveForm($event)"}
+                  .hidden
+                    %input{type:"hidden","ng-value":"{{business_id}}","ng-model":"business_id", value:"{{business_id}}"}
+                  %ul.timeline2
+                    %li.step{"data-date" => "01"}
+                      .text-heading.line.mb-xxl
+                        %h3.regsubt.pb-sm What would you like to order?
+                      .row
+                        .col-xs-12.col-sm-4
+                          .form-group.m-n
+                            %label.control-label.m-n Product type
+                            %md-select.md-no-underline.form-control.m-n{'required':'required', 'ng-model':"writersObject.assetid", id:'product-type', 'title': 'Select product page'}
+                              %md-option{value:'', 'ng-hide':"writersObject.assetid"} --Select--
+                              %md-option{'ng-repeat':"product in content_data.product_type",value:"{{product.id}}", 'ng-selected':"writersObject.assetid == product.id"}
+                                {{product.name}}
+                        .col-xs-12.col-sm-4
+                          .form-group.m-n
+                            %label.control-label.m-n Industry
+                            %md-select.md-no-underline.form-control.m-n{'required':'required', 'ng-model':"writersObject.categoryid", id: 'industry', 'title': 'Select industry of content'}
+                              %md-option{value:"","ng-hide":"writersObject.categoryid"} --Select--
+                              %md-option{'ng-repeat':"industry in content_data.industry",value:"{{industry.id}}", 'ng-selected':"writersObject.categoryid == industry.id"}
+                                {{industry.name}}
+                        .col-xs-12.col-sm-4
+                          .form-group.m-n
+                            %label.control-label.m-n Speciality
+                            %md-select.md-no-underline.form-control.m-n{'required':'required', 'ng-model':"writersObject.expertiseid", id: 'speciality', 'title': 'Select the speciality of the writer'}
+                              %md-option{value:"","ng-hide":"writersObject.expertiseid"} -- Select --
+                              %md-option{'ng-repeat':"speciality in content_data.specialty", value:"{{speciality.id}}", 'ng-selected':"writersObject.expertiseid == speciality.id"}
+                                {{speciality.name}}
+                    %li.step{"data-date" => "02"}
+                      .text-heading.line.mb-xxl
+                        %h3.regesubt.pb-sm Budget and Quality?
+                      .row
+                        .col-xs-12.col-sm-4
+                          .form-group.m-n
+                            %label.control-label.m-n Minimum Words
+                            %input.form-control#minimum-words{type:"number","ng-model":"writersObject.minwords",min:300,step:50,"required":'required'}
+                        .col-xs-12.col-sm-4
+                          .form-group.m-n
+                            %label.control-label.m-n Maximum Words
+                            %input.form-control#maximum-words{type:"number","ng-model":"writersObject.maxwords",min:500,step:50,"required":'required'}
+                        .col-xs-12.col-sm-4
+                          .form-group.m-n.optionstar
+                            %label.control-label.m-n Content writer Level
+                            %ui-select{"ng-model" => "writersObject.writer",theme:"bootstrap"}
+                              %ui-select-match
+                                %span{"ng-bind" => "$select.selected"}
+                              %ui-select-choices{:repeat => "writer_level in (writers_levels | filter: $select.search)"}
+                                %span.fa.fa-star.golden{"ng-repeat": "i in [] | range:writer_level"}
+                    %li.step{"data-date" => "03"}
+                      .text-heading.line.mb-xxl
+                        %h3.regsubt.pb-sm Brief project description?
+                      .row
+                        .col-xs-12.col-sm-12
+                          .form-group.m-n
+                            %label.control-label.m-n Order Title
+                            %input.form-control{"ng-model":"writersObject.title","required":'required'}
+                        .col-xs-12.col-sm-12
+                          .form-group.m-n
+                            %label.control-label.m-n{:for => "Instruction"} Instruction
+                            %textarea#instruction.form-control{redactor:"{minHeight:240}", "ng-model"=>"writersObject.instructions",rows:20,style:"height: 320px","required":'required'}
+                        .col-xs-12.col-sm-6
+                          .form-group.m-n
+                            %label.control-label.m-n{:for => "Company Information"} Company Information
+                            %textarea.form-control#company-information{"ng-model":"writersObject.company_information","ng-value":"default_content_order_data.company_information"}
+                        .col-xs-12.col-sm-6
+                          .form-group.m-n
+                            %label.control-label.m-n{:for => "Target Audience"} Target Audience
+                            %textarea.form-control#target-audience{"ng-model":"writersObject.target_audience","ng-value":"default_content_order_data.target_audience"}
+                        .col-xs-12.col-sm-6
+                          .form-group.m-n
+                            %label.control-label.m-n{:for => "Things to Mention"} Things to Mention
+                            %textarea.form-control#things-to-mention{"ng-model":"writersObject.things_to_mention","ng-value":"default_content_order_data.things_to_mention"}
+                        .col-xs-12.col-sm-6
+                          .form-group.m-n
+                            %label.control-label.m-n{:for => "Things to avoid"} Things to avoid
+                            %textarea.form-control#things-to-avoid{"ng-model":"writersObject.things_to_avoid","ng-value":"default_content_order_data.things_to_avoid"}
+                        .col-xs-12.col-sm-12
+                          .form-group.m-n
+                            .checkbox.checkbox-info.checkbox-info.pl-n
+                              %label
+                                %md-checkbox{"aria-label" => "Checkbox 1", "ng-model" => "seo_checkbox", class: "md_checkbox"}
+                                  SEO Instructions
+                        .col-xs-12.col-sm-12
+                          .panel.panel-default.reset-panel{"ng-if":"seo_checkbox"}
+                            .panel-body
+                              %h4 SEO Instructions
+                              %p Any Special SEO Instructions
+                              .form-group
+                                %textarea.form-control{rows:5, "ng-model":"writersObject.seo_instructions"}
+                              .form-group
+                                %label.control-label Required Keywords
+                                %textarea.form-control{rows:2,"ng-model":"writersObject.required", placeholder:"Required SEO keywords, comma-delimited. Writer must use each keyword phrase at least once."}
+                              .form-group
+                                %label.control-label Optional Keywords
+                                %textarea.form-control{rows:2,"ng-model":"writersObject.optional", placeholder:"Optional SEO keywords, comma-delimited. Writer sees this list but is under no obligation to use each phrase."}
+
+
+
+                    %li.step{"data-date" => "04"}
+                      .text-heading.line.mb-xxl
+                        %h3.regsubt.pb-sm When do you need it?
+                      .row
+                        .col-xs-12.col-sm-6
+                          .form-group.m-n
+                            %label.control-label.m-n Days to Complete
+                            %select#selector1.form-control{"ng-model"=>"writersObject.hourstocomplete","required":'required'}
+                              %option{"ng-repeat"=>"day in num_completed_days track by $index","ng-selected"=>"day == writersObject.hourstocomplete",value:"{{day * 24}}"}
+                                {{ day + 1 }} Days
+                    %li.step{"data-date" => "05"}
+                      .text-heading.line.mb-xxl
+                        %h3.regsubt.pb-sm Add proofreading
+                      .row
+                        .col-xs-12.col-sm-12
+                          .form-group.m-n
+                            .radio.radio-block.radio-info.mb-md.mt-n
+                              %label
+                                %input{type:"radio",value:0,"ng-model"=>"writersObject.paidreview","ng-checked"=>"writersObject.paidreview == 0", name: "optionsRadios1"}
+                                %span.circle
+                                %span.check
+                                %b No
+                                I'm not interested in proofreading
+                            .radio.radio-block.radio-info
+                              %label
+                                %input{type:"radio",value:2,"ng-model"=>"writersObject.paidreview","ng-checked"=>"writersObject.paidreview == 2", name: "optionsRadios1"}
+                                %span.circle
+                                %span.check
+                                %b Yes
+                                , send the order to proofreader for spelling and and grammar checking.
+
+                    .row.hidden
+                      .col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3.text-center
+                        %a.btn.btn-info.reset-btn.btn-lg{"ng-click":"saveDraft($event)"} Save Draft
+                        %a.btn.btn-success.reset-btn.btn-lg{"ng-click":"openPaymentModal($event)","ng-disabled":"writers_form.$pristine || writers_form.$invalid","ng-hide":"!!order_id"}
+                          %span.fa.fa-dollar{"data-order":"{{order_id}}","data-type":"Create"}
+                          Place Order
+                        %a.btn.btn-success.reset-btn.btn-lg{"ng-click":"openPaymentModal($event)","ng-show":"!!order_id"}
+                          %span.fa.fa-dollar{"data-order":"{{order_id}}","data-type":"Update"}
+                          Place Order
+        / Purchase Summary
+        .col-sm-4.p-n
+          .panel.panel-default.m-n.regfixed.no-shadow{'data-widget': {draggable: 'false'}}
+            .panel-body.pl-xl.pr-xl.pt-md
+              .text-heading.line.mt-n
+                %h3.regsubt Price Calculator
+              .col-sm-12.pl-n.pr-n.pt-md
+                %table.table{"ng-class":"{blur: price_not_get}"}
+                  %tbody
+                    %tr
+                      %td Item
+                      %td{:align => "right"} {{article_price || total_price || "x"}}
+                    %tr{"ng-if":"writersObject.paidreview == 2"}
+                      %td Proof reading
+                      %td{:align => "right"} {{proof_reading_price || "x"}}
+                    %tr
+                      %td
+                        %b Total
+                      %td{:align => "right"}
+                        %b {{total_price || "x"}}
+              .col-sm-12.form-group.mt-n
+                .row.text-center
+                  %button.btn.btn-default.btn-raised.btn-label.btn{"ng-click":"saveDraft($event)"} Save Draft
+                  %button.btn.btn-success.btn-raised.btn-label.btn{"ng-click":"openPaymentModal($event)","ng-disabled":"writers_form.$pristine || writers_form.$invalid","ng-hide":"!!order_id"}
+                    %i.fa.fa-dollar.pr{"data-order":"{{order_id}}","data-type":"Create"}
+                    Place Order
+                  %button.btn.btn-success.btn-raised.btn-label.btn{"ng-click":"openPaymentModal($event)","ng-show":"!!order_id"}
+                    %span.fa.fa-dollar{"data-order":"{{order_id}}","data-type":"Update"}
+                    Place Order
+
+/ Payment Modal HTML Markup
+%script{"type":"text/ng-template","id":"writers_payment_modal.html"}
+  %md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-compressed.modal-lg{'aria-label':'Select Payment method'}
+    .modal-header.pb-sm
+      %button.close.mt-xs{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button","ng-click":"cancel()"}
+        %span.fa.fa-times-circle-o
+      %h2.modal-title Select Payment Method
+    %md-dialog-content
+      .md-dialog-content
+        .new-payment-modal
+          .row
+            .col-xs-12.col-sm-6.col-md-4
+              %ul.list-group.stripe-card-list
+                %li.list-group-item{"ng-repeat": "card in business_cards_list"}
+                  %label.clearfix{for:"existing-card-{{$index}}"}
+                    .select-checkbox
+                      .radio.radio-inline.radio-info
+                        %label
+                          %input{type:"radio",name:"existing_card","ng-model":"$parent.existing_card","ng-value":"{{card}}",value:"{{card}}",id:"existing-card-{{$index}}"}
+                          %span.circle
+                          %span.check
+                    .selected-card
+                      %span
+                        {{card.number}}
+            .col-xs-12.col-sm-6.col-md-8
+              %form.form-horizontal{name:"stripe_form","stripe-form":"paymentProcess", "ng-hide":"existing_card"}
+                .form-group.mt-n
+                  .col-sm-12
+                    .input-group
+                      %span.input-group-addon.formfldic
+                        %i.material-icons{"ng-class": "{'text-success':stripe_form.number.$valid,'text-danger':stripe_form.number.$invalid && stripe_form.number.$dirty}"}
+                          credit_card
+                      %input.form-control{:placeholder => "4242 4242 4242 4242", :type => "text","payments-validate":"card","payments-type-model":"type", "payments-format":"card","ng-model":"number","required":"required",name:"number"}
+                .form-group
+                  .col-sm-12
+                    .row
+                      .col-xs-12.col-sm-6
+                        .input-group
+                          %span.input-group-addon.formfldic
+                            %i.material-icons{"ng-class": "{'text-success':stripe_form.expiry.$valid,'text-danger':stripe_form.expiry.$invalid && stripe_form.expiry.$dirty}"}
+                              event_note
+                          %input.form-control{:placeholder => "10/20", :type => "text","payments-validate":"expiry","payments-format":"expiry","ng-model":"expiry", "required":"required",name:"expiry"}
+                      .col-xs-12.col-sm-6
+                        .col-sm-12
+                          .input-group
+                            %span.input-group-addon.formfldic
+                              %i.material-icons{"ng-class": "{'text-success':stripe_form.cvc.$valid,'text-danger':stripe_form.cvc.$invalid && stripe_form.cvc.$dirty}"}
+                                security
+                            %input.form-control{:placeholder => "123[4]", :type => "text","payments-validate":"cvc", "payments-format":"cvc", "payments-type-model":"type","ng-model":"cvc","required":"required",name:"cvc"}
+
+                .form-group
+                  .col-sm-12
+                    .input-group
+                      %span.input-group-addon.formfldic
+                        %i.material-icons mail_outline
+                      %input.form-control{:placeholder => "Email", :type => "email","ng-model":"email", required:"required"}
+                .form-group
+                  .col-sm-12
+                    .input-group
+                      %span.input-group-addon.formfldic
+                        %i.material-icons person_outline
+                      %input.form-control{:placeholder => "Name", :type => "text","ng-model":"name"}
+                .row
+                  .pull-right
+                    %button.btn.btn-raised.btn-success{type:"submit","ng-disabled":"stripe_form.$invalid || stripe_form.$pristine"}
+                      %span.fa.fa-check
+                        Pay Now
+              .existing-payment{"ng-show":"existing_card"}
+                .row
+                  .mt-n.col-sm-9.mgl-65
+                    .cc
+                      %span.chip
+                      %span{"data-card": "{{existing_card.type}}","ng-class": "{'mastercard': existing_card.type == 'mastercard','jcb': existing_card.type == 'jcb', 'discover': existing_card.type == 'discover','diners-club': existing_card.type == 'diners club', 'visacard':existing_card.type == 'visa','amex':existing_card.type == 'american express'}"}
+                      %span.cc-number {{existing_card.number}}
+                .card-pay.text-center
+                  %button.btn.btn-raised.btn-success{type:"button","ng-click"=>"sendExistingCardDetails($event,existing_card)"}
+                    %span.fa.fa-check
+                    Pay Now
+                %hr
+                .card-new
+                .clearfix.confirm-new-card
+                  Do you want to use new Card
+                %button.btn.btn-raised.btn-info.pull-right{"ng-click":"existing_card = null "}
+                  %span.fa.fa-plus
+                  Add Card
+    %md-dialog-actions{layout:'row'}
+

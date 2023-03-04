@@ -1,0 +1,5 @@
+- if !@signup_link&.trial? && @coupon.blank?
+  .promocode
+    = text_field_tag 'coupon_code_input', '', class: 'input-promocode', placeholder: 'Promo Code (if applicable)'
+    %input#apply_coupon.promocode-btn{type: "button", value: "Apply"}
+    %input#remove_coupon.promocode-btn.hidden{type: 'button', value: 'Remove'}

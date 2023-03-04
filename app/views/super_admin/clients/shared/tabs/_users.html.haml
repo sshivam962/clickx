@@ -1,0 +1,31 @@
+.clients-users
+  - client.users.each do |user|
+    .clients-user__col
+      .clients-user__item
+        .clients-user__name
+          = user.name
+        .clients-user__role
+          = user.role.titleize
+        .clients-user__email
+          = user.email
+        .clients-user__invitation-status
+          - status = user.invitation_status
+          - klass = status.eql?('Accepted') ? 'label-success' : 'label-danger'
+          %span{class: klass}
+            = status
+        .clients-user__sent
+          %span.label-default
+            Invitation Sent At - #{days_since(user.invitation_sent_at)}
+        .clients-user__seen
+          Last Seen At - #{days_since(user.last_seen)}
+        %span.ng-hide
+          - if user.invitation_accepted_at.blank? && days_from(user.invitation_sent_at) >= 3
+            = link_to resend_invitation_super_admin_user_path(user.id), method: :put, remote: true, class: 'btn btn-warning btn--sm' do
+              Resend
+        .clients-user__actions
+          - if user.invitation_accepted_at.present?
+            %a.btn.btn-primary.btn--sm{href: switch_to_business_user_path(user_id: user.id), title: 'Login'}
+              %i.glyphicon.glyphicon-log-in
+          - if current_user.super_admin? && user.normal?
+            = link_to remove_user_super_admin_clients_path(user_id: user.id), method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-danger btn--sm' do
+              %i.glyphicon.glyphicon-trash

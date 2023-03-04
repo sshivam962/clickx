@@ -1,0 +1,11 @@
+.page-content
+  .page-heading.no-margin-bottom
+    %h1
+      %i.clickx-icon-user.title-icon
+      = @case_study.title
+  .container-fluid
+    .row
+      .col-md-12
+        .tab-container
+          = form_for @case_study, url: agency_case_study_path(@case_study), method: :patch do |f|
+            = render 'form', f: f

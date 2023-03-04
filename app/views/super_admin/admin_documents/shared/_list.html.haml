@@ -1,0 +1,39 @@
+.locations
+  .row.d-flex.flex-wrap
+    - documents.each do |document|
+      .col-md-3.col-sm-4.mb-5
+        .card--document.h-100
+          .card-content
+            %a.no-underline.d-block{href: edit_super_admin_admin_document_path(document)}
+              .card-image.pb-4
+                %img.img-responsive.br-10{ alt: '', src: document.thumbnail&.file&.url}
+              .card-body.p-2
+                %h3.mb-3= document.title
+                %div= document.description.html_safe
+            %footer.card-footer.d-flex.p-2.flex-wrap
+              .d-flex.pr-3
+                - if document.document_link
+                  = link_to document.document_link, class: 'btn grey-btn-icon d-flex align-items-center', target: '_blank' do
+                    %i.glyphicon.glyphicon-eye-open
+                    Show
+                - else
+                  = link_to document&.document_attachment&.file&.url, class: 'btn grey-btn-icon d-flex align-items-center', target: '_blank' do
+                    %i.glyphicon.glyphicon-eye-open
+                    Show
+              .d-flex.pr-3
+                - if current_user.clickx_admin?
+                  = link_to super_admin_admin_document_path(document), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn grey-btn-icon d-flex align-items-center' do
+                    %i.glyphicon.glyphicon-trash
+                    Delete
+              .d-flex.pr-3
+                = link_to edit_super_admin_admin_document_path(document), class: 'btn grey-btn-icon d-flex align-items-center' do
+                  %i.glyphicon.glyphicon-edit
+                  Edit
+.row
+  .col-md-4.col-lg-4.col-sm-12.pt-md
+    = page_entries_info documents
+  .col-md-8.col-lg-8.col-sm-12.text-lg-right.mt-4.mt-lg-0
+    .pagination-wrapper
+      = will_paginate documents, params: {title: params[:title]}
+:javascript
+  $('.pagination a').attr('data-remote', 'true');

@@ -1,0 +1,338 @@
+%ul#lg-menu.nav.menu
+  %li
+    %a.logo.logoElement{href: '/s/clients'}
+      = image_tag 'logo.png', {alt: 'logotype'}
+
+  %li{'ng-class' => "{'theme active': current_controller == 'businesses'}"}
+    %a{href: '/s/clients'}
+      %i.glyphicon.glyphicon-briefcase
+      Clients
+
+  %li{'ng-class' => "{'theme active': current_controller == 'agencies'}", 'ng-if': "user_permissions.includes('agencies')"}
+    %a{href: '/s/agencies'}
+      %i.agency-icon
+      Agencies
+
+  %li{'ng-class' => "{'active theme': current_controller == 'archived'}", 'ng-if': "user_permissions.includes('archived_clients')"}
+    %a{href: '/s/clients/archived'}
+      %i.glyphicon.glyphicon-folder-close
+      Archived Clients
+
+  %li{'ng-class' => "{'theme active': current_controller == 'leads'}",'ng-if': "  user_permissions.includes('leads')"}
+    %a{href: "/s/leads"}
+      %i.fa.fa-users
+      Leads
+
+  %li{'ng-if': "user_permissions.includes('lead_strategy')"}
+    %a{href: "/s/lead/strategies"}
+      %i.fa.fa-users
+      Lead Strategy
+
+  %li{'ng-if': "user_permissions.includes('lead_strategy_item')"}
+    %a{href: "/s/lead/strategy_items"}
+      %i.fa.fa-users
+      Lead Strategy Items
+
+  %li{'ng-if': "user_permissions.includes('onboarding_procedures')"}
+    %a{href: "/s/onboarding_procedures"}
+      %i.fa.fa-list-ul
+      Onboarding Procedures
+
+  %li{'ng-if': "user_permissions.includes('agency_academy')"}
+    %a{href: '/s/agency/courses'}
+      %i.fa.fa-play
+      Agency Academy
+
+  %li{'ng-if': "user_permissions.includes('admin_courses')"}
+    %a{href: '/s/admin_courses'}
+      %i.fa.fa-play
+      Admin Academy
+
+  %li{'ng-if': "user_permissions.includes('admin_academy')"}
+    %a{href: '/s/admin/courses'}
+      %i.fa.fa-play
+      Admin Academy Manage
+
+  %li{'ng-if': "user_permissions.includes('case_studies')"}
+    %a{href: "/s/case_studies"}
+      %i.fa.fa-newspaper-o
+      Case Studies
+
+  %li{'ng-if': "user_permissions.includes('portfolio')"}
+    %a{href: "/s/portfolio"}
+      %i.fa.fa-picture-o
+      Portfolio
+
+  %li{'ng-if': "user_permissions.includes('faq')"}
+    %a{href: "/s/faqs"}
+      %i.fa.fa-question
+      FAQ
+
+  %li{'ng-if': "user_permissions.includes('documents')"}
+    %a{href: "/s/documents"}
+      %i.fa.fa-file
+      Documents
+
+  %li{'ng-if': "user_permissions.includes('client_academy')"}
+    %a{href: '/s/business/courses'}
+      %i.fa.fa-graduation-cap
+      Client Academy
+
+  %li{'ng-class' => "{'theme active': current_controller == 'questions'}", 'ng-if': "user_permissions.includes('questionnaire')"}
+    %a{href: 's/questions'}
+      %i.glyphicon.glyphicon-edit
+      Questionnaire
+
+  %li{'ng-if': "user_permissions.includes('client_questionnaire')"}
+    %a{href: "/s/inquiry/questionnaires"}
+      %i.glyphicon.glyphicon-edit
+      Client Questionnaire
+
+  %li{'ng-class' => "{'active theme':current_controller == 'content_settings'}", 'ng-if': "user_permissions.includes('content_settings')"}
+    %a{href: '/s/content_settings'}
+      %i.glyphicon.glyphicon-book
+      Content
+
+  %li{'ng-class' => "{'active theme':current_controller == 'integrations'}", 'ng-if': "user_permissions.includes('third_party_integrations')"}
+    %a{href: "/s/integrations"}
+      %i.fa.fa-code-fork
+      Third Party Integrations
+
+  %li{'ng-class' => "{'active theme':current_controller == 'client_locations'}", 'ng-if': "user_permissions.includes('location_map')"}
+    %a{href: '/s/locations/map'}
+      %i.glyphicon.glyphicon-globe
+      Metrics
+
+  %li{'ng-class' => "{'theme active': current_controller == 'labels'}", 'ng-if': "user_permissions.includes('manage_labels')"}
+    %a{href: 's/labels'}
+      %i.glyphicon.glyphicon-tag
+      Manage Labels
+
+  %li{'ng-if': "user_permissions.includes('reports')"}
+    %a{href: '/s/reports'}
+      %i.glyphicon.glyphicon-stats
+      Reports
+
+  %li{'ng-class' => "{'theme active': current_controller == 'mails'}", 'ng-if': "user_permissions.includes('email_templates')"}
+    %a{href: "/s/mail_templates"}
+      %i.glyphicon.glyphicon-envelope
+      Email Templates
+
+  %li{'ng-class' => "{'theme active': current_controller == 'mails'}", 'ng-if': "user_permissions.includes('mails')"}
+    %a{href: "/s/mails"}
+      %i.glyphicon.glyphicon-envelope
+      Emails
+
+  %li{'ng-if': "user_permissions.includes('billing')"}
+    %a{href: "/s/billing"}
+      %i.fa.fa-money
+      Billing
+  %li{'ng-if': "user_permissions.includes('agency_package_subscriptions')"}
+    %a{href: "/s/agency/package_subscriptions"}
+      %i.fa.fa-shopping-cart
+      Agency Subscriptions
+
+  %li{'ng-if': "user_permissions.includes('client_package_subscriptions')"}
+    %a{href: "/s/client/package_subscriptions"}
+      %i.fa.fa-shopping-cart
+      Client Subscriptions
+
+  %li{'ng-if': "user_permissions.includes('smb_package_subscriptions')"}
+    %a{href: "/s/smb/package_subscriptions"}
+      %i.fa.fa-shopping-cart
+      SMB Subscriptions
+
+  %li{'ng-if': "user_permissions.includes('custom_packages')"}
+    %a{href: "/s/custom_packages"}
+      %i.fa.fa-dollar
+      Custom Packages
+
+  %li{'ng-if': "user_permissions.includes('packages')"}
+    %a{href: "/s/packages"}
+      %i.fa.fa-shopping-bag
+      Packages
+
+  %li{'ng-if': "user_permissions.includes('agency_signup_links')"}
+    %a{href: "/s/agency_signup_links"}
+      %i.fa.fa-link
+      Agency Signup Links
+
+  %li{'ng-if': "user_permissions.includes('business_signup_links')"}
+    %a{href: "/s/business_signup_links"}
+      %i.fa.fa-link
+      SMB Signup Links
+
+  %li{'ng-class' => "{'theme active': current_controller == 'admin'}", 'ng-if': "user_permissions.includes('admin_users')"}
+    %a{href: '/s/admin_users'}
+      %i.glyphicon.glyphicon-cog
+      Admin Users
+
+  %li{'ng-if': "user_permissions.includes('agency_settings')"}
+    %a{href: '/s/agency_settings'}
+      %i.glyphicon.glyphicon-cog
+      Agency Support Settings
+
+  / %li{'ng-class' => "{'active theme':current_controller == 'videos'}"}
+  /   %a{href: '/#/videos'}
+  /     %i.fa.fa-graduation-cap
+  /     Academy
+
+  / %li{'ng-class' => "{'active theme':current_controller == 'business_reward_referrals'}"}
+  /   %a{ href: '/#/reward_referrals' }
+  /     %i.fa.fa-share-alt
+  /     Referrals
+
+  / %li
+  /   %a{href: '/users/audit_report'}
+  /     %i.fa.fa-line-chart
+  /     Site Audit Report
+
+
+%ul#xs-menu.nav
+  %li
+    %a.logo-smll.logoElement{href: '/s/clients'}
+      = image_tag('logo-smll.png', {alt: 'logotype', width: 30})
+
+  %li{'ng-class' => "{'theme active': current_controller == 'businesses'}"}
+    %a{href: '/s/clients'}
+      %i.glyphicon.glyphicon-briefcase
+
+  %li{'ng-class' => "{'theme active': current_controller == 'agencies'}", 'ng-if': "user_permissions.includes('agencies')"}
+    %a{href: '/s/agencies'}
+      %i.agency-icon
+
+  %li{'ng-class' => "{'theme active': current_controller == 'admin_courses'}", 'ng-if': "user_permissions.includes('admin_courses')"}
+    %a{href: '/s/admin_courses'}
+      %i.agency-icon
+
+  %li{'ng-class' => "{'theme active': current_controller == 'admin_courses'}", 'ng-if': "user_permissions.includes('admin_academy')"}
+    %a{href: '/s/admin/courses'}
+      %i.agency-icon
+
+  %li{'ng-class' => "{'active theme': current_controller == 'archived'}", 'ng-if': "user_permissions.includes('archived_clients')"}
+    %a{href: '/s/clients/archived'}
+      %i.glyphicon.glyphicon-folder-close
+
+  %li{'ng-if': "user_permissions.includes('leads')"}
+    %a{href: "/s/leads"}
+      %i.fa.fa-users
+
+  %li{'ng-if': "user_permissions.includes('lead_strategy')"}
+    %a{href: "/s/lead/strategies"}
+      %i.fa.fa-users
+
+  %li{'ng-if': "user_permissions.includes('lead_strategy_item')"}
+    %a{href: "/s/lead/strategy_items"}
+      %i.fa.fa-users
+
+  %li{'ng-if': "user_permissions.includes('onboarding_procedures')"}
+    %a{href: "/s/onboarding_procedures"}
+      %i.fa.fa-list-ul
+
+  %li{'ng-if': "user_permissions.includes('agency_academy')"}
+    %a{href: '/s/agency/courses'}
+      %i.fa.fa-play
+
+  %li{'ng-if': "user_permissions.includes('case_studies')"}
+    %a{href: "/s/case_studies"}
+      %i.fa.fa-newspaper-o
+
+  %li{'ng-if': "user_permissions.includes('portfolio')"}
+    %a{href: "/s/portfolio"}
+      %i.fa.fa-picture-o
+
+  %li{'ng-if': "user_permissions.includes('faq')"}
+    %a{href: "/s/faqs"}
+      %i.fa.fa-question
+
+  %li{'ng-if': "user_permissions.includes('documents')"}
+    %a{href: "/s/documents"}
+      %i.fa.fa-file
+
+  %li{'ng-if': "user_permissions.includes('client_academy')"}
+    %a{href: '/s/business/courses'}
+      %i.fa.fa-graduation-cap
+
+  %li{'ng-class' => "{'theme active': current_controller == 'questions'}", 'ng-if': "user_permissions.includes('questionnaire')"}
+    %a{href: 's/questions'}
+      %i.glyphicon.glyphicon-edit
+
+  %li{'ng-class' => "{'active theme':current_controller == 'content_settings'}", 'ng-if': "user_permissions.includes('content_settings')"}
+    %a{href: '/s/content_settings'}
+      %i.glyphicon.glyphicon-book
+
+  %li{'ng-if': "user_permissions.includes('third_party_integrations')"}
+    %a{href: "/s/integrations"}
+      %i.fa.fa-code-fork
+
+  %li{'ng-class' => "{'active theme':current_controller == 'client_locations'}", 'ng-if': "user_permissions.includes('location_map')"}
+    %a{href: '/s/locations/map'}
+      %i.glyphicon.glyphicon-globe
+
+  %li{'ng-class' => "{'theme active': current_controller == 'labels'}", 'ng-if': "user_permissions.includes('manage_labels')"}
+    %a{href: 's/labels'}
+      %i.glyphicon.glyphicon-tag
+
+  %li{'ng-if': "user_permissions.includes('reports')"}
+    %a{href: '/s/reports'}
+      %i.glyphicon.glyphicon-stats
+
+  %li{'ng-class' => "{'theme active': current_controller == 'mails'}", 'ng-if': "user_permissions.includes('email_templates')"}
+    %a{href: '/s/{{current_user_id}}/email_templates'}
+      %i.glyphicon.glyphicon-envelope
+
+  %li{'ng-class' => "{'theme active': current_controller == 'mails'}", 'ng-if': "user_permissions.includes('mails')"}
+    %a{href: '/s/{{current_user_id}}/mails'}
+      %i.glyphicon.glyphicon-envelope
+
+  %li{'ng-if': "user_permissions.includes('billing')"}
+    %a{href: "/s/billing"}
+      %i.fa.fa-money
+
+  %li{'ng-if': "user_permissions.includes('agency_package_subscriptions')"}
+    %a{href: "/s/agency/package_subscriptions"}
+      %i.fa.fa-shopping-cart
+
+  %li{'ng-if': "user_permissions.includes('client_package_subscriptions')"}
+    %a{href: "/s/client/package_subscriptions"}
+      %i.fa.fa-shopping-cart
+
+  %li{'ng-if': "user_permissions.includes('smb_package_subscriptions')"}
+    %a{href: "/s/smb/package_subscriptions"}
+      %i.fa.fa-shopping-cart
+
+  %li{'ng-if': "user_permissions.includes('custom_packages')"}
+    %a{href: "/s/custom_packages"}
+      %i.fa.fa-dollar
+
+  %li{'ng-if': "user_permissions.includes('packages')"}
+    %a{href: "/s/packages"}
+      %i.fa.fa-shopping-bag
+
+  %li{'ng-if': "user_permissions.includes('agency_signup_links')"}
+    %a{href: "/s/agency_signup_links"}
+      %i.fa.fa-link
+
+  %li{'ng-if': "user_permissions.includes('business_signup_links')"}
+    %a{href: "/s/business_signup_links"}
+      %i.fa.fa-link
+
+  %li{'ng-class' => "{'theme active': current_controller == 'admin'}", 'ng-if': "user_permissions.includes('admin_users')"}
+    %a{href: '/s/admin_users'}
+      %i.glyphicon.glyphicon-cog
+
+  %li{'ng-if': "user_permissions.includes('agency_settings')"}
+    %a{href: 's/agency_settings'}
+      %i.glyphicon.glyphicon-cog
+
+  / %li{'ng-class' => "{'active theme':current_controller == 'videos'}"}
+  /   %a{href: '/#/videos'}
+  /     %i.fa.fa-graduation-cap
+
+  / %li{'ng-class' => "{'active theme':current_controller == 'business_reward_referrals'}"}
+  /   %a{ href: '/#/reward_referrals' }
+  /     %i.fa.fa-share-alt
+
+  / %li
+  /   %a{href: "/users/audit_report"}
+  /     %i.fa.fa-line-chart

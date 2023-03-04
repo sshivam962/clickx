@@ -1,0 +1,26 @@
+- @courses['fulfilment'].each do |course|
+  .address.col-xs-12.col-lg-3.col-md-4.col-sm-6.mb-5{ id: dom_id(course), data: { url: update_position_super_admin_course_path(course) } }
+    .bg-light-gray.p-4.rounded.h-100.d-flex.flex-column
+      .card-content.col-stretch.border-bottom.pb-2
+        .card-image.pb-4
+          %a.no-underline.d-block{href: super_admin_course_path(course)}
+            = image_tag course.thumbnail_file_url, class:'img-responsive h100 br-10' if course.thumbnail_file_url.present?
+        .card-body.p-2
+          %h3.mb-3.mt-0.lh-1
+            = course.title
+            - if course.access_tip.present?
+              %span.fs-xxs.d-inline-block.color-light
+                (
+                %i= course.access_tip
+                )
+          %a{href: super_admin_course_path(course)}
+            = "#{course.chapters.count} Chapters"
+      .card-footer.pt-2
+        = link_to super_admin_fulfilment_course_path(course), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn grey-btn-icon align-icon pull-right ml-sm' do
+          %i.glyphicon.glyphicon-trash
+          Delete
+        %a.btn.grey-btn-icon.align-icon.pull-right.ml-sm{ href: edit_super_admin_fulfilment_course_path(course) }
+          %i.glyphicon.glyphicon-edit
+          Edit
+%a.btn.btn--add.pull-right{ href: new_super_admin_fulfilment_course_path(@resource_type)}
+  %i.glyphicon.glyphicon-plus.glyphplus

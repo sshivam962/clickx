@@ -1,0 +1,43 @@
+- content_for :title do
+  Privacy Policy | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    .col-xs-10.col-sm-10.col-lg-10
+      %h1 Privacy Policy
+    .col-xs-2.col-sm-2.col-lg-2
+      %a.btn.btn-warning.pull-right.mt-lg.mb-lg{href: super_admin_funnel_pages_path}
+        Back
+
+  .privacy-policy-form
+    - unless @privacy_policy.present?
+      .container-fluid
+        = form_for PrivacyPolicy.new, url: super_admin_privacy_policy_index_path, method: :post do |f|
+          .col-sm-11.pl-n
+            %b Dynamic Variables : &nbsp&nbsp&nbsp
+            - PrivacyPolicy::PLACEHOLDERS.each do |key, value|
+              %a.copy_to_clipboard.si-placeholder.mr-md{href: 'javascrip:void(0)', data: {key: "{{#{key}}}"}}
+                {{#{key}}}
+            = f.cktext_area :content, class: 'form-control lead_strategy_item_text', placeholder: 'Content', ckeditor: { toolbar: 'privacy_policy' }
+          .col-sm-1
+            = f.submit 'Save', class: 'btn btn-warning pull-right pr-lg pl-lg mt-n'
+  .spacer30
+
+  - if @privacy_policy.present?
+    .privacy-policy
+      .panel.panel-default
+        .panel-heading
+          = link_to super_admin_privacy_policy_path(@privacy_policy), class: 'pull-right ml-md', method: :delete, 'data-confirm': 'Are you sure?' do
+            %i.fa.fa-trash
+          = link_to edit_super_admin_privacy_policy_path(@privacy_policy), class: 'pull-right ml-md', remote: true do
+            %i.fa.fa-edit
+          %h2{style: 'text-transform: none;'}= raw(@privacy_policy.content)
+
+:javascript
+  $('.copy_to_clipboard').on('click', function (e) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).data('key')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Copied to Clipboard");
+  });

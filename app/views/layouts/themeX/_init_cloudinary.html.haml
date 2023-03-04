@@ -1,0 +1,7 @@
+:javascript
+  assign_keys("#{Cloudinary.config.cloud_name}", "#{ENV['UPLOAD_PRESET']}");
+  $(window).load(function(){
+    $("ol.progtrckr").each(function(){
+      $(this).attr("data-progtrckr-steps", $(this).children("li").length);
+    });
+  })

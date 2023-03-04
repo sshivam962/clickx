@@ -1,0 +1,162 @@
+- content_for :title do
+  Onboarding Checklist | Clickx
+.header.float-none
+  %h1.float-none Onboarding Checklist
+.onboarding-sections.py-4
+  %button.add-onboarding_section{type: "button", class: 'btn btn-primary'}
+    %i.glyphicon.glyphicon-plus.font-size12.pr-1
+    Add Onboarding Section
+  .p-4
+  #onboarding_section-field
+    = form_with model: OnboardingSection.new, url: super_admin_onboarding_sections_path do |f|
+      .row.mb-md
+        .col-sm-5
+          = f.text_field :title, class: 'form-control', placeholder: 'Section Title' 
+        .col
+          = f.submit 'Add', class: 'btn btn-primary m-n'
+  #onboarding_check_section
+    - @onboarding_sections.each_with_index do |onboarding_section, index|
+      = form_with model: onboarding_section, url: super_admin_onboarding_section_path(onboarding_section) do |f|
+        .bg-white.rounded.mb-4
+          .p-4.rounded-t
+            .d-md-flex.align-items-center
+              .col-stretch.pr-md-3
+                = f.text_field :title, class: 'form-control'
+                = hidden_field_tag :onboarding_section_id, onboarding_section.id, class: 'onboarding_section_position'
+              .col-auto.pt-3.pt-md-0
+                = f.submit 'Save', class: 'btn btn-success mr-2'
+                = link_to super_admin_onboarding_section_path(onboarding_section) ,class: 'btn btn-danger mr-2', method: :delete, data: { confirm: 'Are you sure ?'} do
+                  %i.glyphicon.glyphicon-trash.font-size12
+                  %span.d-none.d-sm-inline-block
+                    Delete
+                %button.add-onboarding_checklist{type: "button", class: 'btn btn-info', section_id: onboarding_section.id, inc_val: 1 }
+                  %i.glyphicon.glyphicon-plus.font-size12
+                  %span.d-none.d-sm-inline-block
+                    Add Checklist
+          #onboarding_checklist-field
+            - @cls = ''
+            - if onboarding_section.onboarding_checklist.present?
+              - @cls = 'py-2'
+            .onboarding_checklist.bg-muted.rounded-b.px-4{class: "#{@cls} onboarding_checklist_add_#{onboarding_section.id}"}
+              - if onboarding_section.onboarding_checklist.present?
+                .sortable_onboarding_checklist.pt-0
+                  - onboarding_section.onboarding_checklist.each_with_index do |onboarding_check, index|
+                    .d-flex.align-items-center.py-2.flex-wrap
+                      .col.pr-3
+                        %i.glyphicon.glyphicon-resize-vertical.text-muted
+                      .col-stretch.pr-sm-3
+                        = text_field_tag 'onboarding_checklist_title', onboarding_check.title, class: "form-control", id: "edit_title-#{onboarding_check.id}", placeholder: 'Checklist Title'
+                        = hidden_field_tag :onboarding_checklist_id, onboarding_check.id, class: 'onboarding_checklist_position'
+                      .col.actions-col
+                        %button.update-onboarding_checklist{type: "button", class: 'btn btn-success', onboarding_check_id: onboarding_check.id }
+                          %i.glyphicon.glyphicon-ok.font-size12
+                        %button.delete-onboarding_checklist{type: "button", class: 'btn btn-danger', onboarding_check_id: onboarding_check.id }
+                          %i.glyphicon.glyphicon-trash.font-size12
+    #save_reorder.btn.btn-success
+      Save Reorder
+
+:css
+  #onboarding_section-field{
+    display: none;
+  }
+
+:javascript
+  $('.add-onboarding_section').on('click', function(){
+    $('#onboarding_section-field').show()
+  })
+
+  $('.add-onboarding_checklist').on('click', function(){
+    var section_id = $(this).attr('section_id');
+    var inc_val = $(this).attr('inc_val');
+    $('.onboarding_checklist_add_'+section_id).prepend("<div class='py-2'><div class='d-flex'><div class='col-stretch pr-3'><input type='text' class='form-control' name='onboarding_checklist_title' id='title-"+section_id+"-"+inc_val+"'></div><div class='col-auto'><button class='btn btn-success save-onboarding_checklist' section_id = "+section_id+" inc_val = "+inc_val+" ><i class='glyphicon glyphicon-ok font-size12'></i></button></div></div></div>");
+    var new_inc_val = parseInt(inc_val) + 1;
+    $('.add-onboarding_checklist').attr("inc_val", new_inc_val);
+  })
+
+  $('.onboarding_checklist').on('click', '.save-onboarding_checklist', function(e){
+    e.preventDefault();
+    var onboarding_section_id = $(this).attr('section_id');
+    var inc_val = $(this).attr('inc_val');
+    var title = $("#title-"+onboarding_section_id+"-"+inc_val).val();
+    $.ajax({
+      url: "/s/onboarding_sections/create_checklist",
+      type: 'post',
+      data: {title: title, onboarding_section_id: onboarding_section_id, position: inc_val},
+      dataType: 'json',
+      success:function(response){
+        if(response.status == 200){
+          alert("Checklist Created Successfully!!");
+        }
+        else{
+          alert("Checklist Create Error!!");
+        }
+      }
+    });
+  })
+
+  $('.onboarding_checklist').on('click', '.update-onboarding_checklist', function(e){
+    e.preventDefault();
+    var onboarding_check_id = $(this).attr('onboarding_check_id');
+    var title = $("#edit_title-"+onboarding_check_id).val();
+    $.ajax({
+      url: "/s/onboarding_sections/update_checklist",
+      type: 'post',
+      data: {title: title, id: onboarding_check_id, },
+      dataType: 'json',
+      success:function(response){
+        if(response.status == 200){
+          alert("Checklist Updated Successfully!!");
+        }
+        else{
+          alert("Checklist Update Error!!");
+        }
+      }
+    });
+  })
+
+  $('.onboarding_checklist').on('click', '.delete-onboarding_checklist', function(e){
+    e.preventDefault();
+    var onboarding_check_id = $(this).attr('onboarding_check_id');
+    $.ajax({
+      url: "/s/onboarding_sections/delete_checklist",
+      type: 'post',
+      data: {id: onboarding_check_id},
+      dataType: 'json',
+      success:function(response){
+        if(response.status == 200){
+          location.reload();
+        }
+        else{
+          alert("Checklist Delete Error!!");
+        }
+      }
+    });
+  })
+
+  $( function() {
+    $( ".sortable_onboarding_checklist" ).sortable();
+  } );
+
+  $('#save_reorder').on('click', function(e){
+    e.preventDefault();
+    var checklist_len = $(".onboarding_checklist_position").length;
+    var sortOrder = [];
+    for(var i=0; i<checklist_len; i++){
+        sortOrder.push($(".onboarding_checklist_position")[i].value);
+
+    }
+    $.ajax({
+      url: "/s/onboarding_sections/sort_position",
+      type: 'post',
+      data: {sortOrder: sortOrder},
+      dataType: 'json',
+      success:function(response){
+        if(response.status == 200){
+          alert("Checklist Reordered Successfully!!");
+          location.reload();
+        }
+      }
+    })
+  });
+
+

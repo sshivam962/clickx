@@ -1,0 +1,17 @@
+.bg-sky-blue.rounded.border-1.border-blue.mb-4
+  .bg-white.rounded-t-12.py-4.px-5
+    .fs-md.color-dark-blue.fw-m Value Hook
+  .p-lg-5.p-4
+    .input-wrapper
+      %label.input-wrapper-label{for: "value_hook_page_title"} Offer Name
+      = f.text_field :title, required: true, class: 'form-control login', placeholder: 'Enter Offer Name'
+    .input-wrapper
+      %label.input-wrapper-label{for: "value_hook_page_title"} Offer/Video Title
+      = f.text_field :internal_title, required: true, class: 'form-control login', placeholder: 'Enter Offer/Video Title'
+    .input-wrapper
+      %label.input-wrapper-label{for: "value_hook_title"} Video Embed Code
+      = f.text_area :video_embed_code, required: true, class: 'form-control login', placeholder: 'Enter Video embed code'  
+    .input-wrapper
+      = f.hidden_field :agency_id, value: current_agency.id
+      = f.submit "Save", class: 'btn btn-warning saveBtn'
+  

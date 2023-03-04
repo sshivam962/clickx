@@ -1,0 +1,5 @@
+<% if @client.errors.present? %>
+  toastr.error("<%= @client.errors.full_messages.to_sentence %>")
+<% else %>
+  $("#keyword_ranking_actions_<%= @client.id%>").html("<%= escape_javascript render( partial: 'super_admin/reports/shared/keyword_ranking_actions', locals: { client: @client }) %>");
+<% end %>

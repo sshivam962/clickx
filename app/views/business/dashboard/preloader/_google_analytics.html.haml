@@ -1,0 +1,58 @@
+.d-panel.mb-4
+  .row.d-flex.flex-wrap
+    .col-xs-12.dpanel-item.mb-5
+      .bg-white.br-10.pl-lg.pr-lg.pt-2.pb-2.mb-4
+        .d-flex.justify-content-between.flex-wrap
+          .col.f-s-20.pt-2.pb-2.color-dark-blue.fw-sb
+            %span.preloading-item
+              Google Analytics
+            / .custom-tooltip.preloading-item
+            /   %i.fa.fa-info-circle.color-dark-blue
+            /   %span.custom-tooltiptext Displays the analytics of the traffic on your site as per Google Analytics.
+          .col.pt-2.pb-2
+      .stat-cards-list
+        .stat-cards-list--item
+          .stat-card.stat-card--red.preloading-item
+            .stat-card-datas
+              .stat-data
+              .stat-name Sessions
+            .stat-card-icon-wrap
+              .stat-card-icon
+                %i.fa.fa-clock-o
+            .stat-bg-circle
+            .stat-bg-circle.stat-bg-circle2
+        .stat-cards-list--item
+          .stat-card.stat-card--blue.preloading-item
+            .stat-card-datas
+              .stat-data
+              .stat-name Visitors
+            .stat-card-icon-wrap
+              .stat-card-icon
+                %i.fa.fa-users
+            .stat-bg-circle
+            .stat-bg-circle.stat-bg-circle2
+        .stat-cards-list--item
+          .stat-card.stat-card--green.preloading-item
+            .stat-card-datas
+              .stat-data
+              .stat-name Pageviews
+            .stat-card-icon-wrap
+              .stat-card-icon
+                %i.fa.fa-eye
+            .stat-bg-circle
+            .stat-bg-circle.stat-bg-circle2
+      .bg-white.br-10.p-25.preloading-item
+        .row.d-flex.flex-wrap
+          .col-xs-12.col-12.col-lg-12
+            #chart_google_analytics
+
+:javascript
+  $(document).on('ready', function (e) {
+    $.ajax({
+      url: window.location.pathname + '/google_analytics',
+      type: 'get',
+      data: {},
+      dataType: 'script',
+      success:function(response){}
+    })
+  });

@@ -1,0 +1,27 @@
+PreCommit:
+  BundleAudit:
+    enabled: true
+
+  RuboCop:
+    enabled: true
+    on_warn: fail
+    flags:
+      - --format=progress
+      - --force-exclusion
+      - --display-cop-names
+      - --auto-correct
+
+  RailsSchemaUpToDate:
+    enabled: true
+
+  BundleCheck:
+    enabled: true
+
+  TrailingWhitespace:
+    enabled: true
+    exclude:
+      - '**/db/schema.rb'
+
+PrePush:
+  RSpec:
+    enabled: false

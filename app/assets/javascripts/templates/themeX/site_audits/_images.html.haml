@@ -1,0 +1,18 @@
+.col-md-12{ 'ng-repeat': 'error in images.data'}
+  .col-md-12.p-n.text-dark{ 'ng-repeat': '(key,value) in error' }
+    .col-md-12.inline-flex.pl-n{ 'ng-if': "!checkKeys(key, 'excludeKeys')" }
+      .div.pr-sm
+        %i.fa.fa-close.text-danger{ 'ng-if': "error.status == 'error'", 'title': 'Need to fix' }
+        %i.fa.fa-check.text-success{ 'ng-if': "error.status == 'passed'", 'title': 'Passed' }
+      .div.max-content-width
+        %p.max-content-width {{error.status == 'passed'? error.passed_title : error.error_title}}
+      .div.text-muted.text-italic{ 'ng-if': "!(key == 'images_without_alt_text')" }
+        %p {{value? ': '+value : value}}
+      .div.pl-md.text-muted.text-italic{ 'ng-if': "(key == 'images_without_alt_text')", 'ng-init': 'limit = 5' }
+        %p{ 'ng-repeat': 'link in value   | limitTo: limit track by $index' }
+          %a.info{ 'ng-href': '{{link}}', 'target': '_blank' } : {{link}}
+        %a.text-italic.text-success{ 'ng-click': '(limit == value.length? limit = 5 : limit = value.length)', 'ng-show': 'value.length > 5' }
+          {{limit == 5? 'Show more >>>' : 'Less <<<'}}
+    .div{ 'ng-if': "!checkKeys(key, 'excludeKeys')" }
+      %p.ml-md.text-muted.text-italic.pt-sm.pl-md.mb-n{ 'ng-if': "error.status == 'error'"}
+        {{error.error_description}}

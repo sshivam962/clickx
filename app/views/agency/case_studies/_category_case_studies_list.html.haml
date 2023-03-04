@@ -1,0 +1,16 @@
+%table.table.mb-0{"data-widget-group" => "group1"}
+  .fav_case_studies
+    - page = params[:page].present? ? params[:page].to_i : 1
+    - limited_access = current_agency.limited_access_to_case_study?
+    - case_studies.each_with_index do |case_study, index|
+      - item_unlocked = true
+      - if limited_access
+        - item_unlocked = (index < 5) && page.eql?(1) && params[:name].blank?
+
+      = render 'category_casestudy_item', case_study: case_study, favorite: false, checked: 'unchecked', unlocked: item_unlocked
+
+.mt-5.mb-4.text-center.fs-12
+  = page_entries_info case_studies
+
+.pagination-wrapper.my-0.mx-auto
+  = will_paginate case_studies, params: { category_id: params[:category_id], name: params[:name] }

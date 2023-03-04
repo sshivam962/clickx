@@ -1,0 +1,2 @@
+$('.data_list').html("<%= escape_javascript render( partial: 'super_admin/outscrapper/outscraper_data', locals: { all_outscrapper_requests: @outscrapper_requests }) %>");
+$('html, body').animate({ scrollTop: 0 }, 'slow');

@@ -1,0 +1,66 @@
+%tr.text-center.centered-cols.row-card{id: dom_id(client)}
+  %td.col-stretch.col-client
+    %a.client-url{href: edit_agency_client_path(client.id)}
+      %span.client-logo
+        - if client.logo.present?
+          %img{src: client.logo, width: 60}
+        - else
+          = client.initials
+      = client.name
+      %span.edit-button
+        %i.fa.fa-pencil
+  %td.col-btn
+    .btn-group.dropdown
+      - user = client.preview_users.first
+      %button.action-btn.action-btn--light
+        %a{href: switch_to_business_user_path(user_id: user.id, business_id: client.id, feature: 'dashboard')}
+          %span.btn-icon{"data-original-title" => "Login", "data-toggle" => "tooltip", :title => ""}
+            %i.fa.fa-sign-in.color-777
+  %td.col-btn
+    - if client.lead.present?
+      = button_to lead_info_agency_client_path(client.id), method: :get, remote: true, data: { toggle: 'tooltip', 'original-title' => 'Lead Info'}, class: 'action-btn action-btn--light' do
+        %span.btn-icon
+          %i.fa.fa-info-circle
+  %td.col-btn
+    = button_to email_settings_agency_client_path(client.id), method: :get, data: { toggle: 'tooltip', 'original-title' => 'Email Settings'}, class: 'action-btn action-btn--light' do
+      %span.btn-icon
+        %i.fa.fa-envelope
+  %td.col-btn
+    = button_to questionnaires_agency_client_path(client.id), method: :get, remote: true, data: { toggle: 'tooltip', 'original-title' => 'Questionnaire Links'}, class: 'action-btn action-btn--light' do
+      %span.btn-icon
+        %i.fa.fa-question
+  %td.col-btn
+    - if current_agency.payment_links_enabled?
+      = button_to agency_new_client_payment_link_path(resource_id: client.id, resource_type: 'Business'), method: :get, data: { toggle: 'tooltip', 'original-title' => 'New Payment Link'}, class: 'action-btn action-btn--light' do
+        %span.btn-icon
+          %i.fa.fa-dollar
+    - else
+      = button_to '', method: :get, data: { toggle: 'tooltip', 'original-title' => 'New Payment Link'}, class: 'action-btn action-btn--light disabled' do
+        %span.btn-icon
+          %i.fa.fa-dollar
+  %td.col-btn
+    = button_to agency_client_path(client.id), method: :delete, remote: true, data: { confirm: "Are you sure you'd like to delete #{client.name}?", toggle: 'tooltip', 'original-title' => 'Archive'}, class: 'action-btn action-btn--light' do
+      %span.btn-icon
+        %i.fa.fa-archive
+  %td.col-btn
+    %a.action-btn.action-btn--light.text-center{"data-original-title" => "Edit", "data-toggle" => "tooltip", :title => "", href: edit_agency_client_path(client.id)}
+      %span.btn-icon
+        %i.fa.fa-edit
+  %td.col-btn
+    .btn-group.dropdown
+      %button.action-btn.action-btn--light{"aria-expanded" => "false", "data-toggle" => "dropdown"}
+        %span.btn-icon{"data-original-title" => "Settings", "data-toggle" => "tooltip", :title => ""}
+          %i.fa.fa-gear
+      %ul.dropdown-menu{:role => "menu"}
+        %li.p-sm
+          Login As
+        %hr.m-sm
+        - client.users.each do |user|
+          %li
+            %a{href: switch_to_business_user_path(user_id: user.id, business_id: client.id, feature: 'dashboard')}
+              - if user.normal?
+                = user.name
+              - else
+                System User
+%tr.row-spacer
+  %td{:colspan => "7"}

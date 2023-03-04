@@ -1,0 +1,5 @@
+<% if @payment_link.errors.present? %>
+  toastr.error("<%= @payment_link.errors.full_messages.to_sentence %>")
+<% else %>
+  $('#admin_payment_link_<%= @payment_link.id%>').html("<%= escape_javascript render( partial: 'super_admin/payment_links/shared/payment_link', locals: {payment_link: @payment_link, plan: @payment_link.admin_plan}) %>");
+<% end %>

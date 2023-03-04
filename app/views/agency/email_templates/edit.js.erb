@@ -1,0 +1,1 @@
+$('#email-template-form').addClass('email-template-loading').html("<%= escape_javascript render( partial: 'agency/email_templates/email_template_form', locals: { email_template: @email_template }) %>").removeClass('email-template-loading');

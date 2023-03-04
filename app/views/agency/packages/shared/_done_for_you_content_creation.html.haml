@@ -1,0 +1,53 @@
+.panel.panel-info
+  .panel-body.p-lg
+    .row
+      .col-sm-6
+        %ul.package-list
+          %li
+            Up to 4 Blog Posts
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext Up to 500 words per Blog Post. SEO optimized. Up to 2 images included.
+          %li
+            Up to 4 Google Business Profile Posts
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext 1 image is included.
+          %li
+            Up to 20 Social Media Captions
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext Caption + Image + Hashtags.
+          
+      .col-sm-6
+        %ul.package-list
+          %li
+            Up to 4 Video Scripts
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext Partner shoots and edits their own videos. 
+          %li
+            Monthly or Weekly Newsletter Email Content
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext Partner provides specifics or we’ll use related blog post content.
+          %li
+            Google Document Delivery
+            .custom-tooltip.pl-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext Content will be delivered monthly via Google Docs. Partner is responsible for proofing, editing, and uploading content to their own platforms.
+          
+    .col-sm-12.mt-lg
+      .bdr-line.info-tile.info-tile-alt.mb-n.b-s-n
+        .info.p-lg
+          .tile-body
+            %b
+              #{in_currency(plan.amount, current_agency.display_currency)}/mo
+          -# .text-center
+          -#   %span.plan-label
+          -#     MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+    .col-sm-4.p-n.mt-lg.text-center.col-md-offset-4
+      %a.btn.btn-info.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'agency_dfy_content', plan: plan.key)}
+        Get Started
+        %i.pl-sm.fa.fa-angle-double-right
+        .ripple-container

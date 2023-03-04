@@ -1,0 +1,10 @@
+- if @my_case_study_industries.present?
+  .niche-list.niche-list--preloader
+    - (@my_case_study_industries.to_a - [Industry.other]).each do |industry|
+      - next if industry.case_studies.size.zero?
+      = render 'niche_item', industry: industry
+- else
+  -# %i.fa.fa-exclamation-triangle.mr-3.text-warning
+  %a.btn.btn--secondary{href: new_network_case_study_path}
+    %i.fa.fa-plus.mr-2
+    Add Casestudy

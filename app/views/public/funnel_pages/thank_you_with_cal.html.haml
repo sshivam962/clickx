@@ -1,0 +1,31 @@
+- if @agency.thank_you_facebook_pixel.present?
+  = raw(@agency.thank_you_facebook_pixel)
+%section.hero-banner-wrapper
+  .container
+    .row.align-items-center
+      .col-md-2.col-12
+      .col-md-8.col-12.text-center
+        .intro-content-outer
+          %h1 Schedule a Consultation
+          - if @agency.thank_you_funnel.present?
+            - funnel_data = @agency.thank_you_funnel.split("\n")
+            - funnel_data.each do |funnel|
+              %p.hidden-sm.hidden-xs #{funnel}
+          - else
+            %p.hidden-sm.hidden-xs Are you struggling to generate qualified leads? Do you want to grow your revenue 10X? If yes, let us help you! Schedule a consultation for free, unfiltered business strategy and to determine if we are the right fit.
+            %p.hidden-sm.hidden-xs Once you have selected a date and time that works for you, please complete the form so that we can learn more about you and discover the best way to help your business grow.
+            %p.hidden-md.hidden-lg Struggling to generate qualified leads?
+            %p.hidden-md.hidden-lg Want to grow your revenue 10X?
+            %p.hidden-md.hidden-lg Schedule a free consultation to see if we’re the right fit.
+      .col-md-2.col-12
+%section.section-wrapper.bg-grey
+  .container
+    .row.align-items-center
+      .col-md-2.col-12
+      .col-md-8.col-12
+        = raw(@agency.calendly_script)
+      .col-md-2.col-12
+%footer.site-footer
+  .container
+    .footer-content.text-center
+      %p Copyright #{Time.now.year}. All Rights Reserved

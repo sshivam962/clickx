@@ -1,0 +1,15 @@
+.bg-white.px-5.py-4.rounded.h-100.shadow.h-full.form-group
+  %h3 Onboarding checklist
+  %hr/
+  .d-flex.flex-wrap
+    - OnboardingSection.all.each_with_index do |onboarding_section, index|
+      .col.w-100.w-lg-50.pr-lg-5
+        %h4.mb-md
+          = onboarding_section.title
+        = f.collection_check_boxes :onboarding_checklist, OnboardingChecklist.where(onboarding_section_id: onboarding_section.id).order(:position), :id, :title do |b|
+          .pb-3
+            .styled-checkbox.styled-checkbox--info
+              = b.check_box
+              .styled-checkbox-label
+                %span
+                = b.label

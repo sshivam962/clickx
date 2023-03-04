@@ -1,0 +1,87 @@
+/ .row
+/   %h2 Questionnaire
+/   = link_to 'Manage Groups','/s/questions/groups', class: 'btn btn-success'
+/   %i.glyphicon.glyphicon-new-window
+/   %hr/
+
+/ - @groups.each do |group|
+/   .ul
+/     .li= group.name
+/     .li= group.id
+
+/     .li= @group.first.question
+/ - @questions.each do |q|
+/   = q.question
+
+%flash{'key' => "{{ flash.key}}", 'message' => "{{ flash.message }}"}
+
+.header.mb-5
+  .d-flex.justify-content-between
+    .col
+      %h1{style: 'width:250px;'} Questionnaire
+    .col
+      %a.btn.btn-success.pull-right.grpBtn{href:"/s/groups"}
+        %i.glyphicon.glyphicon-new-window
+        Manage Groups
+.clearfix
+.questionnaire-questions
+  %span{'ng-show' => "questions.length",  'ng-repeat' => "group in group_types"}
+    %div.address{'as-sortable' => "sortableOptions", 'ng-model' => 'group_questions[group.id]', id: "{{ 'sort_' + group.id}}"}
+      - @groups.each do |group|
+        .bg-white.p-3.p-sm-5.rounded.mb-4
+          %h3.color-dark-blue.mt-0.mb-4= group.name
+          %ul.questionnaire-list{id: "sortable-#{group.id}", class: 'ui-sortable'}
+            - group.questions.each do |gq|
+              %li{style: "list-style-type: none;", data: { id: gq.id, url: move_position_super_admin_question_path(gq) } }
+                .d-sm-flex.justify-content-between.bordered.p-3.rounded
+                  .col.pt-2
+                    = gq.question
+                  .col.pl-sm-4.pt-3.pt-sm-0
+                    .btn-icon-list
+                      = link_to edit_super_admin_question_path(gq),class: 'btn-icon btn-icon--sm'do
+                        %i.glyphicon.glyphicon-pencil
+                      = link_to super_admin_question_path(gq), method: :delete , class:'btn-icon btn-icon--delete btn-icon--sm', data: {confirm: 'Are you sure?'} do
+                        %i.glyphicon.glyphicon-trash
+
+        :javascript
+          $(document).ready(function(){
+            $( "#sortable-#{group.id}" ).sortable({
+              update: function(e, ui){
+                $.ajax({
+                  url: $(ui.item).data("url"),
+                  type: "PATCH",
+                  data: { position: ui.item.index() + 1},
+                });
+              }
+            });
+          });
+
+      %span{'ng-repeat' => "question in group_questions[group.id]" , 'as-sortable-item' => ''}
+        %div{'as-sortable-item-handle' => ''}
+          %row.name.left20
+
+%a.btn.btn--add.pull-right{ 'href': '/s/questions/new' }
+  %i.glyphicon.glyphicon-plus.glyphplus
+
+:css
+  .ui-sortable {
+    padding-top:0;
+    padding-left: 0;
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .que {
+    background-color: #fff;
+    border: solid 1px #eea236 !important;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: all-scroll ;
+    margin:5px;
+    padding-left:20px;
+    text-color: #4b4e5f;
+    font-size: 18px;
+    line-height: 25px;
+  }
+  .btn-icon-list {width:70px;}

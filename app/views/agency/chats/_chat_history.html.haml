@@ -1,0 +1,20 @@
+.messaging-chat-area-wrap.h-full
+  .messaging-chat-area.d-flex.flex-column
+    .messaging-chat-area-header
+      .d-flex.align-items-center
+        .col-auto.pr-2
+          %button.backto-messages
+            .fa.fa-angle-left
+        .col-auto= chat_thread.user.name
+    .messaging-wrapper-messages.flex-col.overflow-auto
+      .p-4
+        #chat_box_container{class: "chat-box-#{chat_thread.id}"}
+          = render 'chat_box', messages: messages, chat_thread: chat_thread
+    = form_with(url: agency_chats_path, local: false, id: 'chat-form') do |f|
+      .messaging-chat-area-footer
+        .flex-col
+          = f.text_field :message, class: "auto-height chat-text-field", style: 'height:38px', required: true, placeholder: 'Type a message'
+          = f.hidden_field :thread_id, value: chat_thread.id
+        .col-auto.pl-4
+          %button.btn.btn-warning
+            %i.fa.fa-paper-plane

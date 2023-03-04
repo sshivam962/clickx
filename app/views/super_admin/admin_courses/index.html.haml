@@ -1,0 +1,28 @@
+- content_for :title do
+  Admin Academy | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1
+      Admin Academy
+
+.container-fluid
+  %div{"data-widget-group" => "group1"}
+    .row
+      .locations.academy-cours-list
+        - @courses.each do |course|
+          .col-md-3.col-sm-4
+            .card.p-n
+              .card-content.admin-academy-item
+                %a.no-underline{href: super_admin_admin_course_path(course)}
+                  .card-image
+                    - if course.thumbnail_file_url.present?
+                      = image_tag course.thumbnail_file_url, class:'img-responsive'
+                  .card-body
+                    %h3.mb-sm
+                      = course.title
+                    - if course.access_tip.present?
+                      %small
+                        %i.text-muted
+                          = course.access_tip
+                %footer.card-footer.pt-n
+                  = admin_course_progress_bar(course)

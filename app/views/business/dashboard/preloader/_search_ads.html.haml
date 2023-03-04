@@ -1,0 +1,83 @@
+.d-panel.mb-4
+  .row.d-flex.flex-wrap
+    .col-xs-12.dpanel-item.mb-5
+      .bg-white.br-10.pl-lg.pr-lg.pt-2.pb-2.mb-4
+        .d-flex.justify-content-between.flex-wrap
+          .col.f-s-20.pt-2.pb-2.color-dark-blue.fw-sb
+            %span.preloading-item
+              Google Ads
+            / .custom-tooltip.preloading-item
+            /   %i.fa.fa-info-circle.color-dark-blue
+            /   %span.custom-tooltiptext Displays the analytics of the traffic on your site as per Search Ads.
+          .col.pt-2.pb-2
+      .stat-cards-list
+        .stat-cards-list--item
+          .stat-card.stat-card--red.preloading-item
+            .stat-card-datas
+              .stat-data
+              .stat-name Clicks
+            .stat-card-icon-wrap
+              .stat-card-icon
+                %i.fa.fa-clock-o
+            .stat-bg-circle
+            .stat-bg-circle.stat-bg-circle2
+        .stat-cards-list--item
+          .stat-card.stat-card--blue.preloading-item
+            .stat-card-datas
+              .stat-data
+              .stat-name Impressions
+            .stat-card-icon-wrap
+              .stat-card-icon
+                %i.fa.fa-users
+            .stat-bg-circle
+            .stat-bg-circle.stat-bg-circle2
+        .stat-cards-list--item
+          .stat-card.stat-card--green.preloading-item
+            .stat-card-datas
+              .stat-data
+              .stat-name Conversions
+            .stat-card-icon-wrap
+              .stat-card-icon
+                %i.fa.fa-eye
+            .stat-bg-circle
+            .stat-bg-circle.stat-bg-circle2
+      .bg-white.br-10.p-25
+        .row.d-flex.flex-wrap
+          .col-xs-12.col-12.col-lg-6.mb-3.pb-3.mb-xl-0
+            %ul.dpanel-datas-list.row.d-flex.flex-wrap
+              %li.col-sm-6.col-xs-12
+                .d-flex.justify-content-between.bg-light-gray.br-10.p-4.preloading-item
+                  .col Click Through Rate (CTR)
+                  .col.fw-sb
+              %li.col-sm-6.col-xs-12
+                .d-flex.justify-content-between.bg-light-gray.br-10.p-4.preloading-item
+                  .col Cost Per Click (CPC)
+                  .col.fw-sb
+              %li.col-sm-6.col-xs-12
+                .d-flex.justify-content-between.bg-light-gray.br-10.p-4.preloading-item
+                  .col Cost/Conv
+                  .col.fw-sb
+              %li.col-sm-6.col-xs-12
+                .d-flex.justify-content-between.bg-light-gray.br-10.p-4.preloading-item
+                  .col Conversion Rate
+                  .col.fw-sb
+              %li.col-sm-6.col-xs-12
+                .d-flex.justify-content-between.bg-light-gray.br-10.p-4.preloading-item
+                  .col Avg. Cost
+                  .col.fw-sb
+              %li.col-sm-6.col-xs-12
+                .d-flex.justify-content-between.bg-light-gray.br-10.p-4.preloading-item
+                  .col Cost
+                  .col.fw-sb
+          .col-xs-12.col-12.col-lg-6
+            #chart_search_ads.preloading-item
+:javascript
+  $(document).on('ready', function (e) {
+    $.ajax({
+      url: window.location.pathname + '/search_ads',
+      type: 'get',
+      data: {},
+      dataType: 'script',
+      success:function(response){}
+    })
+  });

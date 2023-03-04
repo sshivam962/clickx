@@ -1,0 +1,324 @@
+{
+  "status": 200,
+  "data": {
+    "this_period": {
+      "2018-03-29": {
+        "visit": 772,
+        "contact": 4,
+        "customer": 0
+      },
+      "2018-03-30": {
+        "visit": 1425,
+        "contact": 8,
+        "customer": 0
+      },
+      "2018-03-31": {
+        "visit": 1701,
+        "contact": 8,
+        "customer": 0
+      },
+      "2018-04-01": {
+        "visit": 1963,
+        "contact": 8,
+        "customer": 0
+      },
+      "2018-04-02": {
+        "visit": 3273,
+        "contact": 14,
+        "customer": 0
+      },
+      "2018-04-03": {
+        "visit": 4042,
+        "contact": 19,
+        "customer": 0
+      },
+      "2018-04-04": {
+        "visit": 4996,
+        "contact": 21,
+        "customer": 0
+      },
+      "2018-04-05": {
+        "visit": 5799,
+        "contact": 22,
+        "customer": 0
+      },
+      "2018-04-06": {
+        "visit": 6504,
+        "contact": 24,
+        "customer": 0
+      },
+      "2018-04-07": {
+        "visit": 6647,
+        "contact": 25,
+        "customer": 0
+      },
+      "2018-04-08": {
+        "visit": 6801,
+        "contact": 28,
+        "customer": 0
+      },
+      "2018-04-09": {
+        "visit": 7563,
+        "contact": 35,
+        "customer": 0
+      },
+      "2018-04-10": {
+        "visit": 8318,
+        "contact": 37,
+        "customer": 0
+      },
+      "2018-04-11": {
+        "visit": 9040,
+        "contact": 44,
+        "customer": 0
+      },
+      "2018-04-12": {
+        "visit": 9735,
+        "contact": 54,
+        "customer": 0
+      },
+      "2018-04-13": {
+        "visit": 10400,
+        "contact": 57,
+        "customer": 0
+      },
+      "2018-04-14": {
+        "visit": 10549,
+        "contact": 57,
+        "customer": 0
+      },
+      "2018-04-15": {
+        "visit": 10692,
+        "contact": 61,
+        "customer": 0
+      },
+      "2018-04-16": {
+        "visit": 11393,
+        "contact": 64,
+        "customer": 0
+      },
+      "2018-04-17": {
+        "visit": 12115,
+        "contact": 68,
+        "customer": 0
+      },
+      "2018-04-18": {
+        "visit": 12911,
+        "contact": 75,
+        "customer": 0
+      },
+      "2018-04-19": {
+        "visit": 13638,
+        "contact": 80,
+        "customer": 0
+      },
+      "2018-04-20": {
+        "visit": 14169,
+        "contact": 81,
+        "customer": 0
+      },
+      "2018-04-21": {
+        "visit": 14290,
+        "contact": 82,
+        "customer": 0
+      },
+      "2018-04-22": {
+        "visit": 14407,
+        "contact": 83,
+        "customer": 0
+      },
+      "2018-04-23": {
+        "visit": 15095,
+        "contact": 88,
+        "customer": 0
+      },
+      "2018-04-24": {
+        "visit": 15820,
+        "contact": 89,
+        "customer": 0
+      },
+      "2018-04-25": {
+        "visit": 16549,
+        "contact": 89,
+        "customer": 0
+      },
+      "2018-04-26": {
+        "visit": 17237,
+        "contact": 91,
+        "customer": 0
+      },
+      "2018-04-27": {
+        "visit": 17237,
+        "contact": 91,
+        "customer": 0
+      },
+      "total_counts": {
+        "visits": 17237,
+        "contacts": 91,
+        "customers": 0
+      }
+    },
+    "last_period": {
+      "2018-02-27": {
+        "visit": 870,
+        "contact": 5,
+        "customer": 0
+      },
+      "2018-02-28": {
+        "visit": 1708,
+        "contact": 10,
+        "customer": 0
+      },
+      "2018-03-01": {
+        "visit": 2400,
+        "contact": 13,
+        "customer": 0
+      },
+      "2018-03-02": {
+        "visit": 2992,
+        "contact": 15,
+        "customer": 0
+      },
+      "2018-03-03": {
+        "visit": 3189,
+        "contact": 16,
+        "customer": 0
+      },
+      "2018-03-04": {
+        "visit": 3394,
+        "contact": 16,
+        "customer": 0
+      },
+      "2018-03-05": {
+        "visit": 4086,
+        "contact": 22,
+        "customer": 0
+      },
+      "2018-03-06": {
+        "visit": 4819,
+        "contact": 25,
+        "customer": 0
+      },
+      "2018-03-07": {
+        "visit": 5714,
+        "contact": 34,
+        "customer": 0
+      },
+      "2018-03-08": {
+        "visit": 6342,
+        "contact": 39,
+        "customer": 0
+      },
+      "2018-03-09": {
+        "visit": 6977,
+        "contact": 42,
+        "customer": 0
+      },
+      "2018-03-10": {
+        "visit": 7106,
+        "contact": 42,
+        "customer": 0
+      },
+      "2018-03-11": {
+        "visit": 7222,
+        "contact": 43,
+        "customer": 0
+      },
+      "2018-03-12": {
+        "visit": 7932,
+        "contact": 46,
+        "customer": 0
+      },
+      "2018-03-13": {
+        "visit": 8657,
+        "contact": 47,
+        "customer": 0
+      },
+      "2018-03-14": {
+        "visit": 9425,
+        "contact": 51,
+        "customer": 0
+      },
+      "2018-03-15": {
+        "visit": 10201,
+        "contact": 54,
+        "customer": 1
+      },
+      "2018-03-16": {
+        "visit": 10825,
+        "contact": 61,
+        "customer": 2
+      },
+      "2018-03-17": {
+        "visit": 10961,
+        "contact": 64,
+        "customer": 2
+      },
+      "2018-03-18": {
+        "visit": 11090,
+        "contact": 64,
+        "customer": 2
+      },
+      "2018-03-19": {
+        "visit": 11875,
+        "contact": 67,
+        "customer": 2
+      },
+      "2018-03-20": {
+        "visit": 12570,
+        "contact": 69,
+        "customer": 2
+      },
+      "2018-03-21": {
+        "visit": 13213,
+        "contact": 76,
+        "customer": 2
+      },
+      "2018-03-22": {
+        "visit": 13948,
+        "contact": 80,
+        "customer": 3
+      },
+      "2018-03-23": {
+        "visit": 14686,
+        "contact": 84,
+        "customer": 4
+      },
+      "2018-03-24": {
+        "visit": 14825,
+        "contact": 84,
+        "customer": 4
+      },
+      "2018-03-25": {
+        "visit": 14954,
+        "contact": 84,
+        "customer": 4
+      },
+      "2018-03-26": {
+        "visit": 15628,
+        "contact": 87,
+        "customer": 4
+      },
+      "2018-03-27": {
+        "visit": 16387,
+        "contact": 95,
+        "customer": 5
+      },
+      "2018-03-28": {
+        "visit": 17188,
+        "contact": 95,
+        "customer": 5
+      },
+      "total_counts": {
+        "visits": 17188,
+        "contacts": 95,
+        "customers": 5
+      }
+    },
+    "visit_percent": 2.842722051401056,
+    "contact_pecent": 4.395604395604396,
+    "customer_percent": 0,
+    "visit_to_contact_percentage": 2.279340952601961,
+    "contact_to_customers_percentage": 5.0
+  }
+}

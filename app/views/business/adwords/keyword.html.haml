@@ -1,0 +1,129 @@
+.clickx-breadcrumb-wrapper.ng-scope
+  %ol.breadcrumb.clx-breadcrumb.ng-isolate-scope
+    %li
+      %a{:href => "/b/dashboard"} Home
+    %li
+      %a{:href => "/b/adwords"} PPC Reports
+    %li
+      %span Keywords
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-CalltoAction.title-icon>
+    Google Ads
+  .options{ 'ng-if': "!demo_login && ad_tab != 'campaigns'" }
+    .form-group
+      %span{'ng-class': "{'disable-button': export_disabled}"}
+        %export-button{ 'pdf': 'true', 'name': '{{ name }}' }
+      %md-button.md-raised.md-primary{'ng-click': 'load_datewise_analytics($event)'} {{selectedRange.dateStart | date}} - {{selectedRange.dateEnd | date}}
+
+.container-fluid
+  %div
+    .row{ 'id': '{{ name }}' }
+      .col-md-12
+        = render 'nav_tab'
+
+      .col-md-12
+        .tab-content
+          .keyword
+            .row
+              .col-md-12
+                .tab-container
+                  %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+                    %li.active
+                      %a{"data-toggle":"tab", 'data-target': "#ppc-clicks", 'ng-click':"resizeChart('clicks_keyword_chart'); keyword()", 'title': 'Number of times a user clicks on the headline of your Ad'} Clicks
+                    %li
+                      %a{"data-toggle":"tab", 'data-target': "#ppc-impressions", 'ng-click':"resizeChart('impressions_keyword_chart'); keyword()", 'title': 'Each time your ad is shown on a search result page or other site on the Google Network'} Impressions
+                    %li
+                      %a{"data-toggle":"tab", 'data-target': "#ppc-cost", 'ng-click':"resizeChart('cost_keyword_chart'); keyword()", 'title': 'Total costs that were incurred for PPC ads'} Cost
+                    %li
+                      %a{"data-toggle":"tab", 'data-target': "#ppc-avg-cost", 'ng-click':"resizeChart('avg_cost_keyword_chart'); keyword()", 'title': 'Average costs that were incurred for PPC ads'} Avg. Cost
+                    %li
+                      %a{"data-toggle":"tab", 'data-target': "#ppc-ctr", 'ng-click':"resizeChart('ctr_keyword_chart'); keyword()", 'title': 'Percent of clicks received on your PPC ads to that of impressions'} CTR
+                    %li
+                      %a{"data-toggle":"tab", 'data-target': "#ppc-conversions", 'ng-click':"resizeChart('conversions_keyword_chart'); keyword()", 'title': 'Shows you what happens after a customer clicks on your ads – whether they purchased a product, signed up for your newsletter, called your business, or submitted a form'} Conversions
+                  .tab-content
+                    #ppc-clicks.tab-pane.active
+                      .panel-body
+                        .centered
+                          #clicks_keyword_chart
+                    #ppc-impressions.tab-pane
+                      .panel-body
+                        .centered
+                          #impressions_keyword_chart
+                    #ppc-cost.tab-pane.active
+                      .panel-body
+                        .centered
+                          #cost_keyword_chart
+                    #ppc-avg.tab-pane
+                      .panel-body
+                        .centered
+                          #avg_cost_keyword_chart
+                    #ppc-ctr.tab-pane.active
+                      .panel-body
+                        .centered
+                          #ctr_keyword_chart
+                    #ppc-conversions.tab-pane
+                      .panel-body
+                        .centered
+                          #conversions_keyword_chart
+
+            .row
+              .col-md-12
+                .tab-container
+                  .tab-content{'st-table':"ad_keywords", 'st-safe-src':"copy_ad_keywords"}
+                    .table-responsive
+                      %table.table.table-hover.table-bordered.table-vam
+                        %thead
+                          %tr
+                            %th.vam{'st-sort':'keyword', style: "padding-right:190px;"}
+                              %u.help_pointer{'title': 'The PPC keywords that are driving traffic to your site'}
+                                Keyword
+                            %th.text-center{'st-sort':'match_type'}
+                              %u.help_pointer{'title': 'The type of PPC keywords that are driving you traffic via PPC ads'}
+                                Match Type
+                            %th.text-center{'st-sort':'clicks'}
+                              %u.help_pointer{'title': 'Number of clicks you received through PPC ads by the given keywords'}
+                                Clicks
+                            %th.text-center{'st-sort':'impressions'}
+                              %u.help_pointer{'title': 'Number of views your PPC ads got from the given keywords'}
+                                Impressions
+                            %th.text-center{'st-sort':'numeric_avg_cost'}
+                              %u.help_pointer{'title': 'Average cost incurred for peoples ads for the given keywords'}
+                                Avg. Cost
+                            %th.text-center{'st-sort':'ctr'}
+                              %u.help_pointer{'title': 'Percent of clicks your PPC ads got to that of impressions it received for the given'}
+                                CTR
+                            %th.text-center{'st-sort':'conversion'}
+                              %u.help_pointer{'title': 'Number of people who converted after clicking on your PPC ads for the given keywords'}
+                                Conversion
+                            %th.text-center{'st-sort':'cost', 'ng-if':'markup_value == 0'}
+                              %u.help_pointer{'title': 'Cost per click incurred for PPC ads'}
+                                Cost
+                            %th.text-center{'st-sort':'cost_markup', 'ng-if':'markup_value > 0'}
+                              %u.help_pointer{'title': 'Cost per click incurred for PPC ads'}
+                                Cost
+                            %th.text-center{'st-sort':'average_position'}
+                              %u.help_pointer{'title': 'Average cost incurred for PPC ads for the given keywords'}
+                                Avg.Pos
+                            %th.text-center{'st-sort':'search_impression_share'}
+                              %u.help_pointer{'title': 'Percent of impressions your PPC ad received to that of total impressions received by all the ads in Google SERP for the given keywords','title-direction': 'left' }
+                                Search.Imp.Share
+                        %tbody
+                          %tr{'ng-if':"keyword.keyword != 'Total'" , 'ng-repeat':"keyword in ad_keywords"}
+                            %td
+                              {{keyword.keyword}}
+                              %add-remove-keywords{"keyword":"keyword"}
+                            %td.text-center {{keyword.match_type}}
+                            %td.text-center {{keyword.clicks}}
+                            %td.text-center {{keyword.impressions}}
+                            %td.text-center {{keyword.avg_cost}}
+                            %td.text-center {{keyword.ctr}}
+                            %td.text-center {{keyword.conversion}}
+                            %td.text-center{'ng-if':'keyword.markup_value == 0'}
+                              ${{keyword.cost/1000000 |number:2}}
+                            %td.text-center{'ng-if':'keyword.markup_value > 0'}
+                              ${{keyword.cost_markup/1000000 |number:2}}
+                            %td.text-center {{keyword.average_position}}
+                            %td.text-center {{keyword.search_impression_share}}
+                    %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}
+

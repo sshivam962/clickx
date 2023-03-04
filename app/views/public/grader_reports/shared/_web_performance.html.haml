@@ -1,0 +1,47 @@
+- desktop_insights = @grader_report.desktop_insights
+- mobile_insights = @grader_report.mobile_insights
+.panel.panel-grader
+  .panel-heading
+    %h2.text-darkblue Website Performance
+  .panel-body.bg-white
+    .panel-section
+      .d-flex.row.flex-wrap
+        - if desktop_insights['results'].present?
+          .col-sm-6.col-xs-12
+            .icon-listing.icon-listing--fh
+              .listing-header Desktop
+              .listing-body
+                %ul.icon-list
+                  - desktop_insights['results'].each do |result|
+                    %li
+                      .icon-list--icon
+                        - if result['pass']
+                          %i.material-icons.text-success check
+                        - else
+                          %i.material-icons.text-danger close
+                      .icon-list--label= result['rule'].titleize
+              .listing-footer
+                %h2
+                  = desktop_insights['score']
+                  %span.inlineb.f-s-60 /100
+        - if mobile_insights['results'].present?
+          .col-sm-6.mt-5.mt-md-0.col-xs-12
+            .icon-listing.icon-listing--fh
+              .listing-header Mobile
+              .listing-body
+                %ul.icon-list
+                  - mobile_insights['results'].each do |result|
+                    %li
+                      .icon-list--icon
+                        - if result['pass']
+                          %i.material-icons.text-success check
+                        - else
+                          %i.material-icons.text-danger close
+                      .icon-list--label= result['rule'].titleize
+              .listing-footer
+                %h2
+                  = mobile_insights['score']
+                  %span.inlineb.f-s-60 /100
+  .panel-footer
+    %h4.mb-sm.f-s-20 Pro Tip
+    %p.text-white In today's world, consumers want to access content fast. Having a slow website can increase bounce rate and drive your rank down in the Google results. A few tweaks and you can easily boost your overall rankings in Google. The higher the experience score, the better your website is.

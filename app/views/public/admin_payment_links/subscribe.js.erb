@@ -1,0 +1,13 @@
+<% if @error.present? %>
+  $('.error-payment-link').removeClass('hidden')
+  $.rails.enableElement($('.card_submit_button'))
+  $.rails.enableElement($('.checkout_create_card_submit'))
+  $('input.checkout_create_card_submit').removeAttr('disabled')
+<% else %>
+  $('.error-payment-link').addClass('hidden')
+  $('#step_li_card').removeClass('current')
+  $('#step_li_card').addClass('completed')
+  $('#step_li_success').addClass('current')
+  $('#step_content_card').addClass('hidden')
+  $('#step_content_success').removeClass('hidden')
+<% end %>

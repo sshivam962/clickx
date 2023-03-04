@@ -1,0 +1,20 @@
+!!!
+%html{'ng-app':"clickxApp"}
+  %head
+    = render 'layouts/themeX/meta_tags'
+    = render 'layouts/themeX/cdn'
+    = render 'shared/init_vars'
+
+    = stylesheet_link_tag 'themeX', media: 'all', 'data-turbolinks-track': false
+    = javascript_include_tag "https://js.stripe.com/v2/", cache: true
+    = javascript_include_tag 'themeX', 'data-turbolinks-track': false
+    %title{"ng-bind":"title || 'Dashboard'"}
+      = yield(:title)
+    = csrf_meta_tags
+    - if white_labeled_client? && current_tenent.logo.present?
+      = favicon_link_tag asset_path(current_tenent.logo), rel: 'icon', type: "image/x-icon"
+  %body{'ng-controller':'SelectBusiness'}
+    %div{'ng-include': '', src: "'themeX/home/_change_business.html'"}
+    %div{'ng-view':''}
+
+    = render 'shared/vapid'

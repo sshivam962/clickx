@@ -1,0 +1,36 @@
+.row
+  .col-md-12
+    %div
+      %table.table.table--xl
+        %tbody
+          %tr.centered-cols.row-header.text-black.d-none.d-xl-table-row.text-left
+            %th{style: "border:none;"} User
+            %th{style: "border:none;"} Project
+            %th{style: "border:none;"} Amount
+            %th.text-xl-right{style: "border:none;"} Actions
+          - @accepted_projects.each do |project|
+            - proposal = project.accepted_proposal
+            %tr.centered-cols.row-card
+              %td.col-client
+                %a.client-url{href: '#'}
+                  %span.client-logo
+                    = proposal.user.initials
+                  %span.client-name-editable
+                    %span.client-name__name
+                      = proposal.user.name
+                    %span.edit-button.edit-button--show-on-hover
+                      = image_tag 'icons/icon-edit.svg'
+              %td.col-data
+                %span.email
+                  = proposal.project.title
+              %td.col-data
+                %span.email
+                  = number_to_currency(proposal.total_amount)
+              %td.col-btns.text-xl-right
+                - tooltip = proposal.user.stripe_user_id.present? ? '' : { toggle: 'tooltip', 'original-title' => 'Strategies'}
+                - if proposal.paid?
+                  .btn.btn-success.btn--rounded-md.mb-2.mb-md-0 Paid
+                - else
+                  = link_to 'Pay Now', checkout_agency_contractors_path(proposal_id: proposal.id), class: 'btn btn--dark btn--rounded-md mb-2 mb-md-0', data: tooltip, disabled: proposal.user.stripe_user_id.blank?
+            %tr.row-spacer
+              %td{colspan: 7}

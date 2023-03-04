@@ -1,0 +1,94 @@
+- content_for :title do
+  Partner Search | Clickx
+.uiv2
+  .mt-3.mb-5.d-flex.flex-wrap.justify-content-between.align-items-center
+    .col
+      %h1.m-0 Partner Search
+  .clearfix
+  .content-card.p-md-5
+    .row
+      .pull-right.mr-sm
+        %a.btn.clear_filters{href: 'javascript:void(0)', 'data-title' => 'Clear Filters'}
+          %i.fa.fa-eraser
+          Clear
+    .content-card__header
+      .d-flex.justify-content-between.flex-wrap
+        .col-search
+          .input-wrapper
+            = text_field_tag :search_name, @filter_name, class: 'search login select-box form-control search_client search_name', placeholder: 'Search By Name'
+            .inner-glyph.glyph-align
+              %i.glyphicon.glyphicon-search
+        .col-search-more.pl-3.client-filters
+          .d-flex.flex-wrap
+            .col-auto.pl-sm-4
+              .input-wrapper
+                - labels = Agency.pluck(:labels).join(',').split(',').uniq.reject(&:blank?).collect {|c| [c, c]}
+                = select_tag 'search_label', options_for_select(labels, @filter_label), include_blank: 'Search By Label', class: 'search login select-box form-control filter_client'
+                .inner-glyph.glyph-align
+                  %i.glyphicon.glyphicon-search
+    .agency_list
+
+- if @filter_name.present?
+  = hidden_field_tag :search_state, 'search'
+- else
+  = hidden_field_tag :search_state, 'all'
+
+:javascript
+  $('#search_name').on("keyup", function() {
+    var label = $('#search_label').val().toLowerCase();
+    var name = $('#search_name').val().toLowerCase();
+    var search = false
+    if(name.length >= 3){
+      $('#search_state').val('search')
+      search = true
+    }else if(name.length == 0){
+      if($('#search_state').val() == 'search'){
+        $('#search_state').val('all')
+        search = true
+      }else{
+        search = false
+      }
+    }
+    if(search == true){
+      $.ajax({
+        url: "/s/partner_search",
+        type: 'get',
+        data: { name: name, label: label },
+        dataType: 'script',
+        async: false,
+        success:function(response){
+          $('.agency_list').html(response.data)
+        }
+      })
+    }
+  });
+
+  $('#search_label').on("change", function() {
+    var label = $('#search_label').val();
+    var name = $('#search_name').val().toLowerCase();
+    $.ajax({
+      url: "/s/partner_search",
+      type: 'get',
+      data: { name: name, label: label },
+      dataType: 'script',
+      async: false,
+      success:function(response){
+        $('.agency_list').html(response.data)
+      }
+    })
+  });
+
+  $('.clear_filters').on('click', function() {
+    $('#search_label').val('');
+    $('#search_name').val('');
+    $.ajax({
+      url: '/s/partner_search',
+      type: 'get',
+      data: { name: '', label: '' },
+      dataType: 'script',
+      async: false,
+      success:function(response){
+        $('.agency_list').html(response.data)
+      }
+    })
+  });

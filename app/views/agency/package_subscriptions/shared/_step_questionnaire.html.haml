@@ -1,0 +1,52 @@
+%ul.stages
+  - if steps.include?('plan')
+    %li.completed
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Plan
+  - if steps.include?('client')
+    %li.completed
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Client
+  - if steps.include?('agreement')
+    %li.completed
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Agreement
+  - if steps.include?('payment')
+    %li.completed
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Payment
+  - if steps.include?('success')
+    %li
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Complete
+  - if steps.include?('kick_off')
+    %li.completed
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Kick-Off
+  - if steps.include?('questionnaire')
+    %li.current
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Questionnaire
+.checkout-stages--content.mt-xxl
+  .panel.panel-default.p-xxl.p-lg--sm
+    .panel-body.pl-n.pr-n#questionnaires_list
+
+  .text-center
+    - if next_step.eql?('finish')
+      %a.btn.btn-lg.m-n.btn-warning.btn-raised{href: '/a/clients'} Finish
+    - else
+      %a.btn.btn-lg.m-n.btn-warning.btn-raised.step_complete{href: 'javascript:void(0)', data: {next_step: next_step, current_step: 'questionnaire'}} Continue

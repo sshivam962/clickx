@@ -1,0 +1,6 @@
+<% if @profile.errors.present? %>
+  toastr.error("<%= @profile.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success("Background Image Updated Sucessfully");
+  location.reload();
+<% end %>

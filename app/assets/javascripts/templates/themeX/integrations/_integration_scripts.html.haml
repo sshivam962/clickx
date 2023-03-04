@@ -1,0 +1,82 @@
+%md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-compressed{'aria-label':'Add Integrations'}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "ng-click":"closeModal($event)", :type => "button"}
+      %span.fa.fa-times-circle-o
+    %h2.modal-title Add Integrations
+  %md-dialog-content
+    .md-dialog-content
+    .container-fluid
+      .row
+        .col-md-6.mt-lg
+          .panel.panel-default
+            .panel-heading
+              %h2.headerColor Integration List
+              .panel-ctrls
+                %a.btn.btn-success.btn-raised.btn-sm{"ng-click"=>"newIntegration($event)",'ng-if'=>"!empty"} Add New Integration
+                %button.btn.button-icon.mt-sm.refresh-panel{"ng-click"=>"refreshIntegration()"}
+                  %span.material-icons.inverted refresh
+            .panel-body.no-padding
+              .col-md-12.mt-md
+                %table.table.table-hover.table-bordered
+                  %tbody
+                    %tr{'ng-repeat':"(key,value) in integrationList", 'ng-class':"{'info': $index % 2 == 0}"}
+                      %td
+                        %h4
+                          %span.badge.badge-info {{$index+1}}
+                          %span {{key | humanize}}
+                        %h4{'ng-repeat':"(config_key,config_value) in value", 'ng-class':"{'info': $index % 2 == 0}"}
+                          %label
+                            %a
+                              {{config_key | humanize}} : {{config_value}}
+                        %h5
+                          %a.btn.btn-default.btn-raised.btn-xs.m-n{ "ng-click" =>"addIntegration(key)"}
+                            %i.fa.fa-pencil
+                            .ripple-container
+                          %a.btn.btn-default.btn-raised.btn-xs.m-n{ "ng-click" => "removeIntegration(integrationList,key)"}
+                            %i.fa.fa-trash
+                            .ripple-container
+        .col-md-6.mt-lg.pull-right{ 'ng-repeat' => '(key,value) in integrationList', 'ng-if':"toggleFeat(key)"}
+          .panel.panel-default
+            .panel-heading
+              %h2
+                Edit {{key | humanize}}
+            .panel-body
+              %div{'ng-if':"config_value != null"}
+                %div{"ng-repeat"=> '(config_key,config_value) in value'}
+                  %div{:layout => "row", "layout-align" => "space-between center" }
+                    %md-input-container.md-block{"flex" => ""}
+                      %label {{config_key | humanize}}
+                      %md-select{"ng-model" => "config_key", :placeholder => "Select {{config_key | humanize}}" }
+                        %md-option{ 'ng-repeat':"keys in config_value",:value =>"{{keys}}"} {{keys}}
+                %button.btn.btn-info.btn-raised.pull-right{'ng-click':"sendIntegration(value,key)" } Save
+              %div{'ng-if':"config_value == null"}
+                %div{"ng-repeat"=> '(config_key,config_value) in value'}
+                  %div{:layout => "row", "layout-align" => "space-between center" }
+                    %md-input-container.md-block{"flex" => ""}
+                      %label {{config_key | humanize}}
+                      %input{"ng-model": "config_value", 'ng-blur'=>"change(config_value,config_key,value,key)"}
+                %button.btn.btn-info.btn-raised.pull-right{'ng-click':"sendIntegration(integrationList,key)" } Save
+        .col-md-6.mt-lg{'ng-if'=>"show"}
+          .panel.panel-default{ 'ng-repeat' => '(key,value) in suggestionList'}
+            .panel-heading
+              %h2.headerColor
+                Configure {{key | humanize}}
+            .panel-body
+              %div{ 'ng-if': 'config_value != null' }
+                %div{"ng-repeat"=> '(config_key,config_value) in value'}
+                  %div{:layout => "row", "layout-align" => "space-between center" }
+                    %md-input-container.md-block{"flex" => ""}
+                      %label {{config_key | humanize}}
+                      %md-select{"ng-model" => "config_key", :placeholder => "Select {{config_key | humanize}}" }
+                        %md-option{ 'ng-repeat':"keys in config_value",:value =>"{{keys}}"} {{keys}}
+                %button.btn.btn-info.btn-raised.pull-right{'ng-click':"sendIntegration(value,key)" } Save
+              %div{ 'ng-if': 'config_value == null' }
+                %div{"ng-repeat"=> '(config_key,config_value) in value'}
+                  %div{:layout => "row", "layout-align" => "space-between center" }
+                    %md-input-container.md-block{"flex" => ""}
+                      %label {{config_key | humanize}}
+                      %input{"ng-model": "config_value", 'ng-blur'=>"change(config_value,config_key,value,key)"}
+                %button.btn.btn-info.btn-raised.pull-right{'ng-click':"saveIntegration(suggestionList,key)" } Save
+  %md-dialog-actions{layout:'row'}
+    %button.btn.btn-raised.mt-md.mb-md.btn-default{"data-dismiss" => "modal", :type => "button","ng-click": "closeModal()"} Close
+  

@@ -1,0 +1,51 @@
+- content_for :title do
+  Scale Program | Clickx
+.page-heading.bg-white.mb-4
+  %h1 Scale Program
+.container-fluid
+  .bg-sky-blue.border-1.border-blue.rounded.p-4.p-md-5.mb-5
+    .course-weeks
+      - @weeks.each do |week|
+        - first_chapter_id = 0
+        - courses_weeks = @courses_group[week].sort_by(&:position)
+        - courses_weeks.each do |course|
+          - if first_chapter_id == 0
+            - first_chapter_id = course.chapters.first&.id
+
+        = link_to agency_scale_program_path(first_chapter_id), class: 'text-black', style: 'padding: 0 10px 0 0' do
+          .course-week
+            .sclae__courses
+              .scale_course.shadow
+                .scale_course_bg
+                  %span
+                .d-md-flex.w-100
+                  .col-stretch
+                    .fs-md.pb-lg.fw-m.text-darkblue #{@headers_week[week]}
+                    - total_progress = 0
+                    - course_count = 0
+                    - total_course_count = 0
+                    - courses = @courses_group[week].sort_by(&:position)
+                    - courses.each do |course|
+                      - progress = course.progress(current_user)
+                      - total_progress = total_progress + progress
+                      - total_course_count = total_course_count + 1
+                      - course_count = course_count + course.chapters.count
+                    .d-flex.align-items-center
+                      .pr-3.fs-md.text-blue
+                        %i.fa.fa-youtube-play.vertical-top
+                      %div #{course_count} Videos
+                    %hr.hidden-xs
+                    .d-flex.sc--progress
+                      .col.sc--progress-label Average Completion
+                      .col.col-stretch.px-4.order-2.sc_progress-col
+                        .course-progress
+                          .course-progress-bar{style: "width:#{total_progress/total_course_count}%"}
+                      .col
+                        #{total_progress/total_course_count} %
+                        %span.sc--progress-label Completed
+                  .col
+                    .btn-start-now
+                      %svg#Capa_1{:space => "preserve", :style => "enable-background:new 0 0 483.013 483.013;", :version => "1.1", :viewbox => "0 0 483.013 483.013", :x => "0px", :xmlns => "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink", :y => "0px"}
+                        %path{:d => "M477.043,219.205L378.575,48.677c-7.974-13.802-22.683-22.292-38.607-22.292H143.041c-15.923,0-30.628,8.49-38.608,22.292\r\n\tL5.971,219.205c-7.961,13.801-7.961,30.785,0,44.588l98.462,170.543c7.98,13.802,22.685,22.293,38.608,22.293h196.926\r\n\tc15.925,0,30.634-8.491,38.607-22.293l98.469-170.543C485.003,249.99,485.003,233.006,477.043,219.205z"}
+                      %span
+                        Start Now

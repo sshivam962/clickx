@@ -1,0 +1,49 @@
+= render 'stripe/assets'
+= hidden_field_tag :base_route, '/a/contractors'
+= hidden_field_tag :proposal_id, @proposal.id
+.page-heading.pt-md.pb-md.ui-2020
+  .row.align-items-center
+    .col-md-4
+      %h1
+        %i.fa.fa-credit-card
+        Checkout
+.container-fluid
+  .row.d-flex.flex-wrap.cover-section
+    .col-lg-12.col-xs-12.pb-4
+      .bg-sky-blue.border-blue.p-4.p-md-5.rounded.border-1
+        #dashboard-table.container-fluid.mt-md.pt-xs.ui-2020
+          .card_list
+            %md-input-container
+              %p Contractor Payment: #{number_to_currency(@proposal.amount)}
+              %p ClickX Fee: #{number_to_currency(@proposal.clickx_fee)}
+              %b Total: #{number_to_currency(@proposal.total_amount)}
+              .spacer30
+              .form-group.m-n
+                %label.md-no-float.md-container-ignore Cards
+                = select_tag "selected_card", options_for_select(card_collection(@cards), @default_card), class: 'form-control'
+          #add_card_form
+            - if @cards.blank?
+              = render 'new_card'
+          .text-center
+            .btn.btn-lg.m-n.btn-warning.btn-raised.agency_project_payment#pay_now Pay Now
+:javascript
+  $(document).ready(function() {
+    $('#pay_now').on('click', function() {
+      card_id = $('#selected_card').val();
+      proposal_id = #{@proposal.id}
+      if(card_id == 'add_card') {
+        $(document).on('click', '.agency_project_payment',function() {
+          $('.checkout_create_card_submit').click()
+        })
+      }
+      else {
+        $.ajax({
+          url: "/a/contractors/payment",
+          type: 'post',
+          data: { card_id: card_id, proposal_id: proposal_id },
+          dataType: 'script',
+          async: false
+        })
+      }
+    })
+  })

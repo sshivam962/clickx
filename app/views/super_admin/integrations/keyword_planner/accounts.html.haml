@@ -1,0 +1,33 @@
+- content_for :title do
+  Ads Accounts | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1 Ads Accounts
+    .options
+      %a.btn.btn-white.btn-raised.pull-right{id: "button", href: '#'}
+        Set Account
+        .ripple-container
+
+.locations
+  .col-md-12.pl-n
+    = form_for :account, url: super_admin_integrations_keyword_planner_connect_account_path, method: :post, html: {id: "account_form"} do |a|
+      - @all_accounts.each do |account|
+        .col-md-4.pl-n
+          .panel.panel-default
+            .panel-body
+              .col-md-12.p-n
+                .col-md-1.p-n
+                  = a.radio_button('customer_id', account[:customer_id])
+                .col-md-11.p-n
+                  %span Name: #{ account[:name].present? ? account[:name] : '--' }
+                  %br
+                  %span Customer ID: #{ account[:customer_id].present? ? account[:customer_id] : '--' }
+
+
+:javascript
+  $(document).ready(function() {
+    $('#button').on('click', function(e) {
+      e.preventDefault();
+      $('#account_form').submit();
+    });
+  });

@@ -1,0 +1,20 @@
+.uiv2
+  .clearfix
+    %h3 Mailgun Sub Domains
+  .spacer30
+  .clearfix
+  .content-card.p-md-5
+    = simple_form_for MailgunSubdomain.new, url: super_admin_mailgun_subdomains_path do |f|
+      %label Sub Domain
+      .input-wrapper.mb-4
+        = f.input :subdomain, class: 'input-wrapper-input', required: true, placeholder: 'Enter Subdomain', label: false
+      %label User Name
+      .input-wrapper.mb-4
+        = f.input :user_name, class: 'input-wrapper-input', required: true, placeholder: 'Enter Username', label: false, autocomplete: 'off'
+      %label Password
+      .input-wrapper.mb-4
+        = f.password_field :password, class:'input-wrapper-input', required: true, placeholder: 'Enter password', autocomplete: 'off'
+      = submit_tag 'Save', class: 'btn btn-raised btn-primary'
+
+  #sub_domain_list
+    = render '/super_admin/mailgun_subdomains/list', mailgun_subdomains: @mailgun_subdomains

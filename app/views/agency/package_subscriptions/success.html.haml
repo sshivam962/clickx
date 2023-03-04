@@ -1,0 +1,11 @@
+.page-content
+  .page-heading.mb-n.pb-md
+    %h1 Checkout
+  .container-fluid
+    .row
+      .col-md-6.col-md-offset-3.text-center.mt-xxl.pt-xxl
+        = image_tag 'success.svg', class: 'img-responsive m-auto', style: 'max-width: 340px;'
+        %h2.text-darkblue Thank you for your purchase
+        / %h4.mb-xl You will receive a receipt in your email soon.
+
+        %a.btn.btn-lg.btn-raised.btn-primary.mb-xxl{href: "/#/agencies/#{current_user.ownable_id}/dashboard"} Home

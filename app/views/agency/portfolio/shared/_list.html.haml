@@ -1,0 +1,47 @@
+- category_info = Portfolio::CATEGORY_INFO.detect{|c| c[:key].eql?(category)}
+- limited_access = current_agency.limited_access_to_portfolio?
+- portfolios.each_with_index do |portfolio, index|
+  - item_unlocked = true
+  - if limited_access
+    - item_unlocked = (index < 10)
+
+  .col-xs-12.col-sm-6.col-lg-4.col-xl-3
+    - if item_unlocked
+      .awesome-card
+        .awesome-card-inner
+          .awesome-card-thumbnail
+            .pfolio-new-tab
+              %a.new-tab-button{ href: portfolio_public_link(current_agency, portfolio), target: '_blank' }
+                %i.fa.fa-external-link{"aria-hidden" => "true"}
+            %a.load-pf-modal{href: 'javascript:void(0)', data: {id: portfolio.id}}
+              .awesome-card-thumb{:style => "background-image:url(#{portfolio.thumbnail_url});"}
+          .awesome-card-footer
+            %a.awesome-card-btn{ href: portfolio_public_link(current_agency, portfolio), target: '_blank' }
+              View
+              %span
+                = category_info[:name]
+        .awesome-card--shadow
+        .awesome-card--shadow.awesome-card--shadow2
+    - else
+      .awesome-card
+        .awesome-card-inner
+          .awesome-card-thumbnail
+            .awesome-card-thumb{:style => "background-image:url(#{portfolio.thumbnail_url});"}
+          .awesome-card-footer
+            %a.awesome-card-btn{ href: '/a/packages/growth/agency_infrastructure', target: '_blank' }
+              Upgrade
+        .awesome-card--shadow
+        .awesome-card--shadow.awesome-card--shadow2
+
+:javascript
+  $(document).on('click', '.load-pf-modal', function() {
+    pf_id = $(this).data('id');
+    $.ajax({
+      url: "/a/portfolio/" + pf_id,
+      type: 'get',
+      data: {},
+      dataType: 'script',
+      success:function(response){}
+    })
+    $('.portfolio-modal').modal('show')
+  });

@@ -1,0 +1,74 @@
+= hidden_field_tag :total_price, @plan.amount
+.input-card.input-card--gray.p-4.mb-5.dark
+  %h4.fw-n Purchase Summary
+  %h3.fw-b.mb-3
+    = @plan.name
+  %p.dark
+    %br/
+    %span.current_price_text
+      Plan Pricing: #{plan_price(@plan)}
+    - if @annual_plan.present?
+      %span.annual_price_text.hidden
+        = "Plan Pricing: <span class='plan-price-strike'>#{number_to_currency(@plan.amount * 12, precision: 0)}</span> #{number_to_currency(@annual_plan.amount, precision: 0)}/yr".html_safe
+  %p.dark
+    #coupon_applied
+    #coupon_offer
+    %br/
+    %span.current_price_text
+      Total Charge: #{number_to_currency(@plan.amount, precision: 2)}
+    - if @annual_plan.present?
+      %span.annual_price_text.hidden
+        Total Charge: #{number_to_currency(@annual_plan.amount, precision: 2)}
+%a.btn.btn-input.agency_signup_submit{href: 'javascript:void(0)'}
+  Apply to Become a Partner
+
+- if @annual_plan.present?
+  = hidden_field_tag 'current_plan_price', @plan.amount
+  = hidden_field_tag 'annual_plan_price', @annual_plan.amount
+  :javascript
+    $(document).on('change', '.interval_check',function() {
+      if($('.interval_check').is(":checked")){
+        $('#interval').val('year')
+        $('#plan_price').val($('#annual_plan_price').val())
+        $('#total_price').val($('#annual_plan_price').val())
+        $('.current_price_text').addClass('hidden')
+        $('.annual_price_text').removeClass('hidden')
+      }else{
+        $('#interval').val('month')
+        $('#plan_price').val($('#current_plan_price').val())
+        $('#total_price').val($('#current_plan_price').val())
+        $('.current_price_text').removeClass('hidden')
+        $('.annual_price_text').addClass('hidden')
+      }
+      var coupon_code = $("input[name='coupon_code_input']").val()
+      if(coupon_code != ''){
+        $.ajax({
+          url: '/a/check_coupon',
+          method: "GET",
+          dataType: 'json',
+          data: {
+            coupon_code: coupon_code,
+            plan_price: $('#plan_price').val()
+          },
+          success: function(resp){
+            $('#coupon_applied').text(resp.message)
+            if(resp.code == 200){
+              $('#coupon_code').val(coupon_code)
+
+              total_price = parseFloat($('#total_price').val())
+              discount = resp.discount
+              display_price = total_price - discount
+
+              $('#coupon_code_input').attr('readonly', true)
+              $('#apply_coupon').addClass('hidden')
+              $('#remove_coupon').removeClass('hidden')
+
+              $('#coupon_offer').text(resp.offer_msg)
+
+              $('.coupon_applied_text').removeClass('hidden')
+              $('.coupon_applied_text .charge_coupon_text').html('Total Charge with coupon applied: ' + '$' + parseFloat(display_price, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString())
+            }
+          }
+        });
+      }
+    });

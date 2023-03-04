@@ -1,0 +1,88 @@
+.ui-2020
+  .page-heading.pt-md.pb-md
+    .row.align-items-center
+      .col-md-3
+        %h1.hey
+          %i.clickx-icon-Automotive.title-icon
+          Competitors
+      -unless demo_login?
+        .col-md-9.text-lg-right.text-left.pt-4.pt-lg-0
+          %a.btn.btn-raised.btn-inverse.btn--rounded.mb-2.mb-md-0.btn--dark{data: {target: '#newCompetitionModal', toggle: 'modal'}}
+            %i.fa.fa-plus
+            \&#160; Add competitor
+          %a.btn.btn-raised.btn-inverse.btn--rounded.mb-2.mb-md-0.btn--dark{href: "/b/competitions/potential_competitors"}
+            %i.fa.fa-snowflake-o.d-sm-inline-block
+            \&#160; Potential Competitors
+          %a.btn.btn-raised.btn-inverse.btn--rounded.mb-2.mb-md-0.btn--dark{href: "/b/competitions/common_backlinks"}
+            %i.fa.fa-link.d-sm-inline-block
+            \&#160; Common Backlinks
+          .dropdown.display-inline
+            %button.btn.btn-raised.btn-inverse.btn--rounded.mb-2.mb-md-0.btn--dark{"data-toggle" => "dropdown", :type => "button"}
+              %i.fa.fa-download.d-sm-inline-block
+              Export
+            %ul.dropdown-menu.mt-sm.pt-sm
+              %li
+                %a.export-link{href: "javascript:void(0)", data: { base_url: export_pdf_business_client_competitions_path(format: :pdf)}} PDF
+              %li
+                %a.export-link{href: "javascript:void(0)", data: { base_url: export_csv_business_client_competitions_path(format: :csv)}} CSV
+              %li
+                %a.export-link{href: "javascript:void(0)", data: { base_url: export_csv_business_client_competitions_path(format: :csv), all: 'true'}} CSV-ALL
+
+  #dashboard-table.container-fluid.mt-md.pt-xs
+    .row.row--v-center.row--wrap
+      .col-sm-6.col-xs-9
+        .search-form
+          %form{:action => ""}
+            %input.search-form__input#search_name{:placeholder => "Search", :type => "search"}/
+            %button.search-form__btn Search
+    .spacer25
+    %ul.competitors_list
+      = render 'business/competitions/shared/list', competitions: @competitions
+
+= render 'business/competitions/new'
+%a.export_temp_link.invisible{target: '_blank'}
+  click
+= hidden_field_tag :search_state, 'all'
+
+:javascript
+  $(document).ready(function(){
+    $('#search_name').on("keyup", function() {
+      var name = $('#search_name').val().toLowerCase();
+      var search = false
+      if(name.length >= 3){
+        $('#search_state').val('search')
+        search = true
+      }else if(name.length == 0){
+        if($('#search_state').val() == 'search'){
+          $('#search_state').val('all')
+          search = true
+        }else{
+          search = false
+        }
+      }
+      if(search == true){
+        $.ajax({
+          url: "/b/competitions",
+          type: 'get',
+          data: { name: name },
+          dataType: 'script',
+          async: false,
+          success:function(response){
+            $('.competitors_list').html(response.data)
+          }
+        })
+      }
+    });
+
+    $('.export-link').on("click", function() {
+      base_url = $(this).data('baseUrl')
+      page = $('.pagination .current').text()
+      per_page = $('#per_page').val()
+      all = $(this).data('all')
+      name = $('#search_name').val()
+      export_url = base_url + '?page=' + page + '&per_page=' + per_page + '&all=' + all + '&name=' + name
+      console.log(export_url)
+      $('.export_temp_link').attr('href', export_url)
+      $('.export_temp_link')[0].click()
+    });
+  });

@@ -1,0 +1,44 @@
+.container-fluid.mt-md.pt-xs
+  .panel
+    .panel-body
+      .col-md-12.p-n
+        .col-md-6
+          %b
+            = current_user.name
+          %br
+          %small
+            = current_user.email
+        .col-md-6
+          %span.pull-right
+            %b Lifetime Earnings:
+            %b.green.pl-m
+              = number_to_currency(ap_earnings(@agency_subscriptions.values.flatten))
+      .col-md-12.p-n
+        %span.pull-right
+          = link_to current_user.referral_link, current_user.referral_link
+          / %button.btn.btn-warning.btn-raised.copy_to_clipboard{data: {link: current_user.referral_link}}
+          /   %i.fa.fa-clipboard
+          /   Copy Referral Link
+  .panel
+    .panel-heading
+      Monthly Earnings
+    .panel-body
+      .col-md-12.p-n
+        %table.table
+          %tbody
+            - @agency_subscriptions.each do |month, subscriptions|
+              %tr
+                %td
+                  = month.strftime('%b %y')
+                %td
+                  = number_to_currency(ap_earnings(subscriptions))
+
+:javascript
+  $('.copy_to_clipboard').on('click', function (e) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).data('link')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Referral Link Copied");
+  });

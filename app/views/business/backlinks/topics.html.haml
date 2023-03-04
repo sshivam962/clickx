@@ -1,0 +1,31 @@
+.clickx-breadcrumb-wrapper.ng-scope
+  %ol.breadcrumb.clx-breadcrumb.ng-isolate-scope
+    %li
+      %a{:href => "/b/dashboard"} Home
+    %li
+      %span Topics
+
+.page-heading.no-margin-bottom.no-pad-bottom
+  %h1
+    %i.clickx-icon-LinkBuilding.title-icon
+    Topics
+
+= render 'business/backlinks/shared/nav'
+.col-md-12
+  .tab-content
+    .summary
+      %div#backlinks-tabs
+        .row#exportPDF
+          #tab-9-2.col-sm-12.tab-pane
+            %loading
+          #tab-9-2.col-sm-12.tab-pane.topics-table
+            - if @topics.present?
+              = render 'business/backlinks/topics_table'
+            - else
+              %p.clx-text.text-color-accent-red.text-center
+                No Data Available
+
+:javascript
+  $(document).ready(function() {
+    $("#topics-tab").addClass('active');
+  });

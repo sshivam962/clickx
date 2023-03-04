@@ -1,0 +1,25 @@
+.col-md-12{ 'ng-repeat': 'error in page_links.data'}
+  %label.text-dark.m-n{ 'ng-if': "error.issue_type == 'internal_links_presence'" }
+    %i.fa.fa-close.text-danger{ 'ng-if': "error.status == 'error'",'title': 'Need to fix' }
+    %i.fa.fa-check.text-success{ 'ng-if': "error.status == 'passed'",'title': 'Passed' }
+    %i.fa.fa-exclamation.text-warning{ 'ng-if': "error.status == 'warning'",'title': 'Needs improvement' }
+    {{error.status == 'passed'? error.passed_title: error.error_title}}
+    %p.ml-md.text-muted.text-italic.pl-md.mt-n{ 'ng-if': 'error.passed_description || error.error_description'}
+      {{error.status == 'passed'? error.passed_description: error.error_description}}
+  .col-md-12.p-n.text-dark{ 'ng-repeat': '(key,value) in error' }
+    .col-md-12.inline-flex.pl-n{ 'ng-if': "!checkKeys(key, 'excludeKeys')" }
+      .div.pr-sm
+        %i.fa.fa-close.text-danger{ 'ng-if': "error.status == 'error'", 'title': 'Need to fix' }
+        %i.fa.fa-check.text-success{ 'ng-if': "error.status == 'passed'", 'title': 'Passed' }
+        %i.fa.fa-exclamation.text-warning{ 'ng-if': "error.status == 'warning'",'title': 'Needs improvement' }
+      .div.max-content-width
+        %p.max-content-width
+          {{error.status == 'passed'? error.passed_title : error.error_title}}
+      .div.text-muted.text-italic{ 'ng-if': "!checkKeys(key, 'excludePageKeys')" }
+        %p {{value? ': '+value : value}}
+      .div.pl-md.text-muted.text-italic{ 'ng-if': "checkKeys(key, 'excludePageKeys')" }
+        %p{ 'ng-repeat': 'link in value track by $index' }
+          %a.info{ 'ng-href': '{{link}}', 'target': '_blank' } : {{link}}
+    .div{ 'ng-if': "!checkKeys(key, 'excludeKeys')" }
+      %p.ml-md.text-muted.text-italic.pt-sm.pl-md.mb-n{ 'ng-if': "error.status == 'error' || error.status == 'warning'" }
+        {{error.error_description}}

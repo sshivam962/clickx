@@ -1,0 +1,27 @@
+.panel.panel-default.m-n{ 'ng-if': 'marketing_performance_loaded && keywordsStatus' }
+  .panel-heading.cursor-move
+    %h2
+      %a.l-grey{ href: "#/rankings" }
+        Keywords
+        %i.fa.fa-info-circle.tooltip-text-icon{ 'title': 'Graph showing the number of keywords your site is ranking for and also the position of keywords in Google SERP over time.' }
+    #onboarding-keywords.on-boarding
+    .panel-ctrls
+      %button.Dbutton.btn.button-icon.pull-left.mt-sm{ 'ng-click': 'pdf_export("keywords-dashboard")', 'title': 'Download report', 'ng-class': "{'disable-button': export_disabled}"}
+        %span.material-icons.inverted file_download
+      %button.btn.button-icon.mt-sm.refresh-panel{ 'ng-click': 'init_keywords_page()', 'title': 'Refresh report'}
+        %span.material-icons.inverted refresh
+  .panel-body.no-padding{style: 'height: 420px;'}
+    .p-n
+      .col-sm-12.p-n
+        .panel-body.pt-sm#keywords-dashboard.p-n
+          #all-time-keywords-google{ 'on-click-chart': '', 'on-load-chart': '', 'config': 'keyWordChartOptions', 'redraw': '',
+          'ng-if': 'keywordRowData.length' }
+          .boxes-cover{ 'ng-if': '!keywordRowData.length' }
+            .boxes.clearfix.pd-t-95
+              %span
+                .col-lg-12.col-md-12.col-xs-12.box
+                  %a.block-link{href: "#/rankings"}
+                    .item.text-center
+                      .img
+                        %img{'ng-src' => "/hub_images/seo.png"}
+                      %h3 No keywords available.

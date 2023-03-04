@@ -1,0 +1,11 @@
+%button.close.m-4{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+  %span.px-2.py-2.rounded-8.bg-white.d-inline-block{"aria-hidden" => "true"}
+    %i.material-icons close
+.modal-dialog.modal-md
+  .bg-white.p-4.p-sm-5.rounded
+    %p.mb-4
+      Please remove email template from the list - 
+    %ul.pl-4.ml-0.pt-2
+      - lead_source_names.each do |lead_source_name|
+        %li.pb-3.pl-2 
+          = lead_source_name 

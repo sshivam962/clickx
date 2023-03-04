@@ -1,0 +1,6 @@
+<% if @error.present? %>
+  toastr.error("<%= @error %>")
+<% elsif @success.present? %>
+  $('#editUrlModal').modal('hide');
+  toastr.success("<%= @success %>");
+<% end %>

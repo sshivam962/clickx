@@ -1,0 +1,87 @@
+- content_for :title do
+  Niches | Clickx
+
+.page-heading.mb-n.pb-md
+  %h1 Niches
+  -# .clickx-breadcrumb-wrapper
+  -#   %ol.breadcrumb.clx-breadcrumb
+  -#     %li
+  -#       %a{href: '/b/dashboard'} Home
+  -#     %li
+  -#       %span Niches
+.container-fluid
+  .searchform-wrapper.pt-4
+    .search-form
+      %input.search-form__input#search_industry{placeholder: 'Search', type: 'search', value: @filter_q}
+      %button.search-form__btn
+        %i.fa.fa-search
+      %a.search-form-btn-clear.clear_filters{href: 'javascript:void(0)', 'data-title' => 'Clear Filters'}
+        %i.fa.fa-times
+  .spacer25
+  #industry_list
+    = render 'niche_list'
+    - if @filter_q.present?
+      = render 'case_studies_list'
+  #casestudy_list
+
+:javascript
+  $('#search_industry').on('keyup', function() {
+    var name = $('#search_industry').val().toLowerCase();
+    if(name.length >= 3){
+      $('.search-form-btn-clear').addClass('search-form-btn-clear--active');
+      $.ajax({
+        url: "/a/industries",
+        type: 'get',
+        data: { q: name },
+        dataType: 'script',
+        async: false,
+        success:function(response){
+        }
+      })
+    }
+    else if(name.length == 0){
+      $('.search-form-btn-clear').removeClass('search-form-btn-clear--active');
+      $.ajax({
+        url: "/a/industries",
+        type: 'get',
+        data: { q: name },
+        dataType: 'script',
+        async: false,
+        success:function(response){
+          $('#casestudy_list').html("");
+        }
+      })
+    }
+  });
+
+  $('.clear_filters').on('click', function() {
+    $('.search-form-btn-clear').removeClass('search-form-btn-clear--active');
+    $('#search_industry').val('');
+    var name = $('#search_industry').val().toLowerCase();
+    $.ajax({
+      url: "/a/industries",
+      type: 'get',
+      data: { q: name },
+      dataType: 'script',
+      async: false,
+      success:function(response){
+        $('#casestudy_list').html("");
+      }
+    })
+  });
+
+  function favourite_click_fn(industry_id) {
+    var name = $('#search_industry').val().toLowerCase();
+    if(name.length < 3){
+      name = '';
+    }
+    $.ajax({
+      url: "/a/industries/"+industry_id+"/favorite",
+      type: 'post',
+      data: { q: name },
+      dataType: 'script',
+      async: false,
+      success:function(response){
+      }
+    })
+  }

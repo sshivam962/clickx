@@ -1,0 +1,15 @@
+%table.table.table-bordered.users.reports
+  %thead
+    %th Agency
+    -#%th.text-center Total Bought Data
+    %th Email Sent
+    %th Remaining
+  %tbody
+    -data.each do |d|
+      %tr
+        %td.agency
+          = d[:agency_name]
+        %td.agency
+          = d[:count]
+        %td.agency
+          = d[:remaining_limit]

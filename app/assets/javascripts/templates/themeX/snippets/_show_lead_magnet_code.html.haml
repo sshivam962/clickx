@@ -1,0 +1,28 @@
+%script{type:"text/ng-template",id:"lead-magnet-code-modal.html"}
+  %md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-md{'aria-label':'Install Lead Magnet'}
+    .modal-header
+      %button.close{ 'aria-hidden': 'true', 'ng-click': 'close()', 'type': 'button' }
+        %span.fa.fa-times-circle-o
+      %h2.modal-title Install Lead Magnet
+    %md-dialog-content
+      .md-dialog-content
+        %p
+          Copy the code below and paste it onto page you want to insert
+          %b Lead Magnet
+        .form-group
+          %textarea#scope_generated.form-control.mt-md.mb-md{"ng-model":"snippet",rows:6,readonly:"true"}
+        .form-group
+          %label.col-md-12.control-label.m-n{:for => "email"} Send snippet to developer
+          .input-group.ml-md.mr-md
+            %input#email.form-control{placeholder:"Email address of developer",style:"height: 38px","ng-model":"developer_email"}
+            %span.input-group-btn.p-n
+              %button.btn.btn-info.btn-raised.m-n{type:"button","ng-click": "sendEmailToDeveloper($event)"}
+                %i.fa.fa-send.mr-sm>
+                Send
+    %md-dialog-actions{layout:"row"}
+      %button.btn.btn-default.btn-raised{ 'data-dismiss': 'modal',
+      'type': 'button', 'ng-click': 'close()' } Close
+      %button.btn.btn-raised.btn-primary{:type => "button",
+      "ngclipboard":"","data-clipboard-target":"#scope_generated"}
+        %i.fa.fa-code.mr-sm>
+        Copy

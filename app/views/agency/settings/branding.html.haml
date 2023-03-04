@@ -1,0 +1,316 @@
+.page-content
+  .page-heading
+    %h1
+      %i.clickx-icon-Premium.title-icon
+      Branding
+  .container-fluid.branding-block
+    %div
+      .row.d-md-flex.flex-wrap
+        .col-sm-6.col-lg-4
+          .panel.panel-default.mb-5{'data-widget': {draggable: 'false'}}
+            .panel-heading
+              %h2 Logo
+            .panel-body.fadeInLeft
+              .form-group.mt-n.pb-n
+                .fileinput.fileinput-new.mb-n.fileinput-responsive.width100
+                  .fileinput-preview.thumbnail.mb20.show-file.width100{style: 'height: 100px;'}
+                    .image-background{style: "background-image: url('#{current_agency.logo}')"}
+                    %img.over.pdt-25{src: current_agency.logo}
+                  %div
+                    %p.fs-xxs.text-muted.lh-12.mt-3.mb-3 Upload Logo (PNG image is preferred, Recommended Size is 1000 x 200 px)
+                    %span.btn.btn-primary.btn-raised.mb-n.tooltips.branding_upload{data: {placement: 'top', toggle: 'tooltips', type: 'logo'}}
+                      %span.fileinput-new
+                        %i.fa.fa-camera.icpadd-r10
+                        Select image
+                    %input.logo_upload{name: 'file', type: 'file', class: 'invisible', onchange: "upload(this.files[0], 'logo')"}
+        .col-sm-6.col-lg-4
+          .panel.panel-default.mb-5{'data-widget': {draggable: 'false'}}
+            .panel-heading
+              %h2 Square Logo
+            .panel-body.fadeInLeft
+              .form-group.mt-n.pb-n
+                .fileinput.fileinput-new.mb-n.fileinput-responsive.width100
+                  .fileinput-preview.thumbnail.mb20.show-file.width100{style: 'height: 100px;'}
+                    .image-background{style: "background-image: url('#{current_agency.square_logo}')"}
+                    %img.over.pdt-25{src: current_agency.square_logo}
+                  %div
+                    %p.fs-xxs.text-muted.lh-12.mt-3.mb-3 Upload Logo (PNG image is preferred, Recommended Size is 250 x 250 px)
+                    %span.btn.btn-primary.btn-raised.mb-n.tooltips.branding_upload{data: {placement: 'top', toggle: 'tooltips', type: 'square_logo'}}
+                      %span.fileinput-new
+                        %i.fa.fa-camera.icpadd-r10
+                        Select image
+                    %input.square_logo_upload{name: 'file', type: 'file', class: 'invisible', onchange: "upload(this.files[0], 'square_logo')"}
+        .col-sm-6.col-lg-4
+          .panel.panel-default.mb-5{'data-widget': {draggable: 'false'}}
+            .panel-heading
+              %h2 Email Logo
+            .panel-body.fadeInLeft
+              .form-group.mt-n.pb-n
+                .fileinput.fileinput-new.mb-n.fileinput-responsive.width100
+                  .fileinput-preview.thumbnail.mb20.show-file.width100{style: 'height: 100px;'}
+                    .image-background{style: "background-image: url('#{current_agency.email_logo}')"}
+                    %img.over.pdt-25{src: current_agency.email_logo}
+                  %div
+                    %p.fs-xxs.text-muted.lh-12.mt-3.mb-3 Upload Logo (PNG image is preferred, Recommended Size is 3600 x 1800 px)
+                    %span.btn.btn-primary.btn-raised.mb-n.tooltips.branding_upload{data: {placement: 'top', toggle: 'tooltips', type: 'email_logo'}}
+                      %span.fileinput-new
+                        %i.fa.fa-camera.icpadd-r10
+                        Select image
+                    %input.email_logo_upload{name: 'file', type: 'file', class: 'invisible', onchange: "upload(this.files[0], 'email_logo')"}
+        .col-sm-6.col-lg-4
+          .panel.panel-default.mb-5{'data-widget': {draggable: 'false'}}
+            .panel-heading
+              %h2 Grader Logo
+            .panel-body.fadeInLeft
+              .form-group.mt-n.pb-n
+                .fileinput.fileinput-new.mb-n.fileinput-responsive.width100
+                  .fileinput-preview.thumbnail.mb20.show-file.width100{style: 'height: 100px;'}
+                    .image-background{style: "background-image: url('#{current_agency.grader_logo}')"}
+                    %img.over.pdt-25{src: current_agency.grader_logo}
+                  %div
+                    %p.fs-xxs.text-muted.lh-12.mt-3.mb-3 Upload Logo (PNG image is preferred, Recommended Size is 3600 x 1800 px)
+                    %span.btn.btn-primary.btn-raised.mb-n.tooltips.branding_upload{data: {placement: 'top', toggle: 'tooltips', type: 'grader_logo'}}
+                      %span.fileinput-new
+                        %i.fa.fa-camera.icpadd-r10
+                        Select image
+                    %input.grader_logo_upload{name: 'file', type: 'file', class: 'invisible', onchange: "upload(this.files[0], 'grader_logo')"}
+        .col-sm-6.col-lg-4
+          .panel.panel-default.mb-5{'data-widget': {draggable: 'false'}}
+            .panel-heading
+              %h2 Favicon
+            .panel-body.fadeInLeft
+              .form-group.mt-n.pb-n
+                .fileinput.fileinput-new.mb-n.fileinput-responsive.width100
+                  .fileinput-preview.thumbnail.mb20.show-file.width100{style: 'height: 100px;'}
+                    .image-background{style: "background-image: url('#{current_agency.favicon}')"}
+                    %img.over.pdt-25{src: current_agency.favicon}
+                  %div
+                    %p.fs-xxs.text-muted.lh-12.mt-3.mb-3 Upload Favicon (PNG image is preferred, Recommended Size is 16 x 16 px)
+                    %span.btn.btn-primary.btn-raised.mb-n.tooltips.branding_upload{data: {placement: 'top', toggle: 'tooltips', type: 'favicon'}}
+                      %span.fileinput-new
+                        %i.fa.fa-camera.icpadd-r10
+                        Select image
+                    %input.favicon_upload{name: 'file', type: 'file', class: 'invisible', onchange: "upload(this.files[0], 'favicon')"}
+
+        .col-sm-12
+          .panel.panel-default.mb-5
+            .panel-heading
+              Agency Color Settings
+            .panel-body
+              = form_for current_agency, url: agency_settings_path, method: :patch do |f|
+                = hidden_field_tag :section, 'branding'
+                .col-md-6
+                  .form-group
+                    %label{for: 'domain'} Case Study / Portfolio Header Color
+                    = f.text_field :case_study_portfolio_header_color, class: 'form-control login', placeholder: '#F8A100', required: true
+                  .horizontal-align.text-center#case_study_portfolio_header{style: "background:#{current_agency.case_study_portfolio_header_color}"}
+                    .pt-xl.pb-xl
+                      .page-logo-wrapper
+                        = image_tag current_agency.logo || '', class: 'img-responsive'
+                .col-md-6
+                  .form-group
+                    %label{for: 'domain'} Strategy / Product Header Color
+                    = f.text_field :strategy_product_header_color, class: 'form-control login', placeholder: '#F8A100', required: true
+                  .horizontal-align.text-center#strategy_product_header{style: "background:#{current_agency.strategy_product_header_color}"}
+                    .pt-xl.pb-xl
+                      .page-logo-wrapper
+                        = image_tag current_agency.logo || '', class: 'img-responsive'
+                .col-md-6
+                  .form-group
+                    %label{for: 'domain'} Strategy/Product Section Background Color
+                    = f.text_field :strategy_product_background_color, class: 'form-control login', placeholder: '#F8A100', required: true
+                  .horizontal-align.text-center#strategy_product_background{style: "background:#{current_agency.strategy_product_background_color}"}
+                    .pt-xl.pb-xl
+                      .page-logo-wrapper
+                        = image_tag 'lead_strategy/lead-gen.svg', class: 'img-responsive'
+                .col-md-6
+                  .form-group
+                    %label{for: 'domain'} Strategy/Product Section Text Color
+                    = f.text_field :strategy_product_text_color, class: 'form-control login', placeholder: '#F8A100', required: true
+                  .horizontal-align.text-center#strategy_product_text_background{style: "background:#{current_agency.strategy_product_background_color}; height: 134px;"}
+                    .pt-xl.pb-xl
+                      .page-logo-wrapper
+                        %h3#strategy_product_text{style: "color:#{current_agency.strategy_product_text_color}"} Sample text
+                .col-md-6
+                  .form-group
+                    %label{for: 'domain'} Questionnaire Header Color
+                    = f.text_field :questionnaire_header_color, class: 'form-control login', placeholder: '#F8A100', required: true
+                  .horizontal-align.text-center#questionnaire_header{style: "background:#{current_agency.questionnaire_header_color}"}
+                    .pt-xl.pb-xl
+                      .page-logo-wrapper
+                        = image_tag current_agency.logo || '', class: 'img-responsive'
+                .col-md-6
+                  .form-group
+                    %label{for: 'domain'} ROI Calculator Header Color
+                    = f.text_field :roi_header_color, class: 'form-control login', placeholder: '#F8A100', required: true
+                  .horizontal-align.text-center#roi_header{style: "background:#{current_agency.roi_header_color}"}
+                    .pt-xl.pb-xl
+                      .page-logo-wrapper
+                        = image_tag current_agency.logo || '', class: 'img-responsive'
+                .col-md-12
+                  .form-group.pull-right
+                    %button.btn.btn-primary.btn-raised.initiate_service{type: 'submit' }
+                      Save
+
+        .col-sm-12
+          .panel.panel-default.mb-5
+            .panel-heading
+              Agency Domain Settings
+            .panel-body
+              = form_for current_agency, url: agency_settings_path, method: :patch do |f|
+                = hidden_field_tag :section, 'branding'
+                .row.mb-0
+                  .col-md-12
+                    .form-group.mt-0
+                      %label{for: 'domain'} 
+                        Custom Domain 
+                        %span.fs-xxs.text-muted 
+                          (format : 
+                          %span.fw-m app.youragency.com)
+                      = f.text_field :domain, class: 'form-control login width40per', placeholder: 'Custom Domain URL', required: true
+                  .col-md-12
+                    .form-group.mt-3
+                      - if @existing_payment
+                        %button.btn.btn-primary.btn-raised.initiate_service{type: 'submit' }
+                          Save
+                      - else
+                        %a.btn.btn-primary.btn-raised.initiate_service{href: '#checkout' }
+                          Setup Custom Domain
+                        %button.invisible.submit_branding_form{type: 'submit' }
+              - if !@existing_payment && !current_agency.cname_verified
+                #checkout
+                  .panel.panel-default.p-3
+                    .panel-head
+                      %i.clickx-icon-Website.ico-60.pr-sm.text-info
+                      %h2.pt-header-caption.text-info Custom Domain
+                      .pt-header-price
+                        = number_to_currency(@plan.amount, precision: 0)
+                        %span> /mo
+                        %span
+                          %div.d-inline-block.f-s-sm.fw-n
+                      .fw-sb.text-darkblue
+                        = " #{number_to_currency(@plan.onetime_charge, precision: 0)} "
+                        %span> One Time Implementation
+                    .panel-body.pl-n.pr-n
+                      %p.f-s-sm Set up a custom domain for your proposals, payment links, portfolio, case studies, and client  dashboard. Our team will help you set up a custom subdomain (EX: reports.agency.com) and provide any DNS support to launch and whitelist them by Google, Facebook, and other third party apps!
+                .mt-lg.checkout_form.hidden
+                  = render 'agency/settings/payments/shared/new'
+              - else
+                - if current_agency.cname.present?
+                  = form_for current_agency, url: verify_cname_agency_settings_path, method: :patch, remote: true do |f|
+                    .row
+                      .col-md-6.col-sm-12
+                        .form-group
+                          %label{for: 'cname'} CNAME
+                          #width40per
+                            = current_agency.cname
+                      #verify_cname
+                        = render 'verify_cname'
+        .col-sm-12
+          .panel.panel-default.mb-5
+            .panel-heading
+              Calendar header
+            .panel-body
+              = form_for current_agency, url: agency_settings_path, method: :patch do |f|
+                = hidden_field_tag :section, 'branding'
+                .row.mb-0
+                  .col-md-12
+                    .form-group.mt-0
+                      = f.text_field :casestudy_calender_header, class: 'form-control login width40per', placeholder: 'Calendar Header for Case Study Pages'
+                  .col-md-12
+                    .form-group.mt-0
+                      = f.text_field :portfolio_calender_header, class: 'form-control login width40per', placeholder: 'Calendar Header for Portfolio Pages'
+                  .col-md-12
+                    .form-group.mt-0
+                      = f.text_field :lead_calender_header, class: 'form-control login width40per', placeholder: 'Calendar Header for Strategy Pages'
+                  .col-md-12
+                    .form-group.mt-3
+                      %button.btn.btn-primary.btn-raised.initiate_service{type: 'submit' }
+                        Save
+
+:javascript
+  $('.branding_upload').click(function() {
+    $('.' + $(this).data('type') + '_upload').click();
+  })
+
+  var upload = function(file, logo) {
+    if(typeof(file) != 'string' && file.type != 'image/png'){
+      toastr.error("Whoops! you didn't upload a .png file. Please upload a png file");
+    }else{
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+        var params = {
+          image: reader.result,
+          logo: logo
+        };
+        $.ajax({
+          url: "/a/settings/update_logo",
+          type: 'PATCH',
+          dataType: 'script',
+          data: params,
+          success: function(result) {
+            location.reload();
+          }
+        });
+      };
+    }
+  };
+
+  $('.initiate_service').click(function(){
+    $('.checkout_form').removeClass('hidden')
+  })
+
+  $('#agency_strategy_product_background_color').minicolors({
+    theme: 'bootstrap',
+    defaultValue: $('#agency_strategy_product_background_color').val()
+  });
+
+  $('#agency_strategy_product_text_color').minicolors({
+    theme: 'bootstrap',
+    defaultValue: $('#agency_strategy_product_text_color').val()
+  });
+
+  $('#agency_questionnaire_header_color').minicolors({
+    theme: 'bootstrap',
+    defaultValue: $('#agency_questionnaire_header_color').val()
+  });
+  
+  $('#agency_roi_header_color').minicolors({
+    theme: 'bootstrap',
+    defaultValue: $('#agency_roi_header_color').val()
+  });
+
+  $('#agency_strategy_product_header_color').minicolors({
+    theme: 'bootstrap',
+    defaultValue: $('#agency_strategy_product_header_color').val()
+  });
+
+  $('#agency_case_study_portfolio_header_color').minicolors({
+    theme: 'bootstrap',
+    defaultValue: $('#agency_case_study_portfolio_header_color').val()
+  });
+
+  $('#agency_case_study_portfolio_header_color').change(function(){
+    $('#case_study_portfolio_header').css('background', $(this).val())
+  });
+
+  $('#agency_strategy_product_header_color').change(function(){
+    $('#strategy_product_header').css('background', $(this).val())
+  });
+
+  $('#agency_questionnaire_header_color').change(function(){
+    $('#questionnaire_header').css('background', $(this).val())
+  });
+  
+  $('#agency_roi_header_color').change(function(){
+    $('#roi_header').css('background', $(this).val())
+  });
+
+  $('#agency_strategy_product_background_color').change(function(){
+    $('#strategy_product_background, #strategy_product_text_background').css('background', $(this).val());
+  });
+
+  $('#agency_strategy_product_text_color').change(function(){
+    $('#strategy_product_text').css('color', $(this).val())
+  });

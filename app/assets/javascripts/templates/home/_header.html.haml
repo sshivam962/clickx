@@ -1,0 +1,12 @@
+.username
+  .customer
+    %span ID: {{ header_unique_id() }}
+
+  .customer-email
+    %span.email
+      %a{href: '/profile'}
+        {{ current_user_email }}
+    %span.logout
+      %a{href: '', 'ng-click' => 'sign_out()'}
+        Logout
+        %i.glyphicon.glyphicon-log-out

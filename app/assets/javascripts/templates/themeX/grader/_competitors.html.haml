@@ -1,0 +1,58 @@
+.col-md-12
+  .panel.panel-default
+
+    .panel-heading
+      %h2.mb-n.text-darkblue Competitors
+    .panel-body
+      .row
+        .col-sm-6.mb-lg
+          %h4 Main Organic Competitors
+        .col-sm-6.mb-lg
+          %h4 Main Paid Competitors
+        .col-sm-12.p-n
+          .col-sm-6
+            .table-responsive
+              %table.table.table-hover.table-vam.b-l-yellow
+                %thead
+                  %tr.inverse
+                    %th Keyword
+                    %th Competitor Relevance
+                    %th Common Keywords
+                    %th Organic Keywords
+                %tbody
+                  %tr{'ng-repeat': 'o_competitor in organic_competitors.competitors'}
+                    %td
+                      %a{href: "http://{{o_competitor.domain}}", target: '_blank'}
+                        {{o_competitor.domain}}
+                    %td {{o_competitor.competitor_relevance}}
+                    %td {{o_competitor.common_keywords}}
+                    %td {{o_competitor.organic_keywords}}
+                  %tr{'ng-if': "organic_competitors.competitors.length == 0"}
+                    %td.text-center{colspan: 4} Sorry, we haven't found any organic competitors for your domain.
+
+          .col-sm-6
+            .table-responsive
+              %table.table.table-hover.table-vam.b-l-purple
+                %thead
+                  %tr.inverse
+                    %th Keyword
+                    %th Competitor Relevance
+                    %th Common Keywords
+                    %th Organic Keywords
+                %tbody
+                  %tr{'ng-repeat': 'a_competitor in adwords_competitors.competitors'}
+                    %td
+                      %a{href: "http://{{a_competitor.domain}}", target: '_blank'}
+                        {{a_competitor.domain}}
+                    %td {{a_competitor.competitor_relevance}}
+                    %td {{a_competitor.common_keywords}}
+                    %td {{a_competitor.organic_keywords}}
+                  %tr{'ng-if': "adwords_competitors.competitors.length == 0"}
+                    %td.text-center{colspan: 4} Sorry, we haven't found any paid competitors for your domain.
+
+    .panel-footer
+      .col-xs-12.col-sm-10.col-xs-offset-0.col-sm-offset-1
+        .jumbotron.bg-info.pl-xl.pr-xl.no-shadow
+          %h4.mb-sm.f-s-20 Clickx Pro Tip
+          %p.text-white.mb-n These are the domain names that currently share the keywords your website ranks for. Spy on your competitors' keywords with clickx and overtake them in Google searches.
+          / %button.btn.btn-outline-white.f-w-md{:type => "button"} Upgrade and Monitor Competitors

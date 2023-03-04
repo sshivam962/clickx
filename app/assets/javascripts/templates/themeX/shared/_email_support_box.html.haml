@@ -1,0 +1,21 @@
+.email_support_div
+  #livechat.livechat
+    .livechat-header
+      .livechat-faces.text-center
+        .livechat-face{'ng-repeat': 'member in business.support_members'}
+          %img.img-responsive.img-circle{'ng-src': '{{member.image}}'}
+      %h4.livechat-names.text-center {{support_members_name}}
+    .livechat-body.clearfix
+      %h4.livechat-title Do you have any questions?
+      %p.livechat-text Contact your customers success manager
+      %form{'ng-submit': 'sendSupportEmail(qn_content)'}
+        %textarea.livechat-message.mb{'ng-model': '$root.qn_content'}
+        %button.btn.btn-success.btn-raised.btn-sm.pull-right.send-button{type: 'submit'}
+          SEND
+          .ripple-container
+  %ul.floating-chat-button.btn-group-sm{ 'ng-click': 'showChatBox()' }
+    %li
+      %button#floating-button.btn.btn-info.btn-fab
+        %i.material-icons
+          %span#chat-icon chat
+        .ripple-container

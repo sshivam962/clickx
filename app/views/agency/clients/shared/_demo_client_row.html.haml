@@ -1,0 +1,27 @@
+%tr.text-center.centered-cols.row-card{id: dom_id(client)}
+  %td.col-stretch.col-client
+    %a.client-url{href: '#'}
+      %span.client-logo
+        - if client.logo.present?
+          %img{src: client.logo, width: 60}
+        - else
+          = client.initials
+      = client.name
+      (Demo)
+  %td.col-btn
+  %td.col-btn
+  %td.col-btn
+  %td.col-btn
+  %td.col-btn
+  %td.col-btn
+  %td.col-btn
+  %td.col-btn
+    .btn-group.dropdown
+      - user = client.preview_users.first
+      %button.action-btn.action-btn--light
+        %a{href: switch_to_business_user_path(user_id: user.id, business_id: client.id, feature: 'dashboard')}
+          %span.btn-icon{"data-original-title" => "Login", "data-toggle" => "tooltip", :title => ""}
+            %i.fa.fa-sign-in.color-777
+
+%tr.row-spacer
+  %td{:colspan => "7"}

@@ -1,0 +1,29 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Local-Listings.title-icon>
+    Edit Location
+    %small
+.container-fluid
+  %form.edit_location{id: "edit_locations", 'data-parsley-validate':"", name:'locationForm', 'ng-submit':"update()" }
+    %wizard{"on-finish":"go_back()"}
+      %div
+        .row
+          %bmd-accordion.col-xs-12{ "close-others": "true" }
+            .basic{'ng-include':"", src: "'themeX/locations/form/_basic.html'"}
+            .details{'ng-include':"", src: "'themeX/locations/form/_details.html'"}
+            .description{'ng-include':"", src: "'themeX/locations/form/_description.html'"}
+
+%script
+  window.ParsleyConfig = {
+  validationThreshold: 0,
+  successClass: 'has-success',
+  errorClass: 'has-error',
+  errorElem: '<span></span>',
+  errorsWrapper: '<span class="help-block"></span>',
+  errorTemplate: "<div></div>",
+  classHandler: function(el) {
+  return el.$element.closest(".form-group");
+  }
+  };
+
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.2/parsley.min.js"}

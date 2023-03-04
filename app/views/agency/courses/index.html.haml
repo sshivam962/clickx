@@ -1,0 +1,25 @@
+- content_for :title do
+  Academy | Clickx
+.page-content.ui-2020
+  .page-heading.pt-md.pb-md
+    .row.align-items-center
+      .col-md-6
+        %h1
+          %i.clickx-icon-student
+          Academy
+  .container-fluid
+    #courses_list
+      = render 'course_list'
+:javascript
+
+  function favourite_click_fn(course_id) {
+    $.ajax({
+      url: "/a/courses/"+course_id+"/favorite",
+      type: 'post',
+      data: {},
+      dataType: 'script',
+      async: false,
+      success:function(response){
+      }
+    })
+  }

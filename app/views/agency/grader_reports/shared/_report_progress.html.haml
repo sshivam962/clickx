@@ -1,0 +1,10 @@
+- report_limit = current_agency.grader_report_limit
+- percentage = (reports_count/report_limit.to_f) * 100
+.grader-report
+  .d-xl-flex.align-items-center
+    .col-auto.pr-5
+      %span.mb-sm
+        Grader Reports (#{reports_count}/#{report_limit})
+    .col-auto.col-stretch
+      .progress.progress-striped.active.m-n
+        .progress-bar.progress-bar-info{style: "width: #{percentage}%"}

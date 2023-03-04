@@ -1,0 +1,39 @@
+%div.clearfix
+  %h3
+    Coupons
+  .right.editBtns.topN75
+    = link_to 'New Coupon', new_super_admin_coupon_path, class: 'btn btn-warning pull-right padLeft38'
+  .right.editBtns.topN75
+    = link_to 'Back', super_admin_billing_index_path, class: 'btn btn-warning pull-right padLeft38'
+
+%div
+  %table.table.table-bordered.users.reports
+    %thead
+      %th Coupon ID
+      %th Offer
+      %th Currency
+      %th Duration
+      %th Max redemptions
+      %th Duration in months
+      %th Redeem by
+      %th
+
+    %tbody
+    - @coupons.each do |coupon|
+      %tr
+        %td= coupon.coupon_id
+        %td= "#{ coupon.percent_off ? "#{coupon.percent_off}% OFF" : "$#{coupon.amount_off/100} OFF" }"
+        %td= coupon.currency
+        %td= coupon.duration
+        %td= coupon.max_redemptions
+        %td= coupon.duration_in_months
+        %td= coupon.redeem_by
+        %td
+          %span
+            = link_to 'Delete',super_admin_coupon_path(coupon.id) , class: 'btn btn-danger btn-xs delete-b', method: :delete, data: {confirm: 'Are you sure?'}
+  = will_paginate @coupons
+
+:css
+  .delete-b {
+    padding: 5px 10px;
+  }

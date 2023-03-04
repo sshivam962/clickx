@@ -1,0 +1,10 @@
+%table.table.table-bordered.users.reports
+  %thead
+    %th Domain Name
+    %th 
+  %tbody
+    - @blacklisted_domains.each do |blacklisted_domain|
+      %tr
+        %td= blacklisted_domain.name
+        %td.center
+          = link_to 'Delete', super_admin_blacklisted_domain_path(blacklisted_domain), class: 'btn btn-danger m-0 btn--xs px-4', method: :delete, data: { confirm: "Are you sure you'd like to delete this domain" }

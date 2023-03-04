@@ -1,0 +1,170 @@
+- plan = plans['ad_hoc_reports']&.first
+- if plan.present?
+  .ala_carte-list--item.reporting{"data-filter" => "reporting"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Ad-Hoc Reports
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 1 Custom Made Report
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Google Analytics Data
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Google Search Console
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Google Ads Data
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Facebook Ads Data
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Technical SEO Reports
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Third Party Research Data
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+
+/ - plan = plans['call_tracking']&.first
+/ - if plan.present?
+/   .ala_carte-list--item.reporting{"data-filter" => "reporting"}
+/     .plan-card
+/       .plan-card--header
+/         .f-s-22.fw-sb.text-black Call Tracking
+/         .plan-card--price
+/           = in_currency(plan.amount, current_agency.display_currency)
+/         .plan-card--price-slashed
+/           MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+/       .plan-card--body
+/         %ul.plan-card-list
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 1 Local or Toll Free Number
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Caller Name/ID
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Campaign Source
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Call Recording (Optional)
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Keyword Level Tracking (Extra)
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 500 Mins Included
+/       - unless @is_preview
+/         .plan-card--footer
+/           %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+/             Get Started
+/ - plan = plans['basic_ga_implementation']&.first
+/ - if plan.present?
+/   .ala_carte-list--item.reporting{"data-filter" => "reporting"}
+/     .plan-card
+/       .plan-card--header
+/         .f-s-22.fw-sb.text-black GA4 Basic Setup
+/         .plan-card--price
+/           = in_currency(plan.amount, current_agency.display_currency)
+/         .plan-card--price-slashed
+/           MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+/       .plan-card--body
+/         %ul.plan-card-list
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Create/Upgrade One domain
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Activate Google Signals
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Exclude internal traffic
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Connect Adwords Account
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Setup referral exclusion
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Add users and permissions
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Test & verify tracking / data
+/       - unless @is_preview
+/         .plan-card--footer
+/           %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+/             Get Started
+- plan = plans['advanced_ga_implementation']&.first
+- if plan.present?
+  .ala_carte-list--item.reporting{"data-filter" => "reporting"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black GA4 Advanced Setup
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Create/Upgrade One domain
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Enhanced Measurement Tracking
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Activate Google Signals
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Exclude internal traffic
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Connect Adwords Account
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Import conversions to Ad Account
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Connect to Google Search Console
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Setup Cross Domain Tracking
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Setup GA4 test property
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Setup referral exclusion
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Custom Event tracking
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Goal Conversion Tracking
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Create remarking audience(s)
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Add users and permissions
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Test & verify tracking / data
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started

@@ -1,0 +1,60 @@
+.row
+  .col-md-12
+    .tab-container
+      .tab-content
+        .table-responsive
+          %table#search_table.table.table-hover.table-bordered.table-vam
+            %thead
+              %tr
+                %th.vam{style: "padding-right:190px;"}
+                  %u.help_pointer{'title': 'The PPC search terms that are driving traffic to your site'}
+                    Search Term
+                %th.text-center
+                  %u.help_pointer{'title': 'The keywords present in your PPC search terms'}
+                    Keyword
+                %th.text-center
+                  %u.help_pointer{'title': 'The type of PPC keywords that are driving you traffic via PPC ads'}
+                    Match Type
+                %th.text-center
+                  %u.help_pointer{'title': 'Number of clicks you received through PPC ads by the given keywords'}
+                    Clicks
+                %th.text-center
+                  %u.help_pointer{'title': 'Number of views your PPC ads got from the given keywords '}
+                    Impressions
+                %th.text-center
+                  %u.help_pointer{'title': 'Average cost incurred for PPC ads for the given keywords'}
+                    Avg. Cost
+                %th.text-center
+                  %u.help_pointer{'title': 'Percent of clicks your PPC ads got to that of impressions it received for the given keywords '}
+                    CTR
+                %th.text-center
+                  %u.help_pointer{'title': 'Number of people who converted after clicking on your PPC ads for the given keywords'}
+                    Conversion
+                %th.text-center
+                  %u.help_pointer{'title': 'Cost per click incurred for PPC ads', 'title-direction': 'left' }
+                    Cost
+            %tbody
+              - data[:total_details].each do |term|
+                %tr
+                  %td
+                    #{term[:query]}
+                    %add-remove-keywords{"keyword":"ad"}
+                  %td.text-center #{term[:keyword]}
+                  %td.text-center #{term[:match_type]}
+                  %td.text-center #{term[:clicks]}
+                  %td.text-center #{term[:impressions]}
+                  %td.text-center $#{term[:average_cost]}
+                  %td.text-center #{term[:ctr]}%
+                  %td.text-center #{term[:conversions]}
+                  %td.text-center
+                    $#{term[:cost]}
+
+:javascript
+  $(document).ready( function () {
+    var table = $('#search_table').DataTable({
+      "pageLength": 25
+    });
+    $('#search_table_filter input').on('keyup change', function () {
+      table.column(0).search($(this).val()).draw();
+    });
+  });

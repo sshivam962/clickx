@@ -1,0 +1,56 @@
+- backlinks_info = @grader_report.backlinks_info
+.col-md-12
+  .panel.panel-grader
+    .panel-heading
+      %h2.text-darkblue Off-page Optimization
+    .panel-body.bg-white
+      .panel-section
+        .row
+        - if backlinks_info.backlinks.length == 0
+          .col-lg-7.col-md-6
+            .data-list
+              .data-list-body
+                Sorry, there are no links for this domain name
+        - else
+          .col-lg-7.col-md-6
+            .data-list
+              .data-list-header Backlinks
+              .data-list-body
+                - backlinks_info.backlinks.each do |backlink|
+                  .data-list--item
+                    .fz-sm= backlink['topic']
+                    %a.greay-link.word-break-all{href: backlink['source_url'], target: '_blank'}
+                      = backlink['source_url']
+
+          .col-lg-5.col-md-6.pl-lg-5.pb-lg-0
+            .percentage-card
+              .percentage-card__row
+                .percentage-card__col
+                  .percentage-card__head Trust Flow
+                  .percentage-card__body
+                    %span{class: "text-#{backlinks_flow_klass(backlinks_info.trust_flow)}"}> #{backlinks_info.trust_flow} /
+                    100
+
+                .percentage-card__col
+                  .percentage-card__head Citation Flow
+                  .percentage-card__body
+                    %span{class: "text-#{backlinks_flow_klass(backlinks_info.citation_flow)}"}> #{backlinks_info.citation_flow} /
+                    100
+            .spacer20
+            .chart-card.bg-warning.text-white.br-8
+              .d-flex.justify-content-between.align-items-center
+                .chart-card__title.f-s20 External Backlinks
+                / .sample-pie-chart
+                /   .spc-mask.spc-mask--one.bg-warning
+                %span= number_with_delimiter(backlinks_info.ext_backlinks)
+            .spacer20
+            .chart-card.bg-d-grey.text-white.br-8
+              .d-flex.justify-content-between.align-items-center
+                .chart-card__title.f-s20 Referring Domains
+                / .sample-pie-chart.sample-pie-chart--warning
+                /   .spc-mask.spc-mask--two.bg-.bg-d-grey
+                %span= number_with_delimiter(backlinks_info.ref_domains)
+    .panel-footer
+      %div
+        %h4.mb-sm.f-s-20 Pro Tip
+        %p.mb-n Backlinks account for close to 70% of a search engines' algorithm. Search engines calculate the relevance of a site to a keyword based on the quality and quantity of backlinks. The best strategy to get someone to link to your website is to create high quality content that is share worthy and promote it on social media. Trust Flow is a metric weighted by the number of clicks from a seed set of  trusted sites to a given URL, or Domain. Citation Flow is a metric that is weighted by the number citations to a given URL, or domain.

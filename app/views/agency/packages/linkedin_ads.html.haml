@@ -1,0 +1,829 @@
+- content_for :title do
+  LinkedIn Ads | Clickx
+.ui-2020.package-page
+  .page-content
+    .page-heading.pt-md.pb-md
+      %h1
+        .d-flex.justify-content-between
+          .col-auto
+            %i.clickx-icon-linkedin
+            LinkedIn Ads
+          = render 'agency/packages/shared/msrp_percentage'
+    .container-fluid
+      .table-responsive.table-plan.text-center
+        %table.table.table-hover.mb-n.overflow-h.plan-preloader.pt-xxl
+          %thead
+            %tr
+              %th.col-label{"vertical-align" => "top"}
+                .pt-col-content
+              - @plans.each do |plan|
+                %th.col-package
+                  .pt-col-content
+                    - if plan.title == 'Pro'
+                      .best-seller-badge.fw-m Best Seller
+                    .pt-header-caption= plan.title
+                    .pt-header-price
+                      = in_currency(plan.amount, current_agency.display_currency)
+                      %span> /mo
+                      = hidden_field_tag(:hidden_plan_amount, plan.amount, class: 'hidden_plan_amount', id: plan.key)
+                    %span.plan-label
+                      - @msrp_class = "msrp_#{plan.key}"
+                      %span.d-inline-block{:class => @msrp_class} MSRP: #{in_currency(plan.amount + (plan.amount * 0.5), current_agency.display_currency)}
+                      %span.d-inline-block + Ad Spend
+            %tr.buttons-row
+              %th.col-label{"vertical-align" => "top"}
+                .pt-col-content
+              - @plans.each do |plan|
+                %th.col-package
+                  .pt-col-content
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: @package.key, plan: plan.key)}
+                      Get Started
+          %tbody
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    LinkedIn Ad Spend
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Paid directly to LinkedIn
+              -# %td.col-small
+              -#   .pt-col-content{"data-label" => "Linkedin Ad Spend"}
+              -#     %span
+              -#       Under #{in_currency(2000, current_agency.display_currency)}
+              -#       .custom-tooltip
+              -#         %i.fa.fa-info-circle
+              -#         %span.custom-tooltiptext Paid directly to Linkedin
+              %td
+                .pt-col-content{"data-label" => "Linkedin Ad Spend"}
+                  %span
+                    -# #{in_currency(2001, current_agency.display_currency)} - #{in_currency(4000, current_agency.display_currency)}
+                    Under #{in_currency(4000, current_agency.display_currency)}
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Paid directly to Linkedin
+              %td
+                .pt-col-content{"data-label" => "Linkedin Ad Spend"}
+                  %span
+                    #{in_currency(4001, current_agency.display_currency)} - #{in_currency(6500, current_agency.display_currency)}
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Paid directly to Linkedin
+              %td
+                .pt-col-content{"data-label" => "Linkedin Ad Spend"}
+                  %span
+                    #{in_currency(6501, current_agency.display_currency)} - #{in_currency(8000, current_agency.display_currency)}
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Paid directly to Linkedin
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Implementation Fee
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              -# %td
+              -#   .pt-col-content{"data-label" => "Implementation Fee"}
+              -#     %span
+              -#       #{in_currency(250, current_agency.display_currency)} One Time
+              -#       .custom-tooltip
+              -#         %i.fa.fa-info-circle
+              -#         %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content{"data-label" => "Implementation Fee"}
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content{"data-label" => "Implementation Fee"}
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content{"data-label" => "Implementation Fee"}
+                  %span
+                    #{in_currency(250, current_agency.display_currency)} One Time
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a #{in_currency(500, current_agency.display_currency)} setup to the client for our setup fee of #{in_currency(250, current_agency.display_currency)}. Please reach out if there are any questions on pricing.
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Kick-Off Call with Agency
+              -# %td
+              -#   .pt-col-content{"data-label" => "Kick-Off Call with Agency"}
+              -#     %span
+              -#       %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Kick-Off Call with Agency"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Kick-Off Call with Agency"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Kick-Off Call with Agency"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Unlimited Email Support
+              -# %td
+              -#   .pt-col-content{"data-label" => "Unlimited Email Support"}
+              -#     %span With Agency
+              %td
+                .pt-col-content{"data-label" => "Unlimited Email Support"}
+                  %span With Agency
+              %td
+                .pt-col-content{"data-label" => "Unlimited Email Support"}
+                  %span With Agency
+              %td
+                .pt-col-content{"data-label" => "Unlimited Email Support"}
+                  %span With Agency
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Campaign Launch Timeline
+              -# %td
+              -#   .pt-col-content{"data-label" => "Campaign Launch Timeline"}
+              -#     %span 2 Weeks
+              %td
+                .pt-col-content{"data-label" => "Campaign Launch Timeline"}
+                  %span 2 Weeks
+              %td
+                .pt-col-content{"data-label" => "Campaign Launch Timeline"}
+                  %span 2 Weeks
+              %td
+                .pt-col-content{"data-label" => "Campaign Launch Timeline"}
+                  %span 2 Weeks
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Pre Kick off Strategy Call
+              -# %td
+              -#   .pt-col-content{"data-label" => "Pre Kick off Strategy Call"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Pre Kick off Strategy Call"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Pre Kick off Strategy Call"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Pre Kick off Strategy Call"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Dedicated Linkedin Ad Specialists
+              -# %td
+              -#   .pt-col-content{"data-label" => "Dedicated Linkedin Ad Specialists"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Linkedin Ad Specialists"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Linkedin Ad Specialists"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Linkedin Ad Specialists"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Implementation
+              -# %td
+              -#   .pt-col-content{"data-label" => "Implementation"}
+              %td
+                .pt-col-content{"data-label" => "Implementation"}
+              %td
+                .pt-col-content{"data-label" => "Implementation"}
+              %td
+                .pt-col-content{"data-label" => "Implementation"}
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span 100% Customized Strategy
+              -# %td
+              -#   .pt-col-content{"data-label" => "100% Customized Strategy"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "100% Customized Strategy"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "100% Customized Strategy"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "100% Customized Strategy"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Pixel Setup
+              -# %td
+              -#   .pt-col-content{"data-label" => "Pixel Setup"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Pixel Setup"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Pixel Setup"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Pixel Setup"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Targeting &amp; Audience Research
+              -# %td
+              -#   .pt-col-content{"data-label" => "Targeting & Audience Research"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Targeting & Audience Research"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Targeting & Audience Research"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Targeting & Audience Research"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Setup Custom Audiences
+              -# %td
+              -#   .pt-col-content{"data-label" => "Setup Custom Audiences"}
+              -#     %span
+              -#       %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Setup Custom Audiences"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Setup Custom Audiences"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Setup Custom Audiences"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Sponsered Content Ads
+              -# %td
+              -#   .pt-col-content{"data-label" => "Sponsered Content Ads"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Sponsered Content Ads"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Sponsered Content Ads"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Sponsered Content Ads"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Message Ads
+              -# %td
+              -#   .pt-col-content{"data-label" => "Message Ads"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Message Ads"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Message Ads"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Message Ads"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Video Ads
+              -# %td
+              -#   .pt-col-content{"data-label" => "Video Ads"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Video Ads"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Video Ads"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Video Ads"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Text Ads
+              -# %td
+              -#   .pt-col-content{"data-label" => "Text Ads"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Text Ads"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Text Ads"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Text Ads"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Carousel Ads
+              -# %td
+              -#   .pt-col-content{"data-label" => "Carousel Ads"}
+              -#     %span
+              -#       2 Creatives with
+              -#       = succeed "1 Round of Revisions" do
+              -#         %br/
+              %td
+                .pt-col-content{"data-label" => "Carousel Ads"}
+                  %span
+                    2 Creatives with
+                    = succeed "1 Round of Revisions" do
+                      %br/
+              %td
+                .pt-col-content{"data-label" => "Carousel Ads"}
+                  %span
+                    4 Creatives with
+                    = succeed "1 Round of Revisions" do
+                      %br/
+              %td
+                .pt-col-content{"data-label" => "Carousel Ads"}
+                  %span
+                    6 Creatives with
+                    = succeed "1 Round of Revisions" do
+                      %br/
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Campaign Buildout
+              -# %td
+              -#   .pt-col-content{"data-label" => "Campaign Buildout"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Campaign Buildout"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Campaign Buildout"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Campaign Buildout"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Ad Creation
+              -# %td
+              -#   .pt-col-content{"data-label" => "Ad Creation"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Ad Creation"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Ad Creation"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Ad Creation"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Ad Creative Approval
+              -# %td
+              -#   .pt-col-content{"data-label" => "Ad Creative Approval"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Ad Creative Approval"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Ad Creative Approval"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Ad Creative Approval"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Initial Ads Copywriting
+              -# %td
+              -#   .pt-col-content{"data-label" => "Initial Ads Copywriting"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Initial Ads Copywriting"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Initial Ads Copywriting"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Initial Ads Copywriting"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Implementation of Initial bids
+              -# %td
+              -#   .pt-col-content{"data-label" => "Implementation of Initial bids"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Implementation of Initial bids"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Implementation of Initial bids"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Implementation of Initial bids"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Implementation of Ad Scheduling
+              -# %td
+              -#   .pt-col-content{"data-label" => "Implementation of Ad Scheduling"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Implementation of Ad Scheduling"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Implementation of Ad Scheduling"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Implementation of Ad Scheduling"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Retargeting Campaign Setup
+              -# %td
+              -#   .pt-col-content{"data-label" => "Retargeting Campaign Setup"}
+              -#     %span
+              -#       %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Retargeting Campaign Setup"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Retargeting Campaign Setup"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Retargeting Campaign Setup"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span On-Going Support
+              -# %td
+              -#   .pt-col-content{"data-label" => "On-Going Support"}
+              %td
+                .pt-col-content{"data-label" => "On-Going Support"}
+              %td
+                .pt-col-content{"data-label" => "On-Going Support"}
+              %td
+                .pt-col-content{"data-label" => "On-Going Support"}
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Dedicated Campaign Management Team
+              -# %td
+              -#   .pt-col-content{"data-label" => "Dedicated Campaign Management Team"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Campaign Management Team"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Campaign Management Team"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Campaign Management Team"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Linkedin Ad Management
+              -# %td
+              -#   .pt-col-content{"data-label" => "Linkedin Ad Management"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Linkedin Ad Management"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Linkedin Ad Management"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Linkedin Ad Management"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Multiple Ad Set Split Tests
+              -# %td
+              -#   .pt-col-content{"data-label" => "Instagram Ads Management"}
+              -#     %span
+              -#       %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Instagram Ads Management"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Instagram Ads Management"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Instagram Ads Management"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Monthly Performance Report
+              -# %td
+              -#   .pt-col-content{"data-label" => "Monthly Performance Report"}
+              -#     %span With Agency
+              %td
+                .pt-col-content{"data-label" => "Monthly Performance Report"}
+                  %span With Agency
+              %td
+                .pt-col-content{"data-label" => "Monthly Performance Report"}
+                  %span With Agency
+              %td
+                .pt-col-content{"data-label" => "Monthly Performance Report"}
+                  %span With Agency
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Campaign Quality Audits
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is an internal deliverable. Clients will not be receiving a weekly report from our team. Our team consistently checks the Ad Account every week, to make sure everything is working well and if anything needs to be changed. This weekly check helps the Account Managers build a monthly report for the Client on performance and future recommendations.
+              -# %td
+              -#   .pt-col-content{"data-label" => "Campaign Quality Audits"}
+              -#     %span
+              -#       .custom-tooltip
+              -#         %i.fa.fa-info-circle
+              -#         %span.custom-tooltiptext This is an internal deliverable. Clients will not be receiving a weekly report from our team. Our team consistently checks the Ad Account every week, to make sure everything is working well and if anything needs to be changed. This weekly check helps the Account Managers build a monthly report for the Client on performance and future recommendations.
+              -#       Weekly
+              %td
+                .pt-col-content{"data-label" => "Campaign Quality Audits"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is an internal deliverable. Clients will not be receiving a weekly report from our team. Our team consistently checks the Ad Account every week, to make sure everything is working well and if anything needs to be changed. This weekly check helps the Account Managers build a monthly report for the Client on performance and future recommendations.
+                    Weekly
+              %td
+                .pt-col-content{"data-label" => "Campaign Quality Audits"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is an internal deliverable. Clients will not be receiving a weekly report from our team. Our team consistently checks the Ad Account every week, to make sure everything is working well and if anything needs to be changed. This weekly check helps the Account Managers build a monthly report for the Client on performance and future recommendations.
+                    Weekly
+              %td
+                .pt-col-content{"data-label" => "Campaign Quality Audits"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is an internal deliverable. Clients will not be receiving a weekly report from our team. Our team consistently checks the Ad Account every week, to make sure everything is working well and if anything needs to be changed. This weekly check helps the Account Managers build a monthly report for the Client on performance and future recommendations.
+                    Weekly
+            -# %tr
+            -#   %td.col-label.text-left
+            -#     .pt-col-content
+            -#       %span
+            -#         Performance-Based Ad Spend Allocation
+            -#         .custom-tooltip.pull-right.pl-sm
+            -#           %i.fa.fa-info-circle
+            -#           %span.custom-tooltiptext Performance-Based Ad Spend Allocation is used when multiple campaigns are tested to find the right targeting and creative that makes sense to our audience. For example, if one campaign outperforms another, more Ad Spend is allocated to the one performing the best, so budget is not wasted.
+            -#   -# %td
+            -#   -#   .pt-col-content{"data-label" => "Performance-Based Ad Spend Allocation"}
+            -#   -#     %span
+            -#   -#       .custom-tooltip
+            -#   -#         %i.fa.fa-info-circle
+            -#   -#         %span.custom-tooltiptext Performance-Based Ad Spend Allocation is used when multiple campaigns are tested to find the right targeting and creative that makes sense to our audience. For example, if one campaign outperforms another, more Ad Spend is allocated to the one performing the best, so budget is not wasted.
+            -#   -#       %i.material-icons.tick-r.f-s-20 check
+            -#   %td
+            -#     .pt-col-content{"data-label" => "Performance-Based Ad Spend Allocation"}
+            -#       %span
+            -#         .custom-tooltip
+            -#           %i.fa.fa-info-circle
+            -#           %span.custom-tooltiptext Performance-Based Ad Spend Allocation is used when multiple campaigns are tested to find the right targeting and creative that makes sense to our audience. For example, if one campaign outperforms another, more Ad Spend is allocated to the one performing the best, so budget is not wasted.
+            -#         %i.material-icons.tick-r.f-s-20 check
+            -#   %td
+            -#     .pt-col-content{"data-label" => "Performance-Based Ad Spend Allocation"}
+            -#       %span
+            -#         .custom-tooltip
+            -#           %i.fa.fa-info-circle
+            -#           %span.custom-tooltiptext Performance-Based Ad Spend Allocation is used when multiple campaigns are tested to find the right targeting and creative that makes sense to our audience. For example, if one campaign outperforms another, more Ad Spend is allocated to the one performing the best, so budget is not wasted.
+            -#         %i.material-icons.tick-r.f-s-20 check
+            -#   %td
+            -#     .pt-col-content{"data-label" => "Performance-Based Ad Spend Allocation"}
+            -#       %span
+            -#         .custom-tooltip
+            -#           %i.fa.fa-info-circle
+            -#           %span.custom-tooltiptext Performance-Based Ad Spend Allocation is used when multiple campaigns are tested to find the right targeting and creative that makes sense to our audience. For example, if one campaign outperforms another, more Ad Spend is allocated to the one performing the best, so budget is not wasted.
+            -#         %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Performance-Based Budget pacing
+              -# %td
+              -#   .pt-col-content{"data-label" => "Performance-Based Budget pacing"}
+              -#     %span
+              -#       %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Performance-Based Budget pacing"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Performance-Based Budget pacing"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Performance-Based Budget pacing"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Month to Month Commitment
+              -# %td
+              -#   .pt-col-content{"data-label" => "Month to Month Commitment"}
+              -#     %span
+              -#       %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Month to Month Commitment"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Month to Month Commitment"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Month to Month Commitment"}
+                  %span
+                    %i.material-icons.text-success.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Client Cancellation
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              -# %td
+              -#   .pt-col-content{"data-label" => "Client Cancellation"}
+              -#     %span
+              -#       30 Days Required
+              -#       .custom-tooltip
+              -#         %i.fa.fa-info-circle
+              -#         %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content{"data-label" => "Client Cancellation"}
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content{"data-label" => "Client Cancellation"}
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content{"data-label" => "Client Cancellation"}
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+
+            - unless @is_preview
+              %tr.pt-row-footer
+                %td.col-label.text-left
+                  .pt-col-content
+                - @plans.each do |plan|
+                  %td
+                    .pt-col-content
+                      %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: @package.key, plan: plan.key)}
+                        Get Started
+      .row.pt-5.pb-4.d-none.flex-wrap.row-p-5
+        .col-md-6.col-sm-6.col
+          .panel-body.bg-white.panel-br-10.p-5.h-100
+            .panel-head.pb-5
+              %i.clickx-icon-Support.ico-60.pr-sm.text-info
+              %h5.f-s-16.f-w-lg.l-s-2.text-muted OPTIONAL
+              .pt-header-caption.text-info White-Glove™ Customer Service
+              .pt-header-price
+                #{in_currency(500, current_agency.display_currency)}
+                %span> /mo
+            .panel-content.pl-n.pr-n
+              %p In addition to our White Label Dashboard for Reporting, White-Glove&#x2122; Customer Service include day to day Account Management, Email Communication with our Account Managers as well as Monthly Strategy and Reporting Phone Call.
+        .col-md-6.col-sm-6.col.mt-4.mt-md-0
+          .panel-body.bg-white.panel-br-10.p-5.h-100
+            .panel-head.pb-5
+              %i.clickx-icon-partner.ico-60.pr-sm.text-info
+              %h5.f-s-16.f-w-lg.l-s-2.text-muted OPTIONAL
+              .pt-header-caption.text-info Expedited Onboarding
+              .pt-header-price
+                #{in_currency(500, current_agency.display_currency)}
+                %span> /One Time
+            .panel-content.pl-n.pr-n
+              %p Speedy Ad Setup and Approval. 1 Week Rush Turn Around.
+              %p Requires Immediate Access to Business Manager as an Admin, Ad Account Creation, and Page Access, Dashboard Provisioning, Campaign Funding and Launch Support
+      - if raw(@package.sales_pitch).present?
+        .row.pt-4.pb-4.d-flex.flex-wrap.row-p-4
+          .col-sm-12.mt-4.mt-md-0
+            .panel-body.bg-white.panel-br-10.p-5.h-100
+              .panel-content.pl-n.pr-n
+                = raw(@package.sales_pitch)
+      .spacer15
+:javascript
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.plan-preloader').removeClass('plan-preloader');
+    }, 500);
+  });

@@ -1,0 +1,73 @@
+.container-fluid.py-4
+  .email-templates-wrapper
+    .email-templates-back-button
+      %i.fa.fa-angle-left
+      Back
+    .email-templates-row.relative
+      .col.relative
+        .email-templates-list--wrapper
+          .email-templates-list
+            - @email_templates.each do |template|
+              .email-templates-list--item.d-flex.align-items-center.p-2{id: "email-templates-list-item_#{template.id}"}
+                .col
+                  .email-templates-list--item-icon.mr-3
+                    %i.fa.fa-envelope
+                %div.flex-col.pr-3
+                  = template.name
+                .col
+                  %a.email-templates-edit-btn{"data-remote" => "true", :href => edit_agency_email_template_path(template), 'data-toggle': 'tooltip', title: 'Edit', 'data-placement': 'bottom'}
+                    .email-templates-list--item-action-btn.edit-template
+                      %i.fa.fa-pencil
+                .col.pl-2
+                  %a{"data-method" => "post", :href => create_duplicate_email_template_agency_email_template_path(template), title: 'Duplicate', 'data-toggle': 'tooltip', 'data-placement': 'bottom'}
+                    .email-templates-list--item-action-btn
+                      %i.fa.fa-clone
+                .col.pl-2
+                  %a.remove-email-template{"data-remote" => "true","data-method" => "post", :href => disable_email_template_agency_email_template_path(template), title: 'Remove', 'data-toggle': 'tooltip', 'data-placement': 'left',  "data-toggle": "modal"}
+                    .email-templates-list--item-action-btn
+                      %i.fa.fa-trash
+                     
+        .btn-addnew-email-template-wrap
+          %a.btn-addnew-email-template.edit-template{"data-remote" => "true", :href => new_agency_email_template_path}
+            %i.fa.fa-plus.mr-3
+            Add Template
+      .col.col-span-2.bg-gray.rounded-12.email-template-preview-area.p-4.p-md-5
+        #email-template-form.email-template-loading
+
+.modal.fade.in.remove-emial-template-modal{role: "dialog", tabindex: "-1"}
+  #remove-emial-template-modal            
+  
+:javascript
+  $('.tooltips').tooltip();
+  $('.copy_text').click(function(){
+    var copyText = $('.' + $(this).data('value'))
+    copyText.select();
+    document.execCommand('copy');
+    $('.tooltips').attr('data-original-title', 'Copied!');
+    $(this).find('.tooltips').tooltip('show');
+  })
+  $('.copy_text').hover(function(){
+    $('.tooltips').attr('data-original-title', 'Copy to clipboard');
+    $(this).find('.tooltips').tooltip('show');
+  })
+
+  var winWIdth = $(window).width();
+  $(document).on('click', '.email-templates-edit-btn', function() {
+    $('.email-templates-list--item').removeClass('active');
+    if(winWIdth < 1024) {
+      $('.email-templates-wrapper').addClass('edit-view');
+      $('.email-template-preview-area, .email-templates-back-button').fadeIn();
+    } else {
+      $(this).parents('.email-templates-list--item').addClass('active');
+    }
+  });
+  $(document).on('click', '.email-templates-back-button', function() {
+    $('.email-templates-wrapper').removeClass('edit-view');
+    $('.email-template-preview-area, .email-templates-back-button').fadeOut();
+  })
+
+:css
+  .offscreen{
+    position: absolute;
+    left: -999em;
+  }

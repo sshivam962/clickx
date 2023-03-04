@@ -1,0 +1,89 @@
+#edit-strategy-modal.modal.fade{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg{role: 'document'}
+    = form_for email, url: super_admin_mail_path(email), method: :put, remote: true do |f|
+      .modal-content
+        .modal-header
+          Edit Email
+          %a.close.pl-md{'data-dismiss': 'modal'}
+            %span ×
+        .modal-body
+          .row
+            .col-md-10
+              .form-group.to-addresses
+                %label{for: "to_addresses"} To addresses
+                .col-sm-10.right.grey-btn-group
+                  = link_to '#', class: "btn grey-btn-icon align-icon ml-sm mb-sm", id: "to-new-field" do
+                    %i.glyphicon.glyphicon-plus
+                    New
+                - email.to_addresses.each do |to_addr|
+                  .spacer15
+                  .to-addr
+                    = link_to '#', class: "red-btn-icon remove_field_to red pull-right" do
+                      &#10006;
+                    = f.text_field :to_addresses, value: "#{to_addr}", class: "form-control login width90per", placeholder: 'To addresses', name: "email[to_addresses][]"
+              .spacer15
+              .form-group.cc-addresses
+                %label{for: "cc_addresses"} CC addresses
+                .col-sm-10.right.grey-btn-group
+                  = link_to '#', class: "btn grey-btn-icon align-icon ml-sm mb-sm", id: "cc-new-field" do
+                    %i.glyphicon.glyphicon-plus
+                    New
+                - email.cc_addresses.each do |cc_addr|
+                  .spacer15
+                  .cc-addr
+                    = link_to '#', class: "red-btn-icon remove_field_cc red pull-right" do
+                      &#10006;
+                    = f.text_field :cc_addresses, value: "#{cc_addr}", class: 'form-control login width90per', placeholder: 'CC addresses', name: "email[cc_addresses][]"
+              .spacer15
+              -# .form-group.bcc-addresses
+              -#   %label{for: "bcc_addresses"} BCC addresses
+              -#   .col-sm-10.right.grey-btn-group
+              -#     = link_to '#', class: "btn grey-btn-icon align-icon ml-sm mb-sm", id: "bcc-new-field" do
+              -#       %i.glyphicon.glyphicon-plus
+              -#       New
+              -#   - email.bcc_addresses.each do |bcc_addr|
+              -#     .spacer15
+              -#     .bcc-addr
+              -#       = link_to '#', class: "red-btn-icon remove_field_bcc red pull-right" do
+              -#         &#10006;
+              -#       = f.text_field :bcc_addresses, value: "#{bcc_addr}", class: 'form-control login width90per', placeholder: 'BCC addresses', name: "email[bcc_addresses][]"
+        .modal-footer
+          = f.submit 'Save', class: 'btn btn-primary btn-raised submit'
+
+:javascript
+  $(document).ready(function() {
+    var to_wrapper = $(".to-addresses");
+    var cc_wrapper = $(".cc-addresses");
+    var bcc_wrapper = $(".bcc-addresses");
+    var to_add_button = $("#to-new-field");
+    var cc_add_button = $("#cc-new-field");
+    var bcc_add_button = $("#bcc-new-field");
+
+    $(to_add_button).click(function(){
+      $(to_wrapper).append('<div class="spacer15"></div><div><a href="#" class="red-btn-icon remove_field red pull-right">&#10006</a><input type="text" name="email[to_addresses][]" class="form-control login width90per new-field" placeholder="To addresses"/></div>');
+    });
+    $(cc_add_button).click(function(){
+      $(cc_wrapper).append('<div class="spacer15"></div><div><a href="#" class="red-btn-icon remove_field red pull-right">&#10006</a><input type="text" name="email[cc_addresses][]" class="form-control login width90per new-field" placeholder="CC addresses"/></div>');
+    });
+    $(bcc_add_button).click(function(){
+      $(bcc_wrapper).append('<div class="spacer15"></div><div><a href="#" class="red-btn-icon remove_field red pull-right">&#10006</a><input type="text" name="email[bcc_addresses][]" class="form-control login width90per new-field" placeholder="BCC addresses"/></div>');
+    });
+    $(to_wrapper).on("click",".remove_field", function(){
+      $(this).parent('div').remove();
+    });
+    $(cc_wrapper).on("click",".remove_field", function(){
+      $(this).parent('div').remove();
+    });
+    $(bcc_wrapper).on("click",".remove_field", function(){
+      $(this).parent('div').remove();
+    });
+    $('.remove_field_to').click(function(){
+      $(this).parent('div').remove();
+    });
+    $('.remove_field_cc').click(function(){
+      $(this).parent('div').remove();
+    });
+    $('.remove_field_bcc').click(function(){
+      $(this).parent('div').remove();
+    });
+  });

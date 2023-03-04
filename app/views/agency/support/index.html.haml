@@ -1,0 +1,234 @@
+%script{src: "https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js", :type => "text/javascript"}
+%link{href: "https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.css", rel: "stylesheet"}
+- content_for :title do
+  Support | Clickx
+.tabbed-page-wrapper
+  .tabbed-page--contents.bg-sky-blue.border-1.border-blue.rounded
+    .tabbed-page--header.mb-4
+      .fw-m.text-darkblue.lh-12
+        Support
+    .tabbed-page
+      .tabbed-page--left
+        .tabbed-page--nav.bg-light.p-20.rounded-12.rounded.border-1.border-blue.h-100
+          - if current_agency.coaching_calls_in_support_page?
+            .tabbed-page--nav-item{'data-id': 'tab-live-support'}
+              %i.fa.fa-video-camera.color-blue.mr-2
+              Live Support
+          .tabbed-page--nav-item{'data-id': 'tab-submit-ticket'}
+            %i.fa.fa-user-circle.mr-2
+            Submit a Ticket
+          -# - if current_agency.support_prospecting_call?
+          -#   .tabbed-page--nav-item{'data-id': 'tabbed-page-3'}
+          -#     %i.fa.fa-video-camera.color-blue.mr-2
+          -#     Partner Office Hours
+          -# - if current_agency.coaching_calls_in_support_page?
+          -#   .tabbed-page--nav-item{'data-id': 'tab-lg'}
+          -#     %i.fa.fa-video-camera.color-blue.mr-2
+          -#     Lead Generation
+          -# - if current_agency.coaching_calls_in_support_page?
+          -#   .tabbed-page--nav-item{'data-id': 'tabbed-page-4'}
+          -#     %i.fa.fa-video-camera.color-blue.mr-2
+          -#     Hot Seats
+          - if current_agency.moment_call?
+            .tabbed-page--nav-item{'data-id': 'tabbed-page-5'}
+              %i.fa.fa-phone.mr-2
+              Schedule Momentum 1:1 Call
+          -# .tabbed-page--nav-item.active{'data-id': 'tabbed-page-5'}
+          -#   %i.fa.fa-play.mr-2
+          -#   Live Challenge
+          -# .tabbed-page--nav-item.active{'data-id': 'tabbed-page-6'}
+          -#   %i.fa.fa-play.mr-2
+          -#   Hot Seats Sessions
+          -# - if current_agency.support_prospecting_call?
+          -#   .tabbed-page--nav-item{'data-id': 'tabbed-page-6'}
+          -#     %i.fa.fa-video-camera.color-blue.mr-2
+          -#     Agency Webinar Series
+          .tabbed-page--nav-item{'data-id': 'tabbed-page-7'}
+            %i.fa.fa-users.mr-2
+            Get to Know Your Coaching Team
+          .tabbed-page--nav-item{'data-id': 'tabbed-page-9'}
+            %i.fa.fa-calculator
+            Scale Calculator
+          .tabbed-page--nav-item{'data-id': 'tabbed-page-10'}
+            %i.fa.fa-sun-o.mr-2
+            Feature Request
+          .tabbed-page--nav-item{'data-id': 'tab-service-level-agreement'}
+            %i.fa.fa-handshake-o.mr-2
+            Service Level Agreement
+      .tabbed-page--right
+        .tabbed-page--content-area
+          #tab-submit-ticket.tabbed-page-item
+            .tabbed-page-item--header
+              %i.fa.fa-user-circle.mr-2
+              Submit a Ticket
+              %span.tabbed-page-item--header-icon
+                %i.fa.fa-angle-down
+            .tabbed-page-item--content
+              = render 'agency/support/shared/help_and_support'
+          - if current_agency.coaching_calls_in_support_page?
+            #tab-live-support.tabbed-page-item
+              .tabbed-page-item--header
+                %i.fa.fa-video-camera.color-blue.mr-2
+                Live Support
+                %span.tabbed-page-item--header-icon
+                  %i.fa.fa-angle-down
+              .tabbed-page-item--content
+                = render 'agency/support/shared/coaching_calls_in_support_page'
+            #tab-lg.tabbed-page-item
+              .tabbed-page-item--header
+                %i.fa.fa-phone.mr-2
+                Lead Generation
+                %span.tabbed-page-item--header-icon
+                  %i.fa.fa-angle-down
+              .tabbed-page-item--content
+                = render 'agency/support/shared/call_lead_gen'
+          - if current_agency.support_prospecting_call?
+            #tabbed-page-3.tabbed-page-item
+              .tabbed-page-item--header
+                %i.fa.fa-video-camera.color-blue.mr-2
+                Partner Office Hours
+                %span.tabbed-page-item--header-icon
+                  %i.fa.fa-angle-down
+              .tabbed-page-item--content
+                = render 'agency/support/shared/partner_call'
+          #tabbed-page-4.tabbed-page-item
+            .tabbed-page-item--header
+              %i.fa.fa-phone.mr-2
+              Hot Seats
+              %span.tabbed-page-item--header-icon
+                %i.fa.fa-angle-down
+            .tabbed-page-item--content
+              = render 'agency/support/shared/hot_seats'
+          - if current_agency.moment_call?
+            #tabbed-page-5.tabbed-page-item
+              .tabbed-page-item--header
+                %i.fa.fa-phone.mr-2
+                Schedule Momentum 1:1 Call
+                %span.tabbed-page-item--header-icon
+                  %i.fa.fa-angle-down
+              .tabbed-page-item--content
+                = render 'agency/support/shared/momentum_call'
+          -# #tabbed-page-5.tabbed-page-item
+          -#   .tabbed-page-item--header
+          -#     %i.fa.fa-play.mr-2
+          -#     Live Challenge
+          -#     %span.tabbed-page-item--header-icon
+          -#       %i.fa.fa-angle-down
+          -#   .tabbed-page-item--content
+          -#     = render 'agency/support/shared/live_challenge'
+          -# #tabbed-page-6.tabbed-page-item
+          -#   .tabbed-page-item--header
+          -#     %i.fa.fa-play.mr-2
+          -#     Hot Seats Sessions
+          -#     %span.tabbed-page-item--header-icon
+          -#       %i.fa.fa-angle-down
+            .tabbed-page-item--content
+              = render 'agency/support/shared/hot_seats_sessions'
+          -# - if current_agency.support_prospecting_call?
+          -#   #tabbed-page-6.tabbed-page-item
+          -#     .tabbed-page-item--header
+          -#       %i.fa.fa-video-camera.color-blue.mr-2
+          -#       Agency Webinar Series
+          -#       %span.tabbed-page-item--header-icon
+          -#         %i.fa.fa-angle-down
+          -#     .tabbed-page-item--content
+          -#       = render 'agency/support/shared/support_call'
+          #tabbed-page-7.tabbed-page-item
+            .tabbed-page-item--header
+              %i.fa.fa-users.mr-2
+              Get to Know Your Coaching Team
+              %span.tabbed-page-item--header-icon
+                %i.fa.fa-angle-down
+            .tabbed-page-item--content
+              = render 'agency/support/shared/get_to_know_your_coaching_team'
+          #tab-service-level-agreement.tabbed-page-item
+            .tabbed-page-item--header
+              %i.fa.fa-handshake-o.mr-2
+              Service Level Agreement
+              %span.tabbed-page-item--header-icon
+                %i.fa.fa-angle-down
+            .tabbed-page-item--content
+              = render 'agency/support/shared/service_agreement'
+          #tabbed-page-9.tabbed-page-item
+            .tabbed-page-item--header
+              %i.fa.fa-calculator
+              Scale Calculator
+              %span.tabbed-page-item--header-icon
+                %i.fa.fa-angle-down
+            .tabbed-page-item--content
+              = render 'agency/support/shared/scale_calculator'
+          #tabbed-page-10.tabbed-page-item
+            .tabbed-page-item--header
+              %i.fa.fa-sun-o.mr-2
+              Feature Request
+              %span.tabbed-page-item--header-icon
+                %i.fa.fa-angle-down
+            .tabbed-page-item--content
+              -# = link_to "javascript:void(0);", onclick:"openNewWindow('https://clickx.ideas.aha.io')", class: 'btn btn-info fw-sb' do
+              -#   Feature Request
+              .hs-form-wrapper
+                %script{:charset => "utf-8", :src => "//js.hsforms.net/forms/embed/v2.js", :type => "text/javascript"}
+                :javascript
+                  hbspt.forms.create({
+                    region: "na1",
+                    portalId: "5862065",
+                    formId: "9a4ab1da-2a58-4c2c-8af8-c5e8297b6590"
+                  });
+:javascript
+  function wrapperHeight() {
+    var wrapperHeihgt = jQuery('#layout-static').outerHeight();
+    winWidth = jQuery(window).width();
+    if(winWidth > 767) {
+      jQuery('.tabbed-page-wrapper').css('height', wrapperHeihgt + 'px');
+      jQuery('.tabbed-page--nav-item:first-child').trigger('click');
+    } else {
+      jQuery('.tabbed-page--contents').css('min-height', wrapperHeihgt - 20 + 'px');
+    }
+  }
+  jQuery(document).ready(function() {
+    wrapperHeight();
+  });
+  jQuery(window).load(function() {
+    wrapperHeight();
+  });
+  window.onresize = function() {
+    wrapperHeight();
+  }
+
+
+  $(document).on('click', '.support-accordion-header', function() {
+    if($(this).next('.support-accordion-content').is(':visible')) {
+      $(this).next('.support-accordion-content').slideUp();
+      $(this).parent('.support-accordion').addClass('support-accordion--collapsed');
+    } else {
+      $(this).next('.support-accordion-content').slideDown();
+      $(this).parent('.support-accordion').removeClass('support-accordion--collapsed');
+    }
+    $('.btn_bac_wrap').addClass('hidden');
+    $('.scale_calc_nav').slideDown();
+    $('.reverse_scale_calc, .scale_calc').slideUp();
+  });
+  $(document).on('click', '.tabbed-page--nav-item', function() {
+    jQuery(this).addClass('active').siblings('.tabbed-page--nav-item').removeClass('active');
+    var tabId = jQuery(this).data('id');
+    jQuery('#' + tabId).show().siblings('.tabbed-page-item').hide();
+    $('.btn_bac_wrap').addClass('hidden');
+    $('.scale_calc_nav').slideDown();
+    $('.reverse_scale_calc, .scale_calc').slideUp();
+  });
+  function openNewWindow(location) {
+    winWidth = jQuery(window).width();
+    winHeight = jQuery(window).height();
+    newWindowWidth = winWidth - (winWidth / 4)
+    newWindowHeight = winHeight - (winHeight / 4)
+    window.open(location, 'newwindow', 'width='+newWindowWidth+',height='+newWindowHeight); return false;
+  }
+  $(document).on('click', '.tabbed-page-item--header', function() {
+    if($(this).parent('.tabbed-page-item').hasClass('active')) {
+      $(this).parent('.tabbed-page-item').removeClass('active')
+      $(this).next('.tabbed-page-item--content').slideUp();
+    } else {
+      $(this).parent('.tabbed-page-item').addClass('active')
+      $(this).next('.tabbed-page-item--content').slideDown();
+    }
+  });

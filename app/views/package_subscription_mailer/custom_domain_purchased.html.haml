@@ -1,0 +1,21 @@
+%p
+  %h4
+    Custom Domain subscription recieved:
+    = @package.package_name.humanize
+%p
+  Amount :
+  = number_to_currency(@package.amount)
+%p
+  Agency :
+  = @agency.name
+
+%p
+  Custom Domain:
+  = @agency.domain
+%p
+  Default:
+  = @agency.weburl
+
+%p
+  CNAME:
+  = @agency.cname

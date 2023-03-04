@@ -1,0 +1,16 @@
+- content_for :title do
+  Social Media Prompts | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    .col-xs-10.col-sm-10.col-lg-10
+      %h1 Social Media Prompts
+    - if current_user.role == 'admin' && current_user.full_access == true
+      .col-xs-2.col-sm-2.col-lg-2
+        %a.btn.btn-warning.pull-right.mt-lg.mb-lg{href: new_super_admin_social_media_prompt_path}
+          %i.fa.fa-plus
+          New Social Media Prompt
+.row
+  .col-md-12
+    %div
+      %table.table.table--xl
+        = render 'super_admin/social_media_prompts/shared/list', social_media_prompts: @social_media_prompts

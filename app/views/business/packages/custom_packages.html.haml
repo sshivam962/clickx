@@ -1,0 +1,35 @@
+- content_for :title do
+  My Quotes
+.page-heading
+  %h1 My Quotes
+.container-fluid
+  %div{"data-widget-group" => "group1"}
+    .row
+      .col-sm-12
+        .panel.panel-info
+          .panel-body.p-lg
+            .row
+              .col-sm-12.p-n.mb-lg
+                .table-responsive.table-pricing1
+                  %table.table.table-hover.mb-n
+                    %thead
+                      %tr
+                        %th.vat{:width => "250"}
+                          %h2.text-info.mt-n.f-s-22 Package
+                        %th.vat{:width => "200"}
+                          %h2.text-info.mt-n.f-s-22 Management Fee
+                        %th.vat{:width => "200"}
+                          %h2.text-info.mt-n.f-s-22 Implementation Fee
+                        %th.vat{:width => "120"}
+                    %tbody
+                      - @plans.each do |plan|
+                        %tr
+                          %td.vam
+                            = plan[:name]
+                          %td.vam
+                            = number_to_currency(plan[:amount], precision: 0)
+                          %td.vam
+                            = number_to_currency(plan[:implementation_fee], precision: 0)
+                          %td.vam
+                            %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: business_checkout_path(package: 'custom', plan: plan[:package_name])}
+                              Get Started

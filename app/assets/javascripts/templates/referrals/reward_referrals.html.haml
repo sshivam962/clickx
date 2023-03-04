@@ -1,0 +1,44 @@
+/ .header1
+/   %ul
+/     %li
+/       %a.btn.btn-warning.btn-sm.btn-reset-m-0.pull-right{ 'ng-click': 'go_back()' }
+/         %i.fa.fa-arrow-left.pr-xs
+/         Back
+/       %a.btn.btn-warning.btn-sm.btn-reset-m-0.pull-right{ 'ng-href': '/#/referral_analytics' }
+/         %i.fa.fa-line-chart.pr-xs
+/         Analytics
+/   %h1 Reward Referrals
+/ .container-fluid
+/   .row
+/     .col-xs-12.col-sm-12.col-md-12{ 'st-table': 'referred_signups', 'st-pipe': 'getReferredSignups' }
+/       .referred-signups{ 'style': 'margin-top:50px', 'ng-if': 'referred_signups' }
+/         %table.table.table-bordered.users.reports
+/           %thead
+/             %th{ 'ng-click': 'sortBy("referrer")' } Referrer
+/             %th{ 'ng-click': 'sortBy("referree")' } Referee
+/             -# %th Eligible
+/             %th Rewarded
+/           %tbody
+/             %tr{ 'ng-repeat': 'referral in referred_signups track by $index', 'uib-tooltip': '{{referral.notes}}',
+/             'tooltip-append-to-body': 'true', 'style': 'height: 56px' }
+/               %td.text-center {{ referral.referrer }}
+/               %td.text-center {{ referral.referree }}
+/               -# %td.text-center {{ referral.eligibility? 'Yes' : 'No' }}
+/               %td.text-center{ 'ng-if': 'referral.rewarded' } Yes
+/               %td.text-center{ 'ng-if': '!referral.rewarded' }
+/                 %button.btn.btn-warning.btn-sm{ 'ng-click': 'rewardHim(referral, $index)' } Reward
+/         .row.text-center.p-n.mgl-33
+/           .pagination-links{ 'st-pagination': '', 'st-items-by-page': 'itemsByPage' }
+/       .jumbotron{ 'ng-if': '!referred_signups' }
+/         %h3.text-center No referral data to be shown.
+
+/ %script{ 'id': "rewardReferrals.html", 'type': "text/ng-template" }
+/   .modal-header
+/     %h3.modal-title
+/       Reward - {{ referral.referrer.first_name }} {{ referral.referrer.last_name }}
+/   .modal-body
+/     %textarea.width100per{ 'ng-model': 'note', 'style': 'height: 100px;',
+/     'placeholder': 'Add some notes about this Reward' }
+/   .modal-footer
+/     %button.btn.btn-sm.btn-success{ 'ng-click': 'saveNote(note);close();' } Save
+/     %button.btn.btn-sm.white{ 'ng-click': 'close();' } Close

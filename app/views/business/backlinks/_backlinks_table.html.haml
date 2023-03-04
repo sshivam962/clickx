@@ -1,0 +1,53 @@
+.panel.panel-default
+  .panel-body.p-n.pt-md
+    .col-md-12
+      .col-sm-12.p-n
+        .table-responsive
+          %table.table.table-hover.table-vam.table-striped.text-muted
+            %thead
+              %tr
+                %th.f-w-md
+                  %u.help_pointer{ "title": "Referring Page" }
+                    = link_to 'REFERRING PAGE',
+                    all_business_backlinks_path(order_by: 'SourceTitle', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "title": "Trust flow of the backlinks" }
+                    = link_to 'TF', all_business_backlinks_path(order_by: 'SourceTrustFlow', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "title": "Citation flow of the backlinks" }
+                    = link_to 'CF', all_business_backlinks_path(order_by: 'SourceCitationFlow', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "title": "Type of backlinks" }
+                    = link_to 'Link Type', all_business_backlinks_path(order_by: 'LinkType', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "title": "First Seen and Last Checked" }
+                    = link_to 'FIRST SEEN - LAST CHECKED', all_business_backlinks_path(order_by: 'LastSeenDate', order: sort_order), style: 'color:#949494;', remote: true
+                %th.f-w-md
+                  %u.help_pointer{ "title": "Anchor Text" }
+                    = link_to 'ANCHOR TEXT', all_business_backlinks_path(order_by: 'AnchorText', order: sort_order), style: 'color:#949494;', remote: true
+            %tbody
+              - @backlinks.each do |backlink|
+                %tr
+                  %td
+                    %a.text-info{ "href" => backlink.referring_page, target: '_blank' }
+                      = backlink.referring_page
+                    %p.m-n
+                      = backlink.title
+                  %td
+                    = backlink.trust_flow
+                  %td
+                    = backlink.citation_flow
+                  %td
+                    = backlink.link_type
+                  %td
+                    %p
+                      = backlink.first_indexed_date
+                    %p
+                      = backlink.last_seen_date
+                  %td
+                    %p.m-n
+                      = backlink.anchor_text
+      .ui-2020
+        .row.pagination-wrapper
+          .pagination
+            = will_paginate @backlinks

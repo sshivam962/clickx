@@ -1,0 +1,20 @@
+.uiv2
+  .header
+    %h1 Manage Labels
+
+  .locations
+    = form_with url: super_admin_labels_path do |f|
+      = label_tag :labels
+      = text_field_tag :labels, @tags, class: 'form-control', multiple: true, 'data-role':"tagsinput"
+      %br
+      = f.submit 'Save', class: 'btn btn-warning saveBtn'
+      = link_to 'Back',root_path, class: 'btn btn-info'
+
+:javascript
+  $('#labels').tagsInput();
+
+:css
+  .tagsinput{
+    width: 100%!important;
+    height: auto!important;
+  }

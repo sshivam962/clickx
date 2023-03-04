@@ -1,0 +1,41 @@
+- agencies.each do |agency|
+  .pt-n{id: dom_id(agency)}
+    .clients-list
+      .clients-list__item.d-flex.flex-wrap
+        .col-stretch.clients-list__datas.pr-4.pt-3
+          .d-flex
+            .col-md-4.pl-0
+              - if agency.logo.present?
+                %img.mr-xs{alt: 'logo', src: agency.logo, width: '50'}
+              %span.name.blue
+                = agency.name
+                - subscription = agency.growth_subscriptions.last
+                - if agency.growth_subscriptions.present?
+                  %small
+                    = "(#{agency.growth_plan_key&.titleize})"
+                .mt-3.ml-lg.pl-xl
+                  - if agency.deleted?
+                    = "Status: Cancelled"
+                  - elsif subscription.present?
+                    = "Status: #{subscription.status.titleize}"
+            .col-md-3
+              %p
+                = link_to agency.active_domain
+              - if agency.support_email.present?
+                %p
+                  Email:
+                  %a{href: "mailto:#{agency.support_email}"}= agency.support_email
+              - if agency.phone.present?
+                %p
+                  Phone:
+                  %a{href: "tel:#{agency.phone}"}= agency.phone
+            .col-md-3
+              %span.small
+                - agency.users.order(:first_name).normal.each do |user|
+                  #{user.name} (#{user.email})
+                  %br
+            .col-md-3
+              - agency.label_list.each do |label|
+                %span.small.pr-sm
+                  %span.label.label-default
+                    = label

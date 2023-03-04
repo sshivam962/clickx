@@ -1,0 +1,10 @@
+%td
+  = webhook.target_url
+%td
+%td
+%td
+%td
+  = link_to super_admin_workable_webhook_path(webhook), method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', 'original-title' => 'Archive'}, class: 'btn btn-default action-btn' do
+    %span.btn-icon
+      %i.fa.fa-trash
+      Delete

@@ -1,0 +1,52 @@
+- content_for :title do
+  Proposals | Clickx
+/ No Notifications
+
+/ #wrapper.ui-2020
+/   #layout-static
+/     .static-content-wrapper
+/       .static-content
+/         .page-content
+/           %script{:src => "https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js", :type => "text/javascript"}
+/           %link{:href => "https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.css", :rel => "stylesheet"}/
+/           .page-heading
+/             %h1
+/               %i.clickx-icon-db>
+/               Projects
+/           .container-fluid
+/             .pt-4
+/               .d-table.bg-white.rounded.mx-auto.p-5.text-center.no-items-notification
+/                 .py-5
+/                 %img{ 'src': "#{ image_path 'projects/no-notification.svg' }", style: "width:80px;" }
+/                 .pb-5
+/                 .fs-md.fw-b.pb-2.text-black No Notifications Yet
+/                 %p.fs-xxs Stay tuned! Notifications about your activity will show up here.
+/                 .py-5
+
+/ All Notifications
+#wrapper.ui-2020
+  #layout-static
+    .static-content-wrapper
+      .static-content
+        .page-content
+          .page-heading
+            %h1
+              %i.clickx-icon-Measure
+              Proposals
+          .container-fluid
+            .row.d-flex.flex-wrap.cover-section
+              .col-lg-6.col-xs-12.pb-4
+                .bg-sky-blue.border-blue.p-4.p-md-5.rounded.border-1
+                  .project-notifications-list
+                    - @projects.each do |project|
+                      .project-notifications-list-item.mb-3.mb-lg-4
+                        %a.d-block.project-notification.bg-white.shadow-md.rounded-8.p-4{href: project_proposals_agency_project_path(project), data:{remote: true}}
+                          .d-flex.justify-content-between.align-items-center
+                            .col-auto
+                              .fw-m.fs-sm.text-black= project.title.titleize
+                            .col-auto
+                              .p-3.bg-warning.fw-m.text-white.rounded-8= sprintf '%02d', project.project_proposals.count
+
+              .col-lg-6.col-xs-12.pb-4
+                #project_proposals.bg-sky-blue.border-blue.rounded.border-1.d-flex.justify-content-center.align-items-center
+                  %h4 No Project Selected

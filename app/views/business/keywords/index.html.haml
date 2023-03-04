@@ -1,0 +1,30 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-PromoteSearch.title-icon
+    Keywords
+
+  %button.btn.btn-white.btn-raised.m-n.pull-right{"data-target" => "#add-keywords-modal", "data-toggle" => "modal", :type => "button"}
+    %i.fa.fa-plus.pr-xs
+    Add Keywords
+
+.container-fluid
+  %div
+    .row
+      .col-md-12
+        .panel.panel-blue
+          .panel-body.pt-sm#table_export
+            .col-sm-12.p-n
+              .col-sm-3.p-n
+                .form-group.m-n.pl-n.pt-sm
+                  = form_with url: business_keywords_path, method: :get, local: false do |f|
+                    .pl-n.input-group
+                      %span.input-group-addon.formfldic
+                        %i.material-icons search
+                      #keyword-search-field
+                        = f.text_field :search_term, class: 'form-control col-sm-5 cus6in pl-lg', placeholder: 'Search'
+                      = f.submit 'Search', style: "display: none"
+            .col-sm-12.pt-sm.p-n
+              #keywords-table
+                = render 'keywords_list'
+
+= render 'add_keywords'

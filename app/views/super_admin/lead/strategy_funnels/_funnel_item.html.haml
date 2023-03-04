@@ -1,0 +1,27 @@
+.panel.panel-default{id: "panel-#{funnel.id}", style: 'text-transform: none; list-style-type: none;', data: { id: funnel.id, url: move_position_super_admin_strategy_funnel_path(funnel.id) }}
+  .panel-body
+    .col-md-10
+      %li
+        = funnel.content
+    .col-md-2
+      .pull-right
+        = link_to super_admin_strategy_funnel_path(funnel), class: 'ml-sm', method: :delete, data: { confirm: "Are you sure?"}, remote: true do
+          %i.fa.fa-trash
+        %a.ml-sm.edit-funnel{data: {id: funnel.id}}
+          %i.fa.fa-edit
+    .update-funnel-form.hidden{id: "update-funnel-#{funnel.id}"}
+      = form_with model: funnel, url: super_admin_strategy_funnel_path(funnel), local: false  do |f|
+        = f.hidden_field :category
+        = f.hidden_field :funnel_type
+        .form-group
+          .col-sm-10.pr-n
+            = f.text_field :content, class: 'form-control login display-inline'
+          .col-sm-2
+            = f.submit 'Save', class: 'btn btn-info mt-n'
+
+:javascript
+  $('.edit-funnel').on('click',function(){
+    funnel_id = $(this).data('id')
+    $('.update-funnel-form').addClass('hidden')
+    $('#update-funnel-' + funnel_id).removeClass('hidden');
+  });

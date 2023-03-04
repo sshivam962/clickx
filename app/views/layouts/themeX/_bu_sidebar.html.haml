@@ -1,0 +1,211 @@
+.static-sidebar-wrapper.sidebar-dark.ui-2020
+  .fixed-sidebar
+    .static-sidebar
+      .sidebar
+        .widget.stay-on-collapse
+          %nav.widget-body{role: "navigation"}
+            %ul.acc-menu
+              - if current_business.free_service?
+                %li
+                  %a.withripple{href: "/#/grader"}
+                    %span.icon
+                      %i.clickx-icon-House
+                    %span Grader
+              - else
+                %li
+                  %a.withripple{href: '/b/dashboard'}
+                    %span.icon
+                      %i.clickx-icon-House
+                    %span Dashboard
+              - if current_business.reputation_service
+                %li
+                  %a.withripple{href: "javascript:;"}
+                    %span.icon
+                      %i.clickx-icon-CalltoAction
+                    %span Campaigns
+                  %ul.acc-menu
+                    / - if current_business.onboarding_procedures.present?
+                    /   %li
+                    /     %a.withripple{href: "/#/onboarding_procedures" }
+                    /       %span.icon
+                    /         %i.clickx-icon-Reports
+                    /       %span Onboarding
+                    - if current_business.reputation_service
+                      %li
+                        %a.withripple{href: "/#/search_terms" }
+                          %span.icon
+                            %i.clickx-icon-Performance-Review
+                          %span Rep Management
+
+              - if current_business.agency.clickx?
+                %li.li-block.hasChild
+                  %a.withripple{href: "javascript:void(0);"}
+                    %span.icon
+                      %i.clickx-icon-package
+                    %span Plans
+                  %ul.acc-menu
+                    %li.sub-li
+                      %a.withripple{href: "/b/packages/facebook_ads"}
+                        %span.icon
+                          %i.clickx-icon-facebook
+                        %span Facebook Ads
+                    %li.sub-li
+                      %a.withripple{href: "/b/packages/google_ads"}
+                        %span.icon
+                          %i.clickx-icon-adwords
+                        %span Google Ads
+                    %li.sub-li
+                      %a.withripple{href: "/b/packages/seo_services"}
+                        %span.icon
+                          %i.clickx-icon-seo
+                        %span Advanced SEO
+                    %li.sub-li
+                      %a.withripple{href: "/b/packages/local_seo"}
+                        %span.icon
+                          %i.clickx-icon-Page
+                        %span Local SEO
+                    %li.sub-li
+                      %a.withripple{href: "/b/packages/social_media"}
+                        %span.icon
+                          %i.clickx-icon-SocialMedia
+                        %span Brand Building
+                    -# %li.sub-li
+                    -#   %a.withripple{href: "/b/packages/digital_pr"}
+                    -#     %span.icon
+                    -#       %i.clickx-icon-partner
+                    -#     %span Digital PR
+                    %li.sub-li
+                      %a.withripple{href: "/b/packages/ala_carte"}
+                        %span.icon
+                          %i.clickx-icon-SellSheet
+                        %span À La Carte
+                    - if current_business.custom_packages.active.present?
+                      %li.sub-li
+                        %a.withripple{href: "/b/packages/custom_packages"}
+                          %span.icon
+                            %i.clickx-icon-CustomCMS
+                          %span My Quotes
+
+              %li
+                %a.withripple{href: "javascript:;"}
+                  %span.icon
+                    %i.clickx-icon-seo
+                  %span SEO
+                %ul.acc-menu
+                  %li{class: ('btn-disable' unless current_business.seo_service)}
+                    - if current_business.semrush_project_id.present?
+                      %a.withripple{href: "/b/keywords"}
+                        %span.icon
+                          %i.clickx-icon-PromoteSearch
+                        %span Keywords
+                    - else
+                      %a.withripple{href: "/#/rankings"}
+                        %span.icon
+                          %i.clickx-icon-PromoteSearch
+                        %span Keywords
+                  %li
+                    %a.withripple{href: "/b/keywords_generator"}
+                      %span.icon
+                        %i.clickx-icon-Search
+                      %span Keyword Generator
+                  / %li{class: ('btn-disable' unless current_business.site_audit_service)}
+                  /   %a.withripple{href: "/#/site_audit"}
+                  /     %span.icon
+                  /       %i.clickx-icon-GrowthDrivenSite
+                  /     %span
+                  /       Site Audit
+                  -# %li{class: ('btn-disable' unless current_business.backlink_service)}
+                  -#   %a.withripple{href: "/b/backlinks"}
+                  -#     %span.icon
+                  -#       %i.clickx-icon-LinkBuilding
+                  -#     %span Backlinks
+                  %li
+                    %a.withripple{href: "/b/search_console"}
+                      %span.icon
+                        %i.clickx-icon-Maintenance
+                      %span Search Console
+                  -# %li{class: ('btn-disable' unless current_business.contents_service)}
+                  -#   %a.withripple{href: "/#/contents"}
+                  -#     %span.icon
+                  -#       %i.clickx-icon-BlogWriting
+                  -#     %span Content
+              %li{class: ('btn-disable' unless current_business.competitors_service)}
+                %a.withripple{ href: '/b/competitions' }
+                  %span.icon
+                    %i.clickx-icon-Strategy
+                  %span Competitors
+              %li
+                %a.withripple{href: "javascript:;"}
+                  %span.icon
+                    %i.clickx-icon-DisplayAd
+                  %span Ads
+                %ul.acc-menu
+                  %li
+                    %a.withripple{href: "/b/google_ads"}
+                      %span.icon
+                        %i.clickx-icon-CalltoAction
+                      %span Google Ads
+                  %li{class: ('btn-disable' unless current_business.facebook_ad_service)}
+                    %a.withripple{href: "/b/facebook_ads"}
+                      %span.icon
+                        %i.clickx-icon-DisplayAd
+                      %span Facebook Ads
+                  %li
+                    %a.withripple{href: "/b/custom_urls"}
+                      %span.icon
+                        %i.clickx-icon-LinkBuilding
+                      %span UTM Builder
+              %li
+                %a.withripple{href: "javascript:;"}
+                  %span.icon
+                    %i.clickx-icon-Reports
+                  %span Analytics
+                %ul.acc-menu
+                  %li
+                    %a.withripple{ href: '/b/google_analytics' }
+                      %span.icon
+                        %i.clickx-icon-Measure
+                      %span Web Analytics
+                  %li{class: ('btn-disable' unless current_business.call_analytics_service)}
+                    %a.withripple{href: "/b/call_analytics"}
+                      %span.icon
+                        %i.clickx-icon-Mobile
+                      %span Call Analytics
+                  - unless demo_login?
+                    %li
+                      %a.withripple{href: "/b/callrail"}
+                        %span.icon
+                          %i.material-icons.title-icon.white settings_phone
+                        %span CallRail
+              %li{class: ('hidden' unless current_business.local_profile_service)}
+                %a.withripple{href: "javascript:;"}
+                  %span.icon
+                    %i.clickx-icon-Local-Listings
+                  %span Local
+                %ul.acc-menu
+                  / %li
+                  /   %a.withripple{href: "/#/#{current_business.id}/locations_list"}
+                  /     %span.icon
+                  /       %i.clickx-icon-BoldLocal
+                  /     %span Local Profiles
+                  %li
+                    %a.withripple{href: "/b/reviews"}
+                      %span.icon
+                        %i.clickx-icon-Performance-Review
+                      %span Reputation
+                  %li
+                    %a.withripple{href: "/#/locations"}
+                      %span.icon
+                        %i.clickx-icon-Maintenance
+                      %span Location Management
+              - if current_agency.name.eql?('Clickx')
+                %li
+                  %a.withripple{href: '/b/courses'}
+                    %span.icon
+                      %i.clickx-icon-academy
+                    %span Academy
+              %li
+                %a.withripple{href: "/b/support"}
+                  %span.icon
+                    %i.clickx-icon-Support
+                  %span Support

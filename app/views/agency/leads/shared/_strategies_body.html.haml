@@ -1,0 +1,42 @@
+- if current_agency.strategy_limit&.positive?
+  - Lead::Strategy::CATEGORIES.keys.each do |category|
+    - strategy = @strategies[category]&.first
+    .d-flex.flex-wrap.mb-4.justify-content-between
+      .col-auto.pr-4
+        .author
+          = category
+          - if strategy.present? && !strategy.approved?
+            %span.badge.badge-style
+              DRAFT
+      .col-auto
+        - if strategy&.deleted?
+          = link_to unarchive_agency_lead_strategy_path(@lead.id, strategy.id), class: 'btn btn--dark btn--rounded-md btn-default btn-sm mt-n mr-xs', remote: true, method: :patch do
+            %i.fa.fa-archive
+            Unarchive
+        - else
+          - if strategy.present?
+            = link_to archive_agency_lead_strategy_path(@lead.id, strategy.id), class: 'btn btn--dark btn--rounded-md btn-default btn-sm mt-n mr-xs', remote: true, method: :patch, data: { confirm: "Are you sure?"} do
+              %i.fa.fa-archive
+              Archive
+            %a.btn.btn--dark.btn--rounded-md.btn-default.btn-sm.mt-n.copy_to_clipboard{href: lead_strategy_public_link(strategy), target: '_blank'}
+              %i.icfont.material-icons.text-white.mr-2{:title => "Copy the URL"} content_copy
+              Copy URL
+            %a.btn.btn--dark.btn--rounded-md.btn-default.btn-sm.mt-n{href: edit_agency_lead_strategy_path(@lead, strategy)}
+              %i.fa.fa-edit
+              Edit
+          - else
+            - if @this_month_strategies.size < @strategy_limit
+              %a.btn.btn--dark.btn--rounded-md.btn-default.btn-sm.mt-n{href: new_agency_lead_strategy_path(@lead, category: category)}
+                %i.fa.fa-plus
+                New
+            - else
+              %a.btn.btn--dark.btn--rounded-md.btn-default.btn-sm.mt-n.strategy_exceeded{href: 'javascript:void(0)'}
+                %i.fa.fa-plus
+                New
+- else
+  .d-flex.flex-wrap.mb-4.justify-content-between
+    Please upgrade your plan to access this feature and generate strategies.
+  %a.plan-upgrade.fw-lg.d-none.d-sm-block.text-center{href: '/a/packages/growth/agency_infrastructure'}
+    %span.btn.btn-raised.btn-warning.btn-upgrade
+      Upgrade
+      .ripple-container

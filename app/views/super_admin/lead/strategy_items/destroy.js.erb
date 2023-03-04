@@ -1,0 +1,6 @@
+<% if @strategy_item.errors.present? %>
+  toastr.error("<%= @strategy_item.errors.full_messages.to_sentence %>")
+<% else %>
+  $("#lead_strategy_item_<%= @strategy_item.id%>").remove();
+  toastr.success("Strategy Deleted");
+<% end %>

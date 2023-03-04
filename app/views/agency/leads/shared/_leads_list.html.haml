@@ -1,0 +1,65 @@
+.row
+  .col-md-12
+    %div
+      %table.table.table--xl
+        %tbody
+          %tr.centered-cols.row-header.text-black.d-none.d-xl-table-row.text-left
+            %th Name
+            %th Email
+            %th Company
+            %th.text-xl-right Actions
+          - if @leads.any?
+            - stripe = current_agency.stripe_credential.present?
+            - @leads.each do |lead|
+              %tr.centered-cols.row-card{id: dom_id(lead)}
+                %td.col-client
+                  %a.client-url{href: edit_agency_lead_path(lead)}
+                    %span.client-logo
+                      = lead.initials
+                    %span.client-name-editable
+                      %span.client-name__name
+                        = lead.full_name
+                      %span.edit-button.edit-button--show-on-hover
+                        = image_tag 'icons/icon-edit.svg'
+                %td.col-data
+                  %span.email
+                    = lead.email
+                %td.col-data
+                  %span
+                    = lead.company
+                %td.col-btns.text-xl-right
+                  %a.action-btn.action-btn--light.text-center{href: strategies_agency_lead_path(lead.id), data: { toggle: 'tooltip', 'original-title' => 'Strategies', remote: true}}
+                    %span.btn-icon
+                      %i.fa.fa-lightbulb-o
+                  %a.action-btn.action-btn--light.text-center{href: default_strategies_agency_lead_path(lead.id), data: { toggle: 'tooltip', 'original-title' => 'Product Pages', remote: true}}
+                    %span.btn-icon
+                      %i.fa.fa-link
+                  %a.action-btn.action-btn--light.text-center{"data-original-title" => "Edit", "data-toggle" => "tooltip", :title => "", href: edit_agency_lead_path(lead)}
+                    %span.btn-icon
+                      %i.fa.fa-edit
+                  - if current_agency.payment_links_enabled?
+                    - if stripe
+                      = link_to agency_new_lead_payment_link_path(resource_id: lead.id, resource_type: 'Lead'), class: "text-center action-btn action-btn--light mr-2", "data-original-title" => "New Payment Link", "data-toggle" => "tooltip", :title => "" do
+                        %span.btn-icon
+                          %i.fa.fa-dollar
+                    - else
+                      = link_to '#', class: "text-center action-btn action-btn--light mr-2", remote: true, "data-original-title" => "New Payment Link", "data-toggle" => "modal", "data-target" => "#lead-payment-link-modal", :title => "" do
+                        %span.btn-icon
+                          %i.fa.fa-dollar
+                  - else
+                    %a.action-btn.action-btn--light.text-center.disabled{"data-original-title" => "New Payment Link", "data-toggle" => "tooltip", :title => "", href: ''}
+                      %span.btn-icon
+                        %i.fa.fa-dollar
+                  = link_to agency_lead_path(lead), class: 'text-center action-btn action-btn--light', remote: true, method: :delete, data: { confirm: "Are you sure?", 'original-title': 'Archive', toggle: 'tooltip'} do
+                    %span.btn-icon
+                      %i.fa.fa-archive
+              %tr.row-spacer
+                %td{colspan: 7}
+          - else
+            = render 'agency/leads/shared/dummy_leads'
+    .row.text-center.p-n.pagination-wrapper
+      = will_paginate @leads
+- unless stripe
+  = render 'agency/leads/shared/payment_link_modal.html.haml'
+:javascript
+  $('.pagination a').attr('data-remote', 'true');  

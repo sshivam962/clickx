@@ -1,0 +1,556 @@
+%ul#lg-menu.nav.menu
+  %li.nav-logo
+    = link_to image_tag('logo.png', { alt: 'logo' }), '/s/clients', class: 'logo logoElement'
+
+  - if policy([:super_admin, current_user]).welcome_banner?
+    %li
+      = link_to '/s/welcome_banners' do
+        %i.glyphicon.glyphicon-briefcase
+        Welcome Banner
+
+  - if policy([:super_admin, current_user]).clients?
+    %li
+      = link_to '/s/clients' do
+        %i.glyphicon.glyphicon-briefcase
+        Clients
+
+  - if policy([:super_admin, current_user]).agencies?
+    %li
+      = link_to '/s/agencies/' do
+        %i.agency-icon
+        Agencies
+  - if policy([:super_admin, current_user]).demo_agency?
+    %li
+      = link_to '/s/agencies/demo_agency' do
+        %i.fa.fa-list-ul
+        Agency Demo
+  - if policy([:super_admin, current_user]).partner_search?
+    %li
+      = link_to '/s/partner_search' do
+        %i.fa.fa-search
+        Partner Search
+  - if policy([:super_admin, current_user]).archived_clients?
+    %li
+      %a{href: '/s/clients/archived'}
+        %i.glyphicon.glyphicon-folder-close
+        Archived Clients
+  - if policy([:super_admin, current_user]).archived_agencies?
+    %li
+      %a{href: '/s/agencies/archived'}
+        %i.glyphicon.glyphicon-folder-close
+        Archived Agencies
+  - if policy([:super_admin, current_user]).verified_domains_agencies?
+    %li
+      %a{href: '/s/agencies/verified_domains'}
+        %i.fa.fa-external-link
+        Verified Domains
+  - if policy([:super_admin, current_user]).leads?
+    %li
+      %a{href: "/s/leads"}
+        %i.fa.fa-users
+        Leads
+  - if policy([:super_admin, current_user]).lead_strategy?
+    %li
+      %a{href: "/s/lead/strategies"}
+        %i.fa.fa-users
+        Lead Strategy
+  - if policy([:super_admin, current_user]).lead_strategy_item?
+    %li
+      %a{href: "/s/lead/strategy_items"}
+        %i.fa.fa-users
+        Lead Strategy Items
+
+  - if policy([:super_admin, current_user]).onboarding_procedures?
+    %li
+      %a{href: "/s/onboarding_procedures"}
+        %i.fa.fa-list-ul
+        Onboarding Procedures
+
+  - if policy([:super_admin, current_user]).agency_academy?
+    %li
+      %a{href: "/s/agency/courses"}
+        %i.fa.fa-play
+        Agency Academy
+  - if policy([:super_admin, current_user]).admin_academy?
+    %li
+      %a{href: "/s/admin_courses"}
+        %i.fa.fa-play
+        Admin Academy
+  - if policy([:super_admin, current_user]).manage_admin_academy?
+    %li
+      %a{href: "/s/admin/courses"}
+        %i.glyphicon.glyphicon-cog
+        Manage Admin Academy
+  - if policy([:super_admin, current_user]).case_studies?
+    %li
+      %a{href: "/s/case_studies"}
+        %i.fa.fa-newspaper-o
+        Case Studies
+  - if policy([:super_admin, current_user]).funnel_pages?
+    %li
+      %a{href: "/s/funnel_pages"}
+        %i.glyphicon.glyphicon-file
+        Funnel Pages
+  - if policy([:super_admin, current_user]).portfolio?
+    %li
+      %a{href: "/s/portfolio"}
+        %i.fa.fa-picture-o
+        Portfolio
+  - if policy([:super_admin, current_user]).faq?
+    %li
+      %a{href: "/s/faqs"}
+        %i.fa.fa-question
+        FAQ
+  - if policy([:super_admin, current_user]).admin_faq?
+    %li
+      %a{href: '/s/admin_faq'}
+        %i.fa.fa-question
+        Admin FAQ
+  - if policy([:super_admin, current_user]).admin_manage_faqs?
+    %li
+      %a{href: '/s/admin_manage_faqs'}
+        %i.glyphicon.glyphicon-cog
+        Admin Manage FAQ
+  - if policy([:super_admin, current_user]).documents?
+    %li
+      %a{href: "/s/documents"}
+        %i.fa.fa-file
+        Documents
+  - if policy([:super_admin, current_user]).documents?
+    %li
+      %a{href: "/s/admin_documents"}
+        %i.fa.fa-file
+        Admin Documents
+  -#if policy([:super_admin, current_user]).agency_facebook_ads?
+    %li
+      %a{href: "/s/facebook_ads"}
+        %i.fa.fa-file
+        Facebook Ads
+  - if policy([:super_admin, current_user]).agency_social_posts?
+    %li
+      %a{href: "/s/social_posts"}
+        %i.fa.fa-file
+        Social Posts
+  -# if policy([:super_admin, current_user]).agency_value_hooks?
+    %li
+      %a{href: "/s/value_hooks"}
+        %i.fa.fa-play
+        Value Hooks
+  -#if policy([:super_admin, current_user]).agency_plug_and_play_ads?
+    %li
+      %a{href: "/s/plug_and_play_ads"}
+        %i.fa.fa-file
+        Plug And Play Ads
+  - if policy([:super_admin, current_user]).client_academy?
+    %li
+      %a{href: '/s/business/courses'}
+        %i.fa.fa-graduation-cap
+        Client Academy
+  - if policy([:super_admin, current_user]).questionnaire?
+    %li
+      %a{href: '/s/questions'}
+        %i.glyphicon.glyphicon-edit
+        Questionnaire
+  - if policy([:super_admin, current_user]).client_questionnaire?
+    %li
+      %a{href: '/s/inquiry/questionnaires'}
+        %i.glyphicon.glyphicon-edit
+        Client Questionnaire
+  - if policy([:super_admin, current_user]).content_settings?
+    %li
+      %a{href: '/s/content_settings'}
+        %i.glyphicon.glyphicon-book
+        Content
+  - if policy([:super_admin, current_user]).third_party_integrations?
+    %li
+      %a{href: "/s/integrations"}
+        %i.fa.fa-code-fork
+        Third Party Integrations
+  - if policy([:super_admin, current_user]).location_map?
+    %li
+      %a{href: '/s/locations/map'}
+        %i.glyphicon.glyphicon-globe
+        Metrics
+  - if policy([:super_admin, current_user]).manage_labels?
+    %li
+      %a{href: '/s/labels'}
+        %i.glyphicon.glyphicon-tag
+        Manage Labels
+  - if policy([:super_admin, current_user]).reports?
+    %li
+      %a{href: '/s/reports'}
+        %i.glyphicon.glyphicon-stats
+        Reports
+  - if policy([:super_admin, current_user]).email_templates?
+    %li
+      %a{href: "/s/mail_templates"}
+        %i.glyphicon.glyphicon-envelope
+        Email Templates
+  - if policy([:super_admin, current_user]).emails?
+    %li
+      %a{href: "/s/mails"}
+        %i.glyphicon.glyphicon-envelope
+        Emails
+  - if policy([:super_admin, current_user]).messages?
+    %li
+      %a{href: "/s/chats"}
+        %i.fa.fa-paper-plane
+        Messages
+  - if policy([:super_admin, current_user]).message_report?
+    %li
+      %a{href: "/s/chats/message_report"}
+        %i.fa.fa-file
+        Message Report
+  - if policy([:super_admin, current_user]).onboarding_checklists?
+    %li
+      %a{href: "/s/onboarding_sections"}
+        %i.fa.fa-check-square-o
+        Onboarding Checklist
+  - if policy([:super_admin, current_user]).billing?
+    %li
+      %a{href: "/s/billing"}
+        %i.fa.fa-money
+        Billing
+  - if policy([:super_admin, current_user]).agency_package_subscriptions?
+    %li
+      %a{href: "/s/agency/package_subscriptions"}
+        %i.fa.fa-shopping-cart
+        Agency Subscriptions
+  - if policy([:super_admin, current_user]).client_package_subscriptions?
+    %li
+      %a{href: "/s/client/package_subscriptions"}
+        %i.fa.fa-shopping-cart
+        Client Subscriptions
+  - if policy([:super_admin, current_user]).smb_package_subscriptions?
+    %li
+      %a{href: "/s/smb/package_subscriptions"}
+        %i.fa.fa-shopping-cart
+        SMB Subscriptions
+  - if policy([:super_admin, current_user]).custom_packages?
+    %li
+      %a{href: "/s/custom_packages"}
+        %i.fa.fa-dollar
+        Custom Packages
+  - if policy([:super_admin, current_user]).packages?
+    %li
+      %a{href: "/s/packages"}
+        %i.fa.fa-shopping-bag
+        Packages
+  - if policy([:super_admin, current_user]).agency_signup_links?
+    %li
+      %a{href: "/s/agency_signup_links"}
+        %i.fa.fa-link
+        Agency Signup Links
+  - if policy([:super_admin, current_user]).business_signup_links?
+    %li
+      %a{href: "/s/business_signup_links"}
+        %i.fa.fa-link
+        SMB Signup Links
+  - if policy([:super_admin, current_user]).payment_links?
+    %li
+      %a{href: '/s/payment_links'}
+        %i.fa.fa-dollar
+        Payment Links
+  - if policy([:super_admin, current_user]).admin_users?
+    %li
+      %a{href: '/s/admin_users'}
+        %i.glyphicon.glyphicon-cog
+        Admin Users
+  - if policy([:super_admin, current_user]).archived_users?
+    %li
+      %a{href: '/s/admin_users/archived'}
+        %i.glyphicon.glyphicon-folder-close
+        Archived users
+  - if policy([:super_admin, current_user]).contractors?
+    %li
+      %a{href: '/s/contractors'}
+        %i.fa.fa-users
+        Contractors
+  - if policy([:super_admin, current_user]).contractors_upload_user?
+    %li
+      %a{href: '/s/contractors_invites'}
+        %i.fa.fa-users
+        Contractor Invites
+  - if policy([:super_admin, current_user]).agency_settings?
+    %li
+      %a{href: "/s/agency_settings"}
+        %i.glyphicon.glyphicon-cog
+        Agency Support Settings
+  - if policy([:super_admin, current_user]).outscraper_data?
+    %li
+      %a{href: '/s/external_leads'}
+        %i.glyphicon.glyphicon-stats
+        Outscraper Data
+  - if policy([:super_admin, current_user]).outscraper_bulk_upload?
+    %li
+      %a{href: '/s/external_leads/bulk_upload'}
+        %i.glyphicon.glyphicon-stats
+        Outscraper Bulk Upload
+  - if policy([:super_admin, current_user]).outscraper_categories?
+    %li
+      %a{href: '/s/external_leads/categories'}
+        %i.glyphicon.glyphicon-stats
+        Outscraper Categories
+  - if policy([:super_admin, current_user]).blacklisted_domains?
+    %li
+      %a{href: "/s/blacklisted_domains"}
+        %i.glyphicon.glyphicon-remove
+        Blacklisted Domains
+  - if policy([:super_admin, current_user]).email_sents?
+    %li
+      %a{href: '/s/email_sents'}
+        %i.glyphicon.glyphicon-stats
+        Email sent
+  - if policy([:super_admin, current_user]).mailgun_subdomains?
+    %li
+      %a{href: "/s/mailgun_subdomains"}
+        %i.glyphicon.glyphicon-remove
+        Mailgun Subdomains
+  - if policy([:super_admin, current_user]).social_media_prompts?
+    %li
+      %a{href: "/s/social_media_prompts"}
+        %i.glyphicon.glyphicon-cog
+        Social Media Prompts
+
+  / %li
+  /   %a{ href: '/#/reward_referrals' }
+  /     %i.fa.fa-share-alt
+  /     Referrals
+
+  / %li
+  /   %a{href: '/users/audit_report'}
+  /     %i.fa.fa-line-chart
+  /     Site Audit Report
+
+
+%ul#xs-menu.nav
+  %li.nav-logo
+    = link_to image_tag('logo-smll.png', { alt: 'logo', width: 30 }), '/s/clients', class: 'logo-smll logoElement'
+
+  %li
+    = link_to '/s/clients/', class: 'text-center' do
+      %i.glyphicon.glyphicon-briefcase
+
+  - if policy([:super_admin, current_user]).agencies?
+    %li
+      = link_to '/s/agencies/', class: 'text-center' do
+        %i.agency-icon
+
+  - if policy([:super_admin, current_user]).partner_search?
+    %li
+      = link_to '/s/partner_search/', class: 'text-center' do
+        %i.fa.fa-search
+
+  - if policy([:super_admin, current_user]).archived_clients?
+    %li
+      %a{href: '/s/clients/archived'}
+        %i.glyphicon.glyphicon-folder-close
+
+  - if policy([:super_admin, current_user]).archived_agencies?
+    %li
+      %a{href: '/s/agencies/archived'}
+        %i.glyphicon.glyphicon-folder-close
+
+  - if policy([:super_admin, current_user]).verified_domains_agencies?
+    %li
+      %a{href: '/s/agencies/verified_domains'}
+        %i.fa.fa-external-link
+
+  - if policy([:super_admin, current_user]).leads?
+    %li
+      %a{href: "/s/leads"}
+        %i.fa.fa-users
+  - if policy([:super_admin, current_user]).lead_strategy?
+    %li
+      %a{href: "/s/lead/strategies"}
+        %i.fa.fa-users
+
+  - if policy([:super_admin, current_user]).lead_strategy_item?
+    %li
+      %a{href: "/s/lead/strategy_items"}
+        %i.fa.fa-users
+
+  - if policy([:super_admin, current_user]).onboarding_procedures?
+    %li
+      %a{href: "/s/onboarding_procedures"}
+        %i.fa.fa-list-ul
+
+  - if policy([:super_admin, current_user]).agency_academy?
+    %li
+      %a{href: "/s/agency/courses"}
+        %i.fa.fa-play
+
+  - if policy([:super_admin, current_user]).admin_academy?
+    %li
+      %a{href: "/s/admin_courses"}
+        %i.fa.fa-play
+
+  - if policy([:super_admin, current_user]).manage_admin_academy?
+    %li
+      %a{href: "/s/admin/courses"}
+        %i.glyphicon.glyphicon-cog
+
+  - if policy([:super_admin, current_user]).case_studies?
+    %li
+      %a{href: "/s/case_studies"}
+        %i.fa.fa-newspaper-o
+  - if policy([:super_admin, current_user]).funnel_pages?
+    %li
+      %a{href: "/s/funnel_pages"}
+        %i.glyphicon.glyphicon-file
+
+  - if policy([:super_admin, current_user]).portfolio?
+    %li
+      %a{href: "/s/portfolio"}
+        %i.fa.fa-picture-o
+
+  - if policy([:super_admin, current_user]).faq?
+    %li
+      %a{href: "/s/faqs"}
+        %i.fa.fa-question
+
+  - if policy([:super_admin, current_user]).admin_faq?
+    %li
+      %a{href: '/s/admin_faq'}
+        %i.fa.fa-question
+
+  - if policy([:super_admin, current_user]).admin_manage_faqs?
+    %li
+      %a{href: '/s/admin_manage_faqs'}
+        %i.glyphicon.glyphicon-cog
+
+  - if policy([:super_admin, current_user]).documents?
+    %li
+      %a{href: "/s/documents"}
+        %i.fa.fa-file
+
+  - if policy([:super_admin, current_user]).client_academy?
+    %li
+      %a{href: '/s/business/courses'}
+        %i.fa.fa-graduation-cap
+
+  - if policy([:super_admin, current_user]).questionnaire?
+    %li
+      %a{href: '/s/questions'}
+        %i.glyphicon.glyphicon-edit
+  - if policy([:super_admin, current_user]).client_questionnaire?
+    %li
+      %a{href: '/s/inquiry/questionnaires'}
+        %i.glyphicon.glyphicon-edit
+
+  - if policy([:super_admin, current_user]).content_settings?
+    %li
+      %a{href: '/s/content_settings'}
+        %i.glyphicon.glyphicon-book
+
+  - if policy([:super_admin, current_user]).third_party_integrations?
+    %li
+      %a{href: "/s/integrations"}
+        %i.fa.fa-code-fork
+
+  - if policy([:super_admin, current_user]).location_map?
+    %li
+      %a{href: '/s/locations/map'}
+        %i.glyphicon.glyphicon-globe
+
+  - if policy([:super_admin, current_user]).manage_labels?
+    %li
+      %a{href: '/s/labels'}
+        %i.glyphicon.glyphicon-tag
+
+  - if policy([:super_admin, current_user]).reports?
+    %li
+      %a{href: '/s/reports'}
+        %i.glyphicon.glyphicon-stats
+
+  - if policy([:super_admin, current_user]).email_templates?
+    %li
+      %a{href: "/s/#{current_user.id}/email_templates"}
+        %i.glyphicon.glyphicon-envelope
+
+  - if policy([:super_admin, current_user]).emails?
+    %li
+      %a{href: "/s/#{current_user.id}/mails"}
+        %i.glyphicon.glyphicon-envelope
+
+  - if policy([:super_admin, current_user]).messages?
+    %li
+      %a{href: "/s/chats"}
+        %i.fa.fa-paper-plane
+
+  - if policy([:super_admin, current_user]).billing?
+    %li
+      %a{href: "/s/billing"}
+        %i.fa.fa-money
+
+  - if policy([:super_admin, current_user]).agency_package_subscriptions?
+    %li
+      %a{href: "/s/agency/package_subscriptions"}
+        %i.fa.fa-shopping-cart
+
+  - if policy([:super_admin, current_user]).client_package_subscriptions?
+    %li
+      %a{href: "/s/client/package_subscriptions"}
+        %i.fa.fa-shopping-cart
+
+  - if policy([:super_admin, current_user]).smb_package_subscriptions?
+    %li
+      %a{href: "/s/smb/package_subscriptions"}
+        %i.fa.fa-shopping-cart
+
+  - if policy([:super_admin, current_user]).custom_packages?
+    %li
+      %a{href: "/s/custom_packages"}
+        %i.fa.fa-dollar
+
+  - if policy([:super_admin, current_user]).packages?
+    %li
+      %a{href: "/s/packages"}
+        %i.fa.fa-shopping-bag
+
+  - if policy([:super_admin, current_user]).agency_signup_links?
+    %li
+      %a{href: "/s/agency_signup_links"}
+        %i.fa.fa-link
+
+  - if policy([:super_admin, current_user]).business_signup_links?
+    %li
+      %a{href: "/s/business_signup_links"}
+        %i.fa.fa-link
+
+  - if policy([:super_admin, current_user]).payment_links?
+    %li
+      %a{href: '/s/payment_links'}
+        %i.fa.fa-dollar
+
+  - if policy([:super_admin, current_user]).admin_users?
+    %li
+      %a{href: '/s/admin_users'}
+        %i.glyphicon.glyphicon-cog
+
+  - if policy([:super_admin, current_user]).archived_users?
+    %li
+      %a{href: '/s/admin_users/archived'}
+        %i.glyphicon.glyphicon-folder-close
+
+  - if policy([:super_admin, current_user]).contractors?
+    %li
+      %a{href: '/s/contractors'}
+        %i.fa.fa-users
+
+  - if policy([:super_admin, current_user]).agency_settings?
+    %li
+      %a{href: "s/agency_settings"}
+        %i.glyphicon.glyphicon-cog
+
+  / %li
+  /   %a{href: '/#/videos'}
+  /     %i.fa.fa-graduation-cap
+
+  / %li
+  /   %a{ href: '/#/reward_referrals' }
+  /     %i.fa.fa-share-alt
+
+  / %li
+  /   %a{href: "/users/audit_report"}
+  /     %i.fa.fa-line-chart

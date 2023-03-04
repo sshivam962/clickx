@@ -1,0 +1,79 @@
+.container.mx-auto.px-4
+  .card.bg-white.shadow-xl.p-5.sm:p-8.rounded-xl.my-12
+
+    .container-sm.mx-auto.pt-12
+      .font-medium.text-3xl.lg:text-4xl.leading-tight.pb-2.text-center Membership
+      %hr.my-8
+      .flex.flex-wrap.justify-center.items-center.pb-10
+        %h5.m-0.pb-4.sm:pb-0.w-full.sm:w-auto.text-center Join Our Clickx Community
+        %ul.flex.flex-wrap.pl-5
+          %li.mr-2.mb-2
+            %a.social-media-icon.social-media-icon--fb.w-10.h-10.leading-8.p-1.text-white.inline-block.text-center.rounded-full.transition.duration-300{:href => "https://www.facebook.com/clickxio/", :target => "_blank"}
+              %i.fa.fa-facebook
+          %li.mr-2.mb-2
+            %a.social-media-icon.social-media-icon--instagram.w-10.h-10.leading-8.p-1.text-white.inline-block.text-center.rounded-full.transition.duration-300{:href => "https://www.instagram.com/clickxio/", :target => "_blank"}
+              %i.fa.fa-instagram
+          %li.mr-2.mb-2
+            %a.social-media-icon.social-media-icon--linkedin.w-10.h-10.leading-8.p-1.text-white.inline-block.text-center.rounded-full.transition.duration-300{:href => "https://www.linkedin.com/company/clickx/", :target => "_blank"}
+              %i.fa.fa-linkedin
+          %li.mr-2.mb-2
+            %a.social-media-icon.social-media-icon--twitter.w-10.h-10.leading-8.p-1.text-white.inline-block.text-center.rounded-full.transition.duration-300{:href => "https://twitter.com/clickxio/", :target => "_blank"}
+              %i.fa.fa-twitter
+          %li.mr-2.mb-2
+            %a.social-media-icon.social-media-icon--youtube.w-10.h-10.leading-8.p-1.text-white.inline-block.text-center.rounded-full.transition.duration-300{:href => "https://www.youtube.com/c/Clickxio?sub_confirmation=1", :target => "_blank"}
+              %i.fa.fa-youtube-play
+      .flex.flex-wrap.justify-center.items-center.pb-10
+        %div.w3-progress-container.w3-round-xlarge
+          #progressbar.w3-progressbar.w3-round-xlarge{:style => "width:#{@membership.progress_percent}%"}
+      %div.list-disc.pl-6.pb-12{:style=>"list-style-type:none;"}
+        = form_for(@membership, as: :membership, url: network_membership_path(@membership), html: { method: :patch }) do |f|
+          %div.mb-3
+            = f.check_box :community_joined, onchange: "toggleCheck();"
+            = f.label :community_joined, "Join and contribute to our"
+            %a.text-primary{:href => "https://www.facebook.com/groups/467613194221213", :target => '_blank'} Clickx Community Facebook Group
+            — share some insights, “wins”, ask questions, etc.
+          %div.mb-3
+            = f.check_box :fb_profile_add, onchange: "toggleCheck();"
+            = f.label :fb_profile_add, "Add Clickx to your Facebook profile as a Member"
+          %div.mb-3
+            = f.check_box :social_links_add, onchange: "toggleCheck();"
+            = f.label :social_links_add, "Add Clickx’s social links to your own social media profiles or email signature."
+          %div.mb-3
+            = f.check_box :post_about_network, onchange: "toggleCheck();"
+            = f.label :post_about_network, "Post about the Network on your own social media accounts and tag Clickx so we can engage and share."
+          %div.mb-3
+            = f.check_box :personal_social_links_add, onchange: "toggleCheck();"
+            = f.label :personal_social_links_add, "Add your personal social links to your Network member profile to connect with fellow members. If we share your work contributions or a review from a client, we will tag you."
+          %div.mb-3
+            = f.check_box :linkedin_add, onchange: "toggleCheck();"
+            = f.label :linkedin_add, "Add your Network membership to your LinkedIn experience. Use the sample description below to describe your contributions as a member:"
+          %div.mb-3
+            = f.check_box :publish_blog, onchange: "toggleCheck();"
+            = f.label :publish_blog, "Publish blogs on the Clickx Agency Scaling blog ("
+            %a.text-primary{:href => "http://www.clickx.io/blog", :target => '_blank'} www.clickx.io/blog
+            ) (Extra Credit)
+      .bg-gray-600.p-5.mb-5
+        .p-4.bg-white
+          .md:flex.text-sm
+            .col-auto.md:pr-5.mb-4.md:mb-0
+              .badge.p-10.bg-light.rounded
+                = image_tag 'network/logo.svg', class: 'w-40 mx-auto'
+            .flex-1
+              .font-bold Member
+              %div Clickx
+              .text-gray-400 [Join date] – Present
+              %p Digital Marketing Specialist performing fulfillment work for agencies across the globe. Services include Google Ads, Facebook Ads, SEO, Web Development and more. The Clickx Fulfillment Network is an elite community of passionate marketing professionals.
+
+:javascript
+  function toggleCheck() {
+      $.ajax({
+        url: "/n/memberships/memberships",
+        type: 'patch',
+        data: $('#edit_membership').serialize(),
+        success: function(result){
+          $("#progressbar").width(result.percent + "%")
+        },
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
+      });
+    }
+

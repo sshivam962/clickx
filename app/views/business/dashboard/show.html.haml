@@ -1,0 +1,44 @@
+.ui-2020
+  .page-content
+    .container-fluid
+      .text-right.mt-4
+        = text_field_tag :date_filter, daterange_picker_format(@start_date, @end_date), class: 'btn btn--dark'
+      .dashboard-panels.mt-5.dashboard-panels-preloader
+        / Google Analytics
+        - if current_business.google_analytics_id.present?
+          #google_analytics_section
+            = render 'business/dashboard/preloader/google_analytics'
+
+        / Search Ads
+        - if current_business.google_ads_service?
+          #search_ads_section
+            = render 'business/dashboard/preloader/search_ads'
+
+        / Facebook Ads
+        - if current_business.fb_ad_account_id.present?
+          #facebook_ads_section
+            = render 'business/dashboard/preloader/facebook_ads'
+
+/ ['google_analytics', 'search_ads', 'facebook_ads']
+:javascript
+  $(document).on('ready', function (e) {
+    $('#date_filter').daterangepicker({
+      maxDate: new Date(),
+      locale: { format: 'MM-DD-YYYY' }
+    }).on("change", function() {
+      daterange = $(this).val();
+      sections = ['google_analytics', 'search_ads', 'facebook_ads']
+      $.each(sections, function( index, section ) {
+        $.ajax({
+          url: window.location.pathname + '/' + section,
+          type: 'get',
+          data: {
+            start_date: daterange.split(' - ')[0],
+            end_date: daterange.split(' - ')[1]
+          },
+          dataType: 'script',
+          success:function(response){}
+        })
+      });
+    });
+  });

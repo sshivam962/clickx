@@ -1,0 +1,8 @@
+<% if @competition.errors.present? %>
+  toastr.error("<%= @competition.errors.full_messages.to_sentence %>")
+<% else %>
+  // $('.competitions_tbody').prepend("<%= escape_javascript render( partial: 'business/competitions/shared/list_item', locals: { competition: @competition }) %>");
+  toastr.success("Competition Added.")
+  $('#newCompetitionModal').modal('hide')
+<% end %>
+

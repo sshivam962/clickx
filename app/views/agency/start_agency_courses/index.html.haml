@@ -1,0 +1,34 @@
+- content_for :title do
+  Academy | Clickx
+.page-content.ui-2020
+  .page-heading.bg-white.mb-4
+    %h1 Start Program
+  .container-fluid
+    .panel
+      .panel-body.pt-0.pb-0
+        .row.d-flex.flex-wrap
+          - @courses.each do |course|
+            .col-xs-12.col-sm-6.col-lg-4.col-xl-3
+              .academy-item
+                - if current_agency.start_agency_program?
+                  %a.academy-item__link{href: agency_course_path(course)}
+                    - if course.thumbnail_file_url.present?
+                      = image_tag course.thumbnail_file_url
+                    %h2.academy-item__name
+                      = course.title
+                    = course_progress(course)
+                - else
+                  .academy-lock-icon
+                    %i.fa.fa-lock{"aria-hidden":"true"}
+                  %a.academy-item__link{href: 'javascript:void(0)'}
+                    - if course.thumbnail_file_url.present?
+                      = image_tag course.thumbnail_file_url
+                    %h2.academy-item__name
+                      = course.title
+                    = course_progress(course)
+                  - if course.access_tip.present?
+                    .academy-item-notice
+                      = course.access_tip
+                .academy-item--shadow.academy-item--shadow1
+                .academy-item--shadow.academy-item--shadow2
+    .spacer15

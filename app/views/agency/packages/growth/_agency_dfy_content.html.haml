@@ -1,0 +1,17 @@
+- content_for :title do
+  Agency DFY Content | Clickx
+.ui-2020.package-page
+  .page-content
+    .page-heading.pt-md.pb-md
+      %h1
+        .d-flex
+          .col-auto
+            %i.clickx-icon-CustomCMS
+          .col-auto
+            Agency DFY Content
+
+    .container-fluid
+      - agency_dfy_content_plan = @package.agency_dfy_content_plan
+      - if agency_dfy_content_plan.present?
+        .col-sm-12.mt-md
+          = render 'agency/packages/shared/done_for_you_content_creation', plan: agency_dfy_content_plan

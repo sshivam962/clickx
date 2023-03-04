@@ -1,0 +1,119 @@
+- content_for :custom_assets do
+  = stylesheet_link_tag 'themeX_base', media: 'all', 'data-turbolinks-track': false
+  = javascript_include_tag 'themeX_base', 'data-turbolinks-track': false
+  = stylesheet_link_tag 'public/case_study', media: 'all', 'data-turbolinks-track' => true
+- content_for :title do
+  = "#{@agency.name} | #{@case_study.title} Marketing Solutions"
+.case-study-wrapper.case-study-wrapper-preloader
+  .csw-header.text-center{style: "background:#{@agency.case_study_portfolio_header_color}"}
+    .container
+      - if @agency.weburl.present?
+        %a{href: formatted_url(@agency.weburl), target: '_blank'}
+          = image_tag @agency.logo || ''
+      - else
+        = image_tag @agency.logo || ''
+  .csw-sub-header.pl-lg-4.pr-lg-4
+    .container.mx-w-100
+      .fs-24.fw-b Case Study
+      .fs-md
+        = @case_study.title
+        - if current_user&.super_admin?
+          %a.edit-link.pl-sm{href: edit_super_admin_case_study_path(@case_study)}
+            %i.fa.fa-edit
+  .pt-5.pb-5.bg-white
+    .container.mx-w-100
+      .row.mb-5
+        .col-md-8
+          - if show_stats?(@case_study)
+            .case_study-stats
+              .case_study-stats-col
+                .d-flex.align-items-center.justify-content-center
+                  .case_study-stats-icon
+                    %i.fa.fa-caret-up
+                  .case_study-stats-percentage= @case_study.stat1_value
+                  .case_study-stats-name= @case_study.stat1_text
+              .case_study-stats-col
+                .d-flex.align-items-center.justify-content-center
+                  .case_study-stats-icon
+                    %i.fa.fa-caret-up
+                  .case_study-stats-percentage= @case_study.stat2_value
+                  .case_study-stats-name= @case_study.stat2_text
+              .case_study-stats-col
+                .d-flex.align-items-center.justify-content-center
+                  .case_study-stats-icon
+                    %i.fa.fa-caret-up
+                  .case_study-stats-percentage= @case_study.stat3_value
+                  .case_study-stats-name= @case_study.stat3_text
+
+          .sepline.sepline-light
+          - if @case_study.images.present?
+            #carousel-case-study.carousel.slide.case_study-slider.slide-case-study
+              .carousel-inner
+                - @case_study.images.each_with_index do |image, index|
+                  .item{class: "#{'active' if index.zero?}"}
+                    .case_study-slide{style:"background-image: url(" + image.file.url + ")"}
+                    //%img.img-responsive{alt: '', src: image.file.url}
+                - if (@case_study.images.count > 1)
+                  %a.left.carousel-control{'data-slide': 'prev', href: '#carousel-case-study'}
+                    %span
+                      %i.fa.fa-chevron-left
+                  %a.right.carousel-control{'data-slide': 'next', href: '#carousel-case-study'}
+                    %span
+                      %i.fa.fa-chevron-right
+              %ol.carousel-indicators
+                - @case_study.images.each_with_index do |image, index|
+                  %li{class: "#{'active' if index.zero?}", data: { 'slide-to': "#{index}", target: '#carousel-case-study'}}
+          - if raw(@case_study.detailed_description).present?
+            .p-4.p-lg-5
+              = raw(@case_study.detailed_description)
+        - if raw(@case_study.description).present?
+          .col-md-4
+            .csw-sidebar
+              .csw-widget
+                = raw(@case_study.description)
+
+  - if raw(@case_study.in_their_words).present?
+    .py-5
+      .container.container.mx-w-100.py-5
+        %h3.text-center.mb-5.mt-0.fw-m In Their Words
+        .casestudy-testimonial
+          = raw(@case_study.in_their_words)
+          .quote-icon.quote-icon-top
+            %i.fa.fa-quote-left
+          .quote-icon
+            %i.fa.fa-quote-right
+  - if raw(@agency.calendly_script).present?
+    .pt-5.pb-5{:style => "background: #fbfcfd"}
+      .container
+        - if @agency.casestudy_calender_header.present?
+          %h3.text-center.mt-5.fw-m #{@agency.casestudy_calender_header}
+        - else
+          %h3.text-center.mt-5.fw-m Schedule a Call
+        = raw(@agency.calendly_script)
+  .pt-5.pb-5.csw-footer
+    .container.text-center
+      %div
+        %span.d-inline-block
+          = "© #{Date.current.year} #{@agency.name}. "
+        %span.d-inline-block All Rights Reserved.
+
+:javascript
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.case-study-wrapper-preloader').removeClass('case-study-wrapper-preloader');
+    }, 500);
+    jQuery('.csw-widget p:first-child + ul, .csw-widget p:first-child + h4 + ul, .csw-widget h4:first-child + ul').slideDown();
+    jQuery('.csw-widget p:first-child, .csw-widget h4:first-child').addClass('active');
+  });
+  jQuery(document).on('click', '.csw-widget p, .csw-widget h4', function() {
+    if(jQuery(this).next('ul').is(':visible')) {
+      jQuery('.csw-widget h4').removeClass('active');
+      jQuery(this).removeClass('active');
+      jQuery(this).next('ul').slideUp();
+    } else {
+      jQuery('.csw-widget').find('ul').slideUp();
+      jQuery('.csw-widget h4').removeClass('active');
+      jQuery(this).addClass('active');
+      jQuery(this).next('ul').slideDown();
+    }
+  })

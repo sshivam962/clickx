@@ -1,0 +1,19 @@
+- if portfolio.video?
+  = raw portfolio.video_embed_code
+- else
+  .slider
+    - portfolio.images.each do |image|
+      %div
+        = image_tag image.file.url
+.pfolio-new-tab
+  %a.new-tab-button{ href: portfolio_public_link(current_agency, portfolio), target: '_blank' }
+    %i.fa.fa-external-link{"aria-hidden" => "true"}
+.text-center.pt-4
+  - if previous_portfolio.present?
+    %a.button.btn.btn-primary.btn-raised.f-w-lg.my-1{href: agency_portfolio_path(previous_portfolio), style: "left: inherit;", data: {remote: true}} Previous Portfolio
+  - else
+    %a.button.btn.btn-primary.btn-raised.f-w-lg.my-1{href: '#', style: "left: inherit;", disabled: true, data: {remote: true}} Previous Portfolio
+  - if next_portfolio.present?
+    %a.button.btn.btn-primary.btn-raised.f-w-lg.my-1{href: agency_portfolio_path(next_portfolio), style: "left: inherit;", data: {remote: true}} Next Portfolio
+  - else
+    %a.button.btn.btn-primary.btn-raised.f-w-lg.my-1{href: '#', style: "left: inherit;", disabled: true, data: {remote: true}} Next Portfolio

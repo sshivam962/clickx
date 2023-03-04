@@ -1,0 +1,5 @@
+<% if @invalid_emails.present? %>
+  toastr.error("Invalid Emails : <%= @invalid_emails.join(', ') %>")
+<% else %>
+  toastr.success("Successfully Updated");
+<% end %>

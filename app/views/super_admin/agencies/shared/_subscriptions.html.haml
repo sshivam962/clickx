@@ -1,0 +1,77 @@
+.col-md-12.active-subscriptions.mb-xl.mt-xl
+  %h4
+    Subscriptions
+  %table.table.table-bordered.users.reports.table-condensed.table-hover.table-clickable
+    %thead
+      %th Client
+      %th Plan
+      %th Status
+      %th Amount
+      %th Date
+      %th Actions
+    %tbody#leads_container
+      - subscriptions.each do |subscription|
+        - client = subscription.business
+        %tr{id: dom_id(subscription)}
+          %td
+            = client&.name
+            - if client.present?
+              .pull-right
+                - if client.home_link.present?
+                  %a.text-info{href: client.home_link, target: '_blank'}
+                    Home Link
+                = link_to load_home_link_super_admin_package_subscription_path(subscription, resource_class: 'business', resource_id: client.id, category: 'client'), method: :get, remote: true do
+                  %i.fa.fa-edit
+                  Home Link
+              .home_link_form{id: "hl_business_#{client.id}_#{subscription.id}"}
+          %td
+            = subscription.package_name.titleize
+            - if subscription.quantity.to_i > 1
+              (x#{subscription.quantity})
+            - if subscription.funnel_platform.present?
+              %br
+              %small.text-info.badge
+                Platform: #{subscription.funnel_platform}
+          %td
+            = subscription.status.titleize
+          %td
+            - if subscription.package_type.eql?('bundle')
+              - subscription.payments.group_by(&:billing_category).each do |bc, payments|
+                - if bc.eql?('charge')
+                  = "One-Time: #{number_to_currency(payments.sum(&:amount), precision: 0)}"
+                  %br
+                - if bc.eql?('subscription')
+                  = "Recurring: #{number_to_currency(payments.sum(&:amount), precision: 0)}"
+                  %br
+              = link_to more_info_super_admin_package_subscription_path(subscription, category: 'agency'), method: :get, remote: true do
+                %i.fa.fa-info
+                More info
+            - else
+              - if subscription.amount.present?
+                - if subscription.billing_category.eql?('charge')
+                  = "Charge: #{number_to_currency(subscription.amount, precision: 0)}"
+                - else
+                  = "Recurring: #{number_to_currency(subscription.amount, precision: 0)}"
+              - if subscription.package_type.eql?('agency_infrastructure')
+                - onetime = subscription.payments.group_by(&:billing_category)['charge']&.first
+                - if onetime.present?
+                  %br
+                  = "One-time: #{number_to_currency(onetime.amount, precision: 0)}"
+              %br
+              - if subscription.onetime_charge.present?
+                = "One-Time: #{number_to_currency(subscription.onetime_charge, precision: 0)}"
+          %td
+            = subscription.created_at.strftime('%b %d, %Y')
+          - unless subscription.package_name == 'onboarding_onetime_charge'
+            %td.text-center
+              - if client.present?
+                %a.btn.btn-info.btn-sm{href: questionnaires_super_admin_client_path(client.id, subscription_id: subscription.id), data: { toggle: 'tooltip', 'original-title' => 'Questionnaire Links', remote: true}}
+                  %i.fa.fa-question
+              - if subscription.onboarding_procedures.present?
+                %a.btn.btn-info.btn-sm{href: list_op_super_admin_package_subscription_path(subscription.id, category: 'client'), data: { toggle: 'tooltip', 'original-title' => 'List Onboarding Procedures', remote: true}}
+                  %i.fa.fa-list-ul
+              %a{href: new_op_super_admin_package_subscription_path(subscription.id, category: 'client'), data: { toggle: 'tooltip', 'original-title' => 'Add Onboarding Procedures', remote: true}}
+                %i.fa.fa-list-ul.fa-lg
+              %a.btn{href: "https://dashboard.stripe.com/subscriptions/#{subscription.account_id}", data: { toggle: 'tooltip', 'original-title' => 'Stripe Link', target: "_blank" }}
+                %i.fa.fa-external-link.fa-lg
+                Stripe Link

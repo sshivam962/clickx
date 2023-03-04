@@ -1,0 +1,54 @@
+.panel.panel-default.m-n#google-analytics{ 'ng-if': 'marketing_performance_loaded && googleAnalyticsStatus' }
+  .panel-heading.cursor-move
+    %h2
+      %a.l-grey{ href: '/#/google_analytics' }
+        Google Analytics
+        %i.fa.fa-info-circle.tooltip-text-icon{ 'title': 'Displays the analytics of the traffic on your site as per Google Analytics.' }
+    #onboarding-google-analytics.on-boarding
+    .panel-ctrls
+      %button.Dbutton.btn.button-icon.pull-left.mt-sm{ 'ng-click': 'pdf_export("google-analytics")', 'title': 'Download report', 'ng-class': "{'disable-button': export_disabled}" }
+        %span.material-icons.inverted file_download
+      %button.btn.button-icon.mt-sm.refresh-panel{ 'ng-click': 'init_google_analytics()', 'title': 'Refresh report' }
+        %span.material-icons.inverted refresh
+  .panel-body.no-padding.scroll-pane{style: 'height: 420px;'}
+    .boxes-cover{'ng-show':'analytics_data == null'}
+      .boxes.clearfix.pd-t-95
+        %span
+          .col-lg-12.col-md-12.col-xs-12.box
+            %a.block-link{ href:'/#/google_analytics' }
+              .item.text-center
+                .img
+                  %img{'ng-src':'/hub_images/ic-analytics.png'}
+                %h3 No analytics data available
+    .scroll-content.p-n{'ng-show':'analytics_data != null'}
+      .col-sm-12.p-n
+        .panel-body.pt-sm
+          %md-tabs{'md-border-bottom':'', 'md-dynamic-height':''}
+            %md-tab.active{label: 'Visitors', index:'0', 'md-on-select':"resizeChart('visitors_charts');"}
+              %md-content.mt
+                %draw-chart#visitors_charts{ 'on-click-chart': '', 'on-load-chart': '', 'config': 'users_datas[0]' }
+            %md-tab{label: 'Pages/ Session', index:'1', 'md-on-select':"resizeChart('page_per_visit_charts');" }
+              %md-content.mt
+                %draw-chart#position_chart{ 'on-click-chart': '', 'config': 'users_datas[1]' }
+            %md-tab{label: 'Session Duration', index:'2', 'md-on-select':"resizeChart('avg_session_charts');" }
+              %md-content.mt
+                %draw-chart#position_chart{ 'on-click-chart': '', 'config': 'users_datas[2]' }
+            %md-tab{label: 'New Sessions', index:'3', 'md-on-select':"resizeChart('new_visits_charts');" }
+              %md-content.mt
+                %draw-chart#position_chart{ 'on-click-chart': '', 'config': 'users_datas[3]' }
+            %md-tab{label: 'Bounce Rate', index:'4', 'md-on-select':"resizeChart('bounce_charts');" }
+              %md-content.mt
+                %draw-chart#position_chart{ 'on-click-chart': '', 'config': 'users_datas[4]' }
+        .panel-footer.width100.p-sm{ 'ng-click': 'goTo("/google_analytics")' }
+          .col-lg-4.bdr-line.col-md-4.col-sm-4.col-xs-4.p-sm.text-center.bdr-b-blue.btn-pointer
+            %h4.mt-n.mb-n.pt-xs
+              %small.mt-n.mb-sm> Sessions
+              {{ analytics_data['ga:sessions'] | toLocaleString }}
+          .col-lg-4.bdr-line.col-md-4.col-sm-4.col-xs-4.p-sm.text-center.bdr-b-red.btn-pointer
+            %h4.mt-n.mb-n.pt-xs
+              %small.mt-n.mb-sm> Visitors
+              {{ analytics_data['ga:users'] | toLocaleString }}
+          .col-lg-4.bdr-line.col-md-4.col-sm-4.col-xs-4.p-sm.text-center.bdr-b-green.btn-pointer
+            %h4.mt-n.mb-n.pt-xs
+              %small.mt-n.mb-sm> Pageviews
+              {{ analytics_data['ga:pageviews'] | toLocaleString }}

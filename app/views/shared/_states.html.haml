@@ -1,0 +1,1 @@
+= select_tag 'billing[state]', options_for_select(states.collect {|s| [s, s]}, resource&.state), include_blank: 'Select State', class: 'form-control select', required: true, id: 'state_select'

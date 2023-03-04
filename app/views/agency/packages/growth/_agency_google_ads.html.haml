@@ -1,0 +1,942 @@
+- plans = package.plans.where.not(key: 'advanced').sort_by(&:amount)
+- content_for :title do
+  Google Ads | Clickx
+.ui-2020.package-page
+  .page-content.page-plan
+    .page-heading.pt-md.pb-md
+      .row.align-items-center
+        .col-sm-12
+          %h1
+            %i.clickx-icon-adwords
+            Google Ads
+    .container-fluid
+      .table-responsive.table-plan.text-center.plan-preloader
+        %table.table.table-hover.mb-n
+          %thead
+            %tr
+              %th.col-label{"vertical-align" => "top"}
+                .pt-col-content
+                  %h2.pt-header-caption.pt-header-caption--title.text-left
+              %th.col-package.col-package--mw
+                .pt-col-content
+                  .pt-header-caption Jumpstart Plus
+                  .pt-header-price
+                    $699
+                    %span> /mo
+                  .mt-4
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'agency_google_ads', plan: 'jumpstart_plus')}
+                      Get Started
+              %th.col-package.col-package--mw
+                .pt-col-content
+                  .pt-header-caption Starter
+                  .pt-header-price
+                    $899
+                    %span> /mo
+                  .mt-4
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'agency_google_ads', plan: 'starter')}
+                      Get Started
+              %th.col-package.col-package--mw
+                .pt-col-content
+                  .pt-header-caption Pro
+                  .pt-header-price
+                    $1,199
+                    %span> /mo
+                  .mt-4
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'agency_google_ads', plan: 'pro')}
+                      Get Started
+          %tbody
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Ad Budgets
+              %td
+                .pt-col-content
+                  %span.pl-label Ad Budgets
+                  %span.pl-val Under $1,500
+              %td
+                .pt-col-content
+                  %span.pl-label Ad Budgets
+                  %span.pl-val Under $2,000
+              %td
+                .pt-col-content
+                  %span.pl-label Ad Budgets
+                  %span.pl-val $2,001 - $4,999
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Campaign Questionnaire
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Questionnaire
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Questionnaire
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Questionnaire
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Kick-Off Call with Agency
+              %td
+                .pt-col-content
+                  %span.pl-label Kick-Off Call with Agency
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Kick-Off Call with Agency
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Kick-Off Call with Agency
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Unlimited Email Support
+              %td
+                .pt-col-content
+                  %span.pl-label Unlimited Email Support
+                  %span.pl-val With Agency
+              %td
+                .pt-col-content
+                  %span.pl-label Unlimited Email Support
+                  %span.pl-val With Agency
+              %td
+                .pt-col-content
+                  %span.pl-label Unlimited Email Support
+                  %span.pl-val With Agency
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Campaign Launch Timeline
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Launch Timeline
+                  %span.pl-val 2 Weeks
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Launch Timeline
+                  %span.pl-val 2 Weeks
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Launch Timeline
+                  %span.pl-val 2 Weeks
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Dedicated Google Ad Specialists
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Google Ad Specialists
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Google Ad Specialists
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Google Ad Specialists
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Implementation
+              %td
+                .pt-col-content
+              %td
+                .pt-col-content
+              %td
+                .pt-col-content
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span 100% Customized Strategy
+              %td
+                .pt-col-content
+                  %span.pl-label 100% Customized Strategy
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label 100% Customized Strategy
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label 100% Customized Strategy
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Tag Manager Implementation
+              %td
+                .pt-col-content
+                  %span.pl-label Tag Manager Implementation
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Tag Manager Implementation
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Tag Manager Implementation
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Keyword & Audience Research
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Keyword and Audience Research is done for every Google Campaign type (even affiliate networks, that way I can determine where to place ads).
+              %td
+                .pt-col-content
+                  %span.pl-label Keyword & Audience Research
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Keyword and Audience Research is done for every Google Campaign type (even affiliate networks, that way I can determine where to place ads).
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Keyword & Audience Research
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Keyword and Audience Research is done for every Google Campaign type (even affiliate networks, that way I can determine where to place ads).
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Keyword & Audience Research
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Keyword and Audience Research is done for every Google Campaign type (even affiliate networks, that way I can determine where to place ads).
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Google Ad Types
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Depending on the Ad Spend and Client resources, we can create and manage multiple types of Google Ads. The options include: Search Ads, Display Ads, YouTube Ads, In-App Ads, Shopping/Product Ads, Call Only Ads, and will be accompanied by the proper extensions where applicable.
+              %td
+                .pt-col-content
+                  %span.pl-label Google Ad Types
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Depending on the Ad Spend and Client resources, we can create and manage multiple types of Google Ads. The options include: Search Ads, Display Ads, YouTube Ads, In-App Ads, Shopping/Product Ads, Call Only Ads, and will be accompanied by the proper extensions where applicable.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Google Ad Types
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Depending on the Ad Spend and Client resources, we can create and manage multiple types of Google Ads. The options include: Search Ads, Display Ads, YouTube Ads, In-App Ads, Shopping/Product Ads, Call Only Ads, and will be accompanied by the proper extensions where applicable.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Google Ad Types
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Depending on the Ad Spend and Client resources, we can create and manage multiple types of Google Ads. The options include: Search Ads, Display Ads, YouTube Ads, In-App Ads, Shopping/Product Ads, Call Only Ads, and will be accompanied by the proper extensions where applicable.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Campaign Buildout
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will include the design and creation of the following items: Ad Types, Ad Groups, Product Groups, Copywriting, Ad Extension Setup, and Custom Graphics (Visual Ads only) along with Keyword Research/Bidding and Placement Optimizations. If you need more info, check out our FAQs or contact the Partner Manager.
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Buildout
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will include the design and creation of the following items: Ad Types, Ad Groups, Product Groups, Copywriting, Ad Extension Setup, and Custom Graphics (Visual Ads only) along with Keyword Research/Bidding and Placement Optimizations. If you need more info, check out our FAQs or contact the Partner Manager.
+                  %span.pl-val 2 Campaign/Offer
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Buildout
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will include the design and creation of the following items: Ad Types, Ad Groups, Product Groups, Copywriting, Ad Extension Setup, and Custom Graphics (Visual Ads only) along with Keyword Research/Bidding and Placement Optimizations. If you need more info, check out our FAQs or contact the Partner Manager.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Buildout
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will include the design and creation of the following items: Ad Types, Ad Groups, Product Groups, Copywriting, Ad Extension Setup, and Custom Graphics (Visual Ads only) along with Keyword Research/Bidding and Placement Optimizations. If you need more info, check out our FAQs or contact the Partner Manager.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Responsive Ad Copywriting
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our team will create Responsive Ads where the headlines, text, etc. are specifically chosen based on Google’s knowledge of what the audience will best respond to when seeing the Ad. This can be done for Search and Display Ads.
+              %td
+                .pt-col-content
+                  %span.pl-label Responsive Ad Copywriting
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our team will create Responsive Ads where the headlines, text, etc. are specifically chosen based on Google’s knowledge of what the audience will best respond to when seeing the Ad. This can be done for Search and Display Ads.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Responsive Ad Copywriting
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our team will create Responsive Ads where the headlines, text, etc. are specifically chosen based on Google’s knowledge of what the audience will best respond to when seeing the Ad. This can be done for Search and Display Ads.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Responsive Ad Copywriting
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our team will create Responsive Ads where the headlines, text, etc. are specifically chosen based on Google’s knowledge of what the audience will best respond to when seeing the Ad. This can be done for Search and Display Ads.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Ad groups Planning and Implementation
+              %td
+                .pt-col-content
+                  %span.pl-label Ad groups Planning and Implementation
+                  %span.pl-val
+                    %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content
+                  %span.pl-label Ad groups Planning and Implementation
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Ad groups Planning and Implementation
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Ad Extensions (Location, Call, Sitelink)
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Ad Extensions will vary based on the Google Ad Type.
+              %td
+                .pt-col-content
+                  %span.pl-label Ad Extensions (Location, Call, Sitelink)
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Ad Extensions will vary based on the Google Ad Type.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Ad Extensions (Location, Call, Sitelink)
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Ad Extensions will vary based on the Google Ad Type.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Ad Extensions (Location, Call, Sitelink)
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Ad Extensions will vary based on the Google Ad Type.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Initial Ad Creatives
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will include the Image Uploads or Video Ad Setup (if applicable), etc. The creative portion is determined by the resources the client provides, plus additional images if needed. It is a collaboration so this can be custom per client.
+              %td
+                .pt-col-content
+                  %span.pl-label Initial Ad Creatives
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will include the Image Uploads or Video Ad Setup (if applicable), etc. The creative portion is determined by the resources the client provides, plus additional images if needed. It is a collaboration so this can be custom per client.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Initial Ad Creatives
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will include the Image Uploads or Video Ad Setup (if applicable), etc. The creative portion is determined by the resources the client provides, plus additional images if needed. It is a collaboration so this can be custom per client.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Initial Ad Creatives
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will include the Image Uploads or Video Ad Setup (if applicable), etc. The creative portion is determined by the resources the client provides, plus additional images if needed. It is a collaboration so this can be custom per client.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Ad Copy Approval
+              %td
+                .pt-col-content
+                  %span.pl-label Initial Ad Creatives
+                  %span.pl-val From Client
+              %td
+                .pt-col-content
+                  %span.pl-label Initial Ad Creatives
+                  %span.pl-val From Client
+              %td
+                .pt-col-content
+                  %span.pl-label Initial Ad Creatives
+                  %span.pl-val From Client
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Ad Creative Refresh
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This 90 day period will begin after the first round of Ads has been launched successfully. The Account Manager will be the point of contact for any changes to be made.
+              %td
+                .pt-col-content
+                  %span.pl-label Ad Creative Refresh
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This 90 day period will begin after the first round of Ads has been launched successfully. The Account Manager will be the point of contact for any changes to be made.
+                  %span.pl-val Every 90 Days
+              %td
+                .pt-col-content
+                  %span.pl-label Ad Creative Refresh
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This 90 day period will begin after the first round of Ads has been launched successfully. The Account Manager will be the point of contact for any changes to be made.
+                  %span.pl-val Every 90 Days
+              %td
+                .pt-col-content
+                  %span.pl-label Ad Creative Refresh
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This 90 day period will begin after the first round of Ads has been launched successfully. The Account Manager will be the point of contact for any changes to be made.
+                  %span.pl-val Every 90 Days
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    New Ad Creatives
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If the client needs new creatives (images, copy) before the 90 day refresh period, this will be an extra cost. These items can be found on the A La Carte Plan page. The Account Manager will be the point of contact for any changes to be made.
+              %td
+                .pt-col-content
+                  %span.pl-label New Ad Creatives
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If the client needs new creatives (images, copy) before the 90 day refresh period, this will be an extra cost. These items can be found on the A La Carte Plan page. The Account Manager will be the point of contact for any changes to be made.
+                  %span.pl-val Additional
+              %td
+                .pt-col-content
+                  %span.pl-label New Ad Creatives
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If the client needs new creatives (images, copy) before the 90 day refresh period, this will be an extra cost. These items can be found on the A La Carte Plan page. The Account Manager will be the point of contact for any changes to be made.
+                  %span.pl-val Additional
+              %td
+                .pt-col-content
+                  %span.pl-label New Ad Creatives
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If the client needs new creatives (images, copy) before the 90 day refresh period, this will be an extra cost. These items can be found on the A La Carte Plan page. The Account Manager will be the point of contact for any changes to be made.
+                  %span.pl-val Additional
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Implementation of Initial Bids Budget
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation of Initial Bids Budget
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation of Initial Bids Budget
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation of Initial Bids Budget
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Implementation of Ad Scheduling
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation of Ad Scheduling
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation of Ad Scheduling
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation of Ad Scheduling
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Retargeting Campaign Setup
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For JumpStart Plans, our team will gladly create a Retargeting Campaign for the client. If the client wants a Retargeting Campaign built, that will be included in their “2 Campaigns/Offers” included on this plan. If they want two campaigns that are not retargeting, there will be no retargeting campaign since they have already surpassed their 2 campaign limit.
+              %td
+                .pt-col-content
+                  %span.pl-label Retargeting Campaign Setup
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If the client needs new creatives (images, copy) before the 90 day refresh period, this will be an extra cost. These items can be found on the A La Carte Plan page. The Account Manager will be the point of contact for any changes to be made.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Retargeting Campaign Setup
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If the client needs new creatives (images, copy) before the 90 day refresh period, this will be an extra cost. These items can be found on the A La Carte Plan page. The Account Manager will be the point of contact for any changes to be made.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Retargeting Campaign Setup
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If the client needs new creatives (images, copy) before the 90 day refresh period, this will be an extra cost. These items can be found on the A La Carte Plan page. The Account Manager will be the point of contact for any changes to be made.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Develop Initial List of Negative Keywords
+              %td
+                .pt-col-content
+                  %span.pl-label Develop Initial List of Negative Keywords
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Develop Initial List of Negative Keywords
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Develop Initial List of Negative Keywords
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    24/7 Reporting Dashboard
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+              %td
+                .pt-col-content
+                  %span.pl-label 24/7 Reporting Dashboard
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label 24/7 Reporting Dashboard
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label 24/7 Reporting Dashboard
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span On-Going Support
+              %td
+              %td
+              %td
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Dedicated Campaign Management Team
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Campaign Management Team
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Campaign Management Team
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Campaign Management Team
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Negative Keywords Optimization
+              %td
+                .pt-col-content
+                  %span.pl-label Negative Keywords Optimization
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Negative Keywords Optimization
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Negative Keywords Optimization
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Conversion Tracking
+              %td
+                .pt-col-content
+                  %span.pl-label Conversion Tracking
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Conversion Tracking
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Conversion Tracking
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext A/B Testing compares ads and targeting currently running to find the top-performing ones to allocate budget to (reducing wasted ad spend). This will let us get rid of ineffective targeting and creatives, so that we can explore new opportunities to test.
+                    Multiple Ad Creatives & Ad Set Split Testing
+              %td
+                .pt-col-content
+                  %span.pl-label Multiple Ad Creatives & Ad Set Split Testing
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext A/B Testing compares ads and targeting currently running to find the top-performing ones to allocate budget to (reducing wasted ad spend). This will let us get rid of ineffective targeting and creatives, so that we can explore new opportunities to test.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Multiple Ad Creatives & Ad Set Split Testing
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext A/B Testing compares ads and targeting currently running to find the top-performing ones to allocate budget to (reducing wasted ad spend). This will let us get rid of ineffective targeting and creatives, so that we can explore new opportunities to test.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Multiple Ad Creatives & Ad Set Split Testing
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext A/B Testing compares ads and targeting currently running to find the top-performing ones to allocate budget to (reducing wasted ad spend). This will let us get rid of ineffective targeting and creatives, so that we can explore new opportunities to test.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Monthly Performance Report
+              %td
+                .pt-col-content
+                  %span.pl-label Monthly Performance Report
+                  %span.pl-val With Agency
+              %td
+                .pt-col-content
+                  %span.pl-label Monthly Performance Report
+                  %span.pl-val With Agency
+              %td
+                .pt-col-content
+                  %span.pl-label Monthly Performance Report
+                  %span.pl-val With Agency
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Campaign Quality Audits
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is an internal deliverable. Clients will not be receiving a weekly report from our team. Our team consistently checks the Ad Account every week, to make sure everything is working well and if anything needs to be changed. This weekly check helps the Account Managers build a monthly report for the Client on performance and future recommendations.
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Quality Audits
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is an internal deliverable. Clients will not be receiving a weekly report from our team. Our team consistently checks the Ad Account every week, to make sure everything is working well and if anything needs to be changed. This weekly check helps the Account Managers build a monthly report for the Client on performance and future recommendations.
+                  %span.pl-val Weekly
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Quality Audits
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is an internal deliverable. Clients will not be receiving a weekly report from our team. Our team consistently checks the Ad Account every week, to make sure everything is working well and if anything needs to be changed. This weekly check helps the Account Managers build a monthly report for the Client on performance and future recommendations.
+                  %span.pl-val Weekly
+              %td
+                .pt-col-content
+                  %span.pl-label Campaign Quality Audits
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This is an internal deliverable. Clients will not be receiving a weekly report from our team. Our team consistently checks the Ad Account every week, to make sure everything is working well and if anything needs to be changed. This weekly check helps the Account Managers build a monthly report for the Client on performance and future recommendations.
+                  %span.pl-val Weekly
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Performance-Based Ad Spend Allocation
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Performance-Based Ad Spend Allocation is used when multiple campaigns are tested to find the right targeting and creative that makes sense to our audience. For example, if one campaign outperforms another, more Ad Spend is allocated to the one performing the best, so budget is not wasted.
+              %td
+                .pt-col-content
+                  %span.pl-label Performance-Based Ad Spend Allocation
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Performance-Based Ad Spend Allocation is used when multiple campaigns are tested to find the right targeting and creative that makes sense to our audience. For example, if one campaign outperforms another, more Ad Spend is allocated to the one performing the best, so budget is not wasted.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Performance-Based Ad Spend Allocation
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Performance-Based Ad Spend Allocation is used when multiple campaigns are tested to find the right targeting and creative that makes sense to our audience. For example, if one campaign outperforms another, more Ad Spend is allocated to the one performing the best, so budget is not wasted.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Performance-Based Ad Spend Allocation
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Performance-Based Ad Spend Allocation is used when multiple campaigns are tested to find the right targeting and creative that makes sense to our audience. For example, if one campaign outperforms another, more Ad Spend is allocated to the one performing the best, so budget is not wasted.
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Performance-Based Budget Pacing
+              %td
+                .pt-col-content
+                  %span.pl-label Performance-Based Budget Pacing
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Performance-Based Budget Pacing
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Performance-Based Budget Pacing
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Month to Month Commitment
+              %td
+                .pt-col-content
+                  %span.pl-label Month to Month Commitment
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Month to Month Commitment
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content
+                  %span.pl-label Month to Month Commitment
+                  %span.pl-val
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Client Cancellation
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content
+                  %span.pl-label Client Cancellation
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+                  %span.pl-val 30 Days Required
+              %td
+                .pt-col-content
+                  %span.pl-label Client Cancellation
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+                  %span.pl-val 30 Days Required
+              %td
+                .pt-col-content
+                  %span.pl-label Client Cancellation
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+                  %span.pl-val 30 Days Required
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Implementation Fee
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a $500 setup to the client for our setup fee of $250. Please reach out if there are any questions on pricing.
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation Fee
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a $500 setup to the client for our setup fee of $250. Please reach out if there are any questions on pricing.
+                  %span.pl-val $250 One Time
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation Fee
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a $500 setup to the client for our setup fee of $250. Please reach out if there are any questions on pricing.
+                  %span.pl-val $250 One Time
+
+              %td
+                .pt-col-content
+                  %span.pl-label Implementation Fee
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Please consider charging your customers MSRP implementation fees for month 1. An example of this would be charging a $500 setup to the client for our setup fee of $250. Please reach out if there are any questions on pricing.
+                  %span.pl-val $250 One Time
+            - unless @is_preview
+              %tr
+                %td.col-label.text-left
+                  .pt-col-content
+                - plans.each do |plan|
+                  %td
+                    .pt-col-content
+                      %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: package.key, plan: plan.key)}
+                        Get Started
+      .spacer15
+      - if raw(package.sales_pitch).present?
+        .row.pt-4.pb-4.d-flex.flex-wrap.row-p-4
+          .col-sm-12.mt-4.mt-md-0
+            .panel-body.bg-white.panel-br-10.p-5.h-100
+              .panel-content.pl-n.pr-n
+                = raw(@package.sales_pitch)
+:javascript
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.plan-preloader').removeClass('plan-preloader');
+    }, 500);
+  });

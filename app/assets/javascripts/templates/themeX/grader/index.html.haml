@@ -1,0 +1,45 @@
+.static-content-wrapper
+  .static-content
+    .page-content
+      %div{'ng-if': '!current_business_domain'}
+        %center.set_domain_btn
+          %a.btn.btn-success.btn-raised{:href => "#", "ng-click" => "showPrompt()"}
+            SET DOMAIN
+
+      %div{'ng-if': 'current_business_domain'}
+        .container-fluid
+          %div{"ng-include":"", src:"'themeX/grader/_overall_grade.html'"}
+        .container-fluid
+          %div{"data-widget-group" => "group1"}
+            .row.grader
+              %h2.text-center.mt-n.mb-xl.f-w-xs Grade Breakdown
+              %div{"ng-include":"", src:"'themeX/grader/_onpage_optimization.html'"}
+              / end sec 1
+              %div{"ng-include":"", src:"'themeX/grader/_offpage_optimization.html'"}
+              / end sec 2
+              %div{"ng-include":"", src:"'themeX/grader/_web_performance.html'"}
+              / end sec 3
+              / %h2.text-center.mt-n.mb-xl.f-w-xs Advanced Analysis:
+              / %div{"ng-include":"", src:"'themeX/grader/_competitor_comparison_seo.html'"}
+              / end sec 4
+              / %div{"ng-include":"", src:"'themeX/grader/_competitor_comparison_ppc.html'"}
+              / end sec 5
+              %div{"ng-include":"", src:"'themeX/grader/_competitors.html'"}
+%script{type: "text/ng-template", id: "set_domain"}
+  %md-dialog.width50.selectPages{"aria-label" => "Set Goals"}
+    %form{name: 'add_domain', 'ng-submit': "addDomain(domain, $event);"}
+      %md-toolbar.darkstone_blue
+        .md-toolbar-tools
+          %h2.white
+            %b Add Domain
+      %md-dialog-content
+        .md-dialog-content{ "name": "Goals" }
+          %md-input-container.md-block
+            %label Domain name
+            %input#domain_name{:name => "domain", "ng-model" => "domain", :type => "text" }
+
+      %md-dialog-actions{:layout => "row"}
+        %span{:flex => ""}
+        %md-button.md-raised.accent_red.white{type: 'submit'}
+          Add
+

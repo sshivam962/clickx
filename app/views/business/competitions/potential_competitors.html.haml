@@ -1,0 +1,97 @@
+.pb-md.page-heading.no-margin-bottom.competitors-list.competitors-header
+  %h1
+    %i.clickx-icon-Automotive.title-icon>
+    Potential Competitors
+.container-fluid
+  .panel
+    %ul#competitor-tab.nav.nav-tabs{:role => "tablist"}
+      %li.nav-item
+        %a#organic-tab.nav-link.active{"aria-controls" => "organic", "aria-selected" => "true", "data-toggle" => "tab", :href => "#organic", :role => "tab"} From Organic Traffic
+      %li.nav-item
+        %a#paid-tab.nav-link{"aria-controls" => "paid", "aria-selected" => "false", "data-toggle" => "tab", :href => "#paid", :role => "tab"} From Paid Traffic
+
+    #table_export.panel-body.tab-content
+      #organic.tab-pane.active{"aria-labelledby" => "home-tab", :role => "tabpanel"}
+        .table-responsive
+          - if @competitors_organic.empty?
+            No Data Available.
+          - else
+            %table.table.table-bordered.table-vam.table-hover.mb-n
+              %thead
+                %tr
+                  %th Competitor
+                  %th.text-center Competitor Relevance
+                  %th.text-center Common Keywords
+                  %th.text-center Organic Keywords
+                  %th.text-center Organic Cost
+                  %th.text-center Organic Traffic
+                  %th.text-center Add to Competitors
+              %tbody
+                - @competitors_organic.each do |competitor|
+                  %tr
+                    %td
+                      %a{:href => "http://" + "#{competitor[:domain]}", :target => "_blank"}
+                        %h4.list-group-item-heading #{competitor[:domain]}
+                    %td.text-center
+                      #{competitor[:competitor_relevance]}
+                    %td.text-center
+                      #{competitor[:common_keywords]}
+                    %td.text-center
+                      #{competitor[:organic_keywords]}
+                    %td.text-center
+                      #{competitor[:organic_cost]}
+                    %td.text-center
+                      #{competitor[:organic_traffic]}
+                    %td.text-center
+                      = link_to business_client_competitions_path(competition: {name: competitor[:domain]}), method: :post, remote: true do
+                        %i.fa.fa-plus.pointer
+              %tfoot
+                %tr
+                  %th{ colspan:7 }
+                    .ui-2020
+                      .row.pagination-wrapper.pull-left
+                        .left.pagination-links
+                          .pagination
+                            = will_paginate @competitors_organic
+
+      #paid.tab-pane{"aria-labelledby" => "home-tab", :role => "tabpanel"}
+        .table-responsive
+          - if @competitors_paid.empty?
+            No Data Available.
+          - else
+            %table.table.table-bordered.table-vam.table-hover.mb-n
+              %thead
+                %tr
+                  %th Competitor
+                  %th.text-center Competitor Relevance
+                  %th.text-center Common Keywords
+                  %th.text-center Organic Keywords
+                  %th.text-center Organic Cost
+                  %th.text-center Organic Traffic
+                  %th.text-center Add to Competitors
+              %tbody
+                - @competitors_paid.each do |competitor|
+                  %tr
+                    %td
+                      %a{:href => "http://" + "#{competitor[:domain]}", :target => "_blank"}
+                        %h4.list-group-item-heading #{competitor[:domain]}
+                    %td.text-center
+                      #{competitor[:competitor_relevance]}
+                    %td.text-center
+                      #{competitor[:common_keywords]}
+                    %td.text-center
+                      #{competitor[:organic_keywords]}
+                    %td.text-center
+                      #{competitor[:organic_cost]}
+                    %td.text-center
+                      #{competitor[:organic_traffic]}
+                    %td.text-center
+                      %i.fa.fa-plus.pointer
+              %tfoot
+                %tr
+                  %th{ colspan:7 }
+                    .ui-2020
+                      .row.pagination-wrapper.pull-left
+                        .left.pagination-links
+                          .pagination
+                            = will_paginate @competitors_paid

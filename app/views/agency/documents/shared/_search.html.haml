@@ -1,0 +1,28 @@
+- if documents.blank?
+  .col-md-12
+    No results found...
+- else
+  - documents.each do |document|
+    - access = current_agency.enabled_document_categories.include?(document.category)
+    .col-lg-3.col-md-4.col-sm-6.col-xs-12.mb-5{id: dom_id(document)}
+      .card.card--document.h-100.mb-0.d-flex.flex-column
+        .card-image.br-10
+          - if document.thumbnail.present?
+            %img.document-image.br-10{:alt => "Loading image...", src: document.thumbnail&.file&.url}
+        .px-4.pt-5.flex-col
+          .fwn
+            %a.no-underline.color-dark-blue= document.title
+          .pt-2.mt-1
+            %small.fs-12
+              = precede 'Updated ' do
+                = document.updated_at.strftime('%b %d, %Y')
+        .px-3.py-4.mt-4
+          - if access
+            - if document.document_link?
+              = link_to "View", document.document_link, class: 'button btn width100 btn-lg btn--dark f-w-lg', target: '_blank', "style": "left: inherit;"
+            - else
+              = link_to "Download", document&.document_attachment&.file&.url, class: 'button btn width100 btn-lg btn--dark f-w-lg', target: '_blank', "style": "left: inherit;"
+          - else
+            = link_to '#', class: 'button btn width100 btn-lg f-w-lg', "style": "left: inherit;", disabled: true do
+              %i.fa.fa-lock
+              Download

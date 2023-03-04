@@ -1,0 +1,9 @@
+- agencies.each do |agency|
+  = render 'super_admin/agencies/verified_domains/agency', agency: agency
+.row.mt-md
+  .col-md-4.col-lg-4.col-sm-12
+    = page_entries_info agencies
+  .col-md-8.col-lg-8.col-sm-12.right_align
+    = will_paginate agencies, params: {name: params[:name]}
+:javascript
+  $('.pagination a').attr('data-remote', 'true');

@@ -1,0 +1,215 @@
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/normalize";
+@import "bootstrap/scaffolding";
+
+@import "bootstrap/type";
+@import "bootstrap/grid";
+@import "bootstrap/utilities";
+
+@import "bootstrap/print";
+
+
+/* Variables */
+$BODY_BG: #fff;
+$HEADER_BG: #fff;
+
+$REVIEW_BOX_BG: #fff;
+
+$TITLE_UNDER_LINE_ONE : #889195;
+$TITLE_UNDER_LINE_TWO : #505b5f;
+
+$TITLE_UNDER_LINE_ONE_WIDTH: 100;
+$TITLE_UNDER_LINE_TWO_WIDTH: 40;
+
+@function get_in_px($value){
+  @return  unquote("#{$value}px")
+}
+
+@function get_in_percentage($value){
+  @return unquote("#{$value}%")
+}
+
+
+
+/** UTILITIES **/
+.text-bold{
+  font-weight: bold;
+}
+.margin-bottom-5{
+  margin-bottom: 5px;
+}
+.container{
+  max-width: 760px;
+}
+
+/** eof utilities **/
+
+/* MAIN PDF STYLE */
+html,body{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 14px;
+  letter-spacing: normal;
+  background: $BODY_BG;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  @media print {
+    padding: 0;
+    margin: 0;
+    background: $BODY_BG;
+  }
+}
+body{
+  background: $BODY_BG;
+}
+
+.review_pdf_wrapper{
+  .header{
+    background: $HEADER_BG;
+    padding-top: 40px;
+  }
+  .content{
+    background: transparent;
+    .title{
+      font-weight: lighter;
+      position: relative;
+      padding-bottom: 20px;
+      &:after,&:before{
+        content: '';
+        position: absolute;
+        left: 50%;
+      }
+      &:before{
+        width: get_in_px($TITLE_UNDER_LINE_ONE_WIDTH);
+        margin-left: -(get_in_px($TITLE_UNDER_LINE_ONE_WIDTH/2));
+        background: $TITLE_UNDER_LINE_ONE;
+        bottom: 10px;
+        height: 2px;
+      }
+      &:after{
+        width: get_in_px($TITLE_UNDER_LINE_TWO_WIDTH);
+        margin-left:-( get_in_px($TITLE_UNDER_LINE_TWO_WIDTH/2));
+        height: 4px;
+        background: $TITLE_UNDER_LINE_TWO;
+        bottom: 9px;
+      }
+    }
+  }
+  .reviews-list{
+    margin: 20px 0px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding: 0px 30px;
+    .review-box-wrapper{
+      display: block;
+      margin-bottom: 20px;
+    }
+    .review-box{
+      background: $REVIEW_BOX_BG;
+      padding: 20px;
+      display: block;
+      border: 1px solid #ddd;
+    }
+  }
+}
+.paragraphs{
+  font-size: 14px;
+  line-height: 26px;
+}
+.logo-image{
+  display: block;
+  text-align: center;
+  position: relative;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+  img{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 48px;
+  }
+  &:after{
+    content: '';
+    bottom: 5px;
+    width: 12px;
+    height: 2px;
+    background: #5e5e5e;
+    left: 50%;
+    margin-left: -6px;
+    position: absolute;
+    z-index: 2;
+  }
+}
+
+$date_font_weight: 100!default;
+.date{
+  font-size: 12px;
+  font-weight: $date_font_weight;
+
+}
+.review-box-footer{
+  background-image: -webkit-linear-gradient(to right, #005bc4 10%,
+    #0c9cf3 10%, #0c9cf3 20%,
+    #265ca2 20%,#265ca2 30%,
+    #f37d7d 30%,#f37d7d 35%,
+    #f80000 35%,#f80000 40%,
+    #810d00 40%,#810d00 50%,
+    #570f00 50%,#570f00 60%,
+    #f0ba00 60%,#f0ba00 70%,
+    #d79d0d 70%,#d79d0d 80%,
+    #97bc5d 80%,#97bc5d 90%,
+    #007f32 90%, #007f32 100%);
+  background-image: -moz-linear-gradient(to right, #005bc4 10%,
+    #0c9cf3 10%, #0c9cf3 20%,
+    #265ca2 20%,#265ca2 30%,
+    #f37d7d 30%,#f37d7d 35%,
+    #f80000 35%,#f80000 40%,
+    #810d00 40%,#810d00 50%,
+    #570f00 50%,#570f00 60%,
+    #f0ba00 60%,#f0ba00 70%,
+    #d79d0d 70%,#d79d0d 80%,
+    #97bc5d 80%,#97bc5d 90%,
+    #007f32 90%, #007f32 100%);
+  background-image: -ms-linear-gradient(to right, #005bc4 10%,
+    #0c9cf3 10%, #0c9cf3 20%,
+    #265ca2 20%,#265ca2 30%,
+    #f37d7d 30%,#f37d7d 35%,
+    #f80000 35%,#f80000 40%,
+    #810d00 40%,#810d00 50%,
+    #570f00 50%,#570f00 60%,
+    #f0ba00 60%,#f0ba00 70%,
+    #d79d0d 70%,#d79d0d 80%,
+    #97bc5d 80%,#97bc5d 90%,
+    #007f32 90%, #007f32 100%);
+  width: 100%;
+  height: 6px;
+  background-image: linear-gradient(to right, #005bc4 10%,
+    #0c9cf3 10%, #0c9cf3 20%,
+    #265ca2 20%,#265ca2 30%,
+    #f37d7d 30%,#f37d7d 35%,
+    #f80000 35%,#f80000 40%,
+    #810d00 40%,#810d00 50%,
+    #570f00 50%,#570f00 60%,
+    #f0ba00 60%,#f0ba00 70%,
+    #d79d0d 70%,#d79d0d 80%,
+    #97bc5d 80%,#97bc5d 90%,
+    #007f32 90%, #007f32 100%)
+}
+/* eof main pdf style */
+.footer{
+  padding: 20px 0 40px;
+}
+
+
+@media (max-width: 991px) {
+  .review_pdf_wrapper{
+    .reviews-list{
+      padding: 0px 0px;
+    }
+  }
+}

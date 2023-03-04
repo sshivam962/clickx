@@ -1,0 +1,8 @@
+<% if @user.blank? %>
+  toastr.error('User not found')
+<% elsif @user.errors.present? %>
+  toastr.error("<%= @user.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success("User deleted");
+  $("#user_<%= @user.id%>").remove();
+<% end %>

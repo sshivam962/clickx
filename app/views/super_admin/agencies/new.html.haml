@@ -1,0 +1,11 @@
+.header.no-bottom-border
+.page-header
+  %h3
+    Add New Agency
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href:"/s/agencies"} Back
+
+.agency-form
+  = form_for @agency, url: super_admin_agencies_path do |f|
+    = render 'form', f: f
+    %button.btn.btn-warning.saveBtn.m-0{type: 'submit'} Save Agency

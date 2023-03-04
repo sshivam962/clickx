@@ -1,0 +1,9 @@
+- funnel_pages.each do |funnel_page|
+  = render 'super_admin/funnel_pages/shared/funnel_page', funnel_page: funnel_page
+.row.mt-md
+  .col-md-4.col-lg-4.col-sm-12
+    = page_entries_info funnel_pages
+  .col-md-8.col-lg-8.col-sm-12.right_align
+    = will_paginate funnel_pages, params: {title: params[:title]}
+:javascript
+  $('.pagination a').attr('data-remote', 'true');

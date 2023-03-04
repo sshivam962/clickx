@@ -1,0 +1,19 @@
+%tr.text-center.centered-cols.row-card
+  %td.col-client
+    %a.client-url.d-lg-flex.align-items-center{href: tools_casestudy_show_agency_menu_permissions_path(id: case_study.id)}
+      %span.client-name-circle.mr-0.mb-5.mb-lg-0.mr-lg-3= case_study.title.strip.first
+      .text= case_study.title
+  %td.text-lg-left
+    %p.m-0= case_study.short_desc
+  %td.col-btn.text-right
+    .d-lg-flex.align-items-center.justify-content-center.justify-content-lg-end.flex-wrap.flex-lg-nowrap.mt-3.mt-lg-0
+      .d-block.d-lg-inline-block
+        %a.btn.btn-blue.d-block.d-lg-inline-block.mx-auto.mr-lg-3.mb-4.mb-lg-0{href: tools_casestudy_show_agency_menu_permissions_path(id: case_study.id)}
+          Read More
+          %i.pl-sm.fa.fa-angle-double-right
+      .d-flex.justify-content-center
+        %a.action-btn.action-btn--transparent{href: case_study_public_link(current_agency, case_study), target: '_blank', data: {link: case_study_public_link(current_agency, case_study)}}
+          %span.btn-icon
+            %i.fa.fa-external-link
+%tr.row-spacer
+  %td{:colspan => "3"}

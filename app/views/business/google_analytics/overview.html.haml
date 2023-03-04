@@ -1,0 +1,55 @@
+= render 'page_header', daterange: daterange_picker_format(@start_date, @end_date)
+
+.container-fluid
+  .row
+    .col-md-12
+      = render 'tab_menu', active_tab: 'overview'
+    .col-md-12
+      .tab-content.summary
+        = render 'business/google_analytics/overview', data: @data
+      .tab-content.overview_charts
+
+:javascript
+  // js function to fetch chart data
+  function fetch_chart_data() {
+    const date_range = $('#date_filter').val();
+    const [start_date, end_date] = date_range.split(' - ');
+    const request_url = `/b/google_analytics/overview_charts?chart_type=default&end_date=${end_date}&graph_option=date&start_date=${start_date}`;
+
+    $.ajax({
+      url: request_url,
+      type: 'GET',
+      dataType: 'script',
+      success: function(data) {
+      },
+      error: function(data) {
+        console.log(data);
+      }
+    });
+  }
+
+  $(function() {
+    $('#date_filter').daterangepicker({
+      maxDate: new Date(),
+      locale: { format: 'MM-DD-YYYY' }
+    }).on("change", function() {
+      const date_range = $(this).val();
+      const [start_date, end_date] = date_range.split(' - ');
+      const request_url = `/b/google_analytics?start_date=${start_date}&end_date=${end_date}`;
+
+      $.ajax({
+        url: request_url,
+        type: 'GET',
+        dataType: 'script',
+        success: function(data) {
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+
+      fetch_chart_data()
+    });
+
+    fetch_chart_data()
+  });

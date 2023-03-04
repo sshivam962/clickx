@@ -1,0 +1,84 @@
+%main.theme-clickx.payment
+  .container-fluid
+    .row.horizontal
+      .col-md-4.col-lg-3.vertical-a-center.left-section.left-section--payment
+        .payment-page-header
+          %figure
+            = image_tag 'payment_links/payment.svg', width: '150px'
+          %h2 Payment
+        .text-white.text-center.mt-n.mb-md.p-15.br-6
+          %h3.mt-n.text-white Prepared For
+          .fw-m
+            = @user_info[:name]
+          .fw-m
+            = @user_info[:email]
+        .bottom-copyright
+          %p.text-center.text-white
+            © #{Date.current.year}. All Rights Reserved.
+      .col-md-8.col-lg-9.vertical-a-center.bg-white
+        .stages-scroll-area
+          .clickx-stages.pt-xxl
+            %ul.stages
+              %li#step_li_plan.completed
+                .stage-data
+                  .stages-number
+                    %i.material-icons check
+                  .stages-title Select Plan
+              %li#step_li_card.current
+                .stage-data
+                  .stages-number
+                    %i.material-icons check
+                  .stages-title Payment
+              %li#step_li_success
+                .stage-data
+                  .stages-number
+                    %i.material-icons check
+                  .stages-title Complete
+          %form#checkout_create_card.stripe-card-form
+            .payment-content-area
+              .payment-min-height--wrapper
+                .payment-content-area
+                  .payment-form-wrapper
+                    .spacer50
+                    .cc-pay
+                      %h3.main_question.font-20.mb-n Credit Card Information
+                      .row.pb-md
+                        #new_card_form
+                          #card-container1
+                            .col-xs-12
+                              .form-group.mt-sm
+                                %label.control-label{:for => "number"} Card Number
+                                #card-number-div.input.empty
+                            .col-xs-6
+                              .form-group.mt-sm
+                                %label.control-label{:for => "expiry"} Expiration Date
+                                #card-expiry-div.input.empty
+                            .col-xs-6
+                              .form-group.mt-sm
+                                %label.control-label{:for => "cvc"} CVC
+                                #card-cvc-div.input.empty
+                            .col-xs-12
+                              .error{:role => "alert"}
+                                %span
+                                  %i.fa.fa-times-circle
+                                %span.card-message
+                      .row.error-payment-link.hidden
+                        .panel
+                          .panel-body.p-md
+                            Please enter a valid card
+                    .spacer20
+              .next-btn-wrapper
+                .row
+                  .col-xs-6
+                    %a.btn-next.btn-next--dull.pl_previous_step{href: 'javascript:void(0)', data: {previous: 'plan', current: 'card'}} Back
+                  .col-xs-6.text-right
+                    %a.btn-next.pl_next_step.card_submit_button{href: 'javascript:void(0)', data: {next: 'success', current: 'card', disable_with: 'Processing...'}} Initiate Services
+            = submit_tag 'submit', class: 'invisible checkout_create_card_submit'
+    %footer.payment-footer.clearfix
+      .spacer15
+      .container.text-center
+        %p © #{Date.current.year}. All Rights Reserved.
+:javascript
+  $(document).ready(function() {
+    $.fn.stripeCard();
+  });

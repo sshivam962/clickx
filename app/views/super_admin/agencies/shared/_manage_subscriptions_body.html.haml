@@ -1,0 +1,38 @@
+Active Subscription - #{active_subscription.package_name.titleize}
+- if active_subscription.cancel_at.present?
+  %br
+  Scheduled to end subscription on  #{active_subscription.cancel_at.strftime('%B %d, %Y')}
+  = link_to revert_cancel_super_admin_package_subscription_path(active_subscription, category: 'agency'), method: :post, data: { confirm: 'Do you really want to CANCEL?' }, class: "btn m-n p-n btn-danger pr-sm", remote: true do
+    %i.pl-sm.fa.fa-close
+    Cancel
+    .ripple-container
+- else
+  - if subscription_schedule.blank?
+    = link_to cancel_super_admin_package_subscription_path(active_subscription, category: 'agency'), method: :post, data: { confirm: 'Do you really want to CANCEL?' }, class: "btn m-n p-n btn-danger pr-sm", remote: true do
+      %i.pl-sm.fa.fa-close
+      Cancel
+      .ripple-container
+
+.col-md-12.pl-n.pt-md
+  - if subscription_schedule.present?
+    %br
+    Scheduled downgrade to
+    %b
+      #{subscription_schedule.stripe_plan.titleize}
+    on #{subscription_schedule.start_at.strftime('%B %d, %Y')}
+    = link_to cancel_super_admin_subscription_schedule_path(subscription_schedule), method: :post, data: { confirm: 'Do you really want to CANCEL?' }, class: "btn m-n p-n btn-danger pr-sm", remote: true do
+      %i.pl-sm.fa.fa-close
+      Cancel
+      .ripple-container
+  - else
+    - if active_subscription.cancel_at.blank?
+      - plans_collection = Package.find_by(key: 'agency_infrastructure').plans.where('amount < ?', active_subscription.amount).order(:amount).map{|p| [p.display_name, p.id]}
+      - if plans_collection.present?
+        = form_tag downgrade_plan_super_admin_agency_path(agency), method: :patch, remote: true do
+          .col-md-10.pl-n
+            = select_tag 'downgrade_plan', options_for_select(plans_collection), include_blank: 'Choose plan', class: 'form-control', required: true
+          .col-md-2.pl-n
+            %button.btn.btn-success{type: :submit}
+              Change Plan
+
+

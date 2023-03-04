@@ -1,0 +1,54 @@
+- content_for :title do
+  = @course.title
+.page-content
+  .page-heading.mb-n.pb-md.mt-sm
+    %h1
+      %i.clickx-icon-Design.title-icon
+      = @course.title
+      %small.f-s-xs.mt
+        = "#{@course.chapters.count} Modules"
+    .options
+      %a.btn.btn-warning.btn-raised.m-n.f-w-lg{href: business_courses_path}
+        %i.fa.fa-arrow-left.pr-xs
+        View more lessons
+  .container-fluid.pb-n
+    %div
+      .panel.panel-white.mb-n
+        .row.horizontal-align.course_content
+          = render 'business/courses/shared/content', course: @course, current_chapter: @current_chapter, next_chapter: @next_chapter
+:javascript
+  $(document).on("click",".load_chapter",function() {
+    chapter_id = $(this).data('chapter');
+    course_id = $(this).data('course');
+    $('#chapter_id').val(chapter_id)
+    $.ajax({
+      url: "/b/courses/" + course_id + "/load_chapter",
+      type: 'post',
+      data: {chapter_id: chapter_id},
+      dataType: 'json',
+      success:function(response){
+        if(response.status == 200){
+          $('.timeline-orange').removeClass('active')
+          $('#chapter_li_' + chapter_id).addClass('active')
+          $('.chapter_content').html(response.data.content)
+        }
+      }
+    })
+  });
+
+  $(document).on("click",".next_chapter",function() {
+    chapter_id = $('#chapter_id').val();
+    course_id = $('#course_id').val();
+    $.ajax({
+      url: "/b/courses/" + course_id + "/complete_chapter",
+      type: 'post',
+      data: {chapter_id: chapter_id},
+      dataType: 'json',
+      success:function(response){
+        if(response.status == 200){
+          $('#chapter_id').val(response.data.chapter_id)
+          $('.course_content').html(response.data.content)
+        }
+      }
+    })
+  });

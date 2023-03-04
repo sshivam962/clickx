@@ -1,0 +1,91 @@
+.row.hidden
+  .col-md-12
+    .tab-container
+      %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+        %li.active
+          %a{"data-toggle":"tab", 'data-target': "#visits", 'ng-click':"resizeChart('visits_chart'); searches()"} Visits
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#visitors", 'ng-click':"resizeChart('visitors_chart'); searches()"} Visitors
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#pages-session", 'ng-click':"resizeChart('page_per_visit_chart'); searches()"} Pages/Session
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#session-duration", 'ng-click':"resizeChart('avg_session_chart'); searches()"} Avg. Session Duration
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#new-session", 'ng-click':"resizeChart('new_visits_chart'); searches()"} % New Sessions
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#bounce-rate", 'ng-click':"resizeChart('bounce_chart'); searches()"} Bounce Rate
+      .tab-content
+        #visits.tab-pane.active
+          .panel-body
+            .centered
+              #visits_chart
+        #visitors.tab-pane
+          .panel-body
+            .centered
+              #visitors_chart
+        #pages-session.tab-pane
+          .panel-body
+            .centered
+              #page_per_visit_chart
+        #session-duration.tab-pane
+          .panel-body
+            .centered
+              #avg_session_chart
+        #new-session.tab-pane
+          .panel-body
+            .centered
+              #new_visits_chart
+        #bounce-rate.tab-pane
+          .panel-body
+            .centered
+              #bounce_chart
+        .row
+          .col-sm-12.text-center{ "ng-include": "", "src": "'themeX/google_analytics/_chartFilter.html'" }
+
+.row
+  .col-md-12
+    .tab-container
+      .tab-content
+        .table-responsive
+          %table#keyword_table.table.table-hover.table-bordered.table-vam.mb-5
+            %thead
+              %tr
+                %th
+                %th
+                  %u.help_pointer{ "title": "Keywords that users are searching for on Google to get to your site" }
+                    Keyword
+                %th{ 'st-sort':'totalUsers', 'st-sort-default':'reverse' }
+                  %u.help_pointer{ "title": "Number of users who have visited your page in the above period." }
+                    Users
+                %th
+                  %u.help_pointer{ "title": "Number of pages a user visits in one session on average" }
+                    PageViews/Session
+                %th
+                  %u.help_pointer{ "title": "Average time spent by users on your page" }
+                    Avg. Session
+                    %br Duration
+                %th
+                  %u.help_pointer{ "title": "The percentage of users who directed away from your site after only visiting a single page" }
+                    Bounce Rate
+            %tbody
+              - data.each do |d|
+                %tr
+                  %td
+                    %add-remove-keywords{"keyword":"search"}
+                  %td{align: "left"}= d["sessionGoogleAdsKeyword"]
+                  %td= d["totalUsers"]
+                  %td= d["screenPageViewsPerSession"]
+                  %td= d["averageSessionDuration"]
+                  %td #{d["bounceRate"]}%
+        .row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}
+
+:javascript
+  $(document).ready( function () {
+    var table = $('#keyword_table').DataTable({
+      "pageLength": 25
+    });
+
+    $('#keyword_table_filter input').on('keyup change', function () {
+      table.column(1).search($(this).val()).draw();
+    });
+  });

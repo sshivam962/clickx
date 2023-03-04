@@ -1,0 +1,3 @@
+$('.edit_direct_lead').modal('hide')
+$('.modal-backdrop').remove()
+$("#<%= "direct_lead_tr#{@direct_lead.id}" %>").replaceWith("<%= j(render 'agency/lead_sources/direct_leads_listing_table_tr',  direct_lead: @direct_lead ) %>");

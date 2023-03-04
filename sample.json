@@ -1,0 +1,217 @@
+[
+  {
+    "city": "Akutan",
+    "site": "http://www.tridentseafoods.com/",
+    "type": "Seafood wholesaler",
+    "state": "Alaska",
+    "emails": [
+      {
+        "email": "sales@tridentseafoods.com",
+        "last_name": null,
+        "first_name": null
+      },
+      {
+        "email": "humanresources@tridentseafoods.com",
+        "last_name": null,
+        "first_name": null
+      },
+      {
+        "email": "consumeraffairs@tridentseafoods.com",
+        "last_name": null,
+        "first_name": null
+      }
+    ],
+    "instagram": "https://www.instagram.com/p",
+    "company_name": "Trident Seafoods Corporation"
+  },
+  {
+    "city": "Akutan",
+    "site": "https://education.alaska.gov/compass/ParentPortal/SchoolProfile?SchoolID=560030",
+    "type": "High school",
+    "state": "Alaska",
+    "emails": [
+      {
+        "email": "eed.webmaster@alaska.gov",
+        "last_name": null,
+        "first_name": null
+      },
+      {
+        "email": "tcwebmail@alaska.gov",
+        "last_name": null,
+        "first_name": null
+      },
+      {
+        "email": "tim.mearig@alaska.gov",
+        "last_name": null,
+        "first_name": null
+      }
+    ],
+    "instagram": "https://www.instagram.com/alaskadeed",
+    "company_name": "Akutan School"
+  },
+  {
+    "city": "",
+    "site": "http://www.abbiecreekconstruction.com/",
+    "type": "Custom home builder",
+    "state": "",
+    "emails": [
+      {
+        "email": "info@abbiecreekconstruction.com",
+        "last_name": null,
+        "first_name": null
+      }
+    ],
+    "instagram": null,
+    "company_name": "Abbie Creek Construction"
+  },
+  {
+    "city": "Abbeville",
+    "site": "https://www.yellawood.com/",
+    "type": "Woodworker",
+    "state": "AL",
+    "emails": [
+      {
+        "email": "ksavoy@yellawood.com",
+        "last_name": null,
+        "first_name": null
+      },
+      {
+        "email": "careers@yellawood.com",
+        "last_name": null,
+        "first_name": null
+      },
+      {
+        "email": "arsupport@yellawood.com",
+        "last_name": null,
+        "first_name": null
+      }
+    ],
+    "instagram": "https://www.instagram.com/yellawood",
+    "company_name": "Great Southern Wood"
+  },
+  {
+    "city": "Abbeville",
+    "site": "http://www.jonesconcretefinishing.com/contact",
+    "type": "Construction company",
+    "state": "Alabama",
+    "emails": [
+      {
+        "email": "jeepjn1@aol.com",
+        "last_name": null,
+        "first_name": null
+      }
+    ],
+    "instagram": null,
+    "company_name": "Jones Concrete Finishing, LLC"
+  },
+  {
+    "city": "Abbeville",
+    "site": "https://mark-marsh-masonry.ueniweb.com/",
+    "type": "Masonry contractor",
+    "state": "Alabama",
+    "emails": [
+      {
+        "email": "mark.marsh35@icloud.com",
+        "last_name": null,
+        "first_name": null
+      }
+    ],
+    "instagram": null,
+    "company_name": "M&H Cement and Brick"
+  },
+  {
+    "city": "Akutan",
+    "site": "https://www.eatribes.org/communities/akutan/",
+    "type": "Medical clinic",
+    "state": "Alaska",
+    "emails": [
+      {
+        "email": "paulm@eatribes.net",
+        "last_name": null,
+        "first_name": null
+      },
+      {
+        "email": "ideas@eatribes.net",
+        "last_name": null,
+        "first_name": null
+      }
+    ],
+    "instagram": null,
+    "company_name": "Anesia Kudrin Memorial Clinic"
+  },
+  {
+    "city": "",
+    "site": "https://bradleybrands.net/",
+    "type": "Marketing consultant",
+    "state": "",
+    "emails": [
+      {
+        "email": "heather@bradleybrands.net",
+        "last_name": null,
+        "first_name": null
+      }
+    ],
+    "instagram": "https://www.instagram.com/bradleybrandsofficial",
+    "company_name": "Bradley Brands Digital Marketing, Social & Strategy"
+  },
+  {
+    "city": "Dothan",
+    "site": "https://www.pathfinderdigitalmarketing.com/",
+    "type": "Marketing agency",
+    "state": "Alabama",
+    "emails": [
+      {
+        "email": "tony@pathfinderdigitalmarketing.com",
+        "last_name": null,
+        "first_name": null
+      },
+      {
+        "email": "tectony@tonyppc.com",
+        "last_name": null,
+        "first_name": null
+      }
+    ],
+    "instagram": null,
+    "company_name": "Pathfinder Digital Marketing LLC"
+  },
+  {
+    "city": "Abbeville",
+    "site": "https://www.foodgiant.com/",
+    "type": "Grocery store",
+    "state": "Alabama",
+    "emails": [
+      {
+        "email": "leedwards@foodgiant.com",
+        "last_name": null,
+        "first_name": null
+      },
+      {
+        "email": "tdavis@foodgiant.com",
+        "last_name": "Davis",
+        "first_name": "Tanner"
+      },
+      {
+        "email": "garyduncan@foodgiant.com",
+        "last_name": "Duncan",
+        "first_name": "Gary"
+      }
+    ],
+    "instagram": null,
+    "company_name": "Food Giant"
+  },
+  {
+    "city": "Abbeville",
+    "site": "http://www.killebrewdesign.com/",
+    "type": "Interior designer",
+    "state": "Alabama",
+    "emails": [
+      {
+        "email": "inspiration@killebrewdesign.com",
+        "last_name": null,
+        "first_name": null
+      }
+    ],
+    "instagram": null,
+    "company_name": "Killebrew Design"
+  }
+]

@@ -1,0 +1,9 @@
+<% if @error.present? %>
+  toastr.error("<%= @error %>")
+  $('input.payment-next-btn').removeAttr('disabled')
+  $('input.payment-next-btn').val('Pay Now')
+  $('input.checkout_create_card_submit').removeAttr('disabled')
+<% else %>
+  $('#card_id').val("<%= @card.id%>")
+  $('#new_package_subscription_form').submit()
+<% end %>

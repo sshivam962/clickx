@@ -1,0 +1,22 @@
+.bg-sky-blue.rounded.border-1.border-blue
+  .bg-white.rounded-t-12.py-4.px-5
+    .fs-md.color-dark-blue.fw-m Pinned
+  .p-lg-5.p-4
+    - if @fav_courses.present?
+      .niche-list.niche-list--preloader
+        - @fav_courses.each do |course|
+          = render 'agency_course_lists', course: course, favorite: true
+    - else
+      %i.fa.fa-heart.mr-3.text-red
+      %span.fs-xxs
+        Pin a course for easy access
+.py-4
+  .bg-sky-blue.p-lg-5.p-4.rounded.border-1.border-blue
+    .niche-list.niche-list--default.niche-list--preloader
+      - if @rem_courses.present?
+        - @rem_courses.each do |course|
+          = render 'agency_course_lists', course: course, favorite: false
+      - else
+        %i.fa.fa-exclamation-triangle.mr-3.text-warning
+        %span.fs-xxs
+          Error - No Items Found

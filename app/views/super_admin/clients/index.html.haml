@@ -1,0 +1,129 @@
+- content_for :title do
+  Clients | Clickx
+.uiv2
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    .col-xs-10.col-sm-10.col-lg-10
+      %h1 Clients
+    .col-xs-2.col-sm-2.col-lg-2
+      - if current_user.super_admin?
+        %a.btn.btn-warning.pull-right.mt-lg.mb-lg{href:client_sheet_super_admin_clients_path(format: "xlsx"),"data-title" => "Export"}
+          %i.fa.fa-download
+          EXPORT
+  .clearfix
+  .content-card.p-md-5
+    .row
+      .pull-right.mr-sm
+        %a.btn.clear_filters{href: 'javascript:void(0)', 'data-title' => 'Clear Filters'}
+          %i.fa.fa-eraser
+          Clear
+    = form_tag super_admin_clients_path, id: 'client_search_form', method: :get, remote: true do
+      .content-card__header
+        .d-flex.justify-content-between.flex-wrap
+          .col-search
+            .input-wrapper
+              = text_field_tag :name, @filter_name, class: 'search login select-box form-control search_client search_name', placeholder: 'Search By Name'
+              .inner-glyph.glyph-align
+                %i.glyphicon.glyphicon-search
+          .col-search-more.pl-3.client-filters
+            .d-flex.flex-wrap
+              .col-auto
+                .d-flex
+                  .p-n.pt-sm.pr-4
+                    %span{for: 'agency_white_labeled'} White Labeled
+                  .pl-n.pt-xs.pr-lg
+                    %label.toggle-control
+                      = check_box_tag :agency_white_labeled, nil, @filter_agency_white_labeled, class: 'filter_client'
+                      %span.control
+
+              .col-auto.pl-sm-4
+                .input-wrapper
+                  = select_tag 'services', options_for_select(services_collection, @filter_services), class: 'search login select-box form-control mt-md filter_client', multiple: true
+                  .inner-glyph.right-glyph
+                    %i.glyphicon.glyphicon-search
+              .col-auto.pl-sm-4
+                .input-wrapper
+                  = select_tag 'labels', options_for_select(ActsAsTaggableOn::Tag.pluck(:name).uniq.reject(&:blank?).collect {|c| [c, c]}, @filter_labels), class: 'search login select-box form-control mt-md filter_client', multiple: true
+                  .inner-glyph.right-glyph
+                    %i.glyphicon.glyphicon-search
+              .col-auto.pl-sm-4
+                .input-wrapper
+                  = select_tag 'agencies', options_for_select(Agency.pluck(:name, :id), @filter_agencies), class: 'search login select-box form-control mt-md filter_client', multiple: true
+                  .inner-glyph.right-glyph
+                    %i.glyphicon.glyphicon-search
+
+    .clients_list
+      = render 'super_admin/clients/shared/list', clients: @clients
+  #modal_container
+= hidden_field_tag :search_state
+
+:javascript
+  $('#agencies').select2({
+    multiple: true,
+    placeholder: 'Search By Agencies'
+  });
+
+  $('#labels').select2({
+    multiple: true,
+    placeholder: 'Search By Labels'
+  });
+
+  $('#services').select2({
+    multiple: true,
+    placeholder: 'Search By Services'
+  });
+
+  $('.filter_client').change(function () {
+    $('#client_search_form').submit();
+  });
+
+  $('.search_name').on("keyup", function() {
+    var name = $(this).val();
+    var search = false
+    if(name.length >= 3){
+      $('#search_state').val('search')
+      search = true
+    }else if(name.length == 0){
+      if($('#search_state').val() == 'search'){
+        $('#search_state').val('all')
+        search = true
+      }else{
+        search = false
+      }
+    }
+    if(search == true){
+      $('#client_search_form').submit();
+    }
+  });
+
+  function hideModal() {
+    $('.modal').fadeOut();
+    $('body').removeClass('modal-open');
+  }
+
+  function showTab(id, item) {
+    $('.res-tab__item').removeClass('active');
+    $('#' + id).addClass('active');
+    $('.res-tab__nav-btn').removeClass('active');
+    $(item).addClass('active');
+  }
+  $('.clear_filters').on('click', function() {
+    $('.search_name').val('')
+    $('#agency_white_labeled').prop('checked', false);
+    $('#agencies').val('')
+    $('#agencies').select2({
+      multiple: true,
+      placeholder: 'Search By Agencies'
+    });
+    $('#labels').val('')
+    $('#labels').select2({
+      multiple: true,
+      placeholder: 'Search By Labels',
+      value: ''
+    });
+    $('#services').val('')
+    $('#services').select2({
+      multiple: true,
+      placeholder: 'Search By Services'
+    });
+    $('#client_search_form').submit();
+  });

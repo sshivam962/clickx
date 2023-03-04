@@ -1,0 +1,57 @@
+- content_for :title do
+  Ad Report Summary - Google
+%div.clearfix
+  %h3
+    Ad Report Summary - Google
+= hidden_field_tag :agency_ids, @agencies.pluck(:id).uniq.join(',')
+- @agencies.each do |agency|
+  %div
+    %div.clearfix
+      %h4
+        = agency.name
+    %table.table.table-bordered.users.reports
+      %thead
+        %th{rowspan: 2} Business Name
+        %th{colspan: 6}
+          = Date.today.strftime('%B')
+        %th{colspan: 6}
+          = 1.month.ago.strftime('%B')
+        %th{colspan: 6}
+          = 2.months.ago.strftime('%B')
+      %thead
+        %th{rowspan: 2}
+        %th Impressions
+        %th Interactions
+        %th Interaction Rate
+        %th Avg cost
+        %th Cost
+        %th Conversion
+
+        %th Impressions
+        %th Interactions
+        %th Interaction Rate
+        %th Avg cost
+        %th Cost
+        %th Conversion
+
+        %th Impressions
+        %th Interactions
+        %th Interaction Rate
+        %th Avg cost
+        %th Cost
+        %th Conversion
+      %tbody{id: "google_clients_#{agency.id}"}
+:javascript
+  $(document).ready(function() {
+    agency_ids = $('#agency_ids').val().split(',')
+    $.each(agency_ids, function( index, agency_id ) {
+      $.ajax({
+        url: "/s/reports/google_clients?agency_id=" + agency_id,
+        type: 'get',
+        data: {},
+        dataType: 'script',
+        success:function(response){
+        }
+      })
+    });
+  });

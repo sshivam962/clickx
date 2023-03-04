@@ -1,0 +1,80 @@
+.page__main
+  %section
+    .container.mb-xxl.pb-xxl
+      .row
+        %div
+          = form_tag business_agreements_path, id: 'agreement_form', method: :post, remote: true do
+            %h3.txt-cntr.ptb-25 WHITE LABEL AGREEMENT
+            %p.text-doc.txt-jstfy
+              %b
+                %span This Digital Services and Consulting Agreement (“Agreement”), is entered by and between
+                %span
+                  = text_field_tag 'agreement[legal_name]', @client.name, class: 'width-400', required: true, placeholder: '(CLIENT)'
+                %span
+                  (hereinafter referred to as “Client”), and CLICKX, INC., 222 W. Merchandise Mart Plaza, Suite 1212, Chicago, IL 60654 (hereinafter referred to as “Clickx”).  Client and Clickx may be collectively referred to in this Agreement as the “Parties.”
+            %p.text-doc.txt-jstfy
+              %b WHEREAS,
+              %span Client requests that Clickx, as the digital marketing firm, perform website development, digital marketing services, and/or consulting services for its brand (“Project”).
+            %p.text-doc.txt-jstfy
+              %b WHEREAS,
+              %span Client and Clickx desire to enter into an agreement, which will define respective rights and duties as to all services to be performed.
+            %p.text-doc.txt-jstfy
+              %b WHEREAS,
+              %span Client and Clickx affirm that both understand all of the provisions contained in this Agreement, and in the case that either party requires clarification as to one or more of the provisions contained herein, it has requested clarification or otherwise sought legal guidance.
+            %p.text-doc.txt-jstfy
+              %b NOW, THEREFORE,
+              %span in consideration of the covenants and agreements contained herein, the parties hereto agree as follows:
+            = render 'business/agreements/shared/content'
+
+            .col-md-6
+              .form-group
+                %label Name
+                = text_field_tag 'agreement[name]', nil, class: 'form-control', required: true
+                %span#witness_representative
+                  = "Representative, #{@client.name}"
+              .form-group
+                %label Title
+                = text_field_tag 'agreement[title]', nil, class: 'form-control', required: true
+              %p
+                %span
+                  = "Date&nbsp;&nbsp;&nbsp;&nbsp;#{Date.current.strftime('%d, %B %Y')}".html_safe
+            .col-md-6
+              .form-group
+                .col-md-12
+                  %label.pull-right Signature
+                .col-md-12
+                  = hidden_field_tag 'agreement[signature]', nil, class: 'form-control'
+                  .pull-right
+                    %canvas.form-control-lg.controls{height: '100', width: '300'}
+                    %br
+                    %a.clear_signature.pull-right.small.text-info{href: 'javascript:void(0)'}
+                      Clear
+                      %i.fa.fa-eraser{"aria-hidden" => "true"}
+
+
+              .col-md-12
+                = submit_tag 'Submit', class: 'btn btn-warning btn-lg btn-raised pull-right agreement_submit mt-xxl'
+
+:javascript
+  var canvas = document.querySelector("canvas");
+  var signaturePad = new SignaturePad(canvas);
+  signaturePad.onEnd = function(){
+    $('#agreement_signature').val(signaturePad.toDataURL());
+    $('.agreement_submit').removeClass('hidden')
+  };
+  $('.agreement_submit').on('click', function(e){
+    e.preventDefault();
+    if(signaturePad.isEmpty() == true){
+      toastr.error('Signature is required.')
+    }else{
+      $('#agreement_form').submit()
+    }
+  })
+
+  $('.clear_signature').on('click', function(e){
+    signaturePad.clear();
+  })
+
+  $('#agreement_legal_name').on('change', function(e){
+    $('#witness_representative').text('Representative, ' + $(this).val());
+  })

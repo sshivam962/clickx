@@ -1,0 +1,15 @@
+{
+  "status": 200,
+  "data": {
+    "386586.example.com": 37,
+    "example": 21,
+    "example.com": 2,
+    "http://www.example.com": 1,
+    "example web design": 1,
+    "http://www.example.com/": 1,
+    "visit website": 1,
+    "www.wexample.com": 1,
+    "web design company": 1,
+    "Other Anchor Text": 34
+  }
+}

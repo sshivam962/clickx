@@ -1,0 +1,50 @@
+.row
+  .col-md-12
+    .tab-container
+      .tab-content{ 'st-table':'ga_source_medium', 'st-safe-src':'copy_ga_source_medium' }
+        .table-responsive
+          %table#source_table.table.table-hover.table-bordered.table-vam.mb-5
+            %thead
+              %tr
+                %th #
+                %th Source Medium
+                %th
+                  Sessions
+                %th
+                  New Users
+                %th
+                  Bounce Rate
+                %th.center
+                  Pages /
+                  %br Session
+                %th.center
+                  Avg.Session
+                  %br Duration
+
+            %tbody
+              - data.each_with_index do |source, index|
+                %tr
+                  %td= index + 1
+                  %td.text-left{ align:'left' }= source["sourceMedium"]
+                  %td
+                    = source["sessions"]
+                    - s = get_percent(source["sessions"], total_sessions)
+                    %span.per_info (#{s} %)
+                  %td
+                    = source["newUsers"]
+                    - u = get_percent(source["newUsers"], total_new_users)
+                    %span.per_info (#{u} %)
+                  %td #{source["bounceRate"]}%
+                  %td= source["screenPageViewsPerSession"]
+                  %td= source["averageSessionDuration"]
+
+:javascript
+  $(document).ready( function () {
+    var table = $('#source_table').DataTable({
+      "pageLength": 25
+    });
+
+    $('#source_table_filter input').on('keyup change', function () {
+      table.column(1).search($(this).val()).draw();
+    });
+  });

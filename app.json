@@ -1,0 +1,198 @@
+{
+  "name": "clickx",
+  "description": "Clickx config",
+  "scripts": {
+    "postdeploy": "rake db:migrate"
+  },
+  "env": {
+    "ADMIN_NAME": {
+      "required": true
+    },
+    "ADMIN_PASS": {
+      "required": true
+    },
+    "ADWORD_CLIENT": {
+      "required": true
+    },
+    "ADWORD_DEVELOPER_TOKEN": {
+      "required": true
+    },
+    "ADWORD_SECRET": {
+      "required": true
+    },
+    "AUTHORITY_LABS_API_KEY": {
+      "required": true
+    },
+    "AUTHY_API_KEY": {
+      "required": true
+    },
+    "AUTOPILOT_ALL_LIST_ID": {
+      "required": true
+    },
+    "AUTOPILOT_API_KEY": {
+      "required": true
+    },
+    "AUTOPILOT_NEW_LIST_ID": {
+      "required": true
+    },
+    "AUTOPILOT_TRIAL_LIST_ID": {
+      "required": true
+    },
+    "BASE_URL": {
+      "required": true
+    },
+    "BITLY_API_KEY": {
+      "required": true
+    },
+    "BRIGHT_LOCAL_API_KEY": {
+      "required": true
+    },
+    "BRIGHT_LOCAL_API_SECRET": {
+      "required": true
+    },
+    "CHARGIFY_API_KEY": {
+      "required": true
+    },
+    "CHARGIFY_DEFAULT_PLAN": {
+      "required": true
+    },
+    "CHARGIFY_SUBDOMAIN": {
+      "required": true
+    },
+    "CHART_URL_API_KEY": {
+      "required": true
+    },
+    "CLICKX_COMPANY_USER_PASSWORD": {
+      "required": true
+    },
+    "CLICKX_FB_APP_ID": {
+      "required": true
+    },
+    "CLICKX_FB_APP_SECRET": {
+      "required": true
+    },
+    "CLICKX_FB_GRANT_TYPE": {
+      "required": true
+    },
+    "CLICKX_FB_REDIRECT_URI": {
+      "required": true
+    },
+    "CLOSE_API_KEY": {
+      "required": true
+    },
+    "DELAYED_REQUEST_LIMIT": {
+      "required": true
+    },
+    "GOOGLE_MAP_KEY": {
+      "required": true
+    },
+    "LANG": {
+      "required": true
+    },
+    "MAJESTIC_API_KEY": {
+      "required": true
+    },
+    "OPENAI_API_KEY": {
+      "required": true
+    },
+    "MANDRILL_APIKEY": {
+      "required": true
+    },
+    "MANDRILL_USERNAME": {
+      "required": true
+    },
+    "MARCHEX_AUTH": {
+      "required": true
+    },
+    "MAX_THREADS": {
+      "required": true
+    },
+    "MIN_THREADS": {
+      "required": true
+    },
+    "NEW_RELIC_KEY": {
+      "required": true
+    },
+    "PA_USER_EMAIL": {
+      "required": true
+    },
+    "PA_USER_PASS": {
+      "required": true
+    },
+    "PRIORITY_REQUEST_LIMIT": {
+      "required": true
+    },
+    "RACK_ENV": {
+      "required": true
+    },
+    "RAILS_ENV": {
+      "required": true
+    },
+    "RAILS_SERVE_STATIC_FILES": {
+      "required": true
+    },
+    "REDIS_PROVIDER": {
+      "required": true
+    },
+    "REVIEWS_URL": {
+      "required": true
+    },
+    "ROOT_URL": {
+      "required": true
+    },
+    "SECRET_KEY_BASE": {
+      "required": true
+    },
+    "SEMRUSH_API_KEY": {
+      "required": true
+    },
+    "SEO_AUTH_TOKEN": {
+      "required": true
+    },
+    "SJCL_SECRET_TOKEN": {
+      "required": true
+    },
+    "UPLOAD_PRESET": {
+      "required": true
+    },
+    "WEB_CONCURRENCY": {
+      "required": true
+    },
+    "WRITERACCESS_API_KEY": {
+      "required": true
+    },
+    "WRITERACCESS_URL": {
+      "required": true
+    },
+    "YEXT_API_KEY": {
+      "required": true
+    },
+    "SNIP_URL": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    },
+    "worker": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "airbrake",
+    "codeship",
+    "heroku-postgresql",
+    "logentries",
+    "cloudinary",
+    "memcachier",
+    "newrelic",
+    "redistogo",
+    "scheduler"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}

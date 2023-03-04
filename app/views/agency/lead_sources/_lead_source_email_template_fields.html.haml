@@ -1,0 +1,13 @@
+.email-templates-list--item.pt-4.nested-fields
+  .col.pr-4
+    .email-template-number #{@template_index}
+  .col.flex-col
+    - selected = f.object.email_template_id || nil
+    .email-template-item
+      .email-template-item--header.d-flex.justify-content-between
+        .col
+          .block.pb-0.m-0.text-lg.font-semibold.template-title Email #{@template_index}
+        .col.pl-3
+          = link_to_remove_association "Remove", f, class: "email-template-remove-btn"
+      .relative.email-template-edit-select
+        = f.select :email_template_id, options_for_select(@agency_email_templates.collect {|c| [ c.name, c.id ] }, selected), { include_blank: 'Select Email Template' }, { class: 'input-wrapper-input' }

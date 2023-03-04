@@ -1,0 +1,30 @@
+%div.col-md-12
+  .row.chapter_form
+    = f.hidden_field :course_id, value: @course.id
+    .form-group
+      = f.label :title
+      = f.text_field :title, required: true, class: 'form-control login', placeholder: 'Enter Title'
+    .form-group
+      %label{for: 'chapter_description'} Description
+      = f.label :description
+      = f.cktext_area :description
+    .form-group
+      = f.label :video_embed_code
+      = f.text_area :video_embed_code, class: 'form-control login', rows: 3, required: true
+    .form-group
+      %label{for: 'file_attchments'} File Attachments
+      = link_to_add_association '+ Add', f, :file_attachments, 'data-association-insertion-method': 'append', 'data-association-insertion-node': '.attachments_row', class: 'add_attachment btn btn-primary btn-xs'
+      .row.attachments_row
+        = f.fields_for :file_attachments do |fa|
+          = render 'file_attachment_fields', f: fa
+    - if @course.enable_challenge
+      .form-group
+        %label{for: "chapter_course_challenge_id"} Course Challenge
+        = f.select :course_challenge_id, CourseChallenge.order(:position).pluck(:name, :position), { include_blank: 'Select Course Challenge' }, class: 'form-control'
+    .form-group
+      = f.submit "Save Module", class: 'btn btn-warning saveBtn'
+:javascript
+  $(document).on('change', 'input[type="file"]', function(e) {
+    var fileName = e.target.files[0].name;
+    $(this).next('input').val(fileName);
+  });

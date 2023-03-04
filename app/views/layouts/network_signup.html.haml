@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %meta{charset: "UTF-8"}
+    %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}
+    %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}
+    %meta{content: "ie=edge", "httpequiv": "X-UA-Compatible"}
+    %title= yield(:title) || 'Clickx'
+    = csrf_meta_tags
+    %link{href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap", rel: "stylesheet"}
+    %link{href: "https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css", rel: "stylesheet"}
+    %link{crossorigin: "anonymous", href: "https://pro.fontawesome.com/releases/v5.10.0/css/all.css", integrity: "sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p", rel: "stylesheet"}
+
+    = stylesheet_link_tag 'network_signup', media: 'all', 'data-turbolinks-track': true
+    = stylesheet_link_tag 'network/intlTelInput.min', media: 'all', 'data-turbolinks-track': true
+    = javascript_include_tag 'network_signup', 'data-turbolinks-track': true
+
+    %link{crossorigin: 'anonymous', href: 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css', integrity: 'sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=', rel: 'stylesheet'}
+    %script{crossorigin: 'anonymous', integrity: 'sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=', src: 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js'}
+
+    = yield(:custom_assets)
+  %body
+    = yield

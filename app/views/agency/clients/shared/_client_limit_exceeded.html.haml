@@ -1,0 +1,13 @@
+#client-limit-exceeded-modal.modal.fade{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg{role: 'document'}
+    .modal-content
+      .modal-header
+        Upgrade
+        %a.close.pl-md{'data-dismiss': 'modal'}
+          %span ×
+      .modal-body
+        %p
+          Your client limit has been reached. Please upgrade your subscription to add more clients.
+          %a{href: '/a/packages/growth/agency_infrastructure', target: '_blank'} Upgrade
+      .modal-footer
+        %button.btn.btn-raised.mt-md.mb-md.btn-default{'data-dismiss': 'modal', type: 'button'} Close

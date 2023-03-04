@@ -1,0 +1,46 @@
+.border-1.bg-sky-blue.border-blue.rounded.h-100
+  .bg-white.px-4.py-4.rounded-t-12.fw-m.text-darkblue
+    Domain : 
+    %a{href: lead.root_url, target: '_blank'}
+      #{lead.base_domain}
+      %i.fa.fa-external-link-alt.fs-14
+    .d-flex.mt-4
+      #convert-direct-lead.pr-3
+        = render 'agency/direct_leads/convert_lead', direct_lead: @direct_lead
+      #reject-direct-lead
+        = render 'agency/direct_leads/reject_lead', direct_lead: @direct_lead
+
+  .px-4.pt-4.pb-3
+    =# closeio_outreach_link(lead)
+    =# closeio_filter_link(lead)
+    .candidates_list
+      - if lead.blocked?
+        .col-md-12.text-center.mt-sm
+          .badge.badge-warning.fs-14
+            = blocked_on_message(lead)
+      - contacts.each do |contact|
+        .mb-3
+          #leadDetails.accordion
+            .bg-white.rounded-8.px-4.py-3.w-100.no-border.shadow.items-center
+              %h4.mb-n.mt-0
+                %p.fs-14.fw-sb.mb-2
+                  = contact.full_name
+                %p.fs-14.mb-1
+                  = contact.email
+              - contact.sent_emails.order_by_created.each.with_index(1) do |sent_mail, index|
+                .fw-sb{id: "heading_#{sent_mail.id}"}
+                  .collapsed{"aria-controls" => "collapse_#{sent_mail.id}", "aria-expanded" => "false", "data-target" => "#collapse_#{sent_mail.id}", "data-toggle" => "collapse", type: "button"}
+                    %p.fs-14.mb-1{id: "contact_panel_1"}
+                      Email #{index}
+                      .badge.bg-blue.fs-14.text-white.whitespace-unset
+                        = sent_mail.email_status
+                      - if sent_mail.email_opened_at.present?
+                        %p.fs-14.pt-sm
+                          %i.fa.fa-check-circle.fs-14.green
+                      - if sent_mail.email_clicks_count.present?
+                        %p.fs-14.mt-sm.mr-md.red.badge
+                          = number_to_human(sent_mail.email_clicks_count)
+                          %i.fa.fa-mouse-pointer.font-12.p-n
+                .collapse{"aria-labelledby" => "heading_#{sent_mail.id}", "data-parent" => "#leadDetails", id: "collapse_#{sent_mail.id}"}
+                  .pt-4.fs-14
+                    = raw(sent_mail.content)

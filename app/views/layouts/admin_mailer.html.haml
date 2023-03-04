@@ -1,0 +1,145 @@
+
+
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %meta{:content => "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0", :name => "viewport"}
+    %title Clickx
+    %link{:href => "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700", :rel => "stylesheet"}
+    :css
+      html { width: 100%; }
+      body { background-color: #f5f7fa; margin: 0; padding: 0; font-family: 'Source Sans Pro', sans-serif; }
+      .ExternalClass, .ReadMsgBody { background-color: #f5f7fa; width: 100%; }
+      a { color: #f8b11c; font-style: normal; font-family: 'Source Sans Pro', sans-serif; font-weight: 300; text-decoration: none; }
+      a:hover { color: #adb2bb; font-style: normal; font-weight: 300; text-decoration: none; transition: all 300ms }
+      div, p { margin: 0 !important; font-family: 'Source Sans Pro', sans-serif; }
+      table { border-collapse: collapse; }
+      .table { max-width: 600px; border: 1px solid #e6e6e6; margin: 30px auto; border-radius: 4px; display: table; }
+      .subhead { color: #555555; font-family: 'Source Sans Pro', sans-serif; font-size: 20px; font-weight: 400; margin: 0; padding: 0; text-align: left; }
+      .mhead { color: #333333; font-family: 'Source Sans Pro', sans-serif; font-size: 23px; font-weight: 600; margin: 0; padding: 0; text-align: left; }
+      .f-head { color: #333333; font-family: 'Source Sans Pro', sans-serif; font-size: 19px; font-weight: 600; margin: 0; padding: 0; text-align: left; }
+      .content { color: #333333; font-family: 'Source Sans Pro', sans-serif; font-size: 19px; font-weight: 200; margin: 0; padding: 0; text-align: left; }
+      .cellpadd10 { display: table; padding: 10px 20px; }
+      .cellpadd-t-20 { display: table; padding: 20px 20px; }
+      .link-a { color: #2196F3; font-family: 'Source Sans Pro', sans-serif; font-size: 18px; text-decoration: none; }
+      .link-a:hover { color: #4aafff; text-decoration: none; }
+      .divider { border-bottom: 1px solid #e0e0e0; display: block; margin: 0 auto; width: 90%; }
+      .margt-20 { margin-top: 20px !important }
+      .head-st-2 { padding: 20px 0; font-size: 24px; font-weight: 600; line-height: 40px; }
+      .text-center { text-align: center; }
+      .lnh-n { line-height: 32px; letter-spacing: 0px; padding-bottom: 20px; }
+      .link-2 { color: #f8b11c; font-weight: 600px; border-bottom: dashed 1px #f0f0f0 }
+      .link-2:hover { border-bottom: solid 1px #f0f0f0; text-decoration: none }
+
+      /*.accept { font-size: 22px;color: #ffffff;font-family: 'Source Sans Pro', sans-serif;transition: all 300ms ease;display: block;font-weight: 400;border-radius: 3px;line-height: 57px;width: 100%;text-align: center;background: #5fc66d; position: relative; border:2px solid #5fc66d;}
+      .accept:before { content: ""; background-image: url('images/checked.svg'); width: 30px; height: 30px; position: absolute; left: 13px; top: 13px; transition: all 300ms ease;}
+      .accept:hover { text-decoration: none; color: #5fc66d; background:none; border:2px solid #5fc66d;}
+      .accept:hover:before { content: ""; background-image: url('images/checked-hover.svg'); width: 30px; height: 30px; position: absolute; left: 13px; top: 13px; transition: all 300ms ease; }
+      */
+      .decimal { padding-left: 7px; }
+      .decimal li { font-size: 18px; line-height: 34px; font-weight: 400; padding-left: 15px; margin-left: 22px; list-style-type: decimal; position: relative; margin-bottom: 20px; }
+      .decimal li:before { content: " "; background: rgba(220, 220, 220, 0.44); border-radius: 50%; width: 35px; height: 35px; position: absolute; left: -29px; top: 1px; }
+
+      /*Table styles*/
+      table.layout { width: 100%; border-collapse: collapse; }
+      table.display { margin: 1em 0; }
+      table.display th, table.display td { border: 1px solid #f1f1f1; padding: .5em 1em; }
+      table.display th { background: #e8e8e8; }
+      table.display td { background: #fff; }
+      @media (max-width:30em) {
+         table.responsive-table { box-shadow: none; }
+         table.responsive-table thead { display: none; }
+         table.display th, table.display td { padding: .5em; }
+         table.responsive-table td:nth-child(1), table.responsive-table td:nth-child(2) { padding-left: 25%; }
+         table.responsive-table td:nth-child(1):before, table.responsive-table td:nth-child(2):before { position: absolute; left: .5em; font-weight: bold; }
+         table.responsive-table tr, table.responsive-table td { display: block; }
+         table.responsive-table tr { position: relative; margin-bottom: 1em; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.01); }
+         table.responsive-table td { border-top: none; }
+         table.responsive-table td.organisationnumber { background: #e8e8e8; border-top: 1px solid #e4e4e4;}
+         table.responsive-table td.actions { position: absolute; top: 0; right: 0; border: none; background: none; }
+      }
+      @media only screen and (max-width:640px) {
+         table table, td[class=full_width] { width: 100% !important; }
+      }
+      @media only screen and (max-width:640px) {
+         div[class=div_scale], table[class=table_scale], td[class=td_scale] { margin: 0 auto !important; width: 440px !important; }
+      }
+      @media only screen and (max-width:640px) {
+         img[class=img_scale] { height: auto !important; width: 100% !important; }
+      }
+      @media only screen and (max-width:640px) {
+         table[class=spacer], td[class=spacer] { display: none !important; }
+      }
+      @media only screen and (max-width:640px) {
+         td[class=center] { text-align: center !important; }
+      }
+      @media only screen and (max-width:640px) {
+         table[class=full] { margin-left: 20px !important; margin-right: 20px !important; width: 400px !important; }
+      }
+      @media only screen and (max-width:640px) {
+         img[class=divider] { height: 1px !important; width: 400px !important; }
+      }
+      @media only screen and (max-width:479px) {
+         table table, td[class=full_width] { width: 100% !important; }
+      }
+      @media only screen and (max-width:479px) {
+         div[class=div_scale], table[class=table_scale], td[class=td_scale] { margin: 0 auto !important; width: 100% !important; }
+      }
+      @media only screen and (max-width:479px) {
+         img[class=img_scale] { height: auto !important; width: 100% !important; }
+      }
+      @media only screen and (max-width:479px) {
+         table[class=spacer], td[class=spacer] { display: none !important; }
+      }
+      @media only screen and (max-width:479px) {
+         td[class=center] { text-align: center !important; }
+      }
+      @media only screen and (max-width:479px) {
+         table[class=full] { margin-left: 20px !important; margin-right: 20px !important; width: auto !important; }
+      }
+      @media only screen and (max-width:479px) {
+         img[class=divider] { height: 1px !important; width: 100% !important; }
+      }
+  %body{:bgcolor => "#f5f7fa"}
+    %table.table{:style => "margin: 0 auto"}
+      %tr
+        %td
+          / START OF  HEADER BLOCK
+          %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+            %tr
+              %td{:valign => "top", :width => "100%"}
+                %table{:align => "center", :bgcolor => "#fff", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "background-repeat: no-repeat; height: 125px; background-position: center; background-color: #494c59;"}
+                  %tr
+                    %td{:width => "100%"}
+                      %table.table_scale{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                        %tr
+                          %td.text-center{:height => "30", :width => "100%"}
+                            = image_tag "https://s3.amazonaws.com/clickx-images/clickx-logo-white.png", width: '200'
+          %table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%"}
+            =yield
+
+
+          %table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+            %tr
+              %td{:valign => "top", :width => "100%"}
+                %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+                  %tr
+                    %td{:width => "100%"}
+                      %table.table_scale{:bgcolor => "#424554", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                        %tr
+                          %td{:width => "100%"}
+                            %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                              %tr
+                                %td{:width => "600"}
+                                  %table.full{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "540"}
+                                    %tr
+                                      %td{:align => "center", :center => "", :class => "class=", :style => "font-family: 'Source Sans Pro', sans-serif;margin: 0; padding: 20px 0px 0px; font-weight:300; font-size:14px ; color:#adb2bb; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 33px;"}
+                                        %span
+                                          Questions? Call us at
+                                          %a{:href => "tel:888-909-7825"} 888-909-7245
+                                          today!
+                                    %tr
+                                      %td.center{:align => "center", :style => "font-family: 'Source Sans Pro', sans-serif;margin: 0; padding:0 0 30px 0px; font-weight:300; font-size:14px ; color:#adb2bb; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 30px;"}
+                                        %span
+                                          © #{ Time.now.year } Clickx • 222 W. Merchandise Mart Plaza 1212 • Chicago, IL 60654

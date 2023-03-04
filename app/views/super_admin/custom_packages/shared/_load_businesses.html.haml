@@ -1,0 +1,2 @@
+%label{for: 'agency_package'} Business
+= select_tag 'custom_package[business_id]', options_for_select(businesses.order(:name).pluck(:name, :id)), include_blank: 'Select Business', class: 'form-control'

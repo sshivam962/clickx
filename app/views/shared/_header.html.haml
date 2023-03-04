@@ -1,0 +1,20 @@
+.username.d-flex.justify-content-between
+  .col
+    .d-flex.align-items-center
+      .col 
+        %span.hamburger
+          %span
+      .col.d-lg-none
+        %a.d-block.p-3.lh-1(href="/s/clients") 
+          %img.align-top.va-top(src="/assets/logo-smll.png" alt="" width="30")/
+      .customer.float-none.ml-3
+        %span ID: #{current_user.unique_id}
+  .col
+    .customer-email.float-none
+      %span.email
+        = link_to profile_path do
+          = current_user.email
+      %span.logout
+        = link_to destroy_user_session_path do
+          Logout
+          %i.glyphicon.glyphicon-log-out

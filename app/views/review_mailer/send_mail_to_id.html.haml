@@ -1,0 +1,64 @@
+%table{:align => "center", :border => "0", :cellspacing => "0", :style => "color:#78828C; background: #f5f7f9;", :width => "500"}
+  %tbody
+    %tr{:align => "left", :style => "margin:0;"}
+      %td{:align => "center", :style => "width:100%;padding-top:25px;padding-bottom:20px;"}
+        %table{:align => "center", :border => "0", :cellspacing => "0", :style => " padding: 12px 20px 0 20px; ", :width => "100%"}
+          %tbody
+            %tr{:align => "left"}
+              %td{:align => "left", :style => "font-family:Arial, sans-serif;", :width => "250"}
+                - if @business.logo.present?
+                  %center
+                    %img{:height => "40", :src => "#{@business.logo}", :style => "margin-left:0;min-height:30px !important;"}
+                - else
+                  %center
+                    %h1= @business.name.upcase
+    %tr{:align => "center", :style => "margin:0;"}
+      %td{:align => "center", :style => "padding:0;"}
+        %table{:align => "center", :cellspacing => "0", :style => "border:1px solid #d2d7dc;background:#fff;border-radius:3px;overflow:hidden;", :width => "500"}
+          %tbody
+            %tr{:align => "center"}
+              %td{:align => "center"}
+                %table{:align => "center", :style => "border-width:0;border-collapse:collapse; padding: 12px 20px;", :width => "375"}
+                  %tbody
+                    %tr{:align => "center", :style => "font-size:24px;color:#393E61;"}
+                      %td &#160;
+                      %td{:align => "center", :style => "line-height:1.2;width:365px;padding-top:35px;padding-bottom:15px;font-family:Arial, sans-serif;"} Review Us
+                      %td &#160;
+            %tr{:align => "center"}
+              %td{:align => "center"}
+                %table{:align => "center", :style => "border-width:0;border-collapse:collapse;", :width => "375"}
+                  %tbody
+                    %tr{:align => "center"}
+                      %td{:align => "center", :style => "font-size:18px;color:#1c1c1c;line-height:1.2;padding-bottom:30px;font-family:Arial, sans-serif;"} If you're happy with your experience, we'd love for you to post a review. Click the button below to get started.
+            %tr{:align => "center"}
+              %td{:align => "center"}
+                %table{:align => "center", :style => "border-width:0;font-size:18px;border-collapse:collapse;", :width => "350"}
+                  %tbody
+                    %tr{:align => "center"}
+                      %td{:align => "center", :style => "padding-bottom:30px;font-family:Arial, sans-serif;", :width => "365"}
+                        %a{:href => "#{@location.yelp_link}", :rel => "noreferrer", :style => "display:block;color:#fff;text-decoration:none;background:#e66878;border-radius:3px;padding:20px 0;", :target => "_blank"} Post a Review on Yelp
+            %tr
+              %td{:align => "center", :style => "padding:0 40px 20px;font-family:Arial, sans-serif;font-size:16px;color:#78828C;line-height:1.3;"}
+                %span You can also review us on
+            %tr
+              %td{:align => "center", :style => "padding:0 40px 50px;font-family:Arial, sans-serif;font-size:14px;color:#1c1c1c;line-height:1.3;"}
+                %a{:href => "#{@location.google_link}", :rel => "noreferrer", :style => "display:inline-block;width:150px;margin:0 10px;padding:11px 0px;color:#78828c;text-align:center;text-decoration:none;background:#d2d7dc;border-radius:3px;", :target => "_blank"} Post a Review on Google
+    %tr{:align => "center", :style => "margin:0;"}
+      %td{:style => "padding:0;"}
+        %table{:align => "center", :cellspacing => "0", :style => "font-family:Arial, sans-serif;font-size:12px;color:#78828c;line-height:1.3; padding-bottom: 0;", :width => "500"}
+          %tbody
+            %tr
+              %td{:align => "center", :colspan => "4", :style => "padding:30px; font-family:Arial, sans-serif;line-height:2;padding-bottom:10px;"}
+                %span{:style => "font-weight:600;"}= @business.name
+                %span{:style => "color:#d2d7dc;"} &#160;&#160;|&#160;&#160;
+                %a{href: @business.domain, rel: 'noreferrer', style: "color:#393E61;text-decoration:none;", target: "_blank"}= @business.domain
+            %tr
+              %td{:align => "center", :colspan => "4", :style => "font-family:Arial, sans-serif;"}
+                = @location.loc_address
+            - if @location.phone.present?
+              %tr
+                %td{:align => "center", :colspan => "4", :style => "font-family:Arial, sans-serif;"}
+                  = @location.phone
+            %tr
+              %td{:align => "center", :colspan => "4", :style => "padding-bottom:10px;font-family:Arial, sans-serif;"}
+                %div{:style => "visibility:hidden !important;white-space:nowrap;font:15px courier;color:#ffffff;line-height:0;"} &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;

@@ -1,0 +1,54 @@
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1
+      Custom Packages
+.locations
+  %span
+    .address.row.ml-n.mr-n
+      .col-sm-12.col-md-2
+        %b Name
+      .col-sm-6.col-md-2
+        %b Agency
+      .col-sm-6.col-md-2
+        %b Business
+      .col-sm-6.col-md-1
+        %b Amount
+      .col-sm-6.col-md-1
+        %b Impl. fee
+      .col-sm-6.col-md-2
+        %b Billing Category
+      .col-sm-6.col-md-1
+        %b Status
+      .col-sm-6.col-md-1
+        %b Actions
+  - @custom_packages.each do |custom_package|
+    %span
+      .address.row.ml-n.mr-n
+        .col-sm-12.col-md-2
+          = custom_package.name
+        .col-sm-6.col-md-2
+          = custom_package.agency.name
+        .col-sm-6.col-md-2
+          = custom_package.business&.name
+        .col-sm-6.col-md-1
+          = custom_package.amount
+        .col-sm-6.col-md-1
+          = custom_package.implementation_fee
+        .col-sm-6.col-md-2
+          = custom_package.billing_category
+        .col-sm-6.col-md-1
+          = custom_package.status
+        .col-sm-6.col-md-1
+          .col-sm-12.right.normal-edit-button.grey-btn-group.mb-md
+            - if custom_package.active?
+              = link_to super_admin_custom_package_path(custom_package), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn grey-btn-icon align-icon pull-right ml-sm mb-sm' do
+                %i.glyphicon.glyphicon-trash
+                Delete
+  .row
+    .col-md-4.col-lg-4.col-sm-12.pt-md
+      = page_entries_info @custom_packages
+    .col-md-8.col-lg-8.col-sm-12.right_align
+      = will_paginate @custom_packages
+
+%a.btn.btn--add.pull-right{ 'href': new_super_admin_custom_package_path}
+  %i.glyphicon.glyphicon-plus.glyphplus

@@ -1,0 +1,42 @@
+- content_for :title do
+  Scale Program Headers | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1 Scale Program Headers
+
+.scale_program_headers
+  %button.add-scale_program_headers{type: "button", class: 'btn btn-warning'}
+    Add Scale Program Header
+
+  #scale_program_headers-field
+    = form_with model: @scale_program_header, url: super_admin_scale_program_headers_path do |f|
+      .row.mb-md
+        .col-sm-5
+          = f.text_field :name, class: 'form-control', placeholder: 'Title Name' 
+        .col-sm-2
+          = f.text_field :week, class: 'form-control'  
+        .col
+          = f.submit 'Add', class: 'btn btn-warning m-n'
+  
+  - @scale_program_headers.each do |scale_program_header|
+    = form_with model: scale_program_header, url: super_admin_scale_program_header_path(scale_program_header) do |f|
+      .row.mb-md
+        .col-sm-5
+          = f.text_field :name, class: 'form-control'
+        .col-sm-2
+          = f.text_field :week, class: 'form-control'  
+        .col
+          = f.submit 'Save', class: 'btn btn-warning m-n'
+          = link_to super_admin_scale_program_header_path(scale_program_header) ,class: 'btn btn-info', method: :delete, data: { confirm: 'Are you sure ?'} do
+            %i.glyphicon.glyphicon-trash.font-size12
+            Delete
+            
+:css
+  #scale_program_headers-field{
+    display: none;
+  }
+
+:javascript
+  $('.add-scale_program_headers').on('click', function(){
+    $('#scale_program_headers-field').show()
+  })            

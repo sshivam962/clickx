@@ -1,0 +1,151 @@
+%md-dialog.modal-dialog.modal-lg.clx-modal.modal-darkstone-blue-bg.keyword-add-modal.clx-full-screen-modal{"aria-label" => "Keyword"}
+  %div{"ng-cloak" => ""}
+    .modal-header
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button","ng-click":"go_back()"}
+        %span.fa.fa-times-circle-o
+      %h2.modal-title Keyword
+      %span{:flex => ""}
+    %form.form-vertical{id:"add_keyword_form",name:"addKeyword","ng-submit"=>"saveKeyword()"}
+      %md-dialog-content
+        .md-dialog-content
+          .row
+            .col-sm-6.p-n
+              .form-group.m-n.p-n.col-sm-12
+                %label.control-label.m-n{:for => "fieldname"}
+                  Add Keywords
+                  %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Enter the list of keywords that you are targeting on your site to track the ranking progress', 'title-direction': 'right'}
+              .row
+                .col-sm-12
+                  %textarea#keyword-form-text.form-control{"ng-model": "keywords.add_keyword_text",
+                  "class": "form-control","ng-keyup": "getKeywords($event)",
+                  'placeholder': "Please specify 1 keyword per line..", 'rows': '8',
+                  'required': 'required','name': "keywords", 'md-autofocus': 'true' }
+                .col-sm-12
+                  %span
+                    Keywords remaining:
+                    %i{"ng-class":"{'text-danger':((keywords.remaining_count) < 10),
+                    'text-success':((keywords.remaining_count) > 30)}"}
+                      {{keywords.remaining_count}}
+                .col-sm-12.mt-md
+                  .form-group.m-n.p-n.col-sm-12
+                    %label.control-label.mb-xs
+                      Add Tags
+                      %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Enter or select a tag that you are targeting on your keywords', 'title-direction': 'right'}
+                  %md-input-container.width100
+                    %md-chips{ 'ng-model': 'keyword_tags', 'md-autocomplete-snap': '',
+                    'md-max-chips': '5', 'md-transform-chip': 'transformChip($chip)',
+                    'md-on-add': 'refreshAvailableTags()', 'md-on-remove': 'refreshAvailableTags()' }
+                      %md-autocomplete.width100{ 'md-autoselect': 'true', 'md-item-text': 'tag.name',
+                      'md-items': 'tag in available_tags | filter:searchText', 'md-min-length': '0',
+                      'md-search-text': 'searchText', 'placeholder': 'Select or enter tags',
+                      'md-no-cache': 'true', 'md-dropdown-position': 'bottom' }
+                        %span{ 'md-highlight-text': 'searchText' } {{tag.name}}
+                      %md-chip-template{ 'custom-chip': '{{$chip.color}}' }
+                        %span {{$chip.name}}
+                    %md-content.md-padding{ 'layout': 'column' }
+                      %md-chips.frequent-tags
+                        %md-chip{ 'ng-repeat': 'tag in available_tags | limitTo:5',
+                        'style': 'background-color: {{tag.color}};color: white;cursor: pointer',
+                        'ng-click': 'selectTag(tag)' } {{ tag.name }}
+                      %small Frequently used tags
+            .col-sm-6.p-n
+              .keyword-enter-form.clearfix
+                .form-group.m-n.p-n.col-sm-12
+                  %label.col-md-12.control-label.m-n.p-n{:for => "fieldname"}
+                    Suggestions
+                    %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Enter a seed keyword to get more related keywords in the below section', 'title-direction': 'bottom', 'fixed-position': "true" }
+                  %md-input-container.md-block{'md-no-float':''}
+                    %input#search-table.form-control.col-sm-12{type:"text", placeholder: "Specify a Keyword","ng-model"=>"searched_keyword","ng-keypress": "suggestKeyword($event)"}
+                    %md-icon.with-button
+                      %button.btn.btn-default.reset-default.btn-reset{"ng-click"=>"suggestKeyword($event)",type:"button"}
+                        %i.fa.fa-search
+              .col-sm-12.pt-md.pl-n
+                .panel.panel-default.mb-n
+                  .panel-heading.clx-bg.clx-bg-light-haze
+                    %md-checkbox.checkbox-accent-blue{"ng-show":"suggestions.length > 0","ng-click":"selectAllSuggestions($event,suggestions)","ng-selected":"selectAllCheckbox"}
+                    -#%input{type: "checkbox","ng-show": "suggestions.length > 0","ng-click": "selectAllSuggestions($event,suggestions)"}
+                    %span Keywords
+                    %span.pull-right Volume
+                  .panel-body{"dynamic-slimscroll":""}
+                    .scroll-pane{"slimscroll"=>"slimObject"}
+                      %ul.list-unstyled.suggestion-keywords{"ng-if":"!keyword_fetching"}
+                        %li.pb-md{"ng-repeat"=>"suggestion in suggestions"}
+                          .checkbox
+                            %label
+                              %input.suggestion-checkbox{type:"checkbox","ng-click"=>"addKeywordToList($event,suggestion)"}
+                                %span.checkbox-material
+                                  %span.check
+                            &nbsp;
+                            {{suggestion.keyword_phrase}}
+                            %span.pull-right {{suggestion.search_volume}}
+                      %md-progress-circular.md-warn{"md-mode" => "indeterminate","ng-if":"keyword_fetching"}
+            .col-sm-6.p-n
+              .form-group.clearfix.margin-top-11
+                %label.col-md-12.control-label.m-n{:for => "fieldname"} Country
+                .col-md-12
+                  %select.form-control.mb-lg{ 'placeholder': 'Select a Country', 'ng-model': 'keywords.locale', 'ng-change': 'setLocation()' }
+                    %option{ 'ng-repeat': 'locale in countryList', 'value': '{{locale.locale}}', 'ng-selected': 'locale.locale == keywords.locale' } {{locale.country}}
+                %label.col-md-12.control-label.m-n{:for => "fieldname"} City
+                .col-md-12
+                  %input.form-control{name: 'city', 'ng-model': 'keywords.city', type: 'text', 'vs-google-autocomplete': 'options'}
+      %md-dialog-actions.add-keyword-action{:layout => "row"}
+        %a.btn.btn-raised.mt-md.mb-md.btn-default{'ng-click': "go_back()"} Cancel
+        %button.btn.btn-raised.mt-md.mb-md.btn-primary{type:"submit","ng-disabled": "(!addKeyword.keywords.$vallid && !addKeyword.keywords.$dirty)"}
+          %span.fa.fa-plus
+          Add
+        .clearfix
+        .alert.alert-info.text-left{"ng-if":"keywords.remaining_count < 0"}
+          Since you have reached keyword limit, these keywords will be added to the wishlist.
+
+// @depreciate in Theme 2
+// @remove in Theme 2
+-#%script{type:"text/ng-template",id:"AddKeywordModal.html"}
+-#  .modal-header
+-#    %a.close{'ng-click': 'go_back()'} &#215;
+-#    %h2.modal-title.regsubt.p-n Keyword
+-#  %form.form-vertical{id:"add_keyword_form",name:"addKeyword","ng-submit"=>"saveKeyword()"}
+-#    .modal-body.pb-n
+-#      .row
+-#        .col-sm-6.p-n
+-#          .form-group.m-n.p-n.col-sm-12
+-#            %label.col-md-12.control-label.m-n{:for => "fieldname"} Add Keywords
+-#            .col-sm-12
+-#              %textarea.form-control{"ng-model": "keywords.add_keyword_text","class": "form-control","ng-change": "getKeywords($event)", placeholder: "Please specify 1 keyword per line..",rows:11, required: 'required',name: "keywords"}
+-#            .col-sm-12
+-#              %span
+-#                Keywords remaining:
+-#                %i{"ng-class":"{'text-danger':((keywords.remaining_count) < 10),
+-#                'text-success':((keywords.remaining_count) > 30)}"}
+-#                  {{keywords.remaining_count}}
+-#        .col-sm-6.p-n
+-#          .form-group.m-n.p-n.col-sm-12
+-#            %label.col-md-12.control-label.m-n.p-n{:for => "fieldname"} Suggestions
+-#            .pl-n.input-group
+-#              %input#search-table.form-control.col-sm-12{type:"text", placeholder: "Specify a Keyword","ng-model"=>"searched_keyword","ng-keypress": "suggestKeyword($event)"}
+-#              %span.input-group-btn
+-#                %button.btn.btn-default.reset-default.btn-reset{"ng-click"=>"suggestKeyword($event)",type:"button"}
+-#                  %i.fa.fa-search
+-#          .col-sm-12.pt-md.pl-n
+-#            .panel.panel-default.mb-n
+-#              .panel-heading
+-#                %input{type: "checkbox","ng-show": "suggestions.length > 0","ng-click": "selectAllSuggestions($event,suggestions)"}
+-#                %span Keywords
+-#                %span.pull-right Volume
+-#              .panel-body.scroll-pane{"slim-scroll"=>"{height:'106px',wheelStep:10}"}
+-#                .scroll-content
+-#                  %ul.list-unstyled
+-#                    %li.pb-md{"ng-repeat"=>"suggestion in suggestions"}
+-#                      %input.suggestion-checkbox{type:"checkbox","ng-click"=>"addKeywordToList($event,suggestion)"}
+-#                      &nbsp;
+-#                      {{suggestion.keyword_phrase}}
+-#                      %span.pull-right {{suggestion.search_volume}}
+-#
+-#    .modal-footer
+-#      .col-sm-12
+-#        %a.btn.btn-raised.mt-md.mb-md.btn-default{'ng-click': 'go_back()'} Cancel
+-#        %button.btn.btn-raised.mt-md.mb-md.btn-primary{type:"submit","ng-disabled": "(!addKeyword.keyword.$vallid && !addKeyword.keywords.$dirty) || keywords.remaining_count < 0"}
+-#          %span.fa.fa-plus
+-#          Add
+-#        .clearfix
+-#        .alert.alert-danger.text-left{"ng-if":"keywords.remaining_count < 0"}
+-#          You can only add {{keywords.keywords_limit}} Keywords at a time

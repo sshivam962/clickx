@@ -1,0 +1,33 @@
+%script{type:"text/ng-template",id:"add_integration_code.html"}
+  %md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-lg.modal-compressed{'aria-label':'New Integration'}
+    .modal-header
+      %button.close{"aria-hidden" => "true", "ng-click":"closeModal($event)", :type => "button"}
+        %span.fa.fa-times-circle-o
+      %h2.modal-title Add New Integration
+    %md-dialog-content
+      .md-dialog-content
+        .row
+          .col-md-12.mt-lg{ 'ng-repeat' => '(key,value) in suggestionList'}
+            .panel.panel-default.clx-panel.clx-panel-darkstone-blue
+              .panel-heading
+                %h4.panel-title
+                  Configure {{key | humanize}}
+              .panel-body
+                %div{ 'ng-if': 'config_value != null' }
+                  %div{"ng-repeat"=> '(config_key,config_value) in value'}
+                    %div{:layout => "row", "layout-align" => "space-between center" }
+                      %md-input-container.md-block{"flex" => ""}
+                        %label {{config_key | humanize}}
+                        %md-select{"ng-model" => "config_key", :placeholder => "Select {{config_key | humanize}}" }
+                          %md-option{ 'ng-repeat':"keys in config_value",:value =>"{{keys}}"} {{keys}}
+                  %button.btn.btn-info.btn-raised.btn-sm.pull-right{'ng-click':"sendIntegration(value,key)" } Save
+                %div{ 'ng-if': 'config_value == null' }
+                  %div{"ng-repeat"=> '(config_key,config_value) in value'}
+                    %div{:layout => "row", "layout-align" => "space-between center" }
+                      %md-input-container.md-block{"flex" => ""}
+                        %label {{config_key | humanize}}
+                        %input{"ng-model": "config_value", 'ng-blur'=>"change(config_value,config_key,value,key)"}
+                  %button.btn.btn-info.btn-raised.btn-sm.pull-right{'ng-click':"saveIntegration(suggestionList,key)" } Save
+    %md-dialog-actions.clearfix.p-t-10.p-b-10
+      %div.clearfix.text-right
+        %button.btn.btn-white.btn-raised{"ng-click": "closeModal()", :type => "button"} Close

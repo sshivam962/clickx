@@ -1,0 +1,35 @@
+.todo-group-item{id: "list-#{list.id}"}
+  .awesome_todos_title
+    #{list.title} (#{list.stats})
+    = link_to edit_agency_todo_list_path(list), class: "text-dark", remote: true do
+      %i.fa.fa-pencil.ml-2
+  %ul.awesome_todos{id: "todo-list-#{list.id}"}
+    - list.todo_items.each do |item|
+      %li{ data: { url: update_position_agency_todo_list_todo_item_path(list, item) } }
+        .styled-checkbox
+          %input.item-checkbox{type: "checkbox", id: "item_#{item.id}", checked: item.completed?, data: {item_id: item.id, list_id: list.id}}
+          .styled-checkbox-label
+            %span
+            %label{for: "item_#{item.id}"}= item.content
+            = link_to edit_agency_todo_list_todo_item_path(list, item), class: "text-dark", remote: true do
+              %i.fa.fa-pencil.ml-2
+            = link_to agency_todo_list_todo_item_path(list, item), class: "text-dark", remote: true do
+              %i.fa.fa-eye.ml-2
+  .pb-3
+  %ul.awesome_todos_form
+    %li.add-button-wrap
+      = link_to "Add To-Do Item", new_agency_todo_list_todo_item_path(list), class: "btn btn--dark btn-sm add-todo-item", remote: true
+  .pb-5
+
+:javascript
+  $("#todo-list-#{list.id}").sortable({
+    update: function(e, ui) {
+      $.ajax({
+        url: ui.item.data('url'),
+        type: 'patch',
+        data: { position: ui.item.index() + 1 },
+        dataType: 'json',
+        success:function(response){}
+      })
+    }
+  });

@@ -1,0 +1,44 @@
+%flash{'key' => "{{ flash.key}}", 'message' => "{{ flash.message }}"}
+%div
+  %div.col-lg-12.col-xs-12.col-md-12.col-sm-12
+    %div
+      %span{'ng-if' => "current_user_businesses.length > 1"}
+        %a.right.btn.btn-warning{'ng-click' => "select_campaign()"} Select A Campaign
+        %br
+      %span.right.trial-text{'ng-if': "selected_business.trial_service == true"}
+        %b Trial Account
+        %p.trial-period-font{'ng-if' => "remaining_days == 1"} {{remaining_days}} day remaining
+        %p.trial-period-font{'ng-if' => "remaining_days > 1"} {{remaining_days}} days remaining
+
+      %script{type: "text/ng-template", id: "changeBusiness"}
+        %form.new_task{"accept-charset" => "UTF-8", name:'userForm', "ng-submit" => "change_business()", "novalidate" => "" }
+          .modal-header
+            %h3.modal-title Select a Campaign
+          .modal-body
+            .form-group{"ng-class" => "{'has-error' : submitted && userForm.business_id.$invalid}"}
+              %label{:for => "business_id"} Campaign Name
+              %select#business_id.form-control.login.width40per.width100PerSmall{:name => "new_business", 'ng-model' => 'new_business', required: true, 'ng-options' => "business as business.expired_name for business in current_user_businesses"}
+                %option{:value => ""} Select a Campaign
+              %span.help-inline{"ng-show" => " submitted && userForm.business_id.$invalid"} not a valid business
+              %br/
+
+
+          .modal-footer
+            %button.btn.btn-success{:type => "submit", 'ng-click' => "submitted=true"} Change Campaign
+            %button.btn.btn-primary{'ng-click' => "modalInstance.dismiss('cancel')"} Cancel
+
+.boxes-cover{'ng-if' => "is_super_admin != true"}
+  .boxes.clearfix{"ng-init"=>"show_setup=['Analytics']"}
+    %span{'ng-repeat' => "service in service_status"}
+      .col-lg-3.col-md-4.col-xs-12.box
+        %a.block-link{'ng-href' => "{{service.link}}", 'ng-attr-target' => "{{service.link_target}}"}
+          .item{'ng-class' => "{'inactive_service' : service.link == '' }"}
+            .img
+              %img{'ng-src' => "/hub_images/{{service.icon}}", 'alt' => "service.label"}
+            %h3 {{ service.label }}
+        %a.setup-btn.btn.btn-primary{'ng-href' => "{{analytics_auth_path}}","ng-show"=>"service.label == 'Analytics' && service.link == ''"}
+          %i.fa.fa-cog.fa.fa-spin
+          Setup
+        %a.setup-btn.btn.btn-primary{'ng-href' => "{{search_console_auth_path}}","ng-show"=>"service.label == 'Search Console' && service.link == ''"}
+          %i.fa.fa-cog.fa.fa-spin
+          Setup

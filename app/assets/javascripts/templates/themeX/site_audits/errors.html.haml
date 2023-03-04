@@ -1,0 +1,93 @@
+%p.clx-text.text-color-accent-red.text-center{ 'ng-if': 'uncrawled' }
+  {{uncrawled}}
+.panel.panel-default{ 'ng-if': '!uncrawled' }
+  .panel-heading.bg-white.pt-sm
+    %h4.inlineb.f-w-md
+      Errors
+      %a.text-info{ 'ng-href': '{{page_uri}}', 'target': '_blank' }
+        {{page_uri | urlPath}}
+    .panel-ctrls.dropdown
+      %a.btn.no-border.m-sm.ml-n.mr-n.pr-sm.pl-sm.text-muted{ 'ng-href': '{{csvExport}}', 'ng-class': "{'disable-button': export_disabled}" }
+        %i.material-icons.text-muted.pr-sm> file_download
+        Export
+      %button.btn.button-icon.dropdown-toggle{"data-toggle" => "dropdown", 'ng-if': 'role' }
+        %i.material-icons.inverted more_vert
+      %ul.dropdown-menu{:role => "menu"}
+        %li
+          %a{ 'ng-click': 'edit_error = !edit_error' }
+            {{edit_error? 'View Errors' : 'Edit Info'}}
+  %hr.mt-xs.mb-md.mr-md.ml-md
+  .panel-body.p-n
+    .col-md-12
+      .col-sm-12.p-n.mb-lg
+        .inlineb.mt-sm
+          %label.text-danger.ml-n {{error}} Errors
+          %label.text-warning.ml-md {{warning}} Warning
+          %label.text-success.ml-md {{passed}} Passed
+      .col-sm-12.p-n.bg-grey.bdr-line.mb-lg{ 'ng-repeat': "(key,value) in lists | toArray:true track by $index"}
+        .col-sm-10.p-n.bdr-r{ 'ng-show': 'edit_error' }
+          .panel.panel-default.mb-n.no-shadow.panel-collapsed.display-grid{ 'ng-init': 'isIssueCardOpen = !value.status' }
+            .panel-heading.bg-grey.inline-flex.sa-panel-heading{ 'ng-click': 'isIssueCardOpen = !isIssueCardOpen' }
+              %div.sa-panel-heading
+                %h2.mr-md
+                  %i.fa.fa-check.text-success{ 'ng-if': 'value.status'}
+                  %i.fa.fa-exclamation-triangle.text-warning{ 'ng-if': '!value.status'}
+                  {{blockTitle[key].title}}
+                %small.pt-md.sa-small {{value.description}}
+              .panel-ctrls{"data-action-collapse" => "{\"target\": \".panel-body, .panel-footer\"}",
+                "data-actions-container": "" }
+                %span.button-icon.has-bg
+                  %span.material-icons
+                    {{isIssueCardOpen ? 'clear' : 'add'}}
+            .panel-body{ 'ng-if': 'isIssueCardOpen && edit_error' }
+              .col-md-12
+                .col-md-2.text-italic.text-muted.p-n.ml-md
+                  Generic Description :
+                .col-md-9.text-muted.p-n.ml-md
+                  %textarea.form-control.text-muted{ 'placeholder': 'Edit generic description', 'ng-model': 'value.description' }
+              .col-md-12{ 'ng-repeat': 'error in value.data track by $index' , 'ng-init': 'enable = false',
+                'ng-if': 'error.passed_title || error.error_title || error.passed_description || error.error_description' }
+                .col-md-12.text-muted.p-n
+                  %label
+                    %i.fa.fa-close.text-danger{ 'ng-if': "error.status == 'error'" }
+                    %i.fa.fa-check.text-success{ 'ng-if': "error.status == 'passed'" }
+                    %i.fa.fa-exclamation.text-warning{ 'ng-if': "error.status == 'warning'" }
+                    {{error.status == 'passed'? error.passed_title: error.error_title}}
+                    %a.info
+                      %i.fa.fa-pencil-square-o.ml-md.pl-md{ 'ng-click': 'enable = !enable' }
+                        Edit
+                .col-md-12{ 'ng-show': 'enable' }
+                  .col-md-2.text-italic.text-muted.p-n.ml-md
+                    Passed Title :
+                  .col-md-9.text-muted.p-n.ml-md
+                    %textarea.form-control.text-muted{ 'placeholder': 'Edit passed title', 'ng-model': 'error.passed_title' }
+                  .col-md-2.text-italic.text-muted.p-n.ml-md
+                    Error Title :
+                  .col-md-9.text-muted.p-n.ml-md
+                    %textarea.form-control.text-muted{ 'placeholder': 'Edit error issue title', 'ng-model': 'error.error_title' }
+                  .col-md-2.text-italic.text-muted.p-n.ml-md
+                    Passed Description :
+                  .col-md-9.text-muted.p-n.ml-md
+                    %textarea.form-control.text-muted{ 'placeholder': 'Edit passed issue description', 'ng-model': 'error.passed_description' }
+                  .col-md-2.text-italic.text-muted.p-n.ml-md
+                    Error Description :
+                  .col-md-9.text-muted.p-n.ml-md
+                    %textarea.form-control.text-muted{ 'placeholder': 'Edit error issue description', 'ng-model': 'error.error_description' }
+        .col-sm-2{ 'ng-show': 'edit_error' }
+          %button.btn.btn-default.btn-raised.mt-xs.mb-xs.btn-block{ 'ng-click': 'doneEditInfo(lists)' } Save
+        .col-sm-12.p-n{ 'ng-show': '!edit_error' }
+          .panel.panel-default.mb-n.no-shadow.panel-collapsed.display-grid{ 'ng-init': 'isIssueCardOpen = !value.status' }
+            .panel-heading.bg-grey.inline-flex.sa-panel-heading{ 'ng-click': 'isIssueCardOpen = !isIssueCardOpen' }
+              %div.sa-panel-heading
+                %h2.mr-md
+                  %i.fa.fa-check.text-success{ 'ng-if': 'value.status', 'title': 'Passed'}
+                  %i.fa.fa-exclamation-triangle.text-warning{ 'ng-if': '!value.status', 'title': 'Needs improvement'}
+                  {{blockTitle[key].title}}
+                %small.pt-md.sa-small {{value.description}}
+              .panel-ctrls{"data-action-collapse" => "{\"target\": \".panel-body, .panel-footer\"}",
+                "data-actions-container": "" }
+                %span.button-icon.has-bg
+                  %span.material-icons
+                    {{isIssueCardOpen ? 'clear' : 'add'}}
+            .panel-body{ 'ng-show': 'isIssueCardOpen && !edit_error' }
+              %div{ 'ng-include': '', 'src': "blockTitle[key].src" }

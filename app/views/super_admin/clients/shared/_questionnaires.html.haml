@@ -1,0 +1,17 @@
+#client-questionnaire-links-modal.modal.fade{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg{role: 'document'}
+    .modal-content
+      .modal-header
+        Questionnaires - #{client.name}
+        %a.close.pl-md{'data-dismiss': 'modal'}
+          %span ×
+      .modal-body
+        - questionnaires.each do |questionnaire|
+          .row.mt-sm
+            .col-sm-8
+              .author
+                = questionnaire[:category]
+            .col-sm-4
+              %a.btn.btn-info.btn-sm.copy_to_clipboard{href: questionnaire[:link], target: '_blank'}
+                %i.fa.fa-clipboard{'title': 'Copy the URL'}
+                Copy URL

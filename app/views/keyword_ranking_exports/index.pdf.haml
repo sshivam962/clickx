@@ -1,0 +1,17 @@
+%table
+  %thead
+    %th Keyword
+    %th Google Rank
+    %th URL
+    %th Search Volume
+    %th CPC
+    %th Keyword Difficulty
+  %tbody
+    - @data.each do |keyword|
+      %tr
+        %td= keyword['name']
+        %td= keyword['googleRanking']
+        %td= keyword['googleRankingUrl']
+        %td= keyword['searchVolume']
+        %td= keyword['cpc']
+        %td= keyword['kdi']

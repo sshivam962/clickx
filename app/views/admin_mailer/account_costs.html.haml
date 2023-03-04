@@ -1,0 +1,30 @@
+%table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+  %tr{:bgcolor => "#f7af30"}
+    %td{:align => "center", :style => "text-align: center;"}
+      %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+        %tbody
+          %tr
+            %td{:style => "color: #FFF; font-size: 28px; line-height: 28px; font-weight: bold; padding: 20px 0 10px;"}
+              = "Agency Billing Report - #{@date.strftime("%B")} #{@date.year}"
+          %tr
+            %td{:style => "color: #FFF; font-size: 18px; line-height: 18px; font-weight: bold; padding: 0 0 20px;"}
+              %small= #@formatted_date
+
+  %tr
+    %td
+      %table{:bgcolor => "#f7f8f9", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+        %tbody
+          %tr
+            %td{:style => "color: #646464; font-size: 18px; line-height: 28px; font-weight: bold; padding: 0;"}
+              %table{:style => "width: 100%; max-width: 680px; margin: 20px auto;font-size: 15px; line-height: 25px; font-weight: normal;"}
+                %tbody
+                  %tr{:bgcolor => "#fFF"}
+                    %td{:style => "font-family:'Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif;line-height:15px;margin:0;padding:6px 3px;"} Agency
+                    %td{:style => "font-family:'Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif;line-height:15px;margin:0;padding:6px 3px"} Amount
+                  - @billing_details.each_with_index do |(key, value), index|
+                    %tr{:bgcolor => "#{index.odd? ? '#FFF' : ''}"}
+                      %td{:style => "font-size: 13px; color:#6ac341;font-family:'Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif;line-height:13px;margin:0;padding:6px 3px;"}
+                        = key
+                      %td{:style => "font-size: 13px; font-family:'Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif;line-height:13px;margin:0;padding:6px 3px"}
+                        = number_to_currency value[:amount]
+

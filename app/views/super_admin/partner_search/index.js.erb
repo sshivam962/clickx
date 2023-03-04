@@ -1,0 +1,5 @@
+<% if @filter_query == '' %>
+  location.reload();
+<% else %>
+  $('.agency_list').html("<%= escape_javascript render( partial: 'super_admin/partner_search/list', locals: { agencies: @agencies }) %>");
+<% end %>

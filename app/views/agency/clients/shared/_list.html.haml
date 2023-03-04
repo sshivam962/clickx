@@ -1,0 +1,13 @@
+%div.agency-clients
+  %table.table
+    %tbody
+      - if clients.present? || @demo_client.present?
+        - if @demo_client
+          = render 'agency/clients/shared/demo_client_row', client: @demo_client
+        - clients.each do |client|
+          = render 'agency/clients/shared/client_row', client: client
+      - else
+        %tr.text-center.hidden
+          %td{:colspan => "9"} No Data Available
+.row.text-center.p-n.pagination-wrapper
+  = will_paginate @clients, params: {q: params[:q]}

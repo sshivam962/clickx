@@ -1,0 +1,231 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Local-Listings.title-icon>
+    Listings
+    %i.fa.fa-info-circle.tooltip-text-icon{'title': 'This tool helps you manage and edit current local listings of your company.'}
+  .options{ 'ng-if': '!demo_login' }
+    .form-group
+      %a.btn.btn-white.btn-raised{href: "/b/locations/new", 'title': 'Add a new location lisitng.'}
+        %i.fa.fa-plus
+        Add New Location
+        .ripple-container
+
+.container-fluid
+  %div
+    .row
+      .col-xs-12
+        .panel.panel-default
+          .panel-heading
+          .panel-body
+            #googlemap.inline-flex
+            .div{id: "class" , 'ng-repeat': "marker in markers"}
+              .a{href: "#", 'ng-click': "openInfoWindow($event, marker)"}
+            .row
+              - @locations.each do |loc|
+                .col-xs-12
+                  .row
+                    / Contents
+                    .col-md-8.col-lg-7
+                      %address
+                        - if loc.name?
+                          %h4.addlocation
+                            %i.material-icons> place
+                            #{loc.name}
+                        - if loc.address? || loc.city?
+                          %span
+                            #{ loc.address } #{ loc.address  && ','}
+                            #{ loc.city } #{ loc.city && ','}
+                        - if loc.state?
+                          %span #{ loc.state },
+                        - if loc.country?
+                          %span #{ loc.country },
+                        - if loc.zip?
+                          %span #{ loc.zip }
+                        %br
+                        #{ loc.phone }
+                        %br
+                        %abbr.pt-md.inlineb
+                          %strong Last Updated:
+                        #{(Time.now - loc.updated_at).to_i / 86400 } days ago
+                      - if loc.website?
+                        %address
+                          %strong Website :
+                          %a{href: "/#", target: "_blank"} #{ loc.website }
+                    / Options
+                    .col-md-4.col-lg-5{ 'ng-if': '!demo_login' }
+                      .form-group.loc-form-group.text-right
+                        .btn-group.clearfix
+                          %a{type: "button", class:"btn btn-default btn-raised", "data-toggle": "modal", "data-target": "##{loc.id}", title: 'Add a company review form on your site to enable visitors to review your company.'}
+                            %i.material-icons.f-14 assignment
+                            Reviews Form
+                          %a.btn.btn-default.btn-raised{href: "#{loc.short_url}", target: "_blank", rel: "noopener noreferrer"}
+                            %i.material-icons.f-14{'title': 'View the landing page where visitors can leave a review about your company.'}
+                              link
+                            Review Landing Page
+                        %input.copy-input-hide.hidden{ id:"copy-{{loc.id}}",:value => "{{loc.short_url}}"}
+                        .btn-group
+                          %a.btn.btn-default.btn-raised{href: "/b/locations/#{loc.id}/add_coupon", 'title': 'Upload images for your positive and negative reviews.'}
+                            %i.material-icons.f-14 add
+                            Review Message
+                          %a.btn.btn-warning.btn-raised{href: "/b/locations/#{loc.id}/edit", 'title': 'Edit this listing'}
+                            %i.material-icons.white.f-14 edit
+                          = link_to business_location_path(loc.id), method: :delete, class: 'btn btn-danger btn-raised', data: { confirm: 'Are you sure you want to delete?' } do
+                            %i.material-icons.white.f-14 delete
+                          -# %a.btn.btn-danger.btn-raised{href: "/b/locations/#{loc.id}","data-method": "delete", 'title': 'Delete this listing'}
+                          -#   %i.material-icons.white.f-14 delete
+
+
+                %div{class: "modal fade", id: "#{loc.id}", tabindex: "-1", role: "dialog", "aria-labelledby": "myModalLabel"}
+                  %div{class: "modal-dialog", "role": "document"}
+                    %div{class: "modal-content"}
+                      %div{class: "modal-header"}
+                        %button{type: "button", class: "close", "data-dismiss": "modal", "aria-label": "Close"}
+                          %span{"aria-hidden": "true"} &times
+                        %h3{class: "modal-title", id: "myModalLabel"}
+                          #{loc.name} - Reviews Embed Form
+                      %div{class: "modal-body"}
+                        %h4 Instructions :
+                        Use the following Url in an iframe tag within your webpage to embed the reviews form.
+                        %p
+                          URL :
+                          %a{'ng-href': "{{loc.short_url}}", target: '_target'}
+                            #{loc.short_url}
+                        %p
+                          %h4 Example Code :
+                          %pre
+                            %code
+                              &lt;iframe src="#{ loc.short_url }" width='100%' height='350px'&gt;&lt;/iframe&gt;
+                        .row
+                          .col-xs-12
+                            %h4 Preview :
+                            %iframe{ src: "#{loc.short_url}", width: '100%', height: '350px' }
+                      %div{class: "modal-footer"}
+                        %button{type: "button", class:"btn btn-default", "data-dismiss": "modal"} Close
+
+.modal.fade{"aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1", id: "reviews_form_{{loc.id}}"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        {{loc.name}} - Reviews Embed Form
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &#215;
+      .modal-body
+        %h4 Instructions :
+        Use the following Url in an iframe tag within your webpage to embed the reviews form.
+        %br
+        %br
+        URL :
+        %a{'ng-href': "{{loc.short_url}}", target: '_target'}
+          {{loc.short_url}}
+        %br
+        %br
+        %h4 Example Code :
+        %br
+        %code
+          &lt;iframe src="{{trustSrc(loc.short_url)}}" width='100%' height='350px'&gt;&lt;/iframe&gt;
+        %br
+        %br
+        %br
+        %h4 Preview :
+        %iframe{ 'ng-src': "{{trustSrc(loc.review_url)}}", width: '100%', height: '350px' }
+
+
+:javascript
+  $(document).ready(function() {
+    $('.copy_text').click(function (e) {
+    e.preventDefault();
+    var copyText = $(this).attr('href');
+
+    document.addEventListener('copy', function(e) {
+      e.clipboardData.setData('text/plain', copyText);
+      e.preventDefault();
+    }, true);
+
+    document.execCommand('copy');
+    });
+  })
+
+  var urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+  }
+
+  var initMap = function() {
+    var bounds = new google.maps.LatLngBounds();
+    var center = new google.maps.LatLng(40.0000, -98.0000)
+    var mapOptions = {
+      zoom: 4,
+      center: center,
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    }
+    var map = new google.maps.Map(document.getElementById('googlemap'), mapOptions);
+
+    zoomLevel = parseInt(urlParam('zoom'))
+
+    $.ajax({
+      url: "/pc/#{current_business.obfuscated_id}/map_info",
+      method: "GET",
+      headers: {"X-Requested-With": "XMLHttpRequest"},
+      dataType: 'json',
+      success: function(resp){
+        locations_fetched = true;
+        var locations = resp.locations;
+        locations.forEach(function(loc){
+          createMarker(map, bounds, loc);
+        })
+
+        map.fitBounds(bounds);
+        map.setCenter(bounds.getCenter());
+
+        if(locations.length == 1){
+          map.setZoom(15);
+        }
+        if(!isNaN(zoomLevel)){
+          map.setZoom(zoomLevel);
+        }
+      }
+    });
+    if("#{current_business.branded?}" == 'true'){
+      var clickxTM = document.createElement('p');
+      clickxTM.style.background = 'white';
+      clickxTM.style.padding = '5px';
+      clickxTM.innerHTML = "Powered By " +
+                           "<img src='https://s3.amazonaws.com/clickx-images/Clickx-Logo.png' type='image/png' style='height:auto;width:60px'></img>"
+      var TMdiv = document.createElement('div');
+      TMdiv.appendChild(clickxTM);
+
+      map.controls[google.maps.ControlPosition.TOP_RIGHT].push(TMdiv);
+    }
+  }
+
+  var createMarker = function (map, bounds, loc){
+    var marker = new google.maps.Marker({
+        map: map,
+        animation: google.maps.Animation.DROP,
+        position: new google.maps.LatLng(loc.lat, loc.lng),
+        title: loc.name
+    });
+    bounds.extend(marker.position);
+
+    marker.content = '<div class="infoWindowContent">' + loc.address + '<br>' +
+    '<a href = "http://' + loc.website +'">' + loc.website + '</a>' + '</div>';
+
+    var infoWindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(marker, 'click', function(){
+        infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+        infoWindow.open(map, marker);
+    });
+  }
+
+  initMap();
+
+  $(window).load(function(){
+    google.maps.event.addDomListener(window, "resize", function() {
+      initMap();
+    });
+  });

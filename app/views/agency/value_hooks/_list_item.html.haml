@@ -1,0 +1,30 @@
+.row.d-flex.flex-wrap
+  - @value_hooks.each do |value_hook|
+    .col-xs-12.col-sm-6.col-lg-4.col-xl-3
+      .awesome-card
+        .awesome-card-inner
+          .awesome-card-actions
+            %a.awesome-card-actions-btn{ href: public_value_hooks_link(current_agency, value_hook), target: '_blank' }
+              %i.fa.fa-external-link{"aria-hidden" => "true"}
+            %a.awesome-card-actions-btn{ href: edit_agency_value_hook_path(value_hook) }
+              %i.fa.fa-edit{"aria-hidden" => "true"}
+            = link_to agency_value_hook_path(value_hook), method: :delete, data: { confirm: 'Are you sure?' }, class: "awesome-card-actions-btn awesome-card-actions-btn--remove" do
+              %i.fa.fa-trash
+          .awesome-card-thumbnail
+            .awesome-card-thumb{:style => "background-image:url(#{value_hook.thumbnail&.file&.url});", "data-target" => "#value_hook_"+"#{value_hook.id}", "data-toggle" => "modal"}
+          .awesome-card-footer
+            %span.awesome-card-btn.awesome-card-btn--fb
+              = value_hook.title
+        .awesome-card--shadow
+        .awesome-card--shadow.awesome-card--shadow2
+
+    .modal.fade{role: "dialog", id:"value_hook_#{value_hook.id}", tabindex: '-1'}
+      .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg.modal-lg{role: 'document'}
+        .modal-content
+          .modal-header
+            %a.close.pl-md{'data-dismiss': 'modal'}
+              %span ×
+          .portfolio-modal-body
+            .loading-spin
+            .modal-body
+              = value_hook.video_embed_code.html_safe

@@ -1,0 +1,24 @@
+= hidden_field_tag :total_price, @plan.amount
+.input-card.input-card--gray.p-4.mb-5.dark
+  %h4.fw-n Purchase Summary
+  %h3.fw-b.mb-3
+    = @plan.key.titleize
+  %p.dark
+    %br
+    %span.current_price_text
+      Plan Pricing: #{plan_price(@plan)}
+    - if @annual_plan.present?
+      %span.annual_price_text.hidden
+        = "Plan Pricing: <span class='plan-price-strike'>#{number_to_currency(@plan.amount * 12, precision: 0)}</span> #{number_to_currency(@annual_plan.amount, precision: 0)}/yr".html_safe
+  %p.dark
+    #coupon_applied
+    #coupon_offer
+    %br/
+    %span.current_price_text
+      Total Charge: #{number_to_currency(@plan.amount, precision: 2)}
+    - if @annual_plan.present?
+      %span.annual_price_text.hidden
+        Total Charge: #{number_to_currency(@annual_plan.amount, precision: 2)}
+%a.btn.btn-input.business_signup_submit{href: 'javascript:void(0)'}
+  Apply Now
+

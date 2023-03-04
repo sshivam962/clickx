@@ -1,0 +1,48 @@
+%tr{data: {target: "##{dom_id(lead)}", toggle: 'collapse'}}
+  %td
+    = lead.full_name
+  %td
+    = lead.email
+  %td
+    = lead.company
+  %td
+    = lead.phone
+  %td
+    %a.text-info{href: "//#{without_scheme(lead.domain)}", target: '_blank'}
+      = lead.domain
+%tr.collapse{id: dom_id(lead)}
+  %td.hiddenRow{colspan: 5}
+    .col-md-4
+      %div
+        %p
+          Agency:
+          = lead.agency.name
+        %p
+          Status:
+          = lead.status
+        %p
+          Created At:
+          = lead.created_at.strftime('%b %d, %Y')
+    .col-md-4
+      - if lead.campaign_info.present?
+        Campaign Information
+        %ul
+          - lead.campaign_info.each do |info|
+            %li
+              = info
+      - if lead.campaign_info.present?
+        Competitor Information
+        %ul
+          - lead.competitor_info.each do |info|
+            %li
+              = info
+    .col-md-4
+      - if lead.next_steps.present?
+        Next Steps
+        %ul
+          - lead.next_steps.each do |step|
+            %li
+              = step
+      - if lead.call_notes.present?
+        Call Notes
+        %p= lead.call_notes

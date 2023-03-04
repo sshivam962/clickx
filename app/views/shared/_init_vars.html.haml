@@ -1,0 +1,12 @@
+%script
+  var app_name = "#{app_name}"
+  var dashboard_url = "#{current_user_dashboard}"
+  - if @businesses.present?
+    var current_user_businesses = "#{@businesses}"
+  - else
+    var current_user_businesses = ''
+
+= render 'shared/vars/env_config'
+= render 'shared/vars/current_user'
+= render 'shared/vars/current_agency'
+= render 'shared/vars/current_business'

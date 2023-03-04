@@ -1,0 +1,28 @@
+- subscription_schedule = current_agency.subscription_schedules.not_started.first
+%td.col-label.text-left
+- plans.each do |plan|
+  %td
+    - if active_subscription.present?
+      - if subscription_schedule.present?
+        - if subscription_schedule.stripe_plan.eql?(plan.stripe_plan)
+          .pt-col-content
+            .btn-block.m-n.text-center.p-10.bdr-line.text-info
+              Scheduled for Downgrade on #{subscription_schedule.start_at.strftime('%B %d')}
+        - else
+          - if active_subscription.plan_id.eql?(plan.stripe_plan)
+            .pt-col-content
+              .btn-block.m-n.text-center.p-10.bdr-line.text-info
+                Subscribed
+      - elsif active_subscription.plan_id.eql?(plan.stripe_plan)
+        .pt-col-content
+          .btn-block.m-n.text-center.p-10.bdr-line.text-info
+            Subscribed
+      - else
+        - if active_subscription.amount < plan.amount && subscription_schedule.blank?
+          .pt-col-content
+            = link_to agency_package_subscription_upgrade_path(package: package.key, plan: plan.key), method: :post, data: { confirm: 'Are you sure?' }, class: 'btn btn-raised btn-block btn-lg m-n btn-info', remote: true do
+              Upgrade
+    - else
+      .pt-col-content
+        %a.btn.btn-raised.btn-block.btn-lg.m-n{class: 'btn-info', href: agency_checkout_path(package: package.key, plan: plan.key)}
+          Get Started

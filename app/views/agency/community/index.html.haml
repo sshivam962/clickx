@@ -1,0 +1,47 @@
+.page-heading.pt-md.pb-md
+  %h1
+    %i.clickx-icon-SellSheets
+    Community
+.container-fluid.ui-2020
+  .row
+    .col-lg-10.col-lg-offset-1
+      .row.d-flex.justify-content-center
+        .col-sm-6
+          .fb-group-card.text-center.link_click{data: {link: 'https://www.facebook.com/groups/219968518519888'}}
+            .fb-banner.fb-banner__two
+            / <img src="images/fb-group.svg" alt="">
+            .pt-2
+            %h3.mb-4 Clickx Agency Growth
+            %a.btn.btn-info.btn-raised{href: "#"} Join the Facebook Group
+            .pt-4
+          .pb-5.d-sm-none
+        .col-sm-6
+          .fb-group-card.text-center.link_click{data: {link: 'https://www.facebook.com/groups/467613194221213'}}
+            .fb-banner.fb-banner__one
+            / <img src="images/fb-group.svg" alt="">
+            .pt-2
+            %h3.mb-4 Clickx Community
+            %a.btn.btn-info.btn-raised{href: "#"} Join the Facebook Group
+            .pt-4
+      .pt-5.text-center
+        %h3 Connect with us
+        .social-icons
+          %a{:href => "http://www.facebook.com/clickxio", :target => "_blank"}
+            %i.fa.fa-facebook
+          %a{:href => "http://twitter.com/clickxio", :target => "_blank"}
+            %i.fa.fa-twitter
+          %a{:href => "https://www.linkedin.com/company/clickx", :target => "_blank"}
+            %i.fa.fa-linkedin
+          %a{:href => "https://www.youtube.com/c/Clickxio", :target => "_blank"}
+            %i.fa.fa-youtube-play
+          %a{:href => "http://www.pinterest.com/clickxio/", :target => "_blank"}
+            %i.fa.fa-pinterest
+          %a{:href => "https://www.instagram.com/clickxio/", :target => "_blank"}
+            %i.fa.fa-instagram
+
+:javascript
+  $(document).ready(function(){
+    $('.link_click').on('click', function(){
+      window.open($(this).data('link'), '_blank');
+    })
+  })

@@ -1,0 +1,65 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rspec
+  - rubocop-rails
+
+Style/Documentation:
+  Description: 'Document classes and non-namespace modules.'
+  Enabled: false
+
+Metrics/LineLength:
+  Description: 'Limit lines to 100 characters.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#80-character-limits'
+  Enabled: false
+  Max: 500
+
+Metrics/ClassLength:
+  Max: 1500
+
+Style/AndOr:
+  Description: 'Use &&/|| instead of and/or.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-and-or-or'
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false
+
+RSpec/MessageChain:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+RSpec/MessageChain:
+  Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+    - config/initializers/*.rb
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'tmp/**/*'
+    - 'bin/**/*'
+    - 'tracker-js/node_modules/**/*'
+    - 'log/**/*'
+    - spec/rails_helper.rb
+    - spec/spec_helper.rb
+    - test/test_helper.rb
+    - Guardfile
+    - config/application.rb
+    - db/schema.rb
+    - lib/semrush.rb
+    - spec/jobs/fetch_rank_callback_job_spec.rb
+    - spec/lib/authority_labs_spec.rb
+    - spec/jobs/add_to_delayed_queue_job_spec.rb
+    - spec/jobs/add_to_priority_queue_job_spec.rb
+    - app/jobs/fetch_rank_callback_job.rb
+    - app/jobs/fetch_search_result_rank_callback_job.rb

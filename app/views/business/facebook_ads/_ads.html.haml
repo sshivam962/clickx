@@ -1,0 +1,200 @@
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        %h2 Ads Metrics
+        %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Average metrics for the Facebook Ads'}
+      .panel-body
+        .row
+          .col-md-6
+            %table.table.table-hover
+              %tbody
+                - if data[:total_impressions].present?
+                  %tr
+                    %td Impressions
+                    %td{align: 'right'} #{data[:total_impressions]}
+                - if data[:total_clicks].present?
+                  %tr
+                    %td Total Clicks
+                    %td{align: 'right'} #{data[:total_clicks]}
+                - if data[:total_inline_link_clicks].present?
+                  %tr
+                    %td Link Clicks
+                    %td{align: 'right'} #{data[:total_inline_link_clicks]}
+                - if data[:total_frequency].present?
+                  %tr
+                    %td Frequency
+                    %td{align: 'right'} #{data[:total_frequency]}
+                - if (data[:total_conversion] != 0)
+                  %tr
+                    %td Conversion
+                    %td{align: 'right'} #{data[:total_conversion]}
+                - if (data[:total_leads].present? && data[:total_leads] != 0)
+                  %tr
+                    %td Leads
+                    %td{align: 'right'} #{data[:total_leads]}
+          .col-md-6
+            %table.table.table-hover
+              %tbody
+                - if data[:total_reach].present?
+                  %tr
+                    %td Total Reach
+                    %td{align: 'right'} #{data[:total_reach]}
+                - if data[:total_cpc].present?
+                  %tr
+                    %td CPC
+                    %td{align: 'right'} $#{data[:total_cpc]}
+                - if data[:total_ctr].present?
+                  %tr
+                    %td CTR
+                    %td{align: 'right'} #{data[:total_ctr]}%
+                - if data[:total_spend].present?
+                  %tr
+                    %td Total Spend
+                    %td{align: 'right'} $#{data[:total_spend].round(2)}
+                - if data[:total_revenue].present?
+                  %tr
+                    %td Revenue
+                    %td{align: 'right'} $#{data[:total_revenue]}
+.row
+  - if graph_data.present?
+    .col-md-12
+      .tab-container
+        %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+          %li.active
+            %a{"data-toggle":"tab", 'data-target': "#fbads-clicks", id: "fb-click-id", 'title': 'Show me the graph of clicks | received on my FB ads'} Clicks
+          %li
+            %a{"data-toggle":"tab", 'data-target': "#fbads-impressions", id: "fb-impression-id", 'title': 'Show me the graph of impressions | received on my FB ads'} Impressions
+          %li
+            %a{"data-toggle":"tab", 'data-target': "#fbads-cpc", id: "fb-cpc-id", 'title': 'Show me the graph of CPC | received on my FB ads'} CPC
+        .tab-content
+          #fbads-clicks.tab-pane.active
+            .panel-body
+              .centered
+                #fbads_clicks_line_chart
+          #fbads-impressions.tab-pane
+            .panel-body
+              .centered
+                #fbads_impressions_line_chart
+          #fbads-cpc.tab-pane
+            .panel-body
+              .centered
+                #fbads_cpc_line_chart
+
+.row
+  - if data[:insights].present?
+    .col-md-12
+      .tab-container
+        .tab-content{'st-table':"ad_details", 'st-safe-src':"copy_ad_details"}
+          .table-responsive
+            %table#ads_table.table.table-hover.table-bordered.table-vam
+              %thead
+                %tr
+                  %th.vam{'st-sort':'ad_name', style: "padding-right:190px;"}
+                    %u.help_pointer{'title': 'The Facebook Ads Ad name'}
+                      Ad
+                  %th.vam{'st-sort':'campaign_name', style: "padding-right:190px;"}
+                    %u.help_pointer{'title': 'The Facebook Ads Campaign name'}
+                      Campaign
+                  %th.vam{'st-sort':'adset_name', style: "padding-right:190px;"}
+                    %u.help_pointer{'title': 'The Facebook Ads Adset name'}
+                      Adset
+                  %th.text-center{'st-sort':'clicks'}
+                    %u.help_pointer{'title': 'Number of clicks you received through FB ads for the given ads'}
+                      Clicks
+                  %th.text-center{'st-sort':'inline_link_clicks'}
+                    %u.help_pointer{'title': 'The number of clicks on links within the ad that led to destinations or experiences, on or off Facebook'}
+                      Link Clicks
+                  %th.text-center{'st-sort':'impressions'}
+                    %u.help_pointer{'title': 'Number of views your FB ads got fro the given ads'}
+                      Impressions
+                  %th.text-center{'st-sort':'cpc'}
+                    %u.help_pointer{'title': 'Cost Per Clicks for the given ads'}
+                      CPC
+                  %th.text-center{'st-sort':'ctr'}
+                    %u.help_pointer{'title': 'Percent of clicks your FB ads got to that of impressions it received for the given ads'}
+                      CTR
+                  %th.text-center{'st-sort':'reach'}
+                    Reach
+                  %th.text-center{'st-sort':'spend'}
+                    Spend
+                  - if (data[:total_conversion] != 0)
+                    %th.text-center{'st-sort':'conversion'}
+                      Conversion
+                  - if (data[:total_revenue] != 0)
+                    %th.text-center{'st-sort':'revenue'}
+                      Revenue
+                  - if (data[:total_leads].present? && data[:total_leads] != 0)
+                    %th.text-center{'st-sort':'leads'}
+                      Leads
+              %tbody
+                - data[:insights].each do |insight|
+                  %tr
+                    %td
+                      %div.pointer{type: "button", 'data-toggle': "modal", 'data-target': "#fads-modal", class: "display-modal", value: insight["ad_id"]}
+                        %img{src: insight["thumbnail"]} &nbsp; #{insight["ad_name"]}
+                    %td.text-center #{insight["campaign_name"]}
+                    %td.text-center #{insight["adset_name"]}
+                    %td.text-center #{insight["clicks"]}
+                    %td.text-center #{insight["inline_link_clicks"]}
+                    %td.text-center #{insight["impressions"]}
+                    %td.text-center
+                      - cpc = insight["cpc"].round(2)
+                      $#{cpc}
+                    %td.text-center
+                      - ctr = insight["ctr"].round(2)
+                      #{ctr}%
+                    %td.text-center #{insight["reach"]}
+                    %td.text-center $#{insight["spend"]}
+                    - if (data[:total_conversion] != 0)
+                      %td.text-center #{insight["conversion"]}
+                    - if (data[:total_revenue] != 0)
+                      %td.text-center #{insight["revenue"]}
+                    - if (data[:total_leads].present? && data[:total_leads] != 0)
+                      %td.text-center #{insight["leads"]}
+
+#ads-modal
+
+:javascript
+  $(function() {
+    var table = $('#ads_table').DataTable({
+      "pageLength": 25
+    });
+
+    $('#ads_table_filter input').on('keyup change', function () {
+      table.column(0).search($(this).val()).draw();
+    });
+
+    var charts = JSON.parse('#{raw(graph_data[:data].to_json)}');
+    var item = FbadsChart.users_chart(
+      charts
+    );
+
+    $('#fbads_clicks_line_chart').highcharts(item[0])
+
+    $("#fb-click-id").on("click", function() {
+      $('#fbads_clicks_line_chart').highcharts(item[0])
+    })
+
+    $("#fb-impression-id").on("click", function() {
+      $('#fbads_impressions_line_chart').highcharts(item[1]);
+    })
+
+    $("#fb-cpc-id").on("click", function() {
+      $('#fbads_cpc_line_chart').highcharts(item[2]);
+    })
+
+    $(".display-modal").on("click", function(){
+      const id = $(this).attr("value")
+      $.ajax({
+        url: `/b/facebook_ads/ad_preview?creative_id=${id}`,
+        type: 'GET',
+        dataType: 'script',
+        success: function(data) {
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    })
+  })

@@ -1,0 +1,18 @@
+@import 'jquery-ui/datepicker';
+@import 'jquery-ui/theme';
+@import 'ion-rangeslider/css/ion.rangeSlider.min';
+@import 'styleX';
+@import 'plugins/toastr.min';
+@import 'plugins/jssocial.min';
+@import 'plugins/jssocial-classic.min';
+@import 'jqcloud.min';
+
+body, html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  min-height: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

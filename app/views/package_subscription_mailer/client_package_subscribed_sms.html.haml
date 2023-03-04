@@ -1,0 +1,6 @@
+- if @package.expedited_onboarding || @package.onetime_charge.present?
+  Total Amount:
+  = number_to_currency(@package.amount.to_f + @package.expedited_onboarding_fee.to_f + @package.onetime_charge.to_f + @addon_plans&.sum(&:amount).to_f + @addon_plans&.map(&:implementation_fee).compact.sum)
+- else
+  Amount :
+  = number_to_currency(@package.amount)

@@ -1,0 +1,22 @@
+.bg-white.p-4.p-md-5.rounded-t-12
+  .fw-m.fs-md.text-black= @project.title
+.p-4.p-md-5
+  .project-notifications-list
+    - project_proposals.each do |proposal|
+      .project-notifications-list-item.mb-4.mb-lg-5
+        .d-block.project-notification.bg-white.shadow-md.rounded-8.p-4
+          .fw-m.text-black= proposal.user.name
+          .text-black.fs-14.muted= proposal.user.network_profile.description
+          .fs-16.pt-3
+            %span$
+            %span= proposal.amount
+          .d-flex.align-items-center.pt-4
+            .col-auto.pr-2
+              = link_to 'View Proposal', proposal_modal_agency_projects_path(proposal_id: proposal.id), class: 'btn btn--dark w-100', remote: true
+            .col-auto.pr-2
+              %button.btn.px-4
+                %i.fa.fa-user
+            .col-auto.pr-2
+              = link_to send_message_agency_projects_path(proposal_id: proposal.id), class: 'btn text-dark px-4', method: :post do
+                %i.fa.fa-comment-o
+#proposal_modal

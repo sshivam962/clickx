@@ -1,0 +1,90 @@
+%script
+  - if current_business.present?
+    var semrush_project = "#{current_business.semrush_project_id.present?}";
+    var agreement_signed = "#{current_business.agreement_signed?}";
+    var branded = "#{current_business.branded?}"
+    var export_disabled = "#{current_business.free_service || current_business.trial_service}"
+    var has_onboarding_procedures = "#{current_business.onboarding_procedures.present?}"
+    var is_dummy_business = "#{current_business.dummy}"
+
+    var current_business = "#{current_business.id}"
+    var current_business_domain = "#{current_business.domain}"
+    var this_business = #{current_business.to_json.html_safe}
+
+    var current_fb_budget = "#{current_business.fb_budget}"
+    var current_ppc_budget = "#{current_business.ppc_budget}"
+
+    var business_have_my_quotes = "#{current_business&.custom_packages.active&.present?}"
+    var current_business_free_service = "#{current_business.free_service}"
+    var current_business_trial_service = "#{current_business.trial_service}"
+    var current_calls_enabled = "#{current_business.call_analytics_service}"
+    var current_competitors_service = "#{current_business.competitors_service}"
+    var current_contents_enabled = "#{current_business.contents_service}"
+    var current_facebook_ad_service = "#{current_business.facebook_ad_service?}"
+    var current_intelligence_enabled = "#{current_business.intelligence_enabled?}"
+    var current_local_profile_enabled = "#{current_business.local_profile_service}"
+    var current_managed_service = "#{current_business.managed_service?}"
+    var current_ppc_service = "#{current_business.google_ads_service?}"
+    var current_reputation_service = "#{current_business.reputation_service}"
+    var current_seo_enabled = "#{current_business.seo_service}"
+
+    var business_reviews_url = "#{current_business.top_reviews_url}"
+    var current_business_obfuscated_id = "#{current_business.obfuscated_id}"
+    var current_call_analytics_id = "#{current_business.call_analytics_id}"
+    var current_full_url = "#{current_business.web_url}"
+    var current_google_analytics_id = "#{current_business.google_analytics_id}"
+    var current_site_url = "#{current_business.site_url}"
+
+    - if demo_login?
+      - if original_agency && original_agency.square_logo.present?
+        var logo = "#{original_agency.square_logo}"
+      - else
+        var logo = ''
+      - if original_agency && original_agency.logo.present?
+        var square_logo = "#{original_agency.logo}"
+      - else
+        var square_logo = ''
+    - else
+      - if current_business.agency_square_logo.present?
+        var logo = "#{current_business.agency_square_logo}"
+      - else
+        var logo = ''
+      - if current_business.agency_logo.present?
+        var square_logo = "#{current_business.agency_logo}"
+      - else
+        var square_logo = ''
+
+  - else
+    var branded = false
+    var export_disabled = true
+    var has_onboarding_procedures = false
+    var is_dummy_business = false
+
+    var current_business = ''
+    var current_business_domain = ''
+    var this_business = ''
+
+    var current_fb_budget = ''
+    var current_ppc_budget = ''
+
+    var business_have_my_quotes = false
+    var current_business_free_service = false
+    var current_business_trial_service = false
+    var current_calls_enabled = false
+    var current_competitors_service = false
+    var current_contents_enabled = false
+    var current_facebook_ad_service = false
+    var current_intelligence_enabled = false
+    var current_local_profile_enabled = false
+    var current_managed_service = false
+    var current_ppc_service = false
+    var current_reputation_service = false
+    var current_seo_enabled = false
+
+    var business_reviews_url = ''
+    var current_business_obfuscated_id = ''
+    var current_call_analytics_id = ''
+    var current_full_url = ''
+    var current_google_analytics_id = ''
+    var current_site_url = ''
+    var agreement_signed = '';

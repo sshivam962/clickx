@@ -1,0 +1,2 @@
+$('.competitors_list').html("<%= escape_javascript render( partial: 'business/competitions/shared/list.html.haml', locals: { competitions: @competitions }) %>");
+$('html, body').animate({ scrollTop: 0 }, 'slow');

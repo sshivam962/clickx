@@ -1,0 +1,11 @@
+%h4 Available Strategies
+.panel-group
+  - strategy_items&.each do |item|
+    .panel.panel-default.panel-selected-strategy
+      .panel-heading
+        - template  = Liquid::Template.parse(item.strategy)
+        - parsed_strategy = template.render({'company_name' => lead.company})
+        %h2{style: 'text-transform: none;'}
+          = raw(parsed_strategy)
+        %a.pull-right.add_strategy_item{"data-item" => item.id, :href => "javascript:void(0)"}
+          %i.fa.fa-plus

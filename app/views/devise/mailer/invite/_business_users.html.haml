@@ -1,0 +1,84 @@
+- biz = Business.find_by_id(@resource.ownable_id) || @resource.businesses.first
+- agency = biz.agency
+
+%div{style: "background-color:#F6F6F7; padding:15px;"}
+  %table.table{border: "0", cellpadding: "0", cellspacing: "0", style: "margin: 0 auto; border-width:0;"}
+    %tr
+      %td
+        %table{align: "center", border: "0", cellpadding: "0", cellspacing: "0", style: "border-width:0;", width: "100%"}
+          %tr
+            %td{valign: "top", width: "100%"}
+              %table{align: "center", bgcolor: "#fff", border: "0", cellpadding: "0", cellspacing: "0", style: "border-width:0; background-color: #4c4e60; border-bottom: 1px solid #F6F6F7;"}
+                %tr
+                  %td{width: "100%"}
+                    %table.table_scale{align: "center", border: "0", cellpadding: "0", cellspacing: "0", style: "border-width:0; ", width: "600"}
+                      %tr
+                        %td
+                        %td{style: "text-align: center; vertical-align: middle; padding-top:25px; padding-bottom:25px;", width: "100%"}
+                          - if agency && agency.logo
+                            %img{src: "#{agency.logo}", alt: "", crop:'fit', type:'fetch', style:"width:160px"}
+                          - else
+                            %img{src: "https://clickx-images.s3.amazonaws.com/clickx-logo-white.png", alt: "", crop:'fit', type:'fetch', style:"width:160px"}
+                        %td
+
+        %table{align: "center", bgcolor: "#F6F6F7", border: "0", cellpadding: "0", cellspacing: "0", style: "height:420px; background-color:#fff;", width: "100%"}
+          %tr
+            %td{valign: "top", width: "100%"}
+              %table{align: "center", border: "0", cellpadding: "0", cellspacing: "0"}
+                %tr
+                  %td{width: "100%"}
+                    %table.table_scale{bgcolor: "#FFF", border: "0", cellpadding: "0", cellspacing: "0", width: "600"}
+                      %tr
+                        %td{align: "center", width: "100%"}
+                          %table{align: "center", border: "0", cellpadding: "0", cellspacing: "0", width: "600"}
+                            %tr
+                              %td.spacer{width: "30"}
+                              %td
+                                / START OF COLUMN
+                                %table.full{align: "center", border: "0", cellpadding: "0", cellspacing: "0", style: "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", width: "540"}
+                                  %tr{style: "margin-bottom: 15px"}
+                                    %td{style: "padding-top: 0; padding-bottom: 0; color:#777777"}
+                                      %div{style: "padding:30px 0 10px;"}
+                                        %div{style: "text-align:center; padding:20px 0 30px;"}
+                                          %p{style: "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0 0 25px 0;font-family: 'Montserrat', sans-serif;"} Welcome aboard!
+                                          %p{style: "font-size:16px; line-height: 1.6em; margin: 0;font-family: 'Montserrat', sans-serif;"} Our Digital Marketing Portal allows you to manage and stay on track of your online marketing campaign. Accept the invitation to continue making a password.
+                                        %hr{style: "border-top:1px solid #F6F6F7; border-bottom:none"}
+                                        %div{style: "padding:30px 0 0;"}
+                                          %p{style: "font-size:16px; line-height: 1.6em; font-weight:700; margin: 0 0 20px 0;font-family: 'Montserrat', sans-serif;"} What will you find inside?
+                                          %p{style: "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0 0 20px 0;font-family: 'Montserrat', sans-serif;"} Depending on your campaign, you will be able to access the following analytics 24/7:
+                                          %ul{style: "text-align:left; list-style:circle; list-style-position: inside; padding: 0; margin: 25px 0 15px;"}
+                                            %li{style: "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0 0 8px 0;font-family: 'Montserrat', sans-serif;"} Marketing analytics dashboard
+                                            %li{style: "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0 0 8px 0;font-family: 'Montserrat', sans-serif;"} Google analytics traffic and conversion analytics
+                                            %li{style: "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0 0 8px 0;font-family: 'Montserrat', sans-serif;"} Complete SEO keyword rank tracking & backlinks reporting
+                                            %li{style: "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0 0 8px 0;font-family: 'Montserrat', sans-serif;"} Google Search Console integration
+                                            %li{style: "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0 0 8px 0;font-family: 'Montserrat', sans-serif;"} Google ads campaign performance metrics
+                                            %li{style: "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0 0 8px 0;font-family: 'Montserrat', sans-serif;"} Facebook ads campaign performance metrics
+                                            %li{style: "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0 0 8px 0;font-family: 'Montserrat', sans-serif;"} Call analytics for your campaign (If required)
+                                            %li{style: "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0 0 8px 0;font-family: 'Montserrat', sans-serif;"} Competitor tracking of traffic, keywords and backlinks
+                                          %p{style: "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0 0 20px 0;"}
+                                            By accepting this invitation, you're also accepting our
+                                            = succeed "." do
+                                              %a{href: "#0"} terms
+                                          %p{style: "margin:0 0 30px 0; text-align:center;"}
+                                            %a.btn{href: "#{accept_invitation_url(@resource, invitation_token: @token, host: agency&.active_domain || ROOT_URL)}", style: "display: inline-block; padding:14px 22px; border-radius:25px; background:#f8b11c; color:#fff; font-weight:500; text-decoration:none; font-size:16px;font-family: 'Montserrat', sans-serif;"} Accept Invitation
+                              %td.spacer{width: "30"}
+
+        %table{align: "center", bgcolor: "#fff", border: "0", cellpadding: "0", cellspacing: "0", width: "100%"}
+          %tr
+            %td{style: "border-top: 1px solid #F6F6F7;", valign: "top", width: "100%"}
+              %table{align: "center", border: "0", cellpadding: "0", cellspacing: "0"}
+                %tr
+                  %td{width: "100%"}
+                    %table.table_scale{bgcolor: "#fff", border: "0", cellpadding: "0", cellspacing: "0", width: "600"}
+                      %tr
+                        %td{width: "100%"}
+                          %table{border: "0", cellpadding: "0", cellspacing: "0", width: "600"}
+                            %tr
+                              %td{width: "600"}
+                                %table.full{align: "center", border: "0", cellpadding: "0", cellspacing: "0", style: "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", width: "540"}
+                                  %tr
+                                    %td{align: "center", cclass: "center"}
+                                      %p.footer-copy{style: "font-family: Arial, sans-serif; font-size: 9pt; font-weight: 300; text-align: center; line-height: 1.5; padding:25px 0; color:#b1b1b1;"}
+                                        Questions? Call us at (855) 255-4160 today!
+                                        %br/
+                                        © #{Date.current.year} ABC Agency Services

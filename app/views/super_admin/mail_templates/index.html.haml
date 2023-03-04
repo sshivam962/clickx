@@ -1,0 +1,31 @@
+- content_for :title do
+  = 'Email Templates | Clickx'
+.page-header
+  %h3
+    Email Templates
+
+- @templates.each do |template|
+  .locations
+    .container
+      .row
+        %b.name
+          = template.mail_type + " Template"
+        - if template.mail_type == "New Customer Comment"
+          %br
+          %span.help-inline
+            Template of an email sent to Admin(s) when customer comments on a content.
+        - elsif template.mail_type == "Content Feedback"
+          %br
+          %span.help-inline
+            Template of an email sent to Admin(s) when customer submits a feedback on a content
+        - elsif template.mail_type == "New Content"
+          %br
+          %span.help-inline
+            Template of an email sent to campaign user(s) (only those who have accepted the invitation request), when
+            %br
+            admin submits a new content for review
+        .right.editBtns
+          = link_to edit_super_admin_mail_template_path(template), class: 'btn btn-warning mail_list_btn p-xs' do
+            Edit
+
+

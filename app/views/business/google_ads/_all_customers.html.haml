@@ -1,0 +1,30 @@
+- @all_customers.each_with_index do |customer, index|
+  %tr.customer{id: "customer_#{index}", data: { id: customer[:id], mid: customer[:mid] }}
+    %td= index + 1
+    %td= customer[:name]
+    %td= customer[:id]
+
+  :javascript
+    $( "#customer_#{index}" ).hover(
+      function() {
+        $(this).addClass("success pointer white");
+      }, function() {
+        $(this).removeClass("success pointer white");
+      }
+    );
+
+    $("#customer_#{index}").on('click', function() {
+      $('.customer').removeClass('success-1');
+      $(this).addClass("success-1");
+      var login_customer_id = $(this).data("mid");
+      $('#login_customer_id').val(login_customer_id);
+      var customer_client_id = $(this).data("id");
+      $('#customer_client_id').val(customer_client_id);
+      $("#save_button").removeClass("disabled text-white");
+    });
+
+:css
+  .success-1 {
+    color: #bad531;
+    background-color: #efffdd;
+  }

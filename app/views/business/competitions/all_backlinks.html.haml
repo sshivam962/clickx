@@ -1,0 +1,70 @@
+.page-heading.no-margin-bottom.pb-md
+  %h1
+    %i.clickx-icon-LinkBuilding.title-icon>
+    Backlinks
+    %small
+      Domain :
+      %b #{@competition.name}
+  .options
+    .form-group
+      = link_to export_backlinks_csv_business_client_competitions_path(id: @competition.id), class: 'btn btn-default btn-raised', target: '_blank' do
+        %i.fa.fa-download.icpadd-r10
+        Download CSV
+.panel.panel-default.m-md
+  .panel-heading.bg-white.pt-sm
+    %h4.inlineb.f-w-md Backlinks
+    .panel-ctrls.dropdown
+      = link_to export_backlinks_csv_business_client_competitions_path(id: @competition.id), class: 'btn btn-white no-border m-sm ml-n mr-n pr-sm pl-sm', target: '_blank' do
+        %i.material-icons.text-muted.pr-sm> file_download
+        %b.text-muted Export
+  %hr.mb-md.mr-md.ml-md/
+  .panel-body.p-n
+    .col-md-12
+      .col-sm-12.p-n.mb-lg
+        .inlineb.mt-sm
+          %a.text-warning.ml-md #{@all_backlinks.count} Backlinks
+      .col-sm-12.p-n
+        .table-responsive
+          %table.table.table-hover.table-vam.table-striped.text-muted
+            %thead
+              %tr
+                %th{:width => "30"}
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "right", "data-toggle" => "tooltip", :title => "Referring Page."}
+                    LINKS
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Trust flow of the backlinks."}
+                    TRUST FLOW
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Citation flow of the backlinks."}
+                    CITATION FLOW
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Type of backlinks."}
+                    LINK TYPE
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Date when first seen."}
+                    FIRST INDEXED
+                %th.f-w-md
+                  %u.help_pointer{ "data-placement" => "left", "data-toggle" => "tooltip", :title => "Date when last checked."}
+                    LAST SEEN
+            %tbody
+              - index = 1
+              - @backlinks.each do |backlink|
+                %tr
+                  %td #{index}
+                  %td
+                    %a.text-info{ "href": "#{backlink.referring_page}", target: '_blank' }
+                      #{backlink.referring_page}
+                    %p.m-n #{backlink.title}
+                  %td #{backlink.trust_flow}
+                  %td #{backlink.citation_flow}
+                  %td #{backlink.link_type}
+                  %td
+                    %p #{backlink.first_indexed_date}
+                  %td
+                    %p.m-n #{backlink.last_seen_date}
+                - index += 1
+        .ui-2020
+          .row.pagination-wrapper
+            .pagination
+              = will_paginate @backlinks

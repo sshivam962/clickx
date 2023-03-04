@@ -1,0 +1,11 @@
+$('.edit_lead_source').modal('hide')
+$('.modal-backdrop').remove()
+$('#set_email_template').modal('hide')
+$("#lead_source_id").html("<%=escape_javascript options_for_select(@lead_sources.map { |s| [s.name, s.id] })%>");
+<% if @message[0] %>
+  toastr['success']("<%=escape_javascript @message[1] %>");
+  $('#lead_source_<%=@lead_source.id%>').remove()
+  $('.lead_source_list').append("<%= escape_javascript render( partial: 'lead_source',locals: { lead_source: @lead_source})%>")
+<% else %>
+  toastr['error']("<%=escape_javascript @message[1] %>");
+<% end %>

@@ -1,0 +1,27 @@
+.col-md-6.px-3.m-n
+  .input-wrapper.mb-3
+    = f.input_field :first_name, placeholder: 'First name', class: 'input-wrapper-input', required: true
+.col-md-6.px-3.m-n
+  .input-wrapper.mb-3
+    = f.input_field :last_name, placeholder:'Last name', class: 'input-wrapper-input', required: true
+.col-md-6.px-3.m-n
+  .input-wrapper.mb-3
+    = f.input_field :company, placeholder:'Company', class: 'input-wrapper-input'
+.col-md-6.px-3.m-n
+  .input-wrapper.mb-3
+    = f.input_field :title, placeholder:'Title', class: 'input-wrapper-input'
+.col-md-6.px-3.m-n
+  .input-wrapper.mb-3
+    = f.email_field :email, placeholder:'Email', class: 'input-wrapper-input', required: true
+.col-md-6.px-3.m-n
+  .input-wrapper.mb-3
+    = f.input_field :instagram, placeholder:'Instagram', class: 'input-wrapper-input'    
+.col-md-6.px-3.m-n
+  .input-wrapper.mb-3
+    = f.phone_field :phone, placeholder:'Phone', class: 'input-wrapper-input'
+.col-md-6.px-3.m-n
+  .input-wrapper.mb-3
+    = f.input_field :city, placeholder:'City', class: 'input-wrapper-input'    
+.col-md-12.px-3
+  .input-wrapper.mb-0
+    = f.submit 'Save', class: 'btn btn-raised btn-primary'

@@ -1,0 +1,19 @@
+- first_name = @signup_link&.first_name
+- last_name = @signup_link&.last_name
+- company = @signup_link&.company
+
+.d-sm-flex.pb-3
+  .w-sm-50.pr-sm-3.pb-sm-0.pb-3
+    %label.input-label{for: 'user_first_name'} First Name
+    = text_field_tag 'user[first_name]', first_name, required: true, class: 'form-input', readonly: first_name.present?
+  .w-sm-50.pl-sm-3
+    %label.input-label{for: 'user_last_name'} Last Name
+    = text_field_tag 'user[last_name]', last_name, required: true, class: 'form-input', readonly: last_name.present?
+.d-sm-flex.pb-3
+  .w-sm-50.pr-sm-3.pb-sm-0.pb-3
+    %label.input-label{for: 'user_phone'} Phone
+    = phone_field_tag 'user[phone]', '', required: true, class: 'form-input', placeholder: "+1 555 555 1234"
+  .w-sm-50.pl-sm-3
+    %label.input-label{for: "agency_name"} Agency/Organization
+    = text_field_tag 'agency[name]', company,required: true, class: 'form-input', readonly: company.present?
+.pb-5

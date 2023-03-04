@@ -1,0 +1,24 @@
+- content_for :title do
+  Plug And Play Ads | Clickx
+.px-lg-4
+  .page-heading.mb-n.pb-md.mt-sm
+    %h1
+      Plug And Play Ads
+  .container-fluid.pt-lg-5.pt-4
+    .bg-sky-blue.rounded.border-1.border-blue.px-4.px-lg-5.py-lg-4
+      .row.d-flex.flex-wrap
+        - @plug_and_play_ads.each do |plug_and_play_ad|
+          .col-xs-12.col-sm-6.col-lg-4.col-xl-3
+            .awesome-card
+              .awesome-card-inner
+                %a.awesome-card-link{ href: public_plug_and_play_ads_link(current_agency, plug_and_play_ad), target: '_blank' }
+                  .awesome-card-thumbnail
+                    .awesome-card-thumb.awesome-card-thumb--fb{:style => "background-image:url(#{plug_and_play_ad.thumbnail&.file&.url});"}
+                %a.awesome-card-footer{:href => agency_plug_and_play_ad_path(agency_id: current_agency,id: plug_and_play_ad)}
+                  .awesome-card-btn.awesome-card-btn--fb
+                    View
+                    %span
+                      Ad
+              .awesome-card--shadow
+              .awesome-card--shadow.awesome-card--shadow2
+    .p-lg-4.p-3

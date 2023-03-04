@@ -1,0 +1,27 @@
+%tr
+  %td{:align => "left", :style => ""}
+    %b Active Subscriptions
+    %table{align: 'center', border: 0, cellpadding: 5, cellspacing: 0, width: '100%'}
+      %tbody
+        - @active_subs.each do |sub|
+          %tr
+            %td
+              = sub[:email]
+            %td
+              = Time.at(sub[:current_period_end]).strftime('%a, %d %b %Y')
+    %br
+    %br
+
+%tr
+  %td{:align => "left", :style => ""}
+    %b Scheduled to Cancel Subscriptions
+    %table{align: 'center', border: 0, cellpadding: 5, cellspacing: 0, width: '100%'}
+      %tbody
+        - @cancelled_subs.each do |sub|
+          %tr
+            %td
+              = sub[:email]
+            %td
+              = Time.at(sub[:current_period_end]).strftime('%a, %d %b %Y')
+    %br
+    %br

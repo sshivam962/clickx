@@ -1,0 +1,8 @@
+.niche-item{id: "niche-#{industry.id}"}
+  %a.niche-item-inner{href: network_industry_case_study_path(industry_id: industry.id)}
+    .niche-item-icon
+      %i{class: industry.icon_klass}
+    .text-md.m-0.mt-5.mb-5.leading-5.text-gray-700
+      = industry.title
+    %span.niche-item--items= industry.case_studies.select { |network_profile| network_profile.network_profile_id == current_user.network_profile.id }.size
+

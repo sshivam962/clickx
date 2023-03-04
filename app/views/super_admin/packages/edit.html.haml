@@ -1,0 +1,10 @@
+- content_for :title do
+  = "Edit #{@package.name} | Clickx"
+.page-header
+  %h3
+    = @package.name
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: super_admin_packages_path } Back
+.agency-form
+  = form_for @package, url: super_admin_package_path(@package), method: :patch do |f|
+    = render 'form', f: f

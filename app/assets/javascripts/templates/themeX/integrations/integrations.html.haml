@@ -1,0 +1,117 @@
+.page-heading.no-margin-bottom
+  %h1#sticky-offset
+    %i.clickx-icon-page-cog.title-icon>
+    Integrations
+    %small Manage Services
+.container-fluid
+  .row#sticky-parent
+    .col-sm-4#integration-menu
+      .list-group
+        %a.list-group-item.list-group-item-action.p-md{ 'ng-click': 'setFilter("all")', 'ng-class': ' filter["all"] ? "active-list" : "list-styling" ' }
+          All
+          %span.badge.badge-style 5
+        %a.list-group-item.list-group-item-action.p-md{ 'ng-click': 'setFilter("ads")', 'ng-class': ' filter["ads"] ? "active-list" : "list-styling" ' }
+          Ads
+          %span.badge.badge-style 2
+        %a.list-group-item.list-group-item-action.p-md{ 'ng-click': 'setFilter("call")', 'ng-class': ' filter["call"] ? "active-list" : "list-styling" ' }
+          Call Analytics
+          %span.badge.badge-style 1
+        %a.list-group-item.list-group-item-action.p-md{ 'ng-click': 'setFilter("webAnalytics")', 'ng-class': ' filter["webAnalytics"] ? "active-list" : "list-styling" '}
+          Web Analytics
+          %span.badge.badge-style 2
+    .col-sm-8
+      .panel.panel-orange
+        .panel-heading.panel-integrations
+          .col-md-12
+            %h4.pull-left.white.mb-md.mt-md Manage Integrations
+        .panel-body.no-padding
+          .col-md-12.p-n
+            .bs-component
+              .list-group.list-group-spacing
+                .list-group-item{ 'ng-show': 'filter.all || filter.ads' }
+                  %md-list.p-n
+                    %md-list-item.noright.p-n
+                      %img.integration_avatar.mt-md{ 'src': "#{ image_path 'integrations/facebook.png' }" }
+                      .md-list-item-text.ml-md
+                        %h4.list-group-item-heading Facebook Ads
+                        %p.badge{ 'ng-if': 'biz.fb_access_token && details.facebook_account' }
+                          {{ details.facebook_account? details.facebook_account : 'Failed to fetch the info' }}
+                      .md-secondary
+                        %a.btn.btn-raised.btn-success{ 'ng-href': "{{ free_service ? '' : 'auth/facebook?redirect_to=integrations' }}",
+                        'ng-disabled': 'free_service', 'ng-if': '!biz.fb_access_token' } Connect
+                        %a.btn.btn-raised.btn-warning.mt-xs.n{ 'href': '', 'ng-click': 'openFacebookCampaignsModal($event)',
+                        'ng-disabled': 'free_service', 'ng-if': 'biz.fb_access_token' } Manage Campaigns
+                        %a.btn.btn-raised.btn-warning.mt-xs.n{ 'href': '', 'ng-click': 'openFacebookAdsModal($event)',
+                        'ng-disabled': 'free_service', 'ng-if': 'biz.fb_access_token' } Manage
+                  %hr.mg-bt
+
+                .list-group-item{ 'ng-show': 'filter.all || filter.ads' }
+                  %md-list.p-n
+                    %md-list-item.noright.p-n
+                      %img.integration_avatar.mt-md{ 'src': "#{ image_path 'integrations/adwords.png' }" }
+                      .md-list-item-text.ml-md
+                        %h4.list-group-item-heading Google Ads
+                        %p.badge{ 'ng-if': 'biz.google_ads_customer_client_id && !free_service' }
+                          {{ details.google_ads ? details.google_ads : 'Failed to fetch the info' }}
+                      .md-secondary
+                        %a.btn.btn-raised.btn-success.mt-xs.n{ 'ng-href': '/b/google_ads/connect',
+                        'ng-disabled': 'free_service',
+                        'ng-if': '!biz.google_ads_customer_client_id' } Connect
+                      .md-secondary
+                        %a.btn.btn-raised.btn-danger.mt-xs.n{ 'ng-click': "confirmDisconnect('adword')",
+                        'ng-if': 'biz.google_ads_customer_client_id && !free_service' } Disconnect
+                      .md-secondary
+                        %a.btn.btn-raised.btn-warning.mt-xs.n{ 'ng-click': "openCampaignsModal('adword')",
+                        'ng-if': 'biz.google_ads_customer_client_id && !free_service' } Manage
+                  %hr.mg-bt
+
+                .list-group-item{ 'ng-show': 'filter.all || filter.call' }
+                  %md-list.p-n
+                    %md-list-item.noright.p-n
+                      %img.integration_avatar.mt-md{ 'src': "#{ image_path 'integrations/callrail.jpg' }" }
+                      .md-list-item-text.ml-md
+                        %h4.list-group-item-heading CallRail
+                        %p.badge{ 'ng-if': 'biz.callrail_id && biz.callrail_account_id  && !free_service' }
+                          {{ details.callrail_name? details.callrail_name : 'Failed to fetch the info' }}
+                      .md-secondary
+                        %a.btn.btn-raised.btn-success.mt-xs.n{ 'ng-click': "CallRailModal('connect')",
+                        'ng-disabled': 'free_service', 'ng-if': '!biz.callrail_id' } Connect
+                      .md-secondary
+                        %a.btn.btn-raised.btn-danger.mt-xs.n{ 'ng-click': "CallRailModal('disconnect')",
+                        'ng-if': '!free_service && biz.callrail_id && biz.callrail_account_id' } Disconnect
+                      .md-secondary
+                        %a.btn.btn-raised.btn-warning.mt-xs.n{ 'ng-click': "CallRailModal('manage')",
+                        'ng-if': '!free_service && biz.callrail_id' } Manage
+                  %hr.mg-bt
+
+                .list-group-item{ 'ng-show': 'filter.all || filter.webAnalytics' }
+                  %md-list.p-n
+                    %md-list-item.noright.p-n
+                      %img.integration_avatar.mt-md{ 'src': "#{ image_path 'integrations/google_analytics.png' }" }
+                      .md-list-item-text.ml-md
+                        %h4.list-group-item-heading Google Analytics
+                        %p.badge{ 'ng-if': 'biz.google_analytics_id' } {{ biz.google_analytics_id }}
+                      .md-secondary
+                        %a.btn.btn-raised.btn-danger.mt-xs.n{ 'ng-click': "disconnectGoogleAnalytics()",
+                        'ng-if': 'biz.google_analytics_id' } Disconnect
+                      .md-secondary
+                        %a.btn.btn-raised.btn-warning.mt-xs.n{ 'ng-href': "{{ free_service ? '' : '/businesses/'+ current_business+'/google_analytics_settings_change' }}",
+                        'ng-class': "{ 'btn-success': !biz.google_analytics_id, 'btn-warning': biz.google_analytics_id}", 'ng-disabled': 'free_service' }
+                          {{ biz.google_analytics_id ? 'Manage':'Connect' }}
+                  %hr.mg-bt
+
+                .list-group-item{ 'ng-show': 'filter.all || filter.webAnalytics' }
+                  %md-list.p-n
+                    %md-list-item.noright.p-n
+                      %img.integration_avatar.mt-md{ 'src': "#{ image_path 'integrations/search_console.png' }" }
+                      .md-list-item-text.ml-md
+                        %h4.list-group-item-heading Google Search Console
+                        %p.badge{ 'ng-if': 'biz.site_url' } {{ biz.site_url }}
+                      .md-secondary
+                        %a.btn.btn-raised.btn-danger.mt-xs.n{ 'ng-click': "disconnectGoogleSearchConsole()",
+                        'ng-if': 'biz.site_url' } Disconnect
+                      .md-secondary
+                        %a.btn.btn-raised.btn-warning.mt-xs.n{ 'ng-href': "{{ free_service ? '' : '/businesses/'+ current_business+'/google_search_console_settings_change' }}",
+                        'ng-class': "{ 'btn-success': !biz.site_url, 'btn-warning': biz.site_url}", 'ng-disabled': 'free_service' }
+                          {{ biz.site_url ? 'Manage':'Connect' }}
+                  %hr.mg-bt

@@ -1,0 +1,43 @@
+= render 'business/competitions/shared/nav'
+.col-md-12
+  .tab-content
+    .summary
+      %div#competition-tabs
+        .col-md-12
+          %loading
+          .panel.panel-default
+            .panel-body.pt-n
+              - if @competitors_rank.present?
+                .col-sm-12.text-center.p-n
+                  .table-responsive
+                    %table.table.table-hover.table-bordered.table-vam
+                      %thead
+                        %tr
+                          %th
+                            Keyword
+                          %th.text-center
+                            Rank
+                      %tbody
+                        - @competitors_rank.each do |rank|
+                          %tr
+                            %td.text-left
+                              %a.text-info
+                                #{rank.keyword_name}
+                            %td.text-center #{rank.rank }
+                      %tfoot
+                        %tr
+                          %th{colspan:7}
+                            .ui-2020
+                              .row.pagination-wrapper
+                                .pagination
+                                  = will_paginate @competitors_rank
+              - else
+                .panel-heading.bg-white.pt-sm
+                  %h4.text-muted.text-center
+                    Nothing to show, please check back later.
+
+
+:javascript
+  $(document).ready(function() {
+    $("#competitors-rank-tab").addClass('active');
+  });

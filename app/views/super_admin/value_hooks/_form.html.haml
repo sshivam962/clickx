@@ -1,0 +1,41 @@
+%div.col-md-12
+  .row.funnel_page_form
+    .form-group
+      %label{for: "value_hook_page_title"} Title
+      = f.text_field :title, required: true, class: 'form-control login', placeholder: 'Enter Title'
+
+    .form-group
+      %label.font-size18 Thumbnail
+      .input-wrapper
+        = f.fields_for :thumbnail do |t|
+          .preview-thumb-list
+            .preview-thumb-item.cs_image_card
+              .preview-thumb{:style => "background-image: url(#{t.object.file.url})"}
+              .preview-thumb-buttons
+                .preview-thumb-button.preview-thumb-edit
+                  %i.fa.fa-pencil
+                  = t.file_field :file
+    .form-group
+      %label{for: "value_hook_title"} Video embed code
+      = f.text_area :video_embed_code, required: true, class: 'form-control login', placeholder: 'Enter Video embed code'
+    .form-group
+      %label{for: "value_hook_page_title"} Internal Title
+      = f.text_field :internal_title, required: true, class: 'form-control login', placeholder: 'Enter Internal Title'               
+    .form-group
+      = f.submit "Save", class: 'btn btn-warning saveBtn', name: 'Save'
+
+:javascript
+  $(document).ready(()=>{
+  $(document).on('change', '.preview-thumb-edit input[type="file"]', function(){
+  const file = this.files[0];
+  if (file){
+  var it = $(this).parents('.cs_image_card');
+  let reader = new FileReader();
+  reader.onload = function(event){
+    var imageUrl = event.target.result;
+    $(it).find('.preview-thumb').css('background-image', 'url(' + imageUrl + ')');
+  }
+  reader.readAsDataURL(file, it);
+  }
+  });
+  });

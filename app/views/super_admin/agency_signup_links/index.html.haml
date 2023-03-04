@@ -1,0 +1,48 @@
+- content_for :title do
+  Agency Signup Links | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    .col-xs-10.col-sm-10.col-lg-10
+      %h1 Agency Signup Links
+    .col-xs-2.col-sm-2.col-lg-2
+      %a.btn.btn-warning.pull-right.mt-lg.mb-lg{href: calendly_script_super_admin_agency_signup_links_path} Calendly Script
+  .right.class-inline.col-xs-12.col-sm-12.col-lg-12.pr-n
+    %ul.marginleft-58px
+      %li
+        = text_field_tag :search_query, '', class: 'search login width250px select-box form-control mt-md', placeholder: 'Search By Amount, Plan or Name'
+      %li.pull-right
+        = select_tag :status_query, options_for_select(["All", "Paid", "Unpaid", "Expired"], selected: 'All'), include_blank: 'Filter By Status', class: 'search login width250px select-box form-control mt-md'
+#agency_signup_links_container
+  = render 'super_admin/agency_signup_links/shared/list', links: @signup_links
+
+%a.btn.btn--add.pull-right{ 'href': new_super_admin_agency_signup_link_path}
+  %i.glyphicon.glyphicon-plus.glyphplus
+
+:javascript
+  function search(){
+    var query = $('#search_query').val();
+    $.ajax({
+      url: "/s/agency_signup_links",
+      type: 'get',
+      data: { q: query },
+      dataType: 'script',
+      async: false,
+      success:function(response){}
+    })
+  }
+
+  $('#search_query').on("change", function() {
+    search()
+  })
+
+  $('#status_query').on("change", function() {
+    var status = $('#status_query').val();
+    $.ajax({
+        url: "/s/agency_signup_links",
+        type: 'get',
+        data: { status: status },
+        dataType: 'script',
+        async: false,
+        success:function(response){}
+      });
+  });

@@ -1,0 +1,78 @@
+.col-md-8
+  .panel.panel-default
+    .panel-heading
+      %h2 Unique Callers
+      %i.fa.fa-info-circle.tooltip-text-icon{ "data-placement" => "top", "data-toggle" => "tooltip", "title": "This report lets you easily track how many times customers are usually calling your company to get their issues resolved." }
+      .panel-ctrls
+        %button.btn.button-icon.pull-left.mt-sm.refresh-panel{'title': 'Refresh report'}
+          %span.material-icons.inverted refresh
+    .panel-body.no-padding.table-responsive
+      .col-md-12
+        #unique_calls_chart
+        .some{data: {uniqcalls: @uniq_calls_count}}
+
+
+:javascript
+  var uniq_calls_data = #{@uniq_calls_count.to_json.html_safe}
+  var greater_than_five = #{@greater_than_five}
+
+  $('#unique_calls_chart').highcharts(unique_calls_bar_chart_data(uniq_calls_data, greater_than_five));
+
+  function unique_calls_bar_chart_data(unique_calls_data, greater_than_five) {
+    return {
+      chart: {
+        type: 'column',
+        height: 200
+      },
+      exporting: { enabled: false },
+      title: {
+        text: ''
+      },
+      xAxis: {
+        categories: [
+          '1 call',
+          '2 calls',
+          '3 calls',
+          '4 calls',
+          '5 calls',
+          '>5 calls'
+        ],
+        crosshair: true
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: '# of Callers'
+        }
+      },
+      tooltip: {
+        headerFormat:
+          '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat:
+          '<tr><td style="color:{series.color};padding:0">Times Called: </td>' +
+          '<td style="padding:0"><b>{point.y} calls</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+      },
+      plotOptions: {
+        column: {
+          pointPadding: 0.0,
+          borderWidth: 0.0
+        }
+      },
+      series: [
+        {
+          data: [
+            unique_calls_data[1] || 0,
+            unique_calls_data[2] || 0,
+            unique_calls_data[3] || 0,
+            unique_calls_data[4] || 0,
+            unique_calls_data[5] || 0,
+            greater_than_five || 0
+          ]
+        }
+      ],
+      credits: { enabled: false }
+    };
+  };

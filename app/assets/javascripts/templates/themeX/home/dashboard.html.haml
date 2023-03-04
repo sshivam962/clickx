@@ -1,0 +1,105 @@
+.container-fluid
+  %div{'ng-resize':"deviceWidth"}
+    .row
+      .col-md-12
+        %md-button.md-raised.md-default.pull-right.mt-md.mb-xs.pr-md.pl-md{'ng-click': 'load_datewise_analytics($event)'}
+          %i.fa.fa-calendar
+          &nbsp;
+          {{selectedRange.dateStart | date}} - {{selectedRange.dateEnd | date}}
+          &nbsp;
+          %i.fa.fa-caret-down
+        %ul#dashboard{"ng-model":"hubPageOrderlog", 'ui-sortable':"sortableOptions"}
+          %li{'ng-repeat':"pages in hubPageOrderlog", 'ng-show': "{{pages.status}}" , 'ng-class':"deviceWidth < 767? 'fullWidth':'{{pages.classWidth}}'"}
+            %div{'ng-include':"", src: "getNewUrl(pages.title)"}
+%script{type: "text/ng-template", id: "set_goals"}
+  %md-dialog.width50.selectPages{"aria-label" => "Set Goals"}
+    %md-toolbar.darkstone_blue
+      .md-toolbar-tools
+        %h2.white
+          %b Marketing Performance
+        %span{:flex => ""}
+        %md-button.md-icon-button{ "ng-click" => "cancel()" }
+          %md-icon{ "aria-label" => "Close dialog" }
+            %i.material-icons highlight_off
+    %md-dialog-content
+      .md-dialog-content{ "name": "Goals" }
+        %md-input-container.md-block
+          %label Visits per month
+          %input{ :min => "1", :name => "visits", "ng-model" => "visits", :required => "", :step => "any", :type => "number" }
+        %md-input-container.md-block
+          %label Contacts per month
+          %input{ :min => "1", :name => "contacts", "ng-model" => "contacts", :required => "", :step => "any", :type => "number" }
+        %md-input-container.md-block
+          %label Customers per month
+          %input{ :min => "0", :name => "contacts", "ng-model" => "customers", :required => "", :step => "any", :type => "number" }
+        %md-input-container.md-block
+          .col-md-6.bdr-line.p-sm.text-center.bdr-b-red.btn-pointer
+            %h4.mt-n.mb-n.pt-xs
+              %p.mt-n.mb-sm Contacts to Customers
+              %p.lg-count {{ (customers/contacts*100).toFixed(2)+'%' || '-' }}
+          .col-md-6.bdr-line.p-sm.text-center.bdr-b-green.btn-pointer
+            %h4.mt-n.mb-n.pt-xs
+              %p.mt-n.mb-sm Visits to Contacts
+              %p.lg-count {{ (contacts/visits*100).toFixed(2)+'%' || '-' }}
+    %md-dialog-actions{:layout => "row"}
+      %span{:flex => ""}
+      %md-button.md-raised.accent_red.white{ "ng-click": "setMarketingGoals(visits, contacts, customers);" }
+        Set Goal
+      %span{ 'flex': '', 'ng-if': 'goal_present'}
+      %md-button.md-raised.darkstone_blue.white{ "ng-click": "removeGoal();", 'ng-if': 'goal_present' }
+        Remove Goal
+      %span{:flex => ""}
+// @todo Remove this and use the template used on competition page
+%script{type:"text/ng-template",id:'competitionDeleteModalHub.html'}
+  %md-dialog.modal-dialog.modal-lg.clx-modal.modal-darkstone-blue-bg.modal-compressed
+    .modal-header
+      %button.close{"aria-hidden" => "true", "ng-click": "cancelIt()" , type: "button"}
+        %span.fa.fa-times-circle-o
+      %h3.modal-title
+        Confirm Delete Competition
+    %md-dialog-content
+      .modal-dialog-content
+        .container-fluid
+          .form-group
+            %table.table.table-bordered.text-left.reset-table.small-modal-table
+              %tr
+                %td Competitor
+                %td {{displayCurrentComp.name}}
+              %tr
+                %td Trust Flow
+                %td {{displayCurrentComp.summary.TrustFlow}}
+              %tr
+                %td Citation Flow
+                %td {{displayCurrentComp.summary.CitationFlow}}
+              %tr
+                %td Indexed Page
+                %td {{displayCurrentComp.summary.IndexedURLs}}
+              %tr
+                %td Linking Domains
+                %td {{displayCurrentComp.summary.RefDomains}}
+              %tr
+                %td Backlinks
+                %td {{displayCurrentComp.summary.ExtBackLinks}}
+          %div.alert.alert-danger
+            Are you  sure to delete Competition {{displayCurrentComp.name}}.
+    %md-dialog-actions{layout:'row'}
+      .clearfix
+        %button.btn.btn-default.btn-raised{"ng-click"=>"cancelIt()"} Cancel
+        %button.btn.btn-danger.btn-raised{"ng-click"=>"deleteIt()"} Delete
+
+%script{type:"text/ng-template",id:"competitionAddModal.html"}
+  %md-dialog.modal-dialog
+  .modal-header
+    %button.close{"aria-hidden" => "true", "ng-click": "cancelIt()" , type: "button"}
+      %span.fa.fa-times-circle-o
+    %h3.modal-title
+      %span.fa.fa-cloud
+      Competitors
+  %form{id:"add_comp_form",name:"addCompDomain","ng-submit"=>"saveCompetionName()"}
+    .modal-body
+      .form-group
+        %label.control-label{for:"competition-name"} Add competitor
+        %input.form-control#competition-name{name:'competition_name',placeholder:"Enter your competitor's domain name","ng-model"=>"comp_domain","required"=>"required"}
+    .modal-footer
+      %a.btn.btn-sm.btn-default.btn-warning-margin-bottom{"ng-click"=>"go_back()",style:"height:38px"} Cancel
+      %button.btn.btn-warning.btn-sm.btn-warning-margin-bottom{type:"submit"} Add

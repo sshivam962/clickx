@@ -1,0 +1,43 @@
+.panel.panel-default
+  .panel-heading.bg-white.pt-sm
+    %h4.inlineb.f-w-md Top Paid Keywords
+    .panel-ctrls.dropdown
+      = link_to export_keywords_paid_csv_business_client_competitions_path(id: @competition.id), target: "_blank", class: 'Dbutton btn button-icon pull-left mt-sm' do
+        %i.material-icons.text-muted.pr-sm> file_download
+      = link_to paid_keywords_business_client_competition_path(id: @competition.id), target: "_blank", class: 'Dbutton btn button-icon pull-left mt-sm' do
+        %i.material-icons.text-muted.pr-sm> open_in_new
+  %hr.mt-md.mb-md.mr-n.ml-n/
+  .panel-body.pt-n
+    .col-sm-12.text-center.p-n
+      .table-responsive
+        %table.table.table-hover.table-vam
+          %thead
+            %tr
+              %th
+                %u.help_pointer{ "data-placement" => "right", "data-toggle" => "tooltip", :title => "Top keywords on which your competitor is running PPC ads on Google Ads."}
+                  Keyword
+              %th
+                %u.help_pointer{ "data-placement" => "right", "data-toggle" => "tooltip", :title => "Position of PPC ads for the keywords in Google."}
+                  Position
+              %th
+                %u.help_pointer{ "data-placement" => "right", "data-toggle" => "tooltip", :title => "Monthly volume of the PPC keywords which your competitor is targeting .This monthly volume is the average of volume collected from past 12 months."}
+                  Volume
+              %th
+                %u.help_pointer{ "data-placement" => "right", "data-toggle" => "tooltip", :title => "This is the cost your competitor is paying per click on the given keyword\'s PPC ad."} CPC (USD)
+              %th
+                %u.help_pointer{ "data-placement" => "right", "data-toggle" => "tooltip", :title => "Percent of traffic your competitor is getting for the  keyword through PPC ads."}
+                  Traffic
+          %tbody
+            - @keywords_paid.first(10).each do |keyword|
+              %tr
+                %td.text-left
+                  = keyword.name
+                %td.text-left
+                  = keyword.position
+                %td.text-left
+                  = keyword.volume
+                %td.text-left
+                  = keyword.cpc
+                %td.text-center
+                  .progress.progress-striped.active.m-n
+                    .progress-bar.progress-bar-warning{:style => "width: #{number_to_percentage(keyword.traffic.to_i)}" }

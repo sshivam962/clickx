@@ -1,0 +1,203 @@
+.panel.panel-default
+  .panel-heading.pointer{role: "tab", id: "headingTwo"}
+    %h4{class: "panel-title"}
+      %a{role: "button", "data-toggle": "collapse", "data-parent": "#accordion", href: "#collapseTwo", "aria-expanded": "true", "aria-controls": "collapseTwo"}
+        Description
+
+  #collapseTwo{ class: "panel-collapse collapse in", role: "tabpanel", "aria-labelledby": "headingTwo"}
+    .panel-body
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Slogan
+          .col-md-12
+            = f.text_area :slogan, class: "form-control", "data-parsley-trigger": "keyup", "data-parsley-maxlength": "80", "data-parsley-debounce":"500"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Keywords
+          .col-md-12
+            = f.text_area :keywords, class: "form-control", "data-parsley-trigger": "keyup", "data-parsley-maxlength": "255", "data-parsley-debounce":"500"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Short Description ( 140 characters)
+          .col-md-12
+            = f.text_area :short_description, class: "form-control", "data-parsley-trigger": "keyup", "data-parsley-maxlength": "140", "data-parsley-debounce":"500"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Medium Description (150-200 Characters)
+          .col-md-12
+            = f.text_area :medium_description, class: "form-control", "data-parsley-trigger": "keyup", "data-parsley-maxlength": "200", "data-parsley-debounce":"500"
+      .col-md-12
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Full Description (400-500 Characters)
+          .col-md-12
+            = f.text_area :full_description, class: "form-control", "data-parsley-trigger": "keyup", "data-parsley-maxlength": "500", "data-parsley-debounce":"500"
+      #social_links
+        #links_container
+          = f.fields_for :social_links do |sl|
+            .row-m-n
+              .col-md-4
+                .form-group.no-margin-top
+                  %label.col-md-12.control-label Connect With Social Media
+                  .col-md-12
+                    = sl.select :link_type, options_for_select(SOCIAL_LINK_OPTIONS, selected: sl.object.link_type), { include_blank: "Select a type" }, { class: "form-control" }
+              .col-md-8
+                .form-group.no-margin-top
+                  %label.col-md-12.control-label{:for => "fieldurl"} URL
+                  .col-md-10
+                    = sl.text_field :link, class: "form-control", placeholder: "Enter URL"
+                  .col-md-2.deletesocial
+                    %a.btn.btn-xs.btn-danger.btn-raised
+                      %i.material-icons.white delete
+        .col-md-12
+          %a.btn.btn-inverse.btn-raised#social-link
+            %i.icpadd-r10.fa.fa-plus
+            Add Social Link
+
+      #review_links
+        #review_container
+          = f.fields_for :review_links do |rl|
+            .row.m-n
+              .col-md-4
+                .form-group.no-margin-top
+                  %label.col-md-12.control-label Review Link
+                  .col-md-12
+                    = rl.select :link_type, options_for_select(REVIEW_LINK_OPTIONS, selected: rl.object.link_type), { include_blank: "Select a type" }, { class: "form-control" }
+              .col-md-8
+                .form-group.no-margin-top
+                  %label.col-md-12.control-label{:for => "fieldurl"} URL
+                  .col-md-10
+                    = rl.text_field :link, class: "form-control", placeholder: "Enter URL"
+                  .col-md-2.deletereview
+                    %a.btn.btn-xs.btn-danger.btn-raised
+                      %i.material-icons.white delete
+        .col-md-12
+          %a.btn.btn-inverse.btn-raised#review-link
+            %i.icpadd-r10.fa.fa-plus
+            Add Review Link
+
+      .col-md-12.m-t-20
+        %button#save_basic.btn.btn-success.btn-raised.btn-label{ "type": "submit" }
+          = succeed "Save" do
+            .ripple-container
+
+:javascript
+  $(document).ready(function() {
+    const toBeDeleted = [];
+
+    const socialLinkOptions = [
+      'Youtube Channel', 'Facebook', 'Twitter', 'Pinterest',
+      'Google Plus Company Profile', 'Google My Business',
+      'Linkedin Business Page', 'Instagram', 'Houzz', 'Yahoo', 'Yelp'
+    ];
+
+    function generateOptions () {
+      let optionsHTML = ''
+
+      for (option of socialLinkOptions) {
+        optionsHTML+=`<option value="${option}">${option}</option>`;
+      }
+
+      return optionsHTML;
+    }
+
+    function removeSocialFields(e) {
+      e.preventDefault();
+      const parent = $(this).parent().parent().parent();
+      const input = parent.find('input')[0];
+      toBeDeleted.push({ url: input.value })
+      parent.remove();
+    }
+      $('.deletesocial').on("click", removeSocialFields);
+
+      $('#social-link').on("click", function(e){
+        e.preventDefault();
+        const container = document.createElement('div');
+        container.className = 'row m-n';
+        container.innerHTML = (
+          `
+            <div class="col-md-4">
+              <div class="form-group no-margin-top">
+                <label class="col-md-12 control-label">Connect With Social Media </label>
+                <div class="col-md-12">
+                  <select class="form-control" name="location[social_links][][link_type]">
+                    <option value="" disabled selected> Select a type </option>
+                    ${generateOptions()}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="form-group no-margin-top">
+                <label class="col-md-12 control-label" for="fieldurl">URL </label>
+                <div class="col-md-10">
+                  <input id="fieldurl" class="form-control" name="location[social_links][][link]" placeholder="Enter a URL", type="text">
+                </div>
+                <div class="col-md-2 deletesocial">
+                  <a class="btn btn-xs btn-danger btn-raised">
+                    <i class="material-icons white">delete </i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          `)
+
+        container.getElementsByClassName('deletesocial')[0].addEventListener("click", removeSocialFields);
+        $('#links_container').append(container);
+      });
+
+      function removeReviewFields(e) {
+        e.preventDefault();
+        const parent = $(this).parent().parent().parent();
+        const input = parent.find('input')[0];
+        toBeDeleted.push({ url: input.value })
+        parent.remove();
+        $("#review-link").fadeIn();
+        console.log('d');
+      }
+      $('.deletereview').on("click", removeReviewFields);
+
+
+      $('#review-link').on("click", function(e){
+        e.preventDefault();
+
+        const container = document.createElement('div');
+        container.className = 'row m-n';
+        container.innerHTML = (
+          `
+            <div class="col-md-4">
+              <div class="form-group no-margin-top">
+                <label class="col-md-12 control-label">Review Link </label>
+                <div class="col-md-12">
+                  <select class="form-control" name="location[review_links][][link_type]">
+                    <option value="" disabled selected> Select a type </option>
+                    <option value="Google">Google </option>
+                    <option value="Yelp">Yelp </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="form-group no-margin-top">
+                <label class="col-md-12 control-label" for="fieldurl">URL </label>
+                <div class="col-md-10">
+                  <input id="fieldurl" class="form-control" name="location[review_links][][link]" placeholder="Enter a URL", type="text">
+                </div>
+                <div class="col-md-2 deletereview">
+                  <a class="btn btn-xs btn-danger btn-raised">
+                    <i class="material-icons white">delete </i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          `)
+
+        container.getElementsByClassName('deletereview')[0].addEventListener("click", removeReviewFields);
+        $('#review_container').append(container);
+
+        if ($("#review_container").children().length >= 2) {
+          $("#review-link").fadeOut()
+        } else {
+          $("#review-link").fadeIn()
+        }
+      });
+  })

@@ -1,0 +1,46 @@
+.page-heading.no-margin-bottom
+  %h1
+    Add New Client
+.container-fluid
+  .panel.panel-default
+    .panel-body
+      = form_for @client, url: agency_clients_path, method: :post, class: ' form-vertical cardy clickx-parsley', "data-parsley-validate": '' do |f|
+        .col-md-12
+          .row
+            .form-group.mt-md
+              .col-md-3
+                %label.control-label Company Name
+              .col-md-4
+                = f.text_field :name, class: 'form-control', required: true
+          .row
+            .form-group.mt-md
+              .col-md-3
+                %label.control-label Domain Name(eg: example.com)
+              .col-md-4
+                - if f.object.domain.present?
+                  = f.text_field :domain, class: 'form-control', required: true, disabled: true
+                - else
+                  = f.text_field :domain, class: 'form-control', required: true
+          .row
+            .form-group.mt-md
+              .col-md-3
+                %label.control-label Country
+              .col-md-4
+                = f.select :locale, LOCALE_CODES.map{|l| [l['country'], l['locale']]}, {}, required: true, class: 'form-control'
+          .row
+            .form-group.mt-md
+              .col-md-3
+                %label.control-label Target City(eg: Chicago)
+              .col-md-4
+                = f.text_field :target_city, class: 'form-control', required: true
+          .row
+            .form-group
+              .col-md-offset-8.col-md-4
+                %button.btn.btn-raised.pull-right.generate_tracker_code{ type: 'submit', "data-toggle": "collapse", "data-target": "#review-keywords"}
+                  Create Client
+
+:javascript
+  $("#business_locale").change(function() {
+    city = $("#business_locale option:selected").text().split('-')[0].trim() || 'United States';
+    $('#business_target_city').val(city)
+  })

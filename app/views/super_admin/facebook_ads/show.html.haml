@@ -1,0 +1,26 @@
+= stylesheet_link_tag 'public/public_pages', media: 'all', 'data-turbolinks-track': false
+%link{href: 'https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css', rel: 'stylesheet'}
+.page-header
+  %h3
+    Facebook Ads
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: super_admin_facebook_ads_path } Back
+.content-container.text-center
+  .bg-white.rounded.shadow.p-4.my-5
+    - @facebook_ad.images.where(heading: true).each do |image|
+      %div.slide-item
+        %img.img-responsive.m-md-auto{alt: '', src: image.file.url}
+ 
+.content-container.text-center
+  .bg-sky-blue.border-1.border-blue.rounded.shadow.p-4.my-5
+    .slider-wrapper
+      .images-slider
+        - @facebook_ad.images.where(heading: false).each do |image|
+          %div.slide-item
+            %img.img-responsive.m-md-auto{alt: '', src: image.file.url}
+
+%script{src: 'https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js'}
+%script{type:'text/javascript'}
+  $(document).ready(function(){
+  $('.images-slider').bxSlider();
+  });

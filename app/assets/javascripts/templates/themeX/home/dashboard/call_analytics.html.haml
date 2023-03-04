@@ -1,0 +1,23 @@
+.panel.panel-default.m-n#call-analytics{ 'ng-if': 'marketing_performance_loaded && callAnalyticsStatus' }
+  .panel-heading.cursor-move
+    %h2
+      %a.l-grey{ 'href': '#/calls' }
+        Call Analytics
+        %i.fa.fa-info-circle.tooltip-text-icon{ 'title': 'Graph denoting the nature of phone calls made your company. For more information go to call analytics in the "Analytics" section.' }
+    #onboarding-call-analytics.on-boarding
+    .panel-ctrls
+      %button.Dbutton.btn.button-icon.pull-left.mt-sm{ 'ng-click': 'pdf_export("call-analytics")', 'title': 'Download report', 'ng-class': "{'disable-button': export_disabled}" }
+        %span.material-icons.inverted file_download
+      %button.btn.button-icon.mt-sm.refresh-panel{ 'ng-click': 'init_call_analytics_page()', 'title': 'Refresh report' }
+        %span.material-icons.inverted refresh
+  .panel-body.no-padding.scroll-pane{style: 'height: 420px;'}
+    .scroll-content.p-n
+      .col-sm-12.p-n
+        .panel-body.pt-sm
+          %md-tabs{'md-border-bottom':'', 'md-dynamic-height':''}
+            %md-tab.active{label: 'Calls By Status', index:'0', 'md-on-select':'resizeChart("calls_by_status_chart");'}
+              %md-content.mt
+                %draw-chart#calls_by_status_chart{ 'on-click-chart': '', 'on-load-chart': '', 'config': 'pie_chart_data' }
+            %md-tab{label: 'Unique Callers', index:'1', 'md-on-select':'resizeChart("unique_calls_chart");'}
+              %md-content.mt
+                %draw-chart#unique_calls_chart{ 'on-click-chart': '', 'on-load-chart': '', 'config': 'unique_calls_bar_chart_data' }

@@ -1,0 +1,36 @@
+.col-auto
+  .d-flex.fs-sm.fw-n.align-items-center
+    .d-inline-block Mark Up 
+    .col.pl-3
+      = number_field_tag(:percentage_field, "50", class: 'percentage_class pl-3 rounded-8 border-1', currency: current_agency.display_currency, style: "width: 54px;");
+    .col.pl-3 %
+      
+:javascript
+  $(document).on('keyup change', '.percentage_class',function() {
+    var percent_val = $(this).val();
+    
+    var currency = $(this).attr('currency');
+    
+    $(".hidden_plan_amount").each(function() {
+      var amount = $(this).val();
+      var id_to_class = $(this).attr('id');
+      var calc_price = parseFloat(amount) + parseFloat(amount * percent_val/100);
+      var price = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: currency,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      });
+      amount_with_currency = price.format(calc_price); 
+      $(".msrp_"+id_to_class).html('MSRP: '+amount_with_currency);
+    });
+    
+  });
+:css
+  input[type=number].percentage_class::-webkit-inner-spin-button,
+  input[type=number].percentage_class::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0;
+  }

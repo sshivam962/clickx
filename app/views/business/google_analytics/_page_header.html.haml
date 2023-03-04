@@ -1,0 +1,12 @@
+.ui-2020
+  .pb-md.page-heading.no-margin-bottom
+    %h1
+      %i.clickx-icon-LinkBuilding.title-icon
+      Web Analytics
+      %i.fa.fa-info-circle.tooltip-text-icon{'title': 'This tool displays the analytics of the traffic on your site as per Google Analytics.', "data-toggle" => "tooltip", "data-placement" => "top"}
+    .options
+      .form-group
+        -# %span{'ng-class': "{'disable-button': export_disabled}"}
+        -#   %export-template{ 'pdf': 'true' }
+        %md-button.md-raised.md-primary
+          = text_field_tag :date_filter, daterange, class: 'btn btn--dark'

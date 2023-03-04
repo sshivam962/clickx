@@ -1,0 +1,273 @@
+/ Start Intro
+%div{"mc:repeatable" => "Select", "mc:variant" => "Intro", :style => "padding-bottom: 50px;"}
+  %table{:bgcolor => "#F8B018", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+    %tr
+      %td.p30-15{:style => "padding: 25px 30px 25px 30px;"}
+        %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+          %tr
+            %td.h2.center.pb10{:style => "color:#ffffff; font-size:34px; font-weight: 600; line-height:60px; text-align:center; padding-bottom:10px;"}
+              %div{"mc:edit" => "text_2"}
+                Your weekly stats for #{@business.name}
+          %tr
+            %td.h5.center.blue.pb30{:style => "font-size:20px; line-height:26px; text-align:center; color:#fff;"}
+              - date = Time.current
+              %span
+                = date.strftime("%B #{date.day.ordinalize}, %Y")
+/ END Intro
+/ Start Table Body
+%table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+  / END Table Body
+/ Start Analytics
+- if @google_data.present?
+  %div{:bgcolor => "#ffffff", "mc:repeatable" => "Select", "mc:variant" => "Intro"}
+    %table{:bgcolor => "", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+      %tr
+        %td{:style => "color: #646464; font-size: 18px; line-height: 18px; padding: 0 10px 50px 10px;"}
+          %table{:bgcolor => "#fff", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+            %tr
+              %th.column-top{:style => "font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; vertical-align:top;", :width => "280"}
+                %table{:style => " border-collapse: collapse;"}
+                  %tbody
+                    %td{:style => "color: #646464; font-size: 18px;  line-height: 18px; padding: 0 10px 0px 10px;"}
+                      %img{:align => "left", :alt => "Analytics", :height => "auto", :src => "https://s3.amazonaws.com/clickx-images/ic-analytics.png", :style => "margin-top: 10px;", :width => "40"}/
+                      %h2{:style => "color: #646464; text-align: left; padding: 0 0 0 60px;"} Analytics
+                %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :height => "200px", :width => "100%"}
+                  %th
+                    %table{:style => "border: 1px solid #dddddd; border-collapse: collapse; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;", :width => "100%"}
+                      %tr{:bgcolor => "#fff"}
+                        %td.mob-title{:style => "font-size: 15px; padding: 28px;"} Traffic Summary
+                      %tr{:bgcolor => "#fff"}
+                        %td
+                          %table{:style => "width: 100%; font-size: 15px; line-height: 13px; background-color: #fff;"}
+                            %tbody.mob-txt
+                              %tr
+                                %td{:style => "width: 50%; text-align: left; padding: 12px; "}
+                                  Sessions
+                                %td{:style => "width: 50%; text-align: right; padding: 12px; "}
+                                  = number_with_delimiter((@google_data[:totals]['sessions']).to_i) || 0
+                              %tr
+                                %td{:style => "width: 50%; text-align: left; padding: 12px; "}
+                                  Users
+                                %td{:style => "width: 50%; text-align: right; padding: 12px; "}
+                                  = number_with_delimiter((@google_data[:totals]['totalUsers']).to_i) || 0
+                              %tr
+                                %td{:style => "width: 50%; text-align: left; padding: 12px;"}
+                                  Pageviews
+                                %td{:style => "width: 50%; text-align: right; padding: 12px;"}
+                                  = number_with_delimiter((@google_data[:totals]['screenPageViews']).to_i) || 0
+              %th.column-empty2{:style => "font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal;", :width => "30"}
+              %th.column-top{:style => "font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; vertical-align:bottom;", :width => "280"}
+                %table{:style => "border-collapse: collapse; float: right;"}
+                  %tbody
+                    %td{:style => "color: #646464; font-size: 18px;  line-height: 18px; padding: 0 10px 0px 10px;"}
+                      %h2{:style => "color: #646464; padding: 0 0 0 60px; font-size: 18px; font-weight: 400;"} for Last 30 days
+                %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :height => "200px", :width => "100%"}
+                  %th
+                    %table{:style => "border: 1px solid #dddddd; border-collapse: collapse; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;", :width => "100%"}
+                      %tr{:bgcolor => "#fff"}
+                        %td.mob-title{:style => "font-size: 15px; padding: 20px;"} Traffic Summary
+                      %tr{:bgcolor => "#fff"}
+                        %td
+                          %table{:style => "width: 100%; font-size: 15px; line-height: 13px;"}
+                            %tbody
+                              %tr
+                                - if @chart_url
+                                  %td{:style => "width: 50%; text-align: left; padding: 12px; "}
+                                    %center
+                                      %img.summary-img{:alt => "pie", :height => "auto", src: @chart_url, :width => "100%"}
+                                %td{:style => "width: 50%; text-align: right; padding: 12px;"}
+                                  %table
+                                    - total = @google_data[:visit_stats].values.sum
+                                    - total = 1 if total.zero?
+                                    %tbody.mob-txt
+                                      - @google_data[:visit_stats].each do |status, count|
+                                        %tr
+                                          - status = ['referral'].include?(status) ? 'referral' : status
+                                          %td{:style => "width: 25%; padding: 0px 3px 0px 10px; "}
+                                            #{status.to_s.singularize.titleize}
+                                          %td{:style => "width: 5%; padding: 0px 10px; "}
+                                            \:
+                                          %td{:style => "width: 50%; padding: 0px 3px; "}
+                                            #{((count*100.0)/total).round(1)}%
+/ END Analytics
+
+/ START Top Google Gains
+- if @business.seo_service && @top_10_keywords.present?
+  %div{"mc:repeatable" => "Select", "mc:variant" => "Intro"}
+    %table{:bgcolor => "#ffffff", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+      %tr
+        %td{:style => "color: #646464; font-size: 18px;  line-height: 18px; padding: 50px 10px 10px 10px;"}
+          %img{:align => "left", :alt => "Google", :height => "auto", :src => "https://s3.amazonaws.com/clickx-images/ic-seorep.png", :style => "margin-top: 10px;", :width => "40"}/
+          %h2{:style => "color: #646464; padding: 0 0 0 60px;"} Top Google Gains
+      %td{:style => "color: #646464; font-size: 15px; line-height: 28px; font-weight: normal; padding: 0 10px 50px 10px;"}
+        %table.mob-txt{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+          %tbody{:style => "border: 1px solid #dddddd; border-collapse: collapse; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;"}
+            %tr{:bgcolor => "#fff"}
+              - if !@system_keyword
+                %td{:style => "font-weight: bold;  margin:0; padding:15px; border: 1px solid #dddddd;"}
+                  Gain
+              %td{:style => "font-weight: bold;  margin:0; padding:15px; border: 1px solid #dddddd;"}
+                Keyword
+              %td{:style => "font-weight: bold; text-align:center;  margin:0; padding:15px; border: 1px solid #dddddd;"}
+                Rank
+              %td{:style => "font-weight: bold;  margin:0; padding:15px; border: 1px solid #dddddd;"}
+                URL
+            - @top_10_keywords.each_with_index do |keyword, index|
+              - if @business.semrush_project_id.present?
+                %tr{:bgcolor => "#{index.odd? ? '#FFF' : ''}"}
+                  - if !@system_keyword
+                    %td.mob-txt{:style => "font-size: 15px;  line-height:18px; margin:0;padding:15px; border: 1px solid #dddddd;"}
+                      %span{:style => "font-size: 16px;"}>
+                        - if keyword.last_day_google_change.try(:to_i) >= 0
+                          ▴
+                        - else
+                          ▾
+                      = keyword.last_day_google_change
+                  %td.mob-txt{:style => "font-size: 15px;  line-height:18px; margin:0;padding:15px; border: 1px solid #dddddd;"}
+                    = keyword.name
+                  %td.mob-txt{:style => "font-size: 15px;  text-align: center; line-height:18px; margin:0;padding:15px; border: 1px solid #dddddd;"}
+                    = keyword.rank
+                  %td.mob-txt{:style => "font-size: 15px;  line-height:18px; margin:0;padding:15px; border: 1px solid #dddddd;"}
+                    %a{:href => "#{keyword.url}", :style => "color:#4f88bf; margin:0;padding:0", :target => "_blank"}
+                      = keyword.url
+              - else
+                %tr{:bgcolor => "#{index.odd? ? '#FFF' : ''}"}
+                  - if !@system_keyword
+                    %td.mob-txt{:style => "font-size: 15px;  line-height:18px; margin:0;padding:15px; border: 1px solid #dddddd;"}
+                      %span{:style => "font-size: 16px;"}>
+                        - if keyword['googlerankingchange'].try(:to_i) >= 0
+                          ▴
+                        - else
+                          ▾
+                      = keyword['googlerankingchange']
+                  %td.mob-txt{:style => "font-size: 15px;  line-height:18px; margin:0;padding:15px; border: 1px solid #dddddd;"}
+                    = keyword['name']
+                  %td.mob-txt{:style => "font-size: 15px;  text-align: center; line-height:18px; margin:0;padding:15px; border: 1px solid #dddddd;"}
+                    = keyword['googleranking']
+                  %td.mob-txt{:style => "font-size: 15px;  line-height:18px; margin:0;padding:15px; border: 1px solid #dddddd;"}
+                    %a{:href => "#{keyword['googlerankingurl']}", :style => "color:#4f88bf; margin:0;padding:0", :target => "_blank"}
+                      = keyword['googlerankingurl']
+/ END Top Google Gains
+/ START Google Ads
+- if @business.google_ads_service? && @top_10_google_ads_keywords.present?
+  %div{"mc:repeatable" => "Select", "mc:variant" => "Intro"}
+    %table{:bgcolor => "#ffffff", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+      %tr
+        %td{:style => "color: #646464; font-size: 18px;  line-height: 18px; padding: 50px 10px 0px 10px;"}
+          %img{:align => "left", :alt => "Google Ads", :height => "auto", :src => "https://s3.amazonaws.com/clickx-images/ppc.png", :style => "margin-top: 10px;", :width => "40"}/
+          %h2{:style => "color: #646464; padding: 0 0 0 60px;"} Google Ads
+      %td{:style => "color: #646464; font-size: 15px; line-height: 28px; font-weight: normal; padding: 0 10px 50px 10px;"}
+        %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+          %tbody{:style => "box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;"}
+            %tr{:bgcolor => "#fFF"}
+              %td{:style => "font-weight: normal; line-height:18 px;margin:0; padding: 15px; border: 1px solid #dddddd;"}
+                Keywords
+              %td{:style => "font-weight: normal; line-height:18px; margin:0; padding: 15px; text-align: center; border: 1px solid #dddddd;"}
+                Match Type
+              %td{:style => "font-weight: normal; line-height:18px; margin:0; padding: 15px;width:10%;border: 1px solid #dddddd;"}
+                Impressions
+              %td{:style => "font-weight: normal; line-height:18px; margin:0; padding: 15px;width:10%;border: 1px solid #dddddd;"}
+                Interactions
+              %td{:style => "font-weight: normal; line-height:18px; margin:0; padding: 15px;width:10%;border: 1px solid #dddddd;"}
+                Search Imp.Share
+            - @top_10_google_ads_keywords.each_with_index do |keyword, index|
+              %tr{:bgcolor => "#{index.odd? ? '#FFF' : ''}"}
+                %td.mob-txt{:style => "padding-left: 5px;border: 1px solid #dddddd;border: 1px solid #dddddd;"}
+                  %a{:style => " color:#4f88bf; margin:0;padding:15px;", :target => "_blank"}= keyword[:keyword]
+                %td.mob-txt{:style => "line-height:13px; margin:0; padding: 15px; text-align: center; width:12%;border: 1px solid #dddddd;"}
+                  = keyword[:match_type]
+                %td.mob-txt{:style => "line-height:13px; margin:0; padding: 15px; text-align: center;width:12%;border: 1px solid #dddddd;"}
+                  = keyword[:impressions]
+                %td.mob-txt{:style => "line-height:13px; margin:0; padding: 15px; text-align: center;width:12%;border: 1px solid #dddddd;"}
+                  = keyword[:interactions]
+                %td.mob-txt{:align => "center", :style => "line-height:13px; margin:0; padding: 15px; text-align: center;width:13%;border: 1px solid #dddddd;"}
+                  = keyword[:search_impression_share].round(2)
+/ END Google Ads
+
+/ START Facebook Ads
+- if @fb_campaigns.present?
+  %div{"mc:repeatable" => "Select", "mc:variant" => "Intro"}
+    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+      %tr
+        %td{:style => "color: #646464; font-size: 18px;  line-height: 18px; padding: 50px 10px 10px 10px;"}
+          %img{:align => "left", :alt => "FB Ads", :height => "auto", :src => "https://clickx-images.s3.amazonaws.com/ic-socialmedia.png", :style => "margin-top: 10px;", :width => "50"}/
+          %h2{:style => "color: #646464; padding: 0 0 0 60px;"} Facebook Ads
+      %tr
+        %td{:style => "color: #646464; font-size: 18px; line-height: 18px; padding: 0 10px 50px 10px;"}
+          %table{:bgcolor => "#fff", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+            %tr
+              %th.column-top{:style => "font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; vertical-align:top;", :width => "280"}
+                %table{:bgcolor => "#fff", :style => "width: 100%; height:169px; border: 1px solid #dddddd; border-collapse: collapse; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"}
+                  %tbody{:style => "border: 1px solid #dddddd; border-collapse: collapse; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;"}
+                    %tr{:bgcolor => "#fff"}
+                      %td
+                        %table.mob-txt{:style => "width: 100%; font-size: 15px; line-height: 13px;"}
+                          %tbody
+                            %tr
+                              %td{:style => "width: 50%; text-align: left; padding:15px;  border-bottom: 1px solid #dddddd;"}
+                                Impressions
+                              %td{:style => "width: 50%; text-align: right; padding:15px;  border-bottom: 1px solid #dddddd;"}
+                                = number_with_delimiter(@fb_campaigns[:total_impressions], delimiter: ',')
+                            %tr
+                              %td{:style => "width: 50%; text-align: left; padding:15px;  border-bottom: 1px solid #dddddd;"}
+                                Total Clicks
+                              %td{:style => "width: 50%; text-align: right; padding:15px;  border-bottom: 1px solid #dddddd;"}
+                                = number_with_delimiter(@fb_campaigns[:total_clicks], delimiter: ',')
+                            %tr
+                              %td{:style => "width: 50%; text-align: left; padding:15px;  border-bottom: 1px solid #dddddd;"}
+                                Link Clicks
+                              %td{:style => "width: 50%; text-align: right; padding:15px;  border-bottom: 1px solid #dddddd;"}
+                                = number_with_delimiter(@fb_campaigns[:total_inline_link_clicks], delimiter: ',')
+                            %tr
+                              %td{:style => "width: 50%; text-align: left; padding:15px; "}
+                                Frequency
+                              %td{:style => "width: 50%; text-align: right; padding:15px; "}
+                                = @fb_campaigns[:total_frequency].round(2)
+              %th.column-empty2{:style => "font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal;", :width => "30"}
+              %th.column-top{:style => "font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; vertical-align:top;", :width => "280"}
+                %table{:bgcolor => "#fff", :style => "width: 100%; height:169px; border: 1px solid #dddddd; border-collapse: collapse; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"}
+                  %tbody{:style => "border: 1px solid #dddddd; border-collapse: collapse; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;"}
+                    %tr{:bgcolor => "#fff"}
+                      %td
+                        %table.mob-txt{:style => "width: 100%; font-size: 15px; line-height: 13px;"}
+                          %tbody
+                            %tr
+                              %td{:style => "width: 50%; text-align: left; padding:15px;  border-bottom: 1px solid #dddddd;"}
+                                CPC
+                              %td{:style => "width: 50%; text-align: right; padding:15px;  border-bottom: 1px solid #dddddd;"}
+                                = "$#{@fb_campaigns[:total_cpc].round(2)}"
+                            %tr
+                              %td{:style => "width: 50%; text-align: left; padding:15px;  border-bottom: 1px solid #dddddd;"}
+                                Total Reach
+                              %td{:style => "width: 50%; text-align: right; padding:15px;  border-bottom: 1px solid #dddddd;"}
+                                = number_with_delimiter(@fb_campaigns[:total_reach], delimiter: ',')
+                            %tr
+                              %td{:style => "width: 50%; text-align: left; padding:15px;  border-bottom: 1px solid #dddddd;"}
+                                CTR
+                              %td{:style => "width: 50%; text-align: right; padding:15px;  border-bottom: 1px solid #dddddd;"}
+                                = "#{@fb_campaigns[:total_ctr].round(2)}%"
+                            %tr
+                              %td{:style => "width: 50%; text-align: left; padding:15px; "}
+                                Total Spend
+                              %td{:style => "width: 50%; text-align: right; padding:15px; "}
+                                = "$#{number_with_delimiter(@fb_campaigns[:total_spend].round(2), delimiter: ',')}"
+/ END Facebook Ads
+/ CTA
+%div{"mc:repeatable" => "Select", "mc:variant" => "CTA"}
+  %table{:bgcolor => "#fff", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+    %tr
+      %td.p15{:style => "padding: 30px;"}
+        %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+          %tr
+            %td.box{:style => "padding:40px 30px; border:1px solid #ffffff;"}
+              %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+                / Button
+                %tr{"mc:hideable" => ""}
+                  %td{:align => "center"}
+                    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "75%"}
+                      %tr
+                        %td.text-button.mob-txt{:bgcolor => "#32AAEB", :style => "font-size:18px; line-height:18px; text-align:center; padding:12px; "}
+                          %a{:href => "http://#{ENV['BASE_URL']}", :target => "_blank"}
+                            %span{:style => "color: #fff;"} Go to my Dashboard
+                / END Button
+/ END CTA

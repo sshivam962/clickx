@@ -1,0 +1,12 @@
+- group_by_challenge = @course.chapters.group_by{ |c| c.course_challenge_id if c.course_challenge_id }
+- challenge_list = @headers_positions.keys.sort
+- challenge_list.each do |challenge_course|
+  %br
+  %span.author.filtered
+    = @headers_positions[challenge_course]
+  - @course_chapters = group_by_challenge[challenge_course] || []
+  %ul.list-group.scale-courses-list.sort-chapter-challenge-list
+    = render 'challenge_chapter_items' 
+ 
+- @course_chapters = group_by_challenge[nil] || []
+= render 'challenge_chapter_items'  

@@ -1,0 +1,29 @@
+.col-md-12{ 'ng-repeat': 'error in description.data'}
+  %label.text-dark.m-n{ 'ng-if': "error.issue_type == 'description_title_presence'" }
+    %i.fa.fa-close.text-danger{ 'ng-if': "error.status == 'error'",'title': 'Need to fix' }
+    %i.fa.fa-check.text-success{ 'ng-if': "error.status == 'passed'",'title': 'Passed' }
+    %i.fa.fa-exclamation.text-warning{ 'ng-if': "error.status == 'warning'",'title': 'Needs improvement' }
+    {{error.status == 'passed'? error.passed_title: error.error_title}}
+    %p.ml-md.text-muted.text-italic.pl-md.mt-n{ 'ng-if': 'error.passed_description || error.error_description'}
+      {{error.status == 'passed'? error.passed_description: error.error_description}}
+  .col-md-12.p-n.text-dark{ 'ng-repeat': '(key,value) in error' }
+    .col-md-12.inline-flex.pl-n{ 'ng-if': "!checkKeys(key, 'excludeKeys')", 'ng-init': 'limit = 5' }
+      .div.pr-sm
+        %i.fa.fa-close.text-danger{ 'ng-if': "error.status == 'error'", 'title': 'Need to fix' }
+        %i.fa.fa-check.text-success{ 'ng-if': "error.status == 'passed'", 'title': 'Passed' }
+        %i.fa.fa-exclamation.text-warning.pr-sm{ 'ng-if': "error.status == 'warning'",'title': 'Needs improvement' }
+      .div.max-content-width
+        %p.max-content-width
+          {{error.status == 'passed'? error.passed_title  : error.error_title }}
+      .div.text-muted.text-italic{ 'ng-if': "!(key == 'keywords' || key == 'description_duplicates_url')" }
+        %p{ 'ng-class': "{'destination': key == 'description'}" } {{value? ': '+value : value}}
+      .div.text-muted.text-italic{ 'ng-if': "(key == 'keywords' || key == 'description_duplicates_url')" }
+        %p.source{ 'ng-if': "key == 'keywords'", 'ng-repeat': 'link in value track by $index' } : {{link}}
+        %p{ 'ng-if': "key == 'description_duplicates_url'", 'ng-repeat': 'link in value | limitTo: limit' }
+          %a.info{ 'ng-href': '{{link}}', 'target': '_blank' } : {{link}}
+        %a.text-italic.text-success{ 'ng-show': 'value.length > 5',
+        'ng-click': '(limit == value.length? limit = 5 : limit = value.length)'}
+          {{limit == 5? 'Show more >>>' : 'Less <<<'}}
+    .div{ 'ng-if': "!checkKeys(key, 'excludeKeys')" }
+      %p.ml-md.text-muted.text-italic.pt-sm.pl-md.mb-n{ 'ng-if': "error.status == 'error'"}
+        {{error.error_description}}

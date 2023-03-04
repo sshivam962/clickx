@@ -1,0 +1,14 @@
+%tbody#payment_links_list
+  %tr.centered-cols.row-header.text-black.d-none.d-xl-table-row
+    %th{width: '25%'} Prepared For
+    %th{width: '25%'} Description
+    %th{width: '15%'} Price
+    %th{width: '15%'} Implementation Fee
+    %th.text-xl-right Actions
+  - payment_links.each do |payment_link|
+    - plan = payment_link.plan
+    - next unless plan
+    %tr.centered-cols.row-card{id: dom_id(payment_link)}
+      = render 'agency/payment_links/shared/payment_link', payment_link: payment_link, plan: plan
+    %tr.row-spacer{id: "row_spacer_#{payment_link.id}"}
+      %td{colspan: 7}

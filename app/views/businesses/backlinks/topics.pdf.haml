@@ -1,0 +1,27 @@
+%html
+  %head
+    %h1 Topics
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+  %body
+    %table-responsive
+      %table.table.table-bordered.table-vam.table-left
+        %thead
+          %th TRUST FLOW
+          %th TOPIC
+          %th EXTERNAL BACKLINKS
+          %th LINKED FROM REFERRING DOMAINS
+          %th REFERRING DOMAINS
+        %tbody
+          - @topics.each do |topic|
+            %tr
+              %td
+                = topic.topical_trust_flow
+              %td
+                = topic.topic
+              %td
+                = topic.links
+              %td
+                = topic.links_from_ref_domains
+              %td
+                = topic.ref_domains
+

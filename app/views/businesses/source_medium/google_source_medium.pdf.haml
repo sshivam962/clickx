@@ -1,0 +1,39 @@
+%html
+  %head
+    %h1 Source Medium
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+    %body
+      %table-responsive
+        %table.table.table-bordered.table-vam.table-left
+          %thead
+            %th Source Medium
+            %th Sessions
+            %th New Sessions
+            %th New Users
+            %th Bounce Rate
+            %th Pages/Session
+            %th Avg.Session Duration
+            %th Goal Conversion
+            %th Goal Completions
+          %tbody
+            - if @data.dig('table_data')
+              - @data.dig('table_data').each do |goal|
+                %tr
+                  %td.align-center
+                    = goal[:name]
+                  %td.align-center
+                    = goal[:sessions]
+                  %td.align-center
+                    = goal[:new_sessions]
+                  %td.align-center
+                    = goal[:new_users]
+                  %td.align-center
+                    = goal[:bounce_rate]
+                  %td.align-center
+                    = goal[:page_per_session]
+                  %td.align-center
+                    = goal[:avg_session]
+                  %td.align-center
+                    = goal[:goal_conversion]
+                  %td.align-center
+                    = goal[:goal_completion]

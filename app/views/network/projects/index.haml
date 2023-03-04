@@ -1,0 +1,40 @@
+= content_for :title, 'My Projects | Clickx'
+.py-8
+  .lg:container.mx-auto.px-4
+    .border.bg-light-blue.border-blue-200.rounded-md.mb-2
+      .bg-white.py-4.px-5.rounded-t-md.text-xl.font-medium Projects
+      .px-5.py-4
+        %table.data-table.w-full.text-left.text-sm.text-gray-500
+          %thead
+            %tr.text-gray-800
+              %th.pb-3.font-normal Name
+              %th.pb-3.font-normal Project
+              %th.pb-3.font-normal Company
+              %th.pb-3.font-normal
+          %tbody
+            %tr.row-card.shadow.rounded-xl
+              %td.pl-3.py-3.bg-white.rounded-xl{colspan: 4}
+                No Projects Yet
+              / %td.pl-3.py-3.bg-white.rounded-l-xl
+              /   .flex.items-center.text-gray-800
+              /     .col-auto.pr-3
+              /       .bg-cover.bg-gray-300.w-12.h-12.rounded-full.text-center.leading-10.p-1 SA
+              /     .flex-1
+              /       .font-medium Sebastian Astone
+              / %td.py-3.px-2.bg-white Magento 2.0 Plugin
+              / %td.py-3.px-2.bg-white Facebook
+              / %td.py-3.pl-2.pr-5.bg-white.rounded-r-xl.text-right
+              /   .stat-badge.inline-block.px-5.py-1.leading-6.text-white.rounded-lg.bg-green Active
+            / %tr.spacer-row
+            /   %td.p-2{colspan:4}
+            / %tr.row-card.shadow.rounded-xl
+            /   %td.pl-3.py-3.bg-white.rounded-l-xl
+            /     .flex.items-center.text-gray-800
+            /       .col-auto.pr-3
+            /         .bg-cover.bg-gray-300.w-12.h-12.rounded-full.text-center.leading-10.p-1 SA
+            /       .flex-1
+            /         .font-medium Sebastian Astone
+            /   %td.py-3.px-2.bg-white Magento 2.0 Plugin
+            /   %td.py-3.px-2.bg-white Facebook
+            /   %td.py-3.pl-2.pr-5.bg-white.rounded-r-xl.text-right
+            /     .stat-badge.inline-block.px-5.py-1.leading-6.text-white.rounded-lg.bg-red Inactive

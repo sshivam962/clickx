@@ -1,0 +1,109 @@
+= form_tag agency_agreements_path(section: section), id: 'agreement_form', method: :post, remote: true do
+  %h3.txt-cntr.ptb-25 CLICKX PARTNER PROGRAM AGREEMENT
+  %p.text-doc.txt-jstfy
+    %span This Partner Program Agreement (“Agreement”), made this
+    %span
+      = Time.current.day.ordinalize
+    %span day of
+    %span
+      = Time.current.strftime('%B')
+    %span , #{Date.current.year} between, Clickxposure LLC d/b/a Clickx, an Illinois limited liability company located at 3301 Bonita Beach Rd SW, Suite 100, Bonita Springs, FL 34134 ("Company"), and
+    %span
+      %span.form-group.d-inline.m-0.p-0
+        = text_field_tag 'agreement[legal_name]', agency.name, class: 'form-control width-400 d-inline', required: true, placeholder: '(Label)', 'data-name': 'Label'
+    %span (“Label”) located at
+    %span
+      %span.form-group.d-inline.m-0.p-0
+        = text_field_tag 'agreement[location]', agency.billing_address&.full_address, class: 'form-control width-400 d-inline', required: true, placeholder: '(Location)', 'data-name': 'Location'
+    %span . Company and Agency may be collectively referred to as the “Parties.”
+
+    WHEREAS, Company, as a digital marketing company, agrees to perform digital marketing services to Agency and Agency’s third-party clients (“Customer(s)”), on behalf of Agency and performed under Agency’s name and brand
+
+    WHEREAS Company and Agency desire to enter into an agreement, which will define respective rights and duties as to all services to be performed.
+
+    WHEREAS Agency has purchased a Plan or multiple Plans from Company’s website and they Parties desire the terms set forth herein to govern their relationship
+
+    NOW, THEREFORE, in consideration of the covenants and agreements contained herein, the Parties hereto agree as follows.
+  = render 'agency/agreements/shared/content'
+  = render 'agency/agreements/shared/exhibit'
+  = render 'agency/agreements/shared/acknowledgement'
+  .row.sign-agreement-inputs
+    .col-md-6
+      .form-group
+        %label Name
+        = text_field_tag 'agreement[name]', nil, class: 'form-control required-inputs', required: true, data: 'Name', placeholder: 'Your Name', 'data-name': 'Your Name'
+        %span#witness_representative
+          = "Representative, #{agency.name}"
+      .form-group
+        %label Title
+        = text_field_tag 'agreement[title]', nil, class: 'form-control required-inputs', required: true, 'data-name': 'Title', placeholder: 'Title', 'data-name': 'Title'
+      %p
+        %span
+          = "Date&nbsp;&nbsp;&nbsp;&nbsp;#{Date.current.strftime('%d, %B %Y')}".html_safe
+    .col-md-6
+      .form-group
+        .d-inline-block.signature-input
+          .d-block
+            %label Signature
+          .d-block
+            = hidden_field_tag 'agreement[signature]', nil, class: 'form-control'
+            %canvas.form-control-lg.controls{height: '100', width: '300'}
+            %br
+            %a.clear_signature.pull-right.small.text-info{href: 'javascript:void(0)'}
+              Clear
+              %i.fa.fa-eraser{"aria-hidden" => "true"}
+
+
+      .col-md-12
+        = submit_tag 'Submit', class: 'btn btn-warning btn-lg btn-raised pull-right agreement_submit mt-xxl'
+:javascript
+  var canvas = document.querySelector("canvas");
+  var signaturePad = new SignaturePad(canvas);
+  signaturePad.onEnd = function(){
+    $('#agreement_signature').val(signaturePad.toDataURL());
+    $('.agreement_submit').removeClass('hidden')
+  };
+  function signatureError() {
+    $('.signature-input').addClass('has-error');
+    toastr.error('Signature is required.');
+  }
+  $('.agreement_submit').on('click', function(e){
+    e.preventDefault();
+    var signValid = false;
+    var inputsValid = false;
+    var message;
+    $('#agreement_form input:required').each(function() {
+      var $this = $(this);
+      if(!$this.val()) {
+        var inputName = $this.attr('name');
+        inputsValid = false;
+        $this.parent('.form-group').addClass('has-error');
+        var inputName = $(this).data('name');
+        toastr.error(inputName + ' is required.');
+        $('html, body').animate({
+          scrollTop: $('.has-error:first-child').offset().top - 86 //#DIV_ID is an example. Use the id of your destination on the page
+        }, 'slow');
+      } else {
+        inputsValid = true;
+      }
+    });
+    if(signaturePad.isEmpty() == true) {
+      signValid = false
+      signatureError();
+    } else {
+      $('.signature-input').removeClass('has-error');
+      signValid = true
+    }
+    if(inputsValid && signValid) {
+      console.log('no errors');
+      $('#agreement_form').submit()
+    }
+  })
+
+  $('.clear_signature').on('click', function(e){
+    signaturePad.clear();
+  })
+
+  $('#agreement_legal_name').on('change', function(e){
+    $('#witness_representative').text('Representative, ' + $(this).val());
+  })

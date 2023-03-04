@@ -1,0 +1,39 @@
+%script{type: "text/ng-template", id: "latest_question"}
+  %md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-compressed.modal-lg{"aria-label":"Question has been updated"}
+    %form{"accept-charset" => "UTF-8", id: "q", name:'qForm', "ng-submit" => "save_answer()", "novalidate" => ""}
+      %md-toolbar.spl-tool
+        .md-toolbar-tools
+          %h2.modal-title  Question has been updated
+          %span.flex
+          %md-button.md-icon-button{"ng-click":"closeModal()"}
+            %span.fa.fa-times-circle-o
+      %md-dialog-content
+        .md-dialog-content
+          .modal-body
+            %label {{latest_quest.latest_question.question}}
+            .small.orange{{'ng-show' => 'latest_quest.latest_question.description'}}
+              %span ({{latest_quest.latest_question.description}})
+
+            %div{'ng-show' => "latest_quest.latest_question.exp_ans_type == 'oneliner'"}
+              %input.form-control{name: "answer_group_{{latest_quest.latest_question.id}}_answer_oneline",'ng-model' => 'answer_group[latest_quest.latest_question.id]', 'ng-required' => "latest_quest.latest_question.is_mandatory"}
+              %span.help-inline{"ng-show" => "latest_quest.latest_question.is_mandatory && is_submitted && questionnaireForm.answer_group_{{latest_quest.latest_question.id}}_answer_oneline.$invalid"} can't be blank
+
+            %div{'ng-show' => "latest_quest.latest_question.exp_ans_type == 'mcq'"}
+              %label.radio-inline{'ng-repeat' => "choice in latest_quest.latest_question.mcq_choices track by $index"}
+                %input{type: "radio", name: "answer_group_{{latest_quest.latest_question.id}}_answer_mcq", value: "{{choice}}",'ng-model' => 'answer_group[latest_quest.latest_question.id]', 'ng-required' => "latest_quest.latest_question.is_mandatory"} {{choice}}
+              %span.help-inline{"ng-show" => "latest_quest.latest_question.is_mandatory && is_submitted && questionnaireForm.answer_group_{{latest_quest.latest_question.id}}_answer_mcq.$invalid"} can't be blank
+
+            %div{'ng-show' => "latest_quest.latest_question.exp_ans_type == 'boolean_ans'"}
+              %label.radio-inline
+                %input{type: "radio", name: "answer_group_{{latest_quest.latest_question.id}}_answer_boolean", value: "true",'ng-model' => 'answer_group[latest_quest.latest_question.id]', 'ng-required' => "latest_quest.latest_question.is_mandatory"} Yes
+              %label.radio-inline
+                %input{type: "radio",name: "answer_group_{{latest_quest.latest_question.id}}_answer_boolean", value: "false", 'ng-model' => 'answer_group[latest_quest.latest_question.id]', 'ng-required' => "latest_quest.latest_question.is_mandatory"} No
+              %span.help-inline{"ng-show" => "latest_quest.latest_question.is_mandatory && is_submitted && questionnaireForm.answer_group_{{latest_quest.latest_question.id}}_answer_boolean.$invalid"} can't be blank
+
+            %div{ 'ng-show' => "latest_quest.latest_question.exp_ans_type == 'paragraph'"}
+              %textarea.form-control{name: "answer_group_{{latest_quest.latest_question.id}}_answer_paragraph",rows: "5",'ng-model' => 'answer_group[latest_quest.latest_question.id]', 'ng-required' => 'latest_quest.latest_question.is_mandatory'}
+              %span.help-inline{"ng-show" => "latest_quest.latest_question.is_mandatory && is_submitted && questionnaireForm.answer_group_{{latest_quest.latest_question.id}}_answer_paragraph.$invalid"} can't be blank
+      %md-dialog-actions{layout:"row"}
+        %span.flex
+        %button.btn.btn-default.btn-raised{type:"button","ng-click":"closeModal()"} Cancel
+        %button.btn.btn-primary.btn-raised{'ng-click' => "is_submitted = true",type:"submit"} Save

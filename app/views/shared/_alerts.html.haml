@@ -1,0 +1,5 @@
+- flash.each do |key, val|
+  .alert-notification.alert-dismissible.fade.in{:class => key}
+    %div= val
+    %a.close{'data-dismiss' => 'alert'}
+      %i.fa.fa-times

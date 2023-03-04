@@ -1,0 +1,38 @@
+.row
+  .col-md-12
+    .tab-container
+      .tab-content{ 'st-table':'ga_source_medium', 'st-safe-src':'copy_ga_source_medium' }
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th #
+                %th Source Medium
+                %th{ 'st-sort':'sessions', 'st-sort-default':'reverse' }
+                  Sessions
+                %th{ 'st-sort':'newUsers' }
+                  New Users
+                %th{ 'st-sort':'bounceRate' }
+                  Bounce Rate
+                %th.center{ 'st-sort':'screenPageViewsPerSession' }
+                  Pages /
+                  %br Session
+                %th.center{ 'st-sort':'averageSessionDuration' }
+                  Avg.Session
+                  %br Duration
+
+            %tbody
+              %tr{ 'ng-repeat':'row in ga_source_medium' }
+                %td {{$index + 1}}
+                %td.text-left{ align:'left' } {{row.sourceMedium}}
+                %td
+                  {{row.sessions}}
+                  %span.per_info ({{(row.sessions/total_sessions) * 100 |number:2}}%)
+                %td
+                  {{row.newUsers}}
+                  %span.per_info ({{(row.newUsers/total_newusers) * 100 |number:2}}%)
+                %td {{row.bounceRate}}%
+                %td {{row.screenPageViewsPerSession | number}}
+                %td {{row.averageSessionDuration | date:'HH:mm:ss'}}
+  
+        %div.row.text-center.p-n.mgl-33{ "ng-include":"", src: "'themeX/shared/_pagination_links.html'" }

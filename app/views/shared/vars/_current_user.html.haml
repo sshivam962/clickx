@@ -1,0 +1,58 @@
+%script
+  - if current_user.present?
+    var current_id = "#{current_user.id}";
+    var current_role = "#{current_user.role}";
+    var current_user_email = "#{current_user.email}";
+    var current_user_email = "#{current_user.email}";
+    var current_user_logo = "#{current_user.logo}";
+    var current_user_initials = "#{current_user.initials}";
+    var current_user_name = "#{current_user.name}";
+    var current_user_sign_in_count = "#{current_user.sign_in_count}"
+    var current_user_unique_id = "#{current_user.unique_id}";
+    var preview_user = "#{current_user.preview_user}";
+
+    - if demo_login?
+      var demo_login = true
+    - else
+      var demo_login = false
+
+    - if current_user.agency_admin?
+      var is_agency_admin = true
+    - else
+      var is_agency_admin = false
+
+    - if current_user.business_user?
+      var is_business_user = true
+    - else
+      var is_business_user = false
+
+    - if current_user.super_admin?
+      var is_super_admin = true
+    - else
+      var is_super_admin = false
+
+    - if current_user.preview_user?
+      var is_system_user = true
+    - else
+      var is_system_user = false
+
+    - if current_user.full_access?
+      var user_permissions = "#{User.permission_collection.collect(&:last).join(',')}"
+    - else
+      var user_permissions = "#{current_user.roles.pluck(:name).join(',')}"
+
+  - else
+    var current_id = ''
+    var current_role = ''
+    var current_user_email = ''
+    var current_user_name = ''
+    var current_user_sign_in_count = ''
+    var current_user_unique_id = ''
+    var preview_user = ''
+
+    var is_agency_active = false
+    var is_agency_admin = false
+    var is_business_user = false
+    var is_super_admin = false
+    var is_system_user = false
+    var user_permissions = ''

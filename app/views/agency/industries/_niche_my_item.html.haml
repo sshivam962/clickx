@@ -1,0 +1,25 @@
+.niche-item{id: "niche-#{industry.id}"}
+  - if has_access || industries_ids.include?(industry.id)
+    %a.niche-item-inner{href: agency_industry_case_study_path(industry_id: industry.id, my_case_study: my_case_study)}
+      .niche-item-icon
+        %i{class: industry.icon_klass}
+      %h2.f-s-sm.fw-sb.m-0.mt-5.mb-5
+        = industry.title
+      %span.niche-item--items= industry.case_studies.published.select { |agency| agency.agency_id == current_agency.id }.size
+    .niche-item-more
+      %span.niche-more-btn.niche-more-btn--like
+        %a.favourite_click{href: 'javascript:void(0)', onClick: "favourite_click_fn(#{industry.id})"}
+          %i.fa{class: favorite ? 'fa-heart' : 'fa-heart-o'}
+      - if industry.funnel_page.present?
+        %a.niche-more-btn.copy_to_clipboard{href: funnel_page_public_link(industry.funnel_page, current_agency), target: '_blank'}
+          %i.fa.fa-filter
+  - else
+    %a.niche-item-inner{href: 'javascript:void(0)'}
+      .niche-item-icon
+        %i{class: industry.icon_klass}
+      %h2.f-s-sm.fw-sb.m-0.mt-5.mb-5
+        = industry.title
+      %span.niche-item--items= industry.case_studies.published.select { |agency| agency.agency_id == current_agency.id }.size
+    .niche-item-more
+      %span.niche-more-btn
+        %i.fa.fa-lock

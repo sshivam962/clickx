@@ -1,0 +1,37 @@
+%td{ 'colspan': '8' }
+  %table.table.call_details_table.mb-n
+    %tr
+      %td
+      %td{colspan: '3'}
+        %a.btn.btn-raised.btn-block.btn-default.mt-n.mb-n{href: recording}
+          %i.fa.fa-download.pr-sm>
+          Download Recording
+      %td{colspan: '3'}
+        %audio.block.col-sm-12.p-n{controls: '', src: recording}
+    %tr.success
+      %td
+      %td{colspan: '2'}
+        %h4
+          %i.fa.fa-microphone.pr-sm>
+          Call Start
+          = call_start.to_date.strftime("%d %b %Y %I:%M %P") if call_start.present?
+      %td{colspan: '2'}
+        %h4 Inbound Number
+        = call_inboundno
+      %td{colspan: '2'}
+        %h4 Caller Name
+        %p
+          = caller_name
+    %tr.warning
+      %td
+      %td{colspan: '2'}
+        %h4
+          %i.fa.fa-microphone-slash.pr-sm>
+          Call End
+        %p= call_end.to_date.strftime("%d %b %Y %I:%M %P") if call_end.present?
+      %td{colspan: '2'}
+        %h4 Answered By Number
+        %p= call_forwardno
+      %td{colspan: '2'}
+        %h4 Caller Number
+        %p= caller_number

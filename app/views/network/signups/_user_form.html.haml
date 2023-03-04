@@ -1,0 +1,48 @@
+.user-from-wrapper
+  .px-8.py-10
+    .text-2xl.pr-32.leading-8.mb-6 Join our Fulfillment Network
+    -# %p.text-gray-600.font-light Register faster and simplify account setup by logging in with Google.
+    -# .py-8
+    -# %button.btn-signin-with.flex.items-center.w-full.bg-blue.text-white.rounded.p-1
+    -#   %span.inlne-block.w-10.h-10.p-2.bg-white.text-white.rounded
+    -#     = image_tag 'network/icon-google.svg' || ''
+    -#   %span.flex-1
+    -#     Sign up with Google
+    -# .py-3
+    -# %p.text-center.text-gray-600.font-light or use email
+    -# .py-3
+    = form_for @user, url: network_signups_path, remote: true do |f|
+      = f.hidden_field :role
+      .relative.mb-3.input-holder
+        %span.w-10.h-10.absolute.input-holder-icon
+          = image_tag 'network/icon-avatar.svg' || ''
+        = f.text_field :first_name, class: 'bg-white rounded-md p-4 pl-12 lh-2 w-full shadow', placeholder: 'First Name', required: true
+      .relative.mb-3.input-holder
+        %span.w-10.h-10.absolute.input-holder-icon
+          = image_tag 'network/icon-avatar.svg' || ''
+        = f.text_field :last_name, class: 'bg-white rounded-md p-4 pl-12 lh-2 w-full shadow', placeholder: 'Last Name', required: true
+      .relative.mb-3.input-holder
+        %span.w-10.h-10.absolute.input-holder-icon
+          = image_tag 'network/icon-avatar.svg' || ''
+        = f.text_field :phone, class: 'bg-white rounded-md p-4 pl-12 lh-2 w-full shadow', id: 'phone', placeholder: 'Phone', required: true
+      .relative.mb-3.input-holder
+        %span.w-10.h-10.absolute.input-holder-icon
+          = image_tag 'network/icon-at.svg' || ''
+        = f.email_field :email, class: 'bg-white rounded-md p-4 pl-12 lh-2 w-full shadow', placeholder: 'Email Address', required: true
+      .relative.mb-6.input-holder
+        %span.w-10.h-10.absolute.input-holder-icon.input-holder-icon--lock
+          = image_tag 'network/icon-key.svg' || ''
+        = f.password_field :password, class: 'bg-white rounded-md p-4 pl-12 lh-2 w-full shadow', placeholder: 'Password', required: true
+      .text-lg.mb-2.font-medium What's your LinkedIn profile ?
+      %p.text-gray-600.font-light.text-sm.mb-6 Please use the following format: https://www.linkedin.com/in/your-handle
+      .relative.mb-3.input-holder
+        %span.w-10.h-10.absolute.input-holder-icon
+          = image_tag 'network/icon-avatar.svg' || ''
+        = f.fields_for :network_profile do |ff|
+          = ff.text_field :linkedin, class: 'bg-white rounded-md p-4 pl-12 lh-2 w-full shadow', placeholder: 'LinkedIn Profile'
+      .py-3
+      = f.submit 'Join Now', class: 'btn'
+      .py-4
+      %p.text-gray-600.font-light
+        By continuing, you're agreeing to the
+        %a.text-primary{:href => "#0"} Terms

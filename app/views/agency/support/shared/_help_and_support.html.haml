@@ -1,0 +1,16 @@
+.row
+  = form_for :support_mail, url: agency_support_path, method: :post do |f|
+    .col-lg-5
+      .input-wrapper
+        = f.label :from, "From"
+        = f.text_field :from, value: "#{current_user.email}", readonly: true, class: 'input-wrapper-input'
+    .col-lg-7
+      .input-wrapper
+        = f.label :subject
+        = f.text_field :subject, class: 'input-wrapper-input'
+    .col-md-12
+      .input-wrapper
+        = f.label :content
+        = f.cktext_area :content, class: 'input-wrapper-input', ckeditor: { toolbar: 'support' }
+    .col-md-12
+      = f.submit 'Send Feedback', class: 'btn btn-blue', data: {disable_with: "Sending..."}

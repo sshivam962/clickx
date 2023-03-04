@@ -1,0 +1,44 @@
+- @projects.each_with_index do |project, index|
+  .projects-listing-item.width100.p-0.pb-3.m-0
+    .project-card.bg-white.shadow-md.rounded-lg.p-4{class: "project-index-#{index}", id: dom_id(project), data:{id: project.id}}
+      .text-lg.fw-m.text-black.pb-1= project.title
+      -# .text-lg.text-black= current_agency.name
+      -# %ul.project-data-list.text-muted.py-4.fs-xs
+      -#   %li
+      -#     - if (project.short_desc || '').length > 250
+      -#       = truncate(project.short_desc, length: 250)
+      -#       = link_to '...Read more', '', class: "read-more-#{project.id} text-black view-project-details"
+      -#     - else
+      -#       = project.short_desc
+      .d-flex.fs-14.text-muted
+        - if project.created_at.to_date == Date.today
+          .col-auto Today
+        - else
+          .col-auto= "#{pluralize( (Date.today - project.created_at.to_date).round, 'day')} ago"
+        / .col-auto.px-2 .
+        / .col-auto
+        /   %a.text-black.view-project-details{:href => "#"} More...
+  :javascript
+    $(document).ready(function(){
+      $(".project-index-0").click();
+    });
+
+    $('.read-more-#{project.id}').on('click', function(e) {
+      e.preventDefault()
+      $(this).parent().html('#{escape_javascript project.short_desc}')
+    });
+
+    $("#project_#{project.id}").on('click', function() {
+      var project_id = $(this).data('id');
+      $.ajax({
+        url: "/a/projects/" + project_id + "/project_details",
+        type: 'get',
+        dataType: 'script'
+      });
+    });
+
+.row.text-center.p-n.pagination-wrapper
+  = will_paginate @projects, params: { page: params[:page] }
+
+:javascript
+  $('.pagination a').attr('data-remote', 'true');

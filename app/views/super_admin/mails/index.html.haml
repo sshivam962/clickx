@@ -1,0 +1,23 @@
+- content_for :title do
+  = 'Email | Clickx'
+
+.page-header
+  %h3
+    Emails
+
+.locations
+  %span
+    .address.row.ml-n.mr-n
+      .col-sm-12.col-md-3
+        %b Title
+      .col-sm-6.col-md-3
+        %b To addresses
+      .col-sm-6.col-md-3
+        %b CC addresses
+      .col-sm-6.col-md-1
+        %b Actions
+
+  - @emails.each do |email|
+    = render 'super_admin/mails/item', email: email
+
+#modal_container

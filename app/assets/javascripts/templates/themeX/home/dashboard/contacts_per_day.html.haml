@@ -1,0 +1,16 @@
+.panel.panel-default.m-n#contacts-per-day{ 'ng-if': 'marketing_performance_loaded && contactsPerDayStatus' }
+  .panel-heading.cursor-move
+    %h2
+      %a.l-grey{ 'href': "#/leads" }
+        Contacts Per Day
+        %i.fa.fa-info-circle.tooltip-text-icon{ 'title': 'A graph showing the number of contacts you\'re getting on a daily basis. For a list of all contacts, go to the "Contacts" section in the sidebar.' }
+    #onboarding-contacts-per-day.on-boarding
+    .panel-ctrls
+      %button.Dbutton.btn.button-icon.pull-left.mt-sm{ 'ng-click': 'pdf_export("contacts-per-day")', 'title': 'Download report', 'ng-class': "{'disable-button': export_disabled}" }
+        %span.material-icons.inverted file_download
+      %button.btn.button-icon.mt-sm.refresh-panel{ 'ng-click': 'refresh_intelligence("contacts_per_day")','title': 'Refresh report' }
+        %span.material-icons.inverted refresh
+  .panel-body.no-padding.scroll-pane{ 'style': 'height: 420px;' }
+    .p-n.scroll-content
+      .panel-body
+        %draw-chart.btn-pointer#contacts-per-day-chart{ 'config': 'contactsPerDay' }

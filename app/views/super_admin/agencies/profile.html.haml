@@ -1,0 +1,57 @@
+.content.p-n
+  .page-header
+    %h3
+      Agency Profile
+      %small.pull-right
+        %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{:href => "/s/agencies"} Back
+  .bg-white.p-4.p-sm-5.rounded.mb-4
+    %h4.mt-0.text-md Agency Information
+    %hr/
+    .overview-report-list.text-base
+      .overview-report-list-item.pb-3
+        %strong Date Agency Established:
+        = @profile.estd_date
+      .overview-report-list-item.pb-3
+        %strong Core Services:
+        = @profile.core_services
+      .overview-report-list-item.pb-3
+        %strong Unique Value Proposition:
+        = @profile.value_proposition
+  .bg-white.p-4.p-sm-5.rounded.mb-4
+    %h4.mt-0.text-md Niche Information
+    %hr/
+    .overview-report-list.text-base
+      .overview-report-list-item.pb-3
+        %strong Preferred Niche:
+        = @profile.preferred_niche
+      .overview-report-list-item.pb-3
+        %strong How would you describe your niche?:
+        %p= @profile.niche_description
+      .overview-report-list-item.pb-3
+        %strong Type any keyword you would use to look up a niche company on Google:
+        %p= @profile.niche_lookup_keyword
+      .overview-report-list-item.pb-3
+        %strong Identify the pain points that your niche customers have:
+        %p= @profile.customer_pain_points
+      .overview-report-list-item.pb-3
+        %strong List the positions and titles of the decision makers
+        %p= @profile.decision_makers
+      .overview-report-list-item.pb-3
+        %strong Identify directories that have your niche customers listed:
+        %p= @profile.niche_directories
+  .bg-white.p-4.p-sm-5.rounded
+    %h4.mt-0.text-md Agency Growth
+    %hr/
+    .overview-report-list.text-base
+      .overview-report-list-item.pb-3
+        %strong How and where does you agency currently book new client calls?:
+        Condimentum ullamcorper
+      .overview-report-list-item.pb-3
+        %strong What challenges are you experiencing when trying to sell to new clients? What are their objections?:
+        %p= @profile.challenges
+      .overview-report-list-item.pb-3
+        %strong What is your agency’s current monthly revenue?:
+        %p= @profile.monthly_revenue
+      .overview-report-list-item.pb-3
+        %strong What is your agency’s monthly revenue goal in the next three months?:
+        %p= @profile.monthly_revenue_goal

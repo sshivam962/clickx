@@ -1,0 +1,99 @@
+#googlemap
+
+:javascript
+  var urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+  }
+
+  var initMap = function() {
+    var bounds = new google.maps.LatLngBounds();
+    var center = new google.maps.LatLng(40.0000, -98.0000)
+    var mapOptions = {
+      zoom: 4,
+      center: center,
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    }
+    var map = new google.maps.Map(document.getElementById('googlemap'), mapOptions);
+
+    zoomLevel = parseInt(urlParam('zoom'))
+
+    $.ajax({
+      url: "/pc/#{@business.obfuscated_id}/map_info",
+      method: "GET",
+      headers: {"X-Requested-With": "XMLHttpRequest"},
+      dataType: 'json',
+      success: function(resp){
+        locations_fetched = true;
+        var locations = resp.locations;
+        locations.forEach(function(loc){
+          createMarker(map, bounds, loc);
+        })
+
+        map.fitBounds(bounds);
+        map.setCenter(bounds.getCenter());
+
+        if(locations.length == 1){
+          map.setZoom(15);
+        }
+        if(!isNaN(zoomLevel)){
+          map.setZoom(zoomLevel);
+        }
+      }
+    });
+    if("#{@business.branded?}" == 'true'){
+      var clickxTM = document.createElement('p');
+      clickxTM.style.background = 'white';
+      clickxTM.style.padding = '5px';
+      clickxTM.innerHTML = "Powered By " +
+                           "<img src='https://s3.amazonaws.com/clickx-images/Clickx-Logo.png' type='image/png' style='height:auto;width:60px'></img>"
+      var TMdiv = document.createElement('div');
+      TMdiv.appendChild(clickxTM);
+
+      map.controls[google.maps.ControlPosition.TOP_RIGHT].push(TMdiv);
+    }
+  }
+
+  var createMarker = function (map, bounds, loc){
+    var marker = new google.maps.Marker({
+        map: map,
+        animation: google.maps.Animation.DROP,
+        position: new google.maps.LatLng(loc.lat, loc.lng),
+        title: loc.name
+    });
+    bounds.extend(marker.position);
+
+    marker.content = '<div class="infoWindowContent">' + loc.address + '<br>' +
+    '<a href = "http://' + loc.website +'">' + loc.website + '</a>' + '</div>';
+
+    var infoWindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(marker, 'click', function(){
+        infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+        infoWindow.open(map, marker);
+    });
+  }
+
+  initMap();
+
+  $(window).load(function(){
+    google.maps.event.addDomListener(window, "resize", function() {
+      initMap();
+    });
+  });
+
+:css
+  body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+  }
+
+  #googlemap {
+    height: 100%;
+    width: 100%;
+  }

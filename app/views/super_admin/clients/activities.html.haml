@@ -1,0 +1,39 @@
+.page-header.clearfix
+  %h3
+    = @client.name
+    %small.pull-right
+      %a.btn.btn-warning.reset-btn.btn-reset.btn-sm.btn-sm-reset{href: super_admin_clients_path}
+        Back
+
+.history-section
+  %h4
+    %span.fa.fa-history
+    Recent activities
+  - if @activities_group_keys.present?
+    - @activities_group_keys.each do |activities_date|
+      .each-dates
+        .show-date
+          %span.fa.fa-calendar
+          = activities_date
+        .in-a-day
+          - @activities_group[activities_date].each do |activity|
+            .activities-date
+              .show-case-created-at
+                = activity.human_date
+              .panel.panel-default{"rp-collapse-panel":".history-section"}
+                .panel-heading.clearfix{data: {toggle: "collapse", target:"#activity-#{activity.id}"}}
+                  %span.fa.fa-user
+                  #{activity.user&.name} | #{activity.num_rows} #{activity.num_rows == 1 ? "activity" : "activities"}
+                  %span.open-collapse.pull-right.fa.fa-chevron-down
+                .panel-body.collapse{id: "activity-#{activity.id}"}
+                  .inner-per-activity
+                    %table.table.table-bordered
+                      %tbody
+                        - activity.revisions.each do |key, revision|
+                          %tr
+                            %td= key
+                            %td.revision
+                              #{revision[0]} to #{revision[1]}
+  - else
+    .well{"ng-show":"activities_group.length == 0"}
+      We don't have any activities

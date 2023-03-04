@@ -1,0 +1,14 @@
+%script{ type: 'text/ng-template', id: 'time_schedule.html' }
+.modal.fade#time-schedule-modal
+  .modal-dialog.clx-modal.modal-darkstone-blue-bg.spl-modal
+    .modal-content
+      .modal-header
+        %button.close{ 'aria-hidden' => 'true', 'ng-click': 'closeModal($event)', type: 'button' }
+          %span.fa.fa-times-circle-o
+        %h2.modal-title
+          %span.fa.fa-clock-o
+          Request a Demo
+        %p.m-b-0
+          %span.clx-t-size-14.italic.clx-text.text-color-light-haze Schedule a quick demo to see how Clickx can grow your business.
+      .modal-body
+        %iframe.margt-30{allowtransparency: 'true', frameborder: '0', src: "https://clickx-demo.youcanbook.me/?noframe=true&skipHeaderFooter=true", style: "width: 100%; height: auto;min-height: 515px; border-radius: 4px;background-color: #f1f1f1;"}

@@ -1,0 +1,4 @@
+- if @direct_lead.rejected?
+  = link_to 'Undo Reject', reject_agency_direct_lead_path(id: direct_lead.id), method: :post, remote: true, class: 'btn btn-sm btn-success float-right', id: 'lead-mark-not-rejected'
+- else
+  = link_to 'Reject', reject_agency_direct_lead_path(id: direct_lead.id), method: :post, remote: true, class: 'btn btn-sm btn-success float-right', id: 'lead-mark-rejected'

@@ -1,0 +1,27 @@
+%table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+  %tr
+    %td{:valign => "top", :width => "100%"}
+      %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+        %tr
+          %td{:width => "100%"}
+            %table.table_scale{:bgcolor => "#FFF", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+              %tr
+                %td{:align => "center", :width => "100%"}
+                  %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                    %tr
+                      %td.spacer{:width => "30"}
+                      %td{:width => "540"}
+                        / START OF COLUMN
+                        %table.full{:align => "center", :border => "0", :cellpadding => "10", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "540"}
+                          %tr.cellpadd10{:style => "margin-bottom: 15px"}
+                            %td
+                              %p
+                                %br
+                                Name: #{@user.name}
+                                %br
+                                Company Name: #{@business.name}
+                                %br
+                                Address: #{@business.billing_address&.full_address}
+                                %br
+                                Email: #{@user.email}
+                                %br

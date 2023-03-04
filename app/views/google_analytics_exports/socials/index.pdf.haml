@@ -1,0 +1,26 @@
+%html
+  %head
+    %h1 Socials
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+    %body
+      %table-responsive
+        %table.table.table-bordered.table-vam.table-left
+          %thead
+            %th Social Network
+            %th Sessions
+            %th Page Views
+            %th Avg. Session Duration
+            %th Pages/Session
+          %tbody
+            - @socials_data.table_data.each do |socials|
+              %tr
+                %td.align-center
+                  = socials.site
+                %td.align-center
+                  = socials.sessions
+                %td.align-center
+                  = socials.page_views
+                %td.align-center
+                  = socials.avg_session
+                %td.align-center
+                  = socials.page_per_session

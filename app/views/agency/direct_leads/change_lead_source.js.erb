@@ -1,0 +1,6 @@
+<% if @direct_lead.errors.blank? %>
+  //humane.log('Lead source changed.')
+  window.location.reload()
+<% else %>
+ // humane.log("<%= @direct_lead.errors.full_messages.to_sentence%>")
+<% end %>

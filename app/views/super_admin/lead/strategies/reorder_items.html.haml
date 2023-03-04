@@ -1,0 +1,53 @@
+- content_for :title do
+  Edit Lead Strategy | Clickx
+.page-header
+  %h3
+    #{@lead.agency.name} | #{@lead.full_name}
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: super_admin_strategy_leads_path } Back
+    - if @lead_strategy.approved? && !@lead_strategy.created_by?('agency_admin')
+      = link_to send_approval_super_admin_lead_strategy_path(@lead, @lead_strategy), method: :patch, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-sm btn-reset-sm btn-info btn-reset-m-0' do
+        %i.fa.fa-send.text-white
+        Send Approved Email
+- if raw(@lead.call_notes).present?
+  .col-md-12
+    .panel
+      .panel-body
+        = raw(@lead.call_notes)
+.col-md-12
+  .agency-form
+    = form_for @lead_strategy, url: super_admin_lead_strategy_path(@lead, @lead_strategy), method: :patch do |f|
+      .col-md-12
+        .row.lead_strategy_form
+          .form-group
+            %label{for: "lead_strategy_category"} Type
+            = f.select :category, Lead::Strategy::CATEGORIES.keys, {}, required: true, class: 'form-control', disabled: true
+            = f.hidden_field :category
+          .form-group
+            %label{for: "lead_strategy_ad_spend_info"} Ad Spend Info.
+            = f.text_area :ad_spend_info, required: true, class: 'form-control'
+          .form-group
+            %label{for: 'lead_strategy_strategies'} Strategy
+            .panel-group
+              #strategies.p-n
+                - f.object.strategies.each_with_index do |strategy, index|
+                  .panel.panel-default
+                    .panel-heading
+                      %h2{style: 'text-transform: none;'}= raw(strategy)
+                      = hidden_field_tag 'lead_strategy[strategies][]', strategy
+                #no_items_added{class: "#{'hidden' if f.object.strategies.present?}"}
+                  No Items Added..
+          .form-group
+            - if policy([:super_admin, current_user]).leads?
+              %button.btn.btn-info.saveBtn{value: 'approved', name: 'submit'}
+                Approve
+            - else
+              %button.btn.btn-info.saveBtn{value: 'save', name: 'submit'}
+                Save
+            %button.btn.btn-warning.saveBtn{value: 'pending_approval', name: 'submit'}
+              Submit for Approval
+
+:javascript
+  $(function() {
+    $("#strategies").sortable({});
+  });

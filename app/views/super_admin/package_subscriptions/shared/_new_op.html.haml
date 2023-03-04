@@ -1,0 +1,17 @@
+#new-op-modal.modal.fade.ng-isolate-scope.ng-aside.horizontal.right.in{role: 'dialog', tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-dialog.modal-lg
+    .modal-content.bg-white.pl-4.pr-4
+      = form_tag assign_op_super_admin_package_subscription_path(subscription, category: category), method: :post, remote: true do
+        .modal-header
+          Assign Onboarding Procedures
+          %a.close.pl-md{'data-dismiss': 'modal'}
+            %span ×
+        .modal-body
+          - OnboardingProcedure.templates.each do |procedure|
+            .form-group.mt-n
+              %label.control-label{for: 'onboarding_procedure_id'}
+                = check_box_tag 'onboarding_procedure_ids[]', procedure.id, subscription.onboarding_procedures.exists?(title: procedure.title), class: 'onboarding_procedures'
+                = procedure.title
+        .modal-footer
+          = submit_tag 'Save', class: 'btn btn-sm btn-info'
+

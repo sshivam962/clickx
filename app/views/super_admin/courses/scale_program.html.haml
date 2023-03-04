@@ -1,0 +1,43 @@
+- content_for :title do
+  Academy | Clickx
+.page-content.ui-2020
+  .page-heading.pt-md.pb-md
+    .row.align-items-center
+      .col-md-6
+        %h1
+          %i.clickx-icon-SellSheets
+          Scale Program
+      .col-xs-10.col-sm-10.col-lg-10
+        %h1
+          %a.btn.btn-warning.pull-right.mt-lg.mb-lg{href:"#{super_admin_scale_program_headers_path}"} Manage Scale Program Headers
+
+- @weeks.each do |week|
+  - courses = @courses_group[week].sort_by(&:position)
+  %ul
+    %h4
+      %b #{ @headers_week[week] }
+    %div{id: "week-#{week}"}
+      - courses.each do |course|
+        %li{ id: dom_id(course), data: { url: update_position_super_admin_course_path(course) } }
+          = link_to course.title, super_admin_course_path(course), class: 'mr-md'
+          = link_to edit_super_admin_course_path(course), class: 'grey-btn-icon' do
+            %i.glyphicon.glyphicon-edit.font-14
+          = link_to super_admin_course_path(course), method: :delete, data: { confirm: 'Are you sure?' }, class: 'grey-btn-icon pl-1' do
+            %i.glyphicon.glyphicon-trash.font-14
+          = link_to super_admin_course_path(course), class: "grey-btn-icon pl-1" do
+            %i.glyphicon.glyphicon-eye-open
+  %br
+
+  :javascript
+    $("#week-#{week}").sortable({
+      update: function(e, ui) {
+        console.log(ui.item.index() + 1)
+        $.ajax({
+          url: ui.item.data('url'),
+          type: 'patch',
+          data: { position: ui.item.index() + 1},
+          dataType: 'json',
+          success:function(response){}
+        })
+      }
+    });

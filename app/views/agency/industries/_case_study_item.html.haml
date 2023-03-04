@@ -1,0 +1,34 @@
+- if case_study.has_access?(@agency_active_package_name)
+  %tr.text-center.centered-cols.row-card
+    %td.col-client
+      %a.client-url.d-lg-flex.align-items-center{href: agency_case_study_path(case_study, industry_id: @industry)}
+        %span.client-name-circle= case_study.title.strip.first
+        .text= case_study.title
+    %td.text-lg-left.mt-3.mt-lg-0
+      %p= case_study.short_desc
+    %td.col-btn.text-right
+      .d-flex.align-items-center.justify-content-end
+        %a.btn.btn-blue.mr-3{href: agency_case_study_path(case_study, industry_id: case_study.industry_id)}
+          Read More
+          %i.pl-sm.fa.fa-angle-double-right
+        %a.action-btn.action-btn--transparent{href: case_study_public_link(current_agency, case_study), target: '_blank', data: {link: case_study_public_link(current_agency, case_study)}}
+          %span.btn-icon
+            %i.fa.fa-external-link
+
+  %tr.row-spacer
+    %td{:colspan => "3"}
+- else
+  %tr.text-center.centered-cols.disabled_row.row-card
+    %td.col-client
+      .client-url.d-lg-flex.align-items-center{href: 'javascript:void(0)'}
+        %span.client-name-circle
+          %i.fa.fa-lock
+        .text= case_study.title
+    %td.text-lg-left.mt-3.mt-lg-0
+    %td.col-btn.text-right
+      .d-flex.align-items-center.justify-content-end
+        %a.btn.btn-blue.mr-3{:href => "#0", disabled: true}
+          Read More
+          %i.pl-sm.fa.fa-angle-double-right
+  %tr.row-spacer
+    %td{:colspan => "3"}

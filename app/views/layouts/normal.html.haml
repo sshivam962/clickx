@@ -1,0 +1,29 @@
+!!!
+%html
+  %head
+    = render 'layouts/themeX/meta_tags'
+    %title{"ng-bind":"title || 'Dashboard'"}
+      = yield(:title)
+
+    = stylesheet_link_tag 'themeX_base', media: 'all', 'data-turbolinks-track': false
+    = stylesheet_link_tag "https://www.authy.com/form.authy.min.css"
+    = javascript_include_tag "https://www.authy.com/form.authy.min.js"
+    = javascript_include_tag 'themeX_base', 'data-turbolinks-track': false
+    = javascript_include_tag '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'
+    = javascript_include_tag '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js'
+    = stylesheet_link_tag '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css'
+    = stylesheet_link_tag '//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css'
+
+    = csrf_meta_tags
+
+    = render 'layouts/themeX/fonts'
+    = render 'layouts/themeX/ie_support'
+
+  %body
+    #wrapper
+      #layout-static
+        .static-content-wrapper
+          .static-content
+            .page-content
+              = yield
+    = render 'shared/google_analytics'

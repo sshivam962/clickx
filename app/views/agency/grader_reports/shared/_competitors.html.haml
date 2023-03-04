@@ -1,0 +1,67 @@
+- organic_competitors = @grader_report.organic_competitors
+- adwords_competitors = @grader_report.adwords_competitors
+- if organic_competitors['competitors'].present? || adwords_competitors['competitors'].present?
+  .panel.panel-grader
+    .panel-heading
+      %h2.text-darkblue Competitors
+    .panel-body.bg-white
+      .panel-section
+        .row
+          - if organic_competitors['competitors'].present?
+            .col-lg-6
+              %h4.mt-0.mb-lg.f-s-20 Organic Competitors
+              .table-responsive
+                %table.table.table--stats
+                  %thead
+                    %tr.inverse
+                      %th.bg-l-grey.col-url{:width => "100%"} Keyword
+                      %th.bg-l-grey Competitor Relevance
+                      %th.bg-l-grey Common Keywords
+                      %th.bg-l-grey Organic Keywords
+                  %tbody
+                    - if organic_competitors['competitors'].length == 0
+                      %tr
+                        %td.text-center{colspan: 4} Sorry, we haven't found any organic competitors for your domain.
+                    - else
+                      - organic_competitors['competitors'].each do |o_competitor|
+                        %tr
+                          %td
+                            %a.word-break{href: "http://#{o_competitor['domain']}", target: '_blank'}
+                              = o_competitor['domain']
+                          %td
+                            = o_competitor['competitor_relevance']
+                          %td
+                            = number_with_delimiter(o_competitor['common_keywords'])
+                          %td
+                            = number_with_delimiter(o_competitor['organic_keywords'])
+
+          - if adwords_competitors['competitors'].present?
+            .col-lg-6.mt-5.mt-xl-0
+              %h4.mt-0.mb-lg.f-s-20 Paid Competitors
+              .table-responsive
+                %table.table.table--stats
+                  %thead
+                    %tr.inverse
+                      %th.bg-l-grey{:width => "100%"} Keyword
+                      %th.bg-l-grey Competitor Relevance
+                      %th.bg-l-grey Common Keywords
+                      %th.bg-l-grey Organic Keywords
+                  %tbody
+                    - if adwords_competitors['competitors'].length == 0
+                      %tr
+                        %td.text-center{colspan: 4} Sorry, we haven't found any paid competitors for your domain.
+                    - else
+                      - adwords_competitors['competitors'].each do |a_competitor|
+                        %tr
+                          %td
+                            %a.word-break{href: "http://#{a_competitor['domain']}", target: '_blank'}
+                              = a_competitor['domain']
+                          %td
+                            = a_competitor['competitor_relevance']
+                          %td
+                            = number_with_delimiter(a_competitor['common_keywords'])
+                          %td
+                            = number_with_delimiter(a_competitor['organic_keywords'])
+    .panel-footer
+      %h4.mb-sm.f-s-20 Pro Tip
+      %p.text-white.mb-n These are the domain names that currently share the keywords your website ranks for. Spy on your competitors' keywords with our digital marketing platform and overtake them in Google searches.

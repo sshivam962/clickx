@@ -1,0 +1,47 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Local-Listings.title-icon>
+    Locations Listings
+    %i.fa.fa-info-circle.tooltip-text-icon{'title': 'View the local listings of your site on Google and various local-service listing websites.'}
+.container-fluid
+  %div
+    .row
+      .col-xs-12
+        .panel.panel-default
+          .panel-heading
+          .panel-body
+            .div.inline-flex{id: "googlemap"}
+            .div{id: "class" , 'ng-repeat': "marker in markers"}
+              .a{href: "#", 'ng-click': "openInfoWindow($event, marker)"}
+
+          .col-md-12{'ng-show' => "locations.length",  'ng-repeat' => "loc in locations track by $index"}
+            %hr
+            / Contents
+            .col-md-8
+              %address
+                %h4.addlocation{"ng-if":"!!loc.name"}>
+                  %i.material-icons> place
+                  {{ loc.name }}
+                %span{"ng-if":"!!loc.address || !!loc.zity || !!loc.state"}
+                  {{ loc.address }} {{ loc.address && ','}}
+                  {{ loc.city }} {{ loc.city && ',' }}
+                  {{ loc.state }} {{ loc.state && ',' }}
+                %span{"ng-if":"!!loc.country"}
+                  {{ loc.country }},
+                %span{"ng-if":"!!loc.zip"}
+                  {{ loc.zip }}
+                %br
+                %p{"ng-if":"!!loc.phone"}
+                  %span.fa.fa-phone
+                  {{ loc.phone }}
+            / Options
+            .col-md-4
+              .btn-group.fright
+                %a.btn.btn-warning.btn-raised{"ng-show": "!!loc.yext_store_id || !!loc.bright_local_campaign_id", href: "#/{{business_id}}/locations/{{loc.id}}/listings/", 'title': 'Check your claimed listings on other local-listing sites. '}
+                  %i.fa.fa-external-link.pr-xs
+                  View Claimed Listings
+                  .ripple-container
+                / %a.btn.btn-warning.btn-raised{"ng-show": "!loc.yext_store_id", href: "#/locations/{{loc.id}}/clickx_local/", 'title': 'Check your listings on other local-listing sites.'}
+                /   %i.fa.fa-external-link.pr-xs
+                /   View Local Listings Scan
+                /   .ripple-container

@@ -1,0 +1,16 @@
+%h2 Email Preferences
+- @all_features.each do |feature, value|
+  %h3
+    = feature.to_s.humanize
+  - value[:mailers].each do |key,value|
+    - preference = @user.email_preferences.find_or_initialize_by(feature: feature, key: key)
+    = simple_form_for [@user, preference], namespace: key  do |form|
+      = form.input :enabled,          |
+        input_html: {                 |
+        checked: preference.enabled?, |
+        onClick: "this.form.submit()" |
+        },                            |
+        label: value[:name],          |
+        hint: value[:hint]            |
+      = form.input :feature, as: :hidden
+      = form.input :key, as: :hidden

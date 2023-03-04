@@ -1,0 +1,10 @@
+$('#courses_list').html("<%= escape_javascript render( partial: 'agency/courses/course_list') %>");
+
+if( "<%= @favorite %>" == "true" ) {
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+else{
+  $('html, body').animate({
+    scrollTop: $(".niche-list-wrapper").offset().top
+  }, 2000);
+}

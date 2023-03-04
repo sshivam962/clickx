@@ -1,0 +1,42 @@
+- content_for :title do
+  Email Preferences - #{@client.name}
+.pb-md.page-heading.no-margin-bottom
+  .d-flex.justify-content-between
+    .col 
+      %h1
+        %i.clickx-icon-page-cog.title-icon>
+        Email Preferences
+        %small= @client.name
+    .col
+      .form-group.mt-0
+        = link_to profile_path, class: 'btn btn-white btn-raised' do
+          %i.fa.fa-arrow-left.pr-xs
+          Back
+
+.container-fluid
+  %div
+    .row
+      .col-md-12.mt-md
+        .tab-content
+          .panel.panel-profile
+            .tab-content
+              .active.tab-pane.p-md
+                .row
+                  - EmailPreference::BUSINESS_FEATURES.each do |feature, value|
+                    .col-md-12
+                      %h4= feature.to_s.titleize
+                    - value[:mailers].each do |key,value|
+                      - agency_business_pref = current_user.agency_admin_business_email_preferences.find_or_create_by(business: @client)
+                      - preference = agency_business_pref.email_preferences.find_or_initialize_by(feature: feature, key: key)
+                      = simple_form_for [agency_business_pref, preference], namespace: key do |form|
+                        .form-group.m-n
+                          .col-sm-10.tabular-border
+                            = form.input :enabled,          |
+                              input_html: {                 |
+                              checked: preference.enabled?, |
+                              onClick: "this.form.submit()" |
+                              },                            |
+                              label: value[:name],          |
+                              hint: value[:hint]            |
+                        = form.input :feature, as: :hidden
+                        = form.input :key, as: :hidden

@@ -1,0 +1,43 @@
+%table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+  %tr
+    %td{:valign => "top", :width => "100%"}
+      %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+        %tr
+          %td{:width => "100%"}
+            %table.table_scale{:bgcolor => "#FFF", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+              %tr
+                %td{:align => "center", :width => "100%"}
+                  %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                    %tr
+                      %td.spacer{:width => "30"}
+                      %td{:width => "540"}
+                        / START OF COLUMN
+                        %table.full{:align => "center", :border => "0", :cellpadding => "10", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "540"}
+                          %tr.cellpadd10{:style => "margin-bottom: 15px"}
+                            %td
+                              %p
+                                Hi #{@user.first_name},
+                                %br
+                                %br
+                                Thank you for your partnership. Attached is the signed Master Services Agreement for your reference.
+                                %br
+                                %br
+                                Name: #{@user.name}
+                                %br
+                                Company Name: #{@agency.name}
+                                %br
+                                Address: #{@agency.billing_address&.full_address}
+                                %br
+                                Email: #{@user.email}
+                                %br
+                                %br
+                                Please don't hesitate to reach out with additional questions or concerns.
+                                %br
+                                %br
+                                Thanks,
+                                %br
+                                Clickx Team
+                                %br
+                                %br
+                                %small
+                                  If you believe you received this e-mail in error, do not read it.  If you are not the intended recipient, you are hereby notified that any retention, dissemination, distribution, or copying of this communication is strictly prohibited.  If the reader of this message is not the intended recipient, I did not intend to waive and do not waive any privileges or confidentiality of this message or the attachments.  Please reply to the sender that you have received the message in error, then delete it.  Thank you.

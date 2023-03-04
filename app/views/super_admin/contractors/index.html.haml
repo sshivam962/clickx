@@ -1,0 +1,16 @@
+.uiv2
+  .clearfix
+    %h3 Contractors
+  .spacer30
+  .clearfix
+  .content-card.p-md-5
+    = form_tag super_admin_contractors_path, method: :get do
+      .content-card__header
+        .d-flex.justify-content-between.flex-wrap
+          .col-search
+            .input-wrapper
+              = text_field_tag :query, params[:query], class: 'search login select-box form-control search_client search_name', placeholder: 'Search By Name or Email'
+              .inner-glyph.glyph-align
+                %i.glyphicon.glyphicon-search
+    #contractors_list
+      = render '/super_admin/contractors/list', users: @users

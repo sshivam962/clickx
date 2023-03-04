@@ -1,0 +1,46 @@
+%md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-lg{"aria-label" => "Add Tags"}
+  %form{"ng-cloak" => "","ng-submit":"ok($event)"}
+    .modal-header
+      %button.close{"aria-hidden" => "true", "data-dismiss" =>"modal", :type => "button","ng-click":"close()"}
+        %span.fa.fa-times-circle-o
+      %h3.modal-title
+        %span.fa.fa-tags
+        Add Tags
+    %md-dialog-content.p-md
+      .md-dialog-content.col-sm-10.col-sm-offset-1
+        %md-input-container.width100
+          %label Available Keywords
+          %md-chips{ 'ng-model': 'keywords_to_be_tagged', 'md-autocomplete-snap': '',
+          'md-on-add': 'refreshAvailableKeywords()', 'md-on-remove': 'refreshAvailableKeywords()' }
+            %md-autocomplete.width100{ 'md-autoselect': 'true', 'md-item-text': 'keyword.name',
+            'md-items': 'keyword in available_data | filter:searchText', 'md-min-length': '0',
+            'md-search-text': 'searchText', 'placeholder': 'Select Keywords', 'md-autofocus': 'true',
+            'md-no-cache': 'true', 'md-dropdown-position': 'bottom' }
+              %span{ 'md-highlight-text': 'searchText' } {{keyword.name}}
+            %md-chip-template
+              %span {{$chip.name}}
+              .col-sm-12.mt-md
+        %md-input-container.width100
+          %label Add tags
+          %md-chips{ 'ng-model': 'keyword_tags', 'md-autocomplete-snap': '',
+          'md-max-chips': '5', 'md-transform-chip': 'transformChip($chip)', 'md-add-on-blur': 'true',
+          'md-on-add': 'refreshAvailableTags()', 'md-on-remove': 'refreshAvailableTags()' }
+            %md-autocomplete.width100{ 'md-autoselect': 'true', 'md-item-text': 'tag.name',
+            'md-items': 'tag in available_tags | filter:searchText', 'md-min-length': '0',
+            'md-search-text': 'searchText', 'placeholder': 'Search/Create tags',
+            'md-input-id': 'searchTag', 'md-no-cache': 'true', 'md-dropdown-position': 'bottom' }
+              %span{ 'md-highlight-text': 'searchText' } {{tag.name}}
+            %md-chip-template{ 'custom-chip': '{{$chip.color}}' }
+              %span {{$chip.name}}
+          %md-content.md-padding{ 'layout': 'column' }
+            %md-chips.frequent-tags
+              %md-chip{ 'ng-repeat': 'tag in available_tags | limitTo:5',
+              'style': 'background-color: {{tag.color}};color: white;cursor: pointer',
+              'ng-click': 'selectTag(tag)' } {{ tag.name }}
+            %small Frequently used tags
+    %md-dialog-actions{:layout => "row"}
+      %button.btn.btn-raised.mt-md.mb-md.btn-default{ 'ng-click': 'available_data.length ? selectAll() : deselectAll()',
+      'type': 'button', 'ng-if': 'available_data.length || keywords_to_be_tagged.length' }
+        {{ available_data.length ? 'Select All' : 'Deselect All' }}
+      %button.btn.btn-raised.mt-md.mb-md.btn-default{ 'ng-click': 'close()', 'type': 'button' } Cancel
+      %button.btn.btn-raised.mt-md.mb-md.btn-primary{ 'type': 'submit' } Add

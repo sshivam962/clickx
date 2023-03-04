@@ -1,0 +1,8 @@
+.page-header
+  %h3
+    Edit Faq
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: super_admin_admin_manage_faqs_path } Back
+.agency-form
+  = form_for @admin_faq, url: super_admin_admin_manage_faq_path(@admin_faq), method: :patch do |f|
+    = render 'form', f: f

@@ -1,0 +1,221 @@
+- content_for :title do
+  Brand Building
+.page-heading
+  %h1 Brand Building
+.container-fluid
+  %div{"data-widget-group" => "group1"}
+    .row
+      .col-sm-12
+        .panel.panel-default.p-lg
+          .panel-body.p-n
+            .row
+              .col-sm-12
+                - plans = @package.plans.group_by(&:key)
+                .table-responsive.table-pricing1
+                  %table.table.table-hover.mb-n
+                    %thead
+                      %tr
+                        %th.vat.pb-lg{:width => "300"}
+                          - plan = plans['starter'].first
+                          %h2.pt-header-caption.text-info= plan.title
+                          .pt-header-price
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                        %th.vat.pb-lg{:width => "300"}
+                          - plan = plans['pro'].first
+                          %h2.pt-header-caption.text-success= plan.title
+                          .pt-header-price
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                        %th.vat.pb-lg{:width => "300"}
+                          - plan = plans['advanced'].first
+                          %h2.pt-header-caption.text-warning= plan.title
+                          .pt-header-price
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                    %tbody
+                      %tr
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          100% Customized Social Strategy
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          100% Customized Social Strategy
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          100% Customized Social Strategy
+                      %tr
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Dedicated Campaign Manager
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Dedicated Campaign Manager
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Dedicated Campaign Manager
+                      %tr
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Dedicated Content Specialists
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Dedicated Content Specialists
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Dedicated Content Specialists
+                      %tr
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Assess Growth Objectives
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Assess Growth Objectives
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Assess Growth Objectives
+                      %tr
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Extensive Audience Research
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Extensive Audience Research
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Extensive Audience Research
+                      %tr
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Advanced Competitive Research
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Advanced Competitive Research
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Advanced Competitive Research
+                      %tr
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Social Messaging Strategy
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Social Messaging Strategy
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Social Messaging Strategy
+                      %tr
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Analyze Competitor's Growth Strategies
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Analyze Competitor's Growth Strategies
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Analyze Competitor's Growth Strategies
+                      %tr
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Content Creation Up to 45 Posts Up to 10 Custom Graphics
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Content Creation Up to 60 Posts Up to 15 Custom Graphics
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Content Creation Up to 75 Posts Up to 20 Custom Graphics
+                      %tr
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Content Publishing
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Content Publishing
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Content Publishing
+                      %tr
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Manage 2 Social Platforms: Facebook, Instagram, Twitter, LinkedIn
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Manage 3 Social Platforms: Facebook, Instagram, Twitter, LinkedIn
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Manage 4 Social Platforms: Facebook, Instagram, Twitter, LinkedIn
+                      %tr
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Month to Month Commitment
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Month to Month Commitment
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          Month to Month Commitment
+                      %tr
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          30 Day Notice for Cancellation
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          30 Day Notice for Cancellation
+                        %td.vam
+                          %span.tick-2
+                            %i.material-icons check
+                          30 Day Notice for Cancellation
+                      %tr
+                        %td.vam
+                          %a.btn.btn-info.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'social_media', plan: 'starter')}
+                            Get Started
+                            %i.pl-sm.fa.fa-angle-double-right
+                            .ripple-container
+                        %td.vam
+                          %a.btn.btn-success.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'social_media', plan: 'pro')}
+                            Get Started
+                            %i.pl-sm.fa.fa-angle-double-right
+                            .ripple-container
+                        %td.vam
+                          %a.btn.btn-warning.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'social_media', plan: 'advanced')}
+                            Get Started
+                            %i.pl-sm.fa.fa-angle-double-right
+                            .ripple-container

@@ -1,0 +1,39 @@
+- content_for :title do
+  Funnel Pages | Clickx
+.page-heading.bg-white.mb-4
+  .container-fluid
+    %h1
+      %i.clickx-icon-SellSheets.title-icon
+      Funnel Pages
+#dashboard-table.container-fluid.mt-md.pt-xs.ui-2020
+  .row
+    .col-md-12
+      %div
+        %table.table.table--xl
+          %tbody
+            %tr.centered-cols.row-header.text-black.d-none.d-xl-table-row
+              %th Title
+              %th.text-xl-right Actions
+            - @funnel_pages.each do |funnel_page|
+              %tr.centered-cols.row-card{id: dom_id(funnel_page)}
+                %td.col-client
+                  %span
+                    = funnel_page.title
+                %td.col-btns.text-xl-right
+                  %a.btn.btn-default.action-btn.action-btn--light.copy_to_clipboard{href: funnel_page_public_link(funnel_page, current_agency), target: '_blank', data: { toggle: 'tooltip', 'original-title' => 'Copy to Clipboard'}}
+                    %span.btn-icon
+                      %i.fa.fa-clipboard
+              %tr.row-spacer
+                %td{colspan: 7}
+      .row.text-center.p-n.pagination-wrapper
+        = will_paginate @funnel_pages
+  #modal_container
+:javascript
+  $('.copy_to_clipboard').on('click', function (e) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).attr('href')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Link Copied");
+  });

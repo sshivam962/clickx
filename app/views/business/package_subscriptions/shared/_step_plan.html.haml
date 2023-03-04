@@ -1,0 +1,49 @@
+%ul.stages
+  - if steps.include?('plan')
+    %li.current
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Plan
+  - if steps.include?('client')
+    %li
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Client
+  - if steps.include?('agreement')
+    %li
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Agreement
+  - if steps.include?('payment')
+    %li
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Payment
+  - if steps.include?('success')
+    %li
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Complete
+  - if steps.include?('kick_off')
+    %li
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Kick-Off
+  - if steps.include?('questionnaire')
+    %li
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Questionnaire
+.checkout-stages--content.mt-xxl
+  .panel.panel-default.p-xxl.p-lg--sm
+    .panel-body.pl-n.pr-n#plan_details
+      = render 'business/package_subscriptions/shared/plan_details', plan: @plan, package: @package, expedited_onboarding: false, white_glove_service: false, addons: []
+  .text-center
+    %a.btn.btn-lg.m-n.btn-warning.btn-raised.step_complete{href: 'javascript:void(0)', data: {next_step: next_step, current_step: 'plan'}} Continue

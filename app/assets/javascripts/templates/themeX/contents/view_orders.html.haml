@@ -1,0 +1,39 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-BlogWriting.title-icon
+    Clickx Orders
+    %i.fa.fa-info-circle.tooltip-text-icon{'title': 'This report shows you the list of content orders you have placed and also allow you to edit them'}
+  .options
+    %a.btn.btn-default.btn-raised{href:"/#/content_order/new"}
+      %span.fa.fa-pencil
+      Place Order
+.container-fluid
+  %div
+    .row
+      .col-md-12
+        .panel.panel-default.no-shadow{'data-widget': {draggable: 'false'}}
+          .panel-controls.dropdown
+            %button.btn.btn-icon-rounded.refresh-panel{'title': 'Refresh report'}
+              %span.material-icons.inverted refresh
+          .panel-body
+            .pb-md
+              %h4.mb-n Orders
+            .table-responsive
+              %table.table.table-hover.table-bordered.table-vam
+                %thead
+                  %tr
+                    %th{style: "padding-right:300px;"} Title
+                    %th{align: "center"} Order Status
+                    %th{align: "center"} Payment Status
+                    %th{align: "center"} Action
+                %tbody{'ng-show':"orders.length"}
+                  %tr{'ng-repeat':"order in orders track by $index"}
+                    %td
+                      %a.info {{order.form_data.title}}
+                    %td{align: "center"} {{order.order_status == 'waiting_for_content'? "Waiting for Content" : order.order_status | titleize}}
+                    %td{align: "center"} {{order.payment_status | titleize}}
+                    %td{align: "center"}
+                      %a.btn.btn-primary.btn-raised.btn-label{href:"/#/content_order/{{order.id}}/edit","ng-show":"order.order_status=='draft'", 'title': 'Edit order '}
+                        %span.fa.fa-edit
+                        Edit
+                      %span.fa.fa-check-circle.text-success{"ng-show":"order.order_status== 'ordered'"}

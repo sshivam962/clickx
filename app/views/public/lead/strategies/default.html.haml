@@ -1,0 +1,37 @@
+- agency = @lead.agency
+.header-wrapper{style: "background:#{agency.strategy_product_header_color}"}
+  .container.container--sm.text-center
+    - if agency.weburl.present?
+      %a{href: formatted_url(agency.weburl), target: '_blank'}
+        = image_tag agency.logo || ''
+    - else
+      = image_tag agency.logo || ''
+.default-strategy
+  = render "public/lead/strategies/static/#{@category}", agency: agency
+
+- unless @category.eql?('linkedin_ads')
+  .section.bg-dark-gray.p-tb-60
+    .container.container--sm
+      %h3.f-w-lg.pb-xl.text-center Campaign Reporting
+      %script{:async => "", :src => "https://fast.wistia.com/embed/medias/9rpo4u2k5e.jsonp"}
+      %script{:async => "", :src => "https://fast.wistia.com/assets/external/E-v1.js"}
+      .wistia_responsive_padding{:style => "padding:56.25% 0 0 0;position:relative;"}
+        .wistia_responsive_wrapper{:style => "height:100%;left:0;position:absolute;top:0;width:100%;"}
+          .wistia_embed.wistia_async_9rpo4u2k5e{:class => "videoFoam=true", :style => "height:100%;position:relative;width:100%"}
+            .wistia_swatch{:style => "height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"}
+              %img{:alt => "", "aria-hidden" => "true", :onload => "this.parentNode.style.opacity=1;", :src => "https://fast.wistia.com/embed/medias/9rpo4u2k5e/swatch", :style => "filter:blur(5px);height:100%;object-fit:contain;width:100%;"}
+- if raw(agency.calendly_script).present?
+  .section.p-tb-60
+    .container.container--sm
+      - if agency.lead_calender_header.present?
+        %h3.f-w-lg.text-center #{agency.lead_calender_header}
+      - else
+        %h3.f-w-lg.text-center Schedule a Call
+      = raw(agency.calendly_script)
+
+
+.section.bg-muted.text-muted
+  .container.container--sm
+    .mt-xl.mb-xl.text-center
+      %p
+        = "© #{Date.current.year} #{agency&.name}. All Rights Reserved."

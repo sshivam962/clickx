@@ -1,0 +1,87 @@
+- plan = @payment_link.admin_plan
+%main.theme-clickx.payment
+  .container-fluid
+    .row.horizontal
+      .col-md-4.col-lg-3.vertical-a-center.left-section.left-section--payment
+        .payment-page-header
+          %figure
+            = image_tag 'payment_links/select-plan.svg', width: '150px'
+          %h2 Select Plan
+        .text-white.text-center.mt-n.mb-md.p-15.br-6
+          %h3.mt-n.text-white Prepared For
+          .fw-m
+            = @user_info[:name]
+          .fw-m
+            = @user_info[:email]
+        .bottom-copyright
+          %p.text-center.text-white
+            © #{Date.current.year}. All Rights Reserved.
+      .col-md-8.col-lg-9.vertical-a-center.bg-white
+        .stages-scroll-area
+          .clickx-stages.pt-xxl
+            %ul.stages
+              %li#step_li_plan.current
+                .stage-data
+                  .stages-number
+                    %i.material-icons check
+                  .stages-title Select Plan
+              %li#step_li_card
+                .stage-data
+                  .stages-number
+                    %i.material-icons check
+                  .stages-title Payment
+              %li#step_li_success
+                .stage-data
+                  .stages-number
+                    %i.material-icons check
+                  .stages-title Complete
+          = form_tag subscribe_admin_payment_links_path(@payment_link), method: :post, remote: true, id: 'payment_link_subscribe_form' do
+            = hidden_field_tag :card_token
+            .payment-content-area
+              .payment-min-height--wrapper
+                .payment-form-wrapper
+                  .panel.panel-default.p-md.p-lg--sm.desc-panel
+                    .panel-body.pl-n.pr-n
+                      = @payment_link.admin_plan.description_line_1
+                      %br
+                      = @payment_link.admin_plan.description_line_2
+                  .spacer50
+                  - if plan.implementation_fee.present? && plan.pay_with_implementation_fee
+                    .row.implementation_fee_warpper.pb-md
+                      .col-sm-8.col-xs-12
+                        %h3.main_question.mb-xs.font-20
+                          Implementation Fee
+                          %span.one_time ONE TIME
+                      .col-sm-4.col-xs-12.mb-xs.text-right.mt-20
+                        .implementation_fee
+                          = number_to_currency(plan.implementation_fee, precision: 2)
+                  %h3.main_question.font-20
+                    Plan
+                  .form-group.pb-md
+                    .styled-select
+                      %select#package{name: 'selected_plan'}
+                        %option{selected: "selected", value: plan.id}= plan.price_with_details
+                  / %input#charge_payments_now{:name => "charge_payments_now", :type => "hidden", :value => "true"}
+                  / %input#implementation_fee{:name => "implementation_fee", :type => "hidden", :value => "250"}
+                  .row.total_charge_wrapper.pb-md
+                    .col-sm-8.col-xs-12
+                      %h3.main_question.mb-xs.font-20
+                        Total Amount Due Today :
+                      - if plan.pay_with_implementation_fee
+                        %p.sub_heading
+                          One Time Implementation Fee + Monthly Plan
+                    .col-sm-4.col-xs-12.mb-xs.text-right.mt-20
+                      .total_charge
+                        - if plan.pay_with_implementation_fee
+                          = number_to_currency(plan.implementation_fee.to_f + plan.amount, precision: 2)
+                        - else
+                          = number_to_currency(plan.amount, precision: 2)
+              .next-btn-wrapper
+                .row
+                  .col-xs-6
+                  .col-xs-6.text-right
+                    %a.btn-next.pl_next_step{href: 'javascript:void(0)', data: {next: 'card', current: 'plan'}} Next
+    %footer.payment-footer.clearfix
+      .spacer15
+      .container.text-center
+        %p © #{Date.current.year}. All Rights Reserved.

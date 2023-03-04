@@ -1,0 +1,17 @@
+%span{id: dom_id(email)}
+  .address.row.ml-n.mr-n
+    .col-sm-12.col-md-3
+      = email.title
+    .col-sm-6.col-md-3
+      - email.to_addresses.each do |to_addr|
+        = to_addr
+        %br
+    .col-sm-6.col-md-3
+      - email.cc_addresses.each do |cc_addr|
+        = cc_addr
+        %br
+    .col-sm-6.col-md-1
+      .col-sm-12.right.normal-edit-button.grey-btn-group.mb-md
+        %a.btn.grey-btn-icon.align-icon.pull-right.ml-sm.mb-sm{href: edit_super_admin_mail_path(email), data: { remote: true }}
+          %i.glyphicon.glyphicon-edit
+          Edit

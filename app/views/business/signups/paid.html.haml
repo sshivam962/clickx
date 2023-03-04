@@ -1,0 +1,110 @@
+= render 'stripe/assets'
+= content_for :title, 'Apply to Become a Partner'
+= hidden_field_tag :current_page, 'signup'
+.signup-wrapper
+  .form-wrapper
+    = form_tag business_signup_path(tier: params[:tier]), method: :post, class: 'form-vertical clickx-parsley',"data-parsley-validate":"", id: 'signup_form' do
+
+      =# hidden_field_tag :referral_code, @referral_code
+      = hidden_field_tag :card_token
+      = hidden_field_tag :signup_link, @signup_link&.id
+      = hidden_field_tag :interval, @plan.interval
+      = hidden_field_tag 'plan', @plan.stripe_plan , required: true
+      = hidden_field_tag 'plan_price', @plan.amount, required: true
+      = hidden_field_tag :coupon_code
+      %input#tnc.hidden{checked: "checked", name: "checkboxs1", type: "checkbox", disabled: true, readonly: true}
+      .d-xl-flex.justify-content-between.mb-5
+        .col
+          %a{href: '#'}
+            = image_tag 'logo.png'
+          %h3.m-0.mt-3 Start your #{@plan.key.titleize} Plan
+        .col.pt-4.pt-xl-0
+          = render 'agency/signups/shared/coupon'
+
+      - if raw(@signup_link&.title).present?
+        .input-card.input-card--gray.p-4.mb-5.dark
+          = raw(@signup_link.title)
+
+      %h4.m-0.mb-4 Create Your Clickx Profile
+      = render 'business/signups/shared/profile'
+      .pb-5
+      %h4.m-0.mb-4 Billing Address
+      = render 'business/signups/shared/billing_address'
+      .pb-5
+    = render 'business/signups/shared/new_card'
+    .input-card.mb-4
+      %label.checkbox
+        \&#160;&#160;I agree to the
+        %a{href: "http://www.clickx.io/terms/", target: "_blank"} Terms
+        and understand this is a non-refundable payment.
+        %input#tnc{checked: "checked", name: "checkboxs1", type: "checkbox", disabled: true, readonly: true}
+        %span.checkmark
+
+    - if @signup_link.present?
+      = render 'business/signups/shared/signup_link_purchase_summary'
+    - else
+      = render 'business/signups/shared/purchase_summary'
+
+- if !@signup_link&.trial? && @coupon.blank?
+  :javascript
+    var input = document.querySelector('.input-promocode');
+    var el = document.querySelector('.promocode-btn');
+    var inputWrap = document.querySelector('.promocode');
+
+    input.addEventListener('input', function(e){
+      if(this.value.length >= 6){
+        inputWrap.classList.add('promocode--active');
+      } else {
+        inputWrap.classList.remove('promocode--active');
+      }
+    });
+
+:javascript
+  $(document).on('click', '.business_signup_submit',function() {
+    $('.checkout_create_card_submit').click()
+  })
+  $('#apply_coupon').on('click', function(){
+    var plan_price = $("input[name='plan_price'").val()
+    var coupon_code = $("input[name='coupon_code_input']").val()
+    $.ajax({
+      url: '/smb/check_coupon',
+      method: "GET",
+      data: {
+        coupon_code: coupon_code,
+        plan_price: plan_price
+      },
+      headers: {"X-Requested-With": "XMLHttpRequest"},
+      success: function(resp){
+        $('#coupon_applied').text(resp.message)
+        if(resp.code == 200){
+          $('#coupon_code').val(coupon_code)
+          total_price = parseFloat($('#total_price').val())
+          discount = resp.discount
+          display_price = total_price - discount
+
+          $('#coupon_code_input').attr('readonly', true)
+          $('#apply_coupon').addClass('hidden')
+          $('#remove_coupon').removeClass('hidden')
+
+          $('#coupon_offer').text(resp.offer_msg)
+
+          $('.coupon_applied_text').removeClass('hidden')
+          $('.coupon_applied_text .charge_coupon_text').html('Total Charge with coupon applied: ' + '$' + parseFloat(display_price, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString())
+        }else{
+          $('#coupon_code').val('')
+        }
+      }
+    });
+  })
+
+  $('#remove_coupon').on('click', function(){
+    $('#coupon_code_input').removeAttr('readonly')
+    $('#coupon_code_input').val('')
+    $('#coupon_code').val('')
+    $('#apply_coupon').removeClass('hidden')
+    $('#remove_coupon').addClass('hidden')
+    $('.coupon_applied_text').addClass('hidden')
+    $('.coupon_applied_text .current_price_text').html('')
+    $('#coupon_applied').text('')
+    $('#coupon_offer').text('')
+  })

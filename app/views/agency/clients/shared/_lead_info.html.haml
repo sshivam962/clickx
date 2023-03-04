@@ -1,0 +1,97 @@
+#lead-info-modal.modal.fade{role: "dialog", tabindex: '-1'}
+  .modal-lg.modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg{role: 'document'}
+    .modal-content
+      .modal-header
+        Lead - #{lead.full_name}
+        %a.close.pl-md{'data-dismiss': 'modal'}
+          %span ×
+      .modal-body
+        .panel.panel-white.mb-n
+          .panel-body
+            .col-md-12
+              .col-md-6
+                .col-md-3.pl-n
+                  Name
+                .col-md-9.pl-n
+                  = lead.full_name
+                .col-md-3.pl-n
+                  Email
+                .col-md-9.pl-n
+                  = lead.email
+                .col-md-3.pl-n
+                  Company
+                .col-md-9.pl-n
+                  = lead.company
+              .col-md-6
+                .col-md-3.pl-n
+                  Domain
+                .col-md-9.pl-n
+                  = lead.domain
+                .col-md-3.pl-n
+                  Phone
+                .col-md-9.pl-n
+                  = lead.phone
+        .panel.panel-white.mb-n
+          .panel-body
+            .col-md-12.mb-sm
+              .col-md-6
+                %b Monthly Marketing Budget (Including Ad Budget)
+              .col-md-6
+                = number_to_currency(lead.value, precision: 0) || '[N/A]'
+            .col-md-12.mb-sm
+              .col-md-6
+                %b Next Meeting Date (discovery call)
+              .col-md-6
+                = lead.next_meeting_date&.strftime('%B %d, %Y') || '[N/A]'
+            .col-md-12.mb-sm
+              .col-md-6
+                %b Access to the account?
+              .col-md-6
+                = lead.audit_request.presence || '[N/A]'
+            .col-md-12.mb-sm
+              .col-md-12
+                %b Client is Interested in
+              .col-md-12
+                - if lead.campaign_info.present?
+                  %ul
+                    - lead.campaign_info.each do |info|
+                      %li= info.titleize
+                - else
+                  [N/A]
+            .col-md-12.mb-sm
+              .col-md-12
+                %b Client's Current Marketing Tactics
+              .col-md-12
+                = raw(lead.current_info).presence || '[N/A]'
+            .col-md-12.mb-sm
+              .col-md-12
+                %b Competitor Information
+              .col-md-12
+                - if lead.competitor_info.present?
+                  %ul
+                    - lead.competitor_info.each do |info|
+                      %li= info
+                - else
+                  [N/A]
+            .col-md-12.mb-sm
+              .col-md-12
+                %b Client Goals & Expectations
+              .col-md-12
+                = raw(lead.goals_and_expectations).presence || '[N/A]'
+            .col-md-12.mb-sm
+              .col-md-12
+                %b Next Steps
+              .col-md-12
+                - if lead.next_steps.present?
+                  %ul
+                    - lead.next_steps.each do |info|
+                      %li= info.titleize
+                - else
+                  [N/A]
+            .col-md-12.mb-sm
+              .col-md-12
+                %b Call Notes
+              .col-md-12
+                = raw(lead.call_notes).presence || '[N/A]'
+      .modal-footer
+        %button.btn.btn-raised.mt-md.mb-md.btn-default{'data-dismiss': 'modal', type: 'button'} Close

@@ -1,0 +1,22 @@
+- content_for :title do
+  Calendly Script | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    .col-xs-10.col-sm-10.col-lg-10
+      %h1 Calendly Script
+    .col-xs-2.col-sm-2.col-lg-2
+      %a.btn.btn-warning.pull-right.mt-lg.mb-lg{href: super_admin_agency_signup_links_path} Back
+    .col-md-12
+      = form_tag set_calendly_super_admin_agency_signup_links_path, remote: true do
+        .form-group
+          %h4 Default Calendly Script
+          = text_area_tag 'calendly_script', @calendly_script , class: 'form-control login', rows: 5
+          = submit_tag 'Save', class: 'btn btn-warning pull-right'
+
+#admin_calendly_scripts_container
+  = render '/super_admin/agency_signup_links/shared/calendly_script_list', links: @admin_calendly_scripts
+
+%a.btn.btn--add.pull-right{ 'href': new_admin_calendly_script_super_admin_agency_signup_links_path, data: {remote: true}}
+  %i.glyphicon.glyphicon-plus.glyphplus
+
+#modal_container

@@ -1,0 +1,55 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-page-cog.title-icon>
+    Edit User Profile
+  .options
+    .form-group
+      = link_to profile_path, class: 'btn btn-white btn-raised' do
+        %i.fa.fa-arrow-left.pr-xs
+        Back
+.container-fluid
+  %div
+    .row
+      .col-md-12.mt-md
+        .tab-content
+          .panel.panel-profile
+            .tab-content
+              .active.tab-pane.p-md
+                .row
+                  .col-md-12
+                    = form_for(resource, as: resource_name, url: registration_path(resource), html: { method: :patch, class: 'form-horizontal tabular-form' }) do |f|
+                      .form-group
+                        %label.col-sm-2.control-label First Name
+                        .col-sm-8.tabular-border
+                          = f.text_field :first_name, class: 'form-control'
+                      .form-group
+                        %label.col-sm-2.control-label Last Name
+                        .col-sm-8.tabular-border
+                          = f.text_field :last_name, class: 'form-control'
+                      .form-group
+                        %label.col-sm-2.control-label Phone
+                        .col-sm-8.tabular-border
+                          = f.text_field :phone, class: 'form-control'
+                      .form-group
+                        %label.col-sm-2.control-label Address
+                        .col-sm-8
+                          = f.text_area :address, class: 'form-control'
+                      - if resource.identities.blank?
+                        .form-group
+                          %label.col-sm-2.control-label Current Password
+                          .col-sm-8.tabular-border
+                            = f.password_field :current_password, required: true, class: 'form-control passwordincus'
+                      %h4.mt-xl.mb-md
+                        Change Your Password
+                        %small (Enter New Password only if you wish to change it)
+                      .form-group
+                        %label.col-sm-2.control-label New Password
+                        .col-sm-8.tabular-border
+                          = f.password_field :password, class: 'form-control passwordincus'
+                      .form-group
+                        %label.col-sm-2.control-label Confirm Password
+                        .col-sm-8.tabular-border
+                          = f.password_field :password_confirmation, class: 'form-control passwordincus'
+                      .col-sm-12.p-n
+                        = f.submit 'Save', class: 'btn btn-raised btn-success'
+                        = link_to 'Cancel', profile_path, class: 'btn btn-raised btn-default'

@@ -1,0 +1,215 @@
+.bg-sky-blue.rounded.border-1.border-blue.mb-4
+  .bg-white.rounded-t-12.py-4.px-5
+    .fs-md.color-dark-blue.fw-m Info
+  .p-lg-5.p-4.case_study_form
+    .row.d-flex.flex-wrap
+      .col-md-6
+        .input-wrapper
+          %label.input-wrapper-label{for: "case_study_industry_ids"} Industries
+          = f.select :industry_ids, Industry.order(:title).pluck(:title, :id), { include_blank: 'Select Industries' }, required: true, class: 'input-wrapper-input', multiple: true
+      .col-md-6
+        .input-wrapper
+          %label.input-wrapper-label{for: "case_study_services"} Service
+          = f.select :services, CaseStudy::SERVICES, { include_blank: 'Select Services' }, class: 'input-wrapper-input', multiple: true
+      .col-md-6
+        .input-wrapper.mb-0
+          %label.input-wrapper-label{for: "case_study_title"} Title
+          = f.text_field :title, required: true, class: 'input-wrapper-input', placeholder: 'Enter Title'
+      .col-md-6
+        .input-wrapper.mb-0
+          %label.input-wrapper-label{for: "case_study_short_desc"} Short Description
+          = f.text_field :short_desc, class: 'input-wrapper-input', placeholder: 'Short Description'
+
+.bg-sky-blue.rounded.border-1.border-blue.mb-4
+  .bg-white.rounded-t-12.py-4.px-5
+    .fs-md.color-dark-blue.fw-m Stats
+  .p-lg-5.p-4.case_study_form
+    .case_study-stats.bg-white
+      .case_study-stats-col
+        .d-flex.align-items-center.justify-content-center
+          .case_study-stats-icon
+            %i.fa.fa-caret-up
+          #stat_1_value.case_study-stats-percentage= @case_study.stat1_value || ' 500%'
+          #stat_1_description.case_study-stats-name= @case_study.stat1_text || 'Increased Leads'
+      .case_study-stats-col
+        .d-flex.align-items-center.justify-content-center
+          .case_study-stats-icon
+            %i.fa.fa-caret-up
+          #stat_2_value.case_study-stats-percentage= @case_study.stat2_value || '100%'
+          #stat_2_description.case_study-stats-name= @case_study.stat2_text || 'Special Offer Response'
+      .case_study-stats-col
+        .d-flex.align-items-center.justify-content-center
+          .case_study-stats-icon
+            %i.fa.fa-caret-up
+          #stat_3_value.case_study-stats-percentage= @case_study.stat3_value || '80%'
+          #stat_3_description.case_study-stats-name= @case_study.stat3_text || 'Calls Converted'
+    .py-4
+    .row.d-flex.flex-wrap
+      .col-md-4.col-xs-12.mb-5
+        .fs-md.fw-m.pb-4.color-dark Stat 1
+        .input-wrapper.mb-4
+          = f.label :stat1_value, 'Value', class: 'input-wrapper-label'
+          = f.text_field :stat1_value, class: 'input-wrapper-input', placeholder: '500%', id: 'input_stat_1'
+        .input-wrapper.mb-0
+          = f.label :stat1_text, 'Description', class: 'input-wrapper-label'
+          = f.text_field :stat1_text, class: 'input-wrapper-input', placeholder: 'Increased Leads', id: 'input_stat_1_description'
+      .col-md-4.col-xs-12.mb-5
+        .fs-md.fw-m.pb-4.color-dark Stat 2
+        .input-wrapper.mb-4
+          = f.label :stat2_value, 'Value', class: 'input-wrapper-label'
+          = f.text_field :stat2_value, class: 'input-wrapper-input', placeholder: '100%', id: 'input_stat_2'
+        .input-wrapper.mb-0
+          = f.label :stat2_text, 'Description', class: 'input-wrapper-label'
+          = f.text_field :stat2_text, class: 'input-wrapper-input', placeholder: 'Special Offer Response', id: 'input_stat_2_description'
+      .col-md-4.col-xs-12.mb-5
+        .fs-md.fw-m.pb-4.color-dark Stat 3
+        .input-wrapper.mb-4
+          = f.label :stat3_value, 'Value', class: 'input-wrapper-label'
+          = f.text_field :stat3_value, class: 'input-wrapper-input', placeholder: '80%', id: 'input_stat_3'
+        .input-wrapper.mb-0
+          = f.label :stat3_text, 'Description', class: 'input-wrapper-label'
+          = f.text_field :stat3_text, class: 'input-wrapper-input', placeholder: 'Calls Converted', id: 'input_stat_3_description'
+
+
+.bg-sky-blue.rounded.border-1.border-blue.mb-4
+  .bg-white.rounded-t-12.py-4.px-5
+    .fs-md.color-dark-blue.fw-m Images
+  .p-lg-5.p-4.case_study_form
+    .preview-images-list
+      = f.fields_for :images do |image|
+        .preview-images-list-item{data: {url: update_position_agency_case_study_image_path(image.object)}}
+          = render 'image_fields', f: image
+      .cs_image_card.cs_image_card--add
+        = link_to_add_association '+', f, :images
+
+.bg-sky-blue.rounded.border-1.border-blue.mb-4
+  .bg-white.rounded-t-12.py-4.px-5
+    .fs-md.color-dark-blue.fw-m Description
+  .p-lg-5.p-4.case_study_form
+    - description_value = "<h4><strong>Challenge</strong>:</h4><ul><li>Bullet Point 1</li><li>Bullet Point 2</li><li>Bullet Point 3</li></ul><h4><strong>Solution</strong>:</h4><ul><li>Bullet Point 1</li><li>Bullet Point 2</li><li>Bullet Point 3</li></ul><h4><strong>Results</strong>:</h4><ul><li>Bullet Point 1</li><li>Bullet Point 2</li><li>Bullet Point 3</li></ul>"
+    - if @case_study.description.present?
+      - description_value = @case_study.description
+    = f.cktext_area :description, value: description_value
+
+.bg-sky-blue.rounded.border-1.border-blue.mb-4
+  .bg-white.rounded-t-12.py-4.px-5
+    .fs-md.color-dark-blue.fw-m Detailed Description
+  .p-lg-5.p-4.case_study_form
+    .input-wrapper
+      = f.cktext_area :detailed_description, class: 'input-wrapper-input'
+      = f.hidden_field :tier, value: 'starter'
+      = f.hidden_field :agency_id, value: current_agency.id
+    .input-wrapper-btn
+      = f.submit "Save", class: 'btn btn-warning saveBtn', name: 'publish'
+      =# f.submit "Save to Draft", class: 'btn btn-default saveBtn', name: 'draft'
+
+.bg-sky-blue.rounded.border-1.border-blue.mb-4
+  .bg-white.rounded-t-12.py-4.px-5
+    .fs-md.color-dark-blue.fw-m In Their Words
+  .p-lg-5.p-4.case_study_form
+    .input-wrapper
+      = f.text_area :in_their_words, class: 'input-wrapper-input', rows: 5
+    .input-wrapper-btn
+      = f.submit "Save", class: 'btn btn-warning saveBtn', name: 'publish'
+      =# f.submit "Save to Draft", class: 'btn btn-default saveBtn', name: 'draft'
+:javascript
+  $('#case_study_industry_ids').select2({
+    width: '100%',
+    multiple: true
+  });
+  $('#case_study_services').select2({
+    width: '100%',
+    multiple: true
+  });
+  $('.file_input').change(function(event){
+    var input = $(event.currentTarget);
+    var file = input[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+       image_base64 = e.target.result;
+       $(".descriptive_preview").attr("src", image_base64);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  $("#images").sortable({
+    update: function(e, ui) {
+      $.ajax({
+        url: ui.item.data('url'),
+        type: 'patch',
+        data: { position: ui.item.index() + 1 },
+        dataType: 'json',
+        success:function(response){}
+      })
+    }
+  });
+
+  $(document).on("click", '[data-toggle="lightbox"]', function(event) {
+    event.preventDefault();
+    $(this).ekkoLightbox();
+  });
+
+:javascript
+  $(document).ready(()=>{
+  $(document).on('change', '.preview-thumb-edit input[type="file"]', function(){
+  const file = this.files[0];
+  if (file){
+  var it = $(this).parents('.cs_image_card');
+  let reader = new FileReader();
+  reader.onload = function(event){
+  var imageUrl = event.target.result;
+  $(it).find('.preview-thumb').css('background-image', 'url(' + imageUrl + ')');
+  }
+  reader.readAsDataURL(file, it);
+  }
+  });
+  });
+
+:javascript
+  $(document).ready(function() {
+    var stat1Val = $("#input_stat_1").attr('value');
+    $('#stat_1_value').html(stat1Val);
+    var stat1Desc = $("#input_stat_1_description").attr('value');
+    $('#stat_1_description').html(stat1Desc);
+
+    var stat2Val = $("#input_stat_2").attr('value');
+    $('#stat_2_value').html(stat2Val);
+    var stat2Desc = $("#input_stat_2_description").attr('value');
+    $('#stat_2_description').html(stat2Desc);
+
+    var stat3Val = $("#input_stat_3").attr('value');
+    $('#stat_3_value').html(stat3Val);
+    var stat3Desc = $("#input_stat_3_description").attr('value');
+    $('#stat_3_description').html(stat3Desc);
+  });
+
+  $(document).on('input', '#input_stat_1', function() {
+    var stat1Val = $(this).val();
+    $('#stat_1_value').html(stat1Val);
+  });
+  $(document).on('input', '#input_stat_2', function() {
+    var stat1Val = $(this).val();
+    $('#stat_2_value').html(stat1Val);
+  });
+  $(document).on('input', '#input_stat_3', function() {
+    var stat1Val = $(this).val();
+    $('#stat_3_value').html(stat1Val);
+  });
+
+  $(document).on('input', '#input_stat_1_description', function() {
+    var stat1Val = $(this).val();
+    $('#stat_1_description').html(stat1Val);
+  });
+  $(document).on('input', '#input_stat_2_description', function() {
+    var stat1Val = $(this).val();
+    $('#stat_2_description').html(stat1Val);
+  });
+  $(document).on('input', '#input_stat_3_description', function() {
+    var stat1Val = $(this).val();
+    $('#stat_3_description').html(stat1Val);
+  });
+
+:css
+  .modal-backdrop {
+    z-index: 9;
+  }

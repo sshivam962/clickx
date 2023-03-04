@@ -1,0 +1,30 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-page-cog.title-icon>
+    = I18n.t('submit_token_title', {:scope => 'devise'})
+  .options
+    .form-group
+      = link_to profile_path, class: 'btn btn-white btn-raised' do
+        %i.fa.fa-arrow-left.pr-xs
+        Back
+.container-fluid
+  %div
+    .row
+      .col-md-12.mt-md
+        .tab-content
+          .panel.panel-profile
+            .tab-content
+              .active.tab-pane.p-md
+                .row
+                  .col-md-12
+                    = verify_authy_installation_form do
+                      .form-group.m-n
+                        %label.col-sm-2.control-label
+                          OTP Token
+                        .col-sm-2.tabular-border
+                          = text_field_tag :token, '', autocomplete: :off, id: 'authy-token', class: 'form-control'
+                        %label.col-sm-2.control-label.info.mt-sm
+                          = authy_request_sms_link
+                      .col-sm-12.p-n.mt-md
+                        = submit_tag I18n.t('enable_my_account', {scope: 'devise'}), class: 'btn btn-raised btn-success'
+                        = link_to 'Cancel', profile_path, class: 'btn btn-raised btn-default'

@@ -1,0 +1,23 @@
+%a.hasnotifications.dropdown-toggle{ 'data-toggle': 'dropdown' }
+  %span.icon-bg
+    %badge.tooltips.ml-sm{ 'title': 'Notifications', 'title-direction': 'left' }
+    %span.badge.badge-danger.white.notification-icon{ 'ng-if': 'notifications.length' }
+      %b {{ notifications_count }}
+    %i.material-icons notifications
+  %span.badge.badge-info
+.dropdown-menu.animated.notifications
+  .topnav-dropdown-header
+    %span {{ notifications_count }} new notifications
+  .scroll-pane
+    %ul.media-list.scroll-content
+      %li.media.notification-success{ 'ng-repeat': 'notification in notifications' }
+        %a{ 'ng-href': '{{ notification.view_path }}' }
+          .media-left
+            %span.notification-icon
+              %i.material-icons remove_red_eye
+          .media-body
+            %h4.notification-heading {{ notification.content }}
+            %span.notification-time {{ notification.created_at | fromNowMoment }}
+
+  .topnav-dropdown-footer{"ng-if" => "notifications_count > 10"}
+    %a{href: '/notifications'} See all notifications

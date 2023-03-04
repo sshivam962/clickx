@@ -1,0 +1,12 @@
+- if @signup_link&.trial?
+  - sub_amount = 0
+- elsif @coupon.present?
+  - sub_amount = @subscription.amount - discount_by_coupon(@coupon, @subscription.amount, false)
+- else
+  - sub_amount = @subscription.amount
+- onetime_charge = @signup_link&.down_payment? ? 0 : @signup_link&.onetime_charge.to_i
+- down_payment = @signup_link&.down_payment? ? @signup_link&.down_payment : 0
+- total_amount = [sub_amount, @subscription.onetime_charge, onetime_charge, down_payment].flatten.compact.sum
+
+Total Amount Recieved:
+= number_to_currency(total_amount)

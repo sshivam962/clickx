@@ -1,0 +1,51 @@
+.row
+  .col-md-12
+    .tab-container
+      %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+        %li.active
+          %a{"data-toggle":"tab", 'data-target': "#social_sessions", 'ng-click':"resizeChart('social_session_chart'); network()"} Sessions via Social Referral
+      .tab-content
+        #social_sessions.tab-pane.active
+          .panel-body
+            .centered
+              #social_session_chart
+        .row
+          .col-sm-12.text-center{ "ng-include": "", "src": "'themeX/google_analytics/_chartFilter.html'" }
+
+.row
+  .col-md-12
+    .tab-container
+      .tab-content{'st-table':"ga_sites", 'st-safe-src':"copy_ga_sites"}
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th{'st-sort':'googleAdsAdNetworkType'}
+                  %u.help_pointer{ "title": "Social networks from which visitors are coming to your site "}
+                    Social Network
+                %th{'st-sort':'sessions', 'st-sort-default':'reverse'}
+                  %u.help_pointer{ "title": "Number of sessions from visitors who visited your site from a given social network" }
+                    Sessions
+                %th{'st-sort':'screenPageViews'}
+                  %u.help_pointer{ "title": "Number of pages viewed by visitors from a given social network" }
+                    Page Views
+                %th{'st-sort':'averageSessionDuration'}
+                  %u.help_pointer{ "title": "Average time spent by users from a social network on your site" }
+                    Avg. Session
+                    %br Duration
+                %th{'st-sort':'screenPageViewsPerSession'}
+                  %u.help_pointer{ "title": "Average number of pages visited by users from a social network per session" }
+                    Pages/Session
+            %tbody
+              %tr{'ng-repeat':"site in ga_sites"}
+                %td{align: "left"}
+                  {{site.googleAdsAdNetworkType}}
+                %td
+                  {{site.sessions}}
+                  %span.per_info ({{ (site.sessions/total_sessions) *100 |number:2 }}%)
+                %td
+                  {{site.page_views}}
+                  %span.per_info ({{ (site.page_views/total_pageviews) *100 |number:2 }}%)
+                %td {{site.averageSessionDuration | date:'HH:mm:ss'}}
+                %td {{site.screenPageViewsPerSession | number}}
+        %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}

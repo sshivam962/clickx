@@ -1,0 +1,54 @@
+.header
+  .container-fluid
+    %div{"data-widget-group" => "group1"}
+      .row
+        .col-md-4.p-n
+          %ul.nav.nav-tabs.nav-justified.strategy-tabs
+            %li.active{id: 'content_settings'}
+              %a.w100{"data-toggle" => "tab", href: '#content_settings_section'}
+                Settings
+            %li{id: 'content_orders'}
+              %a.w100{"data-toggle" => 'tab', href: '#content_orders_section'}
+                Orders
+        .col-md-12.p-n
+          .tab-content.strategy-leads
+            .tab-pane.pt-n.p-md.active{id: 'content_settings_section'}
+              = render 'super_admin/content_settings/shared/settings'
+            .tab-pane.pt-n.p-md{id: 'content_orders_section'}
+              = render 'super_admin/content_settings/shared/orders'
+
+:css
+  .admin-content-settings{
+    padding: 10px 15px;
+    margin-top: 30px;
+    background-color: #FFF;
+    border: 1px solid #ddd;
+    border-top: 1px solid #FFF;
+  }
+
+  .clearfix {
+    display: block;
+    padding: 0 0 0 10px;
+  }
+
+  .page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eeeeee;
+  }
+
+  .writers-level-settings {
+    display: block;
+    float: left;
+    padding: 0 10px;
+    width: 15%;
+    min-width: 280px;
+  }
+
+  .f-1 {
+    background-color: #ddd;
+  }
+
+  .input-group {
+    width:70%;
+  }

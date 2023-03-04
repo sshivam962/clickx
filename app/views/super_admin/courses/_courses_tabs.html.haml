@@ -1,0 +1,14 @@
+.clearfix
+.mt-5.tabs-wrapper
+  %ul.nav.nav-tabs
+    %li.active
+      %a{"data-toggle" => "tab", :href => "#tab-1"} Agency Courses
+    %li
+      %a{"data-toggle" => "tab", :href => "#tab-2"} Training Courses
+  .tab-content
+    #tab-1.tab-pane.active
+      .row.d-flex.flex-wrap#courses
+        = render 'agency_courses_list' if @courses['acadamics']
+    #tab-2.tab-pane
+      .row.d-flex.flex-wrap#courses
+        = render 'fulfilment_courses_list' if @courses['fulfilment']

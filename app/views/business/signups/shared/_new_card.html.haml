@@ -1,0 +1,29 @@
+%form#checkout_create_card.stripe-card-form
+  %h4.m-0.mb-4 Enter Your Payment Info
+  #card-container1
+    .pb-3
+      %label.input-label{for: 'number'} Card Number
+      .form-input
+        #card-number-div.input.empty
+    .d-sm-flex.pb-3
+      .w-sm-50.pr-sm-3.pb-sm-0.pb-3
+        %label.input-label{for: 'expiry'} Expiration Date
+        .form-input
+          #card-expiry-div.input.empty
+      .w-sm-50.pl-sm-3
+        %label.input-label{for: 'cvc'} CVC
+        .form-input
+          #card-cvc-div.input.empty
+    .d-sm-flex.pb-3
+      .error{role: 'alert', style: 'position:inherit;'}
+        %span
+          %i.fa.fa-times-circle
+        %span.card-message
+    = submit_tag 'submit', class: 'invisible checkout_create_card_submit'
+
+:javascript
+  $(document).ready(function() {
+    CountrySelect.changeStateAccordingToCountry();
+    $.fn.stripeCard();
+  })
+

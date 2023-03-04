@@ -1,0 +1,5 @@
+<% if current_user.errors.present? %>
+  toastr.error("<%= current_user.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success('Updated');
+<% end %>

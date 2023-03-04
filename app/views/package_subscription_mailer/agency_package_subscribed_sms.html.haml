@@ -1,0 +1,3 @@
+- total_amount = [@package.amount, @package.onetime_charge, @package.expedited_onboarding_fee, @addon_plans.pluck(:amount), @addon_plans.pluck(:implementation_fee), @signup_link&.onetime_charge.to_i].flatten.compact.sum
+Total Amount:
+= number_to_currency(total_amount)

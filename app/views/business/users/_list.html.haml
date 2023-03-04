@@ -1,0 +1,44 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th #
+      %th Name
+      %th Email
+      %th Invitation Status
+      %th Invitation Sent
+      %th Last Seen At
+      - if current_user.company_admin?
+        %th Action
+  %tbody
+    - users.each.with_index(1) do |user, index|
+      %tr
+        %td= index
+        %td= user.name
+        %td= user.email
+        %td
+          - if user.invitation_accepted?
+            Accepted
+          - else
+            = link_to resend_invitation_business_user_path(user), method: :put, class: 'btn btn-raised btn-sm m-n pl-sm pr-sm' do
+              %i.fa.fa-paper-plane
+              Resend Invitation
+        %td
+          - if user.invitation_sent_at?
+            %span
+              = "#{(Date.today - user.invitation_sent_at.to_date).round} days ago"
+          - else
+            %span
+              N/A
+        %td
+          - if user.last_seen.present?
+            %span
+              = "#{(Date.today - user.last_seen.to_date).round} days ago"
+          - else
+            %span
+              N/A
+        - if current_user.company_admin?
+          %td
+            - if current_user.id != user.id
+              = link_to business_user_path(user), method: :delete, class: 'btn btn-danger btn-raised btn-xs m-n', data: { confirm: 'Are you sure you want to delete this user?' } do
+                %i.fa.fa-close
+                .ripple-container

@@ -1,0 +1,180 @@
+- content_for :title do
+  Bundled Plans | Clickx
+.ui-2020
+  .page-content
+    .page-heading.pt-md.pb-md
+      .row.align-items-center
+        .col-sm-6
+          %h1
+            %i.clickx-icon-package
+            Bundled Plans
+    .container-fluid
+      .row.row-p-5.d-flex.flex-wrap
+        - package = @packages['google_fb_ads'].first
+        .col.col-md-6.mb-3.col-xs-12
+          .card--plan.bg-white.br-10.p-5.h-100
+            .fs-lg-md.mb-lg.fw-n.text-darkblue Google Ads Starter + Facebook Ads Starter
+            .panel-price.text-warning
+              - package_amount = package.bundle_plans.select(&:subscription?).sum(&:amount)
+              = in_currency(package_amount, current_agency.display_currency)
+              %small.fw-l.text-muted.f-s-28> /mo
+            .mb-lg
+              = bundle_msrp_text(package)
+              %br
+              = bundle_setup_fee_text(package)
+            %a.btn.btn-info.btn-raised.btn-lg.m-n.btn-block{href: agency_checkout_path(package: 'bundle', plan: package.key)} Get Started
+        - package = @packages['google_ads_pro_fb_ads_starter'].first
+        .col.col-md-6.mb-3.col-xs-12
+          .card--plan.bg-white.br-10.p-5.h-100
+            .fs-lg-md.mb-lg.fw-n.text-darkblue Google Ads Pro + Facebook Ads Starter
+            .panel-price.text-warning
+              - package_amount = package.bundle_plans.select(&:subscription?).sum(&:amount)
+              = in_currency(package_amount, current_agency.display_currency)
+              %small.fw-l.text-muted.f-s-28> /mo
+            .mb-lg
+              = bundle_msrp_text(package)
+              %br
+              = bundle_setup_fee_text(package)
+            %a.btn.btn-info.btn-raised.btn-lg.m-n.btn-block{href: agency_checkout_path(package: 'bundle', plan: package.key)} Get Started
+        - package = @packages['fb_ads_pro_google_ads_pro'].first
+        .col.col-md-6.mb-3.col-xs-12
+          .card--plan.bg-white.br-10.p-5.h-100
+            .fs-lg-md.mb-lg.fw-n.text-darkblue Facebook Ads Pro + Google Ads Pro
+            .panel-price.text-warning
+              - package_amount = package.bundle_plans.select(&:subscription?).sum(&:amount)
+              = in_currency(package_amount, current_agency.display_currency)
+              %small.fw-l.text-muted.f-s-28> /mo
+            .mb-lg
+              = bundle_msrp_text(package)
+              %br
+              = bundle_setup_fee_text(package)
+            %a.btn.btn-info.btn-raised.btn-lg.m-n.btn-block{href: agency_checkout_path(package: 'bundle', plan: package.key)} Get Started
+
+        - package = @packages['fb_ads_funnel_development'].first
+        .col.col-md-6.mb-3.col-xs-12
+          .card--plan.bg-white.br-10.p-5.h-100
+            .fs-lg-md.mb-lg.fw-n.text-darkblue Start Facebook Ads with 2 Step Funnel
+            .panel-price.text-warning
+              - package_amount = package.bundle_plans.select(&:subscription?).sum(&:amount)
+              = in_currency(package_amount, current_agency.display_currency)
+              %small.fw-l.text-muted.f-s-28> /mo
+              = " + "
+              - package_charge = package.bundle_plans.select(&:charge?).sum(&:amount)
+              = in_currency(package_charge, current_agency.display_currency)
+              %small.fw-l.text-muted.f-s-28> One Time
+            .mb-lg
+              = bundle_msrp_text(package)
+              %br
+              = bundle_setup_fee_text(package)
+            %a.btn.btn-info.btn-raised.btn-lg.m-n.btn-block{href: agency_checkout_path(package: 'bundle', plan: package.key)} Get Started
+
+        - package = @packages['google_ads_landing_page'].first
+        .col.col-md-6.mb-3.col-xs-12
+          .card--plan.bg-white.br-10.p-5.h-100
+            .fs-lg-md.mb-lg.fw-n.text-darkblue Google Ads Starter + Template Landing Page
+            .panel-price.text-warning
+              - package_amount = package.bundle_plans.select(&:subscription?).sum(&:amount)
+              = in_currency(package_amount, current_agency.display_currency)
+              %small.fw-l.text-muted.f-s-28> /mo
+              = " + "
+              - package_charge = package.bundle_plans.select(&:charge?).sum(&:amount)
+              = in_currency(package_charge, current_agency.display_currency)
+              %small.fw-l.text-muted.f-s-28> One Time
+            .mb-lg
+              = bundle_msrp_text(package)
+              %br
+              = bundle_setup_fee_text(package)
+            %a.btn.btn-info.btn-raised.btn-lg.m-n.btn-block{href: agency_checkout_path(package: 'bundle', plan: package.key)} Get Started
+
+        - package = @packages['local_seo_facebook_starter'].first
+        .col.col-md-6.mb-3.col-xs-12
+          .card--plan.bg-white.br-10.p-5.h-100
+            .fs-lg-md.mb-lg.fw-n.text-darkblue Local SEO Starter + Facebook Ads Starter
+            .panel-price.text-warning
+              - package_amount = package.bundle_plans.select(&:subscription?).sum(&:amount)
+              = in_currency(package_amount, current_agency.display_currency)
+              %small.fw-l.text-muted.f-s-28> /mo
+            .mb-lg
+              = bundle_msrp_text(package)
+              %br
+              = bundle_setup_fee_text(package)
+            %a.btn.btn-info.btn-raised.btn-lg.m-n.btn-block{href: agency_checkout_path(package: 'bundle', plan: package.key)} Get Started
+
+        - package = @packages['local_seo_facebook_jumpstart'].first
+        .col.col-md-6.mb-3.col-xs-12
+          .card--plan.bg-white.br-10.p-5.h-100
+            .fs-lg-md.mb-lg.fw-n.text-darkblue Local SEO + Facebook Ads Jumpstart
+            .panel-price.text-warning
+              - package_amount = package.bundle_plans.select(&:subscription?).sum(&:amount)
+              = in_currency(package_amount, current_agency.display_currency)
+              %small.fw-l.text-muted.f-s-28> /mo
+            .mb-lg
+              = bundle_msrp_text(package)
+              %br
+              = bundle_setup_fee_text(package)
+            %a.btn.btn-info.btn-raised.btn-lg.m-n.btn-block{href: agency_checkout_path(package: 'bundle', plan: package.key)} Get Started
+
+        - package = @packages['national_seo_starter_google_ads_advanced'].first
+        .col.col-md-6.mb-3.col-xs-12
+          .card--plan.bg-white.br-10.p-5.h-100
+            .fs-lg-md.mb-lg.fw-n.text-darkblue Advanced SEO (Starter) with Advanced Google Ads
+            .panel-price.text-warning
+              - package_amount = package.bundle_plans.select(&:subscription?).sum(&:amount)
+              = in_currency(package_amount, current_agency.display_currency)
+              %small.fw-l.text-muted.f-s-28> /mo
+            .mb-lg
+              = bundle_msrp_text(package)
+              %br
+              = bundle_setup_fee_text(package)
+            %a.btn.btn-info.btn-raised.btn-lg.m-n.btn-block{href: agency_checkout_path(package: 'bundle', plan: package.key)} Get Started
+
+        - package = @packages['google_ads_starter_funnel_development_starter'].first
+        .col.col-md-6.mb-3.col-xs-12
+          .card--plan.bg-white.br-10.p-5.h-100
+            .fs-lg-md.mb-lg.fw-n.text-darkblue
+              = package.name
+            .panel-price.text-warning
+              - package_amount = package.bundle_plans.select(&:subscription?).sum(&:amount)
+              = in_currency(package_amount, current_agency.display_currency)
+              %small.fw-l.text-muted.f-s-28> /mo
+              = " + "
+              - package_charge = package.bundle_plans.select(&:charge?).sum(&:amount)
+              = in_currency(package_charge, current_agency.display_currency)
+              %small.fw-l.text-muted.f-s-28> One Time
+            .mb-lg
+              = bundle_msrp_text(package)
+              %br
+              = bundle_setup_fee_text(package)
+            %a.btn.btn-info.btn-raised.btn-lg.m-n.btn-block{href: agency_checkout_path(package: 'bundle', plan: package.key)} Get Started
+
+      .row.pt-5.pb-4.d-none.flex-wrap.row-p-5
+        .col-md-6.col-sm-6.col
+          .panel-body.bg-white.panel-br-10.p-5.h-100
+            .panel-head.pb-5
+              %i.clickx-icon-Support.ico-60.pr-sm.text-info
+              %h5.f-s-16.f-w-lg.l-s-2.text-muted OPTIONAL
+              .pt-header-caption.text-info White-Glove™ Customer Service
+              .pt-header-price
+                #{in_currency(500, current_agency.display_currency)}
+                %span> /mo
+            .panel-content.pl-n.pr-n
+              %p In addition to our White Label Dashboard for Reporting, White-Glove™ Customer Service include day to day Account Management, Email Communication with our Account Managers as well as Monthly Strategy and Reporting Phone Call.
+        .col-md-6.col-sm-6.col.mt-4.mt-md-0
+          .panel-body.bg-white.panel-br-10.p-5.h-100
+            .panel-head.pb-5
+              %i.clickx-icon-partner.ico-60.pr-sm.text-info
+              %h5.f-s-16.f-w-lg.l-s-2.text-muted OPTIONAL
+              .pt-header-caption.text-info Expedited Onboarding
+              .pt-header-price
+                #{in_currency(500, current_agency.display_currency)}
+                %span> /One Time
+            .panel-content.pl-n.pr-n
+              %p Speedy Ad Setup and Approval. 2 Weeks Rush Turn Around.
+              %p Requesting Access to Business Manager as an Admin, Ad Account Creation, and Page Access, Dashboard Provisioning, Campaign Funding and Launch Support
+      .spacer15
+:javascript
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.plan-preloader').removeClass('plan-preloader');
+    }, 500);
+  });

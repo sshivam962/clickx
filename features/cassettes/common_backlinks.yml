@@ -1,0 +1,382 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.rebrandly.com/v1/domains
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Apikey:
+      - 382414aba74246f080f76c84050b1abd
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type,Accept,X-Access-Token,X-Key,apikey,Authorization,Team
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 27 Nov 2017 12:14:09 GMT
+      Etag:
+      - W/"318-/2Mw5bGjySzx93q975NG+z7uVwc"
+      Vary:
+      - Accept-Encoding
+      X-Powered-By:
+      - Express
+      Content-Length:
+      - '792'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '[{"id":"d01213cffb934b7b95af925ff5d87e3e","fullName":"clickx.ly","topLevelDomain":"ly","level":2,"creationDate":"2017-05-20T06:26:55.000Z","createdAt":"2017-05-20T06:26:55.000Z","updatedAt":"2017-05-25T04:03:50.000Z","customHomepage":"http://www.clickx.io","ownerId":"d6ee5ed38a4447799db7b2b18fa34682","type":"USER","subdomains":0,"managed":false,"status":{"dns":"verified","ssl":false},"https":false,"active":true},{"id":"8f104cc5b6ee4a4ba7897b06ac2ddcfb","fullName":"rebrand.ly","topLevelDomain":"ly","level":2,"creationDate":"2015-01-01T00:00:00.000Z","createdAt":"2015-01-01T00:00:00.000Z","updatedAt":"2017-04-24T10:29:37.000Z","customHomepage":"https://www.rebrandly.com","type":"SERVICE","subdomains":0,"managed":true,"status":{"dns":"verified","ssl":true},"https":true,"active":true}]'
+    http_version: 
+  recorded_at: Mon, 27 Nov 2017 12:14:09 GMT
+- request:
+    method: post
+    uri: https://api.rebrandly.com/v1/links
+    body:
+      encoding: UTF-8
+      string: '{"title":"Clickx Signup","domain":{"id":"d01213cffb934b7b95af925ff5d87e3e","full_name":"clickx.ly","top_level_domain":"ly","level":2,"created_at":"2017-05-20T06:26:55.000Z","updated_at":"2017-05-25T04:03:50.000Z","custom_homepage":"http://www.clickx.io","owner_id":"d6ee5ed38a4447799db7b2b18fa34682","type":"USER","subdomains":0,"managed":false,"status":{"dns":"verified","ssl":false},"https":false,"active":true},"destination":"http://localhost:3000/signup?ref=UJEC8RT9LLL2"}'
+    headers:
+      Content-Type:
+      - application/json
+      Apikey:
+      - 382414aba74246f080f76c84050b1abd
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type,Accept,X-Access-Token,X-Key,apikey,Authorization,Team
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 27 Nov 2017 12:14:10 GMT
+      Etag:
+      - W/"2cc-GDnp2C3Fyk7Qz/Fe57xX4NgsUy4"
+      Vary:
+      - Accept-Encoding
+      X-Powered-By:
+      - Express
+      Content-Length:
+      - '716'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"6029898","linkId":6029898,"title":"Clickx Signup","slashtag":"uv0vp","destination":"http://localhost:3000/signup?ref=UJEC8RT9LLL2","createdAt":"2017-11-27T12:14:11.000Z","updatedAt":"2017-11-27T12:14:11.000Z","status":"active","tags":[],"clicks":0,"isPublic":false,"shortUrl":"clickx.ly/uv0vp","domainId":"d01213cffb934b7b95af925ff5d87e3e","domainName":"clickx.ly","domain":{"id":"d01213cffb934b7b95af925ff5d87e3e","ref":"/domains/d01213cffb934b7b95af925ff5d87e3e","fullName":"clickx.ly","active":true},"https":false,"favourite":false,"creator":{"id":"d6ee5ed38a4447799db7b2b18fa34682","fullName":"Clickx","avatarUrl":"https://s.gravatar.com/avatar/dfa68d603ee865f92e63bd7e32af0f41?size=80&d=retro&rating=g"}}'
+    http_version: 
+  recorded_at: Mon, 27 Nov 2017 12:14:11 GMT
+- request:
+    method: get
+    uri: https://company-stream.clearbit.com/v2/companies/find?domain=sampletest.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 27 Nov 2017 12:14:37 GMT
+      Vary:
+      - Accept-Encoding
+      X-Api-Version:
+      - '2017-09-12'
+      Content-Length:
+      - '137'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "error": {
+            "type": "auth_required",
+            "message": "Authentication is required for this action. Sign up at https://clearbit.com"
+          }
+        }
+    http_version: 
+  recorded_at: Mon, 27 Nov 2017 12:14:37 GMT
+- request:
+    method: get
+    uri: http://api.majestic.com/api/json?Count=5&app_api_key=D38F217B37B05419E0BBBAE6F45C0F53&cmd=GetIndexItemInfo&datasource=fresh&item0=sampletest.com&items=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Nov 2017 12:14:37 GMT
+      Server:
+      - Apache
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Code":"OK","ErrorMessage":"","FullError":"","FirstBackLinkDate":"2017-08-25","IndexBuildDate":"2017-11-27
+        05:23:49","IndexType":1,"MostRecentBackLinkDate":"2017-11-26","QueriedRootDomains":1,"QueriedSubDomains":0,"QueriedURLs":0,"QueriedURLsMayExist":0,"ServerBuild":"2017-10-25
+        14:33:44","ServerName":"QUACKYO","ServerVersion":"1.0.6507.24412","UniqueIndexID":"20171127052349-FRESH","DataTables":{"Results":{"Headers":{"MaxTopicsRootDomain":30,"MaxTopicsSubDomain":20,"MaxTopicsURL":10,"TopicsCount":3},"Data":[{"ItemNum":0,"Item":"sampletest.com","ResultCode":"OK","Status":"Found","ExtBackLinks":3,"RefDomains":2,"AnalysisResUnitsCost":3,"ACRank":-1,"ItemType":1,"IndexedURLs":6,"GetTopBackLinksAnalysisResUnitsCost":5000,"DownloadBacklinksAnalysisResUnitsCost":25000,"DownloadRefDomainBacklinksAnalysisResUnitsCost":25000,"RefIPs":2,"RefSubNets":2,"RefDomainsEDU":0,"ExtBackLinksEDU":0,"RefDomainsGOV":0,"ExtBackLinksGOV":0,"RefDomainsEDU_Exact":0,"ExtBackLinksEDU_Exact":0,"RefDomainsGOV_Exact":0,"ExtBackLinksGOV_Exact":0,"CrawledFlag":"False","LastCrawlDate":"","LastCrawlResult":"","RedirectFlag":"False","FinalRedirectResult":"","OutDomainsExternal":"","OutLinksExternal":"","OutLinksInternal":"","OutLinksPages":"","LastSeen":"","Title":"","RedirectTo":"","Language":"","LanguageDesc":"","LanguageConfidence":"","LanguagePageRatios":"","LanguageTotalPages":0,"RefLanguage":"en","RefLanguageDesc":"English","RefLanguageConfidence":"99","RefLanguagePageRatios":"100","RefLanguageTotalPages":3,"CrawledURLs":3,"RootDomainIPAddress":"","TotalNonUniqueLinks":"3","NonUniqueLinkTypeHomepages":"0","NonUniqueLinkTypeIndirect":"0","NonUniqueLinkTypeDeleted":"0","NonUniqueLinkTypeNoFollow":"2","NonUniqueLinkTypeProtocolHTTPS":"2","NonUniqueLinkTypeFrame":"0","NonUniqueLinkTypeImageLink":"0","NonUniqueLinkTypeRedirect":"0","NonUniqueLinkTypeTextLink":"3","RefDomainTypeLive":"2","RefDomainTypeFollow":"1","RefDomainTypeHomepageLink":"0","RefDomainTypeDirect":"2","RefDomainTypeProtocolHTTPS":"1","CitationFlow":1,"TrustFlow":0,"TrustMetric":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":""}]}}}'
+    http_version: 
+  recorded_at: Mon, 27 Nov 2017 12:14:38 GMT
+- request:
+    method: get
+    uri: http://api.majestic.com/api/json?Count=500&MaxSameSourceURLs=1&Mode=1&app_api_key=D38F217B37B05419E0BBBAE6F45C0F53&cmd=GetBackLinkData&datasource=fresh&item=sampletest.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Nov 2017 12:14:38 GMT
+      Server:
+      - Apache
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Code":"OK","ErrorMessage":"","FullError":"","IndexBuildDate":"2017-11-27
+        05:23:49","IndexType":1,"ServerBuild":"2017-10-25 14:33:44","ServerName":"QUACKYO","ServerVersion":"1.0.6507.24412","UniqueIndexID":"20171127052349-FRESH","DataTables":{"BackLinks":{"Headers":{"AvailableLines":3,"BackLinkItem":"sampletest.com","BackLinkType":"BackLinks","Count":500,"From":0,"Item":"sampletest.com","ItemType":"RootDomain","MaxRefDomainTopics":10,"MaxSourceTopics":3,"MaxTargetTopics":10,"OrigItem":"sampletest.com","RefDomainTopicsCount":10,"SourceTopicsCount":3,"TargetTopicsCount":1,"TotalBackLinks":3,"TotalLines":3,"TotalMatches":2},"Data":[{"SourceURL":"http://www.rnkws.com/www.sampletest.com","ACRank":2,"AnchorText":"www.sampletest.com","Date":"2017-11-16","SourceTitle":"sampletest.com
+        : asdas False","SourceOutDomainsExternal":"1","SourceOutLinksExternal":"1","SourceOutLinksInternal":"4","SourceLanguage":"en","SourceLanguageDesc":"English","SourceLanguageConfidence":99,"FlagRedirect":0,"FlagFrame":0,"FlagNoFollow":0,"FlagImages":0,"FlagDeleted":0,"FlagAltText":0,"FlagMention":0,"TargetURL":"http://sampletest.com/","IndirectTargetURL":"","IndirectTargetType":"","TargetTitle":"","TargetLanguage":"","TargetLanguageDesc":"","TargetLanguageConfidence":0,"LinksAvailableForRootDomain":-1,"DomainID":-1,"FirstIndexedDate":"2017-08-26","LastSeenDate":"2017-11-16","DateLost":"","ReasonLost":"","LinkType":"TextLink","LinkSubType":"TextLink_Normal","TargetCitationFlow":10,"TargetTrustFlow":0,"TargetTopicalTrustFlow_Topic_0":"","TargetTopicalTrustFlow_Value_0":"","SourceCitationFlow":14,"SourceTrustFlow":0,"SourceTopicalTrustFlow_Topic_0":"","SourceTopicalTrustFlow_Value_0":"","SourceTopicalTrustFlow_Topic_1":"","SourceTopicalTrustFlow_Value_1":"","SourceTopicalTrustFlow_Topic_2":"","SourceTopicalTrustFlow_Value_2":""},{"SourceURL":"https://community.smartbear.com/t5/SoapUI-Open-Source/Can-javax-wsdl-verbose-value-be-set-from-WSDLOperation/td-p/42014","ACRank":1,"AnchorText":"https://webservices.sampletest.com/xsd/test1.xsd'',","Date":"2017-10-08","SourceTitle":"Can
+        javax.wsdl.verbose value be set from WSDLOpera... - SmartBear Community","SourceOutDomainsExternal":"13","SourceOutLinksExternal":"16","SourceOutLinksInternal":"173","SourceLanguage":"en","SourceLanguageDesc":"English","SourceLanguageConfidence":99,"FlagRedirect":0,"FlagFrame":0,"FlagNoFollow":1,"FlagImages":0,"FlagDeleted":0,"FlagAltText":0,"FlagMention":0,"TargetURL":"https://webservices.sampletest.com/xsd/test1.xsd'',","IndirectTargetURL":"","IndirectTargetType":"","TargetTitle":"","TargetLanguage":"","TargetLanguageDesc":"","TargetLanguageConfidence":0,"LinksAvailableForRootDomain":-1,"DomainID":-1,"FirstIndexedDate":"2017-10-08","LastSeenDate":"2017-10-08","DateLost":"","ReasonLost":"","LinkType":"TextLink","LinkSubType":"TextLink_Normal","TargetCitationFlow":0,"TargetTrustFlow":0,"TargetTopicalTrustFlow_Topic_0":"","TargetTopicalTrustFlow_Value_0":"","SourceCitationFlow":9,"SourceTrustFlow":0,"SourceTopicalTrustFlow_Topic_0":"","SourceTopicalTrustFlow_Value_0":"","SourceTopicalTrustFlow_Topic_1":"","SourceTopicalTrustFlow_Value_1":"","SourceTopicalTrustFlow_Topic_2":"","SourceTopicalTrustFlow_Value_2":""}]}}}'
+    http_version: 
+  recorded_at: Mon, 27 Nov 2017 12:14:38 GMT
+- request:
+    method: get
+    uri: http://api.majestic.com/api/json?Count=500&Query=sampletest.com&app_api_key=D38F217B37B05419E0BBBAE6F45C0F53&cmd=GetTopPages&datasource=fresh
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Nov 2017 12:14:38 GMT
+      Server:
+      - Apache
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Code":"OK","ErrorMessage":"","FullError":"","ChargedAnalysisResUnits":5000,"ChargedRetrievalResUnits":6,"IndexBuildDate":"2017-11-27
+        05:23:49","IndexType":1,"MaxTargetTopics":10,"RemainingAnalysisResUnits":83457000,"RemainingRetrievalResUnits":19403349,"SearchResultCode":0,"ServerBuild":"2017-10-25
+        14:33:44","ServerName":"QUACKYO","ServerVersion":"1.0.6507.24412","TargetTopicsCount":10,"TimeTaken":"0.015","TotalMatches":6,"UniqueIndexID":"20171127052349-FRESH","DataTables":{"Matches":{"Headers":{},"Data":[{"ACRank":2,"URL":"http://sampletest.com/","Title":"http://sampletest.com/","Date":"28
+        Aug 2017","FlagPageData":"True","FlagRedirect":"False","FlagFrames":"FALSE","ExtBackLinks":1,"RefDomains":1,"RefIPs":1,"RefSubNets":1,"LastCrawlResult":"BlockedByRobotsTXT","FinalRedirectResult":"BlockedByRobotsTXT","RedirectTo":"","CitationFlow":10,"TrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":"","TopicalTrustFlow_Topic_3":"","TopicalTrustFlow_Value_3":"","TopicalTrustFlow_Topic_4":"","TopicalTrustFlow_Value_4":"","TopicalTrustFlow_Topic_5":"","TopicalTrustFlow_Value_5":"","TopicalTrustFlow_Topic_6":"","TopicalTrustFlow_Value_6":"","TopicalTrustFlow_Topic_7":"","TopicalTrustFlow_Value_7":"","TopicalTrustFlow_Topic_8":"","TopicalTrustFlow_Value_8":"","TopicalTrustFlow_Topic_9":"","TopicalTrustFlow_Value_9":"","OutDomainsExternal":"0","OutLinksExternal":"0","OutLinksInternal":"0","Language":"","LanguageDesc":"","LanguageConfidence":"","TitleNotPresent":1},{"ACRank":0,"URL":"https://webservices.sampletest.com/xsd/test1.xsd'',","Title":"https://webservices.sampletest.com/xsd/test1.xsd'',","Date":"8
+        Oct 2017","FlagPageData":"False","FlagRedirect":"False","FlagFrames":"FALSE","ExtBackLinks":1,"RefDomains":1,"RefIPs":1,"RefSubNets":1,"LastCrawlResult":"NotCrawled","FinalRedirectResult":"NotCrawled","RedirectTo":"","CitationFlow":0,"TrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":"","TopicalTrustFlow_Topic_3":"","TopicalTrustFlow_Value_3":"","TopicalTrustFlow_Topic_4":"","TopicalTrustFlow_Value_4":"","TopicalTrustFlow_Topic_5":"","TopicalTrustFlow_Value_5":"","TopicalTrustFlow_Topic_6":"","TopicalTrustFlow_Value_6":"","TopicalTrustFlow_Topic_7":"","TopicalTrustFlow_Value_7":"","TopicalTrustFlow_Topic_8":"","TopicalTrustFlow_Value_8":"","TopicalTrustFlow_Topic_9":"","TopicalTrustFlow_Value_9":"","OutDomainsExternal":"","OutLinksExternal":"","OutLinksInternal":"","Language":"","LanguageDesc":"","LanguageConfidence":"","TitleNotPresent":1},{"ACRank":0,"URL":"https://webservices.sampletest.com/wsdl/sampletest.wsdl''.","Title":"https://webservices.sampletest.com/wsdl/sampletest.wsdl''.","Date":"8
+        Oct 2017","FlagPageData":"False","FlagRedirect":"False","FlagFrames":"FALSE","ExtBackLinks":1,"RefDomains":1,"RefIPs":1,"RefSubNets":1,"LastCrawlResult":"NotCrawled","FinalRedirectResult":"NotCrawled","RedirectTo":"","CitationFlow":0,"TrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":"","TopicalTrustFlow_Topic_3":"","TopicalTrustFlow_Value_3":"","TopicalTrustFlow_Topic_4":"","TopicalTrustFlow_Value_4":"","TopicalTrustFlow_Topic_5":"","TopicalTrustFlow_Value_5":"","TopicalTrustFlow_Topic_6":"","TopicalTrustFlow_Value_6":"","TopicalTrustFlow_Topic_7":"","TopicalTrustFlow_Value_7":"","TopicalTrustFlow_Topic_8":"","TopicalTrustFlow_Value_8":"","TopicalTrustFlow_Topic_9":"","TopicalTrustFlow_Value_9":"","OutDomainsExternal":"","OutLinksExternal":"","OutLinksInternal":"","Language":"","LanguageDesc":"","LanguageConfidence":"","TitleNotPresent":1},{"ACRank":0,"URL":"http://www.sampletest.com/","Title":"http://www.sampletest.com/","Date":"28
+        Aug 2017","FlagPageData":"True","FlagRedirect":"False","FlagFrames":"FALSE","ExtBackLinks":0,"RefDomains":0,"RefIPs":0,"RefSubNets":0,"LastCrawlResult":"BlockedByRobotsTXT","FinalRedirectResult":"BlockedByRobotsTXT","RedirectTo":"","CitationFlow":0,"TrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":"","TopicalTrustFlow_Topic_3":"","TopicalTrustFlow_Value_3":"","TopicalTrustFlow_Topic_4":"","TopicalTrustFlow_Value_4":"","TopicalTrustFlow_Topic_5":"","TopicalTrustFlow_Value_5":"","TopicalTrustFlow_Topic_6":"","TopicalTrustFlow_Value_6":"","TopicalTrustFlow_Topic_7":"","TopicalTrustFlow_Value_7":"","TopicalTrustFlow_Topic_8":"","TopicalTrustFlow_Value_8":"","TopicalTrustFlow_Topic_9":"","TopicalTrustFlow_Value_9":"","OutDomainsExternal":"0","OutLinksExternal":"0","OutLinksInternal":"0","Language":"","LanguageDesc":"","LanguageConfidence":"","TitleNotPresent":1},{"ACRank":0,"URL":"http://mail.sampletest.com/","Title":"http://mail.sampletest.com/","Date":"1
+        Sep 2017","FlagPageData":"True","FlagRedirect":"False","FlagFrames":"FALSE","ExtBackLinks":0,"RefDomains":0,"RefIPs":0,"RefSubNets":0,"LastCrawlResult":"BlockedByRobotsTXT","FinalRedirectResult":"BlockedByRobotsTXT","RedirectTo":"","CitationFlow":0,"TrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":"","TopicalTrustFlow_Topic_3":"","TopicalTrustFlow_Value_3":"","TopicalTrustFlow_Topic_4":"","TopicalTrustFlow_Value_4":"","TopicalTrustFlow_Topic_5":"","TopicalTrustFlow_Value_5":"","TopicalTrustFlow_Topic_6":"","TopicalTrustFlow_Value_6":"","TopicalTrustFlow_Topic_7":"","TopicalTrustFlow_Value_7":"","TopicalTrustFlow_Topic_8":"","TopicalTrustFlow_Value_8":"","TopicalTrustFlow_Topic_9":"","TopicalTrustFlow_Value_9":"","OutDomainsExternal":"0","OutLinksExternal":"0","OutLinksInternal":"0","Language":"","LanguageDesc":"","LanguageConfidence":"","TitleNotPresent":1},{"ACRank":0,"URL":"https://www.sampletest.com/samnet/admin/panel/cronjobs/transaction","Title":"https://www.sampletest.com/samnet/admin/panel/cronjobs/transaction","Date":"4
+        Oct 2017","FlagPageData":"False","FlagRedirect":"False","FlagFrames":"FALSE","ExtBackLinks":0,"RefDomains":0,"RefIPs":0,"RefSubNets":0,"LastCrawlResult":"NotCrawled","FinalRedirectResult":"NotCrawled","RedirectTo":"","CitationFlow":0,"TrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":"","TopicalTrustFlow_Topic_3":"","TopicalTrustFlow_Value_3":"","TopicalTrustFlow_Topic_4":"","TopicalTrustFlow_Value_4":"","TopicalTrustFlow_Topic_5":"","TopicalTrustFlow_Value_5":"","TopicalTrustFlow_Topic_6":"","TopicalTrustFlow_Value_6":"","TopicalTrustFlow_Topic_7":"","TopicalTrustFlow_Value_7":"","TopicalTrustFlow_Topic_8":"","TopicalTrustFlow_Value_8":"","TopicalTrustFlow_Topic_9":"","TopicalTrustFlow_Value_9":"","OutDomainsExternal":"","OutLinksExternal":"","OutLinksInternal":"","Language":"","LanguageDesc":"","LanguageConfidence":"","TitleNotPresent":1}]},"DomainInfo":{"Headers":{},"Data":[{"Domain":"sampletest.com","Found":"true","SubDomains":4,"Pages":3,"Links":6,"TotalBackLinks":3,"ExtBackLinks":3,"RefDomains":2,"FlagRedirects":0,"FlagFrames":0,"FlagImages":0,"FlagNoFollow":2,"FlagOldCrawl":0,"PriceTableName":"","TotalMentions":1,"MentionDomains":1,"PriceChartName":"","RefIPs":2,"RefSubNets":2,"RefDomainsWorld_EDU":0,"RefDomainsUSA_EDU":0,"RefDomainsWorld_GOV":0,"RefDomainsUSA_GOV":0,"RefLinksWorld_EDU":0,"RefLinksUSA_EDU":0,"RefLinksWorld_GOV":0,"RefLinksUSA_GOV":0}]}}}'
+    http_version: 
+  recorded_at: Mon, 27 Nov 2017 12:14:38 GMT
+- request:
+    method: get
+    uri: http://api.majestic.com/api/json?Count=1000&app_api_key=D38F217B37B05419E0BBBAE6F45C0F53&cmd=GetAnchorText&datasource=fresh&item=sampletest.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 27 Nov 2017 12:14:39 GMT
+      Server:
+      - Apache
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Code":"OK","ErrorMessage":"","FullError":"","IndexBuildDate":"2017-11-27
+        05:23:49","IndexType":1,"ServerBuild":"2017-10-25 14:33:44","ServerName":"QUACKYO","ServerVersion":"1.0.6507.24412","UniqueIndexID":"20171127052349-FRESH","DataTables":{"AnchorText":{"Headers":{"CanReturnURLs":1,"Count":1000,"FilterAnchorText":"","FilterAnchorTextMode":0,"FilterRefDomain":"","From":0,"Item":"sampletest.com","MaxTopics":10,"Mode":0,"OrigItem":"sampletest.com","TextMode":0,"TopicsCount":3,"TotalBackLinks":3,"TotalRefDomains":3,"TotalResults":3},"Data":[{"AnchorText":"www.sampletest.com","RefDomains":1,"TotalLinks":1,"DeletedLinks":0,"NoFollowLinks":0,"EstimatedLinkCitationFlow":10,"EstimatedLinkTrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":""},{"AnchorText":"https://webservices.sampletest.com/xsd/test1.xsd'',","RefDomains":1,"TotalLinks":1,"DeletedLinks":0,"NoFollowLinks":1,"EstimatedLinkCitationFlow":0,"EstimatedLinkTrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":""},{"AnchorText":"https://webservices.sampletest.com/wsdl/sampletest.wsdl''.","RefDomains":1,"TotalLinks":1,"DeletedLinks":0,"NoFollowLinks":1,"EstimatedLinkCitationFlow":0,"EstimatedLinkTrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":""}]}}}'
+    http_version: 
+  recorded_at: Mon, 27 Nov 2017 12:14:39 GMT
+- request:
+    method: get
+    uri: http://api.semrush.com/?database=us&display_limit=100&display_sort=tr_desc&domain=sampletest.com&export_columns=Ph,Po,Pp,Pd,Nq,Cp,Ur,Tr,Tc&key&type=domain_organic
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 27 Nov 2017 12:14:39 GMT
+      Content-Type:
+      - text/plain
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      X-Content-Type-Options:
+      - nosniff
+    body:
+      encoding: UTF-8
+      string: '{ "error": "ERROR 40 :: MANDATORY PARAMETER action NOT SET OR EMPTY",
+        "exec_time": 0.000143 }'
+    http_version: 
+  recorded_at: Mon, 27 Nov 2017 12:14:40 GMT
+- request:
+    method: get
+    uri: http://api.semrush.com/?database=us&display_limit=100&display_sort=tr_desc&domain=sampletest.com&export_columns=Ph,Po,Pp,Pd,Nq,Cp,Ur,Tr,Tc&key&type=domain_adwords
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 27 Nov 2017 12:14:40 GMT
+      Content-Type:
+      - text/plain
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      X-Content-Type-Options:
+      - nosniff
+    body:
+      encoding: UTF-8
+      string: '{ "error": "ERROR 40 :: MANDATORY PARAMETER action NOT SET OR EMPTY",
+        "exec_time": 0.000231 }'
+    http_version: 
+  recorded_at: Mon, 27 Nov 2017 12:14:40 GMT
+- request:
+    method: get
+    uri: http://api.majestic.com/api/json?Count=1000&app_api_key=D38F217B37B05419E0BBBAE6F45C0F53&cmd=GetAnchorText&datasource=fresh&item=sampletest.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 28 Nov 2017 10:19:56 GMT
+      Server:
+      - Apache
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Code":"OK","ErrorMessage":"","FullError":"","IndexBuildDate":"2017-11-28
+        07:23:50","IndexType":1,"ServerBuild":"2017-10-25 14:33:44","ServerName":"KNUTSCHR","ServerVersion":"1.0.6507.24412","UniqueIndexID":"20171128072350-FRESH","DataTables":{"AnchorText":{"Headers":{"CanReturnURLs":1,"Count":1000,"FilterAnchorText":"","FilterAnchorTextMode":0,"FilterRefDomain":"","From":0,"Item":"sampletest.com","MaxTopics":10,"Mode":0,"OrigItem":"sampletest.com","TextMode":0,"TopicsCount":3,"TotalBackLinks":3,"TotalRefDomains":3,"TotalResults":3},"Data":[{"AnchorText":"www.sampletest.com","RefDomains":1,"TotalLinks":1,"DeletedLinks":0,"NoFollowLinks":0,"EstimatedLinkCitationFlow":10,"EstimatedLinkTrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":""},{"AnchorText":"https://webservices.sampletest.com/xsd/test1.xsd'',","RefDomains":1,"TotalLinks":1,"DeletedLinks":0,"NoFollowLinks":1,"EstimatedLinkCitationFlow":0,"EstimatedLinkTrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":""},{"AnchorText":"https://webservices.sampletest.com/wsdl/sampletest.wsdl''.","RefDomains":1,"TotalLinks":1,"DeletedLinks":0,"NoFollowLinks":1,"EstimatedLinkCitationFlow":0,"EstimatedLinkTrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":""}]}}}'
+    http_version: 
+  recorded_at: Tue, 28 Nov 2017 10:19:56 GMT
+recorded_with: VCR 3.0.3

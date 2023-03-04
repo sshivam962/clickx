@@ -1,0 +1,59 @@
+.header.no-bottom-border
+  %h1  Edit Question
+
+= form_with model: @question, url: super_admin_question_path(@question)  do |f|
+  .row
+    .col-sm-5
+      = f.label :question
+      = f.text_field :question, class: 'form-control', placeholder: 'Question'
+  .row
+    .col-sm-5
+      = f.label :'question description'
+      = f.text_field :description, class: 'form-control', placeholder: 'description'
+
+  .row
+    .col-sm-5
+      = f.label :'Group Type'
+      = f.select :group_id, options_for_select(Group.all.collect{ |g| [g.name, g.id] }), {}, { class: 'form-control' }
+
+  .row
+    .col-sm-5
+      = f.label :exp_ans_type, 'Expected Answer Type'
+      = f.select :exp_ans_type, options_for_select([['Single Line Text','oneliner'],['Yes/No','boolean_ans'],['Paragraph Text','paragraph'],['Multiple Choice','mcq']]), {}, class: 'form-control',id: 'exp_ans_type'
+
+
+  .row.mcq
+    .col-sm-5
+      = f.label :'Multiple Choiches(enter comma seperated)'
+      = f.text_field :mcq_choices, class: 'form-control', placeholder: 'Available Choices'
+  .row
+    .col-sm-5
+      = f.label :'Publish'
+      = f.check_box :is_published
+  .row
+    .col-sm-5
+      = f.label :'Required'
+      = f.check_box :is_mandatory
+
+  .row
+    .col-sm-5
+      = f.submit 'Update Question', class: 'btn btn-warning saveBtn'
+      = link_to 'Back',super_admin_questions_path, class: 'btn btn-default'
+
+
+:css
+  .mcq {
+    display: none;
+  }
+
+:javascript
+  $(document).ready(function(){
+    $('#exp_ans_type').on('change', function(){
+      if($('#exp_ans_type').val() == 'mcq'){
+        $('.mcq').show()
+      }else{
+        $('.mcq').hide()
+      }
+    })
+  })
+

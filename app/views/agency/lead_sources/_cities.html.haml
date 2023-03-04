@@ -1,0 +1,9 @@
+- if @outscrapper_state.present?
+  = select_tag :city, grouped_options_for_select(options_for_city(outscrapper_state)), class: "input-wrapper-input w-full", placeholder: "City", multiple: true, id: "city"
+- else
+  = select_tag :city, grouped_options_for_select(options_for_city(get_selected_state(lead_source_id)), get_previous_cities(lead_source_id)), class: "input-wrapper-input w-full", placeholder: "City", multiple: true, id: "city"
+:javascript
+  $('#city').select2({
+    multiple: true,
+    placeholder: 'City'
+  });

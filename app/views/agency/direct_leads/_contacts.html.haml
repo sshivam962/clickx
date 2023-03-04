@@ -1,0 +1,36 @@
+.modal.fade.bs-lead-contacts-modal-sm1{"aria-labelledby": "mySmallModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg
+    .bg-white.p-4.p-sm-5.rounded
+      .fs-md.fw-sb.text-darkblue.pb-4
+        Contacts
+      %hr.mt-0
+      - if contacts.length == 0
+        No Contacts
+      .contacts-list
+        - contacts.each do |contact|
+          .contacts-list-item
+            .border-1.bg-sky-blue.border-blue.p-4.rounded-8
+              .fw-sb.text-darkblue.pb-4= contact.title
+              .pb-3
+                = contact.full_name.titleize
+              - if contact.email
+                .fw-sb.fs-14= contact.email
+              - if contact.phone
+                .fw-sb.fs-14= contact.phone
+              - if contact.company
+                .fw-sb.fs-14.pb-4= contact.company
+              - if contact.email_sent?
+                .fw-sb.fs-14.pb-4
+                  %span.badge.badge-success.text-white.fs-12
+                    - sent_email_count = contact.sent_emails.count
+                    #{sent_email_count} #{'Email'.pluralize(sent_email_count)} Sent
+              - else
+                %span.d-inline-block.fs-12.py-2.px-4.rounded-8.bg-warning.text-white.fw-m Not Contacted
+              .action-buttons.pt-5
+                %a.close-hover.action-btn.action-btn--gray.action-btn--xs.mr-2{href: agency_edit_direct_lead_contact_path(direct_lead, contact), 'data-remote': true}
+                  %span.btn-icon.text-center
+                    %i.fa.fa-edit
+                = link_to agency_delete_direct_lead_contact_path(direct_lead, contact), method: :delete, class: 'close-hover action-btn action-btn--danger action-btn--xs mr-2', data: { confirm: 'Are you sure you want to delete?', remote: true } do
+                  %span.btn-icon.text-center
+                    %i.fa.fa-trash
+#edit_contact

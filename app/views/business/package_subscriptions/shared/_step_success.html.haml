@@ -1,0 +1,50 @@
+%ul.stages
+  - if steps.include?('plan')
+    %li.completed
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Plan
+  - if steps.include?('client')
+    %li.completed
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Client
+  - if steps.include?('agreement')
+    %li.completed
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Agreement
+  - if steps.include?('payment')
+    %li.completed
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Payment
+  - if steps.include?('success')
+    %li.current
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Complete
+  - if steps.include?('kick_off')
+    %li
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Kick-Off
+  - if steps.include?('questionnaire')
+    %li
+      .stage-data
+        .stages-number
+          %i.material-icons check
+        .stages-title Questionnaire
+.checkout-stages--content.mt-xxl
+  .panel.panel-default
+    .panel-body.p-n
+      .col-md-6.col-md-offset-3.text-center.mt-xxl.pt-xxl
+        = image_tag 'success.svg', class: 'img-responsive m-auto', style: 'max-width: 340px;'
+        %h2.text-darkblue Thank you for your purchase
+        %a.btn.btn-lg.btn-raised.btn-primary.mb-xxl{href: "/b/dashboard"} Home

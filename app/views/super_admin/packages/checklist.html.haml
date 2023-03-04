@@ -1,0 +1,41 @@
+- content_for :title do
+  Packages | Checklist
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1 Packages Checklist
+
+.locations
+  %button.add-ensure_check{type: "button", class: 'btn btn-warning'}
+    Add Packages Checklist
+  = form_for @package, method: :patch, url: super_admin_package_path(@package) do |f|
+    #ensure_check-field
+    - if @package.ensure_checklist?
+      - @package.ensure_checklist.each do |ensure_check|
+        .row.mb-md
+          .col-sm-5
+            = f.text_field :ensure_checklist, class: 'form-control', name: "package[ensure_checklist][]", value: ensure_check 
+          .col
+            = link_to destroy_ensure_checklist_super_admin_package_path(id: @package, ensure_checklist_value: ensure_check) ,class: 'btn btn-info', method: :delete, data: { confirm: 'Are you sure ?'} do
+              %i.glyphicon.glyphicon-trash.font-size12
+              Delete
+    = f.submit 'Save', class: 'btn btn-warning m-n'
+
+:css
+  #ensure_check-field{
+    display: none;
+  }
+
+:javascript
+  $('.add-ensure_check').on('click', function(){
+    $('#ensure_check-field').append("<div class='row mb-md'>"+
+    "<div class='col-sm-5'>"+
+    "<input class='form-control' name='package[ensure_checklist][]'' value='' type='text' id='package_ensure_checklist'></div>"+
+    "<div class='col'><a href='#'' class='remove_this btn btn-danger'><i class='glyphicon glyphicon-trash font-size12'></i>Remove </a></div>"+
+    "</div>");
+    $('#ensure_check-field').show();
+  })
+
+  jQuery(document).on('click', '.remove_this', function() {
+    $(this).closest('.row').remove();
+    return false;
+  });

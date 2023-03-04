@@ -1,0 +1,16 @@
+.panel.panel-default.m-n#contacts-bysource{ 'ng-if': 'marketing_performance_loaded && bySourceStatus' }
+  .panel-heading.cursor-move
+    %h2
+      %a.l-grey{ 'href': "#/leads" }
+        Contacts By Source
+        %i.fa.fa-info-circle.tooltip-text-icon{ 'title': 'For more details, go to web analytics in the "Analytics" section in the sidebar.' }
+    #onboarding-contacts-by-source.on-boarding
+    .panel-ctrls
+      %button.Dbutton.btn.button-icon.pull-left.mt-sm{ 'ng-click': 'pdf_export("contacts-bysource")', 'title': 'Download report', 'ng-class': "{'disable-button': export_disabled}" }
+        %span.material-icons.inverted file_download
+      %button.btn.button-icon.mt-sm.refresh-panel{ 'ng-click': 'refresh_intelligence("new_contacts_by_source")', 'title': 'Refresh report' }
+        %span.material-icons.inverted refresh
+  .panel-body.no-padding.scroll-pane{ 'style': 'height: 420px;' }
+    .p-n.scroll-content
+      .panel-body
+        %draw-chart.btn-pointer#contacts-by-source{ 'config': 'contactsBySource', 'on-click-chart': '', 'on-load-chart': '' }

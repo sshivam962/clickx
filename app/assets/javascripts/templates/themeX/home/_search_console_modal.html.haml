@@ -1,0 +1,17 @@
+%script{type:"text/ng-template",id:"search-console-modal.html"}
+  %md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-compressed
+    %form
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button","ng-click":"closeModal()"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title
+          Google Search Console
+
+      %md-dialog-content
+        .md-dialog-content
+          .form-group
+            %p
+              Please connect to your Google Search Console account
+      %md-dialog-actions
+        %button.btn.btn-raised.mt-md.mb-md.btn-default{"data-dismiss" => "modal", :type => "button","ng-click":"closeModal()"} Close
+        %a.btn.btn-raised.mt-md.mb-md.btn-primary{href: "{{search_console_auth_path}}", target: '_blank'} Connect

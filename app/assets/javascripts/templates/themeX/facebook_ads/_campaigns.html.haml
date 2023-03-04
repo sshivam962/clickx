@@ -1,0 +1,165 @@
+.row
+  .col-md-12{'ng-if':'campaigns'}
+    .panel.panel-default
+      .panel-heading
+        %h2 Account Metrics
+        %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Average metrics for the Facebook Ads campaigns'}
+      .panel-body
+        .row
+          .col-md-6
+            %table.table.table-hover
+              %tbody
+                %tr
+                  %td Impressions
+                  %td{align: 'right'} {{campaigns.total_impressions | decimalFilter}}
+                %tr
+                  %td Total Clicks
+                  %td{align: 'right'} {{campaigns.total_clicks | decimalFilter}}
+                %tr
+                  %td Link Clicks
+                  %td{align: 'right'} {{campaigns.total_inline_link_clicks | decimalFilter}}
+                %tr
+                  %td Frequency
+                  %td{align: 'right'} {{campaigns.total_frequency | decimalFilter}}
+                %tr{'ng-if':"campaigns.total_conversion != '0'"}
+                  %td Conversion
+                  %td{align: 'right'} {{campaigns.total_conversion | decimalFilter }}
+                %tr{'ng-if':"campaigns.total_leads != '0'"}
+                  %td Leads
+                  %td{align: 'right'} {{campaigns.total_leads | decimalFilter }}
+
+          .col-md-6
+            %table.table.table-hover
+              %tbody
+                %tr
+                  %td Total Reach
+                  %td{align: 'right'} {{campaigns.total_reach | decimalFilter}}
+                %tr
+                  %td CPC
+                  %td{align: 'right'} ${{campaigns.total_cpc | decimalFilter }}
+                %tr
+                  %td CTR
+                  %td{align: 'right'} {{campaigns.total_ctr | decimalFilter }}%
+                %tr
+                  %td Total Spend
+                  %td{align: 'right'} ${{campaigns.total_spend | decimalFilter }}
+                %tr
+                  %td Revenue
+                  %td{align: 'right'} ${{campaigns.total_revenue | decimalFilter }}
+
+
+.row
+  .col-md-12{'ng-if':'graph_data'}
+    .tab-container
+      %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+        %li.active
+          %a{"data-toggle":"tab", 'data-target': "#fbads-clicks", 'ng-click':"resizeChart('fbads_clicks_line_chart'); overview()", 'title': 'Show me the graph of clicks | received on my FB ads'} Clicks
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#fbads-impressions", 'ng-click':"resizeChart('fbads_impressions_line_chart'); overview()", 'title': 'Show me the graph of impressions | received on my FB ads'} Impressions
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#fbads-cpc", 'ng-click':"resizeChart('fbads_cpc_line_chart'); overview()", 'title': 'Show me the graph of CPC | received on my FB ads'} CPC
+      .tab-content
+        #fbads-clicks.tab-pane.active
+          .panel-body
+            .centered
+              #fbads_clicks_line_chart
+        #fbads-impressions.tab-pane
+          .panel-body
+            .centered
+              #fbads_impressions_line_chart
+        #fbads-cpc.tab-pane
+          .panel-body
+            .centered
+              #fbads_cpc_line_chart
+
+.row
+  .col-md-12{'ng-if':'campaign_details'}
+    .tab-container
+      .tab-content{'st-table':"campaign_details", 'st-safe-src':"copy_campaign_details"}
+        .table-responsive
+          %table.table.table-hover.table-bordered.table-vam
+            %thead
+              %tr
+                %th.vam{'st-sort':'campaign', style: "padding-right:190px;"}
+                  %u.help_pointer{'title': 'The Facebook Ads campaigns'}
+                    Campaign
+                %th.text-center{'st-sort':'impressions'}
+                  %u.help_pointer{'title': 'Number of views your FB ads got fro the given campaigns'}
+                    Impressions
+                %th.text-center{'st-sort':'reach'}
+                  %u.help_pointer{'title': 'The number of people who saw your ads at least once for the given campaigns'}
+                  Reach
+                %th.text-center{'st-sort':'clicks'}
+                  %u.help_pointer{'title': 'Number of clicks you received through FB ads for the given campaigns'}
+                    Clicks
+                %th.text-center{'st-sort':'ctr'}
+                  %u.help_pointer{'title': 'Percent of clicks your FB ads got to that of impressions it received for the given campaigns'}
+                    CTR
+                %th.text-center{'st-sort':'cpc'}
+                  %u.help_pointer{'title': 'Cost Per Result for the given campaigns'}
+                    CPC
+                %th.text-center{'st-sort':'conversion', 'ng-if':"campaigns.total_conversion != '0'"}
+                  Conversion
+                %th.text-center{'st-sort':'revenue', 'ng-if':"campaigns.total_revenue != '0'"}
+                  Revenue
+                %th.text-center{'st-sort':'leads', 'ng-if':"campaigns.total_leads != '0'"}
+                  Leads
+                %th.text-center{'st-sort':'frequency'}
+                  %u.help_pointer{'title': 'The average number of times each person saw your ad'}
+                    Frequency
+                %th.text-center{'st-sort':'spend'}
+                  Spend
+                %th.text-center{'st-sort':'inline_link_clicks'}
+                  %u.help_pointer{'title': 'The number of clicks on links within the ad that led to destinations or experiences, on or off Facebook'}
+                    Link Clicks
+            %tbody
+              %tr{'ng-repeat':"campaign in campaign_details", 'ng-if': 'campaign'}
+                %td {{campaign.campaign_name}}
+                %td.text-center {{campaign.impressions | decimalFilter}}
+                %td.text-center {{campaign.reach | decimalFilter}}
+                %td.text-center {{campaign.clicks | decimalFilter}}
+                %td.text-center {{campaign.ctr | decimalFilter}}%
+                %td.text-center ${{campaign.cpc | decimalFilter}}
+                %td.text-center{'ng-if':"campaigns.total_conversion != '0'"} {{campaign.conversion | decimalFilter}}
+                %td.text-center{'ng-if':"campaigns.total_revenue != '0'"} {{campaign.revenue | decimalFilter}}
+                %td.text-center{'ng-if':"campaigns.total_leads != '0'"} {{campaign.leads | decimalFilter}}
+                %td.text-center ${{campaign.frequency | decimalFilter}}
+                %td.text-center ${{campaign.spend | decimalFilter}}
+                %td.text-center {{campaign.inline_link_clicks | decimalFilter}}
+        %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}
+
+.row{ 'ng-if': '!demo_login' }
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        %h2 Budget Pacing for current month
+        %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Money spent out of the budget you set for PPC ads'}
+        .panel-ctrls
+          %button.btn.button-icon.mt-sm.refresh-panel{'title': 'Refresh report'}
+            %span.material-icons.inverted refresh
+          %a.btn.button-icon.mt-sm{'ng-href':"/b/settings/budget_pacing", 'title': 'Manage budget set for ads', 'ng-show':'ppc_budget != 0.0'}
+            %span.material-icons.inverted edit
+      .panel-body
+        %row{'ng-show':'fb_budget != 0.0'}
+          .col-xs-12
+            .col-xs-12.border-bottom.p-sm.budget-pacing
+              %div{'current-style':'currentStyle', 'max-style':'maxStyle', 'current-value':'cost', 'isteven-omni-bar':'', 'max-value':'fb_budget'}
+                Ad spent: ${{cost | decimalFilter}} of ${{fb_budget | decimalFilter}}
+              %div{'current-style':'currentStyle', 'max-style':'maxStyle', 'current-value':'today', 'isteven-omni-bar':'', 'max-value':'month_last_day'}
+                {{this_month}} : {{today}} of {{month_last_day}} days
+        %row{'ng-show':'!(fb_budget > 0.0)'}
+          .col-xs-12.center
+            %p.ml-sm.mb-n
+              Set your monthly budget to manage your ads better
+            %a.btn.btn-white.btn-raised{'ng-href':"/b/settings/budget_pacing"}
+              %i.fa.fa-cog.pr-xs
+              Set Budget
+
+.container-fluid{'ng-if':"error"}
+  %div
+  .row#error
+    .col-md-12
+      .panel.panel-default
+        .panel-body
+          %p.clx-text.text-color-accent-red.text-center
+            {{ error }}

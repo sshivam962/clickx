@@ -1,0 +1,26 @@
+- content_for :title do
+  Users | Clickx
+
+.page-content.ui-2020
+  .page-heading.no-margin-bottom
+    %h1
+      %i.clickx-icon-user.title-icon
+      User Management
+    .options
+      %a.btn.btn-white.btn-raised{href: new_business_user_path}
+        %i.fa.fa-plus.pr-xs
+        Add New User
+        .ripple-container
+  .container-fluid
+    .row
+      .col-xs-12
+        .panel.panel-teal
+          .panel-heading
+          .panel-body.no-padding
+            .users_list
+              = render 'business/users/list', users: @users
+          .panel-footer
+            .row.mb-sm.p-n.pagination-wrapper.pull-center
+              .left.pagination-links
+                .pagination
+                  = will_paginate @users

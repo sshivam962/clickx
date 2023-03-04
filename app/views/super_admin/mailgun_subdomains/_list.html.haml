@@ -1,0 +1,10 @@
+%table.table.table-bordered.users.reports
+  %thead
+    %th Sub Domain Name
+    %th
+  %tbody
+    - @mailgun_subdomains.each do |mailgun_subdomain|
+      %tr
+        %td= mailgun_subdomain.subdomain
+        %td.center
+          = link_to 'Delete', super_admin_mailgun_subdomain_path(mailgun_subdomain), class: 'btn btn-danger m-0 btn--xs px-4', method: :delete, data: { confirm: "Are you sure you'd like to delete this domain" }

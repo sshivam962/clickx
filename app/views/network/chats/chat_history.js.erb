@@ -1,0 +1,16 @@
+<% if params[:page].present? %>
+  $('#chat_box_container').prepend("<%= escape_javascript render( partial: '/network/chats/chat_box', locals: { chat_thread: @chat_thread, messages: @messages}) %>");
+<% else %>
+  $('#chat_box').html("<%= escape_javascript render( partial: '/network/chats/chat_history', locals: { chat_thread: @chat_thread, messages: @messages}) %>");
+  $("#message").focus();
+  <% if @unread_messages %>
+    var container = $('.messaging-wrapper-messages');
+    var scrollTo = $('.new-messages');
+    var position = scrollTo.offset().top
+                  - container.offset().top
+                  + container.scrollTop();
+    container.scrollTop(position);
+  <% else %>
+    $('.messaging-wrapper-messages').scrollTop($("#chat_box_bottom").offset().top);
+  <% end %>
+<% end %>

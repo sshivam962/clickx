@@ -1,0 +1,68 @@
+.page-heading
+  %h1 Reports
+.container-fluid
+  .inbox-read-details.clearfix
+    .mb-4
+      = form_tag emailed_agency_direct_leads_path, :method => 'get', :id => "search_emailed_leads" do
+        .search-form
+          = text_field_tag :search, params[:search], placeholder: "", class:"search-form__input"
+          = submit_tag "Search", :name => nil, class:"search-form__btn"
+    .lead_report_wrapper
+      .lead_report_column-wrap
+        .lead_report_column
+          .border-1.bg-sky-blue.border-blue.rounded.h-100
+            .bg-white.px-4.py-4.rounded-t-12.fw-m.text-darkblue
+              Email Leads
+            .p-4
+              #email_leads_listing.email_leads_listing
+                - @emails_leads.each do |emails_lead|
+                  .email_leads_listing_item
+                    %a{"data-remote" => true, :href => contacts_agency_direct_lead_path(emails_lead)}
+                      = emails_lead.base_domain
+
+        .lead_report_column
+          #connected_domain_contacts_list.h-100
+            .border-1.bg-sky-blue.border-blue.rounded.h-100.d-flex.justify-content-center.align-items-center
+              .p-4
+                %h4 No Lead Selected
+
+:javascript
+  $("#leads_listing").dataTable({
+    'sAjaxSource': $("#leads_listing").data('source'),
+    'bProcessing': true,
+    'bServerSide': true,
+    'bInfo': false,
+    'searching': true,
+    'paging': true,
+    'pageLength': 25,
+    'pagingType': 'numbers',
+    'order': [[0, 'asc']],
+    'fnServerParams': function ( aoData ) {
+      aoData.push(
+        {
+          'name': 'email_opened',
+          'value': $('.email_opened_check').prop('checked')
+        },
+        {
+          'name': 'blocked',
+          'value': $('.blocked_check').prop('checked')
+        }
+      );
+    },
+    'columns': [
+      {'data': 'domain', sortable: false},
+    ]
+  })
+
+  $(document).on('change', '.email_opened_check', function(e){
+    $('#leads_listing').DataTable().draw();
+  })
+
+  $(document).on('change', '.blocked_check', function(e){
+    $('#leads_listing').DataTable().draw();
+  })
+
+:css
+  thead{
+    display: none
+  }

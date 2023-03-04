@@ -1,0 +1,45 @@
+- content_for :title do
+  Chat Templates | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1 Chat Templates
+    %a.btn.pull-right.grpBtn{href:"/s/chats"} Back
+
+.locations
+  %button.add-chat_template{type: "button", class: 'btn btn-warning'}
+    Add Chat Template
+
+  #chat_template-field
+    = form_with model: ChatTemplate.new, url: super_admin_chat_templates_path do |f|
+      .row.mb-md
+        .col-sm-3
+          = f.text_field :template_name, class: 'form-control', placeholder: 'Template Name'
+        .col-sm-6
+          = f.text_area :template_data, class: 'form-control', placeholder: 'Template Data'
+        .col
+          = f.submit 'Add', class: 'btn btn-warning m-n'
+
+
+
+  - @chat_templates.each do |chat_template|
+    = form_with model: chat_template, url: super_admin_chat_template_path(chat_template) do |f|
+      .row.mb-md
+        .col-sm-3
+          = f.text_field :template_name, class: 'form-control'
+        .col-sm-6
+          = f.text_area :template_data, class: 'form-control'
+        .col
+          = f.submit 'Save', class: 'btn btn-warning m-n'
+          = link_to super_admin_chat_template_path(chat_template) ,class: 'btn btn-info', method: :delete, data: { confirm: 'Are you sure ?'} do
+            %i.glyphicon.glyphicon-trash.font-size12
+            Delete
+
+:css
+  #chat_template-field{
+    display: none;
+  }
+
+:javascript
+  $('.add-chat_template').on('click', function(){
+    $('#chat_template-field').show()
+  })

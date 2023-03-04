@@ -1,0 +1,20 @@
+.col-md-12.nested-fields
+  .panel
+    .panel-body
+      .field
+        = f.hidden_field :position, class: 'task_position'
+        .col-md-3.pr-n
+          .form-group
+            = f.label :title
+            = f.text_field :title, placeholder: 'Title', class: 'form-control', required: true
+        .col-md-4.pr-n
+          .form-group
+            = f.label :description
+            = f.text_area :description, placeholder: 'Description', class: 'form-control', rows: 3, required: true
+        .col-md-4.pr-n
+          .form-group
+            = f.label :task
+            = f.text_area :task, placeholder: 'Task', class: 'form-control', rows: 3, required: true
+        .col-md-1.pr-n
+          = link_to_remove_association f, class: 'pull-right' do
+            %i.fa.fa-times

@@ -1,0 +1,23 @@
+.page
+  .container
+    .row
+      .col-sm-12
+        #header.aligncenter
+          %h1 Sorry!
+      .col-sm-6.col-sm-offset-3
+        .social
+          .makeup
+            %i.fa.fa-gift
+          %p.lead
+            We want to make things right.
+            %br
+          %p
+          .coupon
+            = image_tag(@location.negative_review_coupon) if @location.negative_review_coupon.present?
+    - if @business.branded?
+      .row
+        .col-sm-8.col-sm-offset-2
+          .powered.clearfix
+            %a.pull-right{:href => "http://clickx.io", target: '_blank'}
+              Powered by
+              %img{src: "#{image_path('Clickx-Logo.svg')}", type: "image/svg+xml"}

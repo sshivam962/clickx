@@ -1,0 +1,7 @@
+<% if @strategy_item.favorite? %>
+  $(".star-<%= @strategy_item.id %>").removeClass('fa-star-o')
+  $(".star-<%= @strategy_item.id %>").addClass('fa-star')
+<% else %>
+  $(".star-<%= @strategy_item.id %>").removeClass('fa-star')
+  $(".star-<%= @strategy_item.id %>").addClass('fa-star-o')
+<% end %>

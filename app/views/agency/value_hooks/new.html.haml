@@ -1,0 +1,5 @@
+- content_for :title do
+  New Value Hooks | Clickx
+.container-fluid.pt-4
+  = form_for @value_hook, url: agency_value_hooks_path, method: :post do |f|
+    = render 'form', f: f

@@ -1,0 +1,8 @@
+.modal.fade.bs-lead-contacts-create-modal-sm1{"aria-labelledby": "mySmallModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md
+    .bg-white.p-4.p-sm-5.rounded
+      .fs-md.fw-sb.text-darkblue.pb-4
+        Create Contact
+      .font-14.row
+        = simple_form_for contact, url: create_contact_agency_direct_lead_path(@direct_lead), method: :post, html: { class: 'form-vertical mt-sm ml-sm', id: 'conf_lead_contact_create', remote: true} do |f|
+          = render 'domain_contacts_form', f: f

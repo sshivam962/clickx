@@ -1,0 +1,23 @@
+#export-leads-modal.modal.fade{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg{role: 'document'}
+    = form_tag export_csv_super_admin_leads_path, method: :post, class: 'export_leads_form' do
+      .modal-content
+        .modal-header
+          Export as CSV
+          %a.close.pl-md{'data-dismiss': 'modal'}
+            %span ×
+          %a.btn.btn-primary.white.export_leads_submit.pull-right{'data-dismiss': 'modal'}
+            Export
+        .modal-body
+          .row
+            - ::Lead.csv_default_attributes.each do |field|
+              .col-md-4
+                .form-group
+                  = check_box_tag 'attributes[]', field, checked: true
+                  %label{for: "#{field}"}
+                    = field.titleize
+
+:javascript
+  $('.export_leads_submit').click(function(){
+    $('.export_leads_form').submit();
+  })

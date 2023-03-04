@@ -1,0 +1,87 @@
+.table-responsive
+  %table.table.table-hover.table-vam
+    %thead
+      %tr
+        %th
+          %u.help_pointer{'title': 'Top Organic Keywords'} Keyword
+        %th
+          %u.help_pointer{'title': 'Position of your competitor\'s site for the given organic keywords in Google'} Position
+        %th
+          %u.help_pointer{'title': 'Volume of the keywords your competitor is ranking for on Google'} Volume
+        %th
+          %u.help_pointer{'title': 'Cost per click of the keywords that your competitor is organically ranking on Google'} CPC (USD)
+        %th
+          %u.help_pointer{'title': 'Percent of traffic your competitor is getting for the keyword through Google organic traffics'} Traffic
+    %tbody
+      - id_number = 0
+      - @keywords.each do |keyword|
+        %tr
+          %td.text-left{ 'title': 'Add to Keyword collection', 'title-direction': 'right' }
+            = keyword.name
+            - if @business_keywords.include?(keyword.name)
+              .keyword-man.btn.m-n.btn-raised.btn-xs.pull-right.btn-danger{ id: 'keyword-' + "#{id_number}", action: 'delete', value: "#{keyword.name}" }
+                %i.fa.fa-trash{id: 'keyword-icon-' + "#{id_number}"}
+                .ripple-container
+            - else
+              .keyword-man.btn.m-n.btn-raised.btn-xs.pull-right.btn-info{ id: 'keyword-' + "#{id_number}", action: 'add',value: "#{keyword.name}" }
+                %i.fa.fa-plus{id: 'keyword-icon-' + "#{id_number}"}
+                .ripple-container
+          %td.text-left
+            = keyword.position
+          %td.text-left
+            = keyword.volume
+          %td.text-left
+            = keyword.cpc
+          %td.text-center
+            .progress.progress-striped.active.m-n
+              .progress-bar.progress-bar-info{:style => "width: #{number_to_percentage(keyword.traffic.to_i)}"}
+        - id_number += 1
+.ui-2020
+  .row.pagination-wrapper
+    .pagination
+      = will_paginate @keywords
+:javascript
+  $(".keyword-man").click(function() {
+    var id = "#" + $(this).attr('id');
+    var id_number = id.split('-')[1]
+    var icon_id = "#keyword-icon-" + id_number
+    var keyword = $(this).attr('value');
+    var action = $(this).attr('action');
+
+    if(action == 'delete') {
+      $.ajax({
+        url: "/b/competitions/#{@competition.id}/remove_keyword",
+        type: 'post',
+        data: { keyword: keyword },
+        success:function(response){
+          if(response.status == 204) {
+            $(id).removeClass("btn-danger")
+            $(id).addClass("btn-info")
+            $(icon_id).removeClass("fa fa-trash");
+            $(icon_id).addClass("fa fa-plus");
+            $(id).attr('action', 'add');
+            toastr.warning('Keyword Deleted Successfully.');
+          }
+        }
+      })
+    } else if(action == 'add') {
+      $.ajax({
+        url: "/b/competitions/#{@competition.id}/add_keyword",
+        type: 'post',
+        data: { keyword: keyword },
+        success:function(response){
+          if(response.status == 406) {
+            toastr.error(response.error);
+          } else if (response.status == 201) {
+            $(id).removeClass("btn-info")
+            $(id).addClass("btn-danger")
+            $(icon_id).removeClass("fa fa-plus");
+            $(icon_id).addClass("fa fa-trash");
+            $(id).attr('action', 'delete');
+            toastr.success('Keyword Added Successfully.');
+          }
+        }
+      });
+    }
+  });
+

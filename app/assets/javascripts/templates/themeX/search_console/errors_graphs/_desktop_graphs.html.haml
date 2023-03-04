@@ -1,0 +1,38 @@
+%ul.nav.panel-warning.nav-tabs.bdt{:style => "background: #F44336;"}
+  %li.active
+    %a{"data-toggle" => "tab", 'data-target' => "#sc-server-error", 'ng-click' => "change_error_type('serverError')"}
+      Server Error
+      .pull-right
+        %b.left10 {{get_error_count('web', 'serverError')}}
+  %li
+    %a{"data-toggle" => "tab", 'data-target' => "#sc-soft-404", 'ng-click' => "change_error_type('soft404')"}
+      Soft 404
+      .pull-right
+        %b.left10 {{get_error_count('web', 'soft404')}}
+  %li
+    %a{"data-toggle" => "tab", 'data-target' => "#sc-access-denied", 'ng-click' => "change_error_type('authPermissions')"}
+      Access Denied
+      .pull-right
+        %b.left10 {{get_error_count('web', 'authPermissions')}}
+  %li
+    %a{"data-toggle" => "tab", 'data-target' => "#sc-not-found", 'ng-click' => "change_error_type('notFound')"}
+      Not Found
+      .pull-right
+        %b.left10 {{get_error_count('web', 'notFound')}}
+.tab-content
+  #sc-server-error.tab-pane.active
+    .panel-body
+      .centered
+        #web_serverError_errors
+  #sc-soft-404.tab-pane
+    .panel-body
+      .centered
+        #web_soft404_errors
+  #sc-access-denied.tab-pane
+    .panel-body
+      .centered
+        #web_authPermissions_errors
+  #sc-not-found.tab-pane
+    .panel-body
+      .centered
+        #web_notFound_errors

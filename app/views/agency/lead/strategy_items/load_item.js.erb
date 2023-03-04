@@ -1,0 +1,1 @@
+$('#strategies').append("<%= escape_javascript render( partial: 'agency/lead/strategies/shared/strategy_item', locals: { strategy: @strategy_item.strategy, uniq_id: SecureRandom.urlsafe_base64, lead: @lead }) %>");

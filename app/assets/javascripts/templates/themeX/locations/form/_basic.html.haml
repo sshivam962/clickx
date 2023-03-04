@@ -1,0 +1,55 @@
+.panel.panel-default{ 'ng-init': 'show_basic = true' }
+  .panel-heading.pointer{ 'ng-click': 'show_basic = !show_basic;' }
+    Basic Information
+    %span.pull-right
+      %i.fa{ 'ng-class': ' show_basic ? "fa-chevron-down" : "fa-chevron-right" ' }
+  %span
+    .progress.form-progress
+      .progress-bar.progress-bar-success{ 'aria-valuemax': '100', 'aria-valuemin': '0',
+      'aria-valuenow': '{{ progress_width(location) }}', 'role': 'progressbar', 'style': 'width:{{ progress_width(location) }}%' }
+  .panel-body{ 'ng-show': 'show_basic' }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Organization Name
+        .col-md-12
+          %input#fieldname.form-control{name: "name",type: "text", "ng-model" => "location.name", 'ng-required': 'true', "data-parsley-trigger": "input focusin focusout" }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Address
+        .col-md-12
+          %input#fieldaddress.form-control{:name => "address",:type => "text", "ng-model" => "location.address", 'ng-required': 'true', "data-parsley-trigger": "input focusin focusout" }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label City
+        .col-md-12
+          %input#fieldcity.form-control{:name => "city",:type => "text", "ng-model" => "location.city"}
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label State
+        .col-md-12
+          %input#fieldstate.form-control{:name => "state",:type => "text", "ng-model" => "location.state"}
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Country
+        .col-md-12
+          %input#fieldcountry.form-control{:name => "country",:type => "text", "ng-model" => "location.country", 'ng-required': 'true', "data-parsley-trigger": "input focusin focusout" }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Zip
+        .col-md-12
+          %input#fieldzip.form-control{:name => "zip",:type => "text", "ng-model" => "location.zip" }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Phone
+        .col-md-12
+          %input#fieldphone.form-control.mask{:name => "phone_no", "ng-model" => "location.phone" }
+    .col-md-6
+      .form-group.no-margin-top
+        %label.col-md-12.control-label Website
+        .col-md-12
+          %input#fieldurl.form-control{:name => "website", "ng-model" => "location.website", 'ng-required': 'true', "data-parsley-trigger": "mouseup input focusin focusout keydown keyup", "data-parsley-type": "url", "data-parsley-debounce":"500" }
+    .col-md-12.m-t-40
+      %span.text-gray
+        %button#save_basic.btn.btn-success.btn-raised.btn-label.btn-lg{ "type": "submit" }
+          = succeed "Save" do
+            .ripple-container

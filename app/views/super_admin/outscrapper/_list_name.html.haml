@@ -1,0 +1,6 @@
+- unless @agency.nil?
+  =select_tag :list_id, options_from_collection_for_select(@agency.lead_sources, "id", "name"), class: "input-wrapper-input w-full",  prompt: "Select List", id: "list_name"
+-else
+  =select_tag :list_id, options_for_select([]), class: "input-wrapper-input w-full", prompt: "Select List", id: "list_name"
+
+

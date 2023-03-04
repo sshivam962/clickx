@@ -1,0 +1,431 @@
+- content_for :title do
+  Funnels | Clickx
+.ui-2020.package-page
+  .page-content
+    .page-heading.pt-md.pb-md
+      %h1
+        %i.clickx-icon-Funnel
+        Funnels
+    .container-fluid
+      .table-responsive.table-plan.text-center
+        %table.table.table-hover.mb-n.overflow-h
+          %thead
+            %tr
+              %th.col-label{"vertical-align" => "top"}
+                .pt-col-content
+              - @plans.order(:amount).each do |plan|
+                %th.col-package
+                  .pt-col-content
+                    .pt-header-caption= plan.title
+                    .pt-header-price
+                      = in_currency(plan.amount, current_agency.display_currency)
+                      - if plan.interval.eql?('month')
+                        %span> /mo
+                    %span.plan-label
+                      MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+                      .plan-tags
+                        %span= funnel_plan_tag(plan.key)
+                    .mt-4
+                      %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'funnel_development', plan: plan.key)}
+                        Get Started
+
+          %tbody
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Funnel Strategy Development
+              %td
+                .pt-col-content{"data-label" => "Funnel Strategy Development"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Funnel Strategy Development"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Funnel Strategy Development"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Funnel Development Questionnaire
+              %td
+                .pt-col-content{"data-label" => "Funnel Development Questionnaire"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Funnel Development Questionnaire"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Funnel Development Questionnaire"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Kick-Off Call with Agency
+              %td
+                .pt-col-content{"data-label" => "Kick-Off Call with Agency"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Kick-Off Call with Agency"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Kick-Off Call with Agency"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Funnel Development
+              %td
+                .pt-col-content{"data-label" => "Funnel Development"}
+                  %span 3 Step Development
+              %td
+                .pt-col-content{"data-label" => "Funnel Development"}
+                  %span 3 Step Development
+              %td
+                .pt-col-content{"data-label" => "Funnel Development"}
+                  %span 3 Step Development
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Funnel Page Length
+              %td
+                .pt-col-content{"data-label" => "Funnel Page Length"}
+                  %span Short Form
+              %td
+                .pt-col-content{"data-label" => "Funnel Page Length"}
+                  %span Medium Form
+              %td
+                .pt-col-content{"data-label" => "Funnel Page Length"}
+                  %span Long Form
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Word Count
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The word count will be an estimated quantity of words for each page within the funnel.
+              %td
+                .pt-col-content{"data-label" => "Word Count"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The word count will be an estimated quantity of words for each page within the funnel.
+                    up to 1,000
+              %td
+                .pt-col-content{"data-label" => "Word Count"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The word count will be an estimated quantity of words for each page within the funnel.
+                    up to 2,500
+              %td
+                .pt-col-content{"data-label" => "Word Count"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The word count will be an estimated quantity of words for each page within the funnel.
+                    up to 4,000
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Copy Repurposing
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If the client needs our team to develop custom copy from scratch, there will be an extra cost. These items can be found on the payment page.
+              %td
+                .pt-col-content{"data-label" => "Copy Repurposing"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If the client needs our team to develop custom copy from scratch, there will be an extra cost. These items can be found on the payment page.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Copy Repurposing"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If the client needs our team to develop custom copy from scratch, there will be an extra cost. These items can be found on the payment page.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Copy Repurposing"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If the client needs our team to develop custom copy from scratch, there will be an extra cost. These items can be found on the payment page.
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Copywriting/Messaging Strategy
+              %td
+                .pt-col-content{"data-label" => "Copywriting/Messaging Strategy"}
+                  %span
+                    %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Copywriting/Messaging Strategy"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Copywriting/Messaging Strategy"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span CTA Development
+              %td
+                .pt-col-content{"data-label" => "CTA Development"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "CTA Development"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "CTA Development"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Mobile Optimization
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext When testing a funnel for mobile optimization, our team will test how the funnel looks across multiple device screen sizes (phone, desktop, etc).
+              %td
+                .pt-col-content{"data-label" => "Mobile Optimization"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext When testing a funnel for mobile optimization, our team will test how the funnel looks across multiple device screen sizes (phone, desktop, etc).
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Mobile Optimization"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext When testing a funnel for mobile optimization, our team will test how the funnel looks across multiple device screen sizes (phone, desktop, etc).
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Mobile Optimization"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext When testing a funnel for mobile optimization, our team will test how the funnel looks across multiple device screen sizes (phone, desktop, etc).
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Funnel Setup (Platform)
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Platform options for Funnel Development include: Clickfunnels, HubSpot, Highlevel, and WordPress (additional fee will apply). Please state which one you would like when checking out.
+              %td
+                .pt-col-content{"data-label" => "Funnel Setup (Platform)"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Platform options for Funnel Development include: Clickfunnels, HubSpot, Highlevel, and WordPress (additional fee will apply). Please state which one you would like when checking out.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Funnel Setup (Platform)"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Platform options for Funnel Development include: Clickfunnels, HubSpot, Highlevel, and WordPress (additional fee will apply). Please state which one you would like when checking out.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Funnel Setup (Platform)"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Platform options for Funnel Development include: Clickfunnels, HubSpot, Highlevel, and WordPress (additional fee will apply). Please state which one you would like when checking out.
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Final Revisions
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext After our team has completed the Funnel Design and Development, we will send this to the client for any final revisions they would like our team to make (images, copy, etc.).
+              %td
+                .pt-col-content{"data-label" => "Final Revisions"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext After our team has completed the Funnel Design and Development, we will send this to the client for any final revisions they would like our team to make (images, copy, etc.).
+                    1 Round
+              %td
+                .pt-col-content{"data-label" => "Final Revisions"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext After our team has completed the Funnel Design and Development, we will send this to the client for any final revisions they would like our team to make (images, copy, etc.).
+                    2 Rounds
+              %td
+                .pt-col-content{"data-label" => "Final Revisions"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext After our team has completed the Funnel Design and Development, we will send this to the client for any final revisions they would like our team to make (images, copy, etc.).
+                    2 Rounds
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Technical Support Offered
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Further Technical Support will start after the Funnel has been launched by our team.
+              %td
+                .pt-col-content{"data-label" => "Technical Support Offered"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Further Technical Support will start after the Funnel has been launched by our team.
+                    15 Days
+              %td
+                .pt-col-content{"data-label" => "Technical Support Offered"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Further Technical Support will start after the Funnel has been launched by our team.
+                    30 Days
+              %td
+                .pt-col-content{"data-label" => "Technical Support Offered"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Further Technical Support will start after the Funnel has been launched by our team.
+                    30 Days
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Design Review Call
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This call will be designated by the funnel design team depending on the length of the funnel. A call will be set up to confirm the funnel copy, graphics, etc. are on the right track.
+
+              %td
+                .pt-col-content{"data-label" => "Design Review Call"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This call will be designated by the funnel design team depending on the length of the funnel. A call will be set up to confirm the funnel copy, graphics, etc. are on the right track.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Design Review Call"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This call will be designated by the funnel design team depending on the length of the funnel. A call will be set up to confirm the funnel copy, graphics, etc. are on the right track.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Design Review Call"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This call will be designated by the funnel design team depending on the length of the funnel. A call will be set up to confirm the funnel copy, graphics, etc. are on the right track.
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    A/B Testing
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With A/B Testing, our focus will be the Opt-in Page CTA and Headlines. Creating two versions of this page, we will be able to determine which performs the best with our desired audience.
+              %td
+                .pt-col-content{"data-label" => "A/B Testing"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With A/B Testing, our focus will be the Opt-in Page CTA and Headlines. Creating two versions of this page, we will be able to determine which performs the best with our desired audience.
+                    %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "A/B Testing"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With A/B Testing, our focus will be the Opt-in Page CTA and Headlines. Creating two versions of this page, we will be able to determine which performs the best with our desired audience.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "A/B Testing"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With A/B Testing, our focus will be the Opt-in Page CTA and Headlines. Creating two versions of this page, we will be able to determine which performs the best with our desired audience.
+                    %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Conversion Optimization
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In designing a Conversion Optimized Funnel, we need to make sure there are no distractions for the visitors as well as clear actions for them to take. Good practices include: call-to-action buttons at top of page (form, schedule call, etc.), clickable phone number at top, etc.
+              %td
+                .pt-col-content{"data-label" => "Conversion Optimization"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In designing a Conversion Optimized Funnel, we need to make sure there are no distractions for the visitors as well as clear actions for them to take. Good practices include: call-to-action buttons at top of page (form, schedule call, etc.), clickable phone number at top, etc.
+                    %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Conversion Optimization"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In designing a Conversion Optimized Funnel, we need to make sure there are no distractions for the visitors as well as clear actions for them to take. Good practices include: call-to-action buttons at top of page (form, schedule call, etc.), clickable phone number at top, etc.
+                    %i.material-icons.close-r.f-s-20 close
+              %td
+                .pt-col-content{"data-label" => "Conversion Optimization"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In designing a Conversion Optimized Funnel, we need to make sure there are no distractions for the visitors as well as clear actions for them to take. Good practices include: call-to-action buttons at top of page (form, schedule call, etc.), clickable phone number at top, etc.
+                    %i.material-icons.tick-r.f-s-20 check
+
+            - unless @is_preview
+              %tr.pt-row-footer
+                %td.col-label.text-left
+                  .pt-col-content
+                %td
+                  .pt-col-content
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'funnel_development', plan: 'starter')}
+                      Get Started
+                %td
+                  .pt-col-content
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'funnel_development', plan: 'pro')}
+                      Get Started
+                %td
+                  .pt-col-content
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'funnel_development', plan: 'advanced')}
+                      Get Started
+      - if raw(@package.sales_pitch).present?
+        .row.pt-4.pb-4.d-flex.flex-wrap.row-p-4
+          .col-sm-12.mt-4.mt-md-0
+            .panel-body.bg-white.panel-br-10.p-5.h-100
+              .panel-content.pl-n.pr-n
+                = raw(@package.sales_pitch)
+      .spacer25
+
+:javascript
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.plan-preloader').removeClass('plan-preloader');
+    }, 500);
+  });

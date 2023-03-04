@@ -1,0 +1,11 @@
+$("#lead_source_id").html("<%=escape_javascript options_for_select(@lead_sources.map { |s| [s.name, s.id] })%>");
+<% if @message[0] %>
+  toastr['success']("<%=escape_javascript @message[1] %>");
+  $('.lead_source_list').prepend("<%= escape_javascript render( partial: 'lead_source',locals: { lead_source: @lead_source})%>")
+  $('#new_lead_source').trigger('reset');
+  $('#new_lead_source .add-sequence').val('').trigger("change");
+  $('.tooltips').tooltip()
+  $(".add-new-source-modal").modal('hide');
+<% else %>
+  toastr['error']("<%=escape_javascript @message[1] %>");
+<% end %>  

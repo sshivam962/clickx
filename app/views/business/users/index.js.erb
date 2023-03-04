@@ -1,0 +1,2 @@
+$('.users_list').html("<%= escape_javascript render( partial: '/business/users/list.html.haml', locals: { users: @users }) %>");
+$('html, body').animate({ scrollTop: 0 }, 'slow');

@@ -1,0 +1,51 @@
+- content_for :title do
+  Payments | Clickx
+.page-heading.pt-md.pb-md.ui-2020
+  .row.align-items-center
+    .col-md-6
+      %h1
+        %i.clickx-icon-SellSheets.title-icon
+        Payments
+    .col-md-6.text-md-right.text-left.pt-3.pt-md-0
+      - if current_agency.stripe_credential.present?
+        %a.btn.btn--dark.btn--rounded-md.mb-2.mb-md-0{href: new_agency_payment_link_path}
+          %i.fa.fa-plus.d-none.d-sm-inline-block
+          New Payment Link
+      - else
+        %a.btn.btn--dark.btn--rounded-md.mb-2.mb-md-0{href: '/a/settings', data: {title: 'Goo settings'}}
+          %i.fa.fa-gear.d-none.d-sm-inline-block
+          Add Stripe API Keys
+        %a.btn.btn--dark.btn--rounded-md.mb-2.mb-md-0.disabled{href: '#', data: {tooltip: 'Add Stripe Credentials first.'}}
+          %i.fa.fa-plus.d-none.d-sm-inline-block
+          New Payment Link
+- if current_agency.stripe_credential.present?
+  #dashboard-table.container-fluid.mt-md.pt-xs.ui-2020
+    .row
+      .col-md-12.mb-xs
+        .pull-right
+          = form_tag agency_payment_links_path, id: 'agency_payment_links_form', method: :get, remote: true do
+            %span.pt-sm{for: 'paid'} Paid
+            %label.toggle-control.mb-md
+              = check_box_tag :status, 'paid', params[:status].eql?('paid'), class: 'filter_links'
+              %span.control.action-btn--light
+    .row
+      .col-md-12
+        %div
+          %table.table.table--xl
+            = render 'agency/payment_links/shared/list', payment_links: @payment_links
+        .row.text-center.p-n.pagination-wrapper
+          = will_paginate @payment_links
+
+:javascript
+  $('.copy_to_clipboard').on('click', function (e) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).attr('href')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Link Copied");
+  });
+
+  $('.filter_links').change(function () {
+    $('#agency_payment_links_form').submit();
+  });

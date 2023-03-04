@@ -1,0 +1,44 @@
+%td{ 'colspan': '8' }
+  %table.table.call_details_table.mb-n
+    - call_recording = @call_audio.first
+    - if call_recording["error"]
+      %tr
+        %td{colspan: '3'}
+          = call_recording["error"]
+    - elsif call_recording["url"]
+      %tr
+        %td{colspan: '3'}
+          %a.btn.btn-raised.btn-block.btn-default.mt-n.mb-n{href: call_recording["url"]}
+            %i.fa.fa-download.pr-sm>
+            Download Recording
+        %td{colspan: '3'}
+          %audio.block.col-sm-12.p-n{controls: '', src: call_recording["url"]}
+    %tr.success
+      %td
+      %td{colspan: '2'}
+        %h4
+          %i.fa.fa-microphone.pr-sm>
+          Call Start
+          %p
+            = @call_details.call_start&.to_date.strftime("%d %b %Y %I:%M %P")
+      %td{colspan: '2'}
+        %h4 Inbound Number
+        = @call_details.inbound_number
+      %td{colspan: '2'}
+        %h4 Caller Name
+        %p
+          = @call_details.caller_name
+    %tr.warning
+      %td
+      %td{colspan: '2'}
+        %h4
+          %i.fa.fa-microphone-slash.pr-sm>
+          Call End
+        %p
+          = @call_details.call_end&.to_date.strftime("%d %b %Y %I:%M %P")
+      %td{colspan: '2'}
+        %h4 Answered By Number
+        %p= @call_details.answered_by
+      %td{colspan: '2'}
+        %h4 Caller Number
+        %p= @call_details.caller

@@ -1,0 +1,5 @@
+<% if @agency.errors.present? %>
+  toastr.error("<%= @agency.errors.full_messages.to_sentence %>")
+<% else %>
+  $('#verify_cname').html("<%= escape_javascript render( partial: 'agency/settings/verify_cname') %>");
+<% end %>

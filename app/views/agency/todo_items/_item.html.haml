@@ -1,0 +1,10 @@
+.modal-bg{"data-dismiss" => "modal", :type => "button"}
+.d-flex.align-items-center.justify-content-center.h-100.w-100.pr-4
+  .modal-dialog{role: 'document'}
+    .modal-content.bg-white.p-5.rounded
+      %button.btn-close-overlay{"data-dismiss" => "modal", :type => "button"}
+        %i.fa.fa-times
+      .modal-body.pb-0.pt-0
+        %p
+          %b.fw-lg= item.content
+        %p.fw-lg= item.description

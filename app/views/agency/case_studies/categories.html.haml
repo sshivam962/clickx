@@ -1,0 +1,45 @@
+- content_for :title do
+  Case Studies | Clickx
+.page-heading.bg-white.mb-4
+  %h1 Case Studies
+.px-lg-4
+  .container-fluid
+    .bg-sky-blue.rounded.border-1.border-blue.mb-4
+      .bg-white.rounded-t-12.py-4.px-5
+        .d-flex.justify-content-between.align-items-center
+          .col-auto
+            .fs-md.color-dark-blue.fw-m My Case Studies
+          .col-auto
+            - if @my_case_studies.present?
+              %a.btn.btn--dark.btn--rounded-md.mb-2.mb-md-0{href: new_agency_case_study_path}
+                %i.fa.fa-plus
+                \&#160; Create
+      .p-lg-5.p-4.text-center
+        - if @my_case_studies.present?
+          %table.table.mb-0
+            - @my_case_studies.each do |case_study|
+              = render 'my_category_casestudy', case_study: case_study, favorite: false, checked: 'unchecked'
+        - else
+          %a.btn.btn--dark.btn--rounded-md{href: new_agency_case_study_path}
+            %i.fa.fa-plus
+            \&#160; Create
+
+    .bg-sky-blue.rounded.border-1.border-blue.mb-4
+      .p-lg-5.p-4
+        .row
+          - CaseStudy::CATEGORIES.each do |category|
+            .col-xs-12.col-sm-6.col-xl-3.pb-3
+              .awesome-card.mt-0.mb-5{class: category[:bg]}
+                .awesome-card-inner
+                  = link_to agency_category_case_studies_path(category[:id]), class: 'text-darkblue fw-sb' do
+                    .overflow-h
+                      .awesome-card-social-thumbnail
+                    .awesome-card-footer
+                      .d-flex.justify-content-between.align-items-center.px-4.py-3
+                        .col
+                          .fs-sm= category[:name].upcase
+                        .col
+                          %span.awesome-card-notifications #{@cs_counts[category[:key]]}
+                .awesome-card--shadow
+                .awesome-card--shadow.awesome-card--shadow2
+                  .awesome-card-thumb

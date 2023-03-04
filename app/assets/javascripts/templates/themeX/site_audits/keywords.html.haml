@@ -1,0 +1,61 @@
+%p.clx-text.text-color-accent-red.text-center{ 'ng-if': '!keywordsEnable' }
+  No Data Available
+.panel.panel-default{'st-table':'keywords', 'st-pipe':'stTableServerKeyword',
+  'trigger-st-table-after-events':'', 'ng-show': 'keywordsEnable' }
+  .panel-heading.bg-white.pt-sm
+    %h4.inlineb.f-w-md
+      Keywords
+      %span.text-info {{page_uri | urlPath}}
+    .panel-ctrls.dropdown
+      .form-group.m-n.p-n
+        .pl-n.input-group
+          %span.input-group-addon.formfldic
+            %i.material-icons search
+          %input#search-table.form-control.col-sm-5.cus6in.pl-lg{ 'st-search': '' ,
+          'placeholder': 'Keyword', 'type': 'search' }
+  %hr.mt-xs.mb-md.mr-md.ml-md
+  .panel-body.p-n
+    .col-md-12
+      .col-sm-12.p-n.mb-lg
+        .inlineb.mt-sm
+          %a.text-warning.ml-md {{totalKeywordSize}} Keywords
+        .dropdow.inlineb.pull-right
+          %h4.text-left.inlineb.mr-md
+            %small{ 'st-summary': '', 'number-Of-rows': 'st_per_page' }
+          %button.btn.btn-default.m-n.btn-raised.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+            {{limit_keyword_rows}}
+            %span.caret
+          %ul.dropdown-menu
+            %li.p-sm
+              %a{ 'ng-click': 'limit_keyword_rows = totalKeywordSize' } All
+            %li.p-sm
+              %a{ 'ng-click': 'limit_keyword_rows = 10' } 10
+            %li.p-sm
+              %a{ 'ng-click': 'limit_keyword_rows = 20' } 20
+            %li.p-sm
+              %a{ 'ng-click': 'limit_keyword_rows = 50' } 50
+      .col-sm-12.p-n
+        .table-responsive
+          %table.table.table-hover.table-vam.table-striped.text-muted
+            %thead
+              %tr
+                %th{:width => "30"}
+                %th.f-w-md
+                  %small URL
+                %th.f-w-md
+                  %small RANK
+                %th.f-w-md
+                  %small CHANGE
+                %th.f-w-md
+                  %small SEARCH VOLUME
+            %tbody
+              %tr{ 'ng-repeat': 'keyword in keywords' }
+                %td {{(($index + (paginationStart || 0)) +1)}}.
+                %td
+                  %span.text-info.block {{keyword.name}}
+                %td {{keyword.googleRanking}}
+                %td
+                  %div{"ng-bind-html": "keyword.google_ranking_change | seoRankingChange"}
+                %td {{keyword.searchVolume || "Low"}}
+  .panel-footer.width100.p-sm
+    %div.content-middle{"st-pagination": "","st-items-by-page": "limit_keyword_rows"}

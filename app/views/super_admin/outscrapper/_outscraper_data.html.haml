@@ -1,0 +1,110 @@
+.locations
+  %span
+    .address.row.ml-n.mr-n
+      .col-sm-12{style: "width: 10%"}
+        %b Serial no
+      .col-sm-6{style: "width: 20%"}
+        %b Agency
+      .col-sm-12{style: "width: 10%"}
+        %b Limit
+      .col-sm-12{style: "width: 20%"}
+        %b Created at
+      .col-sm-6.text-center{style: "width: 10%"}
+        %b Data
+      .col-sm-6.text-center{style: "width: 15%"}
+        %b Copy
+      .col-sm-6{style: "width: 15%"}
+        %b Status
+  - all_outscrapper_requests.order("updated_at DESC").each_with_index do |outscrapper_request, i|
+    %span
+      .address.row.ml-n.mr-n
+        .col-sm-12{style: "width: 10%"}
+          = i+1
+        .col-sm-6{style: "width: 20%"}
+          = outscrapper_request.agency.name
+        .col-sm-12{style: "width: 10%"}
+          = outscrapper_request.limit
+        .col-sm-12{style: "width: 20%"}
+          = format_at_date(outscrapper_request.created_at)
+        .col-sm-6.col-md-1.text-center{style: "width: 10%"}
+          -if outscrapper_request.outscrapper_data.present?
+            = link_to "View Data", super_admin_external_lead_path(id: outscrapper_request.outscrapper_data.id),  class: 'btn btn--dark m-2'
+          -else
+            %a.btn.btn--dark.m-2{style: "opacity: 0.5; pointer-events: none"} View Data
+        .col-sm-6.col-md-1.text-center{style: "width: 15%"}
+          -if outscrapper_request.outscrapper_data.present?
+            %a.btn.btn--dark.m-2{"data-target": ".copy-modal", "data-toggle": "modal", "data-id": "#{outscrapper_request.outscrapper_data.id}"}Copy
+          -else
+            %a.btn.btn--dark.m-2.pe-none{style: "opacity: 0.5; pointer-events: none"} Copy
+        .col-sm-6{style: "width: 10%"}
+          -if outscrapper_request.outscrapper_status == "Pending"
+            %span.d-inline-block.py-2.px-3.rounded-15.bg-warning.fs-xs.text-white{style: "background-color: #ffc107; border-radius: 15px"} Processing
+          -elsif outscrapper_request.outscrapper_status == "Success"
+            %span.d-inline-block.py-2.px-3.rounded-15.bg-green.fs-xs.text-white{style: "background: green; border-radius: 15px"} Completed
+          -else
+            -if outscrapper_request.retry_count < 3
+              %a{"data-target": ".reorder-modal", "data-toggle": "modal", "data-id": "#{outscrapper_request.id}", "data-limit-id": "#{outscrapper_request.agency.outscraper_limit.credit_balance}", title: "Reorder data"}
+                %span.d-inline-block.py-2.px-3.rounded-15.bg-red.fs-xs.text-white{style: "background: var(--red); border-radius: 15px"} Error
+            -else
+              %a{title: "Request failed for 3 consecutive time"}
+                %span.d-inline-block.py-2.px-3.rounded-15.bg-red.fs-xs.text-white{style: "background: var(--red); border-radius: 15px"} Error
+
+.modal.fade.in.copy-modal{role: "dialog"}
+  .modal-dialog.modal-md.task-create-modal-body
+    .bg-white.p-4.p-sm-5.rounded
+      = form_for :copy_data, html: {id: "copy_data_form"} do |f|
+        .row
+          .col-md-12
+            .fs-xs.mb-3 Agency
+            .input-wrapper.mb-12
+              =f.select :agency_id, Agency.all.collect { |a| [a.name, a.id]}, { include_blank: "Select Agency" }, class: "input-wrapper-input w-full", placeholder: "Agency", id: "agency", data:{remote: true, url: "/s/external_leads/list_name", method: 'get'}
+        .row
+          .col-md-12
+            .fs-xs.mb-3 List Name
+            .input-wrapper.mb-12{id: "list_field"}
+              =render partial: "super_admin/outscrapper/list_name"
+        .pt-4
+          .btn.btn--dark#btn_copy_details Copy Details
+.modal.fade.in.reorder-modal{role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-m
+    .bg-white.p-4.p-sm-5.rounded
+      .prospecting_details_form
+        .row
+          .col-md-6
+            .fw-m.fw-b.text-darkblue.text-md Reorder Data
+          .col-md-6
+            .fw-m.fw-b.text-md.text-right#available_limit
+        %hr.my-4
+          %div#reorder
+            .fw-m.fw-b.text-md.text-center Do you want to reorder this data
+            %div{style: "text-align:center; padding:25px 25px 0 25px;"}
+              .btn.btn-success.fs-xs#reorder_request{style: "padding: 6px 45px;"} Yes
+              .btn.btn-warning.fs-xs{"data-dismiss" => "modal", :type => "button","ng-click": "closeModal()", style: "padding: 6px 45px;"} No
+
+.ui-2020
+  .row.pagination-wrapper
+    .pagination
+      = will_paginate @outscrapper_requests
+
+:javascript
+  $(document).ready(function() {
+    var request_id;
+    var available_limit;
+    $('.reorder-modal').on('show.bs.modal', function (e) {
+        request_id = $(e.relatedTarget).data('id');
+        available_limit = "Available credits: " + $(e.relatedTarget).data('limit-id');
+        $('#available_limit').html(available_limit);
+    })
+    $("#reorder_request").on('click', function(e) {
+      var url = "/a/external_leads/reorder_data/" + request_id;
+      $.ajax({
+          url: url,
+          type: 'patch',
+          success: function(){
+            $('.reorder-modal').modal('hide');
+            window.location.reload();
+          },
+          beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
+        });
+    });
+  });

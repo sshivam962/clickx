@@ -1,0 +1,77 @@
+- content_for :title do
+  View Social Media Prompt | Clickx
+
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    .col-xs-10.col-sm-10.col-lg-10
+      %h1 
+        = @social_media_prompt.title
+    .col-xs-2.col-sm-2.col-lg-2
+      %a.btn.btn-warning.pull-right.mt-lg.mb-lg{href: super_admin_social_media_prompts_path} Back
+
+.uiv2
+  .clearfix
+  .content-card.p-md-5
+    .spinner-overlay.spinner-overlay-intro
+    = form_for @social_media_prompt, url: super_admin_social_media_prompt_path(@social_media_prompt), method: :patch do |f|
+      .form-group
+        .row
+          .col-sm-12
+            .form-group.mt-2
+              %label Content
+              = text_area_tag :content, '', class: 'form-control mb-0 pt-0', placeholder: 'Write content for quote', rows:'5'
+      .form-group
+        .row
+          .col-sm-12
+            .form-group.mt-2
+              %label Prompt
+              = f.text_area :prompt, class: 'form-control mb-0 pt-0 prompt', placeholder: 'Prompt', required: true, rows: 5
+              .spacer10
+              %button.btn.btn-success.ai_result{type: :button}
+                Get AI Result
+      .spacer40
+      .form-group
+        .row
+          .col-sm-12
+            .form-group.mt-2
+              %label Result
+              = text_area_tag :prompt_result, '', class: 'form-control mb-0 pt-0 prompt_result', placeholder: 'AI Generated Result', rows:'10'
+              
+
+:javascript
+
+  $('.ai_result').click(function(e){
+    e.preventDefault()
+    $('.spinner-overlay-intro').css('opacity',1).show()
+    var prompt_content = $("#content").val()
+    var prompt = $(".prompt").val()
+    if(!prompt){
+      alert("enter prompt")
+    } 
+    else {
+      if(prompt_content)
+        prompt += " " + " '" + prompt_content + "'"
+      $.ajax({
+        url: '/s/social_media_prompts/create_ai_prompt',
+        type: 'post',
+        data: {
+          prompt: prompt
+        },
+        dataType: 'json',
+        success:function(response){
+          $('.spinner-overlay-intro').css('opacity',0).hide()
+
+          if (typeof response.data.content !== 'undefined' && response.data.content.length > 0) {
+
+            var content = JSON.parse(response.data.content);
+            words = content[0].replace(/\n/g, "");
+            $('.prompt_result').val(words)
+            
+          }
+          
+        }
+      })
+    }
+    
+  })
+              

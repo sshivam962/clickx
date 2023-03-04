@@ -1,0 +1,107 @@
+- content_for :title do
+  Facebook & Instagram Ads
+- text_color = agency.strategy_product_text_color
+.section.p-tb-60{style: "background:#{agency.strategy_product_background_color}"}
+  .container
+    .row.v-center--lg.text-center--md.col-centered--md
+      .col-md-5.col-md-offset-1.text-center
+        = image_tag 'lead_strategy/f-i-ads.svg', class: 'img-responsive'
+        .p-lg--md
+      .col-md-6
+        %h1{style: "color:#{text_color}"}
+          Facebook &amp; Instagram Ads
+          %br
+          %span.f-w-lg= @lead.company
+        %p{style: "color:#{text_color}"}
+          Prepared For
+          - if @lead.full_name.present?
+            %br
+            = @lead.full_name
+          - if @lead.email.present?
+            %br
+            = @lead.email
+.section.p-tb-80.p-tb-md-40
+  .container.container--sm
+    .card.p-n.m-n
+      .card--title
+        .d-md-flex.flex-row.justify-content-between.align-items-center
+          .col Facebook Ads Implementation
+          .col.font-16 Month 1
+      .card--contents
+        %ul.spec-list
+          %li Campaign Kick Off Call
+          %li Define Launch Timeline
+          %li Dedicated Facebook Ad Specialists
+          %li 100% Customized Strategy
+          %li Pixel Setup
+          %li Targeting Audience Research
+          %li Setup Custom Audiences
+          %li Facebook Lead Ads
+          %li Facebook Form Setup
+          %li Campaign Buildout
+          %li Ad Image Creation
+          %li Initial Ad Creatives
+          %li Additional Ad Creatives
+          %li Ad Creative Approval
+          %li New Ad Creatives
+          %li Initial Ads Copywriting
+          %li Implementation of Initial bids
+          %li Implementation of Ad Scheduling
+          %li Retargeting Campaign Setup
+          %li 24/7 Reporting Dashboard
+.section.bg-light.p-tb-80.p-tb-md-40
+  .container.container--sm
+    .card.p-n.m-n
+      .card--title.card--title-primary
+        .d-md-flex.flex-row.justify-content-between.align-items-center
+          .col On-Going Management &amp; Support
+          .col.font-16 Month 2 and Onwards
+      .card--contents
+        %ul.spec-list
+          %li Dedicated Campaign Management Team
+          %li Facebook Ad Management
+          %li Instagram Ads Management
+          %li Feedback on Landing Page
+          %li Multiple Ad Set Split Tests
+          %li Monthly Performance Report
+          %li Campaign Quality Audits
+          %li Performance-Based Budget Pacing
+          %li Month to Month Commitment
+          %li 30 Day Notice for Cancellation
+          %li One Time Implementation Fee Applies
+.section.p-tb-80.p-tb-md-40
+  .container.container--sm
+    %h3.f-w-lg.pb-xl.text-center Campaign Launch Process
+    %ul.steps.mt-xl
+      .steps-line
+      %li
+        .step-icon
+          = image_tag 'lead_strategy/static/step-icon-1.svg'
+        %div
+          .step-title Questionnaire
+          %p Document the goals for the campaign, strategy for ad creatives and the offer
+      %li
+        .step-icon
+          = image_tag 'lead_strategy/static/step-icon-2.svg'
+        %div
+          .step-title Ad Creation
+          %p Create engaging ad copies and creatives to capture the audience’s attention
+      %li
+        .step-icon
+          = image_tag 'lead_strategy/static/step-icon-3.svg'
+        %div
+          .step-title Landing Pages
+          %p Define the landing pages that will be used to convert traffic into leads and sales
+      %li
+        .step-icon
+          = image_tag 'lead_strategy/static/step-icon-4.svg'
+        %div
+          .step-title Launch
+          %p Develop campaigns, ad sets, and multiple ads. Define budget and publish ads
+      %li
+        .step-icon
+          = image_tag 'lead_strategy/static/step-icon-5.svg'
+        %div
+          .step-title Optimize
+          %p Review and optimize budget for maximum conversions and cost per conversions
+

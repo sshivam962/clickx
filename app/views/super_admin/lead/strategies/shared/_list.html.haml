@@ -1,0 +1,72 @@
+- pending_approval = lead.lead_strategies.select(&:pending_approval?)
+- approved = lead.lead_strategies.select(&:approved?)
+- in_process = lead.lead_strategies.select(&:in_process?)
+- new_strategies = ::Lead::Strategy::CATEGORIES.keys - lead.lead_strategies.pluck(:category)
+%td.hiddenRow{colspan: 4}
+  .col-md-12
+    .col-md-2.pr-n
+      %b Not Started
+      .items
+        - new_strategies.each do |category|
+          .col-md-12.pr-n
+            %a.mr-md.pull-left{href: new_super_admin_lead_strategy_path(lead_id:  lead.id, type: category)}
+              = category
+    .col-md-2.pr-n
+      %b In Process
+      .items
+        - in_process.each do |strategy|
+          .col-md-12.pr-n
+            %a.mr-md.pull-left{href: edit_super_admin_lead_strategy_path(lead, strategy)}
+              = strategy.category
+            %a.mr-md.pull-left{ href: preview_super_admin_lead_strategy_path(lead, strategy), target: '_blank' }
+              %i.fa.fa-eye
+    .col-md-2.pr-n
+      %b Pending Approval
+      .items
+        - pending_approval.each do |strategy|
+          .col-md-12.pr-n
+            %a.mr-md.pull-left{href: edit_super_admin_lead_strategy_path(lead, strategy)}
+              = strategy.category
+            %a.mr-md.pull-left{ href: preview_super_admin_lead_strategy_path(lead, strategy), target: '_blank' }
+              %i.fa.fa-eye
+    .col-md-2.pr-n
+      %b Approved
+      .items
+        - approved.each do |strategy|
+          .col-md-12.pr-n
+            %a.mr-md.pull-left{ href: edit_super_admin_lead_strategy_path(lead, strategy)}
+              = strategy.category
+              - if strategy.created_by?('agency_admin')
+                %span{style: 'color: #bad531;'}
+                  %i.fa.fa-check-circle-o
+            %a.mr-md.pull-left.copy_to_clipboard{ href: lead_strategy_public_link(strategy), target: '_blank' }
+              %i.fa.fa-clipboard
+            %a.mr-md.pull-left{ href: preview_super_admin_lead_strategy_path(lead, strategy), target: '_blank' }
+              %i.fa.fa-eye
+            - unless strategy.created_by?('agency_admin')
+              = link_to send_approval_super_admin_lead_strategy_path(lead, strategy), data: { confirm: 'Are you sure?' }, method: :patch, remote: true do
+                %i.fa.fa-send.text-white
+    .col-md-2.pr-n
+      %b Product Pages
+      .items
+        - ::Lead::Strategy::STATIC_CATEGORIES.each do |title, category|
+          .col-md-8.pr-n
+            .author
+              = title
+          .col-md-4.pl-n
+            %a.mt-n.copy_to_clipboard{href: growth_strategy_public_link(category, lead), target: '_blank'}
+              %i.fa.fa-clipboard{'title': 'Copy the URL'}
+    .col-md-2.pr-n.pull-right
+      %b Actions
+      .items
+        .row
+          = link_to super_admin_lead_path(lead), data: { toggle: 'tooltip', 'original-title' => 'More info'}, class: 'btn-sm btn btn-raised btn-info pr-sm pl-sm ml-md', target: '_blank' do
+            %span.btn-icon
+              %i.fa.fa-info
+              More Info..
+        - unless lead.old_strategy
+          .row
+            = button_to old_strategy_super_admin_lead_path(lead), method: :patch, remote: true, data: { toggle: 'tooltip', 'original-title' => 'Archive Lead'}, class: 'btn-sm btn btn-raised btn-danger pr-sm pl-sm ml-md' do
+              %span.btn-icon
+                %i.fa.fa-trash
+                Archive

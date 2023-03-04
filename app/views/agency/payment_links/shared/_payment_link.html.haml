@@ -1,0 +1,45 @@
+%td.col-client
+  %span.client-name-editable
+    %span.client-name__name
+      = payment_link.display_name
+      %small.badge
+        = payment_link.resource_type.eql?('Business') ? 'Client' : payment_link.resource_type
+      %br
+      = payment_link.display_email
+%td.col-client
+  %span.client-name-editable
+    %span.client-name__name
+      = plan.description_line_1
+      %br
+      = plan.description_line_2
+%td.col-data
+  %span.email
+    - if plan.subscription?
+      = "#{number_to_currency(plan.amount, precision: 2)}/mo"
+    - else
+      = number_to_currency(plan.amount, precision: 2)
+%td.col-data
+  %span
+    - if plan.implementation_fee&.positive?
+      = number_to_currency(plan.implementation_fee, precision: 2)
+%td.col-btns.text-xl-right
+  - unless payment_link.paid?
+    - if payment_link.enabled?
+      %a.copy_to_clipboard.action-btn.action-btn--light{ href: start_service_payment_link_public_link(payment_link), target: '_blank' }
+        %span.btn-icon
+          %i.fa.fa-clipboard
+    - if payment_link.disabled?
+      = link_to enable_agency_payment_link_path(payment_link), method: :patch, remote: true, data: { toggle: 'tooltip', 'original-title' => 'Enable Payment Link'}, class: 'action-btn action-btn--light' do
+        %span.action-btn-text
+          Enable
+    - else
+      = link_to disable_agency_payment_link_path(payment_link), method: :patch, remote: true, data: { toggle: 'tooltip', 'original-title' => 'Disable Payment Link'}, class: 'action-btn action-btn--light' do
+        %span.action-btn-text
+          Disable
+    = link_to agency_payment_link_path(payment_link), method: :delete, remote: true, data: { confirm: 'Are you sure?', toggle: 'tooltip', 'original-title' => 'Archive'}, class: 'action-btn action-btn--light' do
+      %span.btn-icon
+        = image_tag 'icons/icon-archive-black.svg'
+  - else
+    %span.pr-sm
+      %span.label.label-success.pl-md.pr-md
+        Paid

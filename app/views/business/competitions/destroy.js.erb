@@ -1,0 +1,6 @@
+<% if @competition.errors.present? %>
+  toastr.error("<%= @competition.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success("Competition deleted");
+  $(".competition_<%= @competition.id%>").remove();
+<% end %>

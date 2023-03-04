@@ -1,0 +1,200 @@
+- content_for :title do
+  Agencies | Clickx
+.uiv2
+  .mt-3.mb-5.d-flex.flex-wrap.justify-content-between.align-items-center
+    .col
+      %h1.m-0 Agencies
+    .col
+      - if current_user.super_admin?
+        %a.btn.btn-warning.m-0.px-4.export_xlsx{ href: '#', 'data-title': 'Export' }
+          %i.fa.fa-download
+          EXPORT
+  .clearfix
+  .content-card.p-md-5
+    .row
+      .pull-right.mr-sm
+        %a.btn.clear_filters{href: 'javascript:void(0)', 'data-title' => 'Clear Filters'}
+          %i.fa.fa-eraser
+          Clear
+    .content-card__header
+      .d-flex.justify-content-between.flex-wrap
+        .col-search
+          .input-wrapper
+            = text_field_tag :search_name, @filter_name, class: 'search login select-box form-control search_client search_name', placeholder: 'Search By Name'
+            .inner-glyph.glyph-align
+              %i.glyphicon.glyphicon-search
+        .col-search-more.pl-3.client-filters
+          .d-flex.flex-wrap
+            .col-auto.pl-sm-4
+
+              .togglebutton.toggle-info
+                %label.word-break.fw-n
+                  - check_class = (@filter_is_paid == "true" ? true : false);
+                  = check_box_tag 'is_paid', '', check_class
+                  %span.toggle
+                  Include Free Agencies
+        .col-search-more.pl-3.client-filters
+          .d-flex.flex-wrap
+            .col-auto.pl-sm-4
+              .input-wrapper
+                - status = [["Enabled Agencies", true], ["Disabled Agencies", false]]
+                = select_tag 'search_status', options_for_select(status, @filter_status), class: 'form-control pr-5'
+                .inner-glyph.glyph-align
+                  %i.glyphicon.glyphicon-chevron-down
+            .col-auto.pl-sm-4
+              .input-wrapper
+                - labels = Agency.pluck(:labels).join(',').split(',').uniq.reject(&:blank?).collect {|c| [c, c]}
+                = select_tag 'search_label', options_for_select(labels, @filter_label), include_blank: 'Search By Label', class: 'search login select-box form-control filter_client pr-5'
+                .inner-glyph.glyph-align
+                  %i.glyphicon.glyphicon-search
+
+    .agency_list
+      = render 'super_admin/agencies/list', agencies: @agencies
+- if policy([:super_admin, current_user]).super_admin?
+  %a.btn.btn--add.pull-right{ 'href': new_super_admin_agency_path }
+    %i.glyphicon.glyphicon-plus.glyphplus
+- if @filter_name.present?
+  = hidden_field_tag :search_state, 'search'
+- else
+  = hidden_field_tag :search_state, 'all'
+:javascript
+  $('.login_as_user').change(function(event){
+    var optionSelected = $("option:selected", this);
+    var valueSelected = this.value;
+    target = $(this).attr('data-target')
+    $('#view_dashboard_' + target).attr('href', "/switch_to_agency_user?user_id=" + valueSelected + "&agency_id=" + target)
+  });
+
+  $('#search_name').on("keyup", function() {
+    var label = $('#search_label').val();
+    var status = $('#search_status').val().toLowerCase();
+    var name = $('#search_name').val().toLowerCase();
+    var is_paid = false;
+    if ($('#is_paid').is(":checked"))
+    {
+      is_paid = true;
+    }
+    var search = false
+    if(name.length >= 3){
+      $('#search_state').val('search')
+      search = true
+    }else if(name.length == 0){
+      if($('#search_state').val() == 'search'){
+        $('#search_state').val('all')
+        search = true
+      }else{
+        search = false
+      }
+    }
+    if(search == true){
+      $.ajax({
+        url: "/s/agencies",
+        type: 'get',
+        data: { name: name, label: label, status: status, is_paid: is_paid },
+        dataType: 'script',
+        async: false,
+        success:function(response){
+          $('.agency_list').html(response.data)
+        }
+      })
+    }
+  });
+
+  $('#search_label').on("change", function() {
+    var label = $('#search_label').val();
+    var status = $('#search_status').val().toLowerCase();
+    var name = $('#search_name').val().toLowerCase();
+    var is_paid = false;
+    if ($('#is_paid').is(":checked"))
+    {
+      is_paid = true;
+    }
+    $.ajax({
+      url: "/s/agencies",
+      type: 'get',
+      data: { name: name, label: label, status: status, is_paid: is_paid },
+      dataType: 'script',
+      async: false,
+      success:function(response){
+        $('.agency_list').html(response.data)
+      }
+    })
+  });
+
+
+  $('#is_paid').on("change", function() {
+    var is_paid = false;
+    if ($('#is_paid').is(":checked"))
+    {
+      is_paid = true;
+    }
+    
+    var label = $('#search_label').val();
+    var status = $('#search_status').val().toLowerCase();
+    var name = $('#search_name').val().toLowerCase();
+    $.ajax({
+      url: "/s/agencies",
+      type: 'get',
+      data: { name: name, label: label, status: status, is_paid: is_paid },
+      dataType: 'script',
+      async: false,
+      success:function(response){
+        $('.agency_list').html(response.data)
+      }
+    })
+  });
+
+  $('#search_status').on("change", function() {
+    var label = $('#search_label').val();
+    var status = $('#search_status').val().toLowerCase();
+    var name = $('#search_name').val().toLowerCase();
+    var is_paid = false;
+    if ($('#is_paid').is(":checked"))
+    {
+      is_paid = true;
+    }
+    $.ajax({
+      url: "/s/agencies",
+      type: 'get',
+      data: { name: name, label: label, status: status, is_paid: is_paid },
+      dataType: 'script',
+      async: false,
+      success:function(response){
+        $('.agency_list').html(response.data)
+      }
+    })
+  });
+
+  $('.clear_filters').on('click', function() {
+    $('#search_label').val('');
+    $('#search_name').val('');
+    $('#search_status').val("true");
+    var status = $('#search_status').val().toLowerCase();
+    var is_paid = true;
+    $('#is_paid').attr('Checked','Checked');
+    $.ajax({
+      url: '/s/agencies',
+      type: 'get',
+      data: { name: '', label: '', status: status, is_paid: is_paid },
+      dataType: 'script',
+      async: false,
+      success:function(response){
+        $('.agency_list').html(response.data)
+      }
+    })
+  });
+
+  $('.export_xlsx').on('click', function() {
+    var label = $('#search_label').val();
+    var status = $('#search_status').val().toLowerCase();
+    var name = $('#search_name').val().toLowerCase();
+    var is_paid = false;
+    if ($('#is_paid').is(":checked"))
+    {
+      is_paid = true;
+    }
+
+    download_url = "/s/agencies/agency_sheet.xlsx?name=" + name + "&label=" + label + "&status=" + status + "&is_paid=" + is_paid;
+
+    window.location.href = download_url;
+  });

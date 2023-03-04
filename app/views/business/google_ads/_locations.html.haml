@@ -1,0 +1,18 @@
+-# Not being used, kept for reference when implementing listing of location for a campaign
+
+.col-md-4
+  .tab-container
+    .tab-content
+      .table-responsive
+        %table.table.table-hover.table-bordered.table-vam
+          %thead
+            %tr
+              %th.vam{colspan: 3}
+                {{location_title}}
+          %tbody.locations
+            -# - locations.each do |location|
+            %tr{'ng-repeat': "location in locations"}
+              %td{"ng-class":"location.is_negative ? 'red' : ''"}
+                {{location.location_name}}
+              %td {{location.is_negative ? 'Excluded' : location.targeting_status | titleize}}
+              %td {{location.display_type}}

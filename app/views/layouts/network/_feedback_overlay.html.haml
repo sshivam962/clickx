@@ -1,0 +1,21 @@
+#feedback_overlay.fixed.z-10.inset-0.overflow-y-auto.overlay.hidden
+  .flex.items-center.justify-center.min-h-screen.pt-4.px-4.pb-10.text-center
+    .fixed.inset-0.bg-gray-500.bg-opacity-75.transition-opacity.overlay-close
+    .inline-block.align-bottom.bg-white.rounded-lg.text-left.overflow-hidden.shadow-xl.transform.transition-all.sm:align-middle.sm:max-w-3xl.sm:w-full
+      .bg-white.px-4.pt-5.pb-4.sm:p-6.sm:pb-4
+        .relative.text-center.pb-3
+          .mt-3.sm:mt-0
+            .text-xl.leading-6.font-medium.text-blue
+              Send Feedback
+          %button.overlay-close.absolute.right-0.top-0.text-blue.w-8.h-8.leading-8.text-center.hover:bg-gray-200.hover:text-gray-800.-mt-1.rounded.transition-colors
+            %i.fa.fa-close
+
+        .mt-4
+          = form_tag feedback_path, id: 'feedback_form', method: :post, remote: true do
+            .border.bg-light-blue.border-blue-100.rounded-md.mb-5
+              .bg-white.py-4.px-4.rounded-t-md.leading-none Let us know how we can improve your experience
+              .feedback-input
+                %textarea#feedback_suggestion.border-0.bg-transparent.w-full.p-4.sm:p-5.md:p-6.outline-none.focus:outline-none{placeholder: 'Enter your suggestions here.', rows: 6, name: 'suggestion', required: true}
+            .input-wrapper.input-wrapper--button.pb-3
+              %button.btn.btn.btn--primary.w-32.text-center.mr-3{type: 'submit'} Send
+              .btn.btn--grey.sm:w-32.text-center.overlay-close Cancel

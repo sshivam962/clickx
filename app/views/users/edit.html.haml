@@ -1,0 +1,26 @@
+- content_for :title do
+  Edit Profile
+
+.header.no-bottom-border
+  %h1 Edit Profile
+
+.login-form
+  = form_for(@user, url: user_path, html: {method: :put}) do |f|
+    .form-group
+      = f.label 'Email'
+      = f.text_field :email, class: 'form-control login width40per', placeholder: 'Email'
+    .form-group
+      = f.label :first_name
+      = f.text_field :first_name, class: 'form-control login width20per first_name', placeholder: 'First Name'
+    .form-group
+      = f.label :last_name
+      = f.text_field :last_name, class: 'form-control login width20per', placeholder: 'Last Name'
+    .form-group
+      = f.label :phone
+      = f.text_field :phone, class: 'form-control login width20per', placeholder: 'Phone'
+    .form-group
+      = f.label :address
+      = f.text_area :address, class: 'form-control login width40per', placeholder: 'address'
+    %br/
+    %button.btn.btn-warning{:type => "submit"} Update Profile
+    %a.btn.btn-default{href: profile_path} Back

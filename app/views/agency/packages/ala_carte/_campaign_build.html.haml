@@ -1,0 +1,344 @@
+- plan = plans['google_search_ads_campaign_build']&.first
+/ - if plan.present?
+/   .ala_carte-list--item.campaign_build{"data-filter" => "campaign_build"}
+/     .plan-card
+/       .plan-card--header
+/         .f-s-22.fw-sb.text-black Google Search Ads Campaign Build
+/         .plan-card--price
+/           = in_currency(plan.amount, current_agency.display_currency)
+/         .plan-card--price-slashed
+/           MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+/       .plan-card--body
+/         %ul.plan-card-list
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Campaign Questionnaire
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Kick Off Call with Agency
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Define Key Objectives
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 100% Customized Strategy
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Keyword Research
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Campaign Buildout
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Competitor Analysis
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 1 Campaign Creation
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Up to 4 Ad Groups
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Up to 2 Ad Copywriting
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Up to 2 Custom Graphics
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Up to 3 Design Revisions
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Ad Extensions (Location, Call, Sitelink)
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span A/B Test Ad Copies
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Ad Scheduling
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Approval & Hand Off
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Timeline: 15-20 Days
+/       - unless @is_preview
+/         .plan-card--footer
+/           %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+/             Get Started
+
+- plan = plans['facebook_ads_campaign_build']&.first
+/ - if plan.present?
+/   .ala_carte-list--item.campaign_build{"data-filter" => "campaign_build"}
+/     .plan-card
+/       .plan-card--header
+/         .f-s-22.fw-sb.text-black Facebook Ads Campaign Build
+/         .plan-card--price
+/           = in_currency(plan.amount, current_agency.display_currency)
+/         .plan-card--price-slashed
+/           MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+/       .plan-card--body
+/         %ul.plan-card-list
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Campaign Questionnaire
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Kick Off Call with Agency
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Define Key Objectives
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 100% Customized Strategy
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Targeting & Audience Research
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Custom / Lookalike Audience
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Competitor Analysis
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 1 Campaign Creation
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Up to 4 Ad Sets
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Up to 2 Ad Copywriting
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Up to 2 Custom Graphics
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Up to 3 Design Revisions
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Customize Audience Demographic
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span A/B Test Creatives
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Ad Scheduling
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Approval & Hand Off
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Timeline: 15-20 Days
+/       - unless @is_preview
+/         .plan-card--footer
+/           %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+/             Get Started
+
+
+/ - plan = plans['facebook_ads_ecommerce_campaign_build']&.first
+/ - if plan.present?
+/   .ala_carte-list--item.campaign_build{"data-filter" => "campaign_build"}
+/     .plan-card
+/       .plan-card--header
+/         .f-s-22.fw-sb.text-black Facebook Ads ECommerce Campaign Build
+/         .plan-card--price
+/           = in_currency(plan.amount, current_agency.display_currency)
+/         .plan-card--price-slashed
+/           MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+/       .plan-card--body
+/         %ul.plan-card-list
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Campaign Questionnaire
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Kick Off Call with Agency
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Define Key Objectives
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 100% Customized Strategy
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Targeting & Audience Research
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Custom / Lookalike Audience
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Competitor Analysis
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 1 Campaign Creation
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Product Catalog Ads
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Up to 2 Ad Copywriting
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Up to 2 Custom Graphics
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Up to 3 Design Revisions
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Customize Audience Demographic
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span A/B Test Creatives
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Ad Scheduling
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Approval & Hand Off
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Timeline: 15-20 Days
+/       - unless @is_preview
+/         .plan-card--footer
+/           %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+/             Get Started
+
+
+/ - plan = plans['linkedin_ads_campaign_build']&.first
+/ - if plan.present?
+/   .ala_carte-list--item.campaign_build{"data-filter" => "campaign_build"}
+/     .plan-card
+/       .plan-card--header
+/         .f-s-22.fw-sb.text-black LinkedIn Ads Campaign Build
+/         .plan-card--price
+/           = in_currency(plan.amount, current_agency.display_currency)
+/         .plan-card--price-slashed
+/           MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+/       .plan-card--body
+/         %ul.plan-card-list
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Campaign Questionnaire
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Kick Off Call with Agency
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Define Key Objectives
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 100% Customized Strategy
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Targeting & Audience Research
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Custom Matched Audiences
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Competitor Analysis
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 1 Campaign Creation
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Sponsered Content Ads
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Up to 2 Ad Copywriting
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Up to 2 Custom Graphics
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Up to 3 Design Revisions
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Customize Audience Demographic
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span A/B Test Creatives
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Ad Scheduling
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Approval & Hand Off
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Timeline: 15-20 Days
+/       - unless @is_preview
+/         .plan-card--footer
+/           %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+/             Get Started
+
+
+
+- plan = plans['youtube_ads_campaign_build']&.first
+- if plan.present?
+  .ala_carte-list--item.campaign_build{"data-filter" => "campaign_build"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black YouTube Ads Campaign Build
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Campaign Questionnaire
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Kick Off Call with Agency
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Define Key Objectives
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 100% Customized Strategy
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Audience Targeting (Affinity & In-Market)
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Campaign Buildout
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Competitor Analysis
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 1 Campaign Creation
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span In-Stream Ads
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span TrueView Ads
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Custom Bid Strategy
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Implement Frequency Cap
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Custom Demographics Targeting
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span A/B Test Ad Copies
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Ad Scheduling
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Approval & Hand Off
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Timeline: 15-20 Days
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+

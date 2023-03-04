@@ -1,0 +1,176 @@
+.content
+  .analytics-header
+    %h1.page-title.pull-left Content Order
+    .pull-right
+      %a.btn.btn-warning{href: "/s/content_settings"} Back to the Content Settings
+.writers-form
+  .row
+    .col-xs-12.col-sm-12.col-md-10.col-lg-7
+      = form_with model: @writer_form , url: '' do |f|
+        .hidden
+        .each-form-section
+          %h3.form-title What would you like to order?
+          .form-fields
+            .row
+              .col-xs-12.col-sm-4
+                .form-group
+                  = f.label :product_type, 'Product type'
+                  .wf
+                    = f.select(:product_type, options_for_select(@writer_form.product_type.map{ |i| i["name"]}, @writer_form.product_type.find { |h| h["id"] == @content_order.form_data["assetid"].to_i }["name"]), {}, {class: 'form-control', disabled:"disabled"})
+
+              .col-xs-12.col-sm-4
+                .form-group
+                  = f.label :industry, 'Industry'
+                  .wf
+                    = f.select(:industry, options_for_select(@writer_form.industry.map{ |i| i["name"]}, @writer_form.industry.find { |h| h["id"] == @content_order.form_data["categoryid"].to_i }["name"]), {}, {class: 'form-control', disabled:"disabled"})
+
+              .col-xs-12.col-sm-4
+                .form-group
+                  = f.label :speciality, 'Speciality'
+                  .wf
+                    = f.select(:specialty, options_for_select(@writer_form.specialty.map{ |i| i["name"]}, @writer_form.specialty.find { |h| h["id"] == @content_order.form_data["expertiseid"].to_i }["name"]), {}, {class: 'form-control', disabled:"disabled"})
+
+        .each-form-section
+          %h3.form-title Budget and Quality?
+          .form-fields
+            .row
+              .col-xs-12.col-sm-4
+                .form-group
+                  = f.label :'minimum-words', 'Minimum Words', class: 'control-label'
+                  %input.form-control#minimum-words{type:"number", "disabled":"disabled","readonly":"",
+                  min:300,step:50,"required":'required', value: "#{ContentOrder.find(@content_order.id).form_data["minwords"]}"}
+              .col-xs-12.col-sm-4
+                .form-group
+                  = f.label :'maximum-words', 'Maximum Words', class: 'control-label'
+                  %input.form-control#maximum-words{type:"number", "disabled":"disabled","readonly":"",
+                  min:300,step:50,"required":'required', value: "#{ContentOrder.find(@content_order.id).form_data["maxwords"]}"}
+            .row
+              .col-xs-12.col-sm-4
+                .form-group
+                  = f.label :'writer-level', 'Content writer  Level ( 2 - 6 stars)', class: 'control-label'
+                  %input.form-control{ "value":"#{ContentOrder.find(@content_order.id).form_data["writer"]}" , "disabled":"disabled","readonly":""}
+        .each-form-section
+          %h3.form-title Brief project description?
+          .form-fields.clearfix
+            .row
+              .col-xs-12
+                .form-group
+                  = label_tag 'title', 'Order Title', class: 'control-label'
+                  %input#title.form-control{ "required":'required',"disabled":"disabled","readonly":"", "value":"#{ContentOrder.find(@content_order.id).form_data["title"]}" }
+                .form-group
+                  = label_tag 'instruction', 'Instruction', class: 'control-label'
+                  .well
+                    %div= raw @content_order.form_data["instructions"]
+            .row
+              .col-xs-12
+                .row
+                  .col-xs-12.col-sm-6
+                    .form-group
+                      = label_tag 'company-information', 'Company Information'
+                      %textarea.form-control#company-information{placeholder:"Company information", "value":"#{ContentOrder.find(@content_order.id).form_data["company_information"]}","disabled":"disabled","readonly":""}
+                  .col-xs-12.col-sm-6
+                    .form-group
+                      = label_tag 'target-audience', 'Target Audience'
+                      %textarea.form-control#target-audience{placeholder:"Target audience","value":"#{ContentOrder.find(@content_order.id).form_data["target_audience"]}","disabled":"disabled","readonly":""}
+                .row
+                  .col-xs-12.col-sm-6
+                    .form-group
+                      = label_tag 'things-to-mention', 'Things to Mention'
+                      %textarea.form-control#things-to-mention{placeholder:"#{ContentOrder.find(@content_order.id).form_data["things_to_mention"]}","disabled":"disabled","readonly":""}
+                  .col-xs-12.col-sm-6
+                    .form-group
+                      = label_tag 'things-to-avoid', 'Things to avoid'
+                      %textarea.form-control#things-to-avoid{placeholder:"Things to avoid", "value":"#{ContentOrder.find(@content_order.id).form_data["target_audience"]}","disabled":"disabled","readonly":""}
+            .row
+              .col-xs-12
+                .form-group
+                  .form-inline
+                    .form-group
+                      %label.control-label
+                        %input#seo-instructions{type:"checkbox",value:"1","ng-model"=>"seo_checkbox"}
+                        SEO Instructions
+            .row
+              .col-xs-12#seo-instructions-b
+                .panel.panel-default.reset-panel
+                  .panel-body
+                    %h4 SEO Instructions
+                    %p Any Special SEO Instructions
+                    .form-group
+                      %textarea.form-control{rows:5, placeholder:"#{@content_order.form_data["seo_instructions"] ? "#{@content_order.form_data["seo_instructions"]}":"SEO instructions" }","disabled":"disabled","readonly":""}
+                    .form-group
+                      %label.control-label Required Keywords
+                      %textarea.form-control{rows:2, placeholder:"#{@content_order.form_data["required"] ? "#{@content_order.form_data["required"]}":"Required SEO keywords, comma-delimited. Writer must use each keyword phrase at least once." }","disabled":"disabled","readonly":""}
+                    .form-group
+                      %label.control-label Optional Keywords
+                      %textarea.form-control{rows:2, placeholder:"#{@content_order.form_data["optional"] ? "#{@content_order.form_data["optional"]}":"Optional SEO keywords, comma-delimited. Writer sees this list but is under no obligation to use each phrase." }","disabled":"disabled","readonly":""}
+        .each-form-section
+          %h3.form-title When do you need it?
+          .form-fields.clearfix
+            .row
+              .col-xs-12.col-sm-4.col-md-3
+                .form-group
+                  %label.control-label Days  to Complete
+                  = f.select(:num, options_for_select(@content_order.days,"#{@content_order.form_data["hourstocomplete"].to_i / 24 + 1}"), {}, {class: 'form-control',disabled:"disabled"})
+        .each-form-section
+          %h3.form-title Add proofreading
+          .form-fields.clearfix
+            .row
+              .col-xs-12
+                .form-group
+                  %label.control-label
+                  - if ContentOrder.find(@content_order.id).form_data["paidreview"] == 0
+                    %input{type:"radio",value:0, "value":"#{ContentOrder.find(@content_order.id).form_data["paidreview"]}","checked": true,"disabled":"disabled","readonly":""}
+                    %strong No
+                    I'm not interested in proofreading
+                  - else
+                    %input{type:"radio",value:0, "value":"#{ContentOrder.find(@content_order.id).form_data["paidreview"]}","checked": false,"disabled":"disabled","readonly":""}
+                    %strong No
+                    I'm not interested in proofreading
+                .form-group
+                  %label.control-label
+                  - if ContentOrder.find(@content_order.id).form_data["paidreview"] == 2
+                    %input{type:"radio",value:2,"checked": true,"disabled":"disabled","readonly":""}
+                    %strong Yes
+                    , send the order to proofreader for spelling and grammar checking.
+                  - else
+                    %input{type:"radio",value:2,"checked": false,"disabled":"disabled","readonly":""}
+                    %strong Yes
+                    , send the order to proofreader for spelling and grammar checking.
+        .row
+          .col-xs-12
+            %div.text-center
+              = link_to 'Back', super_admin_content_settings_path, class: 'btn btn-warning btn-reset'
+              - unless @content_order.order_status == 'waiting_for_content' || @content_order.order_status == 'complete'
+                %a.btn.btn-warning.btn-reset.place_admin_order{"ng-click":"adminPlaceOrder($event)", data: {order: @content_order.id}} Place Order
+
+:css
+  #seo-instructions-b {
+    display:none;
+  }
+
+:javascript
+  $('document').ready(function(){
+    $('#seo-instructions').on('click', function(){
+      $('#seo-instructions-b').toggle();
+    });
+  });
+
+  $(document).on('click', '.place_admin_order',function() {
+    order_id = $(this).data('order')
+    $.ajax({
+      url: '/s/content_orders/' + order_id + '/place_order_admin',
+      type: 'get',
+      data: {},
+      dataType: 'json',
+      success:function(response){
+        console.log(response);
+        if (response.status == 200) {
+          toastr.success(response.message);
+        } else {
+          toastr.error(response.message);
+        }
+        $location.path('/content_settings');
+      }
+    })
+  });
+

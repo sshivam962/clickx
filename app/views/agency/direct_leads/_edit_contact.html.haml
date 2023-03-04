@@ -1,0 +1,9 @@
+.modal.fade.bs-direct-lead-contacts-edit-modal-sm1{"aria-labelledby": "mySmallModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md
+    .modal-content
+      .panel.panel-default
+        .panel-heading.font-14
+          Edit Contact
+        .panel-body.font-14
+          = simple_form_for contact, url: agency_update_direct_lead_contact_path(direct_lead, contact), method: :post, html: { class: 'form-vertical mt-sm ml-sm', id: 'direct_lead_contact_edit', remote: true} do |f|
+            = render 'domain_contacts_edit_form', f: f

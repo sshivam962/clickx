@@ -1,0 +1,28 @@
+%table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+  %tr
+    %td{:valign => "top", :width => "100%"}
+      %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+        %tr
+          %td{:width => "100%"}
+            %table.table_scale{:bgcolor => "#FFF", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+              %tr
+                %td{:align => "center", :width => "100%"}
+                  %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                    %tr
+                      %td.spacer{:width => "30"}
+                      %td{:width => "540"}
+                        / START OF COLUMN
+                        %table.full{:align => "center", :border => "0", :cellpadding => "10", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "540"}
+                          %tr.cellpadd10{:style => "margin-bottom: 15px"}
+                            %td
+                              %h1.subhead.head-st-2{style: 'text-align: center;'} New Content Order for
+                              %p.subhead.lnh-n{style: 'text-align: center;'}"#{@content_order.form_data['title']}"
+                              %p{style:"text-align:center"}
+                                New content order '#{@content_order.form_data['title']}' has been placed on #{@content_order.updated_at.strftime("%B %d, %Y")} for campaign #{@content_order.business.name} by #{@user.name}.
+                              %h1.subhead.head-st-2{style: 'font-size: 18px; padding: 0px;'}
+                                Order Details
+                              %ul.decimal
+                                %li Writer level: #{@content_order.form_data['writer']}
+                                %li Words       : #{@content_order.form_data['maxwords']}
+                                %li Order Cost  : #{@content_order.order_price}
+                                %li Payment info: #{@content_order.payment_information.split('_').first}

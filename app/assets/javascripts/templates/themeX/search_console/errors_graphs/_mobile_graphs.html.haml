@@ -1,0 +1,20 @@
+%ul.nav.panel-warning.nav-tabs.bdt{:style => "background: #F44336;"}
+  %li.active
+    %a{"data-toggle" => "tab", 'data-target' => "#sc-access-denied3", 'ng-click' => "change_error_type('notFound')"}
+      Access Denied
+      .pull-right
+        %b.left10 {{get_error_count('mobile', 'notFound')}}
+  %li
+    %a{"data-toggle" => "tab", 'data-target' => "#sc-not-found3", 'ng-click' => "change_error_type('notFound')"}
+      Not Found
+      .pull-right
+        %b.left10 {{get_error_count('mobile', 'notFound')}}
+.tab-content
+  #sc-access-denied3.tab-pane.active
+    .panel-body
+      .centered
+        #mobile_authPermissions_errors
+  #sc-not-found3.tab-pane
+    .panel-body
+      .centered
+        #mobile_notFound_errors

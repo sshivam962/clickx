@@ -1,0 +1,39 @@
+- my_portfolios.each do |portfolio|
+  .col-xs-12.col-sm-6.col-lg-4.col-xl-3
+    .awesome-card
+      - if true#portfolio.has_access?(@agency_active_package_name)
+        .awesome-card-inner
+          .awesome-card-thumbnail
+            .awesome-card-actions
+              %a.awesome-card-actions-btn{ href: portfolio_public_link(current_agency, portfolio), target: '_blank' }
+                %i.fa.fa-external-link{"aria-hidden" => "true"}
+              %a.awesome-card-actions-btn{ href: edit_agency_portfolio_path(portfolio) }
+                %i.fa.fa-edit{"aria-hidden" => "true"}
+              = link_to agency_portfolio_path(portfolio), method: :delete, data: { confirm: 'Are you sure?' }, class: "awesome-card-actions-btn awesome-card-actions-btn--remove" do
+                %i.fa.fa-trash
+
+            %a.load-pf-modal{href: 'javascript:void(0)', data: {id: portfolio.id}}
+              .awesome-card-thumb{:style => "background-image:url(#{portfolio.thumbnail_url});"}
+              -# %img.img-responsive{ alt: '', src: portfolio.thumbnail_url}
+          .awesome-card-footer
+            %a.awesome-card-btn{ href: portfolio_public_link(current_agency, portfolio), target: '_blank' }
+              View
+        .awesome-card--shadow
+        .awesome-card--shadow.awesome-card--shadow2
+      - else
+        .text-center
+          %a{href: 'javascript:void(0)'}
+            = image_tag portfolio.thumbnail_url, class: 'tab-img-blr'
+
+:javascript
+  $(document).on('click', '.load-pf-modal', function() {
+    pf_id = $(this).data('id');
+    $.ajax({
+      url: "/a/portfolio/" + pf_id,
+      type: 'get',
+      data: {},
+      dataType: 'script',
+      success:function(response){}
+    })
+    $('.portfolio-modal').modal('show')
+  });

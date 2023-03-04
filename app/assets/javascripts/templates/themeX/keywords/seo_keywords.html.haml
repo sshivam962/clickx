@@ -1,0 +1,247 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-PromoteSearch.title-icon
+    Keywords
+  .options{ 'ng-if': '!demo_login' }
+    .form-group
+      %span{'ng-class': "{'disable-button': export_disabled}"}
+        %export-button{ 'pdf': 'true', 'csv': 'true', 'csv-all': 'true' }
+      %a.btn.btn-white.btn-raised{'ng-href':'/#/tags', 'title': 'Display Keyword tags'}
+        %i.fa.fa-tags.pr-xs
+        All Tags
+      %a.btn.btn-white.btn-raised{ 'ng-href': '/#/keyword_opportunities', 'title': 'Related keywords' }
+        %i.clickx-icon-Marketing.text-dark
+        Opportunities
+      %a.btn.btn-white.btn-raised.m-n{ 'ng-click': 'openAddKeyword()',
+      'title': 'Add keywords', 'title-direction': 'left' }
+        %i.fa.fa-plus.pr-xs
+        Add Keywords
+      %a.btn.btn-white.btn-raised{ 'ng-href': '/#/keyword_trash', 'title': 'Open keywords in trash'}
+        %i.material-icons.f-14 delete
+        Trash
+
+      .inlineb.pl-md.pull-right
+        %md-select.md-no-underline.form-control.mt-sm{'ng-change':'changeTimeSpan(timespan)', 'ng-model':'timespan'}
+          %md-option{value:''} Select
+          %md-option{value:'all_time'} All Time
+          %md-option{value:'this_month'} This Month
+          %md-option{value:'last_sevendays'} Last Seven days
+          %md-option{value:'last_30_days'} Last 30 days
+
+.container-fluid
+  %div
+    .row
+      .col-md-12{'ng-show':'keywordRowData.length > 0'}
+        .panel.panel-success#graph_export
+          .panel-heading.pl-n
+            %ul.nav.panel-warning.nav-tabs.pull-left
+              %li.active
+                %a{'data-toggle':'tab', 'data-target':'#google-rank'} Google
+            .pull-right
+              %button.btn.btn-icon-rounded.refresh-panel{'title': 'Refresh report'}
+                %span.material-icons.inverted.white refresh
+          .panel-body
+            .tab-content
+              #google-rank.tab-pane.active
+                .col-md-12
+                  .centered
+                    #all-time-keywords-google{style:'min-height: 360px'}
+      .col-md-12{'st-table':'keywords','st-safe-src': 'all_keywords', 'st-pipe':'stTableServer', 'trigger-st-table-after-events':''}
+        .panel.panel-blue
+          .panel-heading.pl-n
+            %ul.nav.nav-tabs.pull-left
+              %li{"ng-click": "toggle(1,$event)", 'title': 'Hide/Show'}
+                %input#keyword.on-off{:type => "checkbox"}
+                %label.switch{:for => "keyword", 'ng-class': "{'keyword-tab': hide_keywords}"} Keywords
+              %li{"ng-click": "toggle(2,$event)", 'title': 'Hide/Show'}
+                %input#google.on-off{:type => "checkbox"}
+                %label.switch{:for => "google", 'ng-class': "{'keyword-tab': hide_google}"} Google
+              %li{"ng-click": "toggle(4,$event)", 'title': 'Hide/Show'}
+                %input#search-volume.on-off{:type => "checkbox"}
+                %label.switch{:for => "search-volume", 'ng-class': "{'keyword-tab': hide_search_volume}"} Search Volume
+              %li{"ng-click": "toggle(5,$event)", 'title': 'Hide/Show'}
+                %input#cpc.on-off{:type => "checkbox"}
+                %label.switch{:for => "cpc", 'ng-class': "{'keyword-tab': hide_cpc}"} CPC
+              %li{"ng-click": "toggle(6,$event)", 'title': 'Hide/Show'}
+                %input#keyword-diff.on-off{:type => "checkbox"}
+                %label.switch{:for => "kdi", 'ng-class': "{'keyword-tab': hide_kdi}"} Keyword Difficulty
+            .pull-right
+              %st-summary{"number-Of-rows"=>"st_per_page"}
+              %button.btn.btn-icon-rounded.refresh-panel{'title': 'Refresh report'}
+                %span.material-icons.inverted.white refresh
+          .panel-body.pt-sm#table_export
+            .col-sm-12.p-n
+              .col-sm-3
+                .form-group.m-n.pl-n.pt-sm
+                  .pl-n.input-group
+                    %span.input-group-addon.formfldic
+                      %i.material-icons search
+                    %input#search-table.form-control.col-sm-5.cus6in.pl-lg{ "placeholder": "Keyword", "st-search": "name", 'ng-model': 'filter_keyword' }
+              .col-sm-3
+                %md-chips{ 'ng-model': 'tag', 'md-autocomplete-snap': '', 'ng-change': 'filterTable()' }
+                  %md-autocomplete.width100{ 'md-autoselect': 'true', 'md-item-text': 'tag.name',
+                  'md-items': 'tag in all_tags | filter:searchTag', 'md-min-length': '0',
+                  'md-search-text': 'searchTag', 'placeholder': 'Search by tag',
+                  'md-require-match': 'true', 'md-dropdown-position': 'bottom' }
+                    %span{ 'md-highlight-text': 'searchTag' } {{tag.name}}
+                  %md-chip-template
+                    %span {{$chip.name}}
+              .col-sm-3
+                %md-chips{ 'ng-model': 'location', 'md-autocomplete-snap': '',
+                'ng-change': 'filterTable()', 'md-max-chips': '5' }
+                  %md-autocomplete.width100{ 'md-autoselect': 'true', 'md-item-text': 'location',
+                  'md-items': 'location in locations | filter:searchLocation', 'md-min-length': '0',
+                  'md-search-text': 'searchLocation', 'placeholder': 'Search by location',
+                  'md-require-match': 'true', 'md-dropdown-position': 'bottom' }
+                    %span{ 'md-highlight-text': 'searchLocation' } {{location}}
+                  %md-chip-template
+                    %span {{$chip}}
+              .col-sm-3{ 'ng-if': '!demo_login' }
+                .btn-group.pull-right
+                  %button.btn.btn-white.btn-md.btn-raised{type:"button","ng-click"=>"addTagsModelNew($event)",
+                  "ng-disabled":"!show_delete_btn"}
+                    %i.fa.fa-tags.pr-xs
+                  %button.btn.btn-white.btn-md.btn-raised{type:"button",'ng-click'=>"deleteSelectedKeyword($event)",
+                  "ng-disabled":"!show_delete_btn"}
+                    %i.fa.fa-trash-o.pr-xs
+            .col-sm-12.pt-sm.p-n
+              .table-responsive
+                %table.table.table-striped.table-bordered.ranking-keyword-table.table-vam.font-14
+                  %thead
+                    %tr
+                      %th.pointer{ 'rowspan': '2', 'style': 'padding-right: 150px',
+                      'ng-if': '!hide_keywords' }
+                        %b
+                          %input{type:"checkbox",id:"select_keywords","ng-click"=>"toggleKeywordSelect($event)"}
+                          %u.help_pointer{ 'title': 'List of keywords you are ranking for.', 'st-sort': 'name' }
+                            Keywords
+                      %th.text-center{ 'colspan': '3', 'ng-if': '!hide_google' }
+                        %b
+                          %u.help_pointer{ 'title': 'Performance of your content pages for various keywords in Google.' } Google
+                      %th.text-center.pointer.p-n{ 'rowspan': '2', 'ng-if': '!hide_search_volume',
+                      'st-sort': 'searchVolume', 'st-skip-natural': 'true' }
+                        %b
+                          %u.help_pointer{ 'title': 'Number of searches a keyword is getting per month (average for last 12 months)' } Search Volume
+                      %th.text-center.p-n{ 'rowspan': '2', 'ng-if': '!hide_cpc' }
+                        %b
+                          %u.help_pointer{ 'title': 'Cost per Click (CPC) refers to the actual price advertisers pay for each click in their pay-per-click (PPC) Ads campaigns.' } CPC
+                      -# %th.text-center.pointer.p-n{ 'rowspan': '2', 'ng-if': '!hide_kdi', 'st-sort': 'kdi' }
+                      -#   %b
+                      -#     %u.help_pointer{ 'title': 'Keyword Difficulty is a measure of how difficult it is to rank for the keyword in the first page of Google.' } Keyword Difficulty
+                    %tr{'ng-if': '!hide_google'}
+                      %th.success.pointer{ 'st-sort': 'googleRanking',
+                      'ng-hide': 'hide_google', 'st-skip-natural': 'true' } Rank
+                      %th.success.pointer{ 'st-sort': 'google_ranking_change', 'st-sort-default': 'true',
+                      'st-skip-natural': 'true' } Change
+                      %th.success.pointer{ "ng-hide": "hide_google", 'st-sort': 'googleRankingUrl',
+                      'st-skip-natural': 'true' } URL
+                  %tbody{"ng-show": "!loadingTable" }
+                    %tr{"ng-repeat"=>"keyword in keywords"}
+                      %td{"ng-if": "!hide_keywords"}
+                        .row
+                          .keyword_name
+                            .col-md-10
+                              %input.keyword-checkbox{ type:'checkbox',name:'keywords[]',"id": "keyword-{{keyword[1]}}",
+                              value:"{{keyword.id}}", "ng-click":"singleCheckboxAction($event)",
+                              'ng-model': 'keyword.checked' }
+                              %a.editable-click{'ng-href': "{{keyword.googleSerpUrl}}", target: '_blank', 'title': "{{keyword.city}}" }
+                                {{keyword.name}}
+                              %span.badge.badge-light.pointer{ 'ng-repeat': 'tag in keyword.tags' }
+                                %a.text-muted{ 'ng-href': "/#/{{business_id}}/keywords/tag/{{tag.id}}" }
+                                  %i.fa.fa-tags{ 'ng-style': "{ 'color': tag.color }" }
+                                  {{tag.name}}
+                            .col-md-2
+                              .btn-group.dropdown.pull-right.m-n
+                                %a.btn.btn-default.btn-raised.btn-xs.fright.m-n{ 'data-toggle': 'dropdown' }
+                                  %i.fa.fa-cog.font15
+                                  %span.caret
+                                %ul.dropdown-menu{:role => "menu"}
+                                  %li.p-xs
+                                    %a{ 'ng-href': '{{history_url(keyword.id)}}' } Rank History
+                                  / %li.p-xs
+                                  /   %a{ 'ng-click': 'competitorRankList(keyword.name, business_id)' } Competitors Rank
+                                  %li.p-xs
+                                    %a{ 'ng-click': 'keywordEditModal(keyword)' } Edit Location
+                      %td.google_rank{"ng-if": "!hide_google"}
+                        %span{style: 'display:block','popover-placement' => "bottom", 'popover-template-a' => 'popover-google.html', 'popover-trigger'=>'mouseenter', 'popover-classname':'clx-popover clx-bg popover-darkstone-blue-bg'}
+                          %div{"ng-bind-html"=>"(keyword.googleRanking || '100+') | seoRankingPosition"}
+                        %script{:id => 'popover-google.html', :type => "text/ng-template"}
+                          %popover_seo{:keyword => "keyword", :type => "google"}
+                      %td.google_change{"ng-if":"!hide_google"}
+                        %div{"ng-bind-html": "keyword.google_ranking_change | seoRankingChange"}
+                      %td.google_link{"ng-if": "!hide_google"}
+                        %a#link.l-grey{"title": "{{keyword.googleRankingUrl}}","ng-show": "keyword.googleRankingUrl",href:"{{keyword.googleRankingUrl}}",target:"_blank"}
+                          %span {{get_laststring_url(keyword.googleRankingUrl)}}
+                        / %a.btn.btn-default.btn-raised.btn-xs.fright.m-n{ 'ng-click': 'gotoSiteAudit($event, keyword.googleRankingUrl)',
+                        /   'ng-show': 'keyword.googleRankingUrl' }
+                        /   %i.fa.fa-arrow-right{'title': 'Show page analysis'}
+                        %span{"ng-show": "keyword.googleRankingUrl==null"} --
+                      %td{"ng-if": "!hide_search_volume"}
+                        {{ (keyword.searchVolume | toLocaleString) || "Low"}}
+                      %td{"ng-if": "!hide_cpc"}
+                        {{keyword.cpc || "Low"}}
+                      -# %td{"ng-if":"!hide_kdi"} {{keyword.kdi == -1 ? '-' : keyword.kdi}}
+                    %tr.light_haze{ "ng-repeat": "keyword in wishlist" }
+                      %td{ 'colspan': '7' }
+                        %input.keyword-checkbox{ type:'checkbox',name:'keywords[]',"id": "keyword-{{keyword[1]}}",
+                        value:"{{keyword.id}}", "ng-click":"singleCheckboxAction($event)",
+                        'ng-model': 'keyword.checked' }
+                        %span.disabled {{ keyword.name }}
+                  %tbody{"ng-show": "loadingTable"}
+                    %tr
+                      %td{colspan:11}
+                        %loading
+                  %tfoot
+                    %tr
+                      %td{colspan: '3'}
+                        %div.left.pagination-links{"st-pagination": "","st-items-by-page": "limit_keyword_rows"}
+                      %td{colspan: '2'}
+                        %md-select.md-no-underline.form-control.mt-sm{'ng-model':'limit_keyword_rows'}
+                          %md-option Select
+                          %md-option{value:10} 10
+                          %md-option{value:25} 25
+                          %md-option{value:50} 50
+                          %md-option{value:100} 100
+                          %md-option{value:150} 150
+                      %td.text-right{colspan: '6'}
+                        .btn-group.pull-right
+                          %button.btn.btn-white.btn-md.btn-raised{type:"button","ng-click"=>"addTagsModelNew($event)", 'title': 'Add tags',
+                          "ng-disabled":"!show_delete_btn" }
+                            %i.fa.fa-tags.pr-xs
+                          %button.btn.btn-white.btn-md.btn-raised{type:"button",'ng-click'=>"deleteSelectedKeyword($event)","ng-disabled":"!show_delete_btn", 'title': 'Delete the selected keywords'}
+                            %i.fa.fa-trash-o.pr-xs
+
+%button.md-fab.md-fab-bottom-right.md-button.pull-right.fixed-element.accent_blue{ 'ng-if': '!demo_login', 'ng-click': 'openAddKeyword()',
+'title': 'Add keywords', 'title-direction': 'left' }
+  %i.material-icons.md-fab--add add
+
+%script{type: "text/ng-template", id: "rank_summary"}
+  %md-dialog.width50.keywordRankSummary{"aria-label" => "Rank Summary"}
+    %md-toolbar.darkstone_blue
+      .md-toolbar-tools
+        %h2.white
+          %b Summary : {{ range }}
+        %span{:flex => ""}
+        %md-button.md-icon-button{ "ng-click" => "cancel()" }
+          %md-icon{ "aria-label" => "Close dialog" }
+            %i.material-icons highlight_off
+    %div
+      %span.pull-right{ 'ng-class': "{'disable-button': export_disabled}",
+      'style': 'height: 40px;position: relative;top: 6px;' }
+        %export-template{ 'pdf': 'true', 'csv': 'true', 'btn-raise': 'false' }
+    %md-dialog-content
+      .md-dialog-content{ "name": "Rank Summary" }
+        %table.table.table-bordered.table-hover{ "ng-show": "keywordDetails.length" }
+          %thead
+            %tr
+              %th.text-left{"ng-click" => "sortBy('keyword')"}
+                %b Keyword Name
+                %span.sortorder{"ng-class" => "{reverse: reverse}", "ng-show" => "propertyName === 'keyword'"}
+              %th{"ng-click" => "sortBy('rank')"}
+                %b Rank
+                %span.sortorder{"ng-class" => "{reverse: reverse}", "ng-show" => "propertyName === 'rank'"}
+          %tbody
+            %tr{ "ng-repeat": "row in keywordDetails | orderBy:propertyName:reverse " }
+              %td.text-left {{ row.keyword }}
+              %td {{ row.rank ? row.rank : ' - ' }}
+%div{'ng-include': '', src: "'themeX/keywords/_edit.html'"}

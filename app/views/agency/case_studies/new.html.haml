@@ -1,0 +1,10 @@
+- content_for :title do
+  New Case Study | Clickx
+
+.container-fluid.pt-4
+  -# .page-heading.no-margin-bottom
+  -#   %h1
+  -#     %i.clickx-icon-user.title-icon
+  -#     New Case Study
+  = form_for @case_study, url: agency_case_studies_path, method: :post do |f|
+    = render 'form', f: f

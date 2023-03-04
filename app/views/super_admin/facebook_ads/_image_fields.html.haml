@@ -1,0 +1,12 @@
+.preview-thumb-item.nested-fields
+  .cs_image_card
+    .relative
+      .preview-thumb.mb-3{:style => "background-image: url(#{f.object.file.url})"}
+      .preview-thumb-buttons
+        .preview-thumb-button.preview-thumb-edit
+          %i.fa.fa-pencil
+          = f.file_field :file
+        .preview-thumb-button.preview-thumb-remove
+          = link_to_remove_association "<i class='fa fa-times'></i>".html_safe, f
+      = f.check_box :heading
+      Set Primary Image

@@ -1,0 +1,28 @@
+.d-panel.mb-4
+  .row.d-flex.flex-wrap
+    .col-xs-12.dpanel-item.mb-5
+      .bg-white.br-10.pl-lg.pr-lg.pt-2.pb-2.mb-4
+        .d-flex.justify-content-between.flex-wrap
+          .col.f-s-20.pt-2.pb-2.color-dark-blue.fw-sb
+            %span
+              Google Ads
+            / .custom-tooltip
+            /   %i.fa.fa-info-circle.color-dark-blue
+            /   %span.custom-tooltiptext Displays the analytics of the traffic on your site as per Search Ads.
+          .col.pt-2.pb-2
+            .d-flex.align-items-center
+              .col.pl-4
+                = link_to business_dashboard_search_ads_path(start_date: @start_date&.strftime('%m/%d/%Y'), end_date: @end_date&.strftime('%m/%d/%Y')), class: 'icon-btn-circle', remote: true, method: :get do
+                  %i.fa.fa-refresh
+      .stat-cards-list
+        .stat-cards-list--item
+          .stat-card.stat-card--red
+            .stat-card-datas
+              = @error
+            - if @auth_error
+              .md-secondary
+                %a.btn.btn-raised.btn-success{ href: '/b/google_ads/connect' } Reconnect
+            - else
+              = link_to business_dashboard_search_ads_path(start_date: @start_date&.strftime('%m/%d/%Y'), end_date: @end_date&.strftime('%m/%d/%Y')), class: 'btn btn-raised btn-success', remote: true, method: :get do
+                %i.fa.fa-refresh
+                Refresh

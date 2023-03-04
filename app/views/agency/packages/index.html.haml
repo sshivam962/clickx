@@ -1,0 +1,206 @@
+- content_for :title do
+  Plans | Clickx
+.ui-2020
+  .page-content
+    .page-heading.pt-md.pb-md
+      .d-flex.align-items-center.justify-content-between.flex-wrap
+        .col-auto
+          %h1
+            %i.clickx-icon-package
+            Plans
+        .col-auto.text-lg-right
+          %a.btn.btn-warning.btn-raised.m-n.f-w-lg{href: agency_fulfilment_courses_path}
+            %span.d-flex.align-items-center
+              %span.mr-3.d-inline-block
+                %i.clickx-icon-Video
+              %span.d-inline-block
+              Training
+    .container-fluid
+      .panel
+        .panel-body.panel-br-10.pt-0.pb-0
+          .row.d-flex.flex-wrap
+            - if current_agency.enabled_package?('generate_lead_strategy')
+              .col-lg-6.col-sm-6.col-xs-12.pb-5
+                %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100{href: '/a/packages/generate_lead_strategy'}
+                  .col-stretch.pt-4
+                    %span.card--plan__icon.d-inline-block
+                      %i.clickx-icon-Strategize
+                    %h4 Digital Marketing Strategy
+                    %span.d-block.p-b-20
+                  %div.py-3
+                    %span.bg-dark.d-block.p-3.br-8.fs-xs View Plan
+            
+            - if current_agency.enabled_package?('local_seo')
+              .col-lg-6.col-sm-6.col-xs-12.pb-5
+                %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100{href: '/a/packages/local_seo'}
+                  .col-stretch.pt-4
+                    %span.card--plan__icon.d-inline-block
+                      %i.clickx-icon-Page
+                    %h4 Local SEO & Content Marketing
+                    %span.d-block.p-b-20
+                  %div.py-3
+                    %span.bg-dark.d-block.p-3.br-8.fs-xs View Plans
+            - if current_agency.enabled_package?('seo_services')
+              .col-lg-6.col-sm-6.col-xs-12.pb-5
+                %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100{href: '/a/packages/seo_services'}
+                  .col-stretch.pt-4
+                    %span.card--plan__icon.d-inline-block
+                      %i.clickx-icon-seo
+                    %h4 Advanced SEO & Content Marketing
+                    %span.d-block.p-b-20
+                  %div.py-3
+                    %span.bg-dark.d-block.p-3.br-8.fs-xs View Plans
+            - if current_agency.enabled_package?('social_media')
+              .col-lg-6.col-sm-6.col-xs-12.pb-5
+                %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100{href: '/a/packages/social_media'}
+                  .col-stretch.pt-4
+                    %span.card--plan__icon.d-inline-block
+                      %i.clickx-icon-SocialMedia
+                    %h4 Brand Building & Social Media
+                    %span.d-block.p-b-20
+                  %div.py-3
+                    %span.bg-dark.d-block.p-3.br-8.fs-xs View Plans
+            - else
+              .col-lg-6.col-sm-6.col-xs-12.pb-5
+                %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100.disabled{href: 'javascript:;'}
+                  .col-stretch.pt-4
+                    %span.card--plan__icon.d-inline-block
+                      %i.clickx-icon-SocialMedia
+                    %h4 Brand Building & Social Media
+                    %span.d-block.p-b-20
+                  %div.py-3
+                    %span.bg-dark.d-block.p-3.br-8.fs-xs
+                      %i.fa.fa-lock
+                      View Plans
+            - if current_agency.enabled_package?('facebook_ads')
+              .col-lg-6.col-sm-6.col-xs-12.pb-5
+                %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100{href: '/a/packages/facebook_ads'}
+                  .col-stretch.pt-4
+                    %span.card--plan__icon.d-inline-block
+                      %i.clickx-icon-facebook
+                    %h4 Meta Lead Gen Ads
+                    %span.d-block.p-b-20
+                  %div.py-3
+                    %span.bg-dark.d-block.p-3.br-8.fs-xs View Plans
+            - if current_agency.enabled_package?('facebook_ecommerce_ads')
+              .col-lg-6.col-sm-6.col-xs-12.pb-5
+                %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100{href: '/a/packages/facebook_ecommerce_ads'}
+                  .col-stretch.pt-4
+                    %span.card--plan__icon.d-inline-block
+                      %i.clickx-icon-facebook
+                    %h4
+                      Meta
+                      = succeed "Ecommerce" do
+                        %br/
+                    %span.d-block.p-b-20
+                  %div.py-3
+                    %span.bg-dark.d-block.p-3.br-8.fs-xs View Plans
+            - if current_agency.enabled_package?('google_ads')
+              .col-lg-6.col-sm-6.col-xs-12.pb-5
+                %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100{href: '/a/packages/google_ads'}
+                  .col-stretch.pt-4
+                    %span.card--plan__icon.d-inline-block
+                      %i.clickx-icon-adwords
+                    %h4 Google &amp; YouTube Lead Gen Ads
+                    %span.d-block.p-b-20
+                  %div.py-3
+                    %span.bg-dark.d-block.p-3.br-8.fs-xs View Plans
+            - if current_agency.enabled_package?('linkedin_ads')
+              .col-lg-6.col-sm-6.col-xs-12.pb-5
+                %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100{href: '/a/packages/linkedin_ads'}
+                  .col-stretch.pt-4
+                    %span.card--plan__icon.d-inline-block
+                      %i.clickx-icon-linkedin
+                    %h4 LinkedIn Ads
+                    %span.d-block.p-b-20
+                  %div.py-3
+                    %span.bg-dark.d-block.p-3.br-8.fs-xs View Plans
+            
+            / - if current_agency.enabled_package?('funnel_development')
+            /   .col-lg-4.col-sm-6.col-xs-12.pb-5
+            /     %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100{href: '/a/packages/funnel_development'}
+            /       .col-stretch.pt-4
+            /         %span.card--plan__icon.d-inline-block
+            /           %i.clickx-icon-Funnel
+            /         %h4 Funnels
+            /         %span.d-block.p-b-20
+            /       %div.py-3
+            /         %span.bg-dark.d-block.p-3.br-8.fs-xs View Plans
+            
+            -# - if current_agency.enabled_package?('digital_pr')
+            -#   .col-lg-4.col-sm-6.col-xs-12.pb-5
+            -#     %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100{href: '/a/packages/digital_pr'}
+            -#       %span.card--plan__icon.d-inline-block
+            -#         %i.clickx-icon-partner
+            -#       %h4 Digital PR
+            -#       %span.d-block.p-b-20
+            -#       %div.pb-3
+                    -# %span.bg-dark.d-block.p-3.br-8.fs-xs View Plans
+            -# - else
+            -#   .col-lg-4.col-sm-6.col-xs-12.pb-5
+            -#     %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100.disabled{href: 'javascript:;'}
+            -#       %span.card--plan__icon.d-inline-block
+            -#         %i.clickx-icon-SocialMedia
+            -#       %h4 Digital PR
+            -#       %span.d-block.p-b-20
+            -#       %span.btn.btn-raised.btn-disabled.btn-lg
+            -#         %i.fa.fa-lock
+            -#         View Plans
+            - if current_agency.bundle_plans?
+              .col-lg-6.col-sm-6.col-xs-12.pb-5
+                %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100{href: '/a/packages/bundle'}
+                  .col-stretch.pt-4
+                    %span.card--plan__icon.d-inline-block
+                      %i.material-icons card_giftcard
+                    %h4 Bundled Plans
+                    %span.d-block.p-b-20
+                  %div.pb-3
+                    %span.bg-dark.d-block.p-3.br-8.fs-xs View Plans
+            - if current_agency.enabled_package?('web_dev_product')
+              .col-lg-6.col-sm-6.col-xs-12.pb-5
+                %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100{href: '/a/packages/web_dev_product'}
+                  .col-stretch.pt-4
+                    %span.card--plan__icon.d-inline-block
+                      %i.clickx-icon-Design
+                    %h4 WordPress Design & Development
+                    %span.d-block.p-b-20
+                  %div.py-3
+                    %span.bg-dark.d-block.p-3.br-8.fs-xs View Plans
+            - if current_agency.enabled_package?('ala_carte')
+              .col-lg-6.col-sm-6.col-xs-12.pb-5
+                %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100{href: '/a/packages/ala_carte'}
+                  .col-stretch.pt-4
+                    %span.card--plan__icon.d-inline-block
+                      %i.clickx-icon-SellSheet
+                    %h4 À La Carte
+                    %span.d-block.p-b-20
+                  %div.py-3
+                    %span.bg-dark.d-block.p-3.br-8.fs-xs View Plans
+            - if current_agency.custom_packages.active.present?
+              .col-lg-6.col-sm-6.col-xs-12.pb-5
+                %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100{href: '/a/packages/custom_packages'}
+                  .col-stretch.pt-4
+                    %span.card--plan__icon.d-inline-block
+                      %i.clickx-icon-CustomCMS
+                    %h4 My Quotes
+                    %span.d-block.p-b-20
+                  %div.py-3
+                    %span.bg-dark.d-block.p-3.br-8.fs-xs View Plans
+            - if current_agency.enabled_package?('programmatic_and_geo_fencing_commented')
+              .col-lg-6.col-sm-6.col-xs-12.pb-5
+                %a.card.br-10.m-0.text-center.d-flex.flex-column.h-100{href: '/a/packages/programmatic_and_geo_fencing'}
+                  .col-stretch.pt-4
+                    %span.card--plan__icon.d-inline-block
+                      %i.clickx-icon-SellSheet
+                    %h4 Programmatic & Geo-Fencing
+                    %span.d-block.p-b-20
+                  %div.py-3
+                    %span.bg-dark.d-block.p-3.br-8.fs-xs View Plans
+      .spacer15
+
+:javascript
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.plan-preloader').removeClass('plan-preloader');
+    }, 500);
+  });

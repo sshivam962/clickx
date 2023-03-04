@@ -1,0 +1,21 @@
+.container-fluid.bg-white
+  .col-md-12
+    .tab-container
+      %loading{ 'ng-show': 'isLoading' }
+      .tab-content{ 'ng-show': '!isLoading' }
+        %h4.text-muted.text-center{ 'ng-if': 'competitors_rank.length == 0' }
+          Nothing to show, please check back again later.
+        .table-responsive{ 'ng-if': 'competitors_rank.length > 0'}
+          %table.table.table-hover.table-bordered.table-vam
+            %thead
+              %tr
+                %th.text-center
+                  URL
+                %th.text-center
+                  Google Rank
+            %tbody
+              %tr{'ng-repeat':"rank in competitors_rank"}
+                %td
+                  %a.text-info{'ng-href': "{{rank.url}}", target: '_blank' }
+                    {{ rank.url }}
+                %td.text-center {{ rank.rank }}

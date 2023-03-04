@@ -1,0 +1,10 @@
+.col-md-12{ 'ng-repeat': 'error in cta.data'}
+  %label.text-dark
+    %i.fa.fa-close.text-danger{ 'ng-if': "error.status == 'error'",'title': 'Need to fix' }
+    %i.fa.fa-check.text-success{ 'ng-if': "error.status == 'passed'",'title': 'Passed' }
+    %i.fa.fa-exclamation.text-warning{ 'ng-if': "error.status == 'warning'",'title': 'Needs improvement' }
+    {{error.status == 'passed'? error.passed_title: error.error_title}}
+    %p.ml-md.text-muted.text-italic.pt-sm.pl-md{ 'ng-if': 'error.passed_description || error.error_description'}
+      {{error.status == 'passed'? error.passed_description : error.error_description}}
+    %p.ml-md.text-muted.pt-sm.pl-md{'ng-if': "error.status == 'passed'",'ng-repeat': 'link in error.cta track by $index' }
+      {{link}} 

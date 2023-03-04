@@ -1,0 +1,139 @@
+.signup-wrapper.js-container
+  .form-wrapper
+    - if @error.blank?
+      - if @signup_link.blank? || @signup_link.trial?
+        %main.theme-clickx.payment
+          .container-fluid
+            .payment-content-area.payment-content-area--thankyou
+              .payment-min-height--wrapper.payment-min-height--wrapper-center.thank-you-content
+                .text-center
+                  .icon-check.mt-lg
+                    = image_tag 'check.svg', width: '150px'
+                  .spacer30.mb-lg
+                  %h2.fs-lg.mb-4 Congrats! 🎉
+                  %h4.mb-3
+                    You will receive an email from us shortly with a magic link you can use to login to your account.
+                  %h4.mb-3
+                    Be sure to check your spam folder (and mark it not spam!) or your promotions tab.
+                  %p.mt-5 -Clickx Partner Management Team
+            %br
+            .py-4
+            .bottom-copyright.text-center
+              %p © #{Date.current.year} Clickx. All Rights Reserved.
+      - else
+        %main.theme-clickx.payment
+          .container-fluid
+            .payment-content-area.payment-content-area--thankyou
+              .payment-min-height--wrapper.payment-min-height--wrapper-center.thank-you-content
+                .text-center
+                  .icon-check.mt-lg
+                    = image_tag 'check.svg', width: '150px'
+                  .spacer30
+                  %h2.fs-lg.mb-4 Congrats! 🎉
+                  %h4.mb-3
+                    You will receive an email from our partner team within one business day.
+                  %h4.mb-3
+                    Be sure to check your spam folder (and mark it not spam!) or your promotions tab.
+                  %p.mt-sm -Clickx Partner Management Team
+          .section.bg-muted.text-muted
+            - if @signup_link.calendly_script.present?
+              .text-center
+                %br
+                %br
+                %p Please schedule your appointment for an onboarding call:
+              %br
+              = raw(@signup_link.calendly_script)
+            %br
+            .py-4
+            .bottom-copyright.text-center
+              %p © #{Date.current.year} Clickx. All Rights Reserved.
+    - else
+      .row.mt-md
+        .col-md-12
+          .panel{"data-widget": {draggable: false}}
+            .panel-heading
+              %h2.regtitle{style: 'float:inherit;'} Something Went Wrong
+            .panel-body
+              %h4
+                - if @validation_error
+                  %p
+                    It appears you already have an account with Clickx. Please reach out for additional support.
+                  %p
+                    We are sorry for this inconvenience.
+                  %p
+                    Thank you,
+                  %p
+                    Clickx Team
+                - else
+                  %p
+                    = @error
+
+      %script{src: "https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js", :type => "text/javascript"}
+      %link{href: "https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.css", rel: "stylesheet"}
+
+      .row
+        .col-md-12
+          .tab-container
+            .tab-content
+              %iframe#freshwidget-embedded-form.freshwidget-embedded-form{frameborder: "0", height: "500px", scrolling: "no", src: "https://clickx.freshdesk.com/widgets/feedback_widget/new?&widgetType=embedded&formTitle=Clickx+Support&submitTitle=Submit&submitThanks=Thank+you%2C+we+will+get+back+to+you+shortly!&screenshot=no", title: "Feedback Form", width: "100%"}
+
+- if @error.blank?
+  :javascript
+    $(function() {
+      window.confettiful = new Confettiful(document.querySelector('.js-container'));
+    })
+
+:javascript
+  $(function() {
+    $('.countdown-wrapper').remove()
+  })
+
+  const Confettiful = function(el) {
+    this.el = el;
+    this.containerEl = null;
+
+    this.confettiFrequency = 3;
+    this.confettiColors = ['#EF2964', '#00C09D', '#2D87B0', '#48485E','#EFFF1D'];
+    // ['slow', 'medium', 'fast']
+    this.confettiAnimations = ['slow'];
+
+    this._setupElements();
+    this._renderConfetti();
+  };
+
+  Confettiful.prototype._setupElements = function() {
+    const containerEl = document.createElement('div');
+    const elPosition = this.el.style.position;
+
+    if (elPosition !== 'relative' || elPosition !== 'absolute') {
+      this.el.style.position = 'relative';
+    }
+
+    containerEl.classList.add('confetti-container');
+
+    this.el.appendChild(containerEl);
+
+    this.containerEl = containerEl;
+  };
+
+  Confettiful.prototype._renderConfetti = function() {
+    this.confettiInterval = setInterval(() => {
+      const confettiEl = document.createElement('div');
+      const confettiSize = (Math.floor(Math.random() * 3) + 7) + 'px';
+      const confettiBackground = this.confettiColors[Math.floor(Math.random() * this.confettiColors.length)];
+      const confettiLeft = (Math.floor(Math.random() * this.el.offsetWidth)) + 'px';
+      const confettiAnimation = this.confettiAnimations[Math.floor(Math.random() * this.confettiAnimations.length)];
+
+      confettiEl.classList.add('confetti', 'confetti--animation-' + confettiAnimation);
+      confettiEl.style.left = confettiLeft;
+      confettiEl.style.width = confettiSize;
+      confettiEl.style.height = confettiSize;
+      confettiEl.style.backgroundColor = confettiBackground;
+
+      confettiEl.removeTimeout = setTimeout(function() {
+        confettiEl.parentNode.removeChild(confettiEl);
+      }, 3000);
+
+      this.containerEl.appendChild(confettiEl);
+    }, 25);
+  };

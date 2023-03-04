@@ -1,0 +1,33 @@
+- content_for :title do
+  My Profile
+.col-md-7.profile
+  .name
+    %span.fullname= current_user.name
+    %span.email= current_user.email
+    = link_to edit_user_path(current_user), class: 'edit theme' do
+      Edit
+      %i.glyphicon.glyphicon-pencil
+  .user
+    %span.login
+      User:
+      %span.nick= current_user.name
+    %input.form-control.password{:disabled => "disabled", :placeholder => "●●●●●●●●●●●●●●●●●●", :type => "password"}/
+    = link_to edit_user_registration_path, class: 'edit theme' do
+      Edit
+      %i.glyphicon.glyphicon-pencil
+  .user.security
+    %span Two Factor Authentication
+    - if current_user.authy_enabled?
+      = link_to user_disable_authy_path, class: 'edit theme', method: :post do
+        Disable
+        %i.glyphicon.glyphicon-pencil
+    - else
+      = link_to user_enable_authy_path, class: 'edit theme', method: :get do
+        Enable
+        %i.glyphicon.glyphicon-pencil
+  - unless current_user.super_admin?
+    .user.security
+      %span Email Preferences
+      = link_to email_settings_user_path(current_user), class: 'edit theme' do
+        Edit
+        %i.glyphicon.glyphicon-pencil

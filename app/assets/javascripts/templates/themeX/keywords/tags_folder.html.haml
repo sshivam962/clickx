@@ -1,0 +1,38 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-BlogWriting.title-icon>
+    Tags
+.container-fluid
+  %div
+    .row
+      .col-md-12
+        .panel.panel-default
+          .panel-body
+            %p.text-danger.text-center{ 'ng-if': 'tags.length == 0'} No tags have been added yet.
+            .table-responsive{ 'ng-if': 'tags.length > 0' }
+              %table.table.table-striped.table-bordered.table-vam
+                %thead
+                  %tr
+                    %th.pl-lg
+                      %b
+                        %u.help_pointer{ 'title': 'List of Tags that associated with your keywords.'} Tags
+                    %th
+                      %b
+                        %u.help_pointer{ 'title': 'Configuration'} Action
+                %tbody
+                  %tr{ 'ng-repeat': 'tag in tags track by $index' }
+                    %td
+                      .folder-btn.relative-positioning
+                        %a.folder-link{href:"/#/{{business_id}}/keywords/tag/{{tag.id}}"}
+                          %i.fa.fa-tags.clrtg.pr-xs.text-info{ 'ng-style'=> "{ 'color': tag.color }"}
+                          %span.name {{tag.name}}
+                    %td
+                      %a{ 'ng-click': 'deleteTag(tag.id)' }
+                        %i.fa.fa-trash.text-danger.pointer
+                        %label.text-muted.mr-lg.pointer Delete
+                      %a{ 'ng-click': 'editTag(tag)' }
+                        %i.fa.fa-pencil.text-info.pointer
+                        %label.text-muted.mr-lg.pointer Edit
+%button.md-fab.md-fab-bottom-right.md-button.pull-right.fixed-element.accent_blue{ 'title': 'Add a new tag',
+'title-direction': 'left', 'ng-click': 'addTag()' }
+  %i.material-icons.md-fab--add add

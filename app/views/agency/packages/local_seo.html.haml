@@ -1,0 +1,1491 @@
+- content_for :title do
+  Local SEO | Clickx
+.ui-2020.package-page
+  .page-content
+    .page-heading.pt-md.pb-md
+      %h1
+        .d-flex.justify-content-between
+          .col-auto
+            %i.clickx-icon-Page
+            Local SEO & Content Marketing
+            .custom-tooltip.pl-sm.fs-sm
+              %i.fa.fa-info-circle
+              %span.custom-tooltiptext.bottom-auto.lh-14 All deliverables for Local SEO will be completed by our team. This timeline is custom per client and not all items will be completed in month one. After conducting the Audits, our team will have a better understanding of which items are priorities. Each month our team will have a set plan of deliverables we will deliver in that month based on action items per client.
+          = render 'agency/packages/shared/msrp_percentage'
+    .container-fluid
+      .table-responsive.table-plan.text-center
+        %table.table.table-hover.mb-n.overflow-h.plan-preloader.pt-xxl
+          %thead
+            %tr
+              %th.col-label
+                .pt-col-content
+              - @plans.each do |plan|
+                %th.col-package
+                  .pt-col-content
+                    - if plan.title == 'Pro'
+                      .best-seller-badge.fw-m Best Seller
+                    .pt-header-caption
+                      = plan.title
+                    .pt-header-price
+                      = in_currency(plan.amount, current_agency.display_currency)
+                      - if plan.interval.eql?('month')
+                        %span> /mo
+                      = hidden_field_tag(:hidden_plan_amount, plan.amount, class: 'hidden_plan_amount', id: plan.key)
+                    %span.plan-label
+                      - @msrp_class = "msrp_#{plan.key}"
+                      %span.d-inline-block{:class => @msrp_class} MSRP: #{in_currency(plan.amount + (plan.amount * 0.5), current_agency.display_currency)}
+                    .mt-4
+                      %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'local_seo', plan: plan.key)}
+                        Get Started
+          %tbody
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Local SEO Questionnaire
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Local SEO Questionnaires help us gather important information about your client like their target audience, and previous customer acquisition efforts.
+              %td
+                .pt-col-content{"data-label" => "Local SEO Questionnaire"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Local SEO Questionnaires help us gather important information about your client like their target audience, and previous customer acquisition efforts.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Local SEO Questionnaire"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Local SEO Questionnaires help us gather important information about your client like their target audience, and previous customer acquisition efforts.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Local SEO Questionnaire"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Local SEO Questionnaires help us gather important information about your client like their target audience, and previous customer acquisition efforts.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Local SEO Questionnaire"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext Local SEO Questionnaires help us gather important information about your client like their target audience, and previous customer acquisition efforts.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    100% Customized Local SEO Strategy
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We take your clients' entire business into consideration when creating the keywords and content that will yield the best results. Note that Local SEO is predominantly for businesses with a physical location or are targeting specific local areas.
+              %td
+                .pt-col-content{"data-label" => "100% Customized Local SEO Strategy"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We take your clients' entire business into consideration when creating the keywords and content that will yield the best results. Note that Local SEO is predominantly for businesses with a physical location or are targeting specific local areas.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "100% Customized Local SEO Strategy"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We take your clients' entire business into consideration when creating the keywords and content that will yield the best results. Note that Local SEO is predominantly for businesses with a physical location or are targeting specific local areas.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "100% Customized Local SEO Strategy"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext We take your clients' entire business into consideration when creating the keywords and content that will yield the best results. Note that Local SEO is predominantly for businesses with a physical location or are targeting specific local areas.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "100% Customized Local SEO Strategy"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext We take your clients' entire business into consideration when creating the keywords and content that will yield the best results. Note that Local SEO is predominantly for businesses with a physical location or are targeting specific local areas.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Kick-Off Call with Agency
+              %td
+                .pt-col-content{"data-label" => "Kick-Off Call with Agency"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext An account manager from Clickx be assigned to review keywords, content planning, and set clear expectations about timelines.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Kick-Off Call with Agency"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext An account manager from Clickx be assigned to review keywords, content planning, and set clear expectations about timelines.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Kick-Off Call with Agency"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext An account manager from Clickx be assigned to review keywords, content planning, and set clear expectations about timelines.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Kick-Off Call with Agency"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext An account manager from Clickx be assigned to review keywords, content planning, and set clear expectations about timelines.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Email Support
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our first priority is to assist our partners. You can expect a 48 hour or less email response time to answer all of your questions.
+              %td
+                .pt-col-content{"data-label" => "Email Support"}
+                  %span
+                    With Agency
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our first priority is to assist our partners. You can expect a 48 hour or less email response time to answer all of your questions.
+              %td
+                .pt-col-content{"data-label" => "Email Support"}
+                  %span
+                    With Agency
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our first priority is to assist our partners. You can expect a 48 hour or less email response time to answer all of your questions.
+              %td
+                .pt-col-content{"data-label" => "Email Support"}
+                  %span
+                    With Agency
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our first priority is to assist our partners. You can expect a 48 hour or less email response time to answer all of your questions.
+              / %td
+              /   .pt-col-content{"data-label" => "Email Support"}
+              /     %span
+              /       With Agency
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext Our first priority is to assist our partners. You can expect a 48 hour or less email response time to answer all of your questions.
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Dedicated Local SEO Strategist
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Campaign Questionnaires help us gather important information about your client like their USP, target audience, and goals for each campaign.
+              %td
+                .pt-col-content{"data-label" => "Dedicated Local SEO Strategist"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Campaign Questionnaires help us gather important information about your client like their USP, target audience, and goals for each campaign.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Local SEO Strategist"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Campaign Questionnaires help us gather important information about your client like their USP, target audience, and goals for each campaign.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Local SEO Strategist"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Campaign Questionnaires help us gather important information about your client like their USP, target audience, and goals for each campaign.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Dedicated Local SEO Strategist"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext Campaign Questionnaires help us gather important information about your client like their USP, target audience, and goals for each campaign.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Dedicated Content Specialists
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Your client will be assigned a content specialist that will work in all channels to create content that boosts their SEO score while building a strong brand message.
+              %td
+                .pt-col-content{"data-label" => "Dedicated Content Specialists"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Your client will be assigned a content specialist that will work in all channels to create content that boosts their SEO score while building a strong brand message.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Content Specialists"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Your client will be assigned a content specialist that will work in all channels to create content that boosts their SEO score while building a strong brand message.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Dedicated Content Specialists"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Your client will be assigned a content specialist that will work in all channels to create content that boosts their SEO score while building a strong brand message.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Dedicated Content Specialists"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext Your client will be assigned a content specialist that will work in all channels to create content that boosts their SEO score while building a strong brand message.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Implementation
+              %td
+                .pt-col-content{"data-label" => "Implementation"}
+              %td
+                .pt-col-content{"data-label" => "Implementation"}
+              %td
+                .pt-col-content{"data-label" => "Implementation"}
+              / %td
+              /   .pt-col-content{"data-label" => "Implementation"}
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Auditing
+              %td
+                .pt-col-content{"data-label" => "Auditing"}
+              %td
+                .pt-col-content{"data-label" => "Auditing"}
+              %td
+                .pt-col-content{"data-label" => "Auditing"}
+              / %td
+              /   .pt-col-content{"data-label" => "Auditing"}
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Local SEO Audit
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The main items delivered in the Local SEO Audit include Google Business Profile page audit, Website and Landing Page audit, Backlinks audit, Reputation analysis, Competitor audit, and Social Media analysis. A full list of audit and optimization deliverables is listed below.
+              %td
+                .pt-col-content{"data-label" => "Local SEO Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The main items delivered in the Local SEO Audit include Google Business Profile page audit, Website and Landing Page audit, Backlinks audit, Reputation analysis, Competitor audit, and Social Media analysis. A full list of audit and optimization deliverables is listed below.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Local SEO Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The main items delivered in the Local SEO Audit include Google Business Profile page audit, Website and Landing Page audit, Backlinks audit, Reputation analysis, Competitor audit, and Social Media analysis. A full list of audit and optimization deliverables is listed below.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Local SEO Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The main items delivered in the Local SEO Audit include Google Business Profile page audit, Website and Landing Page audit, Backlinks audit, Reputation analysis, Competitor audit, and Social Media analysis. A full list of audit and optimization deliverables is listed below.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Local SEO Audit"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext The main items delivered in the Local SEO Audit include Google Business Profile page audit, Website and Landing Page audit, Backlinks audit, Reputation analysis, Competitor audit, and Social Media analysis. A full list of audit and optimization deliverables is listed below.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    GBP Audit
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With the GBP Audit, we first want to determine if a GBP exists for the client. If it does, we will check the Business Information (NAP), Reviews, Photos, etc.
+
+              %td
+                .pt-col-content{"data-label" => "GBP Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With the GBP Audit, we first want to determine if a GBP exists for the client. If it does, we will check the Business Information (NAP), Reviews, Photos, etc.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "GBP Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With the GBP Audit, we first want to determine if a GBP exists for the client. If it does, we will check the Business Information (NAP), Reviews, Photos, etc.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "GBP Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With the GBP Audit, we first want to determine if a GBP exists for the client. If it does, we will check the Business Information (NAP), Reviews, Photos, etc.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "GBP Audit"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext With the GBP Audit, we first want to determine if a GBP exists for the client. If it does, we will check the Business Information (NAP), Reviews, Photos, etc.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Site Structure Audit
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In the Site Structure Audit, the main focus is on the bones of the site (what pages exist, what needs to be created, how can it be laid out using best practices). Once we've checked the structure and flow, this will give our team a good plan on how to tackle optimizations for the best visitor experience.
+              %td
+                .pt-col-content{"data-label" => "Site Architecture Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In the Site Structure Audit, the main focus is on the bones of the site (what pages exist, what needs to be created, how can it be laid out using best practices). Once we've checked the structure and flow, this will give our team a good plan on how to tackle optimizations for the best visitor experience.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Site Architecture Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In the Site Structure Audit, the main focus is on the bones of the site (what pages exist, what needs to be created, how can it be laid out using best practices). Once we've checked the structure and flow, this will give our team a good plan on how to tackle optimizations for the best visitor experience.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Site Architecture Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In the Site Structure Audit, the main focus is on the bones of the site (what pages exist, what needs to be created, how can it be laid out using best practices). Once we've checked the structure and flow, this will give our team a good plan on how to tackle optimizations for the best visitor experience.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Site Architecture Audit"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext In the Site Structure Audit, the main focus is on the bones of the site (what pages exist, what needs to be created, how can it be laid out using best practices). Once we've checked the structure and flow, this will give our team a good plan on how to tackle optimizations for the best visitor experience.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Content Architecture Audit
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For an enhanced user experience, we will check the following items are in line with best practices: top-level pages (main menu items), sublevel pages (dropdown menu items), and the headings of each section. This will ensure the visitors easily know where to find the information they are looking for.
+              %td
+                .pt-col-content{"data-label" => "Content Architecture Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For an enhanced user experience, we will check the following items are in line with best practices: top-level pages (main menu items), sublevel pages (dropdown menu items), and the headings of each section. This will ensure the visitors easily know where to find the information they are looking for.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Content Architecture Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For an enhanced user experience, we will check the following items are in line with best practices: top-level pages (main menu items), sublevel pages (dropdown menu items), and the headings of each section. This will ensure the visitors easily know where to find the information they are looking for.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Content Architecture Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For an enhanced user experience, we will check the following items are in line with best practices: top-level pages (main menu items), sublevel pages (dropdown menu items), and the headings of each section. This will ensure the visitors easily know where to find the information they are looking for.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Content Architecture Audit"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext For an enhanced user experience, we will check the following items are in line with best practices: top-level pages (main menu items), sublevel pages (dropdown menu items), and the headings of each section. This will ensure the visitors easily know where to find the information they are looking for.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Website Copy Audit
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For the Website Copy Audit, we will be checking the relevancy and usefulness of the copy on the site. This will include the evaluation of keywords being used within the copy, if they align with the business, and that there is no Keyword Stuffing. Beyond the keywords, we will assess tone, grammar, spelling, and language to confirm they align with the correct audiences.
+              %td
+                .pt-col-content{"data-label" => "Website Copy Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For the Website Copy Audit, we will be checking the relevancy and usefulness of the copy on the site. This will include the evaluation of keywords being used within the copy, if they align with the business, and that there is no Keyword Stuffing. Beyond the keywords, we will assess tone, grammar, spelling, and language to confirm they align with the correct audiences.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Website Copy Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For the Website Copy Audit, we will be checking the relevancy and usefulness of the copy on the site. This will include the evaluation of keywords being used within the copy, if they align with the business, and that there is no Keyword Stuffing. Beyond the keywords, we will assess tone, grammar, spelling, and language to confirm they align with the correct audiences.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Website Copy Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For the Website Copy Audit, we will be checking the relevancy and usefulness of the copy on the site. This will include the evaluation of keywords being used within the copy, if they align with the business, and that there is no Keyword Stuffing. Beyond the keywords, we will assess tone, grammar, spelling, and language to confirm they align with the correct audiences.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Website Copy Audit"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext For the Website Copy Audit, we will be checking the relevancy and usefulness of the copy on the site. This will include the evaluation of keywords being used within the copy, if they align with the business, and that there is no Keyword Stuffing. Beyond the keywords, we will assess tone, grammar, spelling, and language to confirm they align with the correct audiences.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Website Performance Audit
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Website performance is both important for the user and for Google ranking. We will be checking the security of the website, social links connected to business, checking indexable content, mobile responsiveness, site speed (for mobile and desktop), and that content is readable by Google (headings, metatags, etc.).
+              %td
+                .pt-col-content{"data-label" => "Website Performance Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Website performance is both important for the user and for Google ranking. We will be checking the security of the website, social links connected to business, checking indexable content, mobile responsiveness, site speed (for mobile and desktop), and that content is readable by Google (headings, metatags, etc.).
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Website Performance Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Website performance is both important for the user and for Google ranking. We will be checking the security of the website, social links connected to business, checking indexable content, mobile responsiveness, site speed (for mobile and desktop), and that content is readable by Google (headings, metatags, etc.).
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Website Performance Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Website performance is both important for the user and for Google ranking. We will be checking the security of the website, social links connected to business, checking indexable content, mobile responsiveness, site speed (for mobile and desktop), and that content is readable by Google (headings, metatags, etc.).
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Website Performance Audit"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext Website performance is both important for the user and for Google ranking. We will be checking the security of the website, social links connected to business, checking indexable content, mobile responsiveness, site speed (for mobile and desktop), and that content is readable by Google (headings, metatags, etc.).
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Mobile Audit
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Most traffic will be from mobile devices so our team will want to make sure the website is set up for this. In doing so, we will check mobile responsiveness (speed, friendliness, content, imagery, headers) across multiple phone types.
+              %td
+                .pt-col-content{"data-label" => "Mobile Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Most traffic will be from mobile devices so our team will want to make sure the website is set up for this. In doing so, we will check mobile responsiveness (speed, friendliness, content, imagery, headers) across multiple phone types.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Mobile Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Most traffic will be from mobile devices so our team will want to make sure the website is set up for this. In doing so, we will check mobile responsiveness (speed, friendliness, content, imagery, headers) across multiple phone types.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Mobile Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Most traffic will be from mobile devices so our team will want to make sure the website is set up for this. In doing so, we will check mobile responsiveness (speed, friendliness, content, imagery, headers) across multiple phone types.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Mobile Audit"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext Most traffic will be from mobile devices so our team will want to make sure the website is set up for this. In doing so, we will check mobile responsiveness (speed, friendliness, content, imagery, headers) across multiple phone types.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Indexed Pages & Indexing Audit
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our team will audit Google's index for the client’s site and find all unindexed pages. From there, we'll figure out why in order to make an action plan to have pages searchable by Google.
+              %td
+                .pt-col-content{"data-label" => "Index & Indexing Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our team will audit Google's index for the client’s site and find all unindexed pages. From there, we'll figure out why in order to make an action plan to have pages searchable by Google.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Index & Indexing Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our team will audit Google's index for the client’s site and find all unindexed pages. From there, we'll figure out why in order to make an action plan to have pages searchable by Google.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Index & Indexing Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our team will audit Google's index for the client’s site and find all unindexed pages. From there, we'll figure out why in order to make an action plan to have pages searchable by Google.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Index & Indexing Audit"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext Our team will audit Google's index for the client’s site and find all unindexed pages. From there, we'll figure out why in order to make an action plan to have pages searchable by Google.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Server Signals Audit
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Shared servers are common but they can potentially affect your website reputation in a negative way. Our team will check your DNS (single vs. shared server) and how it is affecting your site. This will allow us to evaluate options and client preferences to take actions in order to protect the sites reputation on Google.
+              %td
+                .pt-col-content{"data-label" => "Server Signals Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Shared servers are common but they can potentially affect your website reputation in a negative way. Our team will check your DNS (single vs. shared server) and how it is affecting your site. This will allow us to evaluate options and client preferences to take actions in order to protect the sites reputation on Google.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Server Signals Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Shared servers are common but they can potentially affect your website reputation in a negative way. Our team will check your DNS (single vs. shared server) and how it is affecting your site. This will allow us to evaluate options and client preferences to take actions in order to protect the sites reputation on Google.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Server Signals Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Shared servers are common but they can potentially affect your website reputation in a negative way. Our team will check your DNS (single vs. shared server) and how it is affecting your site. This will allow us to evaluate options and client preferences to take actions in order to protect the sites reputation on Google.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Server Signals Audit"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext Shared servers are common but they can potentially affect your website reputation in a negative way. Our team will check your DNS (single vs. shared server) and how it is affecting your site. This will allow us to evaluate options and client preferences to take actions in order to protect the sites reputation on Google.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Backlinks Audit
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In conducting the Backlinks Audit, our team will look at the links pointing back to your website. Our goal will be to identify “bad” links and “good” links along with checking the anchor text ratio being relevant to the client.
+              %td
+                .pt-col-content{"data-label" => "Backlinks Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In conducting the Backlinks Audit, our team will look at the links pointing back to your website. Our goal will be to identify “bad” links and “good” links along with checking the anchor text ratio being relevant to the client.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Backlinks Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In conducting the Backlinks Audit, our team will look at the links pointing back to your website. Our goal will be to identify “bad” links and “good” links along with checking the anchor text ratio being relevant to the client.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Backlinks Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In conducting the Backlinks Audit, our team will look at the links pointing back to your website. Our goal will be to identify “bad” links and “good” links along with checking the anchor text ratio being relevant to the client.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Backlinks Audit"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext In conducting the Backlinks Audit, our team will look at the links pointing back to your website. Our goal will be to identify “bad” links and “good” links along with checking the anchor text ratio being relevant to the client.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Analytics Audit
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For the Analytics Audit, our team will examine the Google Analytics account to determine website traffic, what is considered a conversion, conversions made, and whether all sources of traffic are beingtracked. Analyzing past performance will help us better understand trends to later optimize.
+              %td
+                .pt-col-content{"data-label" => "Analytics Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For the Analytics Audit, our team will examine the Google Analytics account to determine website traffic, what is considered a conversion, conversions made, and whether all sources of traffic are beingtracked. Analyzing past performance will help us better understand trends to later optimize.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Analytics Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For the Analytics Audit, our team will examine the Google Analytics account to determine website traffic, what is considered a conversion, conversions made, and whether all sources of traffic are beingtracked. Analyzing past performance will help us better understand trends to later optimize.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Analytics Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For the Analytics Audit, our team will examine the Google Analytics account to determine website traffic, what is considered a conversion, conversions made, and whether all sources of traffic are beingtracked. Analyzing past performance will help us better understand trends to later optimize.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Analytics Audit"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext For the Analytics Audit, our team will examine the Google Analytics account to determine website traffic, what is considered a conversion, conversions made, and whether all sources of traffic are beingtracked. Analyzing past performance will help us better understand trends to later optimize.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Search Console Audit
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Search Console Audit will consist of evaluating keyword alignment, the business’s Google presence, website optimization. We will also want to make sure the website is properly connected to Search Console for further monitoring.
+              %td
+                .pt-col-content{"data-label" => "Search Console Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Search Console Audit will consist of evaluating keyword alignment, the business’s Google presence, website optimization. We will also want to make sure the website is properly connected to Search Console for further monitoring.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Search Console Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Search Console Audit will consist of evaluating keyword alignment, the business’s Google presence, website optimization. We will also want to make sure the website is properly connected to Search Console for further monitoring.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Search Console Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Search Console Audit will consist of evaluating keyword alignment, the business’s Google presence, website optimization. We will also want to make sure the website is properly connected to Search Console for further monitoring.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Search Console Audit"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext The Search Console Audit will consist of evaluating keyword alignment, the business’s Google presence, website optimization. We will also want to make sure the website is properly connected to Search Console for further monitoring.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Online Reputation Audit
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With the Online Reputation Audit, our focus will be on reviews (good? or bad?), location reviews for your business, and check for reviews containing search engine content. This will give us a plan for handling bad reviews and strategy to generate more good reviews.
+              %td
+                .pt-col-content{"data-label" => "Online Reputation Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With the Online Reputation Audit, our focus will be on reviews (good? or bad?), location reviews for your business, and check for reviews containing search engine content. This will give us a plan for handling bad reviews and strategy to generate more good reviews.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Online Reputation Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With the Online Reputation Audit, our focus will be on reviews (good? or bad?), location reviews for your business, and check for reviews containing search engine content. This will give us a plan for handling bad reviews and strategy to generate more good reviews.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Online Reputation Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With the Online Reputation Audit, our focus will be on reviews (good? or bad?), location reviews for your business, and check for reviews containing search engine content. This will give us a plan for handling bad reviews and strategy to generate more good reviews.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Online Reputation Audit"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext With the Online Reputation Audit, our focus will be on reviews (good? or bad?), location reviews for your business, and check for reviews containing search engine content. This will give us a plan for handling bad reviews and strategy to generate more good reviews.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Social Media Audit
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With conducting the Social Media Audit, we first will want to confirm there are social accounts setup (ifnot, we will want to get those setup). Next we will want to check all accounts to ensure alignment with messaging of the brand, ‘about us’ information, and the business name. And finally, making sure Google is picking up those social accounts for the client’s business.
+              %td
+                .pt-col-content{"data-label" => "Social Media Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With conducting the Social Media Audit, we first will want to confirm there are social accounts setup (ifnot, we will want to get those setup). Next we will want to check all accounts to ensure alignment with messaging of the brand, ‘about us’ information, and the business name. And finally, making sure Google is picking up those social accounts for the client’s business.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Social Media Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With conducting the Social Media Audit, we first will want to confirm there are social accounts setup (ifnot, we will want to get those setup). Next we will want to check all accounts to ensure alignment with messaging of the brand, ‘about us’ information, and the business name. And finally, making sure Google is picking up those social accounts for the client’s business.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Social Media Audit"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With conducting the Social Media Audit, we first will want to confirm there are social accounts setup (ifnot, we will want to get those setup). Next we will want to check all accounts to ensure alignment with messaging of the brand, ‘about us’ information, and the business name. And finally, making sure Google is picking up those social accounts for the client’s business.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Social Media Audit"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext With conducting the Social Media Audit, we first will want to confirm there are social accounts setup (ifnot, we will want to get those setup). Next we will want to check all accounts to ensure alignment with messaging of the brand, ‘about us’ information, and the business name. And finally, making sure Google is picking up those social accounts for the client’s business.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Optimization
+              %td
+                .pt-col-content{"data-label" => "Optimization"}
+              %td
+                .pt-col-content{"data-label" => "Optimization"}
+              %td
+                .pt-col-content{"data-label" => "Optimization"}
+              / %td
+              /   .pt-col-content{"data-label" => "Optimization"}
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Local Business Locations Serviced
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If they only have 1 location but are in a very highly competitive location (Chicago, New York, etc.) we would recommend going with a larger plan even though they only have 1 location.
+              %td
+                .pt-col-content{"data-label" => "Local Business Locations Serviced"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If they only have 1 location but are in a very highly competitive location (Chicago, New York, etc.) we would recommend going with a larger plan even though they only have 1 location.
+                    1 Location
+              %td
+                .pt-col-content{"data-label" => "Local Business Locations Serviced"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If they only have 1 location but are in a very highly competitive location (Chicago, New York, etc.) we would recommend going with a larger plan even though they only have 1 location.
+                    Up to 2 Locations
+              %td
+                .pt-col-content{"data-label" => "Local Business Locations Serviced"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext If they only have 1 location but are in a very highly competitive location (Chicago, New York, etc.) we would recommend going with a larger plan even though they only have 1 location.
+                    3-4 Locations
+              / %td
+              /   .pt-col-content{"data-label" => "Local Business Locations Serviced"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext If they only have 1 location but are in a very highly competitive location (Chicago, New York, etc.) we would recommend going with a larger plan even though they only have 1 location.
+              /       Up to 5 Locations
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Local Keyword Research
+              %td
+                .pt-col-content{"data-label" => "Local Keyword Research"}
+                  %span 1-2 Services
+              %td
+                .pt-col-content{"data-label" => "Local Keyword Research"}
+                  %span 3-5 Services
+              %td
+                .pt-col-content{"data-label" => "Local Keyword Research"}
+                  %span Up to 7 Services
+              / %td
+              /   .pt-col-content{"data-label" => "Local Keyword Research"}
+              /     %span Up to 10 Services
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Local Keywords Tracked
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Local Keyword Tracking, our team will monitor any position changes for your keywords. We will implement SEO tactics to improve the rank (whether it falls or we want to increase the existing ranking).
+              %td
+                .pt-col-content{"data-label" => "Local Keywords Tracked"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Local Keyword Tracking, our team will monitor any position changes for your keywords. We will implement SEO tactics to improve the rank (whether it falls or we want to increase the existing ranking).
+                    20
+              %td
+                .pt-col-content{"data-label" => "Local Keywords Tracked"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Local Keyword Tracking, our team will monitor any position changes for your keywords. We will implement SEO tactics to improve the rank (whether it falls or we want to increase the existing ranking).
+                    50
+              %td
+                .pt-col-content{"data-label" => "Local Keywords Tracked"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Local Keyword Tracking, our team will monitor any position changes for your keywords. We will implement SEO tactics to improve the rank (whether it falls or we want to increase the existing ranking).
+                    100
+              / %td
+              /   .pt-col-content{"data-label" => "Local Keywords Tracked"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext With Local Keyword Tracking, our team will monitor any position changes for your keywords. We will implement SEO tactics to improve the rank (whether it falls or we want to increase the existing ranking).
+              /       150
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Competitor Tracking
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Competitor Tracking, our goal is to monitor our ranking compared to competitors and implement SEO tactics to rank above the competition. Some items we will be monitoring include traffic, backlinks, anchor text ratio, organic and paid keywords, etc.
+              %td
+                .pt-col-content{"data-label" => "Competitor Tracking"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Competitor Tracking, our goal is to monitor our ranking compared to competitors and implement SEO tactics to rank above the competition. Some items we will be monitoring include traffic, backlinks, anchor text ratio, organic and paid keywords, etc.
+                    Up to 3
+              %td
+                .pt-col-content{"data-label" => "Competitor Tracking"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Competitor Tracking, our goal is to monitor our ranking compared to competitors and implement SEO tactics to rank above the competition. Some items we will be monitoring include traffic, backlinks, anchor text ratio, organic and paid keywords, etc.
+                    Up to 5
+              %td
+                .pt-col-content{"data-label" => "Competitor Tracking"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Competitor Tracking, our goal is to monitor our ranking compared to competitors and implement SEO tactics to rank above the competition. Some items we will be monitoring include traffic, backlinks, anchor text ratio, organic and paid keywords, etc.
+                    Up to 7
+              / %td
+              /   .pt-col-content{"data-label" => "Competitor Tracking"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext With Competitor Tracking, our goal is to monitor our ranking compared to competitors and implement SEO tactics to rank above the competition. Some items we will be monitoring include traffic, backlinks, anchor text ratio, organic and paid keywords, etc.
+              /       Up to 10
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Manual Directory Research
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Manual Directory Research, our team will find the most relevant Listings for the client. After this evaluation, we will claim the specified amount of Local Listings (based on Plan Level).
+              %td
+                .pt-col-content{"data-label" => "Manual Directory Research"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Manual Directory Research, our team will find the most relevant Listings for the client. After this evaluation, we will claim the specified amount of Local Listings (based on Plan Level).
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Manual Directory Research"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Manual Directory Research, our team will find the most relevant Listings for the client. After this evaluation, we will claim the specified amount of Local Listings (based on Plan Level).
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Manual Directory Research"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Manual Directory Research, our team will find the most relevant Listings for the client. After this evaluation, we will claim the specified amount of Local Listings (based on Plan Level).
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Manual Directory Research"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext With Manual Directory Research, our team will find the most relevant Listings for the client. After this evaluation, we will claim the specified amount of Local Listings (based on Plan Level).
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Claim Local Listings
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Examples of Local Listings we can claim are: Google Business Profile, Yelp, Yahoo, Bing, Yellow Pages, Google Maps, etc. This service can be stretched out over several months depending on how many Local Listings are being claimed.
+              %td
+                .pt-col-content{"data-label" => "Claim Local Listings"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Examples of Local Listings we can claim are: Google Business Profile, Yelp, Yahoo, Bing, Yellow Pages, Google Maps, etc. This service can be stretched out over several months depending on how many Local Listings are being claimed.
+                    Up to 5 Listings
+              %td
+                .pt-col-content{"data-label" => "Claim Local Listings"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Examples of Local Listings we can claim are: Google Business Profile, Yelp, Yahoo, Bing, Yellow Pages, Google Maps, etc. This service can be stretched out over several months depending on how many Local Listings are being claimed.
+                    Up to 15 Listings
+              %td
+                .pt-col-content{"data-label" => "Claim Local Listings"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Examples of Local Listings we can claim are: Google Business Profile, Yelp, Yahoo, Bing, Yellow Pages, Google Maps, etc. This service can be stretched out over several months depending on how many Local Listings are being claimed.
+                    Up to 25 Listings
+              / %td
+              /   .pt-col-content{"data-label" => "Claim Local Listings"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext Examples of Local Listings we can claim are: Google Business Profile, Yelp, Yahoo, Bing, Yellow Pages, Google Maps, etc. This service can be stretched out over several months depending on how many Local Listings are being claimed.
+              /       Up to 50 Listings
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Claim Google Business Profile
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Based on the review on GBP, our team will make the appropriate optimizations. If anything is missing,our team will collaborate with the client to fill in information. If a GBP does not exist for the client, our team will create one with collaboration from the client.
+              %td
+                .pt-col-content{"data-label" => "Claim Google Business Profile"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Based on the review on GBP, our team will make the appropriate optimizations. If anything is missing,our team will collaborate with the client to fill in information. If a GBP does not exist for the client, our team will create one with collaboration from the client.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Claim Google Business Profile"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Based on the review on GBP, our team will make the appropriate optimizations. If anything is missing,our team will collaborate with the client to fill in information. If a GBP does not exist for the client, our team will create one with collaboration from the client.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Claim Google Business Profile"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Based on the review on GBP, our team will make the appropriate optimizations. If anything is missing,our team will collaborate with the client to fill in information. If a GBP does not exist for the client, our team will create one with collaboration from the client.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Claim Google Business Profile"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext Based on the review on GBP, our team will make the appropriate optimizations. If anything is missing,our team will collaborate with the client to fill in information. If a GBP does not exist for the client, our team will create one with collaboration from the client.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Search Console Setup
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Setting up your client search console ensures we can set up any site maintenance and make adjustments smoothly with respect to clients’ search performance.
+              %td
+                .pt-col-content{"data-label" => "Search Console Setup"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Setting up your client search console ensures we can set up any site maintenance and make adjustments smoothly with respect to clients’ search performance.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Search Console Setup"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Setting up your client search console ensures we can set up any site maintenance and make adjustments smoothly with respect to clients’ search performance.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Search Console Setup"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Setting up your client search console ensures we can set up any site maintenance and make adjustments smoothly with respect to clients’ search performance.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Search Console Setup"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext Setting up your client search console ensures we can set up any site maintenance and make adjustments smoothly with respect to clients’ search performance.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Mobile Site Optimization
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In Google’s eyes, the Mobile version of a website is more important than the Desktop version. Our team will make sure both are optimized but based on the Mobile Site Audit we will take action first on the mobile version.
+              %td
+                .pt-col-content{"data-label" => "Mobile Site Optimization"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In Google’s eyes, the Mobile version of a website is more important than the Desktop version. Our team will make sure both are optimized but based on the Mobile Site Audit we will take action first on the mobile version.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Mobile Site Optimization"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In Google’s eyes, the Mobile version of a website is more important than the Desktop version. Our team will make sure both are optimized but based on the Mobile Site Audit we will take action first on the mobile version.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Mobile Site Optimization"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext In Google’s eyes, the Mobile version of a website is more important than the Desktop version. Our team will make sure both are optimized but based on the Mobile Site Audit we will take action first on the mobile version.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Mobile Site Optimization"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext In Google’s eyes, the Mobile version of a website is more important than the Desktop version. Our team will make sure both are optimized but based on the Mobile Site Audit we will take action first on the mobile version.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    On-Page Optimization
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext When making On-Page Optimizations of the website, the Home Page will be the priority. Based on the audits, we will then evaluate which pages should be next based on traffic of most visited pages.
+              %td
+                .pt-col-content{"data-label" => "On-Page Optimization"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext When making On-Page Optimizations of the website, the Home Page will be the priority. Based on the audits, we will then evaluate which pages should be next based on traffic of most visited pages.
+                    Up to 5 Pages
+              %td
+                .pt-col-content{"data-label" => "On-Page Optimization"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext When making On-Page Optimizations of the website, the Home Page will be the priority. Based on the audits, we will then evaluate which pages should be next based on traffic of most visited pages.
+                    Up to 7 Pages
+              %td
+                .pt-col-content{"data-label" => "On-Page Optimization"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext When making On-Page Optimizations of the website, the Home Page will be the priority. Based on the audits, we will then evaluate which pages should be next based on traffic of most visited pages.
+                    Up to 10 Pages
+              / %td
+              /   .pt-col-content{"data-label" => "On-Page Optimization"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext When making On-Page Optimizations of the website, the Home Page will be the priority. Based on the audits, we will then evaluate which pages should be next based on traffic of most visited pages.
+              /       Up to 12 Pages
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Platform Setup
+              %td
+                .pt-col-content{"data-label" => "Platform Setup"}
+                  %span Wordpress
+              %td
+                .pt-col-content{"data-label" => "Platform Setup"}
+                  %span Wordpress
+              %td
+                .pt-col-content{"data-label" => "Platform Setup"}
+                  %span Wordpress
+              / %td
+              /   .pt-col-content{"data-label" => "Platform Setup"}
+              /     %span Wordpress
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Location Schema Implementation
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For Location Schema Implementation, our team will make sure that the source code for pages has the proper HTML coding for Google to crawl the client’s website for information (phone number, address, etc.).
+              %td
+                .pt-col-content{"data-label" => "Location Schema Implementation"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For Location Schema Implementation, our team will make sure that the source code for pages has the proper HTML coding for Google to crawl the client’s website for information (phone number, address, etc.).
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Location Schema Implementation"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For Location Schema Implementation, our team will make sure that the source code for pages has the proper HTML coding for Google to crawl the client’s website for information (phone number, address, etc.).
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Location Schema Implementation"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For Location Schema Implementation, our team will make sure that the source code for pages has the proper HTML coding for Google to crawl the client’s website for information (phone number, address, etc.).
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Location Schema Implementation"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext For Location Schema Implementation, our team will make sure that the source code for pages has the proper HTML coding for Google to crawl the client’s website for information (phone number, address, etc.).
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Conversion Rate Optimization
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For Conversion Rate Optimization, we will be looking for common conversion roadblocks and come up with a UI/UX plan to update the website in order to eliminate those roadblocks/distractions. Some action items may include: moving the CTA above the fold, having a form above the fold, and having a tabable number for mobile versions.
+              %td
+                .pt-col-content{"data-label" => "Conversion Rate Optimization"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For Conversion Rate Optimization, we will be looking for common conversion roadblocks and come up with a UI/UX plan to update the website in order to eliminate those roadblocks/distractions. Some action items may include: moving the CTA above the fold, having a form above the fold, and having a tabable number for mobile versions.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Conversion Rate Optimization"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For Conversion Rate Optimization, we will be looking for common conversion roadblocks and come up with a UI/UX plan to update the website in order to eliminate those roadblocks/distractions. Some action items may include: moving the CTA above the fold, having a form above the fold, and having a tabable number for mobile versions.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Conversion Rate Optimization"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For Conversion Rate Optimization, we will be looking for common conversion roadblocks and come up with a UI/UX plan to update the website in order to eliminate those roadblocks/distractions. Some action items may include: moving the CTA above the fold, having a form above the fold, and having a tabable number for mobile versions.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Conversion Rate Optimization"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext For Conversion Rate Optimization, we will be looking for common conversion roadblocks and come up with a UI/UX plan to update the website in order to eliminate those roadblocks/distractions. Some action items may include: moving the CTA above the fold, having a form above the fold, and having a tabable number for mobile versions.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Content Strategy Development
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our team will strategically identify different types of content that will be most applicable for your marketing goal(s). Some of the items that could be included in the content strategy are: blog posts, creation of specific product or location pages, building out existing pages, etc. This is the why behind the how.
+              %td
+                .pt-col-content{"data-label" => "Content Strategy Development"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our team will strategically identify different types of content that will be most applicable for your marketing goal(s). Some of the items that could be included in the content strategy are: blog posts, creation of specific product or location pages, building out existing pages, etc. This is the why behind the how.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Content Strategy Development"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our team will strategically identify different types of content that will be most applicable for your marketing goal(s). Some of the items that could be included in the content strategy are: blog posts, creation of specific product or location pages, building out existing pages, etc. This is the why behind the how.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Content Strategy Development"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext Our team will strategically identify different types of content that will be most applicable for your marketing goal(s). Some of the items that could be included in the content strategy are: blog posts, creation of specific product or location pages, building out existing pages, etc. This is the why behind the how.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Content Strategy Development"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext Our team will strategically identify different types of content that will be most applicable for your marketing goal(s). Some of the items that could be included in the content strategy are: blog posts, creation of specific product or location pages, building out existing pages, etc. This is the why behind the how.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Custom Content Creation (Monthly)
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Custom Content Creation, this will vary on a monthly basis as to what content we are generating but this can be writing a blog, creating content for a new web page, or refreshing existing content (blog or page). The content will revolve around highly ranked keywords as we want the content to be relevant.
+              %td
+                .pt-col-content{"data-label" => "Custom Content Creation"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Custom Content Creation, this will vary on a monthly basis as to what content we are generating but this can be writing a blog, creating content for a new web page, or refreshing existing content (blog or page). The content will revolve around highly ranked keywords as we want the content to be relevant.
+                    500 Words
+              %td
+                .pt-col-content{"data-label" => "Custom Content Creation"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Custom Content Creation, this will vary on a monthly basis as to what content we are generating but this can be writing a blog, creating content for a new web page, or refreshing existing content (blog or page). The content will revolve around highly ranked keywords as we want the content to be relevant.
+                    800 Words
+              %td
+                .pt-col-content{"data-label" => "Custom Content Creation"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Custom Content Creation, this will vary on a monthly basis as to what content we are generating but this can be writing a blog, creating content for a new web page, or refreshing existing content (blog or page). The content will revolve around highly ranked keywords as we want the content to be relevant.
+                    1,500 Words
+              / %td
+              /   .pt-col-content{"data-label" => "Custom Content Creation"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext With Custom Content Creation, this will vary on a monthly basis as to what content we are generating but this can be writing a blog, creating content for a new web page, or refreshing existing content (blog or page). The content will revolve around highly ranked keywords as we want the content to be relevant.
+              /       2,500 Words
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Custom Link Acquisition (per Qtr)
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Custom Link Acquisition, every client will have a unique strategy based on their industry and website. The goal here is to acquire backlinks for the website. This could range from pitching high authority content to be written as a guest on a blog, citations, local listings, showing up in the local chamber of commerce, etc.
+              %td
+                .pt-col-content{"data-label" => "Custom Link Acquisition (per Qtr)"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Custom Link Acquisition, every client will have a unique strategy based on their industry and website. The goal here is to acquire backlinks for the website. This could range from pitching high authority content to be written as a guest on a blog, citations, local listings, showing up in the local chamber of commerce, etc.
+                    Up to 1
+              %td
+                .pt-col-content{"data-label" => "Custom Link Acquisition (per Qtr)"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Custom Link Acquisition, every client will have a unique strategy based on their industry and website. The goal here is to acquire backlinks for the website. This could range from pitching high authority content to be written as a guest on a blog, citations, local listings, showing up in the local chamber of commerce, etc.
+                    Up to 3
+              %td
+                .pt-col-content{"data-label" => "Custom Link Acquisition (per Qtr)"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext With Custom Link Acquisition, every client will have a unique strategy based on their industry and website. The goal here is to acquire backlinks for the website. This could range from pitching high authority content to be written as a guest on a blog, citations, local listings, showing up in the local chamber of commerce, etc.
+                    Up to 5
+              / %td
+              /   .pt-col-content{"data-label" => "Custom Link Acquisition (per Qtr)"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext With Custom Link Acquisition, every client will have a unique strategy based on their industry and website. The goal here is to acquire backlinks for the website. This could range from pitching high authority content to be written as a guest on a blog, citations, local listings, showing up in the local chamber of commerce, etc.
+              /       Up to 7
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span On-Going Support
+              %td
+                .pt-col-content{"data-label" => "On-Going Support"}
+              %td
+                .pt-col-content{"data-label" => "On-Going Support"}
+              %td
+                .pt-col-content{"data-label" => "On-Going Support"}
+              / %td
+              /   .pt-col-content{"data-label" => "On-Going Support"}
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    24/7 Reporting Dashboard
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+              %td
+                .pt-col-content{"data-label" => "24/7 Reporting Dashboard"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "24/7 Reporting Dashboard"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "24/7 Reporting Dashboard"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "24/7 Reporting Dashboard"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext The Client 24/7 Reporting Dashboard will be available after launch of the Ads or after tracking is set up (depending on services). Our team will connect the assets, then send the client a Whitelabel invitation to create their logins. We'll need their Full Name and desired email address to send this invitation.
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Monthly Reporting Calls
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will vary for SEO services based on the development of services and if there is a report to share. This will be discussed on a case per case basis with the Account Manager.
+              %td
+                .pt-col-content{"data-label" => "Monthly Reporting Calls"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will vary for SEO services based on the development of services and if there is a report to share. This will be discussed on a case per case basis with the Account Manager.
+                    With Agency
+              %td
+                .pt-col-content{"data-label" => "Monthly Reporting Calls"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will vary for SEO services based on the development of services and if there is a report to share. This will be discussed on a case per case basis with the Account Manager.
+                    With Agency
+              %td
+                .pt-col-content{"data-label" => "Monthly Reporting Calls"}
+                  %span
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext This will vary for SEO services based on the development of services and if there is a report to share. This will be discussed on a case per case basis with the Account Manager.
+                    With Agency
+              / %td
+              /   .pt-col-content{"data-label" => "Monthly Reporting Calls"}
+              /     %span
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext This will vary for SEO services based on the development of services and if there is a report to share. This will be discussed on a case per case basis with the Account Manager.
+              /       With Agency
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Month to Month Commitment
+              %td
+                .pt-col-content{"data-label" => "Month to Month Commitment"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Month to Month Commitment"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              %td
+                .pt-col-content{"data-label" => "Month to Month Commitment"}
+                  %span
+                    %i.material-icons.tick-r.f-s-20 check
+              / %td
+              /   .pt-col-content{"data-label" => "Month to Month Commitment"}
+              /     %span
+              /       %i.material-icons.tick-r.f-s-20 check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Cancellation Policy
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content{"data-label" => "Cancellation Policy"}
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content{"data-label" => "Cancellation Policy"}
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              %td
+                .pt-col-content{"data-label" => "Cancellation Policy"}
+                  %span
+                    30 Days Required
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+              / %td
+              /   .pt-col-content{"data-label" => "Cancellation Policy"}
+              /     %span
+              /       30 Days Required
+              /       .custom-tooltip
+              /         %i.fa.fa-info-circle
+              /         %span.custom-tooltiptext For All Recurring Monthly Plans, We Require a Written Thirty (30) Day Notice for Client Contract  Campaign Termination. Refunds Are Not Provided.
+            - unless @is_preview
+              %tr.pt-row-footer
+                %td.col-label.text-left
+                  .pt-col-content
+                - @plans.each do |plan|
+                  %td
+                    .pt-col-content
+                      %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'local_seo', plan: plan.key)}
+                        Get Started
+      - if raw(@package.sales_pitch).present?
+        .row.pt-4.pb-4.d-flex.flex-wrap.row-p-4
+          .col-sm-12.mt-4.mt-md-0
+            .panel-body.bg-white.panel-br-10.p-5.h-100
+              .panel-content.pl-n.pr-n
+                = raw(@package.sales_pitch)
+      .spacer15
+:javascript
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.plan-preloader').removeClass('plan-preloader');
+    }, 500);
+  });

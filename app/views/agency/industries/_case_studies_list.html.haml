@@ -1,0 +1,7 @@
+%table.table{"data-widget-group" => "group1"}
+  .fav_case_studies
+    - @fav_case_studies.each do |case_study|
+      = render 'case_study_item', case_study: case_study, favorite: true, checked: ''
+  .rem_case_studies
+    - @rem_case_studies.each do |case_study|
+      = render 'case_study_item', case_study: case_study, favorite: false, checked: 'unchecked'

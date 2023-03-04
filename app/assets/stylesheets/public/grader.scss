@@ -1,0 +1,9 @@
+body .container .jumbotron{
+  background-color: #60bbe7;
+  padding: 19px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+  border: 0;
+}
+@media (max-width: 992px) { .message { margin-top: 0 !important;}}

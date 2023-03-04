@@ -1,0 +1,47 @@
+- content_for :title do
+  Courses | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    .col-xs-10.col-sm-10.col-lg-10
+      %h1
+        Start Program Courses
+
+.locations#courses
+  - @courses.each do |course|
+    .address.row.ml-n.mr-n{ id: dom_id(course), data: { url: update_position_super_admin_course_path(course) } }
+      .col-sm-12.col-md-6
+        %a.no-underline{href: super_admin_course_path(course)}
+          = image_tag course.thumbnail_file_url, class:'img-responsive h100' if course.thumbnail_file_url.present?
+          %span.name.blue
+            = course.title
+            - if course.access_tip.present?
+              %small
+                (
+                %i= course.access_tip
+                )
+      .col-sm-6.col-md-3
+        %a{href: super_admin_course_path(course)}
+          = "#{course.chapters.count} Chapters"
+      .col-sm-6.col-md-3
+        .col-sm-12.right.normal-edit-button.grey-btn-group.mb-md
+          = link_to super_admin_start_agency_course_path(course), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn grey-btn-icon align-icon pull-right ml-sm mb-sm' do
+            %i.glyphicon.glyphicon-trash
+            Delete
+          %a.btn.grey-btn-icon.align-icon.pull-right.ml-sm.mb-sm{ href: edit_super_admin_start_agency_course_path(course) }
+            %i.glyphicon.glyphicon-edit
+            Edit
+
+%a.btn.btn--add.pull-right{ href: new_super_admin_start_agency_course_path }
+  %i.glyphicon.glyphicon-plus.glyphplus
+:javascript
+  $("#courses").sortable({
+    update: function(e, ui) {
+      $.ajax({
+        url: ui.item.data('url'),
+        type: 'patch',
+        data: { position: ui.item.index() + 1 },
+        dataType: 'script',
+        success:function(response){}
+      })
+    }
+  });

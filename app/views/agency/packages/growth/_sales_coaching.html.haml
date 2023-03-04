@@ -1,0 +1,350 @@
+- content_for :title do
+  Agency Sales Program | Clickx
+- group_plan = package.plans.find_by(key: 'group')
+- individual_plan = package.plans.find_by(key: 'individual')
+.container-fluid.pt-4
+  .bg-sky-blue.border-1.border-blue.rounded.mb-5
+    .bg-white.rounded-t-12.py-4.px-5
+      .fs-md.color-dark-blue.fw-m Scale Program
+    .p-4.p-md-5
+      .row
+        .col-md-4 
+          %ul.items-list.mb-5.mb-md-0
+            %li
+              %span.icon-check 
+                %i.material-icons check
+              Access to SCALE Program
+            %li 
+              %span.icon-check 
+                %i.material-icons check
+              Weekly Group Sales Call Coaching
+            %li 
+              %span.icon-check 
+                %i.material-icons check
+              Weekly Group Lead Gen Coaching
+            %li 
+              %span.icon-check 
+                %i.material-icons check
+              Profitable Niche Selection Support
+            %li 
+              %span.icon-check 
+                %i.material-icons check
+              Bi-Weekly Offer Creation Workshops
+            %li 
+              %span.icon-check 
+                %i.material-icons check
+              Plug & Play Funnel Creation
+            %li 
+              %span.icon-check 
+                %i.material-icons check
+              Facebook/instagram Ads Training
+            %li 
+              %span.icon-check 
+                %i.material-icons check
+              Agency Sales Training & Scripts
+            %li 
+              %span.icon-check 
+                %i.material-icons check
+              Scale Engagement Group
+            %li 
+              %span.icon-check 
+                %i.material-icons check
+              Scale Slack Channel Access
+            %li 
+              %span.icon-check 
+                %i.material-icons check
+              Grow Plan Included ($299 Value)
+            %li 
+              %span.icon-check 
+                %i.material-icons check
+              Weekly 1:1 Scale Support Calls
+            %li 
+              %span.icon-check 
+                %i.material-icons check
+              Support in Hiring Appt. Setters
+            %li 
+              %span.icon-check 
+                %i.material-icons check
+              Support in Hiring Account Managers
+            %li 
+              %span.icon-check 
+                %i.material-icons check
+              1:1 Support for Offer Creation
+
+        .col-md-8 
+          .calendly-wrapper
+            .calendly-inline-widget{"data-url" => "https://calendly.com/white-label-team/partner-upgrade?hide_event_type_details=1&hide_gdpr_banner=1", :style => "min-width:320px;height:640px;"}
+            %script{:async => "", :src => "https://assets.calendly.com/assets/external/widget.js", :type => "text/javascript"}
+-# .ui-2020.package-page
+-#   .page-content.page-plan
+-#     .page-heading.pt-md.pb-md
+-#       .row.align-items-center
+-#         .col-sm-12
+-#           %h1
+-#             %i.clickx-icon-Grow
+-#             Scale Program
+-#     .container-fluid
+-#       .table-responsive.table-plan.text-center.plan-preloader
+-#         %table.table.table-hover.mb-n
+-#           %thead
+-#             %tr
+-#               %th.col-label{"vertical-align" => "top"}
+-#                 .pt-col-content
+-#                   %h2.pt-header-caption.pt-header-caption--title.text-left
+-#               / %th.col-package.col-package--mw
+-#               /   .pt-col-content
+-#               /     .pt-header-caption Nail It
+-#               /     .pt-header-price
+-#               /       .striked-price
+-#               /         %span
+-#               /           $2,500
+-#               /           %span> /mo
+-#               /       = in_currency(group_plan.amount, current_agency.display_currency)
+-#               /       %span> /mo
+-#               /     .mt-4
+-#               /       %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'sales_coaching', plan: 'group')}
+-#               /         Get Started
+-#               %th.col-package.col-package--mw
+-#                 .pt-col-content
+-#                   .pt-header-caption Scale Lite
+-#                   .pt-header-price
+-#                     .striked-price
+-#                       %span
+-#                         $3,000
+-#                         %span> /mo
+-#                     = in_currency(individual_plan.amount, current_agency.display_currency)
+-#                     %span> /mo
+-#                   .mt-4
+-#                     %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'sales_coaching', plan: 'individual')}
+-#                       Get Started
+-#           %tbody
+-#             %tr
+-#               %td.col-label.text-left
+-#                 .pt-col-content
+-#                   %span Access to SCALE Program
+-#               / %td
+-#               /   .pt-col-content
+-#               /     %span.pl-label Access to SCALE Program
+-#               /     %span.pl-val
+-#               /       %i.material-icons.tick-r check
+-#               %td
+-#                 .pt-col-content
+-#                   %span.pl-label Access to SCALE Program
+-#                   %span.pl-val
+-#                     %i.material-icons.tick-r check
+-#             %tr
+-#               %td.col-label.text-left
+-#                 .pt-col-content
+-#                   %span Weekly Group Sales Call Coaching
+-#               / %td
+-#               /   .pt-col-content
+-#               /     %span.pl-label Weekly Group Sales Call Coaching
+-#               /     %span.pl-val
+-#               /       %i.material-icons.tick-r check
+-#               %td
+-#                 .pt-col-content
+-#                   %span.pl-label Weekly Group Sales Call Coaching
+-#                   %span.pl-val
+-#                     %i.material-icons.tick-r check
+-#             %tr
+-#               %td.col-label.text-left
+-#                 .pt-col-content
+-#                   %span Weekly Group Lead Gen Coaching
+-#               / %td
+-#               /   .pt-col-content
+-#               /     %span.pl-label Weekly Group Lead Gen Coaching
+-#               /     %span.pl-val
+-#               /       %i.material-icons.tick-r check
+-#               %td
+-#                 .pt-col-content
+-#                   %span.pl-label Weekly Group Lead Gen Coaching
+-#                   %span.pl-val
+-#                     %i.material-icons.tick-r check
+-#             %tr
+-#               %td.col-label.text-left
+-#                 .pt-col-content
+-#                   %span Profitable Niche Selection Support
+-#               / %td
+-#               /   .pt-col-content
+-#               /     %span.pl-label Profitable Niche Selection Support
+-#               /     %span.pl-val
+-#               /       %i.material-icons.tick-r check
+-#               %td
+-#                 .pt-col-content
+-#                   %span.pl-label Profitable Niche Selection Support
+-#                   %span.pl-val
+-#                     %i.material-icons.tick-r check
+-#             %tr
+-#               %td.col-label.text-left
+-#                 .pt-col-content
+-#                   %span Bi-Weekly Offer Creation Workshops
+-#               / %td
+-#               /   .pt-col-content
+-#               /     %span.pl-label Bi-Weekly Offer Creation Workshops
+-#               /     %span.pl-val
+-#               /       %i.material-icons.tick-r check
+-#               %td
+-#                 .pt-col-content
+-#                   %span.pl-label Bi-Weekly Offer Creation Workshops
+-#                   %span.pl-val
+-#                     %i.material-icons.tick-r check
+-#             %tr
+-#               %td.col-label.text-left
+-#                 .pt-col-content
+-#                   %span Plug & Play Funnel Creation
+-#               / %td
+-#               /   .pt-col-content
+-#               /     %span.pl-label Plug & Play Funnel Creation
+-#               /     %span.pl-val
+-#               /       %i.material-icons.tick-r check
+-#               %td
+-#                 .pt-col-content
+-#                   %span.pl-label Plug & Play Funnel Creation
+-#                   %span.pl-val
+-#                     %i.material-icons.tick-r check
+-#             %tr
+-#               %td.col-label.text-left
+-#                 .pt-col-content
+-#                   %span Facebook/instagram Ads Training
+-#               / %td
+-#               /   .pt-col-content
+-#               /     %span.pl-label Facebook/instagram Ads Training
+-#               /     %span.pl-val
+-#               /       %i.material-icons.tick-r check
+-#               %td
+-#                 .pt-col-content
+-#                   %span.pl-label Facebook/instagram Ads Training
+-#                   %span.pl-val
+-#                     %i.material-icons.tick-r check
+-#             %tr
+-#               %td.col-label.text-left
+-#                 .pt-col-content
+-#                   %span Agency Sales Training & Scripts
+-#               / %td
+-#               /   .pt-col-content
+-#               /     %span.pl-label Agency Sales Training & Scripts
+-#               /     %span.pl-val
+-#               /       %i.material-icons.tick-r check
+-#               %td
+-#                 .pt-col-content
+-#                   %span.pl-label Agency Sales Training & Scripts
+-#                   %span.pl-val
+-#                     %i.material-icons.tick-r check
+-#             %tr
+-#               %td.col-label.text-left
+-#                 .pt-col-content
+-#                   %span Scale Engagement Group
+-#               / %td
+-#               /   .pt-col-content
+-#               /     %span.pl-label Scale Engagement Group
+-#               /     %span.pl-val
+-#               /       %i.material-icons.tick-r check
+-#               %td
+-#                 .pt-col-content
+-#                   %span.pl-label Scale Engagement Group
+-#                   %span.pl-val
+-#                     %i.material-icons.tick-r check
+-#             %tr
+-#               %td.col-label.text-left
+-#                 .pt-col-content
+-#                   %span Scale Slack Channel Access
+-#               / %td
+-#               /   .pt-col-content
+-#               /     %span.pl-label Scale Slack Channel Access
+-#               /     %span.pl-val
+-#               /       %i.material-icons.tick-r check
+-#               %td
+-#                 .pt-col-content
+-#                   %span.pl-label Scale Slack Channel Access
+-#                   %span.pl-val
+-#                     %i.material-icons.tick-r check
+-#             %tr
+-#               %td.col-label.text-left
+-#                 .pt-col-content
+-#                   %span Grow Plan Included ($299 Value)
+-#               / %td
+-#               /   .pt-col-content
+-#               /     %span.pl-label Grow Plan Included ($299 Value)
+-#               /     %span.pl-val
+-#               /       %i.material-icons.tick-r check
+-#               %td
+-#                 .pt-col-content
+-#                   %span.pl-label Grow Plan Included ($299 Value)
+-#                   %span.pl-val
+-#                     %i.material-icons.tick-r check
+-#             %tr
+-#               %td.col-label.text-left
+-#                 .pt-col-content
+-#                   %span Weekly 1:1 Scale Support Calls
+-#               / %td
+-#               /   .pt-col-content
+-#               /     %span.pl-label Weekly 1:1 Scale Support Calls
+-#               /     %span.pl-val
+-#               /       %i.material-icons.close-r close
+-#               %td
+-#                 .pt-col-content
+-#                   %span.pl-label Weekly 1:1 Scale Support Calls
+-#                   %span.pl-val
+-#                     %i.material-icons.tick-r check
+-#             %tr
+-#               %td.col-label.text-left
+-#                 .pt-col-content
+-#                   %span Support in Hiring Appt. Setters
+-#               / %td
+-#               /   .pt-col-content
+-#               /     %span.pl-label Support in Hiring Appt. Setters
+-#               /     %span.pl-val
+-#               /       %i.material-icons.close-r close
+-#               %td
+-#                 .pt-col-content
+-#                   %span.pl-label Support in Hiring Appt. Setters
+-#                   %span.pl-val
+-#                     %i.material-icons.tick-r check
+-#             %tr
+-#               %td.col-label.text-left
+-#                 .pt-col-content
+-#                   %span Support in Hiring Account Managers
+-#               / %td
+-#               /   .pt-col-content
+-#               /     %span.pl-label Support in Hiring Account Managers
+-#               /     %span.pl-val
+-#               /       %i.material-icons.close-r close
+-#               %td
+-#                 .pt-col-content
+-#                   %span.pl-label Support in Hiring Account Managers
+-#                   %span.pl-val
+-#                     %i.material-icons.tick-r check
+-#             %tr
+-#               %td.col-label.text-left
+-#                 .pt-col-content
+-#                   %span 1:1 Support for Offer Creation
+-#               / %td
+-#               /   .pt-col-content
+-#               /     %span.pl-label 1:1 Support for Offer Creation
+-#               /     %span.pl-val
+-#               /       %i.material-icons.close-r close
+-#               %td
+-#                 .pt-col-content
+-#                   %span.pl-label 1:1 Support for Offer Creation
+-#                   %span.pl-val
+-#                     %i.material-icons.tick-r check
+
+-#             - unless @is_preview
+-#               %tr
+-#                 %td.col-label.text-left
+-#                   .pt-col-content
+-#                 / %td
+-#                 /   .pt-col-content
+-#                 /     %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: package.key, plan: group_plan.key)}
+-#                 /       Get Started
+-#                 %td
+-#                   .pt-col-content
+-#                     %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: package.key, plan: individual_plan.key)}
+-#                       Get Started
+-#       .spacer15
+-# :javascript
+-#   jQuery(window).load(function() {
+-#     setTimeout(function() {
+-#       jQuery('.plan-preloader').removeClass('plan-preloader');
+-#     }, 500);
+-#   });

@@ -1,0 +1,18 @@
+%md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-compressed
+  %form
+    .modal-header
+      %button.close{ 'aria-label': 'Close', 'data-dismiss': 'modal',
+        'type': 'button', 'ng-click': 'close()' }
+        %span.fa.fa-times-circle-o
+      %h4.modal-title
+        Facebook Campaigns
+    %md-dialog-content.p-md
+      %loading{"ng-show": "showSpinner"}
+      %md-input-container.width100{"ng-show": "!showSpinner && all_campaigns.length"}
+        %md-chips
+          %md-chip.adword--campaigns{ 'ng-repeat': 'campaign in all_campaigns',
+          'ng-click': 'pickThisCampaign(campaign.id, $index)', 'ng-class': '{ "selected": campaign.selected }' }
+            %md-checkbox#selectCampaign{ 'ng-model': 'campaign.selected' }
+            {{campaign.name}}
+    %md-dialog-actions
+      %button.btn.btn-info.btn-raised{ 'ng-click': 'close()' } Close

@@ -1,0 +1,839 @@
+- content_for :title do
+  Agency infrastructure | Clickx
+- plans = package.plans.where(interval: 'month').where("amount > 99 AND amount < 1499").sort_by(&:amount)
+.ui-2020.package-page
+  .page-content.page-plan
+    .page-heading.pt-md.pb-md
+      .row.align-items-center
+        .col-sm-12
+          %h1
+            %i.clickx-icon-Grow
+            Membership
+
+    .container-fluid
+      .table-responsive.table-plan.text-center.plan-preloader
+        %table.table.table-hover.mb-n.pt-xxl
+          %thead
+            - unless @is_preview
+              %tr#agency_infrastructure_actions
+                = render 'agency/packages/growth/agency_infrastructure_headers', active_subscription: @growth_subscription, package: package, plans: plans
+          %tbody
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Customer Acquisition Support
+              %td
+                .pt-col-content
+                  %span.pl-label Customer Acquisition Support
+              %td
+                .pt-col-content
+                  %span.pl-label Customer Acquisition Support
+              %td
+                .pt-col-content
+                  %span.pl-label Customer Acquisition Support
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Lead Registration
+              %td
+                .pt-col-content
+                  %span.pl-label Lead Registration
+                  %span.pl-val Unlimited
+              %td
+                .pt-col-content
+                  %span.pl-label Lead Registration
+                  %span.pl-val Unlimited
+              %td
+                .pt-col-content
+                  %span.pl-label Lead Registration
+                  %span.pl-val Unlimited
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Custom Product Pages
+              %td
+                .pt-col-content
+                  %span.pl-label Custom Product Pages
+                  %span.pl-val Unlimited
+              %td
+                .pt-col-content
+                  %span.pl-label Custom Product Pages
+                  %span.pl-val Unlimited
+              %td
+                .pt-col-content
+                  %span.pl-label Custom Product Pages
+                  %span.pl-val Unlimited
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Agency Admin Users
+              %td
+                .pt-col-content
+                  %span.pl-label Agency Admin Users
+                  %span.pl-val 5
+              %td
+                .pt-col-content
+                  %span.pl-label Agency Admin Users
+                  %span.pl-val 10
+              %td
+                .pt-col-content
+                  %span.pl-label Agency Admin Users
+                  %span.pl-val 20
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Academy Access
+                    -# %small (Courses Vary by Plan)
+              %td
+                .pt-col-content
+                  %span.pl-label Academy Access
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Academy Access
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Academy Access
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Access to All White Label Products
+              %td
+                .pt-col-content
+                  %span.pl-label Access to All White Label Products
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Access to All White Label Products
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Access to All White Label Products
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Access to Clickx Fulfillment Network
+              %td
+                .pt-col-content
+                  %span.pl-label Access to Clickx Fulfillment Network
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Access to Clickx Fulfillment Network
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Access to Clickx Fulfillment Network
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Upload Your Case Studies
+              %td
+                .pt-col-content
+                  %span.pl-label Upload Your Case Studies
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Upload Your Case Studies
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Upload Your Case Studies
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Upload Your Client Portfolios
+              %td
+                .pt-col-content
+                  %span.pl-label Upload Your Client Portfolios
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Upload Your Client Portfolios
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Upload Your Client Portfolios
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Upload Value Hooks / VSL Funnels
+              %td
+                .pt-col-content
+                  %span.pl-label Upload Value Hooks / VSL Funnels
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Upload Value Hooks / VSL Funnels
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Upload Value Hooks / VSL Funnels
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            -# %tr
+            -#   %td.col-label.text-left
+            -#     .pt-col-content
+            -#       %span Agency Growth FAQs
+            -#   %td
+            -#     .pt-col-content
+            -#       %span.pl-label Agency Growth FAQs
+            -#       %span.pl-val
+            -#         %i.material-icons.tick-r check
+            -#   %td
+            -#     .pt-col-content
+            -#       %span.pl-label Agency Growth FAQs
+            -#       %span.pl-val
+            -#         %i.material-icons.tick-r check
+            -#   %td
+            -#     .pt-col-content
+            -#       %span.pl-label Agency Growth FAQs
+            -#       %span.pl-val
+            -#         %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Access to 100s of Social Media Posts
+              %td
+                .pt-col-content
+                  %span.pl-label Access to 100s of Social Media Posts
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Access to 100s of Social Media Posts
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Access to 100s of Social Media Posts
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span White Label Website Graders
+              %td
+                .pt-col-content
+                  %span.pl-label White Label Website Graders
+                  %span.pl-val 200
+              %td
+                .pt-col-content
+                  %span.pl-label White Label Website Graders
+                  %span.pl-val 300
+              %td
+                .pt-col-content
+                  %span.pl-label White Label Website Graders
+                  %span.pl-val 300
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span White Label ROI Calculator
+              %td
+                .pt-col-content
+                  %span.pl-label White Label ROI Calculator
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label White Label ROI Calculator
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label White Label ROI Calculator
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span White Label Platform URL
+              %td
+                .pt-col-content
+                  %span.pl-label White Label Platform URL
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label White Label Platform URL
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label White Label Platform URL
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Stripe Payment Integration
+              %td
+                .pt-col-content
+                  %span.pl-label Stripe Payment Integration
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Stripe Payment Integration
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Stripe Payment Integration
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Document Library
+              %td
+                .pt-col-content
+                  %span.pl-label Document Library
+                  %span.pl-val Get Started & Questionnaire
+              %td
+                .pt-col-content
+                  %span.pl-label Document Library
+                  %span.pl-val All Access
+              %td
+                .pt-col-content
+                  %span.pl-label Document Library
+                  %span.pl-val All Access
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Dedicated Partner Manager
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Partner Manager
+                  %span.pl-val Email
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Partner Manager
+                  %span.pl-val Email + Phone
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Partner Manager
+                  %span.pl-val Email + Phone
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Slack Daily Accountability
+              %td
+                .pt-col-content
+                  %span.pl-label Slack Daily Accountability
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Slack Daily Accountability
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Slack Daily Accountability
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Agency Slack Group Access
+              %td
+                .pt-col-content
+                  %span.pl-label Agency Slack Group Access
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Agency Slack Group Access
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Agency Slack Group Access
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Social Media Engagement Slack Group
+              %td
+                .pt-col-content
+                  %span.pl-label Social Media Engagement Slack Group
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Social Media Engagement Slack Group
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Social Media Engagement Slack Group
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Weekly Sales Training Calls
+              %td
+                .pt-col-content
+                  %span.pl-label Weekly Sales Training Calls
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Weekly Sales Training Calls
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Weekly Sales Training Calls
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Weekly Lead Generation Training Calls
+              %td
+                .pt-col-content
+                  %span.pl-label Weekly Lead Generation Training Calls
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Weekly Lead Generation Training Calls
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Weekly Lead Generation Training Calls
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Lead Data Credits
+              %td
+                .pt-col-content
+                  %span.pl-label Lead Data Credits
+                  %span.pl-val 1,000 Credits
+              %td
+                .pt-col-content
+                  %span.pl-label Lead Data Credits
+                  %span.pl-val 5000 Credits
+              %td
+                .pt-col-content
+                  %span.pl-label Lead Data Credits
+                  %span.pl-val 7500 Credits
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Managed Email Prospecting
+              %td
+                .pt-col-content
+                  %span.pl-label Managed Email Prospecting
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label Managed Email Prospecting
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Managed Email Prospecting
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Prospecting Email Sequences
+              %td
+                .pt-col-content
+                  %span.pl-label Prospecting Email Sequences
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label Prospecting Email Sequences
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Prospecting Email Sequences
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Email Template Copywriting
+              %td
+                .pt-col-content
+                  %span.pl-label Email Template Copywriting
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label Email Template Copywriting
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Email Template Copywriting
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Personalized AI Emails
+              %td
+                .pt-col-content
+                  %span.pl-label Personalized AI Emails
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label Personalized AI Emails
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Personalized AI Emails
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Email Domain Warmups
+              %td
+                .pt-col-content
+                  %span.pl-label Email Domain Warmups
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label Email Domain Warmups
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Email Domain Warmups
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Past Training Call Recordings
+              %td
+                .pt-col-content
+                  %span.pl-label Past Training Call Recordings
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label Past Training Call Recordings
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Past Training Call Recordings
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Agency Scaling 1:1 Performance Calls
+              %td
+                .pt-col-content
+                  %span.pl-label Agency Scaling 1:1 Performance Calls
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label Agency Scaling 1:1 Performance Calls
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Agency Scaling 1:1 Performance Calls
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Agency Facebook Ad Campaigns
+              %td
+                .pt-col-content
+                  %span.pl-label Agency Facebook Ad Campaigns
+                  %span.pl-val Add on
+              %td
+                .pt-col-content
+                  %span.pl-label Agency Facebook Ad Campaigns
+                  %span.pl-val Add on
+              %td
+                .pt-col-content
+                  %span.pl-label Agency Facebook Ad Campaigns
+                  %span.pl-val Add on
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span SCALE Program & Support
+              %td
+                .pt-col-content
+                  %span.pl-label SCALE Program & Support
+                  %span.pl-val Add on
+              %td
+                .pt-col-content
+                  %span.pl-label SCALE Program & Support
+                  %span.pl-val Add on
+              %td
+                .pt-col-content
+                  %span.pl-label SCALE Program & Support
+                  %span.pl-val Add on
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Customer Retention Support
+              %td
+                .pt-col-content
+                  %span.pl-label Customer Retention Support
+              %td
+                .pt-col-content
+                  %span.pl-label Customer Retention Support
+              %td
+                .pt-col-content
+                  %span.pl-label Customer Retention Support
+            -# %tr
+            -#   %td.col-label.text-left
+            -#     .pt-col-content
+            -#       %span Done-For-You Account Audits
+            -#   %td
+            -#     .pt-col-content
+            -#       %span.pl-label Done-For-You Account Audits
+            -#       %span.pl-val
+            -#         %i.material-icons.close-r close
+            -#   %td
+            -#     .pt-col-content
+            -#       %span.pl-label Done-For-You Account Audits
+            -#       %span.pl-val Up to 2/mo
+            -#   %td
+            -#     .pt-col-content
+            -#       %span.pl-label Done-For-You Account Audits
+            -#       %span.pl-val Up to 3/mo
+            -# %tr
+            -#   %td.col-label.text-left
+            -#     .pt-col-content
+            -#       %span Done-For-You Strategy Creation
+            -#   %td
+            -#     .pt-col-content
+            -#       %span.pl-label Done-For-You Strategy Creation
+            -#       %span.pl-val
+            -#         %i.material-icons.close-r close
+            -#   %td
+            -#     .pt-col-content
+            -#       %span.pl-label Done-For-You Strategy Creation
+            -#       %span.pl-val 2 Strategies/ Month
+            -#   %td
+            -#     .pt-col-content
+            -#       %span.pl-label Done-For-You Strategy Creation
+            -#       %span.pl-val 4 Strategies/ Month
+            -# %tr
+            -#   %td.col-label.text-left
+            -#     .pt-col-content
+            -#       %span Access to 100s of Our Case Studies
+            -#   %td
+            -#     .pt-col-content
+            -#       %span.pl-label Access to 100s of Our Case Studies
+            -#       %span.pl-val
+            -#         %i.material-icons.close-r close
+            -#   %td
+            -#     .pt-col-content
+            -#       %span.pl-label Access to 100s of Our Case Studies
+            -#       %span.pl-val
+            -#         %i.material-icons.tick-r check
+            -#   %td
+            -#     .pt-col-content
+            -#       %span.pl-label Access to 100s of Our Case Studies
+            -#       %span.pl-val
+            -#         %i.material-icons.tick-r check
+            -# %tr
+            -#   %td.col-label.text-left
+            -#     .pt-col-content
+            -#       %span Access to 100s of Our Client Portfolios
+            -#   %td
+            -#     .pt-col-content
+            -#       %span.pl-label Access to 100s of Our Client Portfolios
+            -#       %span.pl-val
+            -#         %i.material-icons.close-r close
+            -#   %td
+            -#     .pt-col-content
+            -#       %span.pl-label Access to 100s of Our Client Portfolios
+            -#       %span.pl-val
+            -#         %i.material-icons.tick-r check
+            -#   %td
+            -#     .pt-col-content
+            -#       %span.pl-label Access to 100s of Our Client Portfolios
+            -#       %span.pl-val
+            -#         %i.material-icons.tick-r check
+            
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span White Label Platform Setup Support
+              %td
+                .pt-col-content
+                  %span.pl-label White Label Platform Setup Support
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label White Label Platform Setup Support
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label White Label Platform Setup Support
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Client Onboarding Support
+              %td
+                .pt-col-content
+                  %span.pl-label Client Onboarding Support
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Client Onboarding Support
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Client Onboarding Support
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Looker Studio Dashboard Templates
+              %td
+                .pt-col-content
+                  %span.pl-label Looker Studio Dashboard Templates
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Looker Studio Dashboard Templates
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Looker Studio Dashboard Templates
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Client Dashboards
+              %td
+                .pt-col-content
+                  %span.pl-label Client Dashboards
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Client Dashboards
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Client Dashboards
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Dedicated Account Manager
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Account Manager
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Account Manager
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Account Manager
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Launch New Niche Agencies
+              %td
+                .pt-col-content
+                  %span.pl-label Launch New Niche Agencies
+                  %span.pl-val $99/mo/Agency
+              %td
+                .pt-col-content
+                  %span.pl-label Launch New Niche Agencies
+                  %span.pl-val $99/mo/Agency
+              %td
+                .pt-col-content
+                  %span.pl-label Launch New Niche Agencies
+                  %span.pl-val $99/mo/Agency
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span.pl-val Cancellation Policy
+              %td
+                .pt-col-content
+                  %span.pl-label Cancellation Policy
+                  %span.pl-val 30 Day Notice
+              %td
+                .pt-col-content
+                  %span.pl-label Cancellation Policy
+                  %span.pl-val 30 Day Notice
+              %td
+                .pt-col-content
+                  %span.pl-label Cancellation Policy
+                  %span.pl-val 30 Day Notice
+            - unless @is_preview
+              %tr#agency_infrastructure_actions
+                = render 'agency/packages/growth/agency_infrastructure_actions', active_subscription: @growth_subscription, package: package, plans: plans
+      .spacer15
+:javascript
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.plan-preloader').removeClass('plan-preloader');
+    }, 500);
+  });

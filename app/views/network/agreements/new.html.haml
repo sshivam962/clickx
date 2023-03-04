@@ -1,0 +1,108 @@
+.py-8
+  .lg:container.mx-auto.px-4
+    .card.bg-white.shadow-xl.p-8.rounded-xl.my-12
+      = form_tag network_agreements_path, id: 'agreement_form', method: :post, remote: true do
+        = hidden_field_tag :authenticity_token, form_authenticity_token
+        .section-title
+          %h3.txt-cntr.ptb-25 INDEPENDENT CONTRACTOR AGREEMENT
+        %p.text-doc.txt-jstfy
+          %b
+            %span This Independent Contractor Agreement (“Agreement”) is entered by and between
+            %span.input-wrapper.inline-block
+              = text_field_tag 'agreement[legal_name]', current_user.name, class: 'width-400 input-wrapper-input', required: true, placeholder: '(CONTRACTOR)'
+            %span
+              (hereinafter referred to as the “Contractor”), and Clickxposure, LLC. an Illinois company (hereinafter referred to as the “Company”). Company and Contractor may be collectively referred to in this Agreement as the “Parties.”
+        %p.text-doc.txt-jstfy
+          %b WHEREAS,
+          %span Contractor requests that Company list Contractor as an available vendor for services to Company’s customers (“Company Customers”) on Company’s website; and
+        %p.text-doc.txt-jstfy
+          %b WHEREAS,
+          %span Company and Contractor desire to enter into an agreement, which will define respective rights and duties as to all services to be performed,
+        %p.text-doc.txt-jstfy
+          %b WHEREAS,
+          %span Contractor and Company affirm that both understand all of the provisions contained in this Agreement, and in the case that either party requires clarification as to one or more of the provisions contained herein, it has requested clarification or otherwise sought legal guidance,
+        %p.text-doc.txt-jstfy
+          %b NOW, THEREFORE,
+          %span in consideration of the covenants and agreements contained herein, the parties hereto agree as follows:
+        = render 'network/agreements/content'
+
+        .py-4
+        .input-wrapper.mb-4
+          %label Name
+          = text_field_tag 'agreement[name]', current_user.name, class: 'input-wrapper--input', required: true
+          %p#witness_representative.text-sm.text-gray-500
+            Representative
+
+        .input-wrapper.mb-4
+          %label Date
+          / = text_field_tag 'agreement[title]', nil, class: 'input-wrapper--input', required: true
+          %p.text-sm.text-gray-500
+            = Date.current.strftime('%B, %d %Y')
+
+        .input-wrapper
+          %label Signature
+          = hidden_field_tag 'agreement[signature]', nil, class: 'input-wrapper--input'
+
+          %canvas.form-control-lg.controls.border-2.border-gray-400.rounded-lg{height: '100', width: '300'}
+          %a.clear_signature.small.text-info.text-sm.text-gray-600.hover:text-gray-800{href: 'javascript:void(0)'}
+            Clear
+            %i.fa.fa-eraser{"aria-hidden" => "true"}
+
+        .input-wrapper.input-wrapper--submit.pt-4
+          = submit_tag 'Submit', class: 'btn btn-warning btn-lg btn-raised agreement_submit mt-xxl'
+        %br
+        %br
+        .section-title
+          %h4.txt-cntr.ptb-25 APPENDIX A
+        %h4.txt-cntr.ptb-25 CONTRACTOR’S SERVICES
+        %p.text-doc.txt-jstfy
+          %b
+            %u Contractor’s Services
+          %span include but are not limited to:
+          %ul
+            %li The provision of digital marketing services to Company Customers, as requested by Company Customers and approved by Company (in each case, a “Company Customer Project”)
+          %br
+          %p The Parties may add additional Services by mutual agreement in writing.
+        %p.text-doc.txt-jstfy
+          %b
+            %u Term of Agreement:
+          %p  The term of this Agreement commences on #{Date.current.strftime('%B, %d %Y')}, and shall continue until this Agreement is terminated by the Parties pursuant to Section 12 of this Agreement. The Term may be extended at the sole discretion of Company.
+        %h4.txt-cntr.ptb-25 COMPENSATION GUIDELINES
+        %p.text-doc.txt-jstfy
+          %b
+            %u Contractor’s Compensation:
+          %p Company will add twenty percent (20%) to Contractor’s bid (the “Platform Fee”) for each Company Customer Project and Company Customer will be charged the total amount (Contractor’s bid plus the Platform Fee). Upon receipt of payment from Company Customer, Company shall pay Contractor the bid price for each Company Customer Project and retain the Platform Fee. Company shall process all payments for every Company Customer Project. Company shall not be obligated to pay Contractor in the event a Company Customer fails or refuses to pay Company. Company will have the right, without prejudicing or waiving any other right hereunder, to withhold the Platform Fee from any amounts due and owing to Contractor. In the event any payment for a Company Customer Project is not processed through Company, and Contractor receives any amount of that payment, Contractor shall pay to Company the Platform Fee due and owing within two (2) days of receipt of payment, even if the payment received by Contractor is not complete or where the Platform Fee exceeds the amount of any such payment.
+          %p Company does not guarantee Contractor any amount of work in any given timeframe.
+        %p.text-doc.txt-jstfy
+          %b
+            %u Contractor’s Withholdings:
+          %p Company shall not be responsible for federal, state and local taxes derived from the Contractor's net income, or for the withholding and/or payment of any federal, state and local income and other payroll taxes, workers' compensation, disability benefits or other legal requirements applicable to the Contractor.
+        %p.text-doc.txt-jstfy
+          %b
+            %u Nonpayment by Company Customer
+          %p In the event a Company Customer does not pay amounts owed, Company shall have the right but not obligation to initiate legal action against any such Company Customer. In the event Company waives its option to do so, or if Contractor elects to initiate its own legal proceedings against any nonpaying Company Customer, Company shall be entitled to its Platform Fee from whatever settlement or judgment obtained by Contractor. In the event the original outstanding Platform Fee exceeds the amount of any settlement or award paid to Contractor, Contractor shall pay Company a prorated fee which is equal to twenty percent (20%) of the gross settlement or award within seven (7) days of receipt of payment.
+
+:javascript
+  var canvas = document.querySelector("canvas");
+  var signaturePad = new SignaturePad(canvas);
+  signaturePad.onEnd = function(){
+    $('#agreement_signature').val(signaturePad.toDataURL());
+    $('.agreement_submit').removeClass('hidden')
+  };
+
+  $('.agreement_submit').on('click', function(e){
+    e.preventDefault();
+    if(signaturePad.isEmpty() == true){
+      toastr.error('Signature is required.')
+    }else{
+      $('#agreement_form').submit()
+    }
+  })
+
+  $('.clear_signature').on('click', function(e){
+    signaturePad.clear();
+  })
+
+  $('#agreement_legal_name').on('change', function(e){
+    $('#witness_representative').text('Representative, ' + $(this).val());
+  })

@@ -1,0 +1,22 @@
+%td.col-client
+  %span.client-name-editable
+    %span.client-name__name
+      = social_media_prompt.title
+%td.col-client
+  %span.client-name-editable
+    %span.client-name__name
+      = social_media_prompt.prompt
+%td.col-btns.text-xl-right
+  %a.btn.btn-default.action-btn.action-btn--light{ href: view_super_admin_social_media_prompt_path(social_media_prompt) }
+    %span.btn-icon
+      %i.fa.fa-eye
+  - if current_user.role == 'admin' && current_user.full_access == true
+    %a.btn.btn-default.action-btn.action-btn--light{ href: edit_super_admin_social_media_prompt_path(social_media_prompt) }
+      %span.btn-icon
+        %i.fa.fa-edit
+    %a.btn-icon.btn-icon--edit.btn-default{href: new_super_admin_social_media_prompt_path(copy_from: social_media_prompt.id), target: '_blank', data: { toggle: 'tooltip', 'title' => 'Make a Copy'}}
+      %span.btn-icon
+        %i.fa.fa-clone
+    = link_to super_admin_social_media_prompt_path(social_media_prompt), method: :delete, remote: true, data: { confirm: 'Are you sure?', toggle: 'tooltip', 'original-title' => 'Archive'}, class: 'btn btn-default action-btn' do
+      %span.btn-icon
+        %i.fa.fa-archive

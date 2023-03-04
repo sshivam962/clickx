@@ -1,0 +1,54 @@
+%html
+  %head
+    %h1 Referrals
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+    %body
+      %table-responsive
+        %table.table.table-bordered.table-vam.table-left
+          %thead
+            %th Date
+            %th Users
+            %th Pages/Session
+            %th Avg. Session Duration
+            %th % New Sessions
+            %th Bounce Rate
+          %tbody
+            - @referrals_data.decorated_chart_data do |analytics|
+              %tr
+                %td.align-center
+                  = analytics.formatted_date
+                %td.align-center
+                  = analytics.users_count
+                %td.align-center
+                  = analytics.pages_per_session
+                %td.align-center
+                  = analytics.avg_session_duration
+                %td.align-center
+                  = analytics.new_sessions
+                %td.align-center
+                  = analytics.bounce_rate
+      %h1 Referrals Details
+      %table-responsive
+        %table.table.table-bordered.table-vam.table-left
+          %thead
+            %th Source
+            %th Users
+            %th Pages/Session
+            %th Avg. Session Duration
+            %th % New Sessions
+            %th Bounce Rate
+          %tbody
+            - @referrals_data.table_data.each do |referrals|
+              %tr
+                %td.align-center
+                  = referrals.site
+                %td.align-center
+                  = referrals.visits
+                %td.align-center
+                  = referrals.page_per_session
+                %td.align-center
+                  = referrals.avg_session
+                %td.align-center
+                  = referrals.new_visits
+                %td.align-center
+                  = referrals.bounce

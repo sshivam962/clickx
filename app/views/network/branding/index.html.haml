@@ -1,0 +1,67 @@
+.container.mx-auto.px-4
+  .card.bg-white.shadow-xl.p-8.pb-0.rounded-xl.my-12
+    .text-center.container-sm.mx-auto
+      .font-medium.text-3xl.lg:text-4xl.leading-tight.pb-2 Branding
+      %hr.my-8
+      .font-light.text-2xl.lg:text-3xl.leading-tight Proudly showcase your Clickx Fulfillment Network membership with Clickx logos.
+
+      .py-2
+
+    .bg-gray-100.mt-8.-mx-8.text-center.pt-12.px-5.md:px-8.rounded-b-xl
+      .container-sm.mx-auto
+        .pb-5
+          %p The logo is available to download in four color applications. Please note that the logo file will not include any colored background as the thumbnails below serve just to provide an example of application.
+
+        .grid.md:grid-cols-2.gap-8.py-12
+          .col-auto
+            .logo-holder
+              = image_tag 'network/logos/full_color/clickx-logo-fullcolor.svg', class: '', alt: 'Full Color Logo'
+            .text-left.text-xs.pt-4
+              .block Full Color Logo
+              .block
+                = link_to 'PNG', image_path('network/logos/full_color/clickx-logo-fullcolor.png'), download: 'clickx-logo-fullcolor.png', class: 'text-blue'
+                |
+                = link_to 'EPS', image_path('network/logos/full_color/clickx-logo-fullcolor.eps'), download: 'clickx-logo-fullcolor.eps', class: 'text-blue'
+                |
+                = link_to 'SVG', image_path('network/logos/full_color/clickx-logo-fullcolor.svg'), download: 'clickx-logo-fullcolor.svg', class: 'text-blue'
+          .col-auto
+            .logo-holder.bg-secondary
+              = image_tag 'network/logos/reverse/clickx-logo-reverse.svg', class: '', alt: 'Reverse Color Logo'
+            .text-left.text-xs.pt-4
+              .block Reverse Color Logo
+              .block
+                = link_to 'PNG', image_path('network/logos/reverse/clickx-logo-reverse.png'), download: 'clickx-logo-reverse.png', class: 'text-blue'
+                |
+                = link_to 'EPS', image_path('network/logos/reverse/clickx-logo-reverse.eps'), download: 'clickx-logo-reverse.eps', class: 'text-blue'
+                |
+                = link_to 'SVG', image_path('network/logos/reverse/clickx-logo-reverse.svg'), download: 'clickx-logo-reverse.svg', class: 'text-blue'
+
+          .col-auto
+            .logo-holder.bg-primary
+              = image_tag 'network/logos/white/clickx-logo-white.svg', class: '', alt: 'All white Logo'
+            .text-left.text-xs.pt-4
+              .block All White Logo
+              .block
+                = link_to 'PNG', image_path('network/logos/white/clickx-logo-white.png'), download: 'clickx-logo-white.png', class: 'text-blue'
+                |
+                = link_to 'EPS', image_path('network/logos/white/clickx-logo-white.eps'), download: 'clickx-logo-white.eps', class: 'text-blue'
+                |
+                = link_to 'SVG', image_path('network/logos/white/clickx-logo-white.svg'), download: 'clickx-logo-white.svg', class: 'text-blue'
+          .col-auto
+            .logo-holder
+              = image_tag 'network/logos/black/clickx-logo-black.svg', class: '', alt: 'All Black Logo'
+            .text-left.text-xs.pt-4
+              .block All Black Logo
+              .block
+                = link_to 'PNG', image_path('network/logos/black/clickx-logo-black.png'), download: 'clickx-logo-black.png', class: 'text-blue'
+                |
+                = link_to 'EPS', image_path('network/logos/black/clickx-logo-black.eps'), download: 'clickx-logo-black.eps', class: 'text-blue'
+                |
+                = link_to 'SVG', image_path('network/logos/black/clickx-logo-black.svg'), download: 'clickx-logo-black.svg', class: 'text-blue'
+          .col-auto
+            .logo-holder
+              = image_tag 'network/logos/clickx-icon.png', class: '', alt: 'All Black Logo'
+            .text-left.text-xs.pt-4
+              .block Clickx Icon
+              .block
+                = link_to 'PNG', image_path('network/logos/clickx-icon.png'), download: 'clickx-icon.png', class: 'text-blue'

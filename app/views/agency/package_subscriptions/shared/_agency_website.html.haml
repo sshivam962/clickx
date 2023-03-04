@@ -1,0 +1,41 @@
+.l-com-info.pt-n
+  %h4
+    = plan[:name]
+.l-com-info.pt-n
+  %h4
+    = "Price: #{number_to_currency(plan.onetime_charge, precision: 0)}"
+  %h4
+    %span
+      = "Hosting Service: #{number_to_currency(plan.amount, precision: 0)}/mo"
+  %br
+  %span
+    %h4
+      %b Add On's
+    .l-com-info.pt-n
+      - ct_plan = Plan.find_by(package_type: 'agency_ala_carte', key: 'call_tracking')
+      = hidden_field_tag :call_tracking_amount, ct_plan.amount
+      %h4
+        %label.pure-material-checkbox
+          = check_box_tag "addons[]", ct_plan.id, false, class: 'payment_checks', id: 'addons_call_tracking'
+          %span
+            = "Toll Free or Local Phone Number: #{number_to_currency(ct_plan.amount, precision: 0)}/mo"
+      - gs_plan = Plan.find_by(package_type: 'g_suite', key: 'basic')
+      = hidden_field_tag :g_suite_amount, gs_plan.amount + gs_plan.implementation_fee
+      %h4
+        %label.pure-material-checkbox
+          = check_box_tag "addons[]", gs_plan.id, false, class: 'payment_checks', id: 'addons_g_suite'
+          %span
+            = "GSuite Email Account: #{number_to_currency(gs_plan.amount, precision: 0)}/mo (#{number_to_currency(gs_plan.implementation_fee, precision: 0)} one-time setup)"
+      - logo_plan = Plan.find_by(package_type: 'logo_design', key: 'basic')
+      = hidden_field_tag :logo_design_amount, logo_plan.amount + logo_plan.implementation_fee
+      %h4
+        %label.pure-material-checkbox
+          = check_box_tag "addons[]", logo_plan.id, false, class: 'payment_checks', id: 'addons_logo_design'
+          %span
+            = "Logo Design: #{number_to_currency(logo_plan.amount, precision: 0)} one-time"
+    .l-com-info.pt-n
+      %h4
+        Total Amount Due Today:
+        %span.total_amount_due
+          = " #{number_to_currency(plan.onetime_charge + plan.amount, precision: 0)}"
+

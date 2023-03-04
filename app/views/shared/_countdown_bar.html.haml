@@ -1,0 +1,27 @@
+.countdown-wrapper
+  .countdown
+    Limited Time Only, Offer Expires in&#160;
+    %span#timeLeft
+:javascript
+  function updateTimeSpan() {
+    var theSpan = document.getElementById('timeLeft');
+    var endTime = new Date("#{signup_link.expires_on.end_of_day.strftime("%a %b %d %Y %H:%M:%S %z")}");
+    endTime = (Date.parse(endTime) / 1000);
+    var now = new Date();
+    now = (Date.parse(now) / 1000);
+
+    var timeLeft = endTime - now;
+    var days = Math.floor(timeLeft / 86400);
+    var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+    var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
+
+    if (hours < "10") { hours = "0" + hours; }
+    if (minutes < "10") { minutes = "0" + minutes; }
+
+    theSpan.innerHTML = '<span>'+ days + '</span> days, <span>' + hours + '</span> hours, <span>' + minutes + '</span> minutes left';
+    setTimeout('updateTimeSpan()', 1000);
+  }
+
+  $(function() {
+    onload = updateTimeSpan();
+  });

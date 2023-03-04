@@ -1,0 +1,344 @@
+@import 'common/common';
+
+/** Form Details Section **/
+.tm-x-form-list {
+  .map-remove-btn.btn.btn-fab.btn-fab-mini {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    font-size: 14px;
+    line-height: 30px;
+  }
+}
+/** End Form Details Section **/
+
+/** Form mapping, fetching section **/
+// $rp_width: 100%;
+.rp-ap-current-lists {
+  display: block;
+  margin: 0 -15px 15px;
+  padding: 0;
+  li {
+    list-style: none;
+    display: block;
+    padding-left: 15px;
+    padding-right: 15px;
+    .panel {
+      .panel-heading {
+        h2 {
+          padding: 14px 0 14px !important;
+        }
+      }
+    }
+    // @media all and #{$above_tab} {
+    //   width: $rp_width/3;
+    // }
+    // @media all and #{$between_mobile_tab} {
+    //   width: $rp_width/2;
+    // }
+    // @media all and #{$upto_mobile} {
+    //   width: 100%;
+    // }
+  }
+}
+.clickx-form-wrapper {
+  .panel-controls {
+    label {
+      span.toggle + span.toggle {
+        display: none;
+      }
+    }
+  }
+  .panel-body {
+    .input-group {
+      .input-group-addon {
+        span.checkbox-material + span.checkbox-material {
+          display: none;
+        }
+      }
+    }
+  }
+}
+.clx-form-mapping {
+  md-tabs-content-wrapper {
+    position: relative;
+    display: block;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+  }
+  md-tabs-content {
+    position: relative;
+  }
+  md-tab-content {
+    display: block;
+    position: relative;
+    top: auto;
+    left: auto;
+    overflow: visible;
+    md-content {
+      padding: 15px;
+      overflow: visible;
+    }
+  }
+  .rp-ap-current-lists {
+    li {
+      display: block;
+      width: 100%;
+    }
+  }
+  .clickx-form-wrapper {
+  }
+}
+/** end form mapping **/
+
+/**
+* @author Jerry Brown
+* @date 30/03/2017
+* @fix Sidebar side menu opening on small screen
+*/
+.fixed-sidebar {
+  width: auto;
+  overflow-x: visible;
+  position: relative;
+  .static-sidebar {
+    position: fixed !important;
+    overflow-x: visible;
+    z-index: 79;
+    nav {
+      position: relative;
+      overflow-x: visible;
+    }
+  }
+}
+.sidebar-collapsed {
+  .fixed-sidebar {
+    .static-sidebar {
+      width: 68px;
+      overflow: hidden;
+      .scroll-track {
+        right: auto;
+        left: 58px;
+      }
+      nav.widget-body > ul.acc-menu {
+        width: 64px;
+        > li {
+          max-width: 64px;
+          overflow-x: hidden;
+          ul.acc-menu {
+            li {
+              a.withripple {
+                padding-left: 10px;
+                padding-right: 6px;
+                .icon {
+                  margin-right: 0;
+                }
+              }
+            }
+          }
+        }
+        > li:hover {
+          max-width: none;
+          overflow-x: visible;
+          pointer-events: auto;
+          a.withripple {
+            .icon {
+              margin-right: 16px;
+            }
+          }
+        }
+      }
+      &:hover {
+        pointer-events: auto;
+      }
+    }
+    &:hover {
+      .static-sidebar {
+        width: 280px;
+        overflow-x: visible;
+      }
+    }
+  }
+  #layout-static {
+    .static-sidebar-wrapper {
+      @media all and (max-width: 767px) {
+        width: 64px;
+        .sidebar {
+          .acc-menu {
+            li.hasChild {
+              position: relative;
+              ul.acc-menu {
+                width: 0;
+                position: absolute;
+                overflow: hidden;
+              }
+              &:hover {
+                ul.acc-menu {
+                  position: absolute;
+                  left: 64px;
+                  top: 0;
+                  width: 210px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/** end FIX ISSUE - sidebar **/
+
+/** Clickx Brand Colours **/
+
+.darkstone_blue {
+  background: #4c4e60 !important;
+}
+
+.merigold {
+  background: #f8b018 !important;
+}
+
+.light_haze {
+  background: #f6f6f7 !important;
+}
+
+.accent_red {
+  background: #ef5023 !important;
+}
+
+.accent_blue {
+  background: #60bbea !important;
+}
+
+.accent_green {
+  background: #bad531 !important;
+}
+
+.text_grey {
+  background: #777777 !important;
+}
+/** End Clickx Brand Colours **/
+
+/** ADS PAGE POPOVER **/
+.ads {
+  .popover {
+    @media all and (min-width: 1200px) {
+      max-width: 360px;
+    }
+    @media all and (min-width: 992px) and (max-width: 1199px) {
+      max-width: 300px;
+    }
+    @media all and (min-width: 768px) and (max-width: 991px) {
+      max-width: 280px;
+    }
+  }
+  .popover-content {
+    border: 6px solid #333;
+    padding: 10px;
+    font-size: 14px;
+  }
+  .boxed {
+    ul {
+      display: block;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      li {
+        list-style: none;
+        display: block;
+        &:first-child {
+          a {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            position: relative;
+            display: block;
+            color: #1556b8 !important;
+            line-height: 20px;
+          }
+        }
+        &.green {
+          color: #069642;
+          font-size: 13px;
+          position: relative;
+          padding: 3px 0;
+        }
+        &:nth-child(3) {
+          font-size: 14px;
+          color: #575757;
+          font-style: italic;
+          line-height: 16px;
+        }
+      }
+    }
+  }
+}
+/** END ADS PAGE POPOVER **/
+
+/** COMPETITOR INSIGHT PAGE */
+.competitors-header {
+  .form-group {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+/** END COMPETITOR INSIGHT PAGE **/
+
+/** IP FILTER LIST PAGE **/
+.ip-list-table {
+}
+
+/** END IP FILTER LIST PAGE **/
+
+.map-fields {
+  .table.map-table {
+    th,
+    td {
+      font-size: 14px;
+    }
+  }
+}
+
+.jp-card-container {
+  display: none;
+}
+
+.dataTables_filter {
+  .form-control {
+    height: 22px;
+  }
+}
+
+.dataTables_length {
+  margin-top: 13px;
+}
+
+.table-responsive {
+  .table {
+    overflow: hidden;
+  }
+}
+
+.icon-danger{
+  color: #f8b018;
+}
+
+.clear-r-i{
+  font-size: 20px;
+  font-weight: 700;
+  border: 2px solid #f8b018;
+  border-radius: 50px;
+  padding: 2px;
+}
+
+.md-chips md-chip{
+  height: auto!important;
+}
+
+md-checkbox{
+  margin-bottom: 0px!important;
+}

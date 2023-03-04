@@ -1,0 +1,23 @@
+md-input-container {
+  .with-button {
+    position: absolute;
+    top: 4px;
+    button {
+      position: relative;
+      border: none;
+      box-shadow: none;
+      padding: 4px;
+      font-size: 18px;
+      line-height: 12px;
+      margin: 0;
+    }
+  }
+}
+
+.btn {
+  &.btn-sm {
+    &.btn-sm-default {
+      padding: 5px 12px;
+    }
+  }
+}

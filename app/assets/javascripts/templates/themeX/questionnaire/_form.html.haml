@@ -1,0 +1,9 @@
+.questions
+  .div{'ng-repeat' => "group in group_types track by $index", 'ng-init' => "count = 1"}
+    %wz-step{'canexit' => "validate_chk"}
+      .address{'ng-init' => "current = $parent.count; $parent.count=$parent.count+1;"}
+        %div{"ng-include" => "", :src => "'themeX/questionnaire/_info.html'"}
+        %button.btn.btn-raised.mt-md.mb-md.btn-primary{'ng-show' => "{{curent + $index}} == groups_count -1", :type => "submit", 'ng-click' => "is_submitted = true", "wz-finish" => ""} Save
+        %button.btn.btn-raised.mt-md.mb-md.btn-primary{'ng-hide' => "{{current + $index}} == groups_count -1",:type => "submit", 'ng-click' => "is_submitted = true" ,"wz-next" => "validate(group)"} Continue
+        %a.btn.btn-white.btn-raised{'ng-show' => "{{current + $index}} != 0 ","wz-previous" => ''} Back
+        %a.btn.btn-white.btn-raised{'ng-hide' => "{{current + $index}} != 0", :href => "/b/dashboard"} Back

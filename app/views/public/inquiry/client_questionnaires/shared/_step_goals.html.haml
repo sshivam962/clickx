@@ -1,0 +1,43 @@
+%ul.stages
+  - if steps.include?('background')
+    %li.completed
+      .stage-data
+        .stages-number
+        .stages-title Background
+  - if steps.include?('goals')
+    %li.current
+      .stage-data
+        .stages-number
+        .stages-title Goals
+  - if steps.include?('audience')
+    %li
+      .stage-data
+        .stages-number
+        .stages-title Audience
+  - if steps.include?('ad_type')
+    %li
+      .stage-data
+        .stages-number
+        .stages-title Ad Type
+  - if steps.include?('creative')
+    %li
+      .stage-data
+        .stages-number
+        .stages-title Creative
+
+.questionnaire-card.mt-5
+  = f.fields_for :answers do |fa|
+    - answer = fa.object
+    - question = answer.question
+    - next if question.blank?
+    - if question.tab_to_show.present?
+      - if question.tab_to_show == "goals"
+        = render "public/inquiry/client_questionnaires/shared/form_elements", question: question, fa: fa
+  .py-4
+  .button-wrapper
+    .d-flex.justify-content-between.align-items-center
+      .col-auto
+        %a.btn.btn--back.step_complete{href: 'javascript:void(0)', data: {next_step: prev_step, current_step: 'goals'}} Back
+      .col-auto
+        %a.btn.step_complete.goals-next-btn{href: 'javascript:void(0)', data: {next_step: next_step, current_step: 'goals'}} Next
+        

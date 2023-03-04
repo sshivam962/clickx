@@ -1,0 +1,84 @@
+- content_for :title do
+  Bundled Plans | Clickx
+- plans = @package.plans.group_by(&:key)
+.page-heading.mb-n.pb-md
+  %h1 Bundled Plans
+.container-fluid.package-page
+  %div{"data-widget-group" => "group1"}
+    - plan = plans['google_fb_ads_starter'].first
+    .row
+      .col-md-12
+        .panel.panel-light
+          .panel-heading Google Ads Starter + Facebook Ads Starter
+          .panel-body
+            .row.v-center
+              .col-sm-9
+                .panel-price
+                  = in_currency(plan.amount, current_agency.display_currency)
+                  %span> /mo
+                %p.m-n MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+              .col-sm-3.text-center
+                %a.btn.btn-info.btn-raised.btn-lg.m-n.btn-block{href: agency_checkout_path(package: 'bundle', plan: plan.key)} Get Started
+    - plan = plans['fb_ads_funnel_dev_starter'].first
+    .row
+      .col-md-12
+        .panel.panel-light
+          .panel-heading Facebook Ads Starter + Funnel Development Starter
+          .panel-body
+            .row.v-center
+              .col-sm-9
+                .panel-price
+                  = in_currency(plan.amount, current_agency.display_currency)
+                  %span> /mo
+                  + #{in_currency(plan.onetime_charge, current_agency.display_currency)}
+                  %span One Time
+                %p.m-n MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+              .col-sm-3.text-center
+                %a.btn.btn-info.btn-raised.btn-lg.m-n.btn-block{href: agency_checkout_path(package: 'bundle', plan: plan.key)} Get Started
+    - plan = plans['google_ads_starter_landing_page'].first
+    .row
+      .col-md-12
+        .panel.panel-light
+          .panel-heading Google Ads Starter + Template Landing Page
+          .panel-body
+            .row.v-center
+              .col-sm-9
+                .panel-price
+                  = in_currency(plan.amount, current_agency.display_currency)
+                  %span> /mo
+                  + #{in_currency(plan.onetime_charge, current_agency.display_currency)}
+                  %span One Time
+                %p.m-n MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+              .col-sm-3.text-center
+                %a.btn.btn-info.btn-raised.btn-lg.m-n.btn-block{href: agency_checkout_path(package: 'bundle', plan: plan.key)} Get Started
+    .row.d-none
+      .col-md-6.col-sm-6
+        .panel.panel-default.p-xxl
+          .panel-head
+            %i.clickx-icon-Support.ico-60.pr-sm.text-info
+            %h5.f-s-16.f-w-lg.l-s-2.text-muted OPTIONAL
+            %h2.pt-header-caption.text-info White-Glove™ Customer Service
+            .pt-header-price
+              #{in_currency(500, current_agency.display_currency)}
+              %span> /mo
+          .panel-body.pl-n.pr-n
+      .col-md-6.col-sm-6
+        .panel.panel-default.p-xxl
+          .panel-head
+            %i.clickx-icon-partner.ico-60.ml-sm.n.pr-sm.text-info
+            %h5.f-s-16.f-w-lg.l-s-2.text-muted OPTIONAL
+            %h2.pt-header-caption.text-info Expedited Onboarding
+            .pt-header-price
+              #{in_currency(500, current_agency.display_currency)}
+              %span> /One Time
+          .panel-body.pl-n.pr-n
+    .row
+      - if raw(@package.sales_pitch).present?
+        .col-sm-12
+          .panel.panel-info
+            .panel-body.p-lg
+              .row
+                .col-sm-12.p-n
+                  .info-tile.info-tile-alt.mb-n.b-s-n
+                    .info.p-lg
+                      = raw(@package.sales_pitch)

@@ -1,0 +1,21 @@
+<% icon_sizes = Rails.configuration.serviceworker.icon_sizes %>
+{
+  "name": "Clickx ",
+  "short_name": "Clickx",
+  "start_url": "/",
+  "icons": [
+  <% icon_sizes.map { |s| "#{s}x#{s}" }.each.with_index do |dim, i| %>
+    {
+      "src": "<%= image_path "logos/clickx-#{dim}.png" %>",
+      "sizes": "<%= dim %>",
+      "type": "image/png"
+    }<%= i == (icon_sizes.length - 1) ? '' : ',' %>
+  <% end %>
+  ],
+  "theme_color": "#F8B018",
+  "background_color": "#F6F6F7",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "gcm_sender_id": "174189789912",
+  "display": "standalone"
+}

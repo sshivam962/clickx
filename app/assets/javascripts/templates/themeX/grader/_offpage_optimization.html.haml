@@ -1,0 +1,62 @@
+.col-md-12
+  .panel.panel-default
+
+    .panel-heading
+      %h2.text-darkblue Off-page Optimization
+    .panel-body
+      .row{'ng-if': '!empty_backlinks'}
+        .col-sm-6
+          .table-responsive
+            %table.table.table-hover.table-vam
+              %thead
+                %tr.bg-muted
+                  %th.f-w-sm Backlinks
+              %tbody
+                %tr{'ng-repeat': 'backlink in backlinks_info.backlinks'}
+                  %td
+                    %h4
+                      %strong {{backlink.topic}}
+                    %a.greay-link.word-break-all{href: "{{backlink.source_url}}", target: '_blank'} {{backlink.source_url}}
+
+        .col-sm-6.p-n
+          .col-sm-6
+            %h4.mb-md
+              Trust Flow
+              %span.badge.tooltips{"data-original-title" => "Details", "data-trigger" => "hover"}
+            .bdr-line.p-sm.text-center
+              %h1.mt-lg.mb-lg.f-w-md{'ng-class': "{'text-danger': backlinks_info.trust_flow <= 10, 'text-warning': (backlinks_info.trust_flow > 10 && backlinks_info.trust_flow <= 40), 'text-success': backlinks_info.trust_flow > 40 }"}
+                {{backlinks_info.trust_flow}}
+                %small.inlineb.text-muted /100
+          .col-sm-6
+            %h4.mb-md
+              Citation Flow
+              %span.badge.tooltips{"data-original-title" => "Details", "data-trigger" => "hover"}
+            .bdr-line.p-sm.text-center
+              %h1.mt-lg.mb-lg.f-w-md{'ng-class': "{'text-danger': backlinks_info.citation_flow <= 10, 'text-warning': (backlinks_info.citation_flow > 10 && backlinks_info.citation_flow <= 40), 'text-success': backlinks_info.citation_flow > 40 }"}
+                {{backlinks_info.citation_flow}}
+                %small.inlineb.text-muted /100
+          .col-sm-12.mt-lg
+            %h4.mb-md
+              External Backlinks
+              %span.badge.tooltips{"data-original-title" => "Details", "data-trigger" => "hover"}
+            .bdr-line.p-sm.text-center
+              %h1.mt-lg.mb-lg.f-w-md
+                {{backlinks_info.ext_backlinks}}
+          .col-sm-12.mt-lg
+            %h4.mb-md
+              Referring Domains
+              %span.badge.tooltips{"data-original-title" => "Details", "data-trigger" => "hover"}
+            .bdr-line.p-sm.text-center
+              %h1.mt-lg.mb-lg.f-w-md
+                {{backlinks_info.ref_domains}}
+      .row{'ng-if': 'empty_backlinks'}
+        .col-sm-12.mt-md
+          .block
+            %span.fa.fa-close.text-danger.f-s-28.mr-md.pad-r-b
+            %i Sorry, there are no links for this domain name
+    .panel-footer
+      .col-xs-12.col-sm-10.col-xs-offset-0.col-sm-offset-1
+        .jumbotron.bg-info.pl-xl.pr-xl.no-shadow
+          %h4.mb-sm.f-s-20 Clickx Pro Tip
+          %p.text-white.mb-n Backlinks account for close to 70% of a search engines' algorithm. Search engines calculate the relevance of a site to a keyword based on the quality and quantity of backlinks. The best strategy to get someone to link to your website is to create high quality content that is share worthy and promote it on social media. Trust Flow is a metric weighted by the number of clicks from a seed set of  trusted sites to a given URL, or Domain. Citation Flow is a metric that is weighted by the number citations to a given URL, or domain.
+          /%button.btn.btn-outline-white.f-w-md{:type => "button"} Start Monitoring Your Backlinks

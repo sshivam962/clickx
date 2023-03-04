@@ -1,0 +1,51 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Reports.title-icon
+    Onboarding Procedures
+
+.container-fluid
+  %div{"data-widget-group" => "group1"}
+    .row
+      .col-sm-12
+        .panel.panel-default
+          .panel-body
+            .row
+              .col-md-12
+                #accordionA.panel-group.panel-default.mb-n
+                  .panel.panel-default{'ng-repeat': 'procedure in biz_onboarding_procedures' }
+                    %a{"data-parent" => "#accordionA", "data-toggle" => "collapse", "data-target" => "#collapse{{procedure.id}}", 'ng-click': 'getBusinessOnboardingProcedure(procedure.id)'}
+                      .panel-heading
+                        %h2.service-title
+                          {{procedure.title}}
+                        .panel-ctrls
+                          %span.button-icon.has-bg
+                            %span.material-icons keyboard_arrow_down
+                        .col-md-3.col-sm-4.col-xs-12.pull-right.onboarding
+                          .pull-right.text-right.checklist-steps
+                            %strong {{procedure.remaining_tasks_count}} steps left
+                          %h5 Progress
+                          .row
+                            .col-xs-12
+                              .progress
+                                .progress-bar.progress-bar-blue{:style => "width: {{procedure.progress_percentage}}%"}
+                    .collapse{id: "collapse{{procedure.id}}"}
+                      %div#proc_show
+                        .panel.panel-default{:style => "visibility: visible; opacity: 1; display: block; transform: translateY(0px);"}
+                          .panel-body
+                            / timeline 1
+                            .row.onboarding-checklist
+                              .col-md-12
+                                %ul.timeline2
+                                  %li.step{'ng-repeat': 'task in tasks' }
+                                    %i.fa.fa-cog.icon-item
+                                    .text-heading.line.mb-xxl
+                                      %h3.regsubt.pb-sm {{task.title}}
+                                    %p {{task.description}}
+                                    .panel.panel-default{:style => "visibility: visible; opacity: 1; display: block; transform: translateY(0px);"}
+                                      .panel-body.item-card
+                                        .row
+                                          .col-xs-12.col-sm-1.col-md-1.text-center
+                                            %a{'ng-click': 'taskCompleted(procedure, task)'}
+                                              %i.fa{id: 'task_{{task.id}}', 'ng-class': "{'fa-check-circle': task.completed, 'fa-circle-o': !task.completed}"}
+                                          .col-xs-12.col-sm-11.col-md-11
+                                            %h4.onboarding-checklist-title {{task.task}}

@@ -1,0 +1,19 @@
+%ul.list-unstyled
+  %li
+    .messageContainer.triangle
+      .circle-div
+        %a#minimizeToggle x
+      %a#logosocial{ 'href': 'https://clickx.io?utm_source=http://www.clickx.io&utm_campaign=contact&utm_medium=offerwidget', 'target': '_blank' }
+        .logoImage
+        %a#profileName {{ new_template.brand_name || 'Brand Name' }}
+      %span#message
+        %span.text-left#messageText{ 'ng-style': 'new_template.style.content' }
+          {{ new_template.content || 'Content' }}
+      .buttonCTA{ 'ng-style': 'new_template.style.button' }
+        %a{ 'ng-style': "{'color': new_template.style.button.color,
+          'font-weight': 'bolder'}" } {{ new_template.button_text || 'Button Text' }}
+  %li
+    .form-group.text-center
+      %label{ 'style': 'display:table;margin:auto;cursor:pointer;' }
+        %img.img-responisve{ 'alt': 'profile img', 'ng-src': '{{ new_template.logo_url }}',
+        'style': 'width:100px;height:100px;display:table;margin:auto;cursor:pointer;border-radius:50%;' }

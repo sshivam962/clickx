@@ -1,0 +1,27 @@
+%span{id: dom_id(client)}
+  .clients-list
+    .clients-list__item.d-flex.flex-wrap
+      .col-stretch.clients-list__datas.pr-4.pt-3
+        .d-flex
+          .col-md-4.pl-0
+            - if client.logo.present?
+              %img.mr-md{alt: 'logo', src: client.logo, width: '50'}
+            %span.name.blue
+              = client.name
+          .col-md-3
+            %span.name.name2
+              = client.agency&.name
+          .col-md-1.p-n
+            - client.label_list.each do |label|
+              %span.small
+                %span.label.label-default= label
+          .col-md-2
+            %span.small
+              = days_since client.last_logged_in
+      .col-auto.clients-list__actions.align-items-center
+        .btn-icon-list
+          = link_to unarchive_super_admin_client_path(client.id), class: 'btn-icon', remote: true, method: :patch, data: { confirm: "Are you sure you'd like to Unarchive #{client.name}?", title: 'Unarchive'} do
+            %i.glyphicon.glyphicon-folder-close
+          - if current_user.super_admin?
+            = link_to force_delete_super_admin_client_path(client.id), class: 'btn-icon btn-icon--delete', remote: true, method: :delete, data: { confirm: "Are you sure you'd like to permanently delete #{client.name}?"} do
+              %i.fa.fa-trash

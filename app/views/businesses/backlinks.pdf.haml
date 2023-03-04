@@ -1,0 +1,33 @@
+%html
+  %head
+    %h1 Backlinks
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+  %body
+    %table-responsive
+      %table.table.table-bordered.table-vam.table-left
+        %thead
+          %th REFERRING PAGE
+          %th TF
+          %th CF
+          %th Link Type
+          %th FIRST SEEN-LAST CHECKED
+          %th ANCHOR TEXT 
+        %tbody
+          - @backlinks.each do |backlinks|
+            %tr
+              %td
+                = backlinks.referring_page
+              %td
+                = backlinks.trust_flow
+              %td
+                = backlinks.citation_flow
+              %td
+                = backlinks.link_type
+              %td
+                = backlinks.first_indexed_date
+                &nbsp;
+                = backlinks.last_seen_date
+              %td
+                =backlinks.anchor_text
+            
+

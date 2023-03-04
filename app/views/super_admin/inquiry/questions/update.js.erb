@@ -1,0 +1,7 @@
+<% if @question.errors.present? %>
+  toastr.error("<%= @question.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success("Question Updated");
+  $('#edit-question-modal').modal('hide')
+  $("#inquiry_question_<%= @question.id%> .title").html("<%=@question.question%>")
+<% end %>

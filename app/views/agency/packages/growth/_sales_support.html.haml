@@ -1,0 +1,138 @@
+- content_for :title do
+  Sales Enablement | Clickx
+- plan = package.plans.first
+.ui-2020.package-page
+  .page-content.page-plan
+    .page-heading.pt-md.pb-md
+      .row.align-items-center
+        .col-sm-12
+          %h1
+            %i.clickx-icon-Attract
+            Sales Enablement
+    .container-fluid
+      .table-responsive.table-plan.text-center.plan-preloader
+        %table.table.table-hover.mb-n
+          %thead
+            %tr
+              %th.col-label{"vertical-align" => "top"}
+                .pt-col-content
+                  %h2.pt-header-caption.pt-header-caption--title.text-left
+              %th.col-package.col-package--mw
+                .pt-col-content
+                  .pt-header-caption Starter
+                  .pt-header-price
+                    $999
+                    %span /mo
+          %tbody
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Required Growth Plan
+              %td
+                .pt-col-content
+                  %span.pl-label Required Growth Plan
+                  %span.pl-val
+                    Pro or Advanced Plan
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Number of Calls (per Month)
+                    .custom-tooltip.pull-right.pl-sm
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext 10 calls for Pro Plans and 20 calls for Advanced Plans.
+              %td
+                .pt-col-content
+                  %span.pl-label
+                    Number of Calls (per Month)
+                    .custom-tooltip
+                      %i.fa.fa-info-circle
+                      %span.custom-tooltiptext 10 calls for Pro Plans and 20 calls for Advanced Plans.
+                  %span.pl-val
+                    based on Custom Strategies Provided
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Dedicated Sales Support
+              %td
+                .pt-col-content
+                  %span.pl-label Dedicated Sales Support
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Sales Call Support
+                    %small (Proposal Meetings)
+              %td
+                .pt-col-content
+                  %span.pl-label Sales Call Support
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+                  .pt-col-content--exdata
+                    %small (Proposal Meetings)
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Custom Proposal Template Design
+              %td
+                .pt-col-content
+                  %span.pl-label Custom Proposal Template Design
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Facebook Ads Proposal Template
+              %td
+                .pt-col-content
+                  %span.pl-label Facebook Ads Proposal Template
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Google Ads Proposal Template
+              %td
+                .pt-col-content
+                  %span.pl-label Google Ads Proposal Template
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span SEO/Local SEO Proposal Template
+              %td
+                .pt-col-content
+                  %span.pl-label SEO/Local SEO Proposal Template
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Sales Training Calls
+              %td
+                .pt-col-content
+                  %span.pl-label Sales Training Calls
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            - unless @is_preview
+              %tr
+                %td.col-label.text-left
+                  .pt-col-content
+                    %span
+                %td.text-center
+                  .pt-col-content
+                    .pb-2.text-center.col-stretch
+                      %a.badge.mb-sm{data: {target:"#feedbackModal", toggle:"modal"}} Join the Waitlist
+                    / %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: package.key, plan: plan.key)}
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: '#', disabled: true}
+                      Get Started
+      .spacer15
+:javascript
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.plan-preloader').removeClass('plan-preloader');
+    }, 500);
+  });

@@ -1,0 +1,67 @@
+- content_for :title do
+  Metrics | Clickx
+- content_for :gon_data do
+  = Gon::Base.render_data
+.header.uiv2
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1
+      Metrics
+    .options
+      %a.btn.btn-white.btn-raised.pull-right{href: '/s/locations/map'}
+        Locations Map
+  .clearfix
+  .col-md-12
+    #client_traction{:style => "min-width: 310px; height: 400px; margin: 0 auto"}
+
+:javascript
+  $(document).ready(function() {
+    Highcharts.chart('client_traction', {
+      title: {
+        text: 'Client Traction'
+      },
+      yAxis: {
+        title: {
+          text: 'Clients'
+        }
+      },
+      xAxis: {
+        categories: gon.traction_data.x_axis
+      },
+      legend: {
+        layout: 'vertical',
+        align: 'center',
+        verticalAlign: 'bottom'
+      },
+
+      plotOptions: {
+        series: {
+          label: {
+            connectorAllowed: false
+          }
+        }
+      },
+
+      series: [{
+        name: 'Clients Count',
+        data: gon.traction_data.y_normal
+      }, {
+        name: 'Free Clients Count',
+        data: gon.traction_data.y_free
+      }],
+
+      responsive: {
+        rules: [{
+          condition: {
+            maxWidth: 500
+          },
+          chartOptions: {
+            legend: {
+              layout: 'horizontal',
+              align: 'center',
+              verticalAlign: 'bottom'
+            }
+          }
+        }]
+      }
+    });
+  });

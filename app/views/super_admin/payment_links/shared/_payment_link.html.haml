@@ -1,0 +1,46 @@
+%td.col-client
+  %span.client-name-editable
+    %span.client-name__name
+      = payment_link.name
+      %br
+      = payment_link.email
+%td.col-client
+  %span.client-name-editable
+    %span.client-name__name
+      = plan.description_line_1
+      %br
+      = plan.description_line_2
+%td.col-data
+  %span.email
+    - if plan.subscription?
+      = "#{number_to_currency(plan.amount, precision: 2)}/mo"
+    - else
+      = number_to_currency(plan.amount, precision: 2)
+%td.col-data
+  %span
+    - if plan.implementation_fee&.positive?
+      = number_to_currency(plan.implementation_fee, precision: 2)
+%td.col-btns.text-xl-right
+  - unless payment_link.paid?
+    %a.copy_to_clipboard.btn.btn-default.action-btn.action-btn--light{ href: start_service_admin_payment_link_public_link(payment_link), target: '_blank' }
+      %span.btn-icon
+        %i.fa.fa-clipboard
+    %a.btn.btn-default.action-btn.action-btn--light{ href: edit_super_admin_payment_link_path(payment_link) }
+      %span.btn-icon
+        %i.fa.fa-edit
+    %a.btn.btn-default.action-btn.action-btn--light{ href: clone_super_admin_payment_link_path(payment_link) }
+      %span.btn-icon
+        %i.fa.fa-copy
+    - if payment_link.disabled?
+      = link_to disabled_super_admin_payment_link_path(payment_link), method: :patch, remote: true, data: { toggle: 'tooltip', 'original-title' => 'Enable Payment Link'}, class: 'btn btn-default action-btn--light' do
+        Enable
+    - else
+      = link_to disabled_super_admin_payment_link_path(payment_link), method: :patch, remote: true, data: { toggle: 'tooltip', 'original-title' => 'Disable Payment Link'}, class: 'btn btn-default action-btn--light' do
+        Disable
+    = link_to super_admin_payment_link_path(payment_link), method: :delete, remote: true, data: { confirm: 'Are you sure?', toggle: 'tooltip', 'original-title' => 'Archive'}, class: 'btn btn-default action-btn' do
+      %span.btn-icon
+        %i.fa.fa-archive
+  - else
+    %span.pr-sm
+      %span.label.label-success.pl-md.pr-md
+        Paid

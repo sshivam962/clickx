@@ -1,0 +1,8 @@
+- if raw(@agency.calendly_script).present?
+  .panel.panel-grader#schedule-call-modal
+    .panel-heading
+      %h2.text-darkblue Schedule a Call
+    .panel-body.bg-white
+      .panel-section
+        .row
+          = raw(@agency.calendly_script)

@@ -1,0 +1,40 @@
+- content_for :title do
+  Location Management - #{@client.name}
+.page-content
+  .page-heading.mb-n.pb-md
+    %h1 Location Management - #{@client.name}
+  .clickx-breadcrumb-wrapper
+    %ol.breadcrumb.clx-breadcrumb
+      %li
+        %a{href: '/clients'} Clients
+      %li
+        %a{href: edit_agency_client_path(@client.id)}= @client.name
+      %li
+        Location Management
+.container-fluid.mt-md.pt-xs
+  .row
+    .col-md-12
+      .panel
+        .panel-body
+          .table-responsive
+            %table.table.table-striped.table-bordered.table-vam
+              %thead{"style":"font-size:15px;"}
+                %th Location
+                %th Yext Store ID
+                %th Actions
+              %tbody{"style":"font-size:15px;"}
+                - if @locations.present?
+                  - @locations.each do |location|
+                    = form_for location, url: agency_client_location_path(@client.id, location.id), method: :patch, remote: true do |f|
+                      %tr.text-center
+                        %td.text-left{"style":"border-left : 0px !important;"}
+                          %b.btn-pointer
+                            = location.name
+                        %td.text-left{"style":"border-left : 0px !important; width: 30%"}
+                          .form-group.m-n
+                            = f.text_field :yext_store_id, class: 'form-control'
+                        %td.text-left{"style":"border-left : 0px !important;"}
+                          %button.btn.btn-sm.btn-warning.btn-raised Save
+                - else
+                  %tr.text-center
+                    %td{colspan: 9} No Data Available

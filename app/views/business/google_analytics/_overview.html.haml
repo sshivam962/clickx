@@ -1,0 +1,39 @@
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        %h2 Traffic Summary
+        .panel-ctrls
+          %button.btn.button-icon.pull-left.mt-sm.refresh-panel{'title': 'Refresh report'}
+            %span.material-icons.inverted refresh
+      .panel-body
+        %table.table.table-hover.m-n
+          %tbody
+            %tr
+              %td Sessions
+              %td{align: "right"} #{data[:totals]["sessions"]}
+            %tr
+              %td Users (Visitors)
+              %td{align: "right"} #{data[:totals]["totalUsers"]}
+            %tr
+              %td Pageviews
+              %td{align: "right"} #{data[:totals]["screenPageViews"]}
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        %h2 Traffic Summary
+        .panel-ctrls
+          %button.btn.button-icon.pull-left.mt-sm.refresh-panel{'title': 'Refresh report'}
+            %span.material-icons.inverted refresh
+      .panel-body
+        .centered
+          #analytics_pie_chart
+
+:javascript
+  $(function() {
+    var visit_stats = JSON.parse('#{raw(data[:visit_stats].to_json)}');
+    var pie_chart_data = GoogleAnalytics.generic_pie_chart_data(
+      visit_stats
+    );
+    $('#analytics_pie_chart').highcharts(pie_chart_data);
+  });

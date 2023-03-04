@@ -1,0 +1,1 @@
+$("#facebook_clients_<%= params[:agency_id]%>").html("<%= escape_javascript render( partial: 'super_admin/reports/shared/facebook_clients', locals: { clients: @clients}) %>");

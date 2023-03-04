@@ -1,0 +1,358 @@
+/**
+* @author Jerry
+**/
+
+@import 'device';
+@import 'mixins';
+@import 'variables';
+@import 'button';
+@import 'componets';
+
+@for $i from 0 through 10 {
+  $mv: $i * 5;
+  .m-t-#{$mv} {
+    margin-top: #{$mv}px;
+  }
+  .m-b-#{$mv} {
+    margin-bottom: #{$mv}px;
+  }
+  .p-#{$mv} {
+    padding: #{$mv}px;
+  }
+  .p-t-#{$mv} {
+    padding-top: #{$mv}px;
+  }
+  .p-b-#{$mv} {
+    padding-bottom: #{$mv}px;
+  }
+  .p-l-#{$mv} {
+    padding-left: #{$mv}px;
+  }
+  .p-r-#{$mv} {
+    padding-right: #{$mv}px;
+  }
+}
+@for $j from 0 through 5 {
+  $mh: $j * 2;
+  .m-l-#{$mh} {
+    margin-left: #{$mh}px;
+  }
+  .m-r-#{$mh} {
+    margin-right: #{$mh}px;
+  }
+}
+
+/**
+* @date 10/5/2016
+* @fix Inline radio element for md-radio-button with inline class elements
+**/
+.inline-elements {
+  display: block;
+}
+.inline-block {
+  display: inline-block;
+}
+
+/* TEXT COLORS **/
+$TEXT_COLORS: (
+  'darkstone-blue': $DARKSTONE_BLUE,
+  'merigold': $MERIGOLD,
+  'light-haze': $LIGHT_HAZE,
+  'accent-red': $ACCENT_RED,
+  'accent-blue': $ACCENT_BLUE,
+  'accent-green': $ACCENT_GREEN,
+  'white': $WHITE_COLOR
+);
+
+.clx-text {
+  @each $name, $color in $TEXT_COLORS {
+    &.text-color-#{$name} {
+      color: $color;
+    }
+  }
+  &.clx-t-size-12 {
+    font-size: 12px;
+  }
+  &.clx-t-size-14 {
+    font-size: 14px;
+  }
+  &.clx-white-text {
+    color: $WHITE_COLOR !important;
+  }
+}
+/** END TEXT COLORS **/
+
+/** PANEL COLORS **/
+.panel {
+  &.clx-panel {
+    @each $name, $color in $TEXT_COLORS {
+      &.clx-panel-#{$name} {
+        .panel-heading {
+          background: $color;
+          @if ($name== 'light-haze') {
+            color: $BLACK_COLOR;
+          } @else {
+            color: $WHITE_COLOR;
+          }
+        }
+        -webkit-box-shadow: 0 1px 6px 0 rgba($color, 0.12),
+          0 1px 1px 0 rgba($color, 0.12);
+        -moz-box-shadow: 0 1px 6px 0 rgba($color, 0.12),
+          0 1px 1px 0 rgba($color, 0.12);
+        box-shadow: 0 1px 6px 0 rgba($color, 0.12),
+          0 1px 1px 0 rgba($color, 0.12);
+      }
+    }
+  }
+  .panel-title {
+    color: inherit;
+  }
+}
+
+/** END PANEL COLORS **/
+
+.form-group {
+  &.form-group-default {
+    margin: 0 0 10px;
+  }
+}
+
+.show-loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 18% 20px 20px;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 10;
+  h3,
+  h5,
+  p {
+    color: #999;
+    text-align: center;
+    span.fa-spin {
+      font-size: 32px;
+      position: relative;
+      margin-top: 25px;
+    }
+  }
+}
+
+.content-diff-section {
+  .diff {
+    ul {
+      padding: 0;
+      list-style: none;
+      li {
+        padding: 4px 4px 4px 16px;
+        background: $LIGHT_HAZE;
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+        &.unchanged {
+          &:first-child {
+            border-top: 1px solid #ccc;
+          }
+          &:last-child {
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 5px;
+          }
+        }
+        // This can be in one section with above
+        &.del,
+        &.ins {
+          &:first-child {
+            border-top: 1px solid #ccc;
+          }
+          &:last-child {
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 5px;
+          }
+        }
+        &.del {
+          background-color: lighten($ACCENT_RED, 40%);
+        }
+        &.ins {
+          background-color: lighten($ACCENT_GREEN, 40%);
+        }
+      }
+    }
+  }
+}
+.left-date-info {
+  display: inline-block;
+  font-size: 14px;
+  vertical-align: middle;
+  span.ng-binding {
+    font-style: italic;
+    color: #777;
+  }
+}
+
+.clx-tooltip-wrapper {
+  &.md-button.md-icon-button {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    width: auto;
+    min-height: 1px;
+  }
+}
+md-tooltip {
+  &.clx-tooltip {
+    z-index: 1800;
+    .md-content {
+      max-width: 360px;
+      white-space: normal;
+      display: inline-block;
+      overflow: visible;
+      word-break: break-all;
+      text-overflow: initial;
+      height: auto;
+      padding: 5px;
+      font-size: 14px;
+      background: rgba(0, 0, 0, 0.8);
+    }
+  }
+}
+
+.url-builder {
+  .c-text {
+    width: calc(100% - 55px);
+    padding-right: 5px;
+    word-break: break-all;
+    font-size: 14px;
+  }
+  a {
+    display: inline-block;
+    float: left;
+  }
+}
+
+.material-icons {
+  &.f-14 {
+    font-size: 14px;
+  }
+}
+.loc-form-group {
+  a.btn {
+    font-size: 12px;
+  }
+  .btn-group {
+    .btn {
+      margin-bottom: 10px;
+    }
+  }
+}
+.review-fright {
+  .rater-inline {
+    right: 0;
+  }
+}
+.lead-m-add {
+  input {
+    margin-top: 18px;
+  }
+  .form-group {
+    input {
+      margin-top: -10px;
+    }
+  }
+}
+
+.keyword-add-modal {
+  .md-dialog-content {
+    padding-bottom: 10px;
+  }
+  .add-keyword-action {
+    .btn {
+      margin-top: 0 !important;
+    }
+  }
+}
+
+.keyword-enter-form {
+  md-input-container {
+    margin-bottom: 5px;
+    .form-control {
+      margin-bottom: 0;
+    }
+    .md-errors-spacer {
+      position: absolute;
+      right: 34px;
+      top: 3px;
+    }
+  }
+}
+.keyword-add-modal {
+  .suggestion-keywords {
+    padding-right: 12px;
+  }
+}
+
+.panel {
+  &.panel-inbox {
+    &.panel-reset {
+      padding: 16px !important;
+    }
+  }
+}
+
+.vertical-middle {
+  vertical-align: middle;
+}
+
+.panel-accordion-full {
+  display: block;
+  width: 100%;
+}
+
+.img-p-component {
+  .img-pd-file {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+
+    a {
+      font-size: 64px;
+      text-decoration: none;
+      position: relative;
+      top: 50%;
+      display: block;
+      margin-top: -32px;
+      line-height: 0;
+    }
+    &:hover {
+      @include c-transition(all, 0.3, linear, 0.03s);
+      background: #f3f3f3;
+    }
+  }
+  .img-p-pdf-file {
+    a {
+      color: #9e2404;
+    }
+  }
+  .img-p-doc-file {
+    a {
+      color: #2b3280;
+    }
+  }
+}
+
+.alert.alert-default {
+  &.ad-reset {
+    color: #424242;
+  }
+}
+
+.keyword-add-modal {
+  .md-dialog-content {
+    padding-bottom: 10px;
+  }
+  .add-keyword-action {
+    .btn {
+      margin-top: 0 !important;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+%md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-compressed{ 'aria-label': 'Ads Campaigns' }
+  %form
+    .modal-header
+      %button.close{ 'aria-label': 'Close', 'data-dismiss': 'modal', 'type': 'button',
+      'ng-click': 'close()' }
+        %span.fa.fa-times-circle-o{ 'aria-hidden': 'true' }
+      %h4.modal-title
+        Ads Campaigns
+    %md-dialog-content
+      .md-dialog-content
+        %md-input-container.width100{ 'ng-if': 'accounts.length' }
+          %label Select Client for Ads {{ ( current_service == 'adword' ? 'search' : current_service ) | humanize }}
+          %md-select{ 'ng-model': 'selectedAccount', 'ng-change': 'updateClient(selectedAccount)' }
+            %md-option{ 'ng-repeat': 'account in accounts', 'ng-value': 'account' }
+              {{account.name}}
+        %br
+        %h4.text-grey.text-center{ 'ng-if': '!accounts.length' }
+          You haven't connected any ad account.
+          %br
+          %br
+          %a{ 'ng-href': '/b/google_ads/connect' } Connect account
+    %md-dialog-actions{layout:'row' }
+      %a.btn.btn-raised.mt-md.mb-md.btn-default{ 'ng-href': '/b/google_ads/connect' } Connect Account
+      %button.btn.btn-raised.mt-md.mb-md.btn-primary{ 'type': 'submit', 'ng-click': 'selectAccount(selectedAccount)' } Save

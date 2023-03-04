@@ -1,0 +1,609 @@
+{
+  "status": 200,
+  "data": {
+    "chart_data": {
+      "total_stats": {
+        "ga:percentNewSessions": 63.51,
+        "ga:sessions": 10864.0,
+        "ga:users": 9643.0,
+        "ga:bounceRate": 41.03,
+        "ga:avgSessionDuration": 219.06,
+        "ga:pageviewsPerSession": 3.59
+      },
+      "chart_rows": {
+        "20180328": [66.94, 490.0, 435.0, 38.57, 218.19, 3.71],
+        "20180329": [61.94, 465.0, 416.0, 37.2, 192.09, 3.39],
+        "20180330": [58.04, 286.0, 250.0, 38.81, 225.83, 3.74],
+        "20180331": [81.48, 54.0, 51.0, 66.67, 125.11, 3.09],
+        "20180401": [77.78, 54.0, 53.0, 50.0, 325.13, 4.0],
+        "20180402": [62.59, 425.0, 371.0, 43.76, 231.54, 3.6],
+        "20180403": [62.92, 472.0, 419.0, 36.23, 217.65, 3.51],
+        "20180404": [64.03, 481.0, 434.0, 41.37, 256.32, 3.93],
+        "20180405": [66.93, 511.0, 460.0, 39.92, 236.62, 3.9],
+        "20180406": [64.86, 424.0, 366.0, 38.44, 237.51, 3.73],
+        "20180407": [74.63, 67.0, 63.0, 52.24, 187.82, 4.21],
+        "20180408": [72.6, 73.0, 69.0, 42.47, 180.47, 4.19],
+        "20180409": [60.33, 547.0, 476.0, 39.67, 237.93, 3.47],
+        "20180410": [64.08, 529.0, 463.0, 37.81, 237.45, 3.98],
+        "20180411": [64.93, 499.0, 438.0, 39.88, 227.58, 3.65],
+        "20180412": [64.68, 470.0, 415.0, 39.57, 199.88, 3.5],
+        "20180413": [60.28, 428.0, 370.0, 42.76, 205.82, 3.92],
+        "20180414": [66.15, 65.0, 62.0, 41.54, 173.2, 2.82],
+        "20180415": [71.01, 69.0, 59.0, 47.83, 138.97, 2.81],
+        "20180416": [63.67, 479.0, 440.0, 46.76, 195.52, 3.13],
+        "20180417": [59.72, 494.0, 434.0, 40.49, 272.76, 3.83],
+        "20180418": [62.9, 496.0, 446.0, 42.54, 246.13, 3.55],
+        "20180419": [60.91, 504.0, 448.0, 42.66, 200.83, 3.38],
+        "20180420": [62.63, 372.0, 336.0, 41.94, 215.08, 3.63],
+        "20180421": [77.33, 75.0, 71.0, 60.0, 218.07, 3.49],
+        "20180422": [67.24, 58.0, 56.0, 58.62, 51.83, 2.24],
+        "20180423": [62.78, 489.0, 434.0, 39.47, 173.52, 3.1],
+        "20180424": [64.17, 494.0, 441.0, 38.87, 201.68, 3.59],
+        "20180425": [64.78, 494.0, 436.0, 42.11, 207.33, 3.63],
+        "20180426": [60.77, 492.0, 425.0, 41.87, 227.4, 3.45],
+        "20180427": [25.0, 8.0, 6.0, 50.0, 105.0, 4.25]
+      }
+    },
+    "keywords_stats": [
+      {
+        "keyword": "none",
+        "visits": "10727",
+        "new_visits": 63.35,
+        "bounce": 8063.0,
+        "avg_session": "00:40",
+        "page_per_session": 220.52
+      },
+      {
+        "keyword": "gamora",
+        "visits": "25",
+        "new_visits": 96.0,
+        "bounce": 24.0,
+        "avg_session": "01:16",
+        "page_per_session": 7.68
+      },
+      {
+        "keyword": "star lord",
+        "visits": "16",
+        "new_visits": 93.75,
+        "bounce": 15.0,
+        "avg_session": "00:18",
+        "page_per_session": 214.69
+      },
+      {
+        "keyword": "amazing",
+        "visits": "13",
+        "new_visits": 100.0,
+        "bounce": 13.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "https://www.done.com/dusted",
+        "visits": "6",
+        "new_visits": 33.33,
+        "bounce": 3.0,
+        "avg_session": "01:06",
+        "page_per_session": 262.0
+      },
+      {
+        "keyword": "joker",
+        "visits": "3",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 127.67
+      },
+      {
+        "keyword": "techie",
+        "visits": "3",
+        "new_visits": 33.33,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "singularity",
+        "visits": "3",
+        "new_visits": 66.67,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 138.0
+      },
+      {
+        "keyword": "nirvana",
+        "visits": "2",
+        "new_visits": 50.0,
+        "bounce": 1.0,
+        "avg_session": "00:50",
+        "page_per_session": 144.0
+      },
+      {
+        "keyword": "https://www.gooner.com/wenger/ctg-1/",
+        "visits": "2",
+        "new_visits": 50.0,
+        "bounce": 1.0,
+        "avg_session": "00:50",
+        "page_per_session": 1122.5
+      },
+      {
+        "keyword": "https://www.bukalapak.com/products/kingsman/",
+        "visits": "2",
+        "new_visits": 100.0,
+        "bounce": 2.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "https://www.iamgroot.com/products/padip/",
+        "visits": "2",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "stark industries",
+        "visits": "2",
+        "new_visits": 100.0,
+        "bounce": 2.0,
+        "avg_session": "00:50",
+        "page_per_session": 190.5
+      },
+      {
+        "keyword": "lord of thunder",
+        "visits": "2",
+        "new_visits": 50.0,
+        "bounce": 1.0,
+        "avg_session": "00:50",
+        "page_per_session": 89.5
+      },
+      {
+        "keyword": "why kings",
+        "visits": "2",
+        "new_visits": 50.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "constantine",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 236.0
+      },
+      {
+        "keyword": "supes",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "diana prince",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "stormbreaker",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "cgi",
+        "visits": "1",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "rocket",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "drax",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 73.0
+      },
+      {
+        "keyword": "t-rex",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "ewp",
+        "visits": "1",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "phew",
+        "visits": "1",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "elects",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "fox",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 503.0
+      },
+      {
+        "keyword": "hact/",
+        "visits": "1",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 59.0
+      },
+      {
+        "keyword": "600-30-ip/",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "https://www.viks/e-1600a-ewp/",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 967.0
+      },
+      {
+        "keyword": "ing",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 676.0
+      },
+      {
+        "keyword": "ivp",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "pig",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "kova",
+        "visits": "1",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 57.0
+      },
+      {
+        "keyword": "relay",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "sadd1e",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "ser00",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "teltry",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "two bgm",
+        "visits": "1",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 50.0
+      },
+      {
+        "keyword": "vidp",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "vitrol",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 204.0
+      },
+      {
+        "keyword": "vsystems",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 81.0
+      },
+      {
+        "keyword": "e",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "oducts",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 79.0
+      },
+      {
+        "keyword": "ith relay",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "phone",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 488.0
+      },
+      {
+        "keyword": "ss",
+        "visits": "1",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 43.0
+      },
+      {
+        "keyword": "hulk",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 30.0
+      },
+      {
+        "keyword": "vikid",
+        "visits": "1",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "fgggghdhad",
+        "visits": "1",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 5.0
+      },
+      {
+        "keyword": "bulk",
+        "visits": "1",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "vi wrench",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "vi0",
+        "visits": "1",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 11.0
+      },
+      {
+        "keyword": "tronic",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "sheet",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 7.0
+      },
+      {
+        "keyword": "steel weather",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 435.0
+      },
+      {
+        "keyword": "vs",
+        "visits": "1",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 569.0
+      },
+      {
+        "keyword": "gency phone",
+        "visits": "1",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 78.0
+      },
+      {
+        "keyword": "nstall",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "nual",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 15.0
+      },
+      {
+        "keyword": "anual",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 94.0
+      },
+      {
+        "keyword": "f",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 106.0
+      },
+      {
+        "keyword": "viking clap",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 85.0
+      },
+      {
+        "keyword": "va",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "tor",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "are",
+        "visits": "1",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      },
+      {
+        "keyword": "ware",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 244.0
+      },
+      {
+        "keyword": "ics e16",
+        "visits": "1",
+        "new_visits": 100.0,
+        "bounce": 1.0,
+        "avg_session": "00:00",
+        "page_per_session": 10.0
+      },
+      {
+        "keyword": "8",
+        "visits": "1",
+        "new_visits": 0.0,
+        "bounce": 1.0,
+        "avg_session": "01:40",
+        "page_per_session": 0.0
+      }
+    ],
+    "keyword_totals": {
+      "visits": "10864",
+      "new_visits": "63.512518409425624",
+      "avg_session": "219.0559646539028",
+      "bounce": "41.03460972017673",
+      "page_views": "3.592415316642121"
+    }
+  }
+}

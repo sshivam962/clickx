@@ -1,0 +1,63 @@
+<% if @error.present? || @google_data.blank? %>
+  console.log("<%= @error %>")
+  console.log("<%= @google_data %>")
+  $('#google_analytics_section').html("<%= escape_javascript render( partial: 'business/dashboard/error/google_analytics', locals: {}) %>");
+<% else %>
+  $('#google_analytics_section').html("<%= escape_javascript render( partial: 'business/dashboard/shared/google_analytics', locals: {}) %>");
+
+  Highcharts.chart('chart_google_analytics', {
+    chart: {
+      type: 'areaspline',
+      height: 250
+    },
+    colors: ['#777', '#60BBEA'],
+    title: false,
+    xAxis: [
+      {
+        categories: gon.google_analytics_graph_data.keys,
+        lineColor: '#ffaa80',
+        lineWidth: 3,
+        tickColor: '#ffaa80',
+        tickWidth: 3
+      }
+    ],
+    yAxis: {
+      title: {
+        text: 'Visits'
+      }
+    },
+    tooltip: {
+      formatter: function() {
+        return (
+          this.x +
+          ' ' +
+          '<br>' +
+          this.series.name +
+          ': ' +
+          '<strong>' +
+          this.y +
+          '</strong>'
+        );
+      }
+    },
+    credits: {
+      enabled: false
+    },
+    plotOptions: {
+      areaspline: {
+        fillOpacity: 0.5,
+        marker: {
+          enabled: false
+        }
+      }
+    },
+    series: [
+      {
+        name: 'Current Period',
+        data: gon.google_analytics_graph_data.visits,
+        color: '#ffccb3',
+        lineColor: '#ffaa80'
+      }
+    ],
+  });
+<% end %>

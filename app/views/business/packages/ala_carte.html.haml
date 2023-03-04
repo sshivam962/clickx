@@ -1,0 +1,138 @@
+- content_for :title do
+  À La Carte
+.page-heading
+  %h1 À La Carte
+.container-fluid
+  - plans = @package.plans.group_by(&:key)
+  %div{"data-widget-group" => "group1"}
+    .row
+      .col-md-4.col-sm-6
+        .panel.panel-default.p-lg
+          - plan = plans['seo_audit_lite'].first
+          .panel-head
+            %i.clickx-icon-seo.ico-60.pr-sm.text-info
+            %h2.pt-header-caption.text-info SEO Audit - Lite
+            .pt-header-price
+              = number_to_currency(plan.amount, precision: 0)
+          .panel-body.p-n
+            %hr
+              %ul.package-list
+                %li Actionable Strategy in Google Slides
+                %li Full Site Analysis
+                %li On-Site Evaluation
+                %li Off-Site Evaluation
+                %li Technical SEO Audit
+                %li Maximum Pages < 250
+              %a.btn.btn-info.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'ala_carte', plan: plan.key)}
+                Get Started
+                %i.pl-sm.fa.fa-angle-double-right
+                .ripple-container
+      .col-md-4.col-sm-6
+        .panel.panel-default.p-lg
+          - plan = plans['google_ads_audit'].first
+          .panel-head
+            %i.clickx-icon-adwords.ico-60.pr-sm.text-info
+            %h2.pt-header-caption.text-info Google Ads Audit
+            .pt-header-price
+              = number_to_currency(plan.amount, precision: 0)
+          .panel-body.p-n
+            %hr
+              %ul.package-list
+                %li Actionable Strategy
+                %li Campaigns Audit
+                %li Audience/Targeting Audit
+                %li Keyword & Ad Groups Audit
+                %li Settings Audit (Location/Device)
+                %li Ad Spend < $10,000/mo
+              %a.btn.btn-info.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'ala_carte', plan: plan.key)}
+                Get Started
+                %i.pl-sm.fa.fa-angle-double-right
+                .ripple-container
+      .col-md-4.col-sm-6
+        .panel.panel-default.p-lg
+          - plan = plans['facebook_ads_audit'].first
+          .panel-head
+            %i.clickx-icon-facebook.ico-60.pr-sm.text-info
+            %h2.pt-header-caption.text-info Facebook Ads Audit
+            .pt-header-price
+              = number_to_currency(plan.amount, precision: 0)
+          .panel-body.p-n
+            %hr
+              %ul.package-list
+                %li Actionable Strategy
+                %li Full Account Analysis
+                %li Campaign & Ads Evaluation
+                %li Conversion Evaluation
+                %li Landing Page Audit
+                %li Ad Spend < $10,000/mo
+              %a.btn.btn-info.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'ala_carte', plan: plan.key)}
+                Get Started
+                %i.pl-sm.fa.fa-angle-double-right
+                .ripple-container
+    .row
+      .col-md-4.col-sm-6
+        .panel.panel-default.p-lg
+          - plan = plans['ppc_landing_page'].first
+          .panel-head
+            %i.clickx-icon-LandingPage2.ico-60.ml-sm.n.pr-sm.text-info
+            %h2.pt-header-caption.text-info Template Landing Page
+            .pt-header-price
+              = number_to_currency(plan.amount, precision: 0)
+          .panel-body.p-n
+            %hr
+              %ul.package-list
+                %li Unbounce Platform
+                %li Design Customization
+                %li Mobile Optimized
+                %li Content Provided by Client
+                %li Custom Lead Form
+                %li Lead Notification Setup
+                %li 1 Round of Revisions
+                %a.btn.btn-info.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'ala_carte', plan: plan.key)}
+                  Get Started
+                  %i.pl-sm.fa.fa-angle-double-right
+                  .ripple-container
+      .col-md-4.col-sm-6
+        .panel.panel-default.p-lg
+          - plan = plans['custom_landing_page'].first
+          .panel-head
+            %i.clickx-icon-LandingPage2.ico-60.ml-sm.n.pr-sm.text-info
+            %h2.pt-header-caption.text-info Custom Landing Page
+            .pt-header-price
+              = number_to_currency(plan.amount, precision: 0)
+          .panel-body.p-n
+            %hr
+              %ul.package-list
+                %li Custom Design
+                %li Custom Development
+                %li Mobile Optimized
+                %li Content Provided by Client
+                %li Custom Lead Form
+                %li Lead Notification Setup
+                %li 1 Round of Revisions
+                %a.btn.btn-info.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'ala_carte', plan: plan.key)}
+                  Get Started
+                  %i.pl-sm.fa.fa-angle-double-right
+                  .ripple-container
+      .col-md-4.col-sm-6
+        .panel.panel-default.p-lg
+          - plan = plans['call_tracking'].first
+          .panel-head
+            %i.clickx-icon-Mobile.ico-60.pr-sm.text-info
+            %h2.pt-header-caption.text-info Call Tracking
+            .pt-header-price
+              = number_to_currency(plan.amount, precision: 0)
+              %span> /mo
+          .panel-body.p-n
+            %hr
+              %ul.package-list
+                %li 1 Local or Toll Free Number
+                %li Caller Name/ID
+                %li Campaign Source
+                %li Call Recording (Optional)
+                %li Keyword Level Tracking (Extra)
+                %li 500 Mins Included
+                %a.btn.btn-info.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'ala_carte', plan: plan.key)}
+                  Get Started
+                  %i.pl-sm.fa.fa-angle-double-right
+                  .ripple-container

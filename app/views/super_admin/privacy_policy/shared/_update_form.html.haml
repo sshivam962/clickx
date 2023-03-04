@@ -1,0 +1,20 @@
+.container-fluid
+  = form_for privacy_policy, url: super_admin_privacy_policy_path, method: :patch do |f|
+    .col-sm-11.pl-n
+      %b Dynamic Variables : &nbsp&nbsp&nbsp
+      - PrivacyPolicy::PLACEHOLDERS.each do |key, value|
+        %a.copy_to_clipboard.si-placeholder.mr-md{href: 'javascrip:void(0)', data: {key: "{{#{key}}}"}}
+          {{#{key}}}
+      = f.cktext_area :content, class: 'form-control lead_strategy_item_text', placeholder: 'Content', ckeditor: { toolbar: 'privacy_policy' }
+    .col-sm-1
+      = f.submit 'Save', class: 'btn btn-warning pull-right pr-lg pl-lg mt-n'
+
+:javascript
+  $('.copy_to_clipboard').on('click', function (e) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).data('key')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Copied to Clipboard");
+  });

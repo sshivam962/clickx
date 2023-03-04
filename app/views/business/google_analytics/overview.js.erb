@@ -1,0 +1,6 @@
+$('.tab-content.summary').html("<%= escape_javascript render(partial: 'business/google_analytics/overview', locals: { data: @data }) %>")
+var visit_stats = JSON.parse('<%= raw(@data[:visit_stats].to_json) %>');
+var pie_chart_data = GoogleAnalytics.generic_pie_chart_data(
+  visit_stats
+);
+$('#analytics_pie_chart').highcharts(pie_chart_data);

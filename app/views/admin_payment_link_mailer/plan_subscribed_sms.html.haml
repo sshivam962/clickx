@@ -1,0 +1,5 @@
+= @payment_link.name
+= "$ : #{number_to_currency(@plan.amount)} (#{@plan.billing_category})"
+- if @plan.pay_with_implementation_fee
+  = "$ : #{number_to_currency(@plan.implementation_fee)} (Implementation Fee)"
+= @payment_link.name

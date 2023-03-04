@@ -1,0 +1,7 @@
+- lead_sources.each do |lead_source|
+  %div{id: "lead_source_content_#{lead_source.id}"}
+    = render 'lead_source', lead_source: lead_source
+#edit_lead_source_modal
+#verify_code_lead_source_modal
+:javascript
+  $('.tooltips').tooltip()

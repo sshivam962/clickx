@@ -1,0 +1,48 @@
+%div{"data-widget-group" => "group1"}
+  .row
+    .col-md-12.full-width
+      .panel.panel-default.no-shadow
+        .panel-body.pb-xxl
+          .col-xs-7.col-sm-7.col-xs-offset-5.col-sm-offset-5.pt-xl.pb-xxl
+            = image_tag 'grader-logo-dark.svg', class: 'img-responsive', width: '200px'
+          .col-sm-4
+            .message.you-message{'ng-if': 'total_score_count == 4'}
+              %div{'ng-if': 'total_avg_score < 20'}
+                You’re off to a great start! Now your job is to build a solid foundation where you can grow your traffic. You want to build out your site in a way you can easily scale your content.
+              %div{'ng-if': 'total_avg_score >= 20 && total_avg_score < 40'}
+                Great job getting your website off the ground. Now you have to focus on keeping the same momentum. Building new content regularly, getting authority links by promoting your website is the next big job.
+              %div{'ng-if': 'total_avg_score >= 40 && total_avg_score < 60'}
+                Great job getting your website off the ground. You’re ready to fly high. Now focus on your core areas you can scale content, authority links and influence.
+              %div{'ng-if': 'total_avg_score >= 60 && total_avg_score < 80'}
+                Great job getting your website flying high! Take a look at previous strategies that were successful and build on that. The goal is to not lose the momentum you’ve built!
+              %div{'ng-if': 'total_avg_score >= 80 && total_avg_score <= 100'}
+                Awesome job. You’re doing really well, now the goal is to make your site be am amazing sales machines. Focus on conversion optimization, speed and usability!
+          .col-sm-4
+            #container
+          .col-sm-4.mt-p-10
+            %h3.mb-n.domain
+              %small> Overall grade for:
+              {{current_business_domain}}
+          .col-xs-12.col-sm-10.col-xs-offset-0.col-sm-offset-1.pt-xl.pb-xxl
+            .row
+              .col-sm-4
+                %h3{'ng-class': "{'text-danger': landing_page_info.score <= 30, 'text-warning': (landing_page_info.score > 30 && landing_page_info.score <= 50), 'text-success': landing_page_info.score > 50 }"}
+                  {{landing_page_info.score}}
+                  %small.inlineb.text-muted /100
+                .progress.mb-sm
+                  .progress-bar{'ng-class': "{'progress-bar-danger': landing_page_info.score <= 30, 'progress-bar-warning': (landing_page_info.score > 30 && landing_page_info.score <= 50), 'progress-bar-success': landing_page_info.score > 50 }", :style => "width: {{landing_page_info.score}}%"}
+                %p On-Page Optimization
+              .col-sm-4
+                %h3{'ng-class': "{'text-danger': backlinks_info.score <= 30, 'text-warning': (backlinks_info.score > 30 && backlinks_info.score <= 50), 'text-success': backlinks_info.score > 50 }"}
+                  {{backlinks_info.score}}
+                  %small.inlineb.text-muted /100
+                .progress.mb-sm
+                  .progress-bar{'ng-class': "{'progress-bar-danger': backlinks_info.score <= 30, 'progress-bar-warning': (backlinks_info.score > 30 && backlinks_info.score <= 50), 'progress-bar-success': backlinks_info.score > 50 }", :style => "width: {{backlinks_info.score}}%"}
+                %p Off-Page Optimization
+              .col-sm-4
+                %h3{'ng-class': "{'text-danger': website_performance_avg_score <= 30, 'text-warning': (website_performance_avg_score > 30 && website_performance_avg_score <= 50), 'text-success': website_performance_avg_score > 50 }"}
+                  {{website_performance_avg_score}}
+                  %small.inlineb.text-muted /100
+                .progress.mb-sm
+                  .progress-bar{'ng-class': "{'progress-bar-danger': website_performance_avg_score <= 30, 'progress-bar-warning': (website_performance_avg_score > 30 && website_performance_avg_score <= 50), 'progress-bar-success': website_performance_avg_score > 50 }", :style => "width: {{website_performance_avg_score}}%"}
+                %p Website Performance

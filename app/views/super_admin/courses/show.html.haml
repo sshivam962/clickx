@@ -1,0 +1,84 @@
+- content_for :title do
+  = "#{@course.title} | Clickx"
+.d-flex.flex-wrap.justify-content-between.align-items-center
+  .col
+    %h1
+      %i.clickx-icon-Design.title-icon
+        = @course.title
+      %small.f-s-xs.mt
+        = "#{@course.chapters.count} Modules"
+  .col
+    .options
+      - if @course.video_category_type == 'start_agency'
+        %a.btn.btn--dark.btn-raised.pull-right{href: super_admin_start_agency_courses_path}
+          Back
+          .ripple-container
+      - else
+        %a.btn.btn--dark.btn-raised.pull-right{href: super_admin_list_courses_path(@course.resource_type)}
+          Back
+          .ripple-container
+      %a.btn.btn--dark.btn-raised.pull-right.mr{href: new_super_admin_course_chapter_path(@course)}
+        Add Module
+        .ripple-container
+      - if @course.enable_challenge
+        %a.btn.btn--dark.btn-raised.pull-right.mr{href:"#{super_admin_course_challenges_path}"}
+          Manage Course Challenge
+          .ripple-container
+%hr.sep
+- if @active_chapter
+  .agency_academy_courses
+    %div{"data-widget-group" => "group1"}
+      .bg-white.rounded.p-3.p-md-5
+        .row.horizontal-align.d-flex.flex-wrap
+          .col-lg-3.col-md-4.col-xs-12
+            - if @course.enable_challenge
+              = render 'challenge_chapter_lists'
+            - else
+              %ul#chapters.list-group.scale-courses-list
+                = render 'chapter_lists'
+
+          .col-lg-9.col-md-8.col-xs-12.chapter_content
+            .chapter_content_inner.pl-lg-4.mb-5
+              = render 'chapter_video', chapter: @active_chapter
+            .action-steps.pt-5.pl-lg-4.mb-5
+              %h2.fw-sb.mb-4.mt-0
+                Action Steps
+              #action_step_form
+                = render 'action_steps_form', chapter: @active_chapter
+              #action_step_list.course-actions-list
+                = render 'action_steps_list', action_steps: @action_steps, chapter: @active_chapter
+:javascript
+  $( ".load_chapter" ).click(function() {
+    chapter_id = $(this).data('chapter');
+    course_id = $(this).data('course');
+    $.ajax({
+      url: "/s/courses/" + course_id + "/load_chapter",
+      type: 'post',
+      data: {chapter_id: chapter_id},
+      dataType: 'json',
+      success:function(response){
+        if(response.status == 200){
+          $('.timeline-orange').removeClass('active')
+          $('#chapter_' + chapter_id).addClass('active')
+          $('.chapter_content').html(response.data.content)
+          $('#action_step_form').html(response.data.action_form)
+          $('#action_step_list').html(response.data.action_list)
+        }
+      }
+    })
+  });
+
+  $("#chapters, .sort-chapter-challenge-list").sortable({
+    items: "li:not(.ui-state-disabled)",
+    cancel: ".ui-state-disabled",
+    update: function(e, ui) {
+      $.ajax({
+        url: ui.item.data('url'),
+        type: 'patch',
+        data: { position: ui.item.index() + 1 },
+        dataType: 'json',
+        success:function(response){}
+      })
+    }
+  });
+

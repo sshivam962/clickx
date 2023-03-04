@@ -1,0 +1,16 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Maintenance.title-icon>
+    Search Console
+    %i.fa.fa-info-circle.tooltip-text-icon{'title': 'This tool lets you analyze the data collected in your Google Search Console right inside Clickx. It lets you easily analyze the keywords you are ranking for, positions, impressions, top pages, crawl errors and also manage sitemaps.', "data-toggle" => "tooltip", "data-placement" => "top"}
+
+.container-fluid
+  %div
+    .row
+      .col-md-12
+        = render 'tab_menu', active_tab: 'sitemaps'
+
+      .col-md-12
+        .tab-content
+          .sitemaps
+            = render 'business/search_console/sitemaps', data: @data

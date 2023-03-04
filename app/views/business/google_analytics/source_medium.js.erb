@@ -1,0 +1,1 @@
+$('.tab-content').html("<%= escape_javascript render(partial: 'business/google_analytics/source_medium', locals: { data: @data[:source_medium], total_sessions: @data[:total_sessions], total_new_users: @data[:total_new_users] }) %>")

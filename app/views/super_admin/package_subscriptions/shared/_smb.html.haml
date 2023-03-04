@@ -1,0 +1,14 @@
+.locations
+  %ul
+    - subscriptions.each do |resource, subscriptions|
+      - next if resource.blank?
+
+      %li.pb-sm
+        %b
+          = business_with_package_name(resource, subscriptions)
+        %ul
+          - subscriptions.each do |subscription|
+            - next if subscription.business_signup?
+
+            %li.pb-sm
+              = business_package_with_amount(subscription)

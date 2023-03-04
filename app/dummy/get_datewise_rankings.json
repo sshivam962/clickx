@@ -1,0 +1,142 @@
+{
+  "row": [
+    {
+      "date": "2016-06",
+      "rankingDistribution": {
+        "googleRanking": [25, 8, 3, 0, 0]
+      }
+    },
+    {
+      "date": "2016-07",
+      "rankingDistribution": {
+        "googleRanking": [30, 3, 1, 3, 0]
+      }
+    },
+    {
+      "date": "2016-08",
+      "rankingDistribution": {
+        "googleRanking": [83, 13, 5, 1, 2]
+      }
+    },
+    {
+      "date": "2016-09",
+      "rankingDistribution": {
+        "googleRanking": [435, 79, 27, 6, 3]
+      }
+    },
+    {
+      "date": "2016-10",
+      "rankingDistribution": {
+        "googleRanking": [456, 112, 34, 26, 13]
+      }
+    },
+    {
+      "date": "2016-11",
+      "rankingDistribution": {
+        "googleRanking": [473, 106, 33, 23, 15]
+      }
+    },
+    {
+      "date": "2016-12",
+      "rankingDistribution": {
+        "googleRanking": [494, 90, 34, 28, 13]
+      }
+    },
+    {
+      "date": "2017-01",
+      "rankingDistribution": {
+        "googleRanking": [532, 82, 33, 27, 14]
+      }
+    },
+    {
+      "date": "2017-02",
+      "rankingDistribution": {
+        "googleRanking": [547, 69, 35, 30, 15]
+      }
+    },
+    {
+      "date": "2017-03",
+      "rankingDistribution": {
+        "googleRanking": [525, 98, 40, 33, 25]
+      }
+    },
+    {
+      "date": "2017-04",
+      "rankingDistribution": {
+        "googleRanking": [528, 105, 34, 33, 24]
+      }
+    },
+    {
+      "date": "2017-05",
+      "rankingDistribution": {
+        "googleRanking": [566, 83, 32, 30, 28]
+      }
+    },
+    {
+      "date": "2017-06",
+      "rankingDistribution": {
+        "googleRanking": [586, 82, 24, 46, 28]
+      }
+    },
+    {
+      "date": "2017-07",
+      "rankingDistribution": {
+        "googleRanking": [586, 80, 22, 54, 27]
+      }
+    },
+    {
+      "date": "2017-08",
+      "rankingDistribution": {
+        "googleRanking": [602, 77, 42, 35, 34]
+      }
+    },
+    {
+      "date": "2017-09",
+      "rankingDistribution": {
+        "googleRanking": [622, 72, 33, 46, 32]
+      }
+    },
+    {
+      "date": "2017-10",
+      "rankingDistribution": {
+        "googleRanking": [606, 80, 51, 47, 29]
+      }
+    },
+    {
+      "date": "2017-11",
+      "rankingDistribution": {
+        "googleRanking": [610, 80, 51, 47, 29]
+      }
+    },
+    {
+      "date": "2017-12",
+      "rankingDistribution": {
+        "googleRanking": [628, 96, 37, 43, 31]
+      }
+    },
+    {
+      "date": "2018-01",
+      "rankingDistribution": {
+        "googleRanking": [661, 84, 42, 45, 23]
+      }
+    },
+    {
+      "date": "2018-02",
+      "rankingDistribution": {
+        "googleRanking": [678, 79, 39, 46, 29]
+      }
+    },
+    {
+      "date": "2018-03",
+      "rankingDistribution": {
+        "googleRanking": [679, 87, 38, 43, 31]
+      }
+    },
+    {
+      "date": "2018-04",
+      "rankingDistribution": {
+        "googleRanking": [704, 70, 40, 37, 27]
+      }
+    }
+  ]
+}

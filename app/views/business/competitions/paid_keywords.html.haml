@@ -1,0 +1,32 @@
+.page-heading.no-margin-bottom.pb-md
+  %h1
+    %i.clickx-icon-Search.title-icon>
+    Paid Keywords
+    %small
+      Domain :
+      %b
+        = @competition.name
+.panel.panel-default.m-md
+  .mt-md.mb-md.mr-n.ml-n
+  .panel-body.pt-n
+    .input-group
+      %span.input-group-addon.pl-n
+        %i.material-icons search
+      .form-group.m-n
+        = text_field_tag :search_keyword, '', class: 'form-control col-sm-5 cus6in pl-xl'
+    .col-sm-12.text-center.p-n
+      #keywords_list
+        = render 'business/competitions/shared/keywords_list'
+
+:javascript
+  $('#search_keyword').on("keyup", function() {
+    var keyword = $('#search_keyword').val().toLowerCase();
+    $.ajax({
+      url: "/b/competitions/" + 367 + "/organic_keywords",
+      type: 'get',
+      data: { keyword: keyword },
+      dataType: 'script',
+      async: false,
+      success:function(response){}
+    })
+  });

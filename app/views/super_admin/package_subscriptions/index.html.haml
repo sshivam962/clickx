@@ -1,0 +1,53 @@
+- page_title = package_subcriptions_page_title(params[:category])
+- content_for :title do
+  #{page_title} | Clickx
+.jsview.uiv2
+  .header
+    %h1
+      = page_title
+  .clearfix
+  - if enable_search_box_with_category params[:category]
+    .content-card.p-0.p-3.my-4
+      .d-flex.justify-content-between.flex-wrap
+        .col-search.m-0
+          .input-wrapper
+            = text_field_tag :search_name, '', class: 'search login select-box form-control mb-0', placeholder: 'Search By Agency Name'
+            .inner-glyph.glyph-align
+              %i.glyphicon.glyphicon-search
+  = hidden_field_tag :category, params[:category]
+  .container-fluid
+    .row
+      .relative
+        .loading-spinner-wrapper
+          .loading-spin
+        #package_subscriptions_list
+          = render "super_admin/package_subscriptions/shared/#{params[:category]}", subscriptions: @package_subscriptions
+#modal_container
+
+:javascript
+  $('.copy_to_clipboard').on('click', function (e) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).attr('href')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Link Copied");
+  });
+
+  $('#search_name').on("keyup", function() {
+    $('.loading-spinner-wrapper').show();
+    var name = $('#search_name').val().toLowerCase();
+    var category = $('#category').val();
+    var sort_direction = $('#sort_direction').val();
+    var sort_column = $('#sort_column').val();
+    $.ajax({
+      url: "/s/"+category+"/package_subscriptions",
+      type: 'get',
+      data: { name: name, category: category,
+        sort_direction: sort_direction, sort_column: sort_column},
+      dataType: 'script',
+      success:function(response){
+        $('.loading-spinner-wrapper').hide();
+      }
+    })
+  });

@@ -1,0 +1,3 @@
+$("#collapse_container_<%= @call_id %>").removeClass('collapse').html("<%= escape_javascript render( partial: '/business/callrail/collapse', locals: { call_start: @call_start, call_inboundno: @call_inboundno, caller_name: @caller_name, call_end: @call_end, call_forwardno: @call_forwardno, caller_number: @caller_number, recording: @recording }) %>");
+$("#expand-<%= @call_id %>").addClass('hidden');
+$("#collapse-<%= @call_id %>").removeClass('hidden');

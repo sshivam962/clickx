@@ -1,0 +1,54 @@
+- content_for :title do
+  Funnel Pages | Clickx
+.uiv2
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    .col-xs-8.col-sm-8.col-lg-8
+      %h1 Funnel Pages
+    .col-xs-2.col-sm-2.col-lg-2
+      %a.btn.btn-warning.pull-right.mt-lg.mb-lg{href:new_super_admin_funnel_page_path, 'data-title' => 'New'}
+        %i.fa.fa-plus
+        New
+    .col-xs-2.col-sm-2.col-lg-2
+      %a.btn.btn-warning.pull-right.mt-lg.mb-lg{href:super_admin_privacy_policy_index_path}
+        Privacy Policy
+  .clearfix
+  .content-card.p-md-5
+    .content-card__header
+      .d-flex.justify-content-between.flex-wrap
+        .col-search
+          .input-wrapper
+            = text_field_tag :search_title, '', class: 'form-control', placeholder: 'Search By Title'
+            .inner-glyph.glyph-align
+              %i.glyphicon.glyphicon-search
+
+    .funnel_pages_list
+      = render 'super_admin/funnel_pages/shared/list', funnel_pages: @funnel_pages
+
+= hidden_field_tag :search_state, 'all'
+
+:javascript
+  $('#search_title').on("keyup", function() {
+    var title = $('#search_title').val().toLowerCase();
+    var search = false
+    if(title.length >= 3){
+      $('#search_state').val('search')
+      search = true
+    }else if(title.length == 0){
+      if($('#search_state').val() == 'search'){
+        $('#search_state').val('all')
+        search = true
+      }else{
+        search = false
+      }
+    }
+    if(search == true){
+      $.ajax({
+        url: "/s/funnel_pages",
+        type: 'get',
+        data: { title: title },
+        dataType: 'script',
+        async: false,
+        success:function(response){}
+      })
+    }
+  });

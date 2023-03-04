@@ -1,0 +1,32 @@
+- content_for :title do
+  Manage Webhook | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    .col-xs-10.col-sm-10.col-lg-10
+      %h1 Manage Webhook
+    .col-xs-2.col-sm-2.col-lg-2
+      %a.btn.btn-warning.pull-right.mt-lg.mb-lg{"data-target": ".create-webhook", "data-toggle": "modal"}
+        %i.fa.fa-plus
+        Create
+.row
+  .col-md-12
+    %div
+      %table.table.table--xl
+        = render '/super_admin/workable_webhooks/shared/list', webhooks: @webhooks
+
+.modal.overlay.fade.create-webhook{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-bg{"data-dismiss" => "modal", :type => "button"}
+  .d-flex.align-items-center.justify-content-center.h-100.w-100
+    .modal-dialog{role: 'document'}
+      = form_tag super_admin_workable_webhooks_path, method: :post do
+        .modal-content.bg-white.p-5.rounded
+          %button.btn-close-overlay{"data-dismiss" => "modal", :type => "button"}
+            %i.fa.fa-times
+          .modal-header.pt-0.px-0
+            %h3.modal-title.regsubt Create Webhook
+          .modal-body.px-0.pb-0
+            .form-group
+              = label_tag 'Target URL', nil, style: "font-size:1.5rem;"
+              .spacer10
+              = text_field_tag 'webhook[target_url]', '', class: 'form-control'
+            = submit_tag 'Save', class: 'btn btn-raised btn--dark fs-xs m-0'

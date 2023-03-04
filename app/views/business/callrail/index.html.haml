@@ -1,0 +1,40 @@
+.ui-2020
+  .pb-md.page-heading.no-margin-bottom
+    %h1
+      %md-icon.material-icons.title-icon settings_phone
+      CallRail
+      %i.fa.fa-info-circle.tooltip-text-icon.tooltip-text-icon-pos.tooltips{ 'title': 'This report shows you the analytics and recordings of all the calls made to your company. The calls are recorded in real time', 'title-direction': 'bottom' }
+    - unless @errors.present?
+      .options
+        .form-group
+          %md-button.md-raised.md-primary
+            = text_field_tag :date_filter, daterange_picker_format(@start_date, @end_date), class: 'btn btn--dark'
+
+- if @errors.present?
+  .container-fluid
+    .col-md-12
+      .panel.panel-default
+        .panel-body
+          %p.clx-text.text-center
+            = @errors
+- else
+  #callrail_panel
+    = render 'data'
+
+:javascript
+  $('#date_filter').daterangepicker({
+    maxDate: new Date(),
+    locale: { format: 'MM-DD-YYYY' }
+  }).on("change", function() {
+    daterange = $(this).val();
+    $.ajax({
+      url: '/b/callrail',
+      type: 'get',
+      data: {
+        start_date: daterange.split(' - ')[0],
+        end_date: daterange.split(' - ')[1]
+      },
+      dataType: 'script',
+      success:function(response){}
+    })
+  });

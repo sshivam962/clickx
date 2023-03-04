@@ -1,0 +1,73 @@
+.row{'ng-show':'false'}
+  .col-md-12
+    .tab-container
+      %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+        %li.active
+          %a{"data-toggle":"tab", 'data-target': "#visitors", 'ng-click':"resizeChart('visitors_map'); locales()"} Visitors
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#pages-session", 'ng-click':"resizeChart('page_per_visit_map'); locales()"} Pages/Session
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#session-duration", 'ng-click':"resizeChart('avg_session_map'); locales()"} Avg. Session Duration
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#new-session", 'ng-click':"resizeChart('new_visits_map'); locales()"} % New Sessions
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#bounce-rate", 'ng-click':"resizeChart('bounce_map'); locales()"} Bounce Rate
+      .tab-content
+        #visitors.tab-pane.active
+          .panel-body
+            .centered
+              #visitors_map
+        #pages-session.tab-pane
+          .panel-body
+            .centered
+              #page_per_visit_map
+        #session-duration.tab-pane
+          .panel-body
+            .centered
+              #avg_session_map
+        #new-session.tab-pane
+          .panel-body
+            .centered
+              #new_visits_map
+        #bounce-rate.tab-pane
+          .panel-body
+            .centered
+              #bounce_map
+
+.row
+  .col-md-12
+    .tab-container
+      .tab-content{'st-table':"ga_sites", 'st-safe-src':"copy_ga_sites"}
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th{'st-sort':'country' }
+                  %u.help_pointer{ "title": "Country of your visitors" }
+                    Country
+                %th{'st-sort':'totalUsers', 'st-sort-default': 'reverse' }
+                  %u.help_pointer{ "title": "Number of unique visitors who visited your site from a given country" }
+                    Users
+                %th{ 'st-sort': 'sessions'}
+                  %u.help_pointer{ 'title': 'Number of sessions your top pages are getting. We have also included the percent of total sessions a given page getting is' }
+                    Sessions
+                %th{'st-sort':'screenPageViewsPerSession' }
+                  %u.help_pointer{ "title": "Number of pages users of a country visit per session on your site" }
+                    Pages/Session
+                %th{'st-sort':'averageSessionDuration' }
+                  %u.help_pointer{ "title": "Average time spent by users of a country on your site" }
+                    Avg. Session
+                    %br Duration
+                %th{'st-sort':'bounceRate' }
+                  %u.help_pointer{ "title": "Percent of users from a country who directed away from your site after visiting a single page" }
+                    Bounce Rate
+            %tbody
+              %tr{'ng-if':"site.country" , 'ng-repeat':"site in ga_sites"}
+                %td{align: "left"}
+                  {{site.country}}
+                %td {{site.totalUsers}}
+                %td {{site.sessions}}
+                %td {{site.screenPageViewsPerSession}}
+                %td {{site.averageSessionDuration | date:'HH:mm:ss'}}
+                %td {{site.bounceRate}} %
+        %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}

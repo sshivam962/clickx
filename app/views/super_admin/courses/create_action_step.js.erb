@@ -1,0 +1,7 @@
+<% if @action_step.errors.present? %>
+  toastr.error("<%= @action_step.errors.full_messages.to_sentence %>")
+<% else %>
+  $('#action_step_item').append("<%= escape_javascript render( partial: 'super_admin/courses/action_step_item', locals: { action_step: @action_step, chapter: @active_chapter }) %>");
+  $('#action_step_form').html("<%= escape_javascript render( partial: 'super_admin/courses/action_steps_form', locals: { chapter: @active_chapter }) %>");
+  toastr.success("Action Step Added");
+<% end %>

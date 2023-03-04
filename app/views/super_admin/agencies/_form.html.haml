@@ -1,0 +1,41 @@
+= render 'super_admin/agencies/form/details', f: f
+= render 'super_admin/agencies/form/platform_access', f: f
+= render 'super_admin/agencies/form/settings', f: f
+= render 'super_admin/agencies/form/onboarding_checklist', f: f
+
+= stylesheet_link_tag "mdtimepicker"
+= javascript_include_tag "mdtimepicker"
+
+:javascript
+  mdtimepicker('#agency_time_zone_start_time', { theme: 'dark', clearBtn: true });
+  $('#agency_labels').select2({
+    width: '100%',
+    multiple: true
+  });
+  $('#scale_zoom_info input').on('click', function() {
+    if($('.scale_zoom_btn').hasClass('hidden')){
+      $('.scale_zoom_btn').removeClass('hidden');
+      $('#zoom_expiry_date').show();
+    }
+    else{
+      $('.scale_zoom_btn').addClass('hidden');
+      $('#zoom_expiry_date').hide();
+      $('#agency_scale_zoom_expiry_date').val('');
+    }
+  });
+
+  $('#agency_scale_program').on('click', function() {
+
+    if($('#agency_scale_program').is(":checked"))
+    {
+      var wanted_option = $('#agency_labels option[value="SCALE"]');
+      wanted_option.prop('selected', true);
+      $('#agency_labels').trigger('change.select2');
+    }
+    else
+    {
+      var wanted_option = $('#agency_labels option[value="SCALE"]');
+      wanted_option.prop('selected', false);
+      $('#agency_labels').trigger('change.select2');
+    }
+  });

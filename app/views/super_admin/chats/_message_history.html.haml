@@ -1,0 +1,89 @@
+.messenger-chat-wrapper
+  .messenger-chat-header.bg-white.br-top-10
+    .d-flex.align-items-center.p-4
+      .col.pr-4.d-flex.align-items-center
+        %a.btn-back-to-messages.fs-30.pr-4.pl-1.d-block.d-lg-none.text-darkblue{:href => "#0"}
+          %i.fa.fa-angle-left
+        %span.messenger-chat-avatar
+          %i.fa.fa-user
+      .col
+        .fs-sm.fw-m.text-block.messenger-message-item-name.fs-sm= thread.display_name
+        .fs-xs.color-silver= thread.contact_phone
+        .fs-xs.color-silver= thread.updated_at.strftime('%d %b')
+      .col.ml-auto
+        .d-flex.align-items-left.justify-content-end
+          = link_to 'Block', block_super_admin_chat_path(thread), method: :post, class: 'btn btn-xs btn-danger btn-outline-danger mr-2'
+  .messenger-chat.p-4
+    - thread.messages.each do |message|
+      - if message.received?
+        .messenger-chat-item
+          .chat-message-item.d-flex
+            .mr-3
+              %span.messenger-chat-avatar.messenger-chat-avatar--md
+                %i.fa.fa-user
+            %div
+              .chat-message-bubble
+                %p= message.body
+              .chat-message-time= message.created_at.strftime('%d %b %I:%M:%S %p')
+      - else
+        .messenger-chat-item.messenger-chat-item--reply
+          .chat-message-item
+            .d-flex
+              %div
+                .chat-message-bubble
+                  %p= message.body
+                .chat-message-time= message.created_at.strftime('%d %b %I:%M:%S %p')
+              .ml-3
+                %span.messenger-chat-avatar.messenger-chat-avatar--md
+                  %i.fa.fa-user
+
+  .messenger-chat-footer.bg-white
+    .chatform
+      = form_tag reply_super_admin_chat_path(thread), remote: true do
+        .d-flex.align-items-center
+          .col
+            %a.btn.btn-default.m-0.btn--xs.px-4#select_template{"data-target": ".bs-select-template", "data-toggle": "modal"}
+              %i.fa.fa-plus
+          .col.pl-3
+            %a.btn.btn-success.m-0.btn--xs.px-4.ai_message_reply
+              %i.fa.fa-rocket
+          .col.col-stretch
+            %label.input-sizer.stacked
+              = text_area_tag :message, nil, placeholder: 'Type a message', class: 'write_msg', rows: '1', oninput: "this.parentNode.dataset.value = this.value"
+              .spinner-overlay.spinner-overlay-intro
+                .nb-spinner 
+            %button.chatform-btn{type: 'submit'}
+              %i.fa.fa-send
+:javascript
+
+  $('.ai_message_reply').click(function(e){
+    e.preventDefault()
+    $('.spinner-overlay-intro').css('opacity',1).show()
+    var message = $(".write_msg").val()
+    if(!message){
+      alert("enter message")
+    } 
+    else {
+      $.ajax({
+        url: '/s/chats/create_ai_message',
+        type: 'post',
+        data: {
+          message: message
+        },
+        dataType: 'json',
+        success:function(response){
+          $('.spinner-overlay-intro').css('opacity',0).hide()
+
+          if (typeof response.data.content !== 'undefined' && response.data.content.length > 0) {
+
+            var content = JSON.parse(response.data.content);
+            words = content[0].replace(/\n/g, "");
+            $('.write_msg').val(words);
+            
+          }
+          
+        }
+      })
+    }
+    
+  })

@@ -1,0 +1,34 @@
+%span{id: dom_id(agency)}
+  .clients-list
+    .clients-list__item.d-flex.flex-wrap
+      .col-stretch.clients-list__datas.pt-3
+        .d-flex
+          .col-md-4.pl-0
+            - if agency.logo.present?
+              %img.mr-md{alt: 'logo', src: agency.logo, width: '50'}
+            %span.name.blue
+              = agency.name
+          .col-sm-4.col-md-4
+            %p
+              = link_to agency.active_domain
+            - if agency.support_email.present?
+              %p
+                Email:
+                %a{href: "mailto:#{agency.support_email}"}= agency.support_email
+          .col-md-2.col-sm-2.p-n
+            %span.small
+              = days_since agency.last_logged_in
+          .col-md-2.p-n
+            - agency.label_list.each do |label|
+              %span.small.pr-sm
+                %span.label.label-default
+                  = label
+      .col-auto.clients-list__actions.align-items-center
+        .btn-icon-list
+          = select_tag 'login_as', options_from_collection_for_select(agency.users, 'id', 'first_name'), class: 'login_as_user form-control select-box width200px', include_blank: 'Login as user..', 'data-target' => agency.id, "data-title" => "View Dashboard"
+          %a.btn-icon.btn-icon--login{"data-title" => "View Dashboard", href: "/switch_to_agency_user?user_id=#{agency.preview_users.first&.id}&agency_id=#{agency.id}", id: "view_dashboard_#{agency.id}" }
+            %i.fa.fa-sign-in
+          %a.btn-icon{"data-title" => "Agency Admins", href: agency_admins_super_admin_agency_path(agency) }
+            %i.fa.fa-user
+          %a.btn-icon.btn-icon--edit{ href: edit_super_admin_agency_path(agency) }
+            %i.fa.fa-edit

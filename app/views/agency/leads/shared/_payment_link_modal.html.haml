@@ -1,0 +1,15 @@
+#lead-payment-link-modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .d-lg-flex.align-items-center.h-lg-cover.pt-5.pb-5
+    .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg
+      .modal-content.modal-content--rounded
+        .modal-header
+          No Stripe Credentials
+          %a.close.pl-md{"data-dismiss" => "modal"}
+            %span
+              %i.material-icons close
+        .modal-body
+          .col-auto.pr-4
+            %p
+              The Stripe Credentials hasn't been setup yet, please headover to settings and setup your stripe credentials to continue ...
+          .col-auto.text-center
+            %a.btn.btn--dark.btn--rounded-md.btn-default.btn-md.mt-sm{href: "/a/settings"} Settings

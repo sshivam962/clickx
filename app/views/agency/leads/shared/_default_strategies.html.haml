@@ -1,0 +1,19 @@
+#lead-default-strategies-modal.modal.fade.in{"aria-hidden" => "false", "aria-labelledby" => "myModalLabel", :role => "dialog", :style => "display: block; padding-right: 0px;", :tabindex => "-1"}
+  .d-lg-flex.align-items-center.h-lg-cover.pt-5.pb-5
+    .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg
+      .modal-content.modal-content--rounded
+        .modal-header
+          Product Pages - #{@lead.company}
+          %a.close.pl-md{"data-dismiss" => "modal"}
+            %span
+              %i.material-icons close
+        .modal-body
+          - ::Lead::Strategy::STATIC_CATEGORIES.each do |title, category|
+            .d-flex.flex-wrap.mb-4.justify-content-between
+              .col-auto.pr-4
+                .author
+                  = title
+              .col-auto
+                %a.btn.btn--dark.btn--rounded-md.btn-default.btn-sm.mt-n.copy_to_clipboard{href: growth_strategy_public_link(category, @lead), target: '_blank'}
+                  %i.icfont.material-icons.text-white.mr-2{:title => "Copy the URL"} content_copy
+                  Copy URL

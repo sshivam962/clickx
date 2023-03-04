@@ -1,0 +1,44 @@
+%html
+  %head
+    %h1 Locales
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+    %body
+      %table-responsive
+        %table.table.table-bordered.table-vam.table-left
+          %thead
+            %th Country
+            %th Users
+            %th Pages/Session
+            %th Avg. Session Duration
+            %th % New Sessions
+            %th Bounce Rate
+          %tbody
+            - @locales_data.table_data.each do |locales|
+              %tr
+                %td.align-center
+                  = locales.site
+                %td.align-center
+                  = locales.visits
+                %td.align-center
+                  = locales.page_per_session
+                %td.align-center
+                  = locales.avg_session
+                %td.align-center
+                  = locales.new_visits
+                %td.align-center
+                  = locales.bounce
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

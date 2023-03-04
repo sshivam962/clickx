@@ -1,0 +1,7 @@
+$('#scale-zoom-modal').modal('hide');
+$('#agency_scale_zoom_expiry_date').val("<%= @expiry_date %>");
+<% if @expiry_date.present? %>
+  $('#zoom_expiry_date').html("<p>(Expiry Date: <%= @expiry_date %>)</p>");
+<% else %>
+  $('#zoom_expiry_date').hide();
+<% end %>

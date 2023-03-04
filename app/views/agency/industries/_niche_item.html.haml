@@ -1,0 +1,64 @@
+.niche-item{id: "niche-#{industry.id}"}
+  - if has_access || industries_ids.include?(industry.id)
+    %a.niche-item-inner{href: "#"}
+      .niche-item-icon
+        %i{class: industry.icon_klass}
+      %h2.f-s-sm.fw-sb.m-0.mt-5.mb-5
+        = industry.title
+      =#%span.niche-item--items= industry.case_studies.published.size
+    .niche-item-more
+      %span.niche-more-btn.niche-more-btn--like
+        %a.btn.d-block.px-4.py-3.text-left.text-white{ href: '#', 'data-toggle': 'modal', 'data-target': '#lead-form-modal' }
+          %i.fa.fa-calendar
+      - if industry.funnel_pages.size == 1
+        %span.niche-more-btn.niche-more-btn--like
+          %a.niche-more-btn.copy_to_clipboard{href: new_agency_funnel_page_path(copy_from: industry.funnel_page.id)}
+            %i.fa.fa-edit
+      - else
+        - if industry.funnel_pages.last.agency_id == current_agency.id
+          %span.niche-more-btn.niche-more-btn--like
+            %a.niche-more-btn.copy_to_clipboard{href: edit_agency_funnel_page_path(industry.funnel_pages.last.id)}
+              %i.fa.fa-edit
+        - else
+          %span.niche-more-btn.niche-more-btn--like
+            %a.niche-more-btn.copy_to_clipboard{href: edit_agency_funnel_page_path(industry.funnel_page.id)}
+              %i.fa.fa-edit
+      %span.niche-more-btn.niche-more-btn--like
+        %a.favourite_click{href: 'javascript:void(0)', onClick: "favourite_click_fn(#{industry.id})"}
+          %i.fa{class: favorite ? 'fa-heart' : 'fa-heart-o'}
+      - if industry.funnel_pages.size == 1
+        %a.niche-more-btn.copy_to_clipboard{href: funnel_page_public_link(industry.funnel_page, current_agency), target: '_blank'}
+          %i.fa.fa-filter
+      - else
+        - if industry.funnel_pages.last.agency_id == current_agency.id
+          %a.niche-more-btn.copy_to_clipboard{href: funnel_page_public_link(industry.funnel_pages.last, current_agency), target: '_blank'}
+            %i.fa.fa-filter
+        - else
+          %a.niche-more-btn.copy_to_clipboard{href: funnel_page_public_link(industry.funnel_page, current_agency), target: '_blank'}
+            %i.fa.fa-filter
+  - else
+    %a.niche-item-inner{href: 'javascript:void(0)'}
+      .niche-item-icon
+        %i{class: industry.icon_klass}
+      %h2.f-s-sm.fw-sb.m-0.mt-5.mb-5
+        = industry.title
+      %span.niche-item--items= industry.case_studies.published.size
+    .niche-item-more
+      %span.niche-more-btn
+        %i.fa.fa-lock
+
+
+#lead-form-modal.modal.fade{role: "dialog", tabindex: '-1'}
+  .modal-dialog.modal-md{role: 'document'}
+    - @agency_niche = AgencyNiche.find_or_create_by(agency_id: current_agency.id,industry_id: industry.id)
+    = form_with model: @agency_niche, url: update_lead_form_agency_industry_path(industry), method: :post, remote: true do |f|
+      .bg-white.p-4.p-sm-5.rounded
+        .fs-md.fw-sb.text-darkblue.pb-3
+          Lead Form - #{industry.title}
+        %hr.my-0
+        .pb-4.pt-3
+        %label.text-darkblue{for: :lead_form}
+          Lead Form Embed Code
+        .input-wrapper.mb-4
+          = f.text_area :lead_form, class: 'input-wrapper-input', rows: 7, placeholder: 'Paste your lead form embed code here'
+        = f.submit 'Save', class: 'btn btn-primary btn-raised'

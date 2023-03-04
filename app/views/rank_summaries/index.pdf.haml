@@ -1,0 +1,17 @@
+%html
+  %head
+    %h1 Keyword Rank Summary
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+  %body
+    %table-responsive
+      %table.table.table-bordered.table-vam.table-left
+        %thead
+          %th Keyword Name
+          %th Rank
+        %tbody
+          - @data.each do |keyword_data|
+            %tr
+              %td
+                = keyword_data[:keyword]
+              %td
+                = keyword_data[:rank]

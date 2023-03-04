@@ -1,0 +1,4 @@
+$("#collapse_container_<%= @call_id %>").html("<%= escape_javascript render( partial: 'business/call_analytics/call_details.html.haml' ) %>");
+$("#plus_button_<%= @call_id %>").addClass('hidden');
+$("#minus_button_<%= @call_id %>").removeClass('hidden');
+$("#collapse_container_<%= @call_id %>").removeClass('hidden');

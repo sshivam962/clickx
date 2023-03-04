@@ -1,0 +1,33 @@
+.container-fluid.mt-md.pt-xs.ui-2020
+  .panel.panel-bg
+    .panel-body.ls_form
+      = form_for @lead_strategy, url: agency_lead_strategy_path(@lead, @lead_strategy), method: :patch do |f|
+        #lead_strategy_step1
+          %h2.mt-2.mb-3.regsubt Strategy Template
+          %h4
+            = @lead_strategy.category
+        = hidden_field_tag 'reorder_item_redirect', true
+        #lead_strategy_step3
+          .spacer50
+          %h2.mt-2.mb-3.regsubt
+            Customize Strategy
+            %small.font-14 Pick items from the right and customize as needed
+          .row
+            .col-md-12
+              %h4 Client Strategy
+              .panel-group
+                #strategies.p-n.ui-sortable.a_strategy_order_items
+                  - @lead_strategy.strategies.each_with_index do |strategy, index|
+                    .panel.panel-default
+                      - template  = Liquid::Template.parse(strategy)
+                      - parsed_strategy = template.render({'company_name' => @lead.company})
+                      = hidden_field_tag 'lead_strategy[strategies][]', strategy
+                      .panel-heading
+                        %h2{style: 'text-transform: none;'}= raw(parsed_strategy)
+        %hr
+        = submit_tag 'Save', class: 'btn btn-lg btn-warning'
+        .spacer15
+  .spacer50
+
+:javascript
+  $("#strategies").sortable({});

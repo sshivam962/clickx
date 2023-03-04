@@ -1,0 +1,411 @@
+- content_for :title do
+  Agency Website | Clickx
+- plans = package.plans.sort_by(&:onetime_charge)
+.ui-2020.package-page
+  .page-content.page-plan
+    .page-heading.pt-md.pb-md
+      .row.align-items-center
+        .col-sm-12
+          %h1
+            %i.clickx-icon-Website
+            Website
+    .container-fluid
+      .table-responsive.table-plan.text-center.plan-preloader
+        %table.table.table-hover.mb-n
+          %thead
+            %tr
+              %th.col-label{"vertical-align" => "top"}
+                .pt-col-content
+                  %h2.pt-header-caption.pt-header-caption--title.text-left
+              %th.col-package.col-package--mw
+                .pt-col-content
+                  .pt-header-caption Starter
+                  .pt-header-price $999
+                  %span.plan-label One-Time Payment
+                  .mt-4
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'agency_website', plan: 'starter')}
+                      Get Started
+              %th.col-package.col-package--mw
+                .pt-col-content
+                  .pt-header-caption Pro
+                  .pt-header-price $1,499
+                  %span.plan-label One-Time Payment
+                  .mt-4
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'agency_website', plan: 'pro')}
+                      Get Started
+              %th.col-package.col-package--mw
+                .pt-col-content
+                  .pt-header-caption Advanced
+                  .pt-header-price $2,499
+                  %span.plan-label One-Time Payment
+                  .mt-4
+                    %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'agency_website', plan: 'advanced')}
+                      Get Started
+          %tbody
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Deliverables Include
+              %td
+                .pt-col-content
+                  %span.pl-label Deliverables Include
+              %td
+                .pt-col-content
+                  %span.pl-label Deliverables Include
+              %td
+                .pt-col-content
+                  %span.pl-label Deliverables Include
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span License to Clickx White Label Agency Website Copy
+              %td
+                .pt-col-content
+                  %span.pl-label License to Clickx White Label Agency Website Copy
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label License to Clickx White Label Agency Website Copy
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label License to Clickx White Label Agency Website Copy
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span License to Clickx White Label Agency Website Photos/Images
+              %td
+                .pt-col-content
+                  %span.pl-label License to Clickx White Label Agency Website Photos/Images
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label License to Clickx White Label Agency Website Photos/Images
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label License to Clickx White Label Agency Website Photos/Images
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span License to our Agency Website Theme Code
+              %td
+                .pt-col-content
+                  %span.pl-label License to our Agency Website Theme Code
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label License to our Agency Website Theme Code
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label License to our Agency Website Theme Code
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Customization Hours
+              %td
+                .pt-col-content
+                  %span.pl-label Customization Hours
+                  %span.pl-val 2 Hours
+              %td
+                .pt-col-content
+                  %span.pl-label Customization Hours
+                  %span.pl-val 5 Hours
+              %td
+                .pt-col-content
+                  %span.pl-label Customization Hours
+                  %span.pl-val 7 Hours
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Agency Logo Update
+              %td
+                .pt-col-content
+                  %span.pl-label Agency Logo Update
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Agency Logo Update
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Agency Logo Update
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Customize to Your Agency Colors
+              %td
+                .pt-col-content
+                  %span.pl-label Customize to Your Agency Colors
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Customize to Your Agency Colors
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Customize to Your Agency Colors
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Add Agency Contact Information
+              %td
+                .pt-col-content
+                  %span.pl-label Add Agency Contact Information
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Add Agency Contact Information
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Add Agency Contact Information
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Replace Agency Name in the Copy
+              %td
+                .pt-col-content
+                  %span.pl-label Replace Agency Name in the Copy
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Replace Agency Name in the Copy
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Replace Agency Name in the Copy
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Launch Support
+              %td
+                .pt-col-content
+                  %span.pl-label Launch Support
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Launch Support
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Launch Support
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span
+                    Link Social Media Accounts
+                    %small (Facebook, Instagram, Twitter, YouTube)
+              %td
+                .pt-col-content
+                  %span.pl-label Link Social Media Accounts
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+                  .pt-col-content--exdata
+                    %small (Facebook, Instagram, Twitter, YouTube)
+              %td
+                .pt-col-content
+                  %span.pl-label Link Social Media Accounts
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+                  .pt-col-content--exdata
+                    %small (Facebook, Instagram, Twitter, YouTube)
+              %td
+                .pt-col-content
+                  %span.pl-label Link Social Media Accounts
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+                  .pt-col-content--exdata
+                    %small (Facebook, Instagram, Twitter, YouTube)
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Custom About Us Page
+              %td
+                .pt-col-content
+                  %span.pl-label Custom About Us Page
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label Custom About Us Page
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label Custom About Us Page
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span One-Time Technical and Local SEO
+              %td
+                .pt-col-content
+                  %span.pl-label One-Time Technical and Local SEO
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label One-Time Technical and Local SEO
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+              %td
+                .pt-col-content
+                  %span.pl-label One-Time Technical and Local SEO
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Niche Specific Case Studies
+              %td
+                .pt-col-content
+                  %span.pl-label Niche Specific Case Studies
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label Niche Specific Case Studies
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label Niche Specific Case Studies
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Social Media Banner Design
+              %td
+                .pt-col-content
+                  %span.pl-label Social Media Banner Design
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label Social Media Banner Design
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label Social Media Banner Design
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span DNS Setup and Walkthrough
+              %td
+                .pt-col-content
+                  %span.pl-label DNS Setup and Walkthrough
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label DNS Setup and Walkthrough
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label DNS Setup and Walkthrough
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Website Heatmap Tracking
+              %td
+                .pt-col-content
+                  %span.pl-label Website Heatmap Tracking
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label Website Heatmap Tracking
+                  %span.pl-val
+                    %i.material-icons.close-r close
+              %td
+                .pt-col-content
+                  %span.pl-label Website Heatmap Tracking
+                  %span.pl-val
+                    %i.material-icons.tick-r check
+            %tr.row-highlighted
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Required Monthly Services
+              %td
+                .pt-col-content
+                  %span.pl-label Required Monthly Services
+              %td
+                .pt-col-content
+                  %span.pl-label Required Monthly Services
+              %td
+                .pt-col-content
+                  %span.pl-label Required Monthly Services
+            %tr
+              %td.col-label.text-left
+                .pt-col-content
+                  %span Hosting
+              %td
+                .pt-col-content
+                  %span.pl-label Hosting
+                  %span.pl-val $25/month
+              %td
+                .pt-col-content
+                  %span.pl-label Hosting
+                  %span.pl-val $25/month
+              %td
+                .pt-col-content
+                  %span.pl-label Hosting
+                  %span.pl-val $25/month
+            - unless @is_preview
+              %tr#agency_infrastructure_actions
+                %td.col-label.text-left
+                  .pt-col-content
+                - plans.each do |plan|
+                  %td
+                    .pt-col-content
+                      %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: package.key, plan: plan.key)}
+                        Get Started
+      .spacer15
+:javascript
+  jQuery(window).load(function() {
+    setTimeout(function() {
+      jQuery('.plan-preloader').removeClass('plan-preloader');
+    }, 500);
+  });

@@ -1,0 +1,8 @@
+<% if @strategy_item.errors.present? %>
+  toastr.error("<%= @strategy_item.errors.full_messages.to_sentence %>")
+<% else %>
+  $("#lead_strategy_item_<%= @strategy_item.id%> h2").html("<%= @strategy_item.strategy%>")
+  toastr.success("Strategy Updated");
+<% end %>
+
+$('#edit-strategy-modal').modal('hide')

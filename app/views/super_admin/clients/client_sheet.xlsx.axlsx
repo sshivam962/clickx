@@ -1,0 +1,17 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Clients List - #{Time.now.strftime('%b %d, %Y')}") do |sheet|
+  sheet.add_row([
+    'Name', 'Created Date', 'Keywords count', 'Competitors count',
+    'Active subscription', 'Users'
+  ])
+  @clients.each do |client|
+    sheet.add_row([
+      client.name,
+      client.created_at.to_date,
+      client.keywords_count,
+      client.competitions.size,
+      client.active_package_subscriptions.pluck(:package_name).map(&:titleize).join(','),
+      client.normal_users.map(&:name).join(', ')
+    ])
+  end
+end

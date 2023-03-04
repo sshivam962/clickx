@@ -1,0 +1,49 @@
+= render 'stripe/assets'
+
+.page-heading.bg-white.mb-4
+  .d-flex.justify-content-between.flex-wrap
+    .col.my-2
+      %h1 Challenge Offer - Payment
+
+.container-fluid
+  .checkout-stages--content
+    -# = hidden_field_tag :base_route, '/a/package_subscriptions'
+    = form_tag agency_challenge_offer_path, method: :post do
+      .panel.panel-default.p-sm
+        .panel-body.pl-n.pr-n
+          .add_card_form
+            .panel-heading
+              %h2 Payment method
+            .panel-body
+              .card_list
+                %md-input-container
+                  .form-group.m-n
+                    %label.md-no-float.md-container-ignore Cards
+                    = select_tag "selected_card", options_for_select(card_collection(@cards), @default_card), class: 'form-control', id: 'selected_card2'
+              #add_card_form
+                - if @cards.blank?
+                  = render 'agency/cards/shared/new'
+              %p.order-summary-bnf
+                %i.material-icons.secuicon> lock
+                Secure Checkout
+      .text-center
+        %input.btn.btn-lg.m-n.btn-warning.btn-raised.step_complete.payment-next-btn{type: 'submit', value: 'Pay Now', data: {disable_with: "Processing..."}}
+
+:javascript
+  $('#selected_card2').on('change', function (e) {
+    var optionSelected = $("option:selected", this);
+    var valueSelected = this.value;
+    if(valueSelected == 'add_card'){
+      $.ajax({
+        url: "/a/cards/new",
+        type: 'get',
+        data: {},
+        dataType: 'json',
+        success:function(response){
+          $('#add_card_form').html(response.data.content)
+        }
+      })
+    }else{
+      $('#add_card_form').html('')
+    }
+  });

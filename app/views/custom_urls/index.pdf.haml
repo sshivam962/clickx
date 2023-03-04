@@ -1,0 +1,20 @@
+%html
+  %head
+    %h1 UTM Builder
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+  %body
+    %table-responsive
+      %table.table.table-bordered.table-vam.table-left
+        %thead
+          %th Campaign
+          %th Complete URL
+          %th Campaign Source
+        %tbody
+          - @custom_url.each do |custom_url|
+            %tr
+              %td
+                = custom_url.campaign_name
+              %td
+                = custom_url.complete_url
+              %td
+                = custom_url.campaign_source

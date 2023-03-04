@@ -1,0 +1,19 @@
+%md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-lg{"aria-label" => "Add Tags"}
+  %form{"ng-cloak" => "", "ng-submit":"ok($event)"}
+    .modal-header
+      %button.close{"aria-hidden" => "true", "data-dismiss" =>"modal", :type => "button","ng-click":"close()"}
+        %span.fa.fa-times-circle-o
+      %h3.modal-title
+        %span.fa.fa-tags
+        {{ tag.id ? 'Edit ' : 'Create ' }} Tag
+    %md-dialog-content.p-md
+      .md-dialog-content.col-sm-10.col-sm-offset-1
+        %label.mb-md.mt-md Tag Name
+        %input.form-control{"ng-model":"tag.name",rows:2}
+        %label.mb-md.mt-md Tag Colors
+        %br
+        .tag-colors{ "ng-repeat": "color in colors", "ng-style": "{'border': '5px solid '+ color, 'background': filter[color] ? color : ''}",
+         "ng-click": 'selectTagcolor(color)' }
+    %md-dialog-actions{:layout => "row"}
+      %button.btn.btn-raised.mt-md.mb-md.btn-default{ 'ng-click': 'close()', 'type': 'button' } Cancel
+      %button.btn.btn-raised.mt-md.mb-md.btn-primary{ 'type': 'submit' } {{ tag.id ? 'Update' : 'Save' }}

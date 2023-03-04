@@ -1,0 +1,67 @@
+.clickx-breadcrumb-wrapper.ng-scope
+  %ol.breadcrumb.clx-breadcrumb.ng-isolate-scope
+    %li
+      %a{:href => "/b/dashboard"} Home
+    %li
+      %span UTM Builder
+
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Marketing.title-icon>
+    UTM Builder
+    %i.fa.fa-info-circle.tooltip-text-icon{"data-placement" => "top", "data-toggle" => "tooltip", :title => "UTM Builder lets you add parameters to the URLs in your web and email ads to track them easily."}
+  .options
+    %button.btn.btn-white.btn-raised.m-n{"data-target" => "#addNewUrlModal", "data-toggle" => "modal", :type => "button"}
+      %i.fa.fa-plus.pr-xs
+      Add URL
+    %span{'ng-class': "{'disable-button': export_disabled}"}
+      %export-template{ 'pdf': 'true' }
+
+.container-fluid
+  %div
+    .row#campaigns
+      .col-md-12
+        .tab-container
+          .tab-content
+            .table-responsive
+              %table.table.table-bordered.table-vam.table-hover.mb-n.clx-table.table-darkstone-blue-bg.table-border-top-darkstone-blue
+                %thead
+                  %tr.table-head
+                    %th.text-center Campaign Name
+                    %th.text-center{style: "width:50%"} Complete URL
+                    %th.text-center Actions
+                %tbody
+                  - @custom_urls.each do |custom_url|
+                    %tr.text-center.trans-color{ id: "row_#{custom_url.id}" }
+                      %td #{custom_url.campaign_name}
+                      %td
+                        .url-builder.clearfix
+                          %a.c-text.greay-link{href: "#{custom_url.complete_url}", target: '_blank'} #{custom_url.complete_url}
+                          %a.btn.btn-raised.btn-default.btn-sm.pull-right{href: "#{custom_url.complete_url}", target: '_blank', 'title': 'Go to the URL'}
+                            %i.fa.fa-link
+                      %td
+                        .form-group.m-n
+                          %button.btn.btn-raised.btn-default.btn-sm{:onclick => "copyClipboard(this.value)", value: custom_url.complete_url}
+                            %i.fa.fa-clone{"aria-hidden" => "true"}
+                            Copy URL
+
+                          = link_to edit_business_custom_url_path(custom_url), remote: true, class: 'btn btn-raised btn-default btn-sm' do
+                            %i.fa.fa-edit
+
+                          = link_to business_custom_url_path(custom_url), class: 'btn btn-raised btn-danger btn-sm', method: :delete, data: {:confirm => 'Are you sure?', remote: false} do
+                            %i.fa.fa-trash
+
+= render 'add_new_url'
+#edit-url-modal
+
+:css
+  .modal-body {
+    overflow-y: auto;
+    max-height: 400px;
+  }
+
+:javascript
+  function copyClipboard(value) {
+    navigator.clipboard.writeText(value);
+    toastr.success("Copied to Clipboard!");
+  };

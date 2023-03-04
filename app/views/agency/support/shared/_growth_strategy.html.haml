@@ -1,0 +1,50 @@
+.section-card.bg-white.rounded-12.mb-4.support-accordion.support-accordion--collapsed
+  .section-card-heading.px-5.py-4.rounded-t-12.support-accordion-header
+    .d-flex.justify-content-between
+      .col
+        Agency Growth Strategy & Recommendations
+      .col
+        %span.accordion-arrow
+          %i.fa.fa-chevron-up
+  #growth_strategy.support-accordion-content
+    .section-card-body.px-5.py-4
+      .todo-group
+        - current_agency.todo_lists.each do |list|
+          = render 'agency/todo_lists/list', list: list
+        %button.btn.btn--dark{"data-target": ".new-todo-list-overlay", "data-toggle": "modal"} Add a To-Do List
+
+.modal.overlay.fade.new-todo-list-overlay{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-bg{"data-dismiss" => "modal", :type => "button"}
+  .d-flex.align-items-center.justify-content-center.h-100.w-100.pr-4
+    .modal-dialog{role: 'document'}
+      .modal-content.bg-white.p-5.rounded
+        %button.btn-close-overlay{"data-dismiss" => "modal", :type => "button"}
+          %i.fa.fa-times
+        .modal-body.px-0.pb-0.pt-0
+          = form_with(model: TodoList.new, url: agency_todo_lists_path) do |f|
+            .form-group.mt-0
+              .fw-lg List Title
+              = f.text_field :title, class: 'form-control'
+            = f.submit 'Add To-do List', class: 'btn btn-raised btn--dark m-0'
+
+.modal.overlay.fade.new-todo-form-overlay{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+.modal.overlay.fade.edit-todo-form-overlay{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+.modal.overlay.fade.show-todo-form-overlay{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+
+:javascript
+  $(document).on('change', '.item-checkbox',function() {
+    var list_id = $(this).data('listId')
+    var item_id = $(this).data('itemId')
+
+    $.ajax({
+      url: "/a/todo_lists/" + list_id + "/todo_items/" + item_id + "/update_status",
+      type: 'PATCH',
+      data: {
+        checked: $(this).is(':checked')
+      },
+      dataType: 'script',
+      success:function(response){
+        //$('#tab_content').html(response.data)
+      }
+    })
+  });

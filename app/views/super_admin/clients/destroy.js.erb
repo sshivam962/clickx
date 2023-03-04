@@ -1,0 +1,6 @@
+<% if @client.errors.present? %>
+  toastr.error("<%= @client.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success('Business deleted');
+  $("#business_<%= @client.id%>").remove();
+<% end %>

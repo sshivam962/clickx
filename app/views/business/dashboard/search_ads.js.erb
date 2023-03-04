@@ -1,0 +1,78 @@
+<% if @error.present? || @search_ads_data.blank? %>
+  console.log("<%= @error %>")
+  console.log("<%= @search_ads_data %>")
+  $('#search_ads_section').html("<%= escape_javascript render( partial: 'business/dashboard/error/search_ads', locals: {}) %>");
+<% else %>
+  $('#search_ads_section').html("<%= escape_javascript render( partial: 'business/dashboard/shared/search_ads', locals: {}) %>");
+
+  Highcharts.chart('chart_search_ads', {
+    chart: {
+      type: 'areaspline',
+      height: 250
+    },
+    colors: ['#777', '#60BBEA'],
+    title: false,
+    xAxis: [
+      {
+        categories: gon.graph_data.this_period.keys,
+        lineColor: '#ffaa80',
+        lineWidth: 3,
+        tickColor: '#ffaa80',
+        tickWidth: 3
+      },
+      {
+        categories: gon.graph_data.last_period.keys,
+        opposite: true,
+        lineColor: '#b3cccc',
+        lineWidth: 3,
+        tickColor: '#b3cccc',
+        tickWidth: 3
+      }
+    ],
+    yAxis: {
+      title: {
+        text: 'Clicks'
+      }
+    },
+    tooltip: {
+      formatter: function() {
+        return (
+          this.x +
+          ' ' +
+          '<br>' +
+          this.series.name +
+          ': ' +
+          '<strong>' +
+          this.y +
+          '</strong>'
+        );
+      }
+    },
+    credits: {
+      enabled: false
+    },
+    plotOptions: {
+      areaspline: {
+        fillOpacity: 0.5,
+        marker: {
+          enabled: false
+        }
+      }
+    },
+    series: [
+      {
+        name: 'Previous Period',
+        data: gon.graph_data.last_period.clicks,
+        color: '#d1e0e0',
+        lineColor: '#b3cccc',
+        xAxis: 1
+      },
+      {
+        name: 'Current Period',
+        data: gon.graph_data.this_period.clicks,
+        color: '#ffccb3',
+        lineColor: '#ffaa80'
+      }
+    ],
+  });
+<% end %>

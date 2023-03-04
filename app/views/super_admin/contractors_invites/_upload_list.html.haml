@@ -1,0 +1,73 @@
+%table.table.table-bordered.users.reports
+  %thead
+    %th Name
+    %th Email
+    %th Phone
+    %th.text-center Admin Action
+    %th Job Title
+    %th Profile URL
+    %th Created/Updated
+    %th Email Template Name
+  %tbody
+    - users.each do |user|
+      %tr{id: "tr_#{user.id}"}
+        %td.first_name
+          = user.name
+          - if user.source.present?
+            %small.badge
+              = user.source.titleize
+        %td.email= user.email
+        %td.phone= user.phone
+        %td.center.action_btn_cls
+          - if user.mail_status.present?
+            %span.sent_completed
+              .btn.btn-danger.btn-sm
+                Sent Completed
+          - else
+            %span.send_email_span.send_email{id: "send_email_#{user.id}"}
+              .btn.btn-success.btn-sm
+                Send Email
+          %span
+            = link_to 'Archive', super_admin_contractors_invite_path(user), class: 'btn btn-danger btn-sm',remote: true, method: :delete, data: { confirm: "Are you sure you'd like to delete this user" }
+        %td= user.workable_job_full_title
+        %td
+          - if user.url.present?
+            = link_to 'Profile Url', user.url, target: '_blank'
+        %td
+          - if user.workable?
+            = user.workable_created_at&.strftime('%a, %d %b %Y')
+            \/
+            %br
+            = user.workable_updated_at&.strftime('%a, %d %b %Y')
+          - else
+            = user.created_at&.strftime('%a, %d %b %Y')
+            \/
+            %br
+            = user.updated_at&.strftime('%a, %d %b %Y')
+        %td= ContractorsInvite::EMAIL_TEMPLATES.to_h.key(user.email_template_name)
+        = hidden_field_tag :last_name, user.last_name, class: 'last_name'
+        = hidden_field_tag :id, user.id, class: 'invite_id'
+
+
+= will_paginate users,data:{ contractors_invite_option: params['contractors_invite_option']}
+
+:javascript
+  $('.send_email').on("click", function() {
+    id = $(this).closest('tr').find('.invite_id').val();
+    $.ajax({
+      url: "/s/contractors_invites/send_email",
+      type: 'post',
+      data: { id: id },
+      dataType: 'json',
+      async: true,
+      success:function(response){
+        if(response.status == 200){
+          toastr.success("You have successfully invited " + response.message);
+          $('#send_email_'+id).html("<div class = 'btn btn-danger'>Sent Completed</div>");
+        }
+        else{
+          toastr.error(response.message);
+        }
+      }
+    })
+  });

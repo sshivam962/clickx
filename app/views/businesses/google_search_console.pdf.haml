@@ -1,0 +1,25 @@
+:css
+  table {
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border: 1px solid black;
+    text-align: center;
+  }
+%table
+  %thead
+    %th Key
+    %th Avg. Position
+    %th Impression
+    %th Clicks
+    %th CTR
+  %tbody
+    - if @google_data
+      - @google_data.dig('totals', 'rows').each do |search|
+        %tr
+          %td= search['keys'].join
+          %td= search['position']
+          %td= search['impressions']
+          %td= search['clicks']
+          %td= search['ctr']

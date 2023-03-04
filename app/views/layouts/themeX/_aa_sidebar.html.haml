@@ -1,0 +1,635 @@
+.static-sidebar-wrapper.sidebar-dark.ui-2020
+  .fixed-sidebar
+    .static-sidebar
+      .sidebar
+        .widget.stay-on-collapse
+          %nav.widget-body{role: "navigation"}
+            %ul.acc-menu
+              - if current_agency.white_labeled && policy(current_agency).courses?
+                %li
+                  %a.withripple{href: "/a/courses"}
+                    %span.icon
+                      %i.clickx-icon-student
+                    %span Academy
+              - else
+                %li.li--locked
+                  %a.withripple.lock-access{href: academy_agency_menu_permissions_path}
+                    %span.icon
+                      %i.clickx-icon-student
+                    %span Academy
+              %li
+                %a.withripple{href: agency_clients_path}
+                  %span.icon
+                    %i.clickx-icon-House
+                  %span Clients
+              - if policy(current_agency).leads?
+                %li
+                  %a.withripple{href: agency_leads_path}
+                    %span.icon
+                      %i.clickx-icon-user
+                    %span Leads
+              - else
+                %li.li--locked
+                  %a.withripple.lock-access{href: "javascript:;"}
+                    %span.icon
+                      %i.clickx-icon-user
+                    %span Leads
+              - if current_agency.enable_cold_email?
+                %li.li-block.hasChild
+                  %a.withripple{href: "javascript:void(0);"}
+                    %span.icon
+                      %i.clickx-icon-Email
+                    %span
+                      Prospecting
+                      %span.acc-menu-tag Beta
+                  %ul.acc-menu
+                    %li.sub-li
+                      %a.withripple{href: agency_lead_sources_path }
+                        %span.icon
+                          %i.clickx-icon-SellSheets
+                        %span Lists
+                    %li.sub-li
+                      %a.withripple{href: agency_single_direct_lead_path }
+                        %span.icon
+                          %i.clickx-icon-Launch2
+                        %span  Send
+                    %li.sub-li
+                      %a.withripple{href: emailed_agency_direct_leads_path}
+                        %span.icon
+                          %i.clickx-icon-CustomCMS
+                        %span  Reports
+                    %li.sub-li
+                      %a.withripple{href: buy_data_requests_agency_lead_sources_path}
+                        %span.icon
+                          %i.clickx-icon-db
+                        %span Data
+                    %li.sub-li
+                      %a.withripple{href: agency_email_templates_path}
+                        %span.icon
+                          %i.clickx-icon-EmailMarketing
+                        %span Templates
+              -else
+                %li.li-block.hasChild
+                  %a.withripple{href: "javascript:void(0);"}
+                    %span.icon
+                      %i.clickx-icon-Email
+                    %span
+                      Prospecting
+                      %span.acc-menu-tag Beta
+                  %ul.acc-menu
+                    %li.sub-li.sub-li--locked
+                      %a.withripple.lock-access{href: prospecting_lists_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-SellSheets
+                        %span Lists
+                    %li.sub-li.sub-li--locked
+                      %a.withripple.lock-access{href: prospecting_send_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-Launch2
+                        %span  Send
+                    %li.sub-li.sub-li--locked
+                      %a.withripple.lock-access{href: prospecting_reports_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-CustomCMS
+                        %span  Reports
+              - if policy(current_agency).industries?
+                %li.sub-li
+                  %a.withripple{href: "/a/industries"}
+                    %span.icon
+                      %i.clickx-icon-BlogWriting
+                    %span Niches
+              - else
+                %li.sub-li.sub-li--locked
+                  %a.withripple.lock-access{href: "javascript:;"}
+                    %span.icon
+                      %i.clickx-icon-BlogWriting
+                    %span Niches
+              - if current_agency.white_labeled
+                %li.li-block.hasChild
+                  %a.withripple{href: "javascript:void(0);"}
+                    %span.icon
+                      %i.clickx-icon-Gear
+                    %span Tools
+                  %ul.acc-menu
+                    - if policy(current_agency).portfolio?
+                      %li.sub-li
+                        %a.withripple{href: "/a/portfolio"}
+                          %span.icon
+                            %i.clickx-icon-image
+                          %span Portfolio
+                    - else
+                      %li.sub-li
+                        %a.withripple.lock-access{href: tools_portfolio_agency_menu_permissions_path}
+                          %span.icon
+                            %i.clickx-icon-image
+                          %span Portfolio
+                    - if policy(current_agency).documents?
+                      %li.sub-li
+                        %a.withripple{href: "/a/documents"}
+                          %span.icon
+                            %i.clickx-icon-Folder
+                          %span Documents
+                    - else
+                      %li.sub-li.sub-li--locked
+                        %a.withripple.lock-access{href: tools_documents_agency_menu_permissions_path}
+                          %span.icon
+                            %i.clickx-icon-Folder
+                          %span Documents
+                    - if policy(current_agency).case_study?
+                      %li
+                        %a{href: "/a/case_study_categories"}
+                          %span.icon
+                            %i.clickx-icon-Reports
+                          %span Case Studies
+                    - else
+                      %li.sub-li.sub-li--locked
+                        %a.withripple.lock-access{href: tools_casestudy_agency_menu_permissions_path}
+                          %span.icon
+                            %i.clickx-icon-Reports
+                          %span Case Studies
+                    -#%li.sub-li
+                      %a{href: "/a/facebook_ads"}
+                        %span.icon
+                          %i.icons-facebook_ads
+                        %span Facebook Ads
+                    - if current_agency&.is_social_media_ad
+                      %li.sub-li
+                        %a{href: "/a/social_posts"}
+                          %span.icon
+                            %i.clx-icon-facebook_ads
+                          %span Social Posts
+                    - else
+                      %li.acc-menu-item--locked
+                        %a.withripple.lock-access{href: tools_social_posts_agency_menu_permissions_path}
+                          %span.icon
+                            %i.clx-icon-facebook_ads
+                          %span Social Posts
+                    - if current_agency&.value_hook
+                      %li.sub-li
+                        %a{href: "/a/value_hooks"}
+                          %span.icon
+                            %i.clickx-icon-Video
+                          %span Value Hooks
+                    - else
+                      %li.acc-menu-item--locked
+                        %a.withripple.lock-access{href: tools_value_hooks_agency_menu_permissions_path}
+                          %span.icon
+                            %i.clickx-icon-Video
+                          %span Value Hooks
+                    -#%li.sub-li
+                      %a{href: "/a/plug_and_play_ads"}
+                        %span.icon
+                          %i.icons-facebook_ads
+                        %span Plug And Play Ads
+                    %li
+                      %a{href: "/a/data_studio"}
+                        %span.icon.mr-1
+                          %svg{:height => "24", :width => "24", :class => "icon-svg"}
+                            %use{"xlink:href" => "#data_studio"}
+                        %span Looker Studio
+                    - if current_agency.payment_links_enabled?
+                      - if policy(current_agency).payment_links?
+                        %li
+                          %a.withripple{href: '/a/payment_links'}
+                            %span.icon
+                              %i.clickx-icon-money
+                            %span Payments
+                      - else
+                        %li.acc-menu-item--locked
+                          %a.withripple.lock-access{href: tools_payments_agency_menu_permissions_path}
+                            %span.icon
+                              %i.clickx-icon-money
+                            %span Payments
+                    - else
+                      %li.acc-menu-item--locked
+                        %a.withripple.lock-access{href: tools_payments_agency_menu_permissions_path}
+                          %span.icon
+                            %i.clickx-icon-money
+                          %span Payments
+                    - if policy(current_agency).roi?
+                      %li.sub-li
+                        %a.withripple{href: "/a/roi_calculator"}
+                          %span.icon
+                            %i.clickx-icon-Calculator
+                          %span ROI Calculators
+                    - else
+                      %li.sub-li.sub-li--locked
+                        %a.withripple.lock-access{href: tools_roi_agency_menu_permissions_path}
+                          %span.icon
+                            %i.clickx-icon-Calculator
+                          %span ROI Calculators
+                    - if policy(current_agency).grader_reports?
+                      %li.sub-li
+                        %a.withripple{href: agency_grader_reports_path}
+                          %span.icon
+                            %i.clickx-icon-Measure
+                          %span Grader
+                    - else
+                      %li.sub-li.sub-li--locked
+                        %a.withripple.lock-access{href: tools_grader_agency_menu_permissions_path}
+                          %span.icon
+                            %i.clickx-icon-Measure
+                          %span Grader
+              - else
+                %li.li-block.hasChild
+                  %a.withripple{href: "javascript:void(0);"}
+                    %span.icon
+                      %i.clickx-icon-Gear
+                    %span Tools
+                  %ul.acc-menu
+                    %li.sub-li
+                      %a.withripple.lock-access{href: tools_portfolio_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-image
+                        %span Portfolio
+                    %li.sub-li.sub-li--locked
+                      %a.withripple.lock-access{href: tools_documents_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-Folder
+                        %span Documents
+                    %li.acc-menu-item--locked
+                      %a.withripple.lock-access{href: tools_casestudy_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-Reports
+                        %span Case Studies
+                    -#%li.sub-li
+                      %a{href: "/a/facebook_ads"}
+                        %span.icon
+                          %i.icons-facebook_ads
+                        %span Facebook Ads
+                    %li.acc-menu-item--locked
+                      %a.withripple.lock-access{href: tools_social_posts_agency_menu_permissions_path}
+                        %span.icon
+                          %i.icons-facebook_ads
+                        %span Social Posts
+                    %li.acc-menu-item--locked
+                      %a.withripple.lock-access{href: tools_value_hooks_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-Video
+                        %span Value Hooks
+                    %li.acc-menu-item--locked
+                      %a.withripple.lock-access{href: tools_data_studio_agency_menu_permissions_path}
+                        %span.icon.mr-1
+                          %svg{:height => "24", :width => "24", :class => "icon-svg"}
+                            %use{"xlink:href" => "#data_studio"}
+                        %span Looker Studio
+                    %li.acc-menu-item--locked
+                      %a.withripple.lock-access{href: tools_payments_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-money
+                        %span Payments
+                    %li.sub-li.sub-li--locked
+                      %a.withripple.lock-access{href: tools_roi_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-Calculator
+                        %span ROI Calculators
+                    %li.sub-li.sub-li--locked
+                      %a.withripple.lock-access{href: tools_grader_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-Measure
+                        %span Grader
+              - if current_agency.abc?
+                %li.li-block.hasChild
+                  %a.withripple{href: "javascript:void(0)"}
+                    %span.icon
+                      %i.clickx-icon-SocialMedia
+                    %span
+                      Projects
+                      %span.acc-menu-tag Beta
+                  %ul.acc-menu
+                    - if policy(current_agency).projects?
+                      %li.sub-li
+                        %a.withripple{href: "/a/projects"}
+                          %span.icon
+                            %i.clickx-icon-db
+                          %span My Projects
+                    - else
+                      %li.sub-li.sub-li--locked
+                        %a.withripple.lock-access{href: project_myproject_agency_menu_permissions_path}
+                          %span.icon
+                            %i.clickx-icon-db
+                          %span My Projects
+                    - if policy(current_agency).projects?
+                      %li
+                        %a.withripple{href: "/a/projects/new"}
+                          %span.icon
+                            %i.clickx-icon-Addition
+                          %span Post a Project
+                    - else
+                      %li.sub-li.sub-li--locked
+                        %a.withripple.lock-access{href: project_post_agency_menu_permissions_path}
+                          %span.icon
+                            %i.clickx-icon-Addition
+                          %span Post a Project
+                    - if policy(current_agency).projects?
+                      %li
+                        %a.withripple{href: '/a/projects/proposals'}
+                          %span.icon
+                            %i.clickx-icon-Measure
+                          %span Proposals
+                    - else
+                      %li.sub-li.sub-li--locked
+                        %a.withripple.lock-access{href: project_proposals_agency_menu_permissions_path}
+                          %span.icon
+                            %i.clickx-icon-Measure
+                          %span Proposals
+                    - if policy(current_agency).projects?
+                      %li
+                        %a.withripple{href: '/a/messages'}
+                          %span.icon
+                            %i.fa.fa-paper-plane
+                          %span Messages
+                    - else
+                      %li.sub-li.sub-li--locked
+                        %a.withripple.lock-access{href: project_messages_agency_menu_permissions_path}
+                          %span.icon
+                            %i.fa.fa-paper-plane
+                          %span Messages
+                    - if policy(current_agency).projects?
+                      %li
+                        %a.withripple{href: '/a/contractors'}
+                          %span.icon
+                            %i.fa.fa-users
+                          %span Contractors
+                    - else
+                      %li.sub-li.sub-li--locked
+                        %a.withripple.lock-access{href: project_contractors_agency_menu_permissions_path}
+                          %span.icon
+                            %i.fa.fa-users
+                          %span Contractors
+              - if policy(current_agency).plans?
+                - if policy(current_agency).packages?
+                  %li.li-block
+                    %a.withripple{href: '/a/packages'}
+                      %span.icon
+                        %i.clickx-icon-package
+                      %span Plans
+                - else
+                  %li.li--locked
+                    %a.withripple.lock-access{href: plans_agency_menu_permissions_path}
+                      %span.icon
+                        %i.clickx-icon-package
+                      %span Plans
+              - else
+                %li.li--locked
+                  %a.withripple.lock-access{href: plans_agency_menu_permissions_path}
+                    %span.icon
+                      %i.clickx-icon-package
+                    %span Plans
+              / - if policy(current_agency).branding?
+              /   %li
+              /     %a.withripple{href: "/a/settings/branding"}
+              /       %span.icon
+              /         %i.clickx-icon-Premium
+              /       %span Branding
+              / - else
+              /   %li.li--locked
+              /     %a.withripple.lock-access{href: "javascript:;"}
+              /       %span.icon
+              /         %i.clickx-icon-Premium
+              /       %span Branding
+              / - if current_agency.level
+              /   - if policy(current_agency).badges?
+              /     %li
+              /       %a.withripple{href: "/a/badges"}
+              /         %span.icon
+              /           %i.clickx-icon-certification
+              /         %span Badging
+              /   - else
+              /     %li.li--locked
+              /       %a.withripple.lock-access{href: "javascript:;"}
+              /         %span.icon
+              /           %i.clickx-icon-certification
+              /         %span Badging
+
+              %li.li-block.hasChild
+                %a.withripple{href: "javascript:void(0);"}
+                  %span.icon
+                    %i.clickx-icon-Grow
+                  %span Scale Program
+                %ul.acc-menu
+                  - if policy(current_agency).scale_program?
+                    %li.sub-li
+                      %a.withripple{href: "/a/scale_program"}
+                        %span.icon
+                          %i.clickx-icon-Video
+                        %span Modules
+                    %li.sub-li
+                      %a.withripple{href: "/a/scale_program/documents"}
+                        %span.icon
+                          %i.clickx-icon-Folder
+                        %span Resources
+                    -# %li.sub-li
+                    -#   %a.withripple{href: "/a/scale_program/recordings"}
+                    -#     %span.icon
+                    -#       %i.clx-icon-coaching
+                    -#     %span Coaching
+                    %li.sub-li
+                      %a.withripple{href: "/a/scale_program/reverse_scale_calculator"}
+                        %span.icon
+                          %i.fa.fa-calculator
+                        %span Scale Calculator
+                  - else
+                    %li.sub-li.sub-li--locked
+                      %a.withripple.lock-access{href: scale_program_modules_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-Video
+                        %span Modules
+                    %li.sub-li.sub-li--locked
+                      %a.withripple.lock-access{href: resource_scale_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-Folder
+                        %span Resources
+                    -# %li.sub-li.sub-li--locked
+                    -#   %a.withripple.lock-access{href: scale_program_coaching_agency_menu_permissions_path}
+                    -#     %span.icon
+                    -#       %i.clx-icon-coaching
+                    -#     %span Coaching
+
+              %li.li-block.hasChild
+                %a.withripple{href: "javascript:void(0);"}
+                  %span.icon
+                    %i.clx-icon-start_program
+                  %span Start Program
+                %ul.acc-menu
+                  - if current_agency.start_agency_program?
+                    %li.sub-li
+                      %a.withripple{href: "/a/start_agency_courses"}
+                        %span.icon
+                          %i.clx-icon-modules
+                        %span Modules
+                  - else
+                    %li.sub-li.sub-li--locked
+                      %a.withripple.lock-access{href: start_program_modules_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clx-icon-modules
+                        %span Modules
+
+              - if current_user.normal?
+                - if policy(current_agency).affiliate_dashboard?
+                  %li
+                    %a.withripple{href: '/affiliate_dashboard'}
+                      %span.icon
+                        %i.clickx-icon-Engage2
+                      %span Affiliate
+                - else
+                  %li.li--locked
+                    %a.withripple.lock-access{href: affiliate_dashboard_agency_menu_permissions_path}
+                      %span.icon
+                        %i.clickx-icon-Engage2
+                      %span Affiliate
+
+              %li.li-block.hasChild
+                %a.withripple{href: "javascript:void(0)"}
+                  %span.icon
+                    %i.clickx-icon-Business2
+                  %span Membership
+                %ul.acc-menu
+                  - if policy(current_agency).agency_infrastructure?
+                    %li.sub-li
+                      %a.withripple{href: '/a/packages/growth/agency_infrastructure'}
+                        %span.icon
+                          %i.clickx-icon-Grow
+                        %span Agency Plans
+                  - else
+                    %li.sub-li.sub-li--locked
+                      %a.withripple.lock-access{href: agency_infrastructure_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-Grow
+                        %span Agency Plans
+                  - if policy(current_agency).agency_website?
+                    %li.sub-li
+                      %a.withripple{href: '/a/packages/growth/agency_website'}
+                        %span.icon
+                          %i.clickx-icon-Website
+                        %span Website
+                  - else
+                    %li.sub-li.sub-li--locked
+                      %a.withripple.lock-access{href: agency_website_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-Website
+                        %span Website
+                  - if policy(current_agency).agency_dfy_content?
+                    %li.sub-li
+                      %a.withripple{href: '/a/packages/growth/agency_dfy_content'}
+                        %span.icon
+                          %i.clickx-icon-CustomCMS
+                        %span DFY Content
+                  - else
+                    %li.sub-li.sub-li--locked
+                      %a.withripple.lock-access{href: agency_dfy_content_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-CustomCMS
+                        %span DFY Content
+                  / - if policy(current_agency).agency_facebook_ads?
+                  /   %li.sub-li
+                  /     %a.withripple{href: '/a/facebook_ads'}
+                  /       %span.icon
+                  /         %i.clickx-icon-facebook
+                  /       %span Facebook Ads
+                  / - else
+                  /   %li.sub-li.sub-li--locked
+                  /     %a.withripple.lock-access{href: "a/facebook_ads"}
+                  /       %span.icon
+                  /         %i.clickx-icon-facebook
+                  /       %span Facebook Ads
+                  / - if policy(current_agency).agency_google_ads?
+                  /   %li.sub-li
+                  /     %a.withripple{href: '/a/packages/growth/agency_google_ads'}
+                  /       %span.icon
+                  /         %i.clickx-icon-adwords
+                  /       %span Google Ads
+                  / - else
+                  /   %li.sub-li.sub-li--locked
+                  /     %a.withripple.lock-access{href: "javascript:;"}
+                  /       %span.icon
+                  /         %i.clickx-icon-adwords
+                  /       %span Google Ads
+                  - unless policy(current_agency).scale_program?
+                    - if policy(current_agency).sales_coaching?
+                      %li.sub-li
+                        %a.withripple{href: '/a/packages/growth/sales_coaching'}
+                          %span.icon
+                            %i.clickx-icon-Grow
+                          %span Scale Program
+                    - else
+                      %li.sub-li.sub-li--locked
+                        %a.withripple.lock-access{href: sales_coaching_agency_menu_permissions_path}
+                          %span.icon
+                            %i.clickx-icon-Grow
+                          %span Scale Program
+
+              %li.li-block.hasChild
+                %a.withripple{href: "javascript:void(0)"}
+                  %span.icon
+                    %i.clickx-icon-SocialMedia
+                  %span Help
+                %ul.acc-menu
+                  - if policy(current_agency).support?
+                    %li.sub-li
+                      %a.withripple{href: "/a/support"}
+                        %span.icon
+                          %i.clickx-icon-Support
+                        %span Support
+                  - else
+                    %li.sub-li.sub-li--locked
+                      %a.withripple.lock-access{href: support_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-Support
+                        %span Support
+                  - if current_agency.white_labeled
+                    - if policy(current_agency).faqs?
+                      %li
+                        %a.withripple{href: "/a/faqs"}
+                          %span.icon
+                            %i.clickx-icon-help
+                          %span FAQ
+                    - else
+                      %li.sub-li.sub-li--locked
+                        %a.withripple.lock-access{href: faq_agency_menu_permissions_path}
+                          %span.icon
+                            %i.clickx-icon-help
+                          %span FAQ
+                  - else
+                    %li.sub-li.sub-li--locked
+                      %a.withripple.lock-access{href: faq_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-help
+                        %span FAQ
+                  - if current_agency.has_active_subscription?
+                    - if policy(current_agency).community?
+                      %li
+                        %a.withripple{href: '/a/community'}
+                          %span.icon
+                            %i.clickx-icon-facebook
+                          %span Community
+                    - else
+                      %li.sub-li.sub-li--locked
+                        %a.withripple.lock-access{href: community_agency_menu_permissions_path}
+                          %span.icon
+                            %i.clickx-icon-facebook
+                          %span Community
+                  - else
+                    %li.sub-li.sub-li--locked
+                      %a.withripple.lock-access{href: community_agency_menu_permissions_path}
+                        %span.icon
+                          %i.clickx-icon-facebook
+                        %span Community
+
+.hidden
+  %svg{:xmlns => "http://www.w3.org/2000/svg"}
+    %symbol#data_studio{:viewbox => "0 0 40 40", }
+      %path{:d => "M19.9088 3.95834C18.3013 3.95834 17.0969 5.1627 17.0969 6.77021C17.0969 7.30604 17.2313 7.84188 17.6328 8.37771L18.8371 7.17336V6.77191C18.8371 6.10169 19.3729 5.56755 20.0415 5.56755C20.71 5.56755 21.2458 6.10339 21.2458 6.77191C21.2458 7.44042 20.71 7.97626 20.0415 7.97626H19.64L18.4357 9.04793C19.7744 9.85083 21.5163 9.58377 22.3192 8.24503C23.1221 6.90629 22.855 5.1644 21.5163 4.3615C21.1148 4.09443 20.579 3.96004 19.9088 3.96004V3.95834Z", :fill => "#ffffff"}
+      %path{:d => "M18.837 12.1269C18.837 11.1896 18.5699 10.2523 18.0341 9.4494L16.4266 11.0569C16.561 11.4584 16.6937 11.7271 16.6937 12.1286C16.6937 12.7988 16.4266 13.3329 16.0234 13.7361L16.8263 15.8794C18.1651 15.0765 18.8353 13.6034 18.8353 12.1303L18.837 12.1269Z", :fill => "#ffffff"}
+      %path{:d => "M14.5521 14.4029C13.3477 14.4029 12.276 13.4656 12.276 12.2595C12.276 11.0535 13.2133 9.98351 14.4194 9.98351C14.8208 9.98351 15.3567 10.1179 15.7581 10.385L17.3656 8.91184C16.4283 8.10894 15.491 7.70749 14.4194 7.70749C12.009 7.70749 10 9.71645 10 12.1269C10 14.5373 11.8746 16.5462 14.4194 16.5462C14.6864 16.5462 15.0896 16.5462 15.3567 16.4118L14.5538 14.4029H14.5521Z", :fill => "#ffffff"}
+      %path{:d => "M20.0431 16.1431C19.1059 16.1431 18.1686 16.2775 17.2313 16.5445L18.4356 19.4908C18.9715 19.4908 19.5073 19.3564 20.0431 19.3564C23.7923 19.3564 26.7385 22.437 26.7385 26.0518C26.7385 29.6665 23.6579 32.7472 20.0431 32.7472C16.4284 32.7472 13.3477 29.6665 13.3477 26.0518C13.3477 23.507 14.6865 21.231 16.9625 20.1593L15.7582 17.213C10.803 19.6251 8.79569 25.6503 11.2044 30.4711C13.6148 35.4263 19.64 37.4336 24.4608 35.0232C29.416 32.6128 31.4233 26.5876 29.0129 21.7668C27.2727 18.4191 23.7906 16.1431 20.0414 16.1431H20.0431Z", :fill => "#ffffff"}
+    
+:css
+  .sidebar-scroll .sidebar nav.widget-body > ul.acc-menu li a.lock-access {pointer-events:initial;}
+<script>
+var beamer_config = {
+product_id : 'MozlTJIr39739',
+selector : '.show-beamer-notifications',
+};
+</script>
+<script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer="defer"></script>

@@ -1,0 +1,13 @@
+- content_for :title do
+  = "Edit  | Clickx"
+.page-heading.bg-white.mb-4
+  .d-flex.justify-content-between.flex-wrap
+    .coll.my-2
+      %h1 Edit Resource
+    .col
+      .options
+        %a.btn.btn-warning{href: agency_documents_path } Back
+.container-fluid
+  .agency-form
+    = form_for @document, url: agency_document_path, method: :patch do |f|
+      = render 'form', f: f

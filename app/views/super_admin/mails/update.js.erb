@@ -1,0 +1,8 @@
+<% if @email.errors.present? %>
+  toastr.error("<%= @email.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success('Email successfully');
+  window.location.href = "<%= @redirect_url %>"
+<% end %>
+
+$('#edit-strategy-modal').modal('hide')

@@ -1,0 +1,5 @@
+<% if params[:page].present? %>
+  $('#messages-list').append("<%= escape_javascript render( partial: 'super_admin/chats/messages_list', locals: { threads: @threads }) %>");
+<% else %>
+  $('#messages-list').html("<%= escape_javascript render( partial: 'super_admin/chats/messages_list', locals: { threads: @threads }) %>");
+<% end %>

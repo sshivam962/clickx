@@ -1,0 +1,1125 @@
+- plan = plans['short_form_videos']&.first
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Short Form Videos
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              10 videos
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext 10 videos.
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 60 Seconds Clips
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Color Grading
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Identify Nuggets
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Video Editing
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Editor Review
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Add Subtitles
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Add Video Titles
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Project Management
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+
+- plan = plans['facebook_cover_design']&.first
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Facebook Cover Design
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Custom Designed Cover
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext Design a cover photo that helps build your brand and communicates your killer offer.
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Mobile-friendly/Responsive
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 2 Rounds of Revisions
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Offer / Call To Action Buttons
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Complimentary Featured Photo
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Use it for Page or Profile
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Submit Photos & Logos
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+
+- plan = Plan.find_by(key: 'alacarte_consulting', package_type: 'consulting')
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Consulting
+        .plan-card--price
+          #{in_currency(plan.amount, current_agency.display_currency)}
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Campaign Strategy
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Audience Strategy
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Offer Strategy
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Landing Page Feedback
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Ad Copy Feedback
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Tracking Feedback
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Minimum 2 Hours
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: plan.package_type, plan: plan.key)}
+            Get Started
+/ - plan = Plan.find_by(key: '300_to_400_words', package_type: 'brand_refinement_website_content')
+/ - if plan.present?
+/   .ala_carte-list--item.services{"data-category" => "services"}
+/     .plan-card
+/       .plan-card--header
+/         .f-s-22.fw-sb.text-black Brand Refinement & Website Content
+/         .plan-card--price
+/           = in_currency(plan.amount, current_agency.display_currency)
+/         .plan-card--price-slashed
+/           MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+/       .plan-card--body
+/         %ul.plan-card-list
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span
+/               Custom Website Copy based on Creative Brief
+/               .custom-tooltip
+/                 %i.fa.fa-info-circle
+/                 -# %span.custom-tooltiptext ather information about the brand’s uniqueness and bring it to life with revamped website copy.
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span
+/               Review Target Market, 2 Competitors, Voice & Tone
+/               .custom-tooltip
+/                 %i.fa.fa-info-circle
+/                 %span.custom-tooltiptext We’ll start by addressing customer’s pain points and desires, top competitors in the niche, and the tone of copy
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span
+/               Review Brand Positioning
+/               .custom-tooltip
+/                 %i.fa.fa-info-circle
+/                 %span.custom-tooltiptext Review and position the brand so that it is able to differentiate itself
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span
+/               Review Unique Selling Proposition
+/               .custom-tooltip
+/                 %i.fa.fa-info-circle
+/                 %span.custom-tooltiptext We’ll create a strong Unique Selling Proposition and supporting statements
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span
+/               Copy Per Page (Up to 300 - 400 Words)
+/               .custom-tooltip
+/                 %i.fa.fa-info-circle
+/                 %span.custom-tooltiptext Website copy pages might include: Home, About, Product/Service Page, Backstory, or Pricing
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 3-5 Business Days Delivery (after receiving Creative Brief)
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Google Doc Delivery
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 1 Round of Edits
+/       - unless @is_preview
+/         .plan-card--footer
+/           %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: plan.package_type, plan: plan.key)}
+/             Get Started
+- plan = plans['google_ads_mcc_setup']&.first
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Google Ads MCC Access & Ad Account Setup
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Setup MCC (If Necessary) Or Access to MCC
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext With an MCC we can link several ad accounts and manage them in a single location.
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Audit Google Ad Account
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext We’ll assess how effective your past campaigns and SEO intent are to ensure future campaigns achieve desired goals.
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Setting up conversion events
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext By setting specific goals we will track data over time to optimize results.
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Connect Google Analytics
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext Google Analytics lets us measure organic traffic and advertising ROI as well as track flash, video, social networking sites, and applications
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Connecting Tag Manager
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext Google Tag Manager allows us to quickly and easily update tags and code snippets on the website.
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Conversion Tracking Setup
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Review Google Campaigns Best Practices
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Connect CC
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+- plan = plans['fb_business_manager_setup']&.first
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black FB Business Manager Setup & Ad Account Setup
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Setup Business Manager (If Necessary)
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Audit Business Manager
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Connect Client to Agency Business Manager
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Connect Client Ad Account
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Connect Facebook Page
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Domain Verification
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Assist with Business Verification
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Review FB Ads Best Practices
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+/ - plan = plans['template_landing_page_v2']&.first
+/ - if plan.present?
+/   .ala_carte-list--item.services{"data-category" => "services"}
+/     .plan-card
+/       .plan-card--header
+/         .f-s-22.fw-sb.text-black Template Landing Page
+/         .plan-card--price
+/           = in_currency(plan.amount, current_agency.display_currency)
+/         .plan-card--price-slashed
+/           MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+/       .plan-card--body
+/         %ul.plan-card-list
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Unbounce Platform
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Design Customization
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Mobile Optimized
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span SEO Friendly Structure
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Content Provided by Client
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Custom Lead Form
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Lead Notification Setup
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 30 Days Free Support
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 1 Round of Revisions
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span #{in_currency(10, current_agency.display_currency)}/mo for Hosting Service
+/       - unless @is_preview
+/         .plan-card--footer
+/           %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+/             Get Started
+- plan = plans['template_landing_page_with_content_v2']&.first
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Template Landing Page + Content
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Unbounce Platform
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Design Customization
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Mobile Optimized
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span SEO Friendly Structure
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Content Creation
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Custom Lead Form
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Lead Notification Setup
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 30 Days Free Support
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 1 Round of Revisions
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span #{in_currency(10, current_agency.display_currency)}/mo for Hosting Service
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+- plan = plans['custom_landing_page_v2']&.first
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Custom Landing Page
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Custom Design
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Custom Development
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Mobile Optimized
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span SEO Friendly Structure
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Content Provided by Client
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Custom Lead Form
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Lead Notification Setup
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 30 Days Free Support
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 1 Round of Revisions
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span #{in_currency(10, current_agency.display_currency)}/mo for Hosting Service
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+- plan = plans['funnel_development_starter']&.first
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Funnel Starter
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Funnel Strategy Development
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Funnel Development Questionnaire
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Kick-Off Call with Agency
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 3 Step Development
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Short Form Page Length
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Word Count up to 1,000
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Copy Repurposing
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Copywriting/Messaging Strategy
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span CTA Development
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Mobile Optimization
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Funnel Setup (Platform)
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Final Revisions 1 Round
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Technical Support Offered 15 Days
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Design Review Call
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span A/B Testing
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Conversion Optimization
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+- plan = plans['google_ads_creatives']&.first
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Google Ads Creatives
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Google Ad Design
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Copy &amp; Design Support
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Maximum 5 Ads for Mobile
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Maximum 5 Ads for Desktop
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Dedicated Design Team
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Design Best Practices
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Clear Value Proposition
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Clear Call to Action
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Stock Image or Visual
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 1 Round of Revisions
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Standard Delivery Time
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+- plan = plans['facebook_ads_creatives']&.first
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Facebook Ads Creatives
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Facebook Ad Design
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Copy &amp; Design Support
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 2 Versions of Split Testing
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Dedicated Design Team
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Optimized for Mobile
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Design Best Practices
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Clear Value Proposition
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Clear Call to Action
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Stock Image or Visual
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 1 Round of Revisions
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Standard Delivery Time
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+/ - plan = plans['facebook_product_catalog']&.first
+/ - if plan.present?
+/   .ala_carte-list--item.services{"data-category" => "services"}
+/     .plan-card
+/       .plan-card--header
+/         .f-s-22.fw-sb.text-black Facebook Product Catalog
+/         .plan-card--price
+/           = in_currency(plan.amount, current_agency.display_currency)
+/         .plan-card--price-slashed
+/           MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+/       .plan-card--body
+/         %ul.plan-card-list
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Create a Catalog
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Upload Product Info
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Connect Ecommerce Platform
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Import Items (if necessary)
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Upload a Data Feed File to a Catalog
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Assign Catalog Permissions
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Optimize Catalog
+/       - unless @is_preview
+/         .plan-card--footer
+/           %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+/             Get Started
+- plan = plans['technical_seo']&.first
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Technical SEO
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Resolve Technical SEO Issues
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext Technical issues that may come up include duplicate content, poor mobile experience, low-quality link building, poor navigation or improper redirects
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Canonical URL
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext Canonical URL is the URL of the page that Google thinks is most representative from a set of duplicate pages on your site and helps us prevent duplicate pages.
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span .htaccess
+            %span
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext .htaccess files provide a way to make configuration changes on a per directory basis so we can take care of small issues without interrupting the rest of your website
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              XML Sitemap Configuration
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext The XML configuration gives us the ability to set the frequency of updates to a website so the priority for each type of content is intact.
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Robots.txt File
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext Robots.txt, is a standard way for websites to communicate with web crawlers and other web robots that keep a website clean.
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Schema Markup
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext Schema Markup for search engines uses a unique semantic vocabulary to more clearly provide information to search engines in order to understand your content.
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 1 Round of Revisions
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+- plan = plans['on_page_implementation']&.first
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black On Page Implementation
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Up to 20 Pages Metadata
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext Metadata is used to summarize various pages of your content so search engines know where and how to rank it.
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Title Tags
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext Title tags provides the web page with a title.
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Meta Descriptions
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext Meta descriptions are used to summarize the content of a web page. Descriptions are shown in search engine listings.
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Header Tags
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext Header tags are used to separate headings and subheadings on a webpage and can be used for SEO purposes
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              H1 and H2 Tag Analysis
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext H1and H2 tags represent the most important headings on the web pages as they describe what that page is about. It is important to put relevant keywords in these headings since they are one of the factors that play into search engine ranking.
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Image Size Optimization
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext Images are analyzed to check for file sizes. Larger sized images will take longer to load and can negatively affect site speed.
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span
+              Content Analysis
+              .custom-tooltip
+                %i.fa.fa-info-circle
+                %span.custom-tooltiptext Web site content is analyzed to make sure content is relevant to services offered, proper structures are in place, and SEO optimized keywords used among other items.
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+
+- plan = plans['30_sec_video_ad']&.first
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black 30 Second Video Ad
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Video Strategy Session
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Video Messaging Support
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Text Animations
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Existing Footage Editing
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Online Video Proofing
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 1 Round of Revisions
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Package Final File
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Deliver Final Video
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+/ - plan = plans['60_sec_video_ad']&.first
+/ - if plan.present?
+/   .ala_carte-list--item.services{"data-category" => "services"}
+/     .plan-card
+/       .plan-card--header
+/         .f-s-22.fw-sb.text-black 60 Second Video Ad
+/         .plan-card--price
+/           = in_currency(plan.amount, current_agency.display_currency)
+/         .plan-card--price-slashed
+/           MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+/       .plan-card--body
+/         %ul.plan-card-list
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Video Strategy Session
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Video Messaging Support
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Text Animations
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Existing Footage Editing
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Online Video Proofing
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 2 Rounds of Revisions
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Package Final File
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Deliver Final Video
+/       - unless @is_preview
+/         .plan-card--footer
+/           %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+/             Get Started
+/ - plan = plans['90_sec_video_ad']&.first
+/ - if plan.present?
+/   .ala_carte-list--item.services{"data-category" => "services"}
+/     .plan-card
+/       .plan-card--header
+/         .f-s-22.fw-sb.text-black 90 Second Video Ad
+/         .plan-card--price
+/           = in_currency(plan.amount, current_agency.display_currency)
+/         .plan-card--price-slashed
+/           MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+/       .plan-card--body
+/         %ul.plan-card-list
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Video Strategy Session
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Video Messaging Support
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Text Animations
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Existing Footage Editing
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Online Video Proofing
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 2 Rounds of Revisions
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Package Final File
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Deliver Final Video
+/       - unless @is_preview
+/         .plan-card--footer
+/           %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+/             Get Started
+- plan = plans['in_depth_keyword_research']&.first
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black In-Depth Keyword Research
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Buyer Intent Research
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Keyword Difficulty
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Industry Research
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Competitor Keywords
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Identity Core Keywords
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Identify Search Volume
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span XLS File Delivery
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+- plan = plans['competitor_research']&.first
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Competitor Research
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 3 Competitors Analyzed
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span SEO Analysis
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Paid Analysis
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Backlinks Analysis
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span CRO Analysis
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span UI/UX Analysis
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Social Media Analysis
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+            Get Started
+- plan = Plan.find_by(key: 'upto_800_words', package_type: 'blog_creation')
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Blog Creation
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Build Authority
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Increase Organic Traffic
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Improve SEO
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Marketing Platform Writers
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Professionally Written Copy
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Blog Title
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Blog Body Copy (600-1200 words per request)
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 3 - 5 Business Days Delivery (after the creative brief is received)
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Google Document Delivery
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 1 Round of Edits (within 3 days of delivery)
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: plan.package_type, plan: plan.key)}
+            Get Started
+- plan = Plan.find_by(key: '150_to_300_words', package_type: 'email_sequence_creation')
+- if plan.present?
+  .ala_carte-list--item.services{"data-category" => "services"}
+    .plan-card
+      .plan-card--header
+        .f-s-22.fw-sb.text-black Email Sequence Creation
+        .plan-card--price
+          = in_currency(plan.amount, current_agency.display_currency)
+        .plan-card--price-slashed
+          MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+      .plan-card--body
+        %ul.plan-card-list
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Custom Emails based on Creative Brief
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Industry-Specific Writers
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Professionally Written Copy
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 1 Subject Link
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Email Body Copy (150-300 words)
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 3 - 5 Business Days Delivery (after the creative brief is received)
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span Google Document Delivery
+          %li
+            %i.material-icons.text-info.tick-r.f-s-20 check
+            %span 1 Round of Edits (within 3 days of delivery)
+      - unless @is_preview
+        .plan-card--footer
+          %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: plan.package_type, plan: plan.key)}
+            Get Started
+/ - plan = plans['customer_success_story']&.first
+/ - if plan.present?
+/   .ala_carte-list--item.services{"data-category" => "services"}
+/     .plan-card
+/       .plan-card--header
+/         .f-s-22.fw-sb.text-black Customer Success Story
+/         .plan-card--price
+/           = in_currency(plan.amount, current_agency.display_currency)
+/         .plan-card--price-slashed
+/           MSRP: #{in_currency(plan.min_recommended_price, current_agency.display_currency)}
+/       .plan-card--body
+/         %ul.plan-card-list
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span End User or Client Interview
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Case Study Objective Session
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Client Brief of Story
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Target Audience Research
+
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Written in Case Study Format
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Delivered as a Word Doc
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span 600 - 800 words
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span One Round of Revisions
+/       - unless @is_preview
+/         .plan-card--footer
+/           %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: plan.package_type, plan: plan.key)}
+/             Get Started
+/ - plan = plans['e_commerce_strategy']&.first
+/ - if plan.present?
+/   .ala_carte-list--item.services{"data-category" => "services"}
+/     .plan-card
+/       .plan-card--header
+/         .f-s-22.fw-sb.text-black E-commerce Strategy
+/         .plan-card--price
+/           = number_to_currency(plan.amount, precision: 0)
+/         .plan-card--price-slashed
+/           MSRP: #{number_to_currency(plan.min_recommended_price, precision: 0)}
+/       .plan-card--body
+/         %ul.plan-card-list
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Strategy Questionnaire
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Kick-Off Call with Agency
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span SMART Goal Setting
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Custom Strategy Development
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Audience Research
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Defined Objectives
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span SWOT Analysis
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Competitive Landscape 
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Tactics and Best Practices
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Timeline Recommendations
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Presentation Call with Agency
+/           %li
+/             %i.material-icons.text-info.tick-r.f-s-20 check
+/             %span Min 2 Weeks Turnaround
+
+/       - unless @is_preview
+/         .plan-card--footer
+/           %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: 'ala_carte', plan: plan.key)}
+/             Get Started

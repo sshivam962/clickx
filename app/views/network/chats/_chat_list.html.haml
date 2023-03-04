@@ -1,0 +1,17 @@
+- chat_threads.each do |chat_thread|
+  .messaging-messages-list-item.chat_item{id: "chat_thread_#{chat_thread.id}", 'data-thread_id': chat_thread.id}
+    %a.p-3.block.hover:bg-gray-100.transition-all.group
+      .flex
+        .col-auto.pr-3.unread-messages-notification
+          - if chat_thread.chat_messages.unread.where(receiver_id: current_user.id).present?
+            %span.text-xxs{class: 'bubble', id: "bubble_#{chat_thread.id}"}= chat_thread.chat_messages.unread.where(receiver_id: current_user.id).count
+          .w-12.h-12.leading-10.p-1.bg-gray-300.rounded-full.text-center.font-medium
+            = chat_thread.agency.name[0]
+        .flex-1.overflow-hidden.pt-2
+          .flex.justify-between.leading-none.pb-2
+            .text-gray-900.text-sm.truncate.font-medium= chat_thread.agency.users.first.name
+            .div{id: "message_time_#{chat_thread.id}"}
+              - if chat_thread.chat_messages.exists?
+                - last_message = chat_thread.chat_messages.last
+                .col-auto.pl-3.text-xs.text-gray-400.whitespace-no-wrap= last_message.created_at.to_date == Date.current ? last_message.created_at.strftime("%l:%M %p") : last_message.created_at.strftime("%d/%m/%y")
+          .text-gray-700.text-xs.truncate.leading-none{id: "latest_message_#{chat_thread.id}"}= chat_thread.latest_message&.message

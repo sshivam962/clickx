@@ -1,0 +1,26 @@
+// Create and Edit modal can be used as single modal
+%script{type:"text/ng-template",id:"edit-keyword.html"}
+  %md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-compressed
+    %form{'ng-submit': 'update(keyword)'}
+      %md-toolbar
+        .md-toolbar-tools
+          %h3.modal-title Keyword Change Location : {{keyword.name}}
+          %span.flex
+          %md-button.md-button.md-icon-button{"ng-click":"closeModal()"}
+            %span.fa.fa-times-circle-o
+      %md-dialog-content
+        .search_term.alert.alert-danger.font-14
+          Any changes to country or city would result in making any present historical ranking data invalid, so those would be removed and this would be considered as a new keyword which starts ranking today.
+        .md-dialog-content
+          .form-group.clearfix
+          .form-group.clearfix
+            %label.col-md-12.control-label.m-n{:for => "fieldname"} Country
+            .col-md-12
+              %select.form-control.mb-lg{ 'placeholder': 'Select a Country', 'ng-model': 'keyword.locale', 'ng-change': 'setLocation()' }
+                %option{ 'ng-repeat': 'locale in countryList', 'value': '{{locale.locale}}', 'ng-selected': 'locale.locale == keyword.locale' } {{locale.country}}
+          .form-group.clearfix
+            %label.col-md-12.control-label.m-n{:for => "fieldname"} City
+            .col-md-12
+              %input.form-control{name: 'city', 'ng-model': 'keyword.city', type: 'text', 'vs-google-autocomplete': 'options'}
+      %md-dialog-actions
+        %input.btn.btn-raised.btn-primary{:type => "submit", :value => "Save"}

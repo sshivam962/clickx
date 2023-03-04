@@ -1,0 +1,17 @@
+- content_for :title do
+  Digital Marketing Strategy | Clickx
+.ui-2020.package-page
+  .page-content
+    .page-heading.pt-md.pb-md
+      %h1
+        .d-flex
+          .col-auto
+            %i.clickx-icon-Strategize
+          .col-auto
+            Digital Marketing Strategy
+
+    .container-fluid
+      - lead_generation_plan = @package.lead_generation_plan
+      - if lead_generation_plan.present?
+        .col-sm-12.mt-md
+          = render 'agency/packages/shared/lead_generation', plan: lead_generation_plan

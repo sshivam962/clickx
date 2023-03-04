@@ -1,0 +1,63 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "width=device-width", :name => "viewport"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "content-type"}/
+    :css
+      body {margin: 0; padding: 0;}
+
+      @media only screen and (max-width: 768px) {
+        .footer-copy {
+          padding: 0 0px !important;
+        }
+        .main-txt {
+          font-size: 28px !important;
+        }
+        .sub-txt {
+          font-size: 18px !important;
+        }
+        .btn-post {
+          padding: 15px 75px !important;
+        }
+
+      }
+  %body
+    %div{:style => "padding: 15px;"}
+      %div{:style => "font: 16px/1.2em 'Montserrat','Kaushan Script','Source Sans Pro', Arial,Helvetica,sans-serif; width: 730px; max-width: 100%; margin: 0 auto; color: #777777; background: #F6F6F7; box-shadow: 0 1px 2px rgba(76, 78, 96, 22%); border-color: #e4e1e1; border-style: solid; border-width: 1px;"}
+        %div{:style => "padding:25px 15px 25px 15px; background-color: #fff;"}
+          %div{:style => "text-align:center;"}
+            %a{:style => "text-decoration:none;color:black"}
+              %img{:alt => "clickx.io", :src => "https://www.clickx.io/wp-content/uploads/logos/full_color/clickx-logo-fullcolor.png", :width => "180"}/
+        %div{:style => "padding-top: 40px; padding-bottom: 0px;"}
+          %h2{:style => "text-align:center; font-family: Montserrat; font-size: 29pt; font-weight: 400; color: #4C4E60; line-height: 1; margin: 0;"}
+            Hi #{@user.first_name}
+        %div
+          %div
+            %div{:style => "padding:0;"}
+              %img{:src => @banner_url, :style => "width: 100%;"}
+          %div
+            %div{:style => "text-align: center;     padding: 0px 45px;"}
+              %h4.main-txt{:style => "font-family: Montserrat; font-size: 27pt; font-weight: 400; line-height: 1.3; margin: 0;"}
+                Please post on our Facebook Group about your
+                %b{:style => "color: #000;"} WIN!
+            %div{:style => "text-align: center;     padding: 0px 55px;"}
+              %h5.sub-txt{:style => "font-family: Montserrat; font-size: 19pt; font-weight: 400; text-align: center; line-height: 1.3;"} We ❤️ sharing success in our community. Success breeds success.
+            %div{:style => "text-align: center;"}
+              %a{:href => "https://www.facebook.com/groups/467613194221213/", :target => "_blank"}
+                %button{:style => "background-color: #000; border: #707070; border-radius: 9px; color: white; padding: 15px 100px; text-align: center; text-decoration: none; display: inline-block; margin: 4px 2px; cursor: pointer; font-size: 20px; font-weight: 700; font-family: Montserrat;transition: 0.3s;"} POST NOW
+            %div
+              %h6{:style => "font-family: Montserrat; font-size: 18px; font-weight: 400; text-align: center; line-height: 1.2; margin: 0; padding-top: 80px;"} FOLLOW US
+              .footer-social-media{:style => "text-align: center; padding-top: 25px; padding-bottom: 25px;"}
+                %a{:href => "https://www.facebook.com/groups/467613194221213/", :target => "_blank"}
+                  %img{:src => "https://clickx-images.s3.amazonaws.com/social/fb.png", :style => "width: 50px; padding: 10px;"}/
+                %a{:href => "https://www.instagram.com/clickxio/?sub_confirmation=1/", :target => "_blank"}
+                  %img{:src => "https://clickx-images.s3.amazonaws.com/social/insta.png", :style => "width: 50px; padding: 10px;"}/
+                %a{:href => "https://www.youtube.com/c/Clickxio?sub_confirmation=1", :target => "_blank"}
+                  %img{:src => "https://clickx-images.s3.amazonaws.com/social/you.png", :style => "width: 50px; padding: 10px;"}/
+                %a{:href => "https://www.linkedin.com/company/clickx?sub_confirmation=1", :target => "_blank"}
+                  %img{:src => "https://clickx-images.s3.amazonaws.com/social/in.png", :style => "width: 50px; padding: 10px;"}/
+            %hr{:style => "width: 75%;"}/
+            %div
+              %h6.footer-copy{:style => "font-family: Montserrat; font-size: 9pt; font-weight: 300; text-align: center; line-height: 1.5; padding: 0 230px;"} © #{Date.current.year} Clickx – Digital Marketing Platform. All Rights Reserved. Made with ♥ in Chicago
+    %link{:href => "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap", :rel => "stylesheet"}/
+    %link{:href => "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap", :rel => "stylesheet"}/

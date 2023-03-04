@@ -1,0 +1,6 @@
+$('#industry_list').html("<%= escape_javascript render( partial: 'niche_list', locals: { clients: @clients }) %>");
+var name = $('#search_industry').val().toLowerCase();
+if (name.length >=3) 
+{
+  $('#casestudy_list').html("<%= escape_javascript render( partial: 'case_studies_list', locals: { clients: @clients }) %>");
+}

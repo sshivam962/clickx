@@ -1,0 +1,6 @@
+<% if resource&.errors.present? %>
+  toastr.error("<%= resource.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success('Invitation Sent');
+  $('#new_user')[0].reset()
+<% end %>

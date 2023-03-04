@@ -1,0 +1,38 @@
+- access = current_agency.enabled_document_categories.include?(@category)
+- documents.each do |document|
+  .col-lg-3.col-md-4.col-sm-6.col-xs-12.mb-5
+    - link = '#'
+    - target = ''
+    - if access
+      - if document.document_link.present?
+        - link = document.document_link
+        - target = '_blank'
+      - elsif document.document_attachment.present?
+        - link = document.document_attachment.file&.url
+        - target = '_blank'
+      %a(href=link target=target) 
+        .card.card--document.h-100.mb-0.d-flex.flex-column
+          .card-image.br-10
+            - if document.thumbnail.present?
+              %img.document-image.br-10{:alt => "Loading image...", src: document.thumbnail&.file&.url}
+          .px-4.pt-5.flex-col
+            .fwn
+              .no-underline.color-dark-blue= document.title
+            .pt-2.mt-1
+              %small.fs-12
+                = precede 'Updated ' do
+                  = document.updated_at.strftime('%b %d, %Y')
+          .px-3.py-4.mt-4
+            - if access
+              - if document.document_link.present?
+                %button{'class' => 'button btn width100 btn-lg btn--dark f-w-lg'} View
+              - elsif document.document_attachment.present?
+                %button{'class' => 'button btn width100 btn-lg btn--dark f-w-lg'} Download
+              - else
+                %button{'class' => 'button btn width100 btn-lg btn--dark f-w-lg'} 
+                  %i.fa.fa-lock
+                  Download
+            - else
+              %button{'class' => 'button btn width100 btn-lg btn--dark f-w-lg'} 
+                %i.fa.fa-lock
+                Download

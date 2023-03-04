@@ -1,0 +1,35 @@
+.page-content
+  .page-heading.no-margin-bottom
+    %h1
+      %i.clickx-icon-SellSheets.title-icon>
+      Assigned Service Onboarding
+    .options
+      %a.btn.btn-white.btn-raised{href:"/#/agencies/service_onboarding"}
+        %i.fa.fa-arrow-left.pr-xs
+        Back
+  .container-fluid
+    %div
+      .row.onboarding-checklist
+        .col-sm-12
+          .panel.panel-default
+            .panel-body
+              .table-responsive
+                %table.table.table-striped.table-bordered.table-vam
+                  %thead
+                    %th Title
+                    %th Client Name
+                    %th.center Action
+
+                  %tbody
+
+                    %tr{'ng-repeat' => "procedure in assigned_onboarding_procedures"}
+                      %td {{procedure.title}}
+                      %td {{procedure.business_name}}
+                      %td.center
+                        %span
+                          %a.btn.btn-success.btn-sm{href: '/#/agencies/service_onboarding/{{procedure.id}}'}
+                            %span.fa.fa-edit
+                            Edit
+                          %a.btn.btn-danger.btn-sm{'ng-click' => 'delete(procedure.id)'}
+                            %span.fa.fa-trash
+                            Delete

@@ -1,0 +1,11 @@
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": [
+        {
+            "url": "https://www.voicestar.com/calls/audio?token=c25f4cde36c4ba7897242bae2fdfa2e3.mp3",
+            "token": "c25f4cde36c4ba7897242bae2fdfa2e3.mp3",
+            "call_id": "Ch6WD1Yr4ElA9MZz"
+        }
+    ]
+}

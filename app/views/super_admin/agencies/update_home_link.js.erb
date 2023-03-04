@@ -1,0 +1,6 @@
+<% if @agency.errors.present? %>
+  toastr.error("<%= @agency.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success('Home Link Saved');
+  location.reload();
+<% end %>

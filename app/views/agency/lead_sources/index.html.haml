@@ -1,0 +1,167 @@
+= stylesheet_link_tag 'https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css'
+= javascript_include_tag "https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"
+.page-heading.bg-white.mb-4
+  .d-flex.justify-content-between.flex-wrap
+    .coll.my-2
+      %h1 Lists
+
+.container-fluid
+  .inbox-read-details.clearfix.max_h
+    .lead_source_wrapper
+      .lead_source_column-wrap
+        #lead_source_list.lead_source_column
+          .border-1.bg-sky-blue.border-blue.rounded.h-100
+            .bg-white.px-4.py-4.rounded-t-12.fw-m.text-darkblue
+              .d-flex.justify-content-between.align-items-center
+                .col
+                  List Name
+                .col
+                  %a.btn.btn--dark.btn-sm{:href => "#0", "data-target": ".add-new-source-modal", "data-toggle": "modal"} Add a New List
+            .p-4
+              .lead_source_list
+                = render 'lead_sources_list', lead_sources: @lead_sources
+              .pagination-wrapper.mb-0.mt-5
+                = will_paginate @lead_sources
+        #lead_source_details.lead_source_column
+          #lead_source_leads.h-100
+            .border-1.bg-sky-blue.border-blue.rounded.h-100.d-flex.justify-content-center.align-items-center
+              .p-4
+                %h4 No source selected
+
+.modal.fade.in.add-new-source-modal{role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md
+    .bg-white.p-4.p-sm-5.rounded
+      .fw-sb.pb-3 Add a New List
+      = simple_form_for(LeadSource.new, as: :lead_source, method: :post, remote: true, url: agency_lead_sources_path, html: { class: 'form-vertical' }) do |f|
+        .input-wrapper.mb-3
+          = f.input_field :name, class: 'input-wrapper-input', as: :string, required: true, placeholder: 'List Name'
+        .input-wrapper.mb-3.input-wrapper-from-email
+          .input-wrapper-input.mb-3
+            .col.flex-col
+              = f.input_field :from_email_name, class: 'input-from-email', as: :string, required: true, placeholder: 'Name For From Email', id: 'from-email-name-input'
+            - if @agency.cold_email_sub_domain.present?
+              .col.pr-4
+                %span.input-from-email--domain @#{@agency.cold_email_sub_domain}.clickxmail.com
+            - else
+              .col.pr-4
+                %span.input-from-email--domain @.clickxmail.com
+          - if @agency.cold_email_sub_domain.blank?
+            .text-danger
+              Agency subdomain is not set. Please set it before sending emails.
+        #from-email-name-helper-text
+        .pt-4
+          = button_tag class: 'btn btn-raised btn-primary', type: 'submit' do
+            Save
+
+.modal.fade.in.bs-import-csv-leads{role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md.task-create-modal-body
+    .bg-white.p-4.p-sm-5.rounded
+      = form_tag import_from_csv_agency_direct_leads_path, method: :post, multipart: true do
+        .fs-md.fw-sb.text-darkblue.pb-5
+          Import CSV Leads
+        = label_tag :lead_source_id, 'Select Lead Source', class: ''
+        .input-wrapper-select
+          = select_tag :lead_source_id, options_for_select(@lead_sources.map { |s| [s.name, s.id] }), class: 'input-wrapper-input', include_blank: true, required: true
+        .pb-4
+        .form-group.m-0.p-0.csv-upload
+          .d-inline-block.relative
+            = label_tag :csv_file, 'Select CSV', class: 'control-label font-14 btn btn-raised btn-info m-0'
+            = file_field_tag :csv_file, accept: 'text/csv', required: true
+        .csv-preview.hidden
+          .csv-preview--close
+            %i.fa.fa-times
+          .csv-preview--title
+        .pb-4
+        %button.btn.btn-muted.btn-raised.mr-sm{"data-dismiss": "modal", type: "button"} Close
+        = submit_tag 'Import', class: 'btn btn-raised btn-primary'
+
+#lead-source-email-templates
+
+:javascript
+  $(window).load(function() {
+    var winWidth = $(window).width();
+    setTimeout(function() {
+      if(winWidth < 992) {
+        $('.lead_source_list > div:first-child button.lead_source_item').trigger('click');
+      }
+      if($('body').hasClass('sidebar-collapsed')) {
+        if(winWidth < 1199) {
+          $('.lead_source_list > div:first-child button.lead_source_item').trigger('click');
+        } else {
+          $('.lead_source_list > div:first-child button.lead_source_item').trigger('click');
+        }
+      } else {
+        if(winWidth > 1199) {
+          $('.lead_source_list > div:first-child button.lead_source_item').trigger('click');
+        }
+      }
+    }, 100);
+  })
+  $(document).on('click', '.csv-preview--close', function() {
+    $('.csv-upload').removeClass('hidden');
+    $('.csv-preview').addClass('hidden');
+  })
+  $(document).on('change', 'input[type="file"]#csv_file', function(e) {
+      var file = e.target.files[0];
+      if(file.length != 0) {
+        var csvDemo = '<p class="fs-lg text-blue text-center"><i class="fa fa-file-text"></i></p> '+file.name
+        $('.csv-upload').addClass('hidden');
+        $('.csv-preview').removeClass('hidden');
+        $('.csv-preview--title').html(csvDemo);
+      } else {
+        $('.csv-upload').removeClass('hidden');
+        $('.csv-preview').addClass('hidden');
+      }
+  });
+  $(document).on('click', '.btn_back_to_leads', function(e) {
+    $('#lead_source_list').show();
+    $('#lead_source_details').hide();
+    $(".lead_source_item").removeClass('current-item');
+  });
+  $.fn.modal.Constructor.prototype.enforceFocus = function() {
+      var $modalElement = this.$element;
+      $(document).on('focusin.modal',function(e) {
+          if ($modalElement.length > 0 && $modalElement[0] !== e.target
+              && !$modalElement.has(e.target).length
+              && $(e.target).parentsUntil('*[role="dialog"]').length === 0) {
+              $modalElement.focus();
+          }
+      });
+  };
+
+  $(document).on('click', '.edit-email-template', function() {
+      $('.email-templates-slidein').fadeIn();
+  })
+  $(document).on('click', '.close-email-templates-slidein, .close-template', function() {
+      $('.email-templates-slidein').fadeOut();
+      $('.add-new-email-form').removeClass('active');
+      $('.email-templates-wrap').removeClass('hide');
+  });
+
+  $('#from-email-name-input').on('keyup', function(){
+    var typed_letters = $(this).val();
+    $('#from-email-name-helper-text').text('From e-mail will be: ' + typed_letters + '@' + "#{@agency.cold_email_sub_domain}" + '.clickxmail.com');
+  });
+
+
+  /*
+  $(document).on('click', '.add-email-btn', function() {
+      $('.add-new-email-form').addClass('active');
+      $('.email-templates-wrap').addClass('hide');
+  });
+  $(document).on('click', '.cancel-add-email', function() {
+      $('.add-new-email-form').removeClass('active');
+      $('.email-templates-wrap').removeClass('hide');
+  });
+  */
+
+  /*
+  $(document).on('click', '.add-email-btn', function() {
+    $('.add-email-template-item').slideDown();
+    $('.add-email-btn').slideUp();
+  })
+  $(document).on('click', '.cancel-new-email', function() {
+    $('.add-email-template-item').slideUp();
+    $('.add-email-btn').slideDown();
+  })
+  */

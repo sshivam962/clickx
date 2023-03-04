@@ -1,0 +1,6 @@
+- if action_steps.present?
+  - action_steps.each do |action_step|
+    #action_step_item
+      = render 'super_admin/courses/action_step_item', action_step: action_step, chapter: chapter
+- else
+  #action_step_item

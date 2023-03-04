@@ -1,0 +1,105 @@
+%html
+  %head
+    %h1 Goals
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+    %body
+      %table-responsive
+        %table.table.table-bordered.table-vam.table-left
+          %thead
+            %th Goal
+            %th Goal Completion
+            %th Goal Value
+            %th Goal Conversion
+            %th Goal Abandonment
+          %tbody
+            - if @data.dig('table_data')
+              - @data.dig('table_data').each do |goal|
+                %tr
+                  %td.align-center
+                    = goal[:site]
+                  %td.align-center
+                    = goal[:goal_completion]
+                  %td.align-center
+                    = goal[:goal_value]
+                  %td.align-center
+                    = goal[:goal_conversion]
+                  %td.align-center
+                    = goal[:goal_abandonment]
+      %h3.align-center Overview
+      %table-responsive
+        %table.table.table-bordered.table-vam.table-left
+          %thead
+            %th Date
+            %th Complete Goals
+            %th Goal Value
+            %th Conversion Rate
+            %th % Abandonment Rate
+          %tbody
+            - if @data.dig('chart_data', :chart_rows)
+              - @data.dig('chart_data', :chart_rows).each do |goals|
+                %tr
+                  %td.align-center
+                    = goals[0].to_date&.strftime('%Y-%m-%d')
+                  %td.align-center
+                    = goals[1][0].to_i
+                  %td.align-center
+                    = goals[1][1].to_i
+                  %td.align-center
+                    = goals[1][2].round(2)
+                  %td.align-center
+                    = goals[1][3].round(2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+-# :css
+-#   .table {
+-#     border-collapse: collapse;
+-#   }
+
+-#   table.table th, table.table td {
+-#     border: 1px solid black;
+-#     text-align: center;
+-#   }
+-# %table.table
+-#   %thead
+-#     %th Goal
+-#     %th Goal Completion
+-#     %th Goal Value
+-#     %th Goal Conversion
+-#     %th Goal Abandonment
+-#   %tbody
+-#     - if @data.dig('table_data')
+-#       - @data.dig('table_data').each do |goal|
+-#         %tr
+-#           %td= goal[:site]
+-#           %td= goal[:goal_completion]
+-#           %td= goal[:goal_value]
+-#           %td= goal[:goal_conversion]
+-#           %td= goal[:goal_abandonment]
+-# %h3 Overview
+-# %table.table
+-#   %thead
+-#     %th Date
+-#     %th Complete Goals
+-#     %th Goal Value
+-#     %th Conversion Rate
+-#     %th % Abandonment Rate
+-#   %tbody
+-#     - if @data.dig('chart_data', :chart_rows)
+-#       - @data.dig('chart_data', :chart_rows).each do |goals|
+-#         %tr
+-#           %td= goals[0].to_date&.strftime('%Y-%m-%d')
+-#           %td= goals[1][0].to_i
+-#           %td= goals[1][1].to_i
+-#           %td= goals[1][2].round(2)
+-#           %td= goals[1][3].round(2)

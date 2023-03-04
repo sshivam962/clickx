@@ -1,0 +1,50 @@
+.clickx-breadcrumb-wrapper.ng-scope
+  %ol.breadcrumb.clx-breadcrumb.ng-isolate-scope
+    %li
+      %a{:href => "/b/dashboard"} Home
+    %li
+      %a{:href => "/#/integrations"} Integrations
+    %li
+      %span Select Customers
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Marketing.title-icon>
+    Select Customers for Google Ads
+    %i.fa.fa-info-circle.tooltip-text-icon.tooltips{'title': 'UTM Builder lets you add parameters to the URLs in your web and email ads to track them easily.'}
+.container-fluid
+  .row
+    .col-xs-12.col-sm-12.col-md-12
+      .panel.panel-default.panel-white
+        = form_with url: '/b/google_ads/update_customer_id', local: true do |f|
+          .panel-heading
+            .form-group
+              = f.submit 'Save', class: 'btn btn-success pull-right m-n disabled text-white', id: 'save_button'
+              %input.bg-white.m-n.p-sm.width50.form-control#search_account{href: '#', placeholder: 'Search for accounts'}
+          .panel-body
+
+            = f.hidden_field :login_customer_id, id: 'login_customer_id'
+            = f.hidden_field :customer_client_id, id: 'customer_client_id'
+            .table-responsive
+              %table.table.table-hover
+                %thead
+                  %tr
+                    %th
+                      %b Account Name
+                    %th
+                      %b Customer ID
+                %tbody.content#all_customers
+                  = render 'all_customers', all_customers: @all_customers
+
+:javascript
+  $(document).ready(function() {
+    $('#search_account').on('keyup', function(){
+      var search_query = $(this).val();
+      $.ajax({
+        url: "/b/google_ads/select_accounts",
+        type: 'get',
+        data: { search_query: search_query },
+        dataType: 'script',
+        async: false
+      })
+    })
+  });

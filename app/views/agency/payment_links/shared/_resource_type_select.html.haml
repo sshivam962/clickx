@@ -1,0 +1,16 @@
+- if resource_type.eql?('Lead')
+  - resources = current_agency.leads.map{|lead| [lead.name, lead.id]}
+  .form-group
+    %label
+      Lead
+    = select_tag 'payment_link[resource_id]', options_for_select(resources, resource_id), include_blank: "Select Lead", required: true, class: 'form-control login display-inline'
+- else
+  - resources = current_agency.businesses.map{|client| [client.name, client.id]}
+  .form-group
+    %label
+      Client
+    = select_tag 'payment_link[resource_id]', options_for_select(resources, resource_id), include_blank: "Select Client", required: true, class: 'form-control login display-inline'
+  #business_users_select
+    - if resource_id.present?
+      - users = client_users_collection(resource_id) || []
+      = render 'agency/payment_links/shared/business_users_select', users: users

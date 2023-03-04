@@ -1,0 +1,6 @@
+.container-fluid.mt-md.pt-xs.ui-2020
+  .panel.panel-bg
+    .panel-body
+      = form_for @lead_strategy, url: agency_lead_strategies_path, method: :post do |f|
+        = render 'agency/lead/strategies/shared/form', f: f, lead: @lead, strategy_items: @strategy_items
+  .spacer50

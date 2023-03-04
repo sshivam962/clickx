@@ -1,0 +1,133 @@
+.ui-2020.navbar-fixed-top-2020
+  %header#topnav.navbar.navbar-fixed-top.navbar-default{role: 'banner'}
+    .logo-area
+      %a.navbar-brand.navbar-brand-primary{ href: "#{current_user_dashboard}" }
+        - if demo_login?
+          - if original_agency && original_agency.square_logo.present?
+            = image_tag original_agency.square_logo, alt: 'Clickx', class: 'show-on-collapse img-logo-white'
+          - if original_agency && original_agency.logo.present?
+            = image_tag original_agency.logo, alt: 'Clickx', class: 'img-white'
+        - else
+          - if current_business && current_business.agency_square_logo.present?
+            = image_tag current_business.agency_square_logo, alt: 'Clickx', class: 'show-on-collapse img-logo-white'
+          - if current_business && current_business.agency_logo.present?
+            = image_tag current_business.agency_logo, alt: 'Clickx', class: 'img-white'
+
+      %span#trigger-sidebar.toolbar-trigger.toolbar-icon-bg.stay-on-search
+        %a{"data-placement" => "right", "data-toggle" => "tooltips", :title => "Toggle Sidebar"}
+          %span.icon-bg
+            %i.material-icons menu
+      .userdetailsclick.hidden-xs.toolbar-trigger.toolbar-icon-bg.ov-h
+        %h4.title-fix
+          .target-title
+            #{current_business.name} : #{current_user.email}
+      - if current_business.is_clickx && current_business.free_service
+        .upgrade-button.pl-xxl.p-xs.mt
+          %a.btn.btn-primary{href: "/#/billing" }
+            Upgrade Now
+    %div.pull-right
+      - if current_business.dummy?
+        .mt.pull-left
+          %small.label.label-danger.p-sm
+            DEMO CAMPAIGN
+      %ul.nav.navbar-nav.toolbar.pull-right
+        %li.dropdown.toolbar-icon-bg
+          %a.nav-account.dropdown-toggle{"aria-expanded" => "false", "data-placement" => "right", "data-toggle" => "dropdown", :title => "My account"}
+            .nav-user-info.d-flex.align-items-center
+              .nav-user__username.d-none.d-lg-block
+                - if current_user.preview_user?
+                  System User
+                - else
+                  #{current_user.name&.truncate(20)}
+                %br
+                %span ID # : #{current_user.unique_id}
+              .avatar
+                - if current_user.logo
+                  .avatar-img
+                    = image_tag(current_user.logo, :alt => current_user.initials, class: 'media-object')
+                - else
+                  .avatar-text
+                    = current_user.initials
+              %span.nav-user__icon
+                %i.material-icons arrow_drop_down
+            .ripple-container
+          %ul.dropdown-menu{:role => "menu"}
+            %li
+              %a{href: '/profile'}
+                %span.myaccicon.dropdown-icon>
+                  %i.clickx-icon-user
+                My Profile
+
+            - if original_user.super_admin? && !demo_login?
+              %li.divider
+              .topnav-dropdown-header
+                %span Switch Accounts
+              - current_business&.users.each do |user|
+                %li
+                  = link_to switch_to_business_user_path(business_id: current_business.id, user_id: user.id), class: user.id == current_user.id ? 'fw-800' : ''  do
+                    = user.preview_user? ? 'System User' : user.first_name
+        %li.dropdown.nav--item
+          %a.myaccounticon.nav--dots.dropdown-toggle{"aria-expanded" => "false", "data-placement" => "right", "data-toggle" => "dropdown"}
+            %span.icon-bg.pull-right
+              %i.material-icons more_vert
+            .ripple-container
+          %ul.dropdown-menu{role: "menu"}
+            - unless demo_login?
+              %li
+                %a{href: "/b/settings/general"}
+                  %span.myaccicon.dropdown-icon>
+                    %i.clickx-icon-Gear
+                  Settings
+              -if current_business.agency.clickx? && Subscription::Plan.client.present?
+                %li
+                  %a{href: "/#/billing"}
+                    %span.myaccicon.dropdown-icon>
+                      %i.clickx-icon-Reports
+                    Billing
+              %li
+                %a{href: "/b/users"}
+                  %span.myaccicon.dropdown-icon>
+                    %i.clickx-icon-user-management
+                  Users
+              %li.divider
+              - if current_business.intelligence_enabled? || current_user.preview_user
+                %li
+                  %a{href: "/#/#{current_business.id}/questionnaire"}
+                    %span.myaccicon.dropdown-icon
+                      %i.clickx-icon-IntelligentStrategies
+                    Campaign Intelligence
+              - unless current_business.dummy
+                %li
+                  %a{href: "/#/integrations"}
+                    %span.myaccicon.dropdown-icon>
+                      %i.clickx-icon-Maintenance
+                    Integrations
+              %li.divider
+              %li.py-3
+                .toggle-darkmode.d-flex.align-items-center.text-black.pl-3
+                  .darkmode-switcher.d-inline-block.my-0.mr-3
+                    .darkmode-switch
+                      %span.darkmode-switch-circle
+                      .col 
+                        %i.clx-icon-sun
+                      .col 
+                        %i.clx-icon-moon
+                  Darkmode
+              %li.divider
+            - if session[:admin_id].present?
+              %li
+                = link_to switch_to_admin_user_path do
+                  %span.myaccicon.dropdown-icon
+                    %i.clickx-icon-Convert
+                  Switch To Admin User
+            - if session[:agency_admin_id].present?
+              %li
+                = link_to switch_to_agency_user_path do
+                  %span.myaccicon.dropdown-icon
+                    %i.clickx-icon-Convert
+                  Switch To Agency Admin
+            %li
+              = link_to destroy_user_session_path do
+                %span.myaccicon.dropdown-icon>
+                  %i.clickx-icon-power-button
+                Logout

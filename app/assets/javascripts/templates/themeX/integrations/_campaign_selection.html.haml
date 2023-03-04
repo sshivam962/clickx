@@ -1,0 +1,41 @@
+%md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-compressed
+  %form
+    .modal-header
+      %button.close{ 'aria-label': 'Close', 'data-dismiss': 'modal',
+        'type': 'button', 'ng-click': 'close()' }
+        %span.fa.fa-times-circle-o
+      %h4.modal-title
+        Select {{ service | humanize }} Ads Campaigns (Only active campaigns listed)
+    %md-dialog-content.p-md{'ng-show': '!error_text_present'}
+      %i.pl Choose your preference on how to manage your campaigns :
+      .form-group.mt-sm
+        .radio.radio-block.radio-info.inline
+          %label.pl-xl
+            %input{type: 'radio','ng-model': 'automated', name: 'optionsRadios1', 'ng-value': "true"}
+            %span.circle{style: 'margin-top: 2px;'}
+            %span.check{style: 'margin-top: 2px;'}
+            %b Automated
+        .radio.radio-block.radio-info.inline
+          %label.pl-xl
+            %input{type:'radio','ng-model': 'automated', name: 'optionsRadios1', 'ng-value': "false", 'ng-change': 'fetchAdwordCampaigns()'}
+            %span.circle{style: 'margin-top: 2px;'}
+            %span.check{style: 'margin-top: 2px;'}
+            %b Manual
+      %loading{"ng-show": "showSpinner && !automated"}
+      %md-input-container.width100.m-n{'ng-show': 'automated'}
+        %center
+          All campaigns of type
+          %b {{service_names[service] | humanize}}
+          will be updated. All new campaigns will be automatically added daily
+      %md-input-container.width100{"ng-show": "!showSpinner && available_data.length && !automated"}
+        %md-chips
+          %md-chip.adword--campaigns{ 'ng-repeat': 'campaign in available_data', 'ng-click': 'selectCampaign($index)', 'ng-class': '{ "selected": campaign.selected }'}
+            %md-checkbox#selectCampaign{ 'ng-model': 'campaign.selected' }
+            {{campaign.name}}
+    %h4.p-md.text-center{"ng-show": "!showSpinner && !available_data.length && !automated"} {{warningText}}
+    %md-dialog-actions{layout:'row', "ng-show": "!showSpinner"}
+      %button.btn.btn-raised.mt-md.mb-md.btn-primary{ 'ng-click': 'allSelected ? deselectAll() : selectAll()',
+      'type': 'button', 'ng-if': "available_data.length && !automated" }
+        {{ allSelected ? 'Deselect All' : 'Select All' }}
+      %button.btn.btn-raised.mt-md.mb-md.btn-primary{ "ng-show": "!showSpinner && (available_data.length || automated)", :type => "submit","ng-disabled": "(integration_form.$invalid)", 'ng-click': 'saveCampaignIds()'} Save changes
+      %button.btn.btn-raised.mt-md.mb-md.btn-default{ 'ng-click': 'close()', 'type': 'button' } Cancel

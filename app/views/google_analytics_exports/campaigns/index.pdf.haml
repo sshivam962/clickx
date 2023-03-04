@@ -1,0 +1,42 @@
+%html
+  %head
+    %h1 Campaigns
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+    %body
+      %table-responsive
+        %table.table.table-bordered.table-vam.table-left
+          %thead
+            %th Campaign
+            %th Sessions
+            %th New Sessions
+            %th New Users
+            %th Bounce Rate
+            %th Pages/Session
+            %th Avg.Session Duration
+            %th Goal Conversion
+            %th Goal Completions
+          %tbody
+            - @campaigns_data.table_data.each do |campaigns|
+              %tr
+                %td.align-center
+                  = campaigns.site
+                %td.align-center
+                  = campaigns.visits
+                %td.align-center
+                  = campaigns.page_per_session
+                %td.align-center
+                  = campaigns.avg_session
+                %td.align-center
+                  = campaigns.new_visits
+                %td.align-center
+                  = campaigns.bounce
+
+
+
+
+
+
+
+
+
+

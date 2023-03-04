@@ -1,0 +1,15 @@
+.col-md-3.nested-fields.p-sm.m-sm.text-center
+  .field
+    .image_wrapper
+      = image_tag f.object.file.url || '', class: 'image_preview'
+      = f.file_field :file, class: 'ls_image_file'
+    .assoc-actions.mt-sm
+      = f.label :file, class: 'custom-file-upload' do
+        %i.fa.fa-upload
+        - if f.object.file.present?
+          Change Image
+        - else
+          Upload Image
+      = link_to_remove_association f, class: 'btn-danger btn remove-btn ml-xs' do
+        %i.fa.fa-times
+

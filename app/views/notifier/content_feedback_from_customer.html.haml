@@ -1,0 +1,55 @@
+%table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+  %tr
+    %td{:valign => "top", :width => "100%"}
+      %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+        %tr
+          %td{:width => "100%"}
+            %table.table_scale{:bgcolor => "#FFF", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+              %tr
+                %td{:align => "center", :width => "100%"}
+                  %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                    %tr
+                      %td.spacer{:width => "30"}
+                      %td{:width => "540"}
+                        / START OF COLUMN
+                        %table.full{:align => "center", :border => "0", :cellpadding => "10", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "540"}
+
+                          -if @email_template.welcome_text.present?
+                            %tr
+                              %td
+                                = raw @email_template.welcome_text
+
+                          -if @email_template.agency_note.present?
+                            %tr
+                              %td
+                                = raw @email_template.agency_note
+                          -if @email_template.paragraph1.present?
+                            %tr
+                              %td
+                                = raw @email_template.paragraph1
+                          %tr
+                            %td
+                              To view #{@business.name}'s #{@content.title} content, click on button below.
+
+                      %td.spacer{:width => "30"}
+%table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+  %tr
+    %td{:valign => "top", :width => "100%"}
+      %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+        %tr
+          %td{:width => "100%"}
+            %table.table_scale{:bgcolor => "#FFF", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+              %tr
+                %td{:align => "center", :width => "100%"}
+                  %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                    %tbody{:style => "background: #fbfbfb; display: inherit; height: 100px; border-top: 1px solid #f1f1f1;"}
+                      %tr
+                        %td.spacer{:width => "30"}
+                        %td{:width => "540"}
+                          / START OF COLUMN
+                          %table.full{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "width: 100% !important;", :width => "540"}
+                            %tr
+                              %td{:center => "", :height => "45", :style => "text-align:center;font-size:18px;font-family:sans-serif;font-weight:bold; align="}
+                                %a{:href => "#{@content_path}", :style => "font-family: 'Source Sans Pro', sans-serif;color: #ffffff; background: #FFB300; padding: 13px 60px; border: 1px solid #ffb508; border-radius: 3px; text-decoration: none;", :target => "_blank"} View Content
+                        %td.spacer{:width => "30"}
+

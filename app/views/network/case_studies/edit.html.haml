@@ -1,0 +1,7 @@
+.container.mx-auto.px-4.my-12
+  .page-heading.no-margin-bottom
+    %h4
+      %i.clickx-icon-user.title-icon
+      = @case_study.title
+  = form_for @case_study, url: network_case_study_path(@case_study), method: :patch do |f|
+    = render 'form', f: f

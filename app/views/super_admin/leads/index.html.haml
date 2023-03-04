@@ -1,0 +1,75 @@
+.header
+  .p-n.col-xs-12.col-sm-12.col-lg-12
+    %h1 Leads
+    %a.btn.btn-default.white.pull-right{data: {toggle: 'modal', target: '#export-leads-modal'}} Export as CSV
+  .right.class-inline.col-xs-12.col-sm-12.col-lg-12.pr-n
+    %ul.marginleft-58px
+      %li
+        = text_field_tag :search_name, '', class: 'search login width250px select-box form-control mt-md', placeholder: 'Search By Name'
+      %li.pull-right
+        = select_tag 'search_agency', options_for_select(Agency.pluck(:name, :id)), include_blank: 'Filter By Agency', class: 'search login width250px select-box form-control mt-md'
+
+%div
+  %table.table.table-bordered.users.reports.table-condensed.table-hover.table-clickable
+    %thead
+      %th Name
+      %th Email
+      %th Company
+      %th Phone
+      %th Domain
+      %th Action
+
+    %tbody#leads_container
+      - @leads.each do |lead|
+        %tr
+          %td
+            %a{href: super_admin_lead_path(lead)}
+              = lead.full_name
+          %td
+            = lead.email
+          %td
+            = lead.company
+          %td
+            = lead.phone
+          %td
+            %a.text-info{href: "//#{without_scheme(lead.domain)}", target: '_blank'}
+              = lead.domain
+
+          %td
+            = link_to 'Edit', edit_super_admin_lead_path(lead)
+  .row
+    .col-md-4.col-lg-4.col-sm-12.pt-md
+      = page_entries_info @leads
+    .col-md-8.col-lg-8.col-sm-12.right_align
+      = will_paginate @leads
+= render 'super_admin/leads/shared/export_modal'
+:javascript
+  $('#search_name').on("keyup", function() {
+    var agency = $('#search_agency').val();
+    var name = $('#search_name').val().toLowerCase();
+    $.ajax({
+      url: "/s/leads",
+      type: 'get',
+      data: { name: name, agency: agency },
+      dataType: 'json',
+      async: false,
+      success:function(response){
+        $('#leads_container').html(response.data)
+      }
+    })
+  });
+
+  $('#search_agency').on("change", function() {
+    var agency = $('#search_agency').val();
+    var name = $('#search_name').val().toLowerCase();
+    $.ajax({
+      url: "/s/leads",
+      type: 'get',
+      data: { name: name, agency: agency },
+      dataType: 'json',
+      async: false,
+      success:function(response){
+        $('#leads_container').html(response.data)
+      }
+    })
+  });

@@ -1,0 +1,38 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-CalltoAction.title-icon>
+    Facebook Ads
+  .options{ 'ng-if': '!demo_login' }
+    .form-group
+      %span{'ng-class': "{'disable-button': export_disabled}"}
+        %export-button{ 'pdf': 'true', 'name': '{{ name }}' }
+      %set-date-range
+
+.container-fluid{ 'id': '{{ name }}' }
+  %div{'ng-if':"has_ad_account"}
+    .row
+      .col-md-12
+        %ul.nav.nav-tabs.material-nav-tabs.mb-lg
+          %li{role:'presentation', 'ng-class':"{'active' : ad_tab == 'campaigns'}"}
+            %a{href: "/#/facebook_ads"} Campaigns
+          %li{ 'ng-if': '!demo_login', role:'presentation', 'ng-class':"{'active' : ad_tab == 'adsets'}"}
+            %a{href: "/#/facebook_ads/adsets"} Adsets
+          %li{ 'ng-if': '!demo_login', role:'presentation', 'ng-class':"{'active' : ad_tab == 'ads'}"}
+            %a{href: "/#/facebook_ads/ads"} Ads
+
+      .col-md-12
+        .tab-content
+          .summary{'ng-if':"ad_tab == 'campaigns'"}
+            %div{"ng-include":"", src:"'themeX/facebook_ads/_campaigns.html'"}
+          .summary{'ng-if':"ad_tab == 'ads'"}
+            %div{"ng-include":"", src:"'themeX/facebook_ads/_ads.html'"}
+          .summary{'ng-if':"ad_tab == 'adsets'"}
+            %div{"ng-include":"", src:"'themeX/facebook_ads/_adsets.html'"}
+  %div{'ng-if':"!has_ad_account"}
+    .row#error
+      .col-md-12
+        .panel.panel-default
+          .panel-body
+            %p.clx-text.text-color-accent-red.text-center
+              {{ error? error : "No Ad Account found, Please reconnect your Facebook Ads!"}}
+

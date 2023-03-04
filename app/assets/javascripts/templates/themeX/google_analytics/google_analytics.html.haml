@@ -1,0 +1,74 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-LinkBuilding.title-icon
+    Web Analytics
+    %i.fa.fa-info-circle.tooltip-text-icon{'title': 'This tool displays the analytics of the traffic on your site as per Google Analytics.'}
+  .options{ 'ng-if': '!demo_login' }
+    .form-group
+      -# %span{'ng-class': "{'disable-button': export_disabled}"}
+      -#   %export-template{ 'pdf': 'true' }
+      %md-button.md-raised.md-primary{'ng-click': 'load_datewise_analytics($event)'} {{selectedRange.dateStart | date}} - {{selectedRange.dateEnd | date}}
+
+.container-fluid
+  %div
+    .row{ 'id': '{{ name }}' }
+      .col-md-12
+        %ul.nav.nav-tabs.material-nav-tabs.mb-lg
+          %li{role:'presentation', 'ng-class':"{'active' : ga_tab == 'overview'}"}
+            %a{ href: '/#/google_analytics' }
+              Overview
+          %li{ 'ng-if': '!demo_login', role: "presentation", 'ng-class':"{'active' : ga_tab == 'keywords'}"}
+            %a{ href: '/#/google_analytics/keywords' }
+              Keywords
+          %li{ 'ng-if': '!demo_login', role:'presentation','ng-class':"{'active' : ga_tab == 'landing_pages'}"}
+            %a{ href:'/#/google_analytics/top_pages' }
+              Top Pages
+          %li{ 'ng-if': '!demo_login', role:'presentation', 'ng-class':"{'active' : ga_tab == 'referrals'}"}
+            %a{ href: '/#/google_analytics/referrals' }
+              Referrals
+          %li{ 'ng-if': '!demo_login', role:'presentation','ng-class':"{'active' : ga_tab == 'campaigns'}"}
+            %a{ href:'/#/google_analytics/campaigns' }
+              Campaigns
+          %li{ 'ng-if': '!demo_login', role:'presentation','ng-class':"{'active' : ga_tab == 'source_medium'}"}
+            %a{ href:'/#/google_analytics/source_medium' }
+              Source Medium
+          %li{ 'ng-if': '!demo_login', role:'presentation', 'ng-class':"{'active' : ga_tab == 'locales'}"}
+            %a{ href: '/#/google_analytics/locales' }
+              Locales
+          -# %li{ 'ng-if': '!demo_login', role:'presentation', 'ng-class':"{'active' : ga_tab == 'goals'}"}
+          -#   %a{ href: '/#/google_analytics/goals' }
+          -#     Goals
+          -# %li{ 'ng-if': '!demo_login', role:'presentation', 'ng-class':"{'active' : ga_tab == 'network'}"}
+          -#   %a{ href: '/#/google_analytics/network' }
+          -#     Social
+          -# %li{ 'ng-if': '!demo_login', role:'presentation', 'ng-class':"{'active' : ga_tab == 'landing'}"}
+          -#   %a{ href: '/#/google_analytics/landing_pages' }
+          -#     Shared URLs
+          -# %li{ 'ng-if': '!demo_login', role:'presentation', 'ng-class':"{'active' : ga_tab == 'top_devices'}"}
+          -#   %a{ href: '/#/google_analytics/top_devices' }
+          -#     Top Devices
+
+      .col-md-12
+        .tab-content
+          .overview{'ng-if':"ga_tab == 'overview'"}
+            %div{"ng-include":"", src:"'themeX/google_analytics/_overview.html'"}
+          .searches{'ng-if':"ga_tab == 'keywords'"}
+            %div{"ng-include":"", src:"'themeX/google_analytics/_searches.html'"}
+          .landing_pages{'ng-if':"ga_tab == 'landing_pages'"}
+            %div{"ng-include":"", src:"'themeX/google_analytics/_landing_pages.html'"}
+          .referrals{'ng-if':"ga_tab == 'referrals'"}
+            %div{"ng-include":"", src:"'themeX/google_analytics/_referrals.html'"}
+          .campaigns{'ng-if':"ga_tab == 'campaigns'"}
+            %div{"ng-include":"", src:"'themeX/google_analytics/_campaigns.html'"}
+          .source_medium{'ng-if':"ga_tab == 'source_medium'"}
+            %div{"ng-include":"", src:"'themeX/google_analytics/_source_medium.html'"}
+          .locales{'ng-if':"ga_tab == 'locales'"}
+            %div{"ng-include":"", src:"'themeX/google_analytics/_locales.html'"}
+          -# .goals{'ng-if':"ga_tab == 'goals'"}
+          -#   %div{"ng-include":"", src:"'themeX/google_analytics/_goals.html'"}
+          -# .network{'ng-if':"ga_tab == 'network'"}
+          -#   %div{"ng-include":"", src:"'themeX/google_analytics/_network.html'"}
+          -# .landing{'ng-if':"ga_tab == 'landing'"}
+          -#   %div{"ng-include":"", src:"'themeX/google_analytics/_shared_urls.html'"}
+          -# .top_devices{'ng-if':"ga_tab == 'top_devices'"}
+          -#   %div{"ng-include":"", src:"'themeX/google_analytics/_top_devices.html'"}

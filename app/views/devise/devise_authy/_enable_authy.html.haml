@@ -1,0 +1,12 @@
+.header.no-bottom-border
+  %h1= I18n.t('authy_register_title', {:scope => 'devise'})
+
+.login-form.enable_2fa_form
+  = enable_authy_form do
+    .form-group.row
+      .col-xs-12.col-sm-4.col-md-3
+        = text_field_tag :country_code, '', :autocomplete => :off, :placeholder => I18n.t('devise.country'), :id => "authy-countries"
+      .col-xs-12.col-sm-6.col-md-3
+        = text_field_tag :cellphone, '', :autocomplete => :off, :placeholder => I18n.t('devise.cellphone'), :id => "authy-cellphone", class: 'form-control'
+    .form-group
+      = submit_tag I18n.t('enable_authy', {:scope => 'devise'}), class: 'btn btn-success'

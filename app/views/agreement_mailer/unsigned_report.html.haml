@@ -1,0 +1,24 @@
+%table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+  %tr
+    %td{:valign => "top", :width => "100%"}
+      %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+        %tr
+          %td{:width => "100%"}
+            %table.table_scale{:bgcolor => "#FFF", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+              %tr
+                %td{:align => "center", :width => "100%"}
+                  %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                    %tr
+                      %td.spacer{:width => "30"}
+                      %td{:width => "540"}
+                        / START OF COLUMN
+                        %table.table-second
+                          %tr.tr-second
+                            %th.th-second Agency Name
+                            %th.th-second Invited At
+                            %th.th-second Last Login
+                          - @agencies.each do |agency|
+                            %tr.tr-second
+                              %td.td-second #{agency.name}
+                              %td.td-second #{agency.support_email}
+                              %td.td-second #{agency.last_logged_in&.strftime("%B %d, %Y")}

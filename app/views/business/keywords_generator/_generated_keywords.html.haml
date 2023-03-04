@@ -1,0 +1,15 @@
+.row
+  .col-md-12
+    .tab-container
+      .panel.kw-gen
+        .panel-body
+          - if current_business.semrush_project_id.nil?
+            %button.btn.btn-info{"data-target" => "#add-keywords-modal", "data-toggle" => "modal", :type => "button"}
+              Add to Keyword Bank
+          %table
+            - @generated_keywords.each do |keywords|
+              %tr
+                %td.p-sm.pl-md
+                  = keywords
+
+= render 'add_keywords'

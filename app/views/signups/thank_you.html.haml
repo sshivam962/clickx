@@ -1,0 +1,12 @@
+.container
+  = link_to 'http://www.clickx.io', target: '_blank', class: 'login-logo' do
+    = image_tag "logo-dark.svg"
+  .row
+    .col-md-8.col-md-offset-2
+      = form_tag signup_path, method: :post, class: 'form-vertical cardy' do
+        .panel.tranin.panel-midnightblue{"data-widget": {draggable: false}}
+          .panel-heading
+            %h2.regtitle Thank You
+          .panel-body
+            %h2.col-sm-12.regsubt.text-center You will receive an invitation email from us shortly.
+          .panel-footer

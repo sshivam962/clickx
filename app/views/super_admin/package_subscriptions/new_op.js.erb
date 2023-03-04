@@ -1,0 +1,2 @@
+$('#modal_container').html("<%= escape_javascript render( partial: 'super_admin/package_subscriptions/shared/new_op', locals: { subscription: @subscription, category: @category}) %>");
+$('#new-op-modal').modal('show')

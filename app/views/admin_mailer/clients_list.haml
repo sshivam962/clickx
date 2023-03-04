@@ -1,0 +1,9 @@
+%tr
+  %td{:align => "left", :style => ""}
+    - Agency.all.each do |agency|
+      %b #{agency.name} (#{agency.businesses.count})
+      %br
+      - agency.businesses.each.with_index(1) do |biz, i|
+        #{i}. #{biz.name}
+        %br
+      %br

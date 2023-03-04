@@ -1,0 +1,57 @@
+.container-fluid
+  .row.pt-lg
+    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+      - @package_subscriptions.each do |package_type, subscriptions|
+        .panel.panel-default
+          .panel-heading
+            %b= package_type.titleize
+          .panel-body
+            .col-md-8.col-lg-8.col-sm-6.col-xs-12
+              %table.table.table-bordered.mb-n
+                %tbody
+                  %tr
+                    %th
+                      %b Package Name
+                    %th
+                      %b Amount
+                    %th
+                      %b Date
+                    %th
+                  - subscriptions.each do |subscription|
+                    %tr
+                      %td{width: '40%'}
+                        = subscription.package_name.humanize.titleize
+                      %td.package_amount{width: '15%'}
+                        = number_to_currency(subscription.amount, precision: 0)
+                      %td{width: '15%'}
+                        - if subscription.subscription?
+                          = Time.at(subscription['metadata']['current_period_end']).strftime('%m/%d/%Y') rescue nil
+                      %td{width: '15%'}
+                        %a.show_invoices{href: 'javascript:void(0)', data: {id: subscription.id, package_type: package_type }}
+                          = "#{subscription.charge? ? 'Receipt' : 'Invoices'}"
+            .col-md-4.col-lg-4.col-sm-6.col-xs-12
+              .subscription_invoice{id: "subscription_invoice_#{package_type}"}
+
+:javascript
+  $( ".show_invoices" ).click(function() {
+    id = $(this).data('id');
+    package_type = $(this).data('package-type');
+    $.ajax({
+      url: "/a/package_subscriptions/" + id + "/invoices",
+      type: 'get',
+      data: {},
+      dataType: 'json',
+      success:function(response){
+        if(response.data.billing_category == 'charge'){
+          var win = window.open(response.data.content, '_blank');
+          if (win) {
+            win.focus();
+          } else {
+            alert('Please allow popups for this website');
+          }
+        }else{
+          $('#subscription_invoice_' + package_type).html(response.data.content)
+        }
+      }
+    })
+  });

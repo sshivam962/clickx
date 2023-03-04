@@ -1,0 +1,14 @@
+%script
+  var environment = "#{Rails.env}"
+
+  var cloud_api = "#{Cloudinary.config.api_key}"
+  var cloud_name = "#{Cloudinary.config.cloud_name}"
+
+  var subscription_plans_available = "#{Subscription::Plan.client.present?}"
+
+  var fb_app_id = "#{ENV['CLICKX_FB_APP_ID']}"
+  var image_upload = "#{ENV['CLOUDINARY_IMAGE_PRESET']}"
+  var offers_upload = "#{ENV['CLOUDINARY_OFFERS_PRESET']}"
+  var reviews_url = "#{ENV['REVIEWS_URL']}"
+  var rollbar_access_token_js = "#{ENV['ROLLBAR_ACCESS_TOKEN_JS']}"
+  var seo_auth_token= "#{ENV['SEO_AUTH_TOKEN']}"

@@ -1,0 +1,56 @@
+%div.col-md-12
+  .row
+    .form-group
+      %label.font-size18 Title
+      = f.text_field :title, required: true, class: 'form-control login', placeholder: 'Enter Title'
+    .form-group
+      %label.font-size18 Thumbnail
+      .col-md-12
+        = f.fields_for :thumbnail do |t|
+          - if f.object.new_record?
+            = t.file_field :file, required: true
+          - else
+            = t.file_field :file
+          = image_tag t.object.file.url || '', width: '123px', class: 'document_thumbnail_preview'
+    .form-group
+      %label.font-size18 Description
+      = f.cktext_area :description, required: true
+    .form-group
+      %label.font-size18 Category
+      = f.select :category, Document.category_collection, { include_blank: 'Select Category' }, required: true, class: 'form-control'
+    .form-group
+      %label.font-size18 Attachment
+      .col-md-12
+        = f.fields_for :document_attachment do |ff|
+          - if f.object.new_record?
+            = ff.file_field :file
+          - else
+            = ff.file_field :file
+          = image_tag ff.object.file.url || '', width: '123px', class: 'document_attachment_preview'
+    .form-group
+      %label.font-size18 Document link
+      = f.text_field :document_link, class: 'form-control login', placeholder: 'Enter Document Link'
+    .form-group
+      = f.submit "Save Resource", class: 'btn btn-warning saveBtn'
+
+:javascript
+  $('#document_thumbnail_attributes_file').change(function(event){
+    var input = $(event.currentTarget);
+    var file = input[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+       image_base64 = e.target.result;
+       $(".document_thumbnail_preview").attr("src", image_base64);
+    };
+    reader.readAsDataURL(file);
+  });
+  $('#document_document_attachment_attributes_file').change(function(event){
+    var input = $(event.currentTarget);
+    var file = input[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+       image_base64 = e.target.result;
+       $(".document_attachment_preview").attr("src", image_base64);
+    };
+    reader.readAsDataURL(file);
+  });

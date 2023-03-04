@@ -1,0 +1,48 @@
+- content_for :title do
+  Strategies | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1
+      Strategies
+    = link_to 'Strategy Funnels', super_admin_strategy_funnels_path, class: 'btn btn-warning pull-right mt-lg mb-lg'
+  .container-fluid
+    %div{"data-widget-group" => "group1"}
+      .row
+        .col-xs-12
+          %ul.nav.nav-tabs.nav-justified.strategy-tabs
+            - Lead::StrategyItem::CATEGORIES.each do |key, value|
+              %li
+                %a.w100{"data-toggle" => "tab", :href => "#sec-#{key}"}= value
+        .col-md-12
+          .tab-content
+            - Lead::StrategyItem::CATEGORIES.each do |key, value|
+              .tab-pane.pt-n.p-md{id: "sec-#{key}"}
+                .panel-group.mt-md
+                  .row
+                    .col-sm-12.mb-sm
+                      %b Dynamic Variables : &nbsp&nbsp&nbsp
+                      - Lead::StrategyItem::PLACEHOLDERS.each do |key, value|
+                        %a.copy_to_clipboard.si-placeholder.mr-md{href: 'javascrip:void(0)', data: {key: "{{#{key}}}"}}
+                          {{#{key}}}
+                    .col-md-12.mb-md.mt-sm
+                      .new-strategy-form
+                        = render 'super_admin/lead/strategy_items/shared/form', category: key
+                  .strategy_items{id: "strategy_item_#{key}"}
+                    - Lead::StrategyItem.send(key).order(favorite: :desc).each do |strategy_item|
+                      = render 'super_admin/lead/strategy_items/shared/item', item: strategy_item
+
+#modal_container
+
+:javascript
+  $(document).ready(function(){
+    $('.strategy-tabs > li:first-child a').click()
+  });
+
+  $('.copy_to_clipboard').on('click', function (e) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).data('key')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Copied to Clipboard");
+  });

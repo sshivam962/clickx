@@ -1,0 +1,37 @@
+- content_for :title do
+  Case Studies | Clickx
+.container.mx-auto.px-4.my-12
+  .case_studies_list
+    .border.bg-light-blue.border-blue-200.rounded-md.mb-5
+      .bg-white.py-4.px-5.rounded-t-md
+        .font-medium.color-secondary.text-lg
+          = @industry.title
+          = hidden_field_tag :industry_id, @industry.id
+      .lg:p-5.p-4
+        #case_studies_list
+          = render 'case_studies_list'
+
+:javascript
+  $('.copy_to_clipboard').on('click', function (e) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).data('link')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Link Copied");
+  });
+  $('#search_case_study').on('keyup', function() {
+    var name = $('#search_case_study').val().toLowerCase();
+    var industry_id = $('#industry_id').val();
+    var my_case_study_id = $('#my_case_study_id').val();
+    $.ajax({
+      url: "/a/industries/" + industry_id + "/case_studies/"+my_case_study_id,
+      type: 'get',
+      data: { name: name },
+      dataType: 'script',
+      async: false,
+      success:function(response){
+        $('#tab_content').html(response.data)
+      }
+    })
+  });

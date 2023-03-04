@@ -1,0 +1,102 @@
+- content_for :custom_assets do
+  %script{src: 'https://code.highcharts.com/highcharts.js'}
+
+#traffic_history{data:{traffic: @competitors_traffic_history.to_json}}
+
+= render 'business/competitions/shared/nav'
+.col-md-12
+  .tab-content
+    .summary
+      %div#competition-tabs
+        -# .panel.panel-default
+        -#   .panel-body.p-n
+        -#     .col-sm-12.p-n.mb-md
+        -#       .panel.panel-default.competitor-analysis.mb-n
+        -#         .panel-heading.bg-white.pt-sm
+        -#         .panel-body.p-n.backlinks-summary
+        -#           #traffic_chart
+
+        -# .panel.panel-default
+        -#   .panel-body.p-n
+        -#     .col-sm-12.p-n.mb-md
+        -#       .panel.panel-default.competitor-analysis.mb-n
+        -#         .panel-heading.bg-white.pt-sm
+        -#           %h4.inlineb.f-w-md Summary
+        -#         %hr.mb-md.mr-md.ml-md.mt-xs
+        -#         .panel-body.p-n.backlinks-summary
+        -#           .col-sm-6.col-md-3.text-center.bdr-r.breakword
+        -#             %h4.mb-xs
+        -#               Backlinks
+        -#               %i.fa.fa-info-circle.tooltip-text-icon{ "title": "A backlink is an incoming link from a different website or referring domain. Within the SEO industry a 'backlink' can sometimes be referred to as an 'in link'."}
+        -#             %h1.mb-sm.mt-sm.f-w-md.f-s-xl
+        -#               #{@backlinks_summary["ExtBackLinks"]}
+        -#             / %span.increase-rate 15%
+        -#           .col-sm-6.col-md-3.text-center.bdr-r.breakword
+        -#             %h4.mb-xs
+        -#               Referring Domains
+        -#               %i.fa.fa-info-circle.tooltip-text-icon{ "title": "Referring domain, also known as 'ref domain', is a website which has a backlink pointing to a page, or link, to the site you are analysing."}
+        -#             %h1.mb-sm.mt-sm.f-w-md.f-s-xl   #{@backlinks_summary["RefDomains"]}
+        -#             / %span.decrease-rate -25%
+        -#           .col-sm-6.col-md-3.text-center.bdr-r.breakword
+        -#             %h4.mb-xs
+        -#               Trust Flow
+        -#               %i.fa.fa-info-circle.tooltip-text-icon{ "title": "Trust Flow is one of the Majestic Flow Metrics, which is weighted by the number of clicks from a seed set of trusted sites to a given URL, or Domain."}
+        -#             %h1.mb-sm.mt-sm.f-w-md.f-s-xl
+        -#               #{@backlinks_summary["TrustFlow"]}
+        -#           .col-sm-6.col-md-3.text-center.breakword
+        -#             %h4.mb-xs
+        -#               Citation Flow
+        -#               %i.fa.fa-info-circle.tooltip-text-icon{ "title": "Citation Flow is one of the Majestic Flow Metrics, which is weighted by the number citations to a given URL, or Domain."}
+        -#             %h1.mb-sm.mt-sm.f-w-md.f-s-xl   #{@backlinks_summary["CitationFlow"]}
+
+        -# .row
+        -#   .col-sm-12.mt-xs
+        -#     = render 'top_pages'
+        .row
+          .col-sm-6
+            = render 'top_organic'
+          .col-sm-6
+            = render 'top_paid'
+
+:javascript
+  var traffic_history = $("#traffic_history").data('traffic');
+
+  $('#traffic_chart').highcharts({
+    chart: {
+      height: 350,
+      type: 'spline'
+    },
+    title: {
+      text: ''
+    },
+    credits: {
+      enabled: false
+    },
+    exporting: {
+      enabled: false
+    },
+    xAxis: {
+      type: 'datetime',
+      labels: {
+        overflow: 'justify'
+      }
+    },
+    yAxis: {
+      title: {
+        text: 'Estimated Traffic'
+      },
+      minorGridLineWidth: 1,
+      gridLineWidth: 1,
+      alternateGridColor: null
+    },
+    series: traffic_history,
+    navigation: {
+      menuItemStyle: {
+        fontSize: '10px'
+      }
+    }
+  });
+
+  $(document).ready(function() {
+    $("#overview-tab").addClass('active');
+  });

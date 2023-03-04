@@ -1,0 +1,6 @@
+= form_for ActionStep.new(chapter_id: chapter.id), url: create_action_step_super_admin_course_path, method: :post, remote: true do |f|
+  .action_step_form-input
+    = f.hidden_field :chapter_id
+    = f.text_field :title, required: true, class: 'form-control', placeholder: 'Enter Title'
+  .action_step_form-btn
+    = f.submit 'Add', class: 'btn btn-warning'

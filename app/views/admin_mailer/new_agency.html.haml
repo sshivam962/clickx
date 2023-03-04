@@ -1,0 +1,56 @@
+%table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+  %tr
+    %td{:valign => "top", :width => "100%"}
+      %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+        %tr
+          %td{:width => "100%"}
+            %table.table_scale{:bgcolor => "#FFF", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+              %tr
+                %td{:align => "center", :width => "100%"}
+                  %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                    %tr
+                      %td.spacer{:width => "30"}
+                      %td{:width => "540"}
+                        / START OF COLUMN
+                        %table.full{:align => "center", :border => "0", :cellpadding => "10", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "540"}
+                          %tr
+                            %td
+                              Name:
+                            %td
+                              = @agency.name
+                          %tr
+                            %td
+                              Phone:
+                            %td
+                              = @agency.phone
+                          %tr
+                            %td
+                              Support Email:
+                            %td
+                              = @agency.support_email
+                          %tr
+                            %td
+                              Address:
+                            %td
+                              = @agency.address
+                          %tr
+                            %td
+                              Domain:
+                            %td
+                              = @agency.domain
+                          %tr
+                            %td
+                              WebURL:
+                            %td
+                              = @agency.weburl
+                          %tr
+                            %td
+                              Labels:
+                            %td
+                              = @agency.labels
+                          %tr
+                            %td
+                              Created By:
+                            %td
+                              = @created_user.name_with_email
+

@@ -1,0 +1,9 @@
+%p
+  %h4
+    Package subscription upgrade Started:
+
+%p
+  New Package: #{@new_plan.product_name}
+
+%p
+  Old Package: #{(@previous_package && @previous_package.plan_id.titleize) || 'Free'}

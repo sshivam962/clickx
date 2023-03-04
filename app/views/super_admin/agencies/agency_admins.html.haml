@@ -1,0 +1,92 @@
+.d-flex.justify-content-between.flex-wrap.align-items-center.mt-4.mb-5
+  .col-auto
+    %h3.m-0
+      Agency Users - #{@agency.name}
+  .col-auto
+    .d-flex.align-items-center
+      .custom-select
+        = select_tag 'login_as', options_from_collection_for_select(@agency.users, 'id', 'first_name'), class: 'login_as_user form-control select-box width200px mb-0', include_blank: 'Login as user..', 'data-target' => @agency.id, "data-title" => "View Dashboard"
+      .btn-icon-list.pl-3
+        %a.btn.btn-sm.btn-reset-sm.btn-info.m-0{"data-title" => "View Dashboard", href: "/switch_to_agency_user?user_id=#{@agency.preview_users.first&.id}&agency_id=#{@agency.id}", id: "view_dashboard_#{@agency.id}" }
+          %i.fa.fa-sign-in
+      .pl-3
+        %a.btn.btn-sm.btn-reset-sm.btn-warning.m-0{href:"/s/agencies"} Back
+
+%div
+  %table.table.table-bordered.users.reports
+    %thead
+      %th Name
+      %th Email
+      %th Invitation Status
+      %th Last Seen At
+      %th Invitation Sent
+      %th Email Alerts
+      %th Agency Admin
+      %th Admin Action
+
+    %tbody
+      - if @agency_admins.present?
+        - @agency_admins.each do |user|
+          %tr{ "data-user-id"=> user.id }
+            %td= user.name
+            %td= user.email
+            %td
+              = user.invitation_accepted_at.blank? ? 'Sent' : 'Accepted'
+            %td
+              %span
+                = days_since(user.last_seen)
+            %td
+              = days_since(user.invitation_sent_at)
+              - unless user.invitation_accepted?
+                = link_to resend_invitation_super_admin_user_path(user.id), method: :put, class: 'btn btn-primary btn-xs' do
+                  Resend
+            %td.center
+              %input.set_email_alert{id: "email_alert_#{user.id}", type: "checkbox", checked: user.email_alert, data: {id: user.id}}
+            %td.center
+              %input.set_agency_super_admin{id: "agency_super_admin_#{user.id}", type: "checkbox", checked: user.agency_super_admin, data: {id: user.id}}
+            %td.center
+              = link_to super_admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' do
+                %i.glyphicon.glyphicon-trash
+                Delete Admin User
+      - else
+        %tr
+          %td{colspan:7}
+            Admin users list not available.
+
+%a.btn.btn--add.pull-right{ 'href': invite_agency_admin_super_admin_agency_path(@agency) }
+  %i.glyphicon.glyphicon-plus.glyphplus
+
+:javascript
+  $('.set_email_alert').click(function() {
+    id = $(this).data('id')
+    checkbox = $('#email_alert_' + id)
+    checked = this.checked
+    url = '/s/users/' + id + '/set_email_alert'
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: {email_alert: checked},
+      success: function(response) {
+        if(response.status != 200){
+          checkbox.prop("checked", !checked);
+        }
+      }
+    });
+  });
+
+  $('.set_agency_super_admin').click(function() {
+    id = $(this).data('id')
+    checkbox = $('#set_agency_super_admin' + id)
+    checked = this.checked
+    url = '/s/users/' + id + '/set_agency_super_admin'
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: {agency_super_admin: checked},
+      success: function(response) {
+        if(response.status != 200){
+          checkbox.prop("checked", !checked);
+        }
+      }
+    });
+  });

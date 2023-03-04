@@ -1,0 +1,120 @@
+.col-md-12
+  .panel.panel-default
+
+    .panel-heading
+      %h2.text-darkblue On-Page Optimization
+    .panel-body
+      .row
+        .col-sm-12
+          %h4.mb-md
+            Title Tag
+            %span.badge.tooltips{"data-original-title" => "Details", "data-trigger" => "hover"}
+          .block{'ng-if': '!landing_page_info_before_load && !landing_page_info.title'}
+            %span.fa.fa-close.text-danger.f-s-28.mr-md.pad-r-b
+            %i No title found
+          .well.well-sm.tooltips.no-shadow{'ng-if': 'landing_page_info.title'}
+            {{landing_page_info.title}}
+
+          .panel.panel-default{'data-widget': {draggable: 'false'}}
+            .panel-heading
+              %span.fa.fa-check.text-success.f-s-28.mr-md{'ng-if': 'landing_page_info.valid_title'}
+              %span.fa.fa-close.text-danger.f-s-28.mr-md{'ng-if': '!landing_page_info.valid_title'}
+              %i Title tag meets the recommended guideline
+              .panel-ctrls{"data-action-collapse" => "{\"target\": \".panel-body, .panel-footer\"}", "data-actions-container" => "", "ng-click" => "reportRow.rowCollapsed1 = !reportRow.rowCollapsed1"}
+                %span.button-icon.has-bg
+                  %span.material-icons
+                    %i.fa.fa-question-circle-o{"aria-hidden" => "true"}
+
+            .panel-body{:class => "fadeInLeft", "ng-if" => "reportRow.rowCollapsed1", :row => ""}
+              .form-group.mt-n.pb-n
+                %i{'ng-if': 'landing_page_info.valid_title'}
+                  Congratulations! It looks like your Homepage title tag is within our recommended length of 50-60 characters. Keep in mind that this is not the only criteria that matters when it comes to SEO. Be sure to clearly define what this website is about and include the primary keyword that you would like to rank for. It is important to create title tags that describe your content and encourage user clicks. Keep in mind that this is only reflecting the title tag of your home page, to get an audit of your entire website, you must upgrade your account here.
+
+                %i{'ng-if': '!landing_page_info.valid_title'}
+                  It looks like your Homepage title tag is outside of our recommended length. Your title tag should be between 50-60 characters. Be sure to clearly define what this website is about and include the primary keyword that you would like to rank for. It is important to create title tags that describe your content and encourage user clicks. Keep in mind that this is only reflecting the title tag of your home page, to get an audit of your entire website, you must upgrade your account here.
+
+        .col-sm-12.mt-md
+          %h4.mb-md
+            Description
+            %span.badge.tooltips{"data-original-title" => "Details", "data-trigger" => "hover"}
+          .block{'ng-if': '!landing_page_info_before_load && !landing_page_info.description'}
+            %span.fa.fa-close.text-danger.f-s-28.mr-md.pad-r-b
+            %i No description found
+          .well.well-sm.tooltips.no-shadow{'ng-if': 'landing_page_info.description'}
+            {{landing_page_info.description}}
+
+          .panel.panel-default{'data-widget': {draggable: 'false'}}
+            .panel-heading
+              %span.fa.fa-check.text-success.f-s-28.mr-md{'ng-if': 'landing_page_info.valid_description'}
+              %span.fa.fa-close.text-danger.f-s-28.mr-md{'ng-if': '!landing_page_info.valid_description'}
+              %i Description tag meets the recommended guideline
+              .panel-ctrls{"data-action-collapse" => "{\"target\": \".panel-body, .panel-footer\"}", "data-actions-container" => "", "ng-click" => "reportRow.rowCollapsed2 = !reportRow.rowCollapsed2"}
+                %span.button-icon.has-bg
+                  %span.material-icons
+                    %i.fa.fa-question-circle-o{"aria-hidden" => "true"}
+
+            .panel-body{:class => "fadeInLeft", "ng-if" => "reportRow.rowCollapsed2", :row => ""}
+              .form-group.mt-n.pb-n
+                %i{'ng-if': 'landing_page_info.valid_description'} Good work! Your Meta Description is {{landing_page_info.description.length}} characters. The ideal length of a meta description is between 150-160 characters. Now that you’ve got the length down, focus on creating the best possible meta description by clearly defining the content of the page, while including focus keywords that your customers will be searching for. Google uses meta descriptions to create the snippet that describes your page in the SERP listings.
+
+                %i{'ng-if': '!landing_page_info.valid_description'} It looks like your Homepage meta description is outside of our recommended length. The ideal length of a meta description is between 150-160 characters. Once you get the length down, focus on creating the best possible meta description by clearly defining the content of the page, while including focus keywords that your customers will be searching for. Google uses meta descriptions to create the snippet that describes your page in the SERP listings.
+
+        .col-sm-12.mt-md
+          %h4.mb-md
+            H1
+            %span.badge.tooltips{"data-original-title" => "Details", "data-trigger" => "hover"}
+          .block{'ng-if': '!landing_page_info_before_load && landing_page_info.h1_contents.length == 0'}
+            %span.fa.fa-close.text-danger.f-s-28.mr-md.pad-r-b
+            %i No H1 tag found
+          .well.well-sm.tooltips.no-shadow{'ng-if': 'landing_page_info.h1_contents.length > 0'}
+            %li{'ng-repeat': 'h1_content in landing_page_info.h1_contents', 'ng-if': 'landing_page_info.h1_contents.length > 1'}
+              {{h1_content}}
+            %p.mb-n{'ng-repeat': 'h1_content in landing_page_info.h1_contents', 'ng-if': 'landing_page_info.h1_contents.length == 1'}
+              {{h1_content}}
+
+          .panel.panel-default{'data-widget': {draggable: 'false'}}
+            .panel-heading
+              %span.fa.fa-check.text-success.f-s-28.mr-md{'ng-if': 'landing_page_info.valid_h1'}
+              %span.fa.fa-close.text-danger.f-s-28.mr-md{'ng-if': '!landing_page_info.valid_h1'}
+              %i H1 tag meets the recommended guideline
+              .panel-ctrls{"data-action-collapse" => "{\"target\": \".panel-body, .panel-footer\"}", "data-actions-container" => "", "ng-click" => "reportRow.rowCollapsed3 = !reportRow.rowCollapsed3"}
+                %span.button-icon.has-bg
+                  %span.material-icons
+                    %i.fa.fa-question-circle-o{"aria-hidden" => "true"}
+
+            .panel-body{:class => "fadeInLeft", "ng-if" => "reportRow.rowCollapsed3", :row => ""}
+              .form-group.mt-n.pb-n
+                %i{'ng-if': 'landing_page_info.valid_h1'} Perfect! Your site is structured using HTML Headings. This helps Google prioritize your content. Make sure that your &ltH1&gt includes your most important keywords. Never duplicate your title tag content in your Header tag. Also remember that each page should only have one &ltH1&gt. Instead, use multiple &ltH2&gt - &ltH6&gt tags to organize the rest of your content.
+
+                %i{'ng-if': '!landing_page_info.valid_h1 && landing_page_info.h1_count > 1'} Oh no! It looks like your homepage is using multiple &ltH1&gt tags. This will be confusing to search engines and could negatively affect your rankings in search results. Make sure that your &ltH1&gt includes your most important keywords. Never duplicate your title tag content in your Header tag. Each page should only have one &ltH1&gt. Instead, use multiple &ltH2&gt - &ltH6&gt tags to organize the rest of your content.
+
+                %i{'ng-if': '!landing_page_info.valid_h1 && landing_page_info.h1_count == 0'} Oh no! It looks like your homepage doesn’t have a &ltH1&gt tag. Google uses structured HTML Headings to prioritize your content. Make sure that your &ltH1&gt includes your most important keywords. Never duplicate your title tag content in your Header tag. Also remember that each page should only have one &ltH1&gt. Instead, use multiple &ltH2&gt - &ltH6> tags to organize the rest of your content.
+
+        .col-sm-12.mt-md
+          %h4.mb-md
+            Security
+            %span.badge.tooltips{"data-original-title" => "Details", "data-trigger" => "hover"}
+          .block
+            %span.fa.fa-check.text-success.f-s-28.mr-md{'ng-if': 'landing_page_info.ssl_enabled'}
+            %span.fa.fa-close.text-danger.f-s-28.mr-md{'ng-if': '!landing_page_info.ssl_enabled'}
+            %i Security meets the recommended guideline
+        .col-sm-12.mt-md
+          %h4.mb-md
+            Social Links
+            %span.badge.tooltips{"data-original-title" => "Details", "data-trigger" => "hover"}
+          .block{'ng-if': 'landing_page_info.links_empty'}
+            %span.fa.fa-close.text-danger.f-s-28.mr-md.pad-r-b
+            %i No social links found
+          .well.well-sm.tooltips.no-shadow.pt-n.pb-n{'ng-if': '!landing_page_info.links_empty'}
+            %ul.list-unstyled.social.mb-n
+              %li{'ng-repeat': "(key, value) in landing_page_info.social_links"}
+                %a.btn.btn-social{href: '{{value}}', 'ng-if': "key != 'google_plus'"}
+                  %i.f-s-20.fa{ class: "fa-{{key}}"}
+                %a.btn.btn-social{href: '{{value}}', 'ng-if': "key == 'google_plus'"}
+                  %i.f-s-20.fa{ class: "fa-google"}
+    .panel-footer
+      .col-xs-12.col-sm-10.col-xs-offset-0.col-sm-offset-1
+        .jumbotron.bg-info.pl-xl.pr-xl.no-shadow
+          %h4.mb-sm.f-s-20 Clickx Pro Tip
+          %p.text-white.mb-n The first page of Google recieves 96% of all searches for a given keyword. Organic traffic is gold in the online world. Google processes 3.5 billion searches per day. Optimizing your website for search is the foundation for generating targeted traffic, converting them into leads and increasing sales. If you don't see relevant keywords for your business, you're losing traffic, leads and revenue.
+          /%button.btn.btn-outline-white.f-w-md{:type => "button"} Get a Complete Audit of Your Website

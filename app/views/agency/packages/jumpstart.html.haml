@@ -1,0 +1,23 @@
+- content_for :title do
+  Jumpstart Plans | Clickx
+
+.container-fluid.package-page
+  %div{"data-widget-group" => "group1"}
+    .row
+      %ul.nav.nav-tabs.label-orange.growth_plans
+        %li.nav-item.active
+          %a.nav-link{href: '#facebook_ads', data: {toggle: 'tab'}} Facebook Ads
+        %li.nav-item
+          %a.nav-link{href: '#google_ads', data: {toggle: 'tab'}} Google Search Ads
+        %li.nav-item
+          %a.nav-link{href: '#search_engine', data: {toggle: 'tab'}} Search Engine Optimization
+      .col-md-12.mt-md
+        .text-info.panel.mb-xs.p-sm
+          NEW JUMPSTART PLANS COMING SOON.
+      .tab-content
+        #facebook_ads.tab-pane.fade.active.in{"aria-labelledby" => "nav-website-tab", :role => "tabpanel"}
+          = render 'agency/packages/jumpstart/facebook_ads', package: @packages['jumpstart_facebook_ads'].first
+        #google_ads.tab-pane.fade{"aria-labelledby" => "nav-infrastructure-tab", :role => "tabpanel"}
+          = render 'agency/packages/jumpstart/google_ads', package: @packages['jumpstart_google_ads'].first
+        #search_engine.tab-pane.fade{"aria-labelledby" => "nav-website-tab", :role => "tabpanel"}
+          = render 'agency/packages/jumpstart/seo', package: @packages['jumpstart_seo'].first

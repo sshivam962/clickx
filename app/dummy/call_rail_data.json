@@ -1,0 +1,102 @@
+{
+  "calls": {
+    "page": 1,
+    "per_page": 100,
+    "total_pages": 1,
+    "total_records": 9,
+    "calls": [
+      {
+        "answered": false,
+        "business_phone_number": null,
+        "customer_city": "Denver",
+        "customer_country": "US",
+        "customer_name": "RUEGSEGGER SIMO",
+        "customer_phone_number": "+13036231131",
+        "customer_state": "CO",
+        "direction": "inbound",
+        "duration": 4,
+        "id": 482140815,
+        "recording": "https://api.callrail.com/v3/a/227799611/calls/111222333/recording.json",
+        "recording_duration": "27",
+        "recording_player": "https://app.callrail.com/calls/111222333/recording?access_key=3b91eb7f7cc08a4d01ed",
+        "start_time": "2017-01-24T11:27:48.119-05:00",
+        "tracking_phone_number": "+13038163491",
+        "voicemail": false
+      },
+      {
+        "answered": false,
+        "business_phone_number": null,
+        "customer_city": "Blue Ridge",
+        "customer_country": "US",
+        "customer_name": "BLUE RIDGE, GA",
+        "customer_phone_number": "+17064558047",
+        "customer_state": "GA",
+        "direction": "inbound",
+        "duration": 16,
+        "id": 800928657,
+        "recording": null,
+        "recording_duration": null,
+        "recording_player": null,
+        "start_time": "2017-01-24T19:50:03.456-05:00",
+        "tracking_phone_number": "+17708243899",
+        "voicemail": false
+      }
+    ]
+  },
+  "summary": {
+    "start_date": "2016-10-01T00:00:00-0000",
+    "end_date": "2016-10-04T23:59:59-0000",
+    "time_zone": "UTC",
+    "total_results": {
+      "total_calls": 180,
+      "missed_calls": 20,
+      "answered_calls": 160,
+      "first_time_callers": 54,
+      "average_duration": 27,
+      "formatted_average_duration": "27s",
+      "leads": 12
+    },
+    "data": [
+      {
+        "date": "2016-10-01",
+        "total_calls": 130,
+        "missed_calls": 4,
+        "answered_calls": 26,
+        "first_time_callers": 4,
+        "average_duration": 45,
+        "formatted_average_duration": "45s",
+        "leads": 6
+      },
+      {
+        "date": "2016-10-02",
+        "total_calls": 30,
+        "missed_calls": 4,
+        "answered_calls": 26,
+        "first_time_callers": 4,
+        "average_duration": 45,
+        "formatted_average_duration": "45s",
+        "leads": 6
+      },
+      {
+        "date": "2016-10-03",
+        "total_calls": 0,
+        "missed_calls": 0,
+        "answered_calls": 0,
+        "first_time_callers": 0,
+        "average_duration": 0,
+        "formatted_average_duration": "0s",
+        "leads": 0
+      },
+      {
+        "date": "2016-10-04",
+        "total_calls": 20,
+        "missed_calls": 10,
+        "answered_calls": 10,
+        "first_time_callers": 1,
+        "average_duration": 15,
+        "formatted_average_duration": "15s",
+        "leads": 0
+      }
+    ]
+  }
+}

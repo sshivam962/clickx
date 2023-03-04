@@ -1,0 +1,39 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-CalltoAction.title-icon>
+    Google Ads
+  .options{ 'ng-if': "!demo_login && ad_tab != 'campaigns'" }
+    .form-group
+      %span{'ng-class': "{'disable-button': export_disabled}"}
+        %export-button{ 'pdf': 'true', 'name': '{{ name }}' }
+      %md-button.md-raised.md-primary{'ng-click': 'load_datewise_analytics($event)'} {{selectedRange.dateStart | date}} - {{selectedRange.dateEnd | date}}
+
+
+.container-fluid
+  %div
+    .row{ 'id': '{{ name }}' }
+      .col-md-12
+        %ul.nav.nav-tabs.material-nav-tabs.mb-lg
+          %li{role:'presentation', 'ng-class':"{'active' : ad_tab == 'summary'}"}
+            %a{href: "/#/adwords"} Summary
+          %li{ 'ng-if': '!demo_login', role:'presentation', 'ng-class':"{'active' : ad_tab == 'keyword'}"}
+            %a{href: "/#/adwords/keyword"} Keywords
+          -# %li{ 'ng-if': '!demo_login', role:'presentation', 'ng-class':"{'active' : ad_tab == 'ads'}"}
+          -#   %a{href: "/#/adwords/ads"} Ads
+          %li{ 'ng-if': '!demo_login', role:'presentation', 'ng-class':"{'active' : ad_tab == 'queries'}"}
+            %a{href: "/#/adwords/queries"} Search Terms
+          %li{ 'ng-if': '!demo_login', role:'presentation', 'ng-class':"{'active' : ad_tab == 'campaigns'}"}
+            %a{href: "/#/adwords/campaigns"} Campaigns
+
+      .col-md-12
+        .tab-content
+          .summary{'ng-if':"ad_tab == 'summary'"}
+            %div{"ng-include":"", src:"'themeX/adwords/_summary.html'"}
+          .keyword{'ng-if':"ad_tab == 'keyword'"}
+            %div{"ng-include":"", src:"'themeX/adwords/_keyword.html'"}
+          -# .ads{'ng-if':"ad_tab == 'ads'"}
+          -#   %div{"ng-include":"", src:"'themeX/adwords/_ads.html'"}
+          .queries{'ng-if':"ad_tab == 'queries'"}
+            %div{"ng-include":"", src:"'themeX/adwords/_queries.html'"}
+          .queries{'ng-if':"ad_tab == 'campaigns'"}
+            %div{"ng-include":"", src:"'themeX/adwords/_campaigns.html'"}

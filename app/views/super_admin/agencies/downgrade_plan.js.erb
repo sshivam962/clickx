@@ -1,0 +1,7 @@
+<% if @error.present? %>
+  toastr.error("<%= @error %>")
+<% else %>
+  toastr.success('Downgrade Scheduled')
+  $('#manage_subscriptions_body').html("<%= escape_javascript render( partial: 'super_admin/agencies/shared/manage_subscriptions_body', locals: { active_subscription: @active_subscription, agency: @agency, subscription_schedule: @subscription_schedule }) %>");
+  $('.subscription_block').html("<%= escape_javascript render( partial: 'super_admin/agencies/shared/subscription_form', locals: { agency: @agency, active_subscription: @active_subscription, subscription_schedule: @subscription_schedule }) %>");
+<% end %>

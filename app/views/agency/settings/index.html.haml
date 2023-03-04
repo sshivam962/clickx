@@ -1,0 +1,560 @@
+= content_for :title, 'Settings'
+.page-content
+  .page-heading.pb-md
+    .row.align-items-center
+      .col-sm-6
+        %h1
+          %i.clickx-icon-page-cog.title-icon>
+          Settings
+      .col-sm-6.text-md-right.text-left.pt-3.pt-md-0
+        - if @agency.agreement&.signed?
+          = link_to agency_download_agreement_path, class: "btn btn--dark btn--rounded-md mb-2 mb-md-0" do
+            Agreement &#160;
+            %i.fa.fa-download
+        - if @agency.addendum_signed?
+          = link_to agency_download_addendum_path, class: "btn btn--dark btn--rounded-md mb-2 mb-md-0 ml-2" do
+            Addendum &#160;
+            %i.fa.fa-download
+  .container-fluid
+    #settings-panels.settings-panels
+      .mb-4
+        .section-card.bg-white.rounded-12
+          %form{name: 'default_content_values', 'ng-submit': "updateAgency(current_agency)"}
+          = form_for @agency, url: agency_settings_path, method: :patch do |f|
+            .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#agency_info"}
+              .d-flex.justify-content-between.align-items-center
+                .col.fw-sb
+                  Agency Info
+                .col
+                  %span.accordion-arrow
+                    %i.fa.fa-chevron-up
+            #agency_info.collapse
+              .section-card-body.px-5.py-4
+                .row
+                  .col-md-6
+                    .form-group.no-margin-top
+                      = f.label :name, class: 'control-label mt-n'
+                      = f.text_field :name, class: 'form-control'
+                  .col-md-6
+                    .form-group.no-margin-top
+                      = f.label :phone, class: 'control-label mt-n'
+                      = f.text_field :phone, class: 'form-control'
+                  .col-md-6
+                    .form-group.no-margin-top
+                      = f.label :support_email, 'Support Email', class: 'control-label mt-n'
+                      = f.text_field :support_email, class: 'form-control', required: true
+                  .col-md-6
+                    .form-group.no-margin-top
+                      = f.label :support_email, 'Website URL', class: 'control-label mt-n'
+                      = f.text_field :weburl, class: 'form-control', required: true, placeholder: 'Website URL'
+                  .col-md-6
+                    .form-group.no-margin-top
+                      = f.label :address, class: 'control-label mt-n'
+                      = f.text_area :address, class: 'form-control', rows:'2'
+                  / .col-md-6
+                  /   .form-group.no-margin-top
+                  /     = f.label :display_currency, 'Display Currency', class: 'control-label mt-n'
+                  /     = f.select :display_currency, options_for_select(CURRENCIES.keys, f.object.display_currency), { prompt: 'Select Currency' }, { class: 'form-control', required: true }
+                  .col-md-6
+                    .form-group.no-margin-top
+                      %label{for: 'timezone_name'} Time Zone
+                      - zone_hash = ActiveSupport::TimeZone::MAPPING.sort_by {|k, v| v}.to_h
+                      - zone_collection = zone_hash.map{|zone_key, zone_value| [zone_value, zone_key]}
+                      = select_tag 'agency[time_zone_name]', options_for_select(zone_collection, f.object.time_zone_name), class: 'form-control'
+                .form-group.mt-sm
+                  = f.submit 'Save', class: 'btn btn--dark'
+                  %a.btn.btn-success.saveBtn.m-0{type: 'button', href: '/a/profile'} Additional Info
+      .mb-4
+        .section-card.bg-white.rounded-12
+          %form{name: 'default_content_values', 'ng-submit': "updateAgency(current_agency)"}
+          = form_for @agency, url: agency_settings_path, method: :patch do |f|
+            .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#billing_address"}
+              .d-flex.justify-content-between.align-items-center
+                .col.fw-sb
+                  Billing Address
+                .col
+                  %span.accordion-arrow
+                    %i.fa.fa-chevron-up
+            #billing_address.collapse
+              .section-card-body.px-5.py-4
+                = f.fields_for :billing_address, @agency.billing_address do |b|
+                  .row
+                    .col-md-6
+                      .form-group.no-margin-top
+                        = b.label :first_name, 'First Name', class: 'control-label mt-n'
+                        = b.text_field :first_name, class: 'form-control'
+                    .col-md-6
+                      .form-group.no-margin-top
+                        = b.label :last_name, 'Last Name', class: 'control-label mt-n'
+                        = b.text_field :last_name, class: 'form-control'
+                    .col-md-6
+                      .form-group.no-margin-top
+                        = b.label :address_line_1, 'Address Line 1', class: 'control-label mt-n'
+                        = b.text_field :address_line_1, class: 'form-control'
+                    .col-md-6
+                      .form-group.no-margin-top
+                        = b.label :address_line_2, 'Address Line 2', class: 'control-label mt-n'
+                        = b.text_field :address_line_2, class: 'form-control'
+                    .col-md-6
+                      .form-group.no-margin-top
+                        = b.label :city, class: 'control-label mt-n'
+                        = b.text_field :city, class: 'form-control'
+                    .col-md-6
+                      .form-group.no-margin-top
+                        = b.label :country, class: 'control-label mt-n'
+                        = b.select(:country, ISO3166::Country.all_translated.collect {|c| [c, c]}, { prompt: 'Select Country' }, { class: 'form-control', required: true, id: 'country_select', data: {url: "/p/states?state=#{@agency.billing_address&.state}", partial: 'agency/settings/shared/states', 'field-name': 'agency[billing_address_attributes][state]'} })
+                    .col-md-6
+                      .form-group.no-margin-top
+                        = b.label :zip, class: 'control-label mt-n'
+                        = b.text_field :zip, class: 'form-control'
+                    .col-md-6
+                      .form-group.no-margin-top
+                        = b.label :state, class: 'control-label mt-n'
+                        =# b.text_field :state, class: 'form-control'
+                        #state_div
+                          = render 'agency/settings/shared/states', states: {}, state: @agency.billing_address&.state, field_name: 'agency[billing_address_attributes][state]'
+                .form-group.mt-sm
+                  = f.submit 'Save', class: 'btn btn--dark btn-raised'
+      .mb-4
+        .section-card.bg-white.rounded-12
+          %form{name: 'default_content_values', 'ng-submit': "updateAgency(current_agency)"}
+          = form_for @agency, url: agency_settings_path, method: :patch do |f|
+            .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#mailing_address"}
+              .d-flex.justify-content-between.align-items-center
+                .col.fw-sb
+                  Mailing Address
+                .col
+                  %span.accordion-arrow
+                    %i.fa.fa-chevron-up
+            #mailing_address.collapse
+              .section-card-body.px-5.py-4
+                .row
+                  .col-md-6
+                    .d-flex
+                      .col
+                        = check_box_tag 'same_as_above', nil, false, checked: false
+                      %label.col.pl-3.text-black{for: "same_as_above"}
+                        = "Same As Billing Address"
+
+                = f.fields_for :mailing_address, @agency.mailing_address do |b|
+                  .row
+                    .col-md-6
+                      .form-group.no-margin-top
+                        = b.label :address_line_1, 'Address Line 1', class: 'control-label mt-n'
+                        = b.text_field :address_line_1, class: 'form-control'
+                    .col-md-6
+                      .form-group.no-margin-top
+                        = b.label :address_line_2, 'Address Line 2', class: 'control-label mt-n'
+                        = b.text_field :address_line_2, class: 'form-control'
+                    .col-md-6
+                      .form-group.no-margin-top
+                        = b.label :city, class: 'control-label mt-n'
+                        = b.text_field :city, class: 'form-control'
+                    .col-md-6
+                      .form-group.no-margin-top
+                        = b.label :country, class: 'control-label mt-n'
+                        = b.select(:country, ISO3166::Country.all_translated.collect {|c| [c, c]}, { prompt: 'Select Country' }, { class: 'form-control', required: true, id: 'mail_country_select', data: {url: "/p/states?state=#{@agency.mailing_address&.state}", partial: 'agency/settings/shared/mailing_states', 'field-name': 'agency[mailing_address_attributes][state]'} })
+                    .col-md-6
+                      .form-group.no-margin-top
+                        = b.label :zip, class: 'control-label mt-n'
+                        = b.text_field :zip, class: 'form-control'
+                    .col-md-6
+                      .form-group.no-margin-top
+                        = b.label :state, class: 'control-label mt-n'
+                        =# b.text_field :state, class: 'form-control'
+                        #mail_state_div
+                          = render 'agency/settings/shared/mailing_states', states: {}, state: @agency.mailing_address&.state, field_name: 'agency[mailing_address_attributes][state]'
+                .form-group.mt-sm
+                  = f.submit 'Save', class: 'btn btn--dark btn-raised'
+
+      .mb-4
+        .section-card.bg-white.rounded-12
+          = form_for @agency, url: agency_settings_path, method: :patch do |f|
+            .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#calendar_integration"}
+              .d-flex.justify-content-between.align-items-center
+                .col.fw-sb
+                  Calendar Integration (i.e Calendly)
+                .col
+                  %span.accordion-arrow
+                    %i.fa.fa-chevron-up
+            #calendar_integration.collapse
+              .section-card-body.px-5.py-4{:class => "fadeInLeft", "ng-if" => "!reportRow.rowCollapsed4", :row => ""}
+                .row
+                  .col-md-12
+                    .form-group.no-margin-top
+                      = f.text_area :calendly_script, class: 'form-control', rows: 4
+                      %i Paste embed code in the box above and hit save.
+                #calendar-preview
+
+
+                .form-group.mt-sm
+                  %button.btn.btn-warning.saveBtn.m-0{type: 'button', id: 'preview_button'} Preview
+                  = f.submit 'Save', class: 'btn btn--dark btn-raised'
+
+      .mb-4
+        .section-card.bg-white.rounded-12
+          = form_for @agency, url: agency_settings_path, method: :patch do |f|
+            .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#facebook_pixel"}
+              .d-flex.justify-content-between.align-items-center
+                .col.fw-sb
+                  Facebook Pixel
+                .col
+                  %span.accordion-arrow
+                    %i.fa.fa-chevron-up
+            #facebook_pixel.collapse
+              .section-card-body.px-5.py-4{:class => "fadeInLeft", "ng-if" => "!reportRow.rowCollapsed4", :row => ""}
+                .row
+                  .col-md-12
+                    .form-group.no-margin-top
+                      = f.text_area :facebook_pixel, class: 'form-control', rows: 4
+                      %i Paste code in the box above and hit save.
+                .form-group.mt-sm
+                  = f.submit 'Save', class: 'btn btn--dark btn-raised'
+
+      .mb-4
+        .section-card.bg-white.rounded-12
+          = form_for @agency, url: agency_settings_path, method: :patch do |f|
+            .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#thank_you_page"}
+              .d-flex.justify-content-between.align-items-center
+                .col.fw-sb
+                  Thank You Page Facebook Pixel
+                .col
+                  %span.accordion-arrow
+                    %i.fa.fa-chevron-up
+            #thank_you_page.collapse
+              .section-card-body.px-5.py-4{:class => "fadeInLeft", "ng-if" => "!reportRow.rowCollapsed4", :row => ""}
+                .row
+                  .col-md-12
+                    .form-group.no-margin-top
+                      = f.text_area :thank_you_facebook_pixel, class: 'form-control', rows: 4
+                      %i Paste code in the box above and hit save.
+                .form-group.mt-sm
+                  = f.submit 'Save', class: 'btn btn--dark btn-raised'
+
+      .mb-4
+        .section-card.bg-white.rounded-12.update_support_popup
+          = form_for @agency, url: agency_settings_path, method: :patch do |f|
+            .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#email_support"}
+              .d-flex.justify-content-between.align-items-center
+                .col.fw-sb
+                  Email Support
+                .col
+                  %span.accordion-arrow
+                    %i.fa.fa-chevron-up
+            #email_support.collapse
+              .section-card-body.px-5.py-4
+                = f.check_box :support_popup
+                Enable Support Popup
+                %div#support_members_wrapper{class: "#{'hidden' unless @agency.support_popup}"}
+                  .support_member_create_div.py-3
+                    .p-4.bg-white.rounded-8
+                      %p.fw-sb
+                        Add support users, they will be shown in the popup.
+                      .row
+                        = f.fields_for :support_members do |sm|
+                          .col-md-6
+                            .form-group.no-margin-top
+                              //%label.control-label.mt-n Name
+                              = sm.label :name, class: 'control-label mt-n'
+                              = sm.text_field :name, class: 'form-control'
+                          = sm.fields_for :photo, sm.object.photo do |p|
+                            .col-md-3
+                              .form-group
+                                = p.label :Upload, class: 'btn btn-raised btn-md btn-sm'
+                                = p.file_field :file
+                            .col-md-3
+                              %img.img-responsive.support_user_preview{src: p.object.file&.url}
+                .form-group.mt-sm
+                  = f.submit 'Save', class: 'btn btn--dark btn-raised'
+      .mb-4
+        .section-card.bg-white.rounded-12
+          = form_for @agency, url: agency_settings_path, method: :patch do |f|
+            .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#yext_integration"}
+              .d-flex.justify-content-between.align-items-center
+                .col.fw-sb
+                  Yext Integration
+                .col
+                  %span.accordion-arrow
+                    %i.fa.fa-chevron-up
+            #yext_integration.collapse
+              .section-card-body.px-5.py-4{:class => "fadeInLeft", "ng-if" => "!reportRow.rowCollapsed4", :row => ""}
+                .row
+                  .col-md-6
+                    .form-group.no-margin-top
+                      = f.label :yext_api_key, 'Yext API Key', class: 'control-label mt-n'
+                      = f.text_field :yext_api_key, class: 'form-control'
+                .form-group.mt-sm
+                  = f.submit 'Save', class: 'btn btn--dark btn-raised'
+      .mb-4
+        .section-card.bg-white.rounded-12
+          = form_for @stripe_credential, url: agency_stripe_credentials_path, method: :post, remote: true do |f|
+            .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#stripe_api_key"}
+              .d-flex.justify-content-between.align-items-center
+                .col.fw-sb
+                  Stripe API Keys
+                  %span.olor-silver.d-inline-block.ml-2{ data: {toggle: 'modal', target: "#stripe_api_key_modal"}}
+                    %i.fa.fa-info-circle
+                .col
+                  %span.accordion-arrow
+                    %i.fa.fa-chevron-up
+            #stripe_api_key.collapse
+              .section-card-body.px-5.py-4{:class => "fadeInLeft", "ng-if" => "!reportRow.rowCollapsed4", :row => ""}
+                .row
+                  .col-md-6
+                    .form-group.no-margin-top
+                      = f.label :publishable_key, 'Publishable Key', class: 'control-label mt-n'
+                      = f.password_field :publishable_key, class: 'form-control', required: true, value: @stripe_credential.publishable_key
+                .row
+                  .col-md-6
+                    .form-group.no-margin-top
+                      = f.label :secret_key, 'Secret Key', class: 'control-label mt-n'
+                      = f.password_field :secret_key, class: 'form-control', required: true, value: @stripe_credential.secret_key
+                = f.fields_for :agency, @stripe_credential.agency do |b|
+                  .row
+                    .col-md-6
+                      .form-group.no-margin-top
+                        = b.label :t_and_c_link, 'Terms & Conditions URL', class: 'control-label mt-n'
+                        = b.text_field :t_and_c_link, class: 'form-control', placeholder: 'Terms & Conditions URL'
+
+                .form-group.mt-sm
+                  = f.submit 'Save', class: 'btn btn--dark btn-raised'
+      .mb-4
+        .section-card.bg-white.rounded-12
+          = form_for @agency, url: agency_settings_path, method: :patch do |f|
+            .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#funnel_thank_you_page"}
+              .d-flex.justify-content-between.align-items-center
+                .col.fw-sb
+                  Funnel Thank You Message
+                .col
+                  %span.accordion-arrow
+                    %i.fa.fa-chevron-up
+            #funnel_thank_you_page.collapse
+              .section-card-body.px-5.py-4{:class => "fadeInLeft", "ng-if" => "!reportRow.rowCollapsed4", :row => ""}
+                .row
+                  .col-md-12
+                    .form-group.no-margin-top
+                      - thank_you_value = "Are you struggling to generate qualified leads? Do you want to grow your revenue 10X? If yes, let us help you! Schedule a consultation for free, unfiltered business strategy and to determine if we are the right fit.\n\nOnce you have selected a date and time that works for you, please complete the form so that we can learn more about you and discover the best way to help your business grow."
+                      - if @agency.thank_you_funnel.present?
+                        - thank_you_value = @agency.thank_you_funnel
+                      = f.text_area :thank_you_funnel, value: thank_you_value, class: 'form-control', rows: 4
+                      %i Enter the thank you text in the box above and hit save.
+                .form-group.mt-sm
+                  = f.submit 'Save', class: 'btn btn--dark btn-raised'
+
+      .mb-4
+        .section-card.bg-white.rounded-12
+          = form_for @agency, url: agency_settings_path, method: :patch do |f|
+            .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#prospecting_email"}
+              .d-flex.justify-content-between.align-items-center
+                .col.fw-sb
+                  Email Prospecting
+                .col
+                  %span.accordion-arrow
+                    %i.fa.fa-chevron-up
+            #prospecting_email.collapse
+              .section-card-body.px-5.py-4{:class => "fadeInLeft", "ng-if" => "!reportRow.rowCollapsed4", :row => ""}
+                .row
+                  .col-md-12
+                    .form-group.no-margin-top
+                      = f.label :cold_email_domain_name, 'Verified Domain', class: 'control-label mt-n'
+                      = f.text_field :cold_email_domain_name, class: 'form-control'
+                .row
+                  .col-sm-6
+                    %input.form-control{:type => "text" , value: f.object.start_time, id: 'agency_time_zone_start_time', name: 'agency[start_time]'}
+
+                .row
+                  .col-md-12
+                    .form-group.no-margin-top
+                      = f.label :icebreaker_sentence, 'AI Bot Intro', class: 'control-label mt-n'
+                      = f.text_area :icebreaker_sentence, class: 'form-control', rows: 3
+                .row
+                  .col-md-12
+                    .form-group.no-margin-top
+                      = f.label :ai_bot_prompt_1, 'AI Bot Prompt 1', class: 'control-label mt-n'
+                      = f.text_area :ai_bot_prompt_1, class: 'form-control', rows: 3
+                .row
+                  .col-md-12
+                    .form-group.no-margin-top
+                      = f.label :ai_bot_prompt_2, 'AI Bot Prompt 2', class: 'control-label mt-n'
+                      = f.text_area :ai_bot_prompt_2, class: 'form-control', rows: 3
+                .row
+                  .col-md-12
+                    .form-group.no-margin-top
+                      = f.label :ai_bot_prompt_3, 'AI Bot Prompt 3', class: 'control-label mt-n'
+                      = f.text_area :ai_bot_prompt_3, class: 'form-control', rows: 3
+                .mt-2
+                  = f.submit 'Save', class: 'btn btn--dark btn-raised'
+      .mb-4
+        .section-card.bg-white.rounded-12
+          = form_for @agency, url: agency_settings_path, method: :patch do |f|
+            - if current_agency.readymode_enabled
+              .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#readymode"}
+                .d-flex.justify-content-between.align-items-center
+                  .col.fw-sb
+                    ReadyMode
+                  .col
+                    %span.accordion-arrow
+                      %i.fa.fa-chevron-up
+              #readymode.collapse
+                .section-card-body.px-5.py-4{:class => "fadeInLeft", "ng-if" => "!reportRow.rowCollapsed4", :row => ""}
+                  .row
+                    .col-md-12
+                      .form-group.no-margin-top
+                        = f.label :readymode_url, 'URL', class: 'control-label mt-n'
+                        = f.text_field :readymode_url, class: 'form-control'
+                  .mt-2
+                    = f.submit 'Save', class: 'btn btn--dark btn-raised'
+            - else
+              .section-card-heading.section-card-heading--disabled.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#readymode"}
+                .d-flex.justify-content-between.align-items-center
+                  .col.fw-sb
+                    ReadyMode
+                  .col
+                    %span.accordion-arrow
+                      %i.fa.fa-times
+      .mb-4
+        .section-card.bg-white.rounded-12
+          = form_for @agency, url: agency_settings_path, method: :patch do |f|
+            .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#settings-panels", "data-toggle" => "collapse", :href => "#funnel_calendlie"}
+              .d-flex.justify-content-between.align-items-center
+                .col.fw-sb
+                  Funnel Calendar
+                .col
+                  %span.accordion-arrow
+                    %i.fa.fa-chevron-up
+            #funnel_calendlie.collapse
+              .section-card-body.px-5.py-4{:class => "fadeInLeft", "ng-if" => "!reportRow.rowCollapsed4", :row => ""}
+                .row
+                  .col-md-12
+                    .form-group.no-margin-top
+                      = f.text_area :funnel_calendlie, class: 'form-control', rows: 4
+                      %i Paste embed code in the box above and hit save.
+                .form-group.mt-sm
+                  = f.submit 'Save', class: 'btn btn--dark btn-raised'
+.mb-5
+
+#support-modal.modal.fade{"role": "dialog", "tabindex": "-1"}
+  .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg{role: 'document'}
+    .modal-content.modal-lg
+      .modal-header
+        Where to find Stripe API key?
+        %a.close{'data-dismiss': 'modal'}
+          %span ×
+      .modal-body
+        %img{:src => "/images/stripe_demo_api_keys/stripe_demo_1.png",  width: '100%'}
+
+#stripe_api_key_modal.modal.fade.modal--lg{"role": "dialog", "tabindex": "-1","aria-labelledby": "myModalLabel", "aria-hidden": "true"}
+  .d-lg-flex.align-items-center.h-lg-cover.pt-5.pb-5
+    %button.close.close-circle{"data-dismiss": "modal","aria-hidden": "true"}
+      &times;
+    .modal-dialog{"style": "width:auto"}
+      .modal-content.modal-content--transparent.modal-content--noshadow
+        .bg-white.p-4.br-10
+          %h3.ext-center.fw-m
+            Finding YOUR Stripe API Keys
+          .mt-4
+          %ol
+            %li
+              Log Into your Stripe account.
+            %li
+              Refer to the left side menu.
+            %li
+              Go down to the Developers section.
+            %li
+              Under that section you should see "API Keys".
+          .mt-4
+          %img{:src => "/images/stripe_demo_api_keys/stripe-api-key.png"}
+          .mt-5
+          %p
+            We need the
+            %strong
+              Publish Key
+            and
+            %strong
+              Secret Key
+            information. The Secret Key has to be clicked to view the information.
+    }
+
+= stylesheet_link_tag "mdtimepicker"
+= javascript_include_tag "mdtimepicker"
+
+:javascript
+  mdtimepicker('#agency_time_zone_start_time', { theme: 'dark', clearBtn: true });
+
+  $('#agency_support_popup').change(function() {
+    if(this.checked) {
+      $("#support_members_wrapper").removeClass('hidden')
+    }else{
+      $("#support_members_wrapper").addClass('hidden')
+    }
+  });
+
+  $(document).ready(function() {
+    var message = $('#agency_calendly_script').val();
+    $('#calendar-preview').html(message);
+  });
+
+  $(document).on('click', '#preview_button', function(e) {
+    e.preventDefault();
+    var message = $('#agency_calendly_script').val();
+    $('#calendar-preview').html(message);
+  })
+
+  $('#same_as_above').change(function() {
+    if(this.checked) {
+      var address_line_1 =  $('#agency_billing_address_attributes_address_line_1').val();
+      $('#agency_mailing_address_attributes_address_line_1').val(address_line_1);
+      var address_line_2 =  $('#agency_billing_address_attributes_address_line_2').val();
+      $('#agency_mailing_address_attributes_address_line_2').val(address_line_2);
+      var city =  $('#agency_billing_address_attributes_city').val();
+      $('#agency_mailing_address_attributes_city').val(city);
+      var zip =  $('#agency_billing_address_attributes_zip').val();
+      $('#agency_mailing_address_attributes_zip').val(zip);
+      var country_select = $("#country_select").val();
+      $("#mail_country_select").val(country_select).change();
+      var state_select = $("#state_select").val();
+      setTimeout(function() {
+        $("#mail_state_select").val(state_select).change();
+        $('#mail_state_select').addClass("bg-gray");
+      }, 1000);
+
+      $('#agency_mailing_address_attributes_address_line_1').prop("readonly", true);
+      $('#agency_mailing_address_attributes_address_line_1').prop("readonly", true);
+      $('#agency_mailing_address_attributes_address_line_2').prop("readonly", true);
+      $('#agency_mailing_address_attributes_city').prop("readonly", true);
+      $('#agency_mailing_address_attributes_zip').prop("readonly", true);
+      $('#mail_country_select').prop("readonly", true);
+      $('#mail_state_select').prop("readonly", true);
+
+      $('#agency_mailing_address_attributes_address_line_1').addClass("bg-gray");
+      $('#agency_mailing_address_attributes_address_line_1').addClass("bg-gray");
+      $('#agency_mailing_address_attributes_address_line_2').addClass("bg-gray");
+      $('#agency_mailing_address_attributes_city').addClass("bg-gray");
+      $('#agency_mailing_address_attributes_zip').addClass("bg-gray");
+      $('#mail_country_select').addClass("bg-gray");
+
+    }
+    else{
+      $('#agency_mailing_address_attributes_address_line_1').val("");
+      $('#agency_mailing_address_attributes_address_line_2').val("");
+      $('#agency_mailing_address_attributes_city').val("");
+      $('#agency_mailing_address_attributes_zip').val("");
+      $("#mail_country_select").val("United States").change();
+
+
+      $('#agency_mailing_address_attributes_address_line_1').prop("readonly", false);
+      $('#agency_mailing_address_attributes_address_line_2').prop("readonly", false);
+      $('#agency_mailing_address_attributes_city').prop("readonly", false);
+      $('#agency_mailing_address_attributes_zip').prop("readonly", false);
+      $('#mail_country_select').prop("readonly", false);
+      $('#state_select').prop("readonly", false);
+
+      $('#agency_mailing_address_attributes_address_line_1').removeClass("bg-gray");
+      $('#agency_mailing_address_attributes_address_line_1').removeClass("bg-gray");
+      $('#agency_mailing_address_attributes_address_line_2').removeClass("bg-gray");
+      $('#agency_mailing_address_attributes_city').removeClass("bg-gray");
+      $('#agency_mailing_address_attributes_zip').removeClass("bg-gray");
+      $('#mail_country_select').removeClass("bg-gray");
+      $('#mail_state_select').removeClass("bg-gray");
+    }
+  });

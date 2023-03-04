@@ -1,0 +1,50 @@
+%span
+  .address.row.ml-n.mr-n
+    .col-sm-12.col-md-5
+      %a.no-underline{href: edit_super_admin_case_study_path(case_study)}
+        %span.name.blue
+          = case_study.title
+        %br
+        %small
+          %i
+            = "(#{case_study.tier})"
+            = case_study.created_at.strftime("#{case_study.created_at.day.ordinalize} %b %Y")
+        %br
+        %small
+          = case_study.reload.industries.map(&:title).join(', ')
+    .col-sm-4.col-md-2
+      = select_tag "assignee-#{case_study.id}",options_from_collection_for_select(super_admins, "id", "name", case_study.assignee.present? ? case_study.assignee.id : nil), include_blank: 'Select Assignee', data: {casestudy: case_study.id}
+    .col-sm-4.col-md-2
+      .col-sm-12.right.normal-edit-button.grey-btn-group.mb-md
+        - if case_study.stat_missing?
+          = image_tag 'cross.ico', width: '25px'
+        - else
+          = image_tag 'tick.ico', width: '25px'
+        .badge= case_study.status.titleize
+    .col-sm-4.col-md-3
+      .col-sm-12.right.normal-edit-button.grey-btn-group.mb-md
+        = link_to super_admin_case_study_path(case_study), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn grey-btn-icon align-icon pull-right ml-sm mb-sm' do
+          %i.fa.fa-archive
+          Archive
+        %a.btn.grey-btn-icon.align-icon.pull-right.ml-sm.mb-sm{ href: edit_super_admin_case_study_path(case_study) }
+          %i.glyphicon.glyphicon-edit
+          Edit
+        %a.btn.grey-btn-icon.align-icon.pull-right.ml-sm.mb-sm{ href: preview_super_admin_case_study_path(case_study), target: '_blank'}
+          %i.glyphicon.glyphicon-eye-open
+          Preview
+        - if case_study.published?
+          = link_to 'Draft', published_super_admin_case_study_path(case_study), id:"published-#{case_study.id}", class: "btn grey-btn-icon align-icon pull-right ml-sm mb-sm published"
+        - if case_study.draft?
+          = link_to 'Publish', published_super_admin_case_study_path(case_study), id:"published-#{case_study.id}", class: "btn grey-btn-icon align-icon pull-right ml-sm mb-sm published"
+
+:javascript
+  $('#assignee-#{case_study.id}').change(function(){
+    var assignee_id = $(this).val();
+    var case_study_id = $(this).data('casestudy');
+    $.ajax({
+      url: "/s/case_studies/" + case_study_id + "/set_assignee",
+      type: 'post',
+      data: {assignee_id: assignee_id},
+      dataType: 'script'
+    })
+  });

@@ -1,0 +1,24 @@
+.d-sm-flex.pb-3
+  .w-sm-50.pr-sm-3.pb-sm-0.pb-3
+    %label.input-label{for: 'user_first_name'} First Name
+    = text_field_tag 'user[first_name]', '', required: true, class: 'form-input'
+  .w-sm-50.pl-sm-3
+    %label.input-label{for: 'user_last_name'} Last Name
+    = text_field_tag 'user[last_name]', '', required: true, class: 'form-input'
+.d-sm-flex.pb-3
+  .w-sm-50.pr-sm-3.pb-sm-0.pb-3
+    %label.input-label{for: "user_email"} Email
+    = email_field_tag 'user[email]', '', required: true, class: 'form-input'
+  .w-sm-50.pl-sm-3
+    %label.input-label{for: 'user_phone'} Phone
+    = phone_field_tag 'user[phone]', '', required: true, class: 'form-input', placeholder: "+1 555 555 1234"
+.pb-3
+  %label.input-label{for: 'business_name'} Company/Organization
+  = text_field_tag 'business[name]', '', required: true, class: 'form-input'
+.d-sm-flex.pb-3
+  .w-sm-50.pr-sm-3.pb-sm-0.pb-3
+    %label.input-label{for: "business_domain"} Domain
+    = text_field_tag 'business[domain]', '', required: true, class: 'form-input'
+  .w-sm-50.pl-sm-3
+    %label.input-label{for: 'business_target_city'} Target City
+    = text_field_tag 'business[target_city]', '', required: true, class: 'form-input'

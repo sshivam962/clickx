@@ -1,0 +1,55 @@
+.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-BlogWriting.title-icon
+    Content
+    %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Content order tool lets you order content for your buisness. This page lets you choose what kind of content you require including the word count and the quality of the writers. Publishing regular content on your company\'s blog is crucial for attracting laser targeted traffic, educating prospect customers, and finally converting them. If you are an online business, never estimate the power of content marketing. ', 'title-direction': 'bottom'}
+  .options{ 'ng-if': '!demo_login' }
+    %span{'ng-class': "{'disable-button': export_disabled}"}
+      %export-template{ 'pdf': 'true' }
+    %a.btn.btn-inverse.btn-raised{href:"/#/{{business_id}}/contents/new", 'ng-if' => "current_role == 'admin' "}
+      %i.fa.fa-plus
+      Add New Content
+    %a.btn.btn-white.btn-raised{href:"/#/content_order/new", 'title': 'Place a new order'}
+      %span.fa.fa-pencil
+      Place Order
+    %a.btn.btn-white.btn-raised{href:"/#/content/view_orders", 'title': 'View all orders'}
+      %span.fa.fa-credit-card
+      &nbsp;View Orders
+      .ripple-container
+.container-fluid
+  %div#contents
+    .row
+      .col-md-12
+        .tab-container
+          .tab-content
+            .table-responsive
+              %table.table.table-hover.table-bordered.table-vam
+                %thead
+                  %tr
+                    %th{style: "padding-right:300px;"} Title
+                    %th.text-center Date Created
+                    %th.text-center Last Modified
+                    %th.text-center Status
+                    %th.text-center{ 'ng-if': '!demo_login' } Action
+                %tbody{'ng-show' => "contents.length"}
+                  %tr{'ng-repeat' => "content in contents track by $index"}
+                    %td
+                      %a.info{href: "/#/{{business_id}}/contents/{{content.id}}"} {{content.title}}
+                    %td.text-center {{content.created_at | amDateFormat:'ll'}}
+                    %td.text-center {{content.updated_at | amDateFormat:'ll'}}
+                    %td.text-center
+                      %span.block{'ng-if' => "content.state == 'approved'"}
+                        .success Ready to Publish
+                      %span.block{'ng-if' => "content.state != 'approved'"}
+                        .info Edits in Progress
+                    %td.text-center{ 'ng-if': '!demo_login' }
+                      %a.btn.btn-primary.btn-raised{'ng-if':"content.state != 'approved' || (content.state == 'approved' && content.link == undefined)", href: "/#/{{business_id}}/contents/{{content.id}}", 'title': 'Edit content to approve'}
+                        %i.fa.fa-check-square-o.pr
+                        Approve
+                      %a.btn.btn-success.btn-raised{'ng-if':"content.state == 'approved' && content.link != undefined", 'ng-href':"{{ web_link(content.link) }}", target: '_blank'}
+                        %i.fa.fa-eye.pr>
+                        View Link
+
+                      %a.btn.btn-danger.del-btn{'ng-if':"current_role == 'admin'", href: "", 'ng-click':"delete(content.id)"}
+                        %span.fa.fa-trash-o
+                        Delete

@@ -1,0 +1,214 @@
+- content_for :title do
+  ROI Calculator
+- if @header
+  .qpage-wrapper
+    .qpage-header.horizontal-align.text-center{style: "background:#{@agency.roi_header_color}"}
+      .container.text-center
+        = link_to formatted_url(@agency.weburl), target: '_blank', class: 'lead-logo', style: "background:#{@agency.roi_header_color}" do
+          - if @agency.logo.present?
+            = image_tag @agency.logo || '', height: '40px'
+          - else
+            %h1.m-n.p-n.white.logo-title
+              = @agency.name
+.container.calculator
+  .row.mt-xxl
+    .col-md-8
+      .panel.tranin.panel-midnightblue{:style => "visibility:visible"}
+        .panel-heading
+          %h2.caltitle What's the expected ROI on your PPC Ads?
+          %small.text-white
+            First, enter your metrics below to get an estimated ROI. Next, play
+            around with those metrics to see the impact it will have.
+        .panel-body.mt-xxl
+          .col-sm-12.p-n
+            .form-group.m-n.p-n
+              %ul.timeline.roi
+                %li.timeline-orange
+                  .timeline-icon 1
+                  .timeline-cal-body
+                    .timeline-header
+                      %span.author.f-s-16
+                        What's your expected monthly ad
+                        spend?
+                      %span.date
+                        How much do you spend on PPC Ads every month? If you
+                        don't spend anything yet, just test out a number.
+                      %span.block.mt-md.range
+                      %input.monthly_ad_spend{:name => "monthly_ad_spend", :type => "text", :value => ""}/
+                %li.timeline-orange
+                  .timeline-icon 2
+                  .timeline-cal-body
+                    .timeline-header
+                      %span.author.f-s-16 What's your expected CPC?
+                      %span.date How much do you expect to pay for a click?
+                      %span.block.mt-md.range
+                      %input.expected_cpc{:name => "expected_cpc", :type => "text", :value => ""}/
+                %li.timeline-orange
+                  .timeline-icon 3
+                  .timeline-cal-body
+                    .timeline-header
+                      %span.author.f-s-16 What's your opt-in conversion rate?
+                      %span.date
+                        What percentage of your visitors convert into a lead
+                        on your website?
+                      %span.block.mt-md.range
+                      %input.opt_in_conversion_rate{:name => "opt_in_conversion_rate", :type => "text", :value => ""}/
+                %li.timeline-orange
+                  .timeline-icon 4
+                  .timeline-cal-body
+                    .timeline-header
+                      %span.author.f-s-16
+                        What's your lead to customer conversion
+                        rate?
+                      %span.date
+                        What percentage of your leads turn into a
+                        customer?
+                      %span.block.mt-md.range
+                      %input.customer_conversion_rate{:name => "customer_conversion_rate", :type => "text", :value => ""}/
+                %li.timeline-orange
+                  .timeline-icon 5
+                  .timeline-cal-body
+                    .timeline-header
+                      %span.author.f-s-16 What's the average sale price?
+                      %span.date On average, how valuable is a single customer?
+                      %span.block.mt-md.range
+                        %input.average_sale_price.form-control{:name => "average_sale_price", :type => "text", :value => 1500, placeholder: '$'}
+    .col-md-4
+      .panel.panel-sum.tranin.panel-midnightblue{:style => "visibility:visible"}
+        .form-group.select-currency.mt-md
+          = label_tag :currency, 'Choose Currency:'
+          = select_tag :currency, options_for_select([["$","$"],["€","€"],["£","£"]], @agency.currency), class: 'form-control'
+        %hr
+        %h2.text-center.mt-n.message_title
+        %p.text-center.bdr-b-line.pb-lg.mb-lg.message_desc
+        .col-md-12.p-n.mb-md
+          %span.pull-left Gross Revenue
+          %span.pull-right.text-info.f-w-lg.gross_revenue -
+        .col-md-12.p-n.mb-md
+          %span.pull-left Net Result
+          %span.pull-right.text-info.f-w-lg.net_result -
+        .col-md-12.p-n.mb-md
+          %span.pull-left ROI
+          %span.pull-right.text-info.f-w-lg.rate_of_investment -
+
+
+:javascript
+  $(function() {
+    var currency = $('#currency').val();
+
+    $('#currency').change(function(){
+      currency = $(this).val();
+      calculate_roi();
+      ad_spend_slider.reset()
+      cpc_slider.reset()
+    });
+
+    function kFormatter(num) {
+        return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math
+            .sign(num) * Math.abs(num)
+    }
+    $('.monthly_ad_spend').ionRangeSlider({
+        skin: 'round',
+        min: 100,
+        max: 20000,
+        from: 2000,
+        step: 100,
+        prettify: function (selection) {
+            return currency + kFormatter(selection)
+        },
+        onChange: function (data) {
+            calculate_roi();
+        },
+    });
+    let ad_spend_slider = $(".monthly_ad_spend").data("ionRangeSlider");
+
+    $('.expected_cpc').ionRangeSlider({
+        skin: 'round',
+        min: 1,
+        max: 300,
+        from: 5,
+        prettify: function (selection) {
+            return currency + selection
+        },
+        onChange: function (data) {
+            calculate_roi();
+        },
+    });
+    let cpc_slider = $(".expected_cpc").data("ionRangeSlider");
+
+    $('.opt_in_conversion_rate').ionRangeSlider({
+        skin: 'round',
+        min: 1,
+        max: 100,
+        from: 10,
+        prettify: function (selection) {
+            return selection + '%'
+        },
+        onChange: function (data) {
+            calculate_roi();
+        },
+    });
+    $('.customer_conversion_rate').ionRangeSlider({
+        skin: 'round',
+        min: 1,
+        max: 100,
+        from: 20,
+        prettify: function (selection) {
+            return selection + '%'
+        },
+        onChange: function (data) {
+            calculate_roi();
+        },
+    });
+    $('.average_sale_price').keyup(function () {
+        calculate_roi();
+    });
+
+    function calculate_roi() {
+      mas = $(".monthly_ad_spend").data("ionRangeSlider").result.from
+      ec = $(".expected_cpc").data("ionRangeSlider").result.from
+      ocr = $(".opt_in_conversion_rate").data("ionRangeSlider").result.from
+      ccr = $(".customer_conversion_rate").data("ionRangeSlider").result.from
+      asp = $('.average_sale_price').val()
+      if (!$.isNumeric(asp)) {
+          asp = 0;
+      }
+      rs1 = mas / ec
+      rs2 = (ocr * rs1) / 100
+      rs3 = (ccr * rs2) / 100
+      gross_revenue = rs3 * parseInt(asp)
+      net_result = gross_revenue - mas
+      roi = (net_result / mas) * 100
+      gross_revenue_text = currency + gross_revenue.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      net_result_text = currency + net_result.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      roi_text = roi.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '%';
+      mas_text = currency + mas.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      if (net_result <= 0) {
+          message_title = "Oh no! 😞<br>You'll lose<br>" + net_result_text
+      } else {
+          message_title = "Well done!<br>You'll profit<br>" + net_result_text
+      }
+      message_desc = "Your " + mas_text + " adspend will generate " + gross_revenue_text +
+          " in revenue, which means you're getting a " + roi_text + "  ROI on your money."
+      $('.message_title').html(message_title)
+      $('.message_desc').html(message_desc)
+      $('.gross_revenue').text(gross_revenue_text)
+      $('.net_result').text(net_result_text)
+      $('.rate_of_investment').text(roi_text)
+    }
+    calculate_roi();
+  });
+
+:css
+  .select-currency{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .select-currency select{
+      width: 20%;
+      margin-left: 20px;
+    }
+  }

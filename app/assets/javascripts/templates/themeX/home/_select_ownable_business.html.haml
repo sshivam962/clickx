@@ -1,0 +1,21 @@
+%script{type: "text/ng-template", id: "selectBusiness"}
+  %md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-compressed{'aria-label':'Select a Business'}
+    %form.new_task{"accept-charset" => "UTF-8", "ng-submit" => "change_ownable_business()", "novalidate" => "" }
+      .modal-header
+        %button.close{'aria-label':'Close','ng-click':'closeModal()'}
+          %span.fa.fa-times-circle-o
+        %h3.modal-title Select a Business
+      %md-dialog-content
+        .modal-dialog-content
+          .container-fluid
+            .row.m-t-50
+              .col-xs-12
+                %md-input-container.form-control
+                  %label{:for => "business_id"} Business Name
+                  %md-select{"ng-model" => "new_ownable_business", :name => "new_ownable_business", required: true}
+                    %md-option{'ng-value': 'undefined'}
+                      %em Select a Business
+                    %md-option{'ng-value': 'client', 'ng-repeat': "client in all_ownable_businesses | orderBy:'name'" }
+                      {{client.name}}
+      %md-dialog-actions{layout:'row'}
+        %button.btn.btn-raised.btn-primary{type:"submit", 'ng-click' => "changeOwnableBusiness()"} Change Business

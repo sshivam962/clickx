@@ -1,0 +1,288 @@
+- content_for :title do
+  Local SEO
+.page-heading
+  %h1 Local SEO
+.container-fluid
+  %div{"data-widget-group" => "group1"}
+    .row
+      .col-sm-12
+        .panel.panel-default.p-lg
+          .panel-body.p-n
+            .row
+              .col-sm-12
+                - plans = @package.plans.group_by(&:key)
+                .table-responsive.table-pricing1
+                  %table.table.table-hover.mb-n
+                    %thead
+                      %tr
+                        %th.vat.pb-lg{:width => "300"}
+                          - plan = plans['starter'].first
+                          %h2.pt-header-caption.text-info= plan.title
+                          .pt-header-price
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                        %th.vat.pb-lg{:width => "300"}
+                          - plan = plans['pro'].first
+                          %h2.pt-header-caption.text-success= plan.title
+                          .pt-header-price
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                        %th.vat.pb-lg{:width => "300"}
+                          - plan = plans['advanced'].first
+                          %h2.pt-header-caption.text-warning= plan.title
+                          .pt-header-price
+                            = number_to_currency(plan.amount, precision: 0)
+                            %span> /mo
+                    %tbody
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          100% Customized Local SEO Strategy
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          100% Customized Local SEO Strategy
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          100% Customized Local SEO Strategy
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Dedicated Local SEO strategist
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Dedicated Local SEO strategist
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Dedicated Local SEO strategist
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Dedicated Content Specialists
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Dedicated Content Specialists
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Dedicated Content Specialists
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Local Keyword Research (5 Products or Services)
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Local Keyword Research (10 Products or Services)
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Local Keyword Research (15 Products or Services)
+                      %tr.bdr-b-line
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Claim Local Listings
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Claim Local Listings
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Claim Local Listings
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Claim Google Business Profile
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Claim Google Business Profile
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Claim Google Business Profile
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          On-Page Optimization
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          On-Page Optimization
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          On-Page Optimization
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Schema Implementation
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Schema Implementation
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Schema Implementation
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Mobile Site Optimization
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Mobile Site Optimization
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Mobile Site Optimization
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Local Keywords Tracked: 100
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Manual Directory Research
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Manual Directory Research
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Custom Content Strategy
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Conversion Rate Optimization
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Conversion Rate Optimization
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Monthly Reporting Calls
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Local Keywords Tracked: 100
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Reputation Monitoring
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Month to Month Commitment
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Custom Content Strategy
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Advanced Analytics
+                      %tr
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          30 Day Notice for Cancellation
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Monthly Reporting Calls
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Link Building Outreach
+                      %tr
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Month to Month Commitment
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Local Keywords Tracked: 100
+                      %tr
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          30 Day Notice for Cancellation
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Custom Content Strategy
+                      %tr
+                        %td.vam
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Monthly Reporting Calls
+                      %tr
+                        %td.vam
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          Month to Month Commitment
+                      %tr
+                        %td.vam
+                        %td.vam
+                        %td.vam
+                          %span.tick-2>
+                            %i.material-icons check
+                          30 Day Notice for Cancellation
+                      %tr
+                        %td.vam
+                          %a.btn.btn-info.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'local_seo', plan: 'starter')}
+                            Get Started
+                            %i.pl-sm.fa.fa-angle-double-right
+                            .ripple-container
+                        %td.vam
+                          %a.btn.btn-success.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'local_seo', plan: 'pro')}
+                            Get Started
+                            %i.pl-sm.fa.fa-angle-double-right
+                            .ripple-container
+                        %td.vam
+                          %a.btn.btn-warning.btn-block.btn-lg.mt-xl.m-n{href: business_checkout_path(package: 'local_seo', plan: 'advanced')}
+                            Get Started
+                            %i.pl-sm.fa.fa-angle-double-right
+                            .ripple-container
+              - plan = @package.plans.first
+              - if plan.implementation_fee.present?
+                .col-sm-12.mt-lg
+                  .bdr-line.info-tile.info-tile-alt.mb-n.b-s-n
+                    .info.p-lg
+                      .tile-heading
+                        %b ONE-TIME: EXPEDITED ONBOARDING: #{number_to_currency(plan.implementation_fee, precision: 0)} USD
+                      %center.font-14
+                        Kick Off Call, Benchmark Report, Analyze Traffic Trends on Google Analytics Review, Analyze SEO
+                        %br
+                        on Google Search Console Review, Keyword Ranking Analysis, Backlink Analysis, UI/UX Analysis,
+                        %br
+                        Conversion Analysis, Technical SEO and Website Speed Analysis

@@ -1,0 +1,11 @@
+$('#edit_lead_source_modal').html("<%= escape_javascript render( partial: 'edit', locals: { lead_source: @lead_source }) %>");
+$('.edit_lead_source').modal('show')
+
+$('.edit_lead_source').on('hidden.bs.modal', function () {
+  $('.modal-backdrop').remove()
+})
+
+$('.add-sequence').select2({
+  width: '100%',
+  dropdownParent: $('.edit_lead_source_content')
+})

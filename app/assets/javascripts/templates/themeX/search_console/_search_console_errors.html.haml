@@ -1,0 +1,41 @@
+.row
+  .col-md-12
+    .tab-container
+      %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+        %li.active
+          %a{"data-toggle" => "tab", 'data-target' => "#sc-desktop", 'ng-click' => "change_error_client('web')"} Desktop
+        %li
+          %a{"data-toggle" => "tab", 'data-target' => "#sc-smartphone", 'ng-click' => "change_error_client('smartphoneOnly')"} Smartphone
+        / %li
+        /   %a{"data-toggle" => "tab", 'data-target' => "#sc-mobile", 'ng-click' => "change_error_client('mobile')"} Feature Phone
+      %div.tab-content.p-n.bdr-none
+        #sc-desktop.tab-pane.active
+          %div.tab-container{"ng-include":"", src: "'themeX/search_console/errors_graphs/_desktop_graphs.html'"}
+        #sc-smartphone.tab-pane
+          %div.tab-container{"ng-include":"", src: "'themeX/search_console/errors_graphs/_smartphone_graphs.html'"}
+        / #sc-mobile.tab-pane
+        /   %div.tab-container{"ng-include":"", src: "'themeX/search_console/errors_graphs/_mobile_graphs.html'"}
+
+.row
+  .col-md-12
+    .tab-container
+      .tab-content{'st-table'=>"search_console_errors", 'st-safe-src' => "all_search_console_errors"}
+        .table-responsive
+          %table.table.table-hover.table-bordered.table-vam
+            %thead
+              %tr
+                %th.vam{style: "padding-right:190px;", 'st-sort':'pageUrl'} URL
+                %th.text-center{'st-sort':'responseCode'} Response Code
+                %th.text-center{'st-sort':'first_detected'} Detected
+            %tbody
+              %tr{'ng-repeat' => "data in search_console_errors"}
+                %td {{data.pageUrl}}
+                %td{align: "center"} {{data.responseCode}}
+                %td{align: "center"} {{data.first_detected | amDateFormat:'MM/D/YY'}}
+
+        %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}
+        .pagination.pagination-lg.pagination-download
+          %li
+            %a{'ng-href':"/businesses/{{current_business}}/crawl_errors_csv", target: '_blank'}
+              %i.fa.fa-download.pr>
+              Download CSV

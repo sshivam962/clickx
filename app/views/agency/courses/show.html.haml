@@ -1,0 +1,153 @@
+- content_for :title do
+  = "#{@course.title} | Clickx"
+.academy-course-page
+  .page-heading.bg-white.mb-4
+    %h1 Academy
+  .container-fluid
+    .academy-course-card.bg-sky-blue.border-1.border-blue.rounded.p-4.mb-0.mb-lg-4
+      .d-flex.pb-4.justify-content-between
+        .text-blue.fw-sb.btn-backto-academy
+          - if @course.video_category_type == "start_agency"
+            %a.text-blue{href: agency_start_agency_courses_path}
+              %span.d-inline-block.pr-3.fs-24.vertical-middle
+                %i.fa.fa-angle-left
+              %span.d-inline-block.vertical-middle 
+                View more lessons
+          - elsif @course.video_category_type == 'fulfilment'
+            %a.text-blue{href: agency_fulfilment_courses_path}
+              %span.d-inline-block.pr-3.fs-24.vertical-middle
+                %i.fa.fa-angle-left
+              %span.d-inline-block.vertical-middle 
+                View more lessons
+          - else
+            %a.text-blue{href: agency_courses_path}
+              %span.d-inline-block.pr-3.fs-24.vertical-middle
+                %i.fa.fa-angle-left
+              %span.d-inline-block.vertical-middle 
+                View more lessons
+          -# %a.text-blue{:href => "/a/courses"}
+          -#   %span.d-inline-block.pr-3.fs-24.vertical-middle
+          -#     %i.fa.fa-angle-left
+          -#   %span.d-inline-block.vertical-middle 
+          -#     Academy
+        .col.view-chapters 
+          .btn-view-chapters 
+            %i.fa.fa-list.mr-2 
+            Chapters
+        - if @course.enable_challenge
+          .col
+            .input-wrapper-select
+              %select.course_challenge_select.input-wrapper-input{id: 'course_challenge_id', onchange: "changeFilter()"}
+                - group_by_challenge = @course.chapters.group_by{ |c| c.course_challenge_id if c.course_challenge_id }
+                - group_by_challenge.keys.compact.sort.each do |item|
+                  %option{value: item , selected: item == @course_challenge_id ? true : false }
+                    = @headers_positions[item]
+      #course_chapters_lists
+        = render 'course_chapters_lists'
+      %input#course_id.hidden{:type => "hidden", :value => "#{@course.id}"}/
+
+              
+:javascript
+  $(document).on("click",".load_chapter",function() {
+    chapter_id = $(this).data('chapter');
+    course_id = $(this).data('course');
+    winWidth = $(window).width();
+    $('#chapter_id').val(chapter_id)
+    $.ajax({
+      url: "/a/courses/" + course_id + "/load_chapter",
+      type: 'post',
+      data: {chapter_id: chapter_id},
+      dataType: 'json',
+      success:function(response){
+        if(response.status == 200){
+          $('.sp__courses__nav__item').removeClass('active')
+          $('#chapter_li_' + chapter_id).addClass('active')
+          $('.chapter_content').html(response.data.content);
+          if(winWidth < 992) {
+            $('.chapter_content_nav').fadeOut();
+            $('.chapter_content').fadeIn();
+            $('.btn-backto-academy').hide();
+            $('.view-chapters').show();
+          }
+        }
+      }
+    })
+  });
+  /*$(document).on("click",".next_chapter",function() {
+    chapter_id = $('#chapter_id').val();
+    linkId = '#chapter_li_'+chapter_id;
+    console.log($(linkId).next('li'));
+    $(linkId).next('li').find('a').trigger('click');
+  }); */
+  
+  $(document).on("click",".next_chapter",function() {
+    chapter_id = $('#chapter_id').val();
+    course_id = $('#course_id').val();
+    next_chapter_id = parseInt(chapter_id) + 1;
+    winWidth = $(window).width();
+    $.ajax({
+      url: "/a/courses/" + course_id + "/complete_chapter",
+      type: 'post',
+      data: {chapter_id: chapter_id},
+      dataType: 'json',
+      success:function(response){
+        if(response.status == 200){
+          $('.sp__courses__nav__item').removeClass('active')
+          $('#chapter_li_' + chapter_id).addClass('active')
+          $('#course_chapters_lists').html(response.data.content);
+          if(winWidth < 992) {
+            $('.chapter_content_nav').fadeOut();
+            $('.chapter_content').fadeIn();
+            $('.btn-backto-academy').hide();
+            $('.view-chapters').show();
+          }
+        }
+      }
+    })
+  });
+
+  function changeFilter(){
+    course_id = $('#course_id').val();
+    $.ajax({
+      url: "/a/courses/" + course_id,
+      type: 'get',
+      data: { course_challenge_id: $('#course_challenge_id').val() },
+      dataType: 'script',
+      async: false,
+      success:function(response){}
+    })
+  }
+
+  $(document).ready(function() {
+    var itemsLength = $('.course_challenge_select option').length
+    $('select').prop('selectedIndex', itemsLength - 1).change();
+
+    var winWidth = $(window).width();
+    var winHeight = $(window).height();
+    var wrapperHeight = $('#layout-static').outerHeight();
+    if(winWidth < 992) {
+      $('.chapter_content').css('min-height', wrapperHeight - 56 + 'px');
+      $('.chapter_content_nav').css('min-height', wrapperHeight - 66 + 'px');
+    //} else {
+      //$('.chapter_content_nav_body').css('height', winHeight - 360 + 'px');
+      //$('.chapter_content').css('height', winHeight - 260 + 'px');
+    }
+    if(!$('.chapter_content__card').is(':visible')) {
+      $('.view-lesson-overview-btn').hide();
+    }
+    $(document).on('click', '.view-lesson-overview-btn', function() {
+      if($('.chapter_content__card').is(':visible')) {
+        $('.chapter_content__card').slideUp();
+        $(this).html('View Lesson Overview');
+      } else {
+        $('.chapter_content__card').slideDown();
+        $(this).html('Hide Lesson Overview');
+      }
+    });
+    $(document).on('click', '.view-chapters ', function() {
+      $('.chapter_content').fadeOut();
+      $('.chapter_content_nav').fadeIn();
+      $('.btn-backto-academy').show();
+      $('.view-chapters').hide();
+    })
+  })

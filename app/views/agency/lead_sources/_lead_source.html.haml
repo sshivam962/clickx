@@ -1,0 +1,26 @@
+.lead_source{class: "#{'locked' unless lead_source.enabled?}"}
+  = button_to agency_lead_source_path(lead_source), remote: true, method: :get, class: 'lead_source_item bg-white rounded-8 px-4 py-3 w-100 d-flex flex-wrap items-center mb-2', id: "lead_source_#{lead_source.id}" do
+    .col-stretch.lead_source_name.pt-sm-1{'data-toggle': 'tooltip', title: "#{lead_source.name}", 'data-placement': 'bottom'}
+      .text-left
+        = truncate(lead_source.name, length: 25)
+    .pl-sm-3.pt-3.pt-sm-0.lead_source_actions
+      .d-flex.align-items-center
+        %a.action-btn.action-btn--xs.mr-2.action-btn--warning{href: edit_agency_lead_source_path(lead_source), data: { remote: true }}
+          %span.btn-icon{'data-toggle': 'tooltip', title: 'Edit', 'data-placement': 'bottom'}
+            .fa.fa-edit
+        - if lead_source.enabled?
+          = link_to disable_agency_lead_source_path(lead_source), method: :post, data: { confirm: 'Are you sure you want to disable this source?', remote: true }, class: 'close-hover action-btn action-btn--success action-btn--xs mr-2', title: 'Lock' do
+            %span.btn-icon{'data-toggle': 'tooltip', title: 'Disable', 'data-placement': 'bottom'}
+              .fa.fa-unlock
+        - else
+          = link_to enable_agency_lead_source_path(lead_source), method: :post, data: { confirm: 'Are you sure you want to enable this source?', remote: true }, class: 'close-hover action-btn action-btn--gray action-btn--xs mr-2', title: 'Unlock' do
+            %span.btn-icon{'data-toggle': 'tooltip', title: 'Enable', 'data-placement': 'bottom'}
+              .fa.fa-lock
+        = link_to activate_autopilot_agency_lead_source_path(id: lead_source, agency_id: lead_source.agency_id), method: :post, data: { remote: true }, class: 'close-hover action-btn action-btn--autopilot action-btn--xs mr-2 ' +" #{'active' if lead_source.enable_automate } ", title: 'Lock', id: "autopilot_#{lead_source.id}"  do
+          %span.btn-icon.btn-icon--autopilot{'data-toggle': 'tooltip', title: 'Autopilot', 'data-placement': 'bottom'}
+            %i.clx-icon-autopilot
+            -# %svg{:height => "26", :width => "26", :class => "icon-svg"}
+            -#   %use{"xlink:href" => "#autopilot"}       
+        %a.delete_lead_source.close-hover.action-btn.action-btn--light.action-btn--xs.action-btn--danger{title: 'Remove', href: agency_lead_source_path(lead_source), data: {remote: true, method: :delete, confirm: 'Are you sure to delete this lead source?'}}
+          %span.btn-icon{'data-toggle': 'tooltip', title: 'Remove', 'data-placement': 'bottom'}
+            %i.fa.fa-times

@@ -1,0 +1,35 @@
+#add-keywords-modal.modal.fade.in{"aria-hidden" => "false", "aria-labelledby" => "add-keywords-modal", :role => "dialog", :tabindex => "-1"}
+  .d-lg-flex.align-items-center.h-lg-cover.pt-5.pb-5
+    .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg
+      .modal-content.modal-content--rounded
+        .modal-header
+          Add Keyword
+          %a.close.pl-md{"data-dismiss" => "modal"}
+            %span
+              %i.material-icons close
+        .modal-body
+          .md-dialog-content
+            .row
+              .col-sm-6
+                .keyword-enter-form.clearfix
+                  .form-group.m-n.p-n.col-sm-12
+                    = form_with url: business_keywords_path, method: :post, local: false do |f|
+                      %label.col-md-12.control-label.m-n.p-n
+                        Add Keywords
+                        %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Enter the list of keywords that you are targeting on your site to track the ranking progress', 'title-direction': 'right'}
+                      .row
+                        .col-sm-12
+                          = f.text_area :keywords, required: true, class: 'form-control', placeholder: 'Please specify 1 keyword per line..', rows: 5
+                          = f.button :button, type: :submit, class: 'btn btn-raised mt-md mb-md btn-primary pull-right' do
+                            %span.fa.fa-plus
+                            Add
+              .col-sm-6
+                .keyword-enter-form.clearfix
+                  .form-group.m-n.p-n.col-sm-12
+                    = form_with url: keyword_suggestions_business_keywords_path, method: :get, local: false do |f|
+                      %label.col-md-12.control-label.m-n.p-n
+                        Suggestions
+                        %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Enter a seed keyword to get more related keywords in the below section', 'title-direction': 'bottom', 'fixed-position': "true" }
+                        %md-input-container.md-block
+                          = f.text_field :keyword, class: 'form-control col-sm-12', placeholder: 'Specify a Keyword'
+                #showSuggestedKeywords

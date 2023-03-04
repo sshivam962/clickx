@@ -1,0 +1,28 @@
+- content_for :title do
+  Onboarding Procedures | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12
+    %h1 Onboarding Procedures Templates
+
+.locations.archived_clients_list
+  - @procedures.each do |procedure|
+    %span
+      .address.row.ml-n.mr-n.pb-n
+        .col-sm-6.col-md-6
+          %span.name.blue
+            = procedure.title
+        .col-sm-3.col-md-3
+          %p
+            #{procedure.onboarding_tasks.size} Tasks
+        .col-sm-3.col-md-3
+          .col-sm-12.right.normal-edit-button.grey-btn-group.mb-md
+            = link_to edit_super_admin_procedure_path(procedure.id), class: 'btn grey-btn-icon align-icon pull-right ml-sm mb-sm' do
+              %i.fa.fa-edit
+              Edit
+.row
+  .col-md-4.col-lg-4.col-sm-12.pt-md
+    = page_entries_info @procedures
+  .col-md-8.col-lg-8.col-sm-12.right_align
+    = will_paginate @procedures
+%a.btn.btn--add.pull-right{ 'href': new_super_admin_procedure_path}
+  %i.glyphicon.glyphicon-plus.glyphplus

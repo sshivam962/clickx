@@ -1,0 +1,17 @@
+.panel.panel-default.m-n#reviews{ 'ng-if': 'marketing_performance_loaded && reviewStatus' }
+  .panel-heading.cursor-move
+    %h2
+      %a.l-grey{href: "#/{{current_business}}/reviews"}
+        Reviews
+        %i.fa.fa-info-circle.tooltip-text-icon{ 'title': 'Overview of the ratings and reviews you got on your site. For more, go to reputation management under the "Locals" section.' }
+    #onboarding-reviews.on-boarding
+    .panel-ctrls
+      %button.Dbutton.btn.button-icon.pull-left.mt-sm{ 'ng-click': 'pdf_export("reviews")', 'title': 'Download report', 'ng-class': "{'disable-button': export_disabled}" }
+        %span.material-icons.inverted file_download
+      %button.btn.button-icon.mt-sm.refresh-panel{'ng-click':'init_review_page()', 'title': 'Refresh report'}
+        %span.material-icons.inverted refresh
+  .panel-body.no-padding.scroll-pane{style: 'height: 420px;'}
+    .scroll-content.p-n
+      .panel.panel-white.no-shadow
+        .panel-body
+          %draw-chart#chart_div.btn-pointer{ 'on-click-chart': '', 'on-load-chart': '', 'config': 'reviewChartData' }

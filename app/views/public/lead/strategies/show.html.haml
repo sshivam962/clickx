@@ -1,0 +1,33 @@
+- agency = @lead.agency
+- if controller.action_name == 'preview'
+  .change-view-buttons
+    %a.change-view-button.active{:href => "javascript:void(0)"}
+      = image_tag 'lead_strategy/icon-landscape.svg'
+    %a.change-view-button{:href => carousel_preview_super_admin_lead_strategy_path(@lead, @lead_strategy)}
+      = image_tag 'lead_strategy/icon-carousel.svg'
+- else
+  .change-view-buttons
+    %a.change-view-button.active{:href => "javascript:void(0)"}
+      = image_tag 'lead_strategy/icon-landscape.svg'
+    %a.change-view-button{:href => lead_strategy_carousel_public_link(@lead_strategy)}
+      = image_tag 'lead_strategy/icon-carousel.svg'
+.header-wrapper.header-wrapper--dark.py-15.shadow-b-dark-xl.header-wrapper--sticky{style: "background:#{agency.strategy_product_header_color}"}
+  .container.container--sm.text-center
+    - if agency.weburl.present?
+      %a{href: formatted_url(agency.weburl), target: '_blank'}
+        = image_tag agency.logo || ''
+    - else
+      = image_tag agency.logo || ''
+= render "public/lead/strategies/shared/#{::Lead::Strategy::CATEGORIES[@lead_strategy.category]}", agency: agency
+
+- if raw(agency.calendly_script).present?
+  .section.p-tb-60.bg-white
+    .container.container--sm
+      %h2.f-w-lg.pb-xl.text-center Schedule a Call
+      = raw(agency.calendly_script)
+
+.section.bg-muted.text-muted
+  .container.container--sm
+    .mt-xl.mb-xl.text-center
+      %p
+        = "© #{Date.current.year} #{agency&.name}. All Rights Reserved."

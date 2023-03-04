@@ -1,0 +1,112 @@
+.col-md-12
+  .panel.panel-default
+    .panel-heading
+      %h2 Leads Per Day
+      %i.fa.fa-info-circle.tooltip-text-icon{ "data-placement" => "top", "data-toggle" => "tooltip", "title": "This report will let you know how many people who called your company converted to leads." }
+      .panel-ctrls
+        %button.btn.button-icon.pull-left.mt-sm.refresh-panel{'title': 'Refresh report'}
+          %span.material-icons.inverted refresh
+    .panel-body.no-padding.table-responsive
+      .col-md-12
+        #leads_per_day_chart
+      = render 'calls_list'
+
+:javascript
+  var unique_leads_per_day = #{@unique_calls_per_day.to_json.html_safe}
+
+  $('#leads_per_day_chart').highcharts(leads_bar_chart_data(unique_leads_per_day));
+
+  function leads_bar_chart_data(leads_data) {
+    month_names = [];
+    //calculate short month name
+    _.each(_.values(leads_data), function(leads) {
+      _.each(_.keys(leads), function(month_date) {
+        var now = new Date(month_date);
+        var month_name = now.toDateString().split(' ')[1];
+        var date_number = month_date.split("-")[2];
+        var short_month = month_name + date_number;
+        month_names.push(short_month);
+      });
+    });
+
+    unique_calls_data = [];
+    repetetive_calls_data = [];
+
+    //seperating unique and repetetive data
+    _.each(_.values(leads_data), function(lead_dates) {
+      _.each(_.values(lead_dates), function(num_key) {
+        _.each(_.values(num_key), function(data) {
+          unique_calls_data.push(data[0]);
+          repetetive_calls_data.push(data[1]);
+        });
+      });
+    });
+
+    return {
+      chart: {
+        type: 'column',
+        height: 300
+      },
+      exporting: { enabled: false },
+      title: {
+        text: ''
+      },
+      xAxis: {
+        categories: month_names,
+        reversed: true
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: 'Calls'
+        },
+        stackLabels: {
+          enabled: true,
+          style: {
+            fontWeight: 'bold',
+            color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+          }
+        }
+      },
+      legend: {
+        align: 'center',
+        verticalAlign: 'bottom',
+        x: 20,
+        y: 15,
+        backgroundColor:
+          (Highcharts.theme && Highcharts.theme.background2) || 'white',
+        borderColor: '#CCC',
+        borderWidth: 1,
+        shadow: false
+      },
+      tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+      },
+      plotOptions: {
+        column: {
+          stacking: 'normal',
+          dataLabels: {
+            enabled: true,
+            color:
+              (Highcharts.theme && Highcharts.theme.dataLabelsColor) ||
+              'white',
+            style: {
+              textShadow: '0 0 3px black'
+            }
+          }
+        }
+      },
+      series: [
+        {
+          name: 'Unique Leads',
+          data: unique_calls_data
+        },
+        {
+          name: 'Repeat Callers',
+          data: repetetive_calls_data
+        }
+      ],
+      credits: { enabled: false }
+    };
+  };

@@ -1,0 +1,56 @@
+.email-templates-slidein
+  .close-email-templates-slidein
+    %i.fa.fa-times
+  .email-templates-slidein-backdrop.close-template
+  .email-templates-wrap
+    .col
+      .fs-sm.text-darkblue.fw-m.px-4.pt-4.d-flex.align-items-center Email Templates
+      %hr.mt-4.mb-0
+    .email-templates-wrap-contents
+      .px-4.py-5
+        - @template_index = 0
+        = form_for @lead_source, url: agency_lead_source_path(@lead_source), method: :put, remote: true do |f|
+          .email-templates-list
+            = f.fields_for :lead_source_email_templates do |ef|
+              - @template_index += 1
+              = render 'lead_source_email_template_fields', f: ef
+            .email-templates-list-node
+            = link_to_add_association f, :lead_source_email_templates, data: { association_insertion_node: '.email-templates-list-node', association_insertion_method: 'append' } do
+              .email-templates-list--item.pt-4
+                .col.pr-4
+                  .email-template-number #{@template_index + 1}
+                .col.flex-col.fs-xs.pt-1
+                  .add-email-template-item
+                    .email-template-item
+                      .email-template-item--header.d-flex.justify-content-between
+                        .col
+                          .block.pb-0.m-0.text-lg.font-semibold.template-title Email #{@template_index}
+                  .add-email-btn Add Email Template
+          .email-templates-slidein-buttons
+            = f.submit 'Save', class: "ets-btn-save"
+            %button.ets-btn-cancel.close-template{:type => "button"} Cancel
+
+:javascript
+  $(document).ready(function() {
+    $('.email-templates-list')
+      .on('cocoon:after-insert', function() {
+        var i = 1;
+        $('.email-templates-list--item').each(function(e){
+          if ($(this).css('display') != 'none') {
+            $(this).find('.email-template-number').text(i);
+            $(this).find('.template-title').text('Email ' + (i));
+            i++;
+          }
+        });
+      })
+      .on("cocoon:after-remove", function() {
+        var i = 1;
+        $('.email-templates-list--item').each(function(e){
+          if ($(this).css('display') != 'none') {
+            $(this).find('.email-template-number').text(i);
+            $(this).find('.template-title').text('Email ' + (i));
+            i++;
+          }
+        });
+      });
+  });

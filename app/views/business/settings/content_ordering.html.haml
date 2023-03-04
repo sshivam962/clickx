@@ -1,0 +1,60 @@
+- content_for :title do
+  Settings | Content Ordering
+.clickx-breadcrumb-wrapper.ng-scope
+  %ol.breadcrumb.clx-breadcrumb.ng-isolate-scope
+    %li
+      %a{:href => "/b/dashboard"} Home
+    %li
+      %span Content Ordering
+.page-content
+  .page-heading.no-margin-bottom
+    %h1
+      %i.clickx-icon-page-cog.title-icon>
+      Settings
+.container-fluid
+  = render '/business/settings/shared/tab_links'
+  .row
+    .col-sm-12
+      .panel.panel-default{'data-widget': {draggable: 'false'}}
+        = form_for @content_order, url: :set_default_content_order_business_settings, method: :patch, remote: true do |f|
+          .panel-heading
+            %h2 Content Ordering Settings
+            %i.fa.fa-info-circle.tooltip-text-icon.tooltips{'title': 'Fill up the information required to order your content requirements'}
+            .panel-ctrls
+              %button.btn.button-icon.pull-left.mt-sm{ type: 'submit', 'title': 'Save'}
+                %span.material-icons.inverted save
+              %button.btn.button-icon.pull-left.mt-sm.content_order_button{"aria-controls" => "collapseContentOrder", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseContentOrder", :role => "button"}
+                #content_order_chevron_down.hidden
+                  %i.fa.fa-chevron-down
+                #content_order_chevron_up
+                  %i.fa.fa-chevron-up
+          .panel-body.fadeInLeft.collapse.in#collapseContentOrder
+            .row
+              .col-md-6
+                .form-group.no-margin-top
+                  %label.control-label.mt-n Company Information
+                  = f.text_area :company_information, class: 'form-control', style: "min-height:100px;"
+              .col-md-6
+                .form-group.no-margin-top
+                  %label.control-label.mt-n Target Audience
+                  = f.text_area :target_audience, class: 'form-control', style: "min-height:100px;"
+              .col-md-6
+                .form-group.no-margin-top
+                  %label.control-label.mt-n Things to mention
+                  = f.text_area :things_to_mention, class: 'form-control', style: "min-height:100px;"
+              .col-md-6
+                .form-group.no-margin-top
+                  %label.control-label.mt-n Things to avoid
+                  = f.text_area :things_to_avoid, class: 'form-control', style: "min-height:100px;"
+:javascript
+  $(document).ready(function() {
+    $('.content_order_button').on('click', function() {
+      if($('#content_order_chevron_down').hasClass('hidden')){
+        $('#content_order_chevron_up').addClass('hidden');
+        $('#content_order_chevron_down').removeClass('hidden');
+      } else {
+        $('#content_order_chevron_up').removeClass('hidden');
+        $('#content_order_chevron_down').addClass('hidden');
+      }
+    })
+  });

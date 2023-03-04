@@ -1,0 +1,239 @@
+- content_for :title do
+  Scale Program | Clickx
+.page-heading.bg-white.mb-4
+  %h1 Scale Program
+
+.container-fluid
+  .bg-sky-blue.border-1.border-blue.rounded.p-4
+    .px-4.pb-4.text-blue.fw-sb
+      %a.text-blue{:href => "/a/scale_program"}
+        %span.d-inline-block.pr-3.fs-24.vertical-middle
+          %i.fa.fa-angle-left
+        %span.d-inline-block.vertical-middle  Scale Program
+    .row
+      .col-lg-4.col-md-5
+        .rounded.border-1.border-blue
+          .bg-white.rounded-t-12.p-20
+            .mb-4.fw-m.text-darkblue.lh-12 #{@week.name}
+            %hr.my-3
+            .fs-14 Average Completion
+            - total_progress = 0
+            - total_course_count = 0
+            - @courses.each do |course|
+              - progress = course.progress(current_user)
+              - total_progress = total_progress + progress
+              - total_course_count = total_course_count + 1
+            .d-flex
+              .col.flex-col.pr-4
+                .course-progress
+                  .course-progress-bar{style: "width:#{total_progress/total_course_count}%"}
+              .col.fs-xxs
+                .course-percentage
+                  #{total_progress/total_course_count} %
+          .bg-light.p-20.rounded-b-12
+            .relative.overflow-h.sp__courses__nav--wrapper
+              %ul.sp__courses__nav.sp__courses__nav--parent.relative{'data-level': 0}
+                - @courses.each_with_index do |course, i|
+                  %li.sp__courses__nav__item.has-sub-nav{'id':"course_#{i}"}
+                    %a{:href => "#"}
+                      .d-flex.align-items-center.w-100
+                        .col.flex-col.d-flex.align-items-center
+                          .fw-m #{course.title}
+                          %span.sp__courses__nav-count= course.chapters.count
+                        .col
+                          %i.fa.fa-chevron-right
+                    %ul.sp__courses__nav.sp__courses__nav-sub{'data-level': 1}
+                      %li.sp__courses__nav_back.pt-3.pb-4
+                        .d-flex.fs-xs.fw-m.text-darkblue
+                          .col.pr-4
+                            %i.fa.fa-chevron-left
+                          .col
+                            #{course.title}
+
+                      - chapters = course.chapters.sort_by(&:position)
+                      - chapters.each do |chapter|
+                        - klass = @chapter.id.eql?(chapter[:id]) ? 'active' : ''
+                        %li.sp__courses__nav__item{class: klass, id: "chapter_#{chapter[:id]}"}
+                          = link_to agency_scale_program_path(chapter.id, nav_param: i), class: 'chapter_link' do
+                            .d-flex.align-items-center.w-100
+                              .col.pr-4
+                                %i.fa.fa-youtube-play
+                              .col.flex-col.d-flex.align-items-center
+                                .fw-m #{chapter.title}
+
+      .col-lg-8.col-md-7.pl-lg-0.pt-5.pt-lg-0
+        #chapter_wrapper
+          #chapter_details
+            .mb-4.pt-3.fw-m.text-darkblue #{@chapter.title}
+            .video-wrapper.rounded-10.overflow-h.mb-4.mb-md-5
+              = @chapter.video_embed_code.html_safe
+            .mb-5
+            .content__card.shadow.content__card--course-details
+              .content__card-header.fw-m
+                Module overview
+              .content__card-body
+                - if raw(@chapter.description).present?
+                  %p= raw(@chapter.description)
+                %p &nbsp;
+                - if @action_steps.present?
+                  .mt-5.mb-5
+                    %h3.mb-5.fwsb Action Steps
+                    %ul.check-list.check-list--linethrough
+                      - @action_steps.each do |action_step|
+                        - if current_user.checked_action_steps.include?(action_step)
+                          %li
+                            .checkbox.checkbox-success
+                              %label.action_step{href: 'javascript:void(0)', data: {id: action_step.id}}
+                                %input{:type => "checkbox", checked: true}/
+                                %span.checkbox-label= action_step.title
+                        - else
+                          %li
+                            .checkbox.checkbox-success
+                              %label.action_step.unchecked{href: 'javascript:void(0)', data: {id: action_step.id}}
+                                %input{:type => "checkbox"}/
+                                %span.checkbox-label= action_step.title
+
+                - if @chapter.file_attachments.present?
+                  .mt-5.mb-5
+                    %h3.mb-5.fwsb Files
+                    - @chapter.file_attachments.each do |file_attachment|
+                      = link_to file_attachment.file.url, {target: '_blank', class: 'btn btn-raised btn-primary font15  whitespace-unset'} do
+                        = file_attachment.display_name
+                        %i.fa.fa-download.pl-sm
+            .d-sm-flex.justify-content-between.mt-4.fw-m.text-center
+              .col-stretch
+                - if @prev_chapter
+                  = link_to agency_scale_program_path(@prev_chapter, nav_param: @data_nav_prev, completed_chapter_id: @chapter.id), 'data-chapter': @prev_chapter.id, 'data-nav': @data_nav_prev, class: 'block py-3 px-4 bg-white rounded-sm-5 br-sm-left-10 text-muted w-100 mb-3 mb-sm-0 previous_button_scale_program' do
+                    %i.material-icons chevron_left
+                    Previous Lesson
+              .col-stretch
+                - if @next_chapter
+                  = link_to agency_scale_program_path(@next_chapter, nav_param: @data_nav_next, completed_chapter_id: @chapter.id), 'data-chapter': @next_chapter.id, 'data-nav': @data_nav_next, class: 'block py-3 px-4 bg-dark rounded-sm-5 br-sm-right-10 text-white w-100 next_button_scale_program' do
+                    %i.material-icons.text-white chevron_right
+                    Next Lesson
+                - else
+                  = link_to agency_scale_program_path('last_chapter', nav_param: @data_nav_next, completed_chapter_id: @chapter.id), class: 'block py-3 px-4 bg-dark rounded-sm-5 br-sm-right-10 text-white w-100' do
+                    %i.material-icons.text-white chevron_right
+                    Finish Lesson
+  .spacer15
+:javascript
+  $(document).on('click', '.has-sub-nav > a', function() {
+    initialHeight = $('.sp__courses__nav').height();
+    navWidth = $('.sp__courses__nav').width();
+    $('.sp__courses__nav--wrapper').height(initialHeight + 'px')
+    parentNav = $(this).parents('.sp__courses__nav--parent');
+    childNav = $(this).parent('li').find('.sp__courses__nav');
+    childNavHeight = childNav.height();
+    navLevel = $(this).parent('li.has-sub-nav').parent('.sp__courses__nav').data('level');
+    animateLeft = 100 * (navLevel+1)
+    parentNav.animate({left: -animateLeft+'%'});
+    $('.sp__courses__nav--wrapper').animate({'height': childNavHeight+'px'});
+    $('.sp__courses__nav-sub').addClass('hidden');
+    childNav.removeClass('hidden');
+  });
+  $(document).on('click', '.sp__courses__nav_back', function() {
+    navLevel = $(this).parent('.sp__courses__nav').data('level');
+    animateLeft = 100 * (navLevel-1);
+    parentNav = $(this).parents('.sp__courses__nav--parent');
+    parentNav.animate({left: -animateLeft+'%'});
+    parentNav = $(this).parent('.sp__courses__nav').parent('.sp__courses__nav__item').parent('.sp__courses__nav');
+    parentNavHeight = parentNav.height();
+    $('.sp__courses__nav--wrapper').animate({'height': parentNavHeight+'px'});
+    $('.sp__courses__nav-sub').removeClass('hidden');
+  });
+  $(window).load(function() {
+    var nav = $('.sp__courses__nav--parent').data('nav');
+    if(nav) {
+      $('.sp__courses__nav--parent').find('li:nth-child('+nav+') > a').trigger('click');
+    } else {
+      //$('.sp__courses__nav--parent').find('li:first-child > a').trigger('click');
+    }
+  })
+  $(document).on('click', '.chapter_link', function(e) {
+    e.preventDefault();
+    var href = $(this).attr('href');
+    $( "#chapter_wrapper" ).load(href + ' #chapter_wrapper');
+    $('.sp__courses__nav__item').removeClass('active');
+    $(this).parent('.sp__courses__nav__item').addClass('active');
+  })
+
+  $(document).on('click', '.next_button_scale_program', function(e) {
+    e.preventDefault();
+    var href = $(this).attr('href');
+    var chapter = $(this).data('chapter');
+    var nav = $(this).data('nav');
+    var targetId = 'chapter_'+chapter;
+    var parentId = 'course_'+nav;
+
+    $( "#chapter_wrapper" ).load(href + ' #chapter_wrapper');
+    if(parentId == $('.sp__courses__nav__item.active').parents('.sp__courses__nav__item.has-sub-nav').attr('id')) {
+      $('.sp__courses__nav__item').removeClass('active');
+      $('#'+targetId).addClass('active');
+    } else {
+      $('.sp__courses__nav_back').trigger('click');
+      $('.sp__courses__nav__item').removeClass('active');
+      setTimeout(function() {
+        $('#'+parentId+' > a').trigger('click');
+        $('#'+targetId).addClass('active');
+      }, 10)
+    }
+  })
+
+  $(document).on('click', '.previous_button_scale_program', function(e) {
+    e.preventDefault();
+    var href = $(this).attr('href');
+    var chapter = $(this).data('chapter');
+    var nav = $(this).data('nav');
+    var targetId = 'chapter_'+chapter;
+    var parentId = 'course_'+nav;
+
+    $( "#chapter_wrapper" ).load(href + ' #chapter_wrapper');
+
+    if(parentId == $('.sp__courses__nav__item.active').parents('.sp__courses__nav__item.has-sub-nav').attr('id')) {
+      $('.sp__courses__nav__item').removeClass('active');
+      $('#'+targetId).addClass('active');
+    } else {
+      $('.sp__courses__nav_back').trigger('click');
+      $('.sp__courses__nav__item').removeClass('active');
+      setTimeout(function() {
+        $('#'+parentId+' > a').trigger('click');
+        $('#'+targetId).addClass('active');
+      }, 10)
+    }
+  })
+
+  $('.action_step').click(function(e){
+    e.preventDefault();
+    if($(this).hasClass('unchecked')) {
+      action_step_id = $(this).data('id');
+      $.ajax({
+        url: '/a/complete_action_steps',
+        type: 'POST',
+        data: { action_step_id: action_step_id },
+        dataType: 'json',
+        success: function(resp){
+          if(resp.status == 200){
+            element = $('label[data-id=' + action_step_id + ']');
+            element.removeClass('unchecked');
+            element.children('input').prop('checked', true)
+          }
+        }
+      });
+    }
+    else{
+      action_step_id = $(this).data('id');
+      $.ajax({
+        url: '/a/complete_action_steps',
+        type: 'DELETE',
+        data: { action_step_id: action_step_id },
+        dataType: 'json',
+        success: function(resp){
+          if(resp.status == 200){
+            element = $('label[data-id=' + action_step_id + ']');
+            element.addClass('unchecked');
+            element.children('input').prop('checked', false)
+          }
+        }
+      });
+    }
+  });

@@ -1,0 +1,25 @@
+.spacer30
+.row
+  .col-md-12
+    %div
+      %table.table.table--xl
+        %tbody#payment_links_list
+          %tr.centered-cols.row-header.text-black.d-none.d-xl-table-row
+            %th{width: '25%'} Niche Name
+            %th.text-xl-right Actions
+          - @industries.each do |industry|
+            %tr.centered-cols.row-card
+              %td.col-client
+                %span.client-name-editable
+                  %span.client-name__name
+                    = industry.title
+              - niche_access = @agency_niche_access.industries_ids.include?(industry.id) rescue nil
+              - checked = true if niche_access
+              %td.col-btns.text-xl-right
+                %input{type: "checkbox", checked: checked, name: "industries_ids", id: "#{industry.id}"}
+:javascript
+  $('input[type="checkbox"]').click(function(){
+    if($("input:checkbox[name=industries_ids]").length >= 1){
+      $('#give_access_btn').removeAttr('disabled style');
+    }
+  });

@@ -1,0 +1,456 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.rebrandly.com/v1/domains
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type,Accept,X-Access-Token,X-Key,apikey,Authorization,Team
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Tue, 28 Nov 2017 09:44:37 GMT
+      Etag:
+      - W/"c-dAuDFQrdjS3hezqxDTNgW7AOlYk"
+      Vary:
+      - Accept-Encoding
+      X-Powered-By:
+      - Express
+      Content-Length:
+      - '12'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: Unauthorized
+    http_version:
+  recorded_at: Tue, 28 Nov 2017 09:44:37 GMT
+- request:
+    method: get
+    uri: http://api.semrush.com/?database=us&display_limit=25&display_sort=nq_desc&export_columns=Ph,%20Nq&key=02536abb9c64d14aff5633ead5e02020&phrase=competitor&type=phrase_related
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 28 Nov 2017 09:45:09 GMT
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Expires:
+      - Tue, 28 Nov 2017 10:44:57 GMT
+      Cache-Control:
+      - max-age=3600
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: "Keyword;Search Volume\r\ncompetitors;6600\r\ncompetitive analysis;5400\r\namazon
+        competitors;2900\r\ncompetitor magazine;1900\r\ncompetitor analysis;1900\r\ngoogle
+        amazon;1900\r\ncompetitor group;1300\r\ncompetitor definition;1300\r\ncompetitor
+        com;880\r\nsynonym for competitor;880\r\ngoogle competitors;720\r\nroll about;590\r\nwhat
+        does compete mean;590\r\ncompetitive analysis example;590\r\nrunning websites;590\r\ndefine
+        competitor;590\r\ncompetit;480\r\nrunning competitor;480\r\ncompetitors training
+        com;480\r\ncompetor;480\r\ncompetitor synonym;390\r\ntarget whiteboard;390\r\ncompetitive
+        market definition;390\r\ncompetitor running;390\r\ncompetitive market analysis;390"
+    http_version:
+  recorded_at: Tue, 28 Nov 2017 09:45:09 GMT
+- request:
+    method: get
+    uri: https://company-stream.clearbit.com/v2/companies/find?domain=sampletest.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 29 Nov 2017 11:58:31 GMT
+      Vary:
+      - Accept-Encoding
+      X-Api-Version:
+      - '2017-09-12'
+      Content-Length:
+      - '137'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "error": {
+            "type": "auth_required",
+            "message": "Authentication is required for this action. Sign up at https://clearbit.com"
+          }
+        }
+    http_version:
+  recorded_at: Wed, 29 Nov 2017 11:58:32 GMT
+- request:
+    method: get
+    uri: http://api.majestic.com/api/json?Count=5&app_api_key&cmd=GetIndexItemInfo&datasource=fresh&item0=sampletest.com&items=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 29 Nov 2017 11:59:52 GMT
+      Server:
+      - Apache
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Code":"FailedRequestViaAPI","ErrorMessage":"Access to this report
+        requires user to be logged in.","FullError":""}'
+    http_version:
+  recorded_at: Wed, 29 Nov 2017 11:59:53 GMT
+- request:
+    method: get
+    uri: http://api.majestic.com/api/json?Count=5&app_api_key=D38F217B37B05419E0BBBAE6F45C0F53&cmd=GetIndexItemInfo&datasource=fresh&item0=sampletest.com&items=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 04 Jan 2018 10:33:04 GMT
+      Server:
+      - Apache
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Code":"OK","ErrorMessage":"","FullError":"","FirstBackLinkDate":"2017-10-01","IndexBuildDate":"2018-01-04
+        01:36:07","IndexType":1,"MostRecentBackLinkDate":"2018-01-02","QueriedRootDomains":1,"QueriedSubDomains":0,"QueriedURLs":0,"QueriedURLsMayExist":0,"ServerBuild":"2017-10-25
+        14:33:44","ServerName":"KNUTSCHR","ServerVersion":"1.0.6507.24412","UniqueIndexID":"20180104013607-FRESH","DataTables":{"Results":{"Headers":{"MaxTopicsRootDomain":30,"MaxTopicsSubDomain":20,"MaxTopicsURL":10,"TopicsCount":3},"Data":[{"ItemNum":0,"Item":"sampletest.com","ResultCode":"OK","Status":"Found","ExtBackLinks":5,"RefDomains":4,"AnalysisResUnitsCost":5,"ACRank":-1,"ItemType":1,"IndexedURLs":5,"GetTopBackLinksAnalysisResUnitsCost":5000,"DownloadBacklinksAnalysisResUnitsCost":25000,"DownloadRefDomainBacklinksAnalysisResUnitsCost":25000,"RefIPs":4,"RefSubNets":4,"RefDomainsEDU":0,"ExtBackLinksEDU":0,"RefDomainsGOV":0,"ExtBackLinksGOV":0,"RefDomainsEDU_Exact":0,"ExtBackLinksEDU_Exact":0,"RefDomainsGOV_Exact":0,"ExtBackLinksGOV_Exact":0,"CrawledFlag":"False","LastCrawlDate":"","LastCrawlResult":"","RedirectFlag":"False","FinalRedirectResult":"","OutDomainsExternal":"","OutLinksExternal":"","OutLinksInternal":"","OutLinksPages":"","LastSeen":"","Title":"","RedirectTo":"","Language":"","LanguageDesc":"","LanguageConfidence":"","LanguagePageRatios":"","LanguageTotalPages":0,"RefLanguage":"en,zh","RefLanguageDesc":"English,Chinese","RefLanguageConfidence":"99,47","RefLanguagePageRatios":"60,40","RefLanguageTotalPages":5,"CrawledURLs":1,"RootDomainIPAddress":"","TotalNonUniqueLinks":"5","NonUniqueLinkTypeHomepages":"0","NonUniqueLinkTypeIndirect":"0","NonUniqueLinkTypeDeleted":"0","NonUniqueLinkTypeNoFollow":"4","NonUniqueLinkTypeProtocolHTTPS":"2","NonUniqueLinkTypeFrame":"0","NonUniqueLinkTypeImageLink":"0","NonUniqueLinkTypeRedirect":"0","NonUniqueLinkTypeTextLink":"5","RefDomainTypeLive":"4","RefDomainTypeFollow":"1","RefDomainTypeHomepageLink":"0","RefDomainTypeDirect":"4","RefDomainTypeProtocolHTTPS":"1","CitationFlow":5,"TrustFlow":0,"TrustMetric":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":""}]}}}'
+    http_version:
+  recorded_at: Thu, 04 Jan 2018 10:33:03 GMT
+- request:
+    method: get
+    uri: http://api.majestic.com/api/json?Count=500&MaxSameSourceURLs=1&Mode=1&app_api_key=D38F217B37B05419E0BBBAE6F45C0F53&cmd=GetBackLinkData&datasource=fresh&item=sampletest.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 05 Jan 2018 05:56:14 GMT
+      Server:
+      - Apache
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJDb2RlIjoiT0siLCJFcnJvck1lc3NhZ2UiOiIiLCJGdWxsRXJyb3IiOiIiLCJJbmRleEJ1aWxkRGF0ZSI6IjIwMTgtMDEtMDUgMDQ6MjE6MjgiLCJJbmRleFR5cGUiOjEsIlNlcnZlckJ1aWxkIjoiMjAxNy0xMC0yNSAxNDozMzo0NCIsIlNlcnZlck5hbWUiOiJFQ0hPTElNQSIsIlNlcnZlclZlcnNpb24iOiIxLjAuNjUwNy4yNDQxMiIsIlVuaXF1ZUluZGV4SUQiOiIyMDE4MDEwNTA0MjEyOC1GUkVTSCIsIkRhdGFUYWJsZXMiOnsiQmFja0xpbmtzIjp7IkhlYWRlcnMiOnsiQXZhaWxhYmxlTGluZXMiOjUsIkJhY2tMaW5rSXRlbSI6InNhbXBsZXRlc3QuY29tIiwiQmFja0xpbmtUeXBlIjoiQmFja0xpbmtzIiwiQ291bnQiOjUwMCwiRnJvbSI6MCwiSXRlbSI6InNhbXBsZXRlc3QuY29tIiwiSXRlbVR5cGUiOiJSb290RG9tYWluIiwiTWF4UmVmRG9tYWluVG9waWNzIjoxMCwiTWF4U291cmNlVG9waWNzIjozLCJNYXhUYXJnZXRUb3BpY3MiOjEwLCJPcmlnSXRlbSI6InNhbXBsZXRlc3QuY29tIiwiUmVmRG9tYWluVG9waWNzQ291bnQiOjEwLCJTb3VyY2VUb3BpY3NDb3VudCI6MywiVGFyZ2V0VG9waWNzQ291bnQiOjEsIlRvdGFsQmFja0xpbmtzIjo1LCJUb3RhbExpbmVzIjo1LCJUb3RhbE1hdGNoZXMiOjR9LCJEYXRhIjpbeyJTb3VyY2VVUkwiOiJodHRwOi8vd3d3LnJ1YW55aWZlbmcuY29tL2Jsb2cvMjAxNC8wMi9zc2xfdGxzLmh0bWwiLCJBQ1JhbmsiOjYsIkFuY2hvclRleHQiOiLljavmn5DkuroiLCJEYXRlIjoiMjAxOC0wMS0wMiIsIlNvdXJjZVRpdGxlIjoiU1NML1RMU+WNj+iurui/kOihjOacuuWItueahOamgui/sCAtIOmYruS4gOWzsOeahOe9kee7nOaXpeW/lyIsIlNvdXJjZU91dERvbWFpbnNFeHRlcm5hbCI6IjMyIiwiU291cmNlT3V0TGlua3NFeHRlcm5hbCI6IjQwIiwiU291cmNlT3V0TGlua3NJbnRlcm5hbCI6IjE3IiwiU291cmNlTGFuZ3VhZ2UiOiJ6aCIsIlNvdXJjZUxhbmd1YWdlRGVzYyI6IkNoaW5lc2UiLCJTb3VyY2VMYW5ndWFnZUNvbmZpZGVuY2UiOjQ1LCJGbGFnUmVkaXJlY3QiOjAsIkZsYWdGcmFtZSI6MCwiRmxhZ05vRm9sbG93IjoxLCJGbGFnSW1hZ2VzIjowLCJGbGFnRGVsZXRlZCI6MCwiRmxhZ0FsdFRleHQiOjAsIkZsYWdNZW50aW9uIjowLCJUYXJnZXRVUkwiOiJodHRwOi8vc2FtcGxldGVzdC5jb20vIiwiSW5kaXJlY3RUYXJnZXRVUkwiOiIiLCJJbmRpcmVjdFRhcmdldFR5cGUiOiIiLCJUYXJnZXRUaXRsZSI6IiIsIlRhcmdldExhbmd1YWdlIjoiIiwiVGFyZ2V0TGFuZ3VhZ2VEZXNjIjoiIiwiVGFyZ2V0TGFuZ3VhZ2VDb25maWRlbmNlIjowLCJMaW5rc0F2YWlsYWJsZUZvclJvb3REb21haW4iOi0xLCJEb21haW5JRCI6LTEsIkZpcnN0SW5kZXhlZERhdGUiOiIyMDE4LTAxLTAyIiwiTGFzdFNlZW5EYXRlIjoiMjAxOC0wMS0wMiIsIkRhdGVMb3N0IjoiIiwiUmVhc29uTG9zdCI6IiIsIkxpbmtUeXBlIjoiVGV4dExpbmsiLCJMaW5rU3ViVHlwZSI6IlRleHRMaW5rX05vcm1hbCIsIlRhcmdldENpdGF0aW9uRmxvdyI6MTAsIlRhcmdldFRydXN0RmxvdyI6MCwiVGFyZ2V0VG9waWNhbFRydXN0Rmxvd19Ub3BpY18wIjoiIiwiVGFyZ2V0VG9waWNhbFRydXN0Rmxvd19WYWx1ZV8wIjoiIiwiU291cmNlQ2l0YXRpb25GbG93Ijo0MCwiU291cmNlVHJ1c3RGbG93Ijo0NSwiU291cmNlVG9waWNhbFRydXN0Rmxvd19Ub3BpY18wIjoiU29jaWV0eS9QZW9wbGUiLCJTb3VyY2VUb3BpY2FsVHJ1c3RGbG93X1ZhbHVlXzAiOjQzLCJTb3VyY2VUb3BpY2FsVHJ1c3RGbG93X1RvcGljXzEiOiJDb21wdXRlcnMvTmV3cyBhbmQgTWVkaWEiLCJTb3VyY2VUb3BpY2FsVHJ1c3RGbG93X1ZhbHVlXzEiOjM4LCJTb3VyY2VUb3BpY2FsVHJ1c3RGbG93X1RvcGljXzIiOiJDb21wdXRlcnMvUHJvZ3JhbW1pbmcvUGVyc29uYWwgUGFnZXMiLCJTb3VyY2VUb3BpY2FsVHJ1c3RGbG93X1ZhbHVlXzIiOjIxfSx7IlNvdXJjZVVSTCI6Imh0dHA6Ly93d3cucm5rd3MuY29tL3d3dy5zYW1wbGV0ZXN0LmNvbSIsIkFDUmFuayI6MiwiQW5jaG9yVGV4dCI6Ind3dy5zYW1wbGV0ZXN0LmNvbSIsIkRhdGUiOiIyMDE3LTEyLTE2IiwiU291cmNlVGl0bGUiOiJzYW1wbGV0ZXN0LmNvbSA6IGFzZGFzIEZhbHNlIiwiU291cmNlT3V0RG9tYWluc0V4dGVybmFsIjoiMSIsIlNvdXJjZU91dExpbmtzRXh0ZXJuYWwiOiIxIiwiU291cmNlT3V0TGlua3NJbnRlcm5hbCI6IjQiLCJTb3VyY2VMYW5ndWFnZSI6ImVuIiwiU291cmNlTGFuZ3VhZ2VEZXNjIjoiRW5nbGlzaCIsIlNvdXJjZUxhbmd1YWdlQ29uZmlkZW5jZSI6OTksIkZsYWdSZWRpcmVjdCI6MCwiRmxhZ0ZyYW1lIjowLCJGbGFnTm9Gb2xsb3ciOjAsIkZsYWdJbWFnZXMiOjAsIkZsYWdEZWxldGVkIjowLCJGbGFnQWx0VGV4dCI6MCwiRmxhZ01lbnRpb24iOjAsIlRhcmdldFVSTCI6Imh0dHA6Ly9zYW1wbGV0ZXN0LmNvbS8iLCJJbmRpcmVjdFRhcmdldFVSTCI6IiIsIkluZGlyZWN0VGFyZ2V0VHlwZSI6IiIsIlRhcmdldFRpdGxlIjoiIiwiVGFyZ2V0TGFuZ3VhZ2UiOiIiLCJUYXJnZXRMYW5ndWFnZURlc2MiOiIiLCJUYXJnZXRMYW5ndWFnZUNvbmZpZGVuY2UiOjAsIkxpbmtzQXZhaWxhYmxlRm9yUm9vdERvbWFpbiI6LTEsIkRvbWFpbklEIjotMSwiRmlyc3RJbmRleGVkRGF0ZSI6IjIwMTctMTEtMDkiLCJMYXN0U2VlbkRhdGUiOiIyMDE3LTEyLTE2IiwiRGF0ZUxvc3QiOiIiLCJSZWFzb25Mb3N0IjoiIiwiTGlua1R5cGUiOiJUZXh0TGluayIsIkxpbmtTdWJUeXBlIjoiVGV4dExpbmtfTm9ybWFsIiwiVGFyZ2V0Q2l0YXRpb25GbG93IjoxMCwiVGFyZ2V0VHJ1c3RGbG93IjowLCJUYXJnZXRUb3BpY2FsVHJ1c3RGbG93X1RvcGljXzAiOiIiLCJUYXJnZXRUb3BpY2FsVHJ1c3RGbG93X1ZhbHVlXzAiOiIiLCJTb3VyY2VDaXRhdGlvbkZsb3ciOjE0LCJTb3VyY2VUcnVzdEZsb3ciOjAsIlNvdXJjZVRvcGljYWxUcnVzdEZsb3dfVG9waWNfMCI6IiIsIlNvdXJjZVRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMCI6IiIsIlNvdXJjZVRvcGljYWxUcnVzdEZsb3dfVG9waWNfMSI6IiIsIlNvdXJjZVRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMSI6IiIsIlNvdXJjZVRvcGljYWxUcnVzdEZsb3dfVG9waWNfMiI6IiIsIlNvdXJjZVRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMiI6IiJ9LHsiU291cmNlVVJMIjoiaHR0cHM6Ly9jb21tdW5pdHkuc21hcnRiZWFyLmNvbS90NS9Tb2FwVUktT3Blbi1Tb3VyY2UvQ2FuLWphdmF4LXdzZGwtdmVyYm9zZS12YWx1ZS1iZS1zZXQtZnJvbS1XU0RMT3BlcmF0aW9uL3RkLXAvNDIwMTQiLCJBQ1JhbmsiOjEsIkFuY2hvclRleHQiOiJodHRwczovL3dlYnNlcnZpY2VzLnNhbXBsZXRlc3QuY29tL3dzZGwvc2FtcGxldGVzdC53c2RsJy4iLCJEYXRlIjoiMjAxNy0xMi0yOSIsIlNvdXJjZVRpdGxlIjoiQ2FuIGphdmF4LndzZGwudmVyYm9zZSB2YWx1ZSBiZSBzZXQgZnJvbSBXU0RMT3BlcmEuLi4gLSBTbWFydEJlYXIgQ29tbXVuaXR5IiwiU291cmNlT3V0RG9tYWluc0V4dGVybmFsIjoiMTMiLCJTb3VyY2VPdXRMaW5rc0V4dGVybmFsIjoiMTYiLCJTb3VyY2VPdXRMaW5rc0ludGVybmFsIjoiMTcxIiwiU291cmNlTGFuZ3VhZ2UiOiJlbiIsIlNvdXJjZUxhbmd1YWdlRGVzYyI6IkVuZ2xpc2giLCJTb3VyY2VMYW5ndWFnZUNvbmZpZGVuY2UiOjk5LCJGbGFnUmVkaXJlY3QiOjAsIkZsYWdGcmFtZSI6MCwiRmxhZ05vRm9sbG93IjoxLCJGbGFnSW1hZ2VzIjowLCJGbGFnRGVsZXRlZCI6MCwiRmxhZ0FsdFRleHQiOjAsIkZsYWdNZW50aW9uIjowLCJUYXJnZXRVUkwiOiJodHRwczovL3dlYnNlcnZpY2VzLnNhbXBsZXRlc3QuY29tL3dzZGwvc2FtcGxldGVzdC53c2RsJy4iLCJJbmRpcmVjdFRhcmdldFVSTCI6IiIsIkluZGlyZWN0VGFyZ2V0VHlwZSI6IiIsIlRhcmdldFRpdGxlIjoiIiwiVGFyZ2V0TGFuZ3VhZ2UiOiIiLCJUYXJnZXRMYW5ndWFnZURlc2MiOiIiLCJUYXJnZXRMYW5ndWFnZUNvbmZpZGVuY2UiOjAsIkxpbmtzQXZhaWxhYmxlRm9yUm9vdERvbWFpbiI6LTEsIkRvbWFpbklEIjotMSwiRmlyc3RJbmRleGVkRGF0ZSI6IjIwMTctMTAtMDgiLCJMYXN0U2VlbkRhdGUiOiIyMDE3LTEyLTI5IiwiRGF0ZUxvc3QiOiIiLCJSZWFzb25Mb3N0IjoiIiwiTGlua1R5cGUiOiJUZXh0TGluayIsIkxpbmtTdWJUeXBlIjoiVGV4dExpbmtfTm9ybWFsIiwiVGFyZ2V0Q2l0YXRpb25GbG93IjoxNCwiVGFyZ2V0VHJ1c3RGbG93IjowLCJUYXJnZXRUb3BpY2FsVHJ1c3RGbG93X1RvcGljXzAiOiIiLCJUYXJnZXRUb3BpY2FsVHJ1c3RGbG93X1ZhbHVlXzAiOiIiLCJTb3VyY2VDaXRhdGlvbkZsb3ciOjksIlNvdXJjZVRydXN0RmxvdyI6MCwiU291cmNlVG9waWNhbFRydXN0Rmxvd19Ub3BpY18wIjoiIiwiU291cmNlVG9waWNhbFRydXN0Rmxvd19WYWx1ZV8wIjoiIiwiU291cmNlVG9waWNhbFRydXN0Rmxvd19Ub3BpY18xIjoiIiwiU291cmNlVG9waWNhbFRydXN0Rmxvd19WYWx1ZV8xIjoiIiwiU291cmNlVG9waWNhbFRydXN0Rmxvd19Ub3BpY18yIjoiIiwiU291cmNlVG9waWNhbFRydXN0Rmxvd19WYWx1ZV8yIjoiIn0seyJTb3VyY2VVUkwiOiJodHRwOi8vaW1nMi4xMDB3ZWlkdS5jb20vZ2V0P3NyYz1odHRwOi8vd3d3LnJ1YW55aWZlbmcuY29tL2Jsb2cvMjAxNC8wMi9zc2xfdGxzLmh0bWwiLCJBQ1JhbmsiOjAsIkFuY2hvclRleHQiOiLljavmn5DkuroiLCJEYXRlIjoiMjAxNy0xMi0yNiIsIlNvdXJjZVRpdGxlIjoiU1NML1RMU+WNj+iurui/kOihjOacuuWItueahOamgui/sCAtIOmYruS4gOWzsOeahOe9kee7nOaXpeW/lyIsIlNvdXJjZU91dERvbWFpbnNFeHRlcm5hbCI6IjMzIiwiU291cmNlT3V0TGlua3NFeHRlcm5hbCI6IjU1IiwiU291cmNlT3V0TGlua3NJbnRlcm5hbCI6IjMiLCJTb3VyY2VMYW5ndWFnZSI6InpoIiwiU291cmNlTGFuZ3VhZ2VEZXNjIjoiQ2hpbmVzZSIsIlNvdXJjZUxhbmd1YWdlQ29uZmlkZW5jZSI6NDksIkZsYWdSZWRpcmVjdCI6MCwiRmxhZ0ZyYW1lIjowLCJGbGFnTm9Gb2xsb3ciOjEsIkZsYWdJbWFnZXMiOjAsIkZsYWdEZWxldGVkIjowLCJGbGFnQWx0VGV4dCI6MCwiRmxhZ01lbnRpb24iOjAsIlRhcmdldFVSTCI6Imh0dHA6Ly9zYW1wbGV0ZXN0LmNvbS8iLCJJbmRpcmVjdFRhcmdldFVSTCI6IiIsIkluZGlyZWN0VGFyZ2V0VHlwZSI6IiIsIlRhcmdldFRpdGxlIjoiIiwiVGFyZ2V0TGFuZ3VhZ2UiOiIiLCJUYXJnZXRMYW5ndWFnZURlc2MiOiIiLCJUYXJnZXRMYW5ndWFnZUNvbmZpZGVuY2UiOjAsIkxpbmtzQXZhaWxhYmxlRm9yUm9vdERvbWFpbiI6LTEsIkRvbWFpbklEIjotMSwiRmlyc3RJbmRleGVkRGF0ZSI6IjIwMTctMTItMjYiLCJMYXN0U2VlbkRhdGUiOiIyMDE3LTEyLTI2IiwiRGF0ZUxvc3QiOiIiLCJSZWFzb25Mb3N0IjoiIiwiTGlua1R5cGUiOiJUZXh0TGluayIsIkxpbmtTdWJUeXBlIjoiVGV4dExpbmtfTm9ybWFsIiwiVGFyZ2V0Q2l0YXRpb25GbG93IjoxMCwiVGFyZ2V0VHJ1c3RGbG93IjowLCJUYXJnZXRUb3BpY2FsVHJ1c3RGbG93X1RvcGljXzAiOiIiLCJUYXJnZXRUb3BpY2FsVHJ1c3RGbG93X1ZhbHVlXzAiOiIiLCJTb3VyY2VDaXRhdGlvbkZsb3ciOjAsIlNvdXJjZVRydXN0RmxvdyI6MCwiU291cmNlVG9waWNhbFRydXN0Rmxvd19Ub3BpY18wIjoiIiwiU291cmNlVG9waWNhbFRydXN0Rmxvd19WYWx1ZV8wIjoiIiwiU291cmNlVG9waWNhbFRydXN0Rmxvd19Ub3BpY18xIjoiIiwiU291cmNlVG9waWNhbFRydXN0Rmxvd19WYWx1ZV8xIjoiIiwiU291cmNlVG9waWNhbFRydXN0Rmxvd19Ub3BpY18yIjoiIiwiU291cmNlVG9waWNhbFRydXN0Rmxvd19WYWx1ZV8yIjoiIn1dfX19
+    http_version:
+  recorded_at: Fri, 05 Jan 2018 05:56:14 GMT
+- request:
+    method: get
+    uri: http://api.majestic.com/api/json?Count=500&Query=sampletest.com&app_api_key=D38F217B37B05419E0BBBAE6F45C0F53&cmd=GetTopPages&datasource=fresh
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 05 Jan 2018 05:56:14 GMT
+      Server:
+      - Apache
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Code":"OK","ErrorMessage":"","FullError":"","ChargedAnalysisResUnits":5000,"ChargedRetrievalResUnits":6,"IndexBuildDate":"2018-01-05
+        04:21:28","IndexType":1,"MaxTargetTopics":10,"RemainingAnalysisResUnits":64717000,"RemainingRetrievalResUnits":17355329,"SearchResultCode":0,"ServerBuild":"2017-10-25
+        14:33:44","ServerName":"ECHOLIMA","ServerVersion":"1.0.6507.24412","TargetTopicsCount":10,"TimeTaken":"0.000","TotalMatches":6,"UniqueIndexID":"20180105042128-FRESH","DataTables":{"Matches":{"Headers":{},"Data":[{"ACRank":2,"URL":"http://sampletest.com/","Title":"http://sampletest.com/","Date":"3
+        Jan 2018","FlagPageData":"False","FlagRedirect":"False","FlagFrames":"FALSE","ExtBackLinks":3,"RefDomains":3,"RefIPs":3,"RefSubNets":3,"LastCrawlResult":"NotCrawled","FinalRedirectResult":"NotCrawled","RedirectTo":"","CitationFlow":10,"TrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":"","TopicalTrustFlow_Topic_3":"","TopicalTrustFlow_Value_3":"","TopicalTrustFlow_Topic_4":"","TopicalTrustFlow_Value_4":"","TopicalTrustFlow_Topic_5":"","TopicalTrustFlow_Value_5":"","TopicalTrustFlow_Topic_6":"","TopicalTrustFlow_Value_6":"","TopicalTrustFlow_Topic_7":"","TopicalTrustFlow_Value_7":"","TopicalTrustFlow_Topic_8":"","TopicalTrustFlow_Value_8":"","TopicalTrustFlow_Topic_9":"","TopicalTrustFlow_Value_9":"","OutDomainsExternal":"","OutLinksExternal":"","OutLinksInternal":"","Language":"","LanguageDesc":"","LanguageConfidence":"","TitleNotPresent":1},{"ACRank":0,"URL":"https://webservices.sampletest.com/xsd/test1.xsd'',","Title":"https://webservices.sampletest.com/xsd/test1.xsd'',","Date":"29
+        Dec 2017","FlagPageData":"False","FlagRedirect":"False","FlagFrames":"FALSE","ExtBackLinks":1,"RefDomains":1,"RefIPs":1,"RefSubNets":1,"LastCrawlResult":"NotCrawled","FinalRedirectResult":"NotCrawled","RedirectTo":"","CitationFlow":0,"TrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":"","TopicalTrustFlow_Topic_3":"","TopicalTrustFlow_Value_3":"","TopicalTrustFlow_Topic_4":"","TopicalTrustFlow_Value_4":"","TopicalTrustFlow_Topic_5":"","TopicalTrustFlow_Value_5":"","TopicalTrustFlow_Topic_6":"","TopicalTrustFlow_Value_6":"","TopicalTrustFlow_Topic_7":"","TopicalTrustFlow_Value_7":"","TopicalTrustFlow_Topic_8":"","TopicalTrustFlow_Value_8":"","TopicalTrustFlow_Topic_9":"","TopicalTrustFlow_Value_9":"","OutDomainsExternal":"","OutLinksExternal":"","OutLinksInternal":"","Language":"","LanguageDesc":"","LanguageConfidence":"","TitleNotPresent":1},{"ACRank":2,"URL":"https://webservices.sampletest.com/wsdl/sampletest.wsdl''.","Title":"https://webservices.sampletest.com/wsdl/sampletest.wsdl''.","Date":"30
+        Dec 2017","FlagPageData":"True","FlagRedirect":"False","FlagFrames":"FALSE","ExtBackLinks":1,"RefDomains":1,"RefIPs":1,"RefSubNets":1,"LastCrawlResult":"NameResolutionFailure","FinalRedirectResult":"NameResolutionFailure","RedirectTo":"","CitationFlow":14,"TrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":"","TopicalTrustFlow_Topic_3":"","TopicalTrustFlow_Value_3":"","TopicalTrustFlow_Topic_4":"","TopicalTrustFlow_Value_4":"","TopicalTrustFlow_Topic_5":"","TopicalTrustFlow_Value_5":"","TopicalTrustFlow_Topic_6":"","TopicalTrustFlow_Value_6":"","TopicalTrustFlow_Topic_7":"","TopicalTrustFlow_Value_7":"","TopicalTrustFlow_Topic_8":"","TopicalTrustFlow_Value_8":"","TopicalTrustFlow_Topic_9":"","TopicalTrustFlow_Value_9":"","OutDomainsExternal":"0","OutLinksExternal":"0","OutLinksInternal":"0","Language":"","LanguageDesc":"","LanguageConfidence":"","TitleNotPresent":1},{"ACRank":0,"URL":"http://www.sampletest.com/","Title":"http://www.sampletest.com/","Date":"3
+        Jan 2018","FlagPageData":"False","FlagRedirect":"False","FlagFrames":"FALSE","ExtBackLinks":0,"RefDomains":0,"RefIPs":0,"RefSubNets":0,"LastCrawlResult":"NotCrawled","FinalRedirectResult":"NotCrawled","RedirectTo":"","CitationFlow":0,"TrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":"","TopicalTrustFlow_Topic_3":"","TopicalTrustFlow_Value_3":"","TopicalTrustFlow_Topic_4":"","TopicalTrustFlow_Value_4":"","TopicalTrustFlow_Topic_5":"","TopicalTrustFlow_Value_5":"","TopicalTrustFlow_Topic_6":"","TopicalTrustFlow_Value_6":"","TopicalTrustFlow_Topic_7":"","TopicalTrustFlow_Value_7":"","TopicalTrustFlow_Topic_8":"","TopicalTrustFlow_Value_8":"","TopicalTrustFlow_Topic_9":"","TopicalTrustFlow_Value_9":"","OutDomainsExternal":"","OutLinksExternal":"","OutLinksInternal":"","Language":"","LanguageDesc":"","LanguageConfidence":"","TitleNotPresent":1},{"ACRank":0,"URL":"http://mail.sampletest.com/","Title":"http://mail.sampletest.com/","Date":"1
+        Dec 2017","FlagPageData":"False","FlagRedirect":"False","FlagFrames":"FALSE","ExtBackLinks":0,"RefDomains":0,"RefIPs":0,"RefSubNets":0,"LastCrawlResult":"NotCrawled","FinalRedirectResult":"NotCrawled","RedirectTo":"","CitationFlow":0,"TrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":"","TopicalTrustFlow_Topic_3":"","TopicalTrustFlow_Value_3":"","TopicalTrustFlow_Topic_4":"","TopicalTrustFlow_Value_4":"","TopicalTrustFlow_Topic_5":"","TopicalTrustFlow_Value_5":"","TopicalTrustFlow_Topic_6":"","TopicalTrustFlow_Value_6":"","TopicalTrustFlow_Topic_7":"","TopicalTrustFlow_Value_7":"","TopicalTrustFlow_Topic_8":"","TopicalTrustFlow_Value_8":"","TopicalTrustFlow_Topic_9":"","TopicalTrustFlow_Value_9":"","OutDomainsExternal":"","OutLinksExternal":"","OutLinksInternal":"","Language":"","LanguageDesc":"","LanguageConfidence":"","TitleNotPresent":1},{"ACRank":0,"URL":"https://www.sampletest.com/samnet/admin/panel/cronjobs/transaction","Title":"https://www.sampletest.com/samnet/admin/panel/cronjobs/transaction","Date":"23
+        Dec 2017","FlagPageData":"False","FlagRedirect":"False","FlagFrames":"FALSE","ExtBackLinks":0,"RefDomains":0,"RefIPs":0,"RefSubNets":0,"LastCrawlResult":"NotCrawled","FinalRedirectResult":"NotCrawled","RedirectTo":"","CitationFlow":0,"TrustFlow":0,"TopicalTrustFlow_Topic_0":"","TopicalTrustFlow_Value_0":"","TopicalTrustFlow_Topic_1":"","TopicalTrustFlow_Value_1":"","TopicalTrustFlow_Topic_2":"","TopicalTrustFlow_Value_2":"","TopicalTrustFlow_Topic_3":"","TopicalTrustFlow_Value_3":"","TopicalTrustFlow_Topic_4":"","TopicalTrustFlow_Value_4":"","TopicalTrustFlow_Topic_5":"","TopicalTrustFlow_Value_5":"","TopicalTrustFlow_Topic_6":"","TopicalTrustFlow_Value_6":"","TopicalTrustFlow_Topic_7":"","TopicalTrustFlow_Value_7":"","TopicalTrustFlow_Topic_8":"","TopicalTrustFlow_Value_8":"","TopicalTrustFlow_Topic_9":"","TopicalTrustFlow_Value_9":"","OutDomainsExternal":"","OutLinksExternal":"","OutLinksInternal":"","Language":"","LanguageDesc":"","LanguageConfidence":"","TitleNotPresent":1}]},"DomainInfo":{"Headers":{},"Data":[{"Domain":"sampletest.com","Found":"true","SubDomains":4,"Pages":1,"Links":6,"TotalBackLinks":5,"ExtBackLinks":5,"RefDomains":4,"FlagRedirects":0,"FlagFrames":0,"FlagImages":0,"FlagNoFollow":4,"FlagOldCrawl":0,"PriceTableName":"","TotalMentions":1,"MentionDomains":1,"PriceChartName":"","RefIPs":4,"RefSubNets":4,"RefDomainsWorld_EDU":0,"RefDomainsUSA_EDU":0,"RefDomainsWorld_GOV":0,"RefDomainsUSA_GOV":0,"RefLinksWorld_EDU":0,"RefLinksUSA_EDU":0,"RefLinksWorld_GOV":0,"RefLinksUSA_GOV":0}]}}}'
+    http_version:
+  recorded_at: Fri, 05 Jan 2018 05:56:14 GMT
+- request:
+    method: get
+    uri: http://api.majestic.com/api/json?Count=1000&app_api_key=D38F217B37B05419E0BBBAE6F45C0F53&cmd=GetAnchorText&datasource=fresh&item=sampletest.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 05 Jan 2018 06:00:43 GMT
+      Server:
+      - Apache
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJDb2RlIjoiT0siLCJFcnJvck1lc3NhZ2UiOiIiLCJGdWxsRXJyb3IiOiIiLCJJbmRleEJ1aWxkRGF0ZSI6IjIwMTgtMDEtMDUgMDQ6MjE6MjgiLCJJbmRleFR5cGUiOjEsIlNlcnZlckJ1aWxkIjoiMjAxNy0xMC0yNSAxNDozMzo0NCIsIlNlcnZlck5hbWUiOiJFQ0hPTElNQSIsIlNlcnZlclZlcnNpb24iOiIxLjAuNjUwNy4yNDQxMiIsIlVuaXF1ZUluZGV4SUQiOiIyMDE4MDEwNTA0MjEyOC1GUkVTSCIsIkRhdGFUYWJsZXMiOnsiQW5jaG9yVGV4dCI6eyJIZWFkZXJzIjp7IkNhblJldHVyblVSTHMiOjEsIkNvdW50IjoxMDAwLCJGaWx0ZXJBbmNob3JUZXh0IjoiIiwiRmlsdGVyQW5jaG9yVGV4dE1vZGUiOjAsIkZpbHRlclJlZkRvbWFpbiI6IiIsIkZyb20iOjAsIkl0ZW0iOiJzYW1wbGV0ZXN0LmNvbSIsIk1heFRvcGljcyI6MTAsIk1vZGUiOjAsIk9yaWdJdGVtIjoic2FtcGxldGVzdC5jb20iLCJUZXh0TW9kZSI6MCwiVG9waWNzQ291bnQiOjMsIlRvdGFsQmFja0xpbmtzIjo1LCJUb3RhbFJlZkRvbWFpbnMiOjUsIlRvdGFsUmVzdWx0cyI6NH0sIkRhdGEiOlt7IkFuY2hvclRleHQiOiLljavmn5DkuroiLCJSZWZEb21haW5zIjoyLCJUb3RhbExpbmtzIjoyLCJEZWxldGVkTGlua3MiOjAsIk5vRm9sbG93TGlua3MiOjIsIkVzdGltYXRlZExpbmtDaXRhdGlvbkZsb3ciOjAsIkVzdGltYXRlZExpbmtUcnVzdEZsb3ciOjAsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMCI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMCI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMSI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMSI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMiI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMiI6IiJ9LHsiQW5jaG9yVGV4dCI6Ind3dy5zYW1wbGV0ZXN0LmNvbSIsIlJlZkRvbWFpbnMiOjEsIlRvdGFsTGlua3MiOjEsIkRlbGV0ZWRMaW5rcyI6MCwiTm9Gb2xsb3dMaW5rcyI6MCwiRXN0aW1hdGVkTGlua0NpdGF0aW9uRmxvdyI6MTAsIkVzdGltYXRlZExpbmtUcnVzdEZsb3ciOjAsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMCI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMCI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMSI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMSI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMiI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMiI6IiJ9LHsiQW5jaG9yVGV4dCI6Imh0dHBzOi8vd2Vic2VydmljZXMuc2FtcGxldGVzdC5jb20vd3NkbC9zYW1wbGV0ZXN0LndzZGwnLiIsIlJlZkRvbWFpbnMiOjEsIlRvdGFsTGlua3MiOjEsIkRlbGV0ZWRMaW5rcyI6MCwiTm9Gb2xsb3dMaW5rcyI6MSwiRXN0aW1hdGVkTGlua0NpdGF0aW9uRmxvdyI6MCwiRXN0aW1hdGVkTGlua1RydXN0RmxvdyI6MCwiVG9waWNhbFRydXN0Rmxvd19Ub3BpY18wIjoiIiwiVG9waWNhbFRydXN0Rmxvd19WYWx1ZV8wIjoiIiwiVG9waWNhbFRydXN0Rmxvd19Ub3BpY18xIjoiIiwiVG9waWNhbFRydXN0Rmxvd19WYWx1ZV8xIjoiIiwiVG9waWNhbFRydXN0Rmxvd19Ub3BpY18yIjoiIiwiVG9waWNhbFRydXN0Rmxvd19WYWx1ZV8yIjoiIn0seyJBbmNob3JUZXh0IjoiaHR0cHM6Ly93ZWJzZXJ2aWNlcy5zYW1wbGV0ZXN0LmNvbS94c2QvdGVzdDEueHNkJywiLCJSZWZEb21haW5zIjoxLCJUb3RhbExpbmtzIjoxLCJEZWxldGVkTGlua3MiOjAsIk5vRm9sbG93TGlua3MiOjEsIkVzdGltYXRlZExpbmtDaXRhdGlvbkZsb3ciOjAsIkVzdGltYXRlZExpbmtUcnVzdEZsb3ciOjAsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMCI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMCI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMSI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMSI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMiI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMiI6IiJ9XX19fQ==
+    http_version:
+  recorded_at: Fri, 05 Jan 2018 06:00:43 GMT
+- request:
+    method: get
+    uri: http://api.semrush.com/?database=us&display_limit=100&display_sort=tr_desc&domain=sampletest.com&export_columns=Ph,Po,Pp,Pd,Nq,Cp,Ur,Tr,Tc&key=02536abb9c64d14aff5633ead5e02020&type=domain_organic
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 05 Jan 2018 06:00:44 GMT
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Expires:
+      - Fri, 05 Jan 2018 07:00:39 GMT
+      Cache-Control:
+      - max-age=3600
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: 'ERROR 50 :: NOTHING FOUND'
+    http_version:
+  recorded_at: Fri, 05 Jan 2018 06:00:44 GMT
+- request:
+    method: get
+    uri: http://api.semrush.com/?database=us&display_limit=100&display_sort=tr_desc&domain=sampletest.com&export_columns=Ph,Po,Pp,Pd,Nq,Cp,Ur,Tr,Tc&key=02536abb9c64d14aff5633ead5e02020&type=domain_adwords
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 05 Jan 2018 12:23:55 GMT
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Expires:
+      - Fri, 05 Jan 2018 13:23:52 GMT
+      Cache-Control:
+      - max-age=3600
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: 'ERROR 50 :: NOTHING FOUND'
+    http_version:
+  recorded_at: Fri, 05 Jan 2018 12:23:55 GMT
+- request:
+    method: get
+    uri: http://api.majestic.com/api/json?Count=1000&app_api_key=D38F217B37B05419E0BBBAE6F45C0F53&cmd=GetAnchorText&datasource=fresh&item=sampletest.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 05 Jan 2018 12:23:56 GMT
+      Server:
+      - Apache
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJDb2RlIjoiT0siLCJFcnJvck1lc3NhZ2UiOiIiLCJGdWxsRXJyb3IiOiIiLCJJbmRleEJ1aWxkRGF0ZSI6IjIwMTgtMDEtMDUgMDQ6MjE6MjgiLCJJbmRleFR5cGUiOjEsIlNlcnZlckJ1aWxkIjoiMjAxNy0xMC0yNSAxNDozMzo0NCIsIlNlcnZlck5hbWUiOiJFQ0hPTElNQSIsIlNlcnZlclZlcnNpb24iOiIxLjAuNjUwNy4yNDQxMiIsIlVuaXF1ZUluZGV4SUQiOiIyMDE4MDEwNTA0MjEyOC1GUkVTSCIsIkRhdGFUYWJsZXMiOnsiQW5jaG9yVGV4dCI6eyJIZWFkZXJzIjp7IkNhblJldHVyblVSTHMiOjEsIkNvdW50IjoxMDAwLCJGaWx0ZXJBbmNob3JUZXh0IjoiIiwiRmlsdGVyQW5jaG9yVGV4dE1vZGUiOjAsIkZpbHRlclJlZkRvbWFpbiI6IiIsIkZyb20iOjAsIkl0ZW0iOiJzYW1wbGV0ZXN0LmNvbSIsIk1heFRvcGljcyI6MTAsIk1vZGUiOjAsIk9yaWdJdGVtIjoic2FtcGxldGVzdC5jb20iLCJUZXh0TW9kZSI6MCwiVG9waWNzQ291bnQiOjMsIlRvdGFsQmFja0xpbmtzIjo1LCJUb3RhbFJlZkRvbWFpbnMiOjUsIlRvdGFsUmVzdWx0cyI6NH0sIkRhdGEiOlt7IkFuY2hvclRleHQiOiLljavmn5DkuroiLCJSZWZEb21haW5zIjoyLCJUb3RhbExpbmtzIjoyLCJEZWxldGVkTGlua3MiOjAsIk5vRm9sbG93TGlua3MiOjIsIkVzdGltYXRlZExpbmtDaXRhdGlvbkZsb3ciOjAsIkVzdGltYXRlZExpbmtUcnVzdEZsb3ciOjAsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMCI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMCI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMSI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMSI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMiI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMiI6IiJ9LHsiQW5jaG9yVGV4dCI6Ind3dy5zYW1wbGV0ZXN0LmNvbSIsIlJlZkRvbWFpbnMiOjEsIlRvdGFsTGlua3MiOjEsIkRlbGV0ZWRMaW5rcyI6MCwiTm9Gb2xsb3dMaW5rcyI6MCwiRXN0aW1hdGVkTGlua0NpdGF0aW9uRmxvdyI6MTAsIkVzdGltYXRlZExpbmtUcnVzdEZsb3ciOjAsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMCI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMCI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMSI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMSI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMiI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMiI6IiJ9LHsiQW5jaG9yVGV4dCI6Imh0dHBzOi8vd2Vic2VydmljZXMuc2FtcGxldGVzdC5jb20vd3NkbC9zYW1wbGV0ZXN0LndzZGwnLiIsIlJlZkRvbWFpbnMiOjEsIlRvdGFsTGlua3MiOjEsIkRlbGV0ZWRMaW5rcyI6MCwiTm9Gb2xsb3dMaW5rcyI6MSwiRXN0aW1hdGVkTGlua0NpdGF0aW9uRmxvdyI6MCwiRXN0aW1hdGVkTGlua1RydXN0RmxvdyI6MCwiVG9waWNhbFRydXN0Rmxvd19Ub3BpY18wIjoiIiwiVG9waWNhbFRydXN0Rmxvd19WYWx1ZV8wIjoiIiwiVG9waWNhbFRydXN0Rmxvd19Ub3BpY18xIjoiIiwiVG9waWNhbFRydXN0Rmxvd19WYWx1ZV8xIjoiIiwiVG9waWNhbFRydXN0Rmxvd19Ub3BpY18yIjoiIiwiVG9waWNhbFRydXN0Rmxvd19WYWx1ZV8yIjoiIn0seyJBbmNob3JUZXh0IjoiaHR0cHM6Ly93ZWJzZXJ2aWNlcy5zYW1wbGV0ZXN0LmNvbS94c2QvdGVzdDEueHNkJywiLCJSZWZEb21haW5zIjoxLCJUb3RhbExpbmtzIjoxLCJEZWxldGVkTGlua3MiOjAsIk5vRm9sbG93TGlua3MiOjEsIkVzdGltYXRlZExpbmtDaXRhdGlvbkZsb3ciOjAsIkVzdGltYXRlZExpbmtUcnVzdEZsb3ciOjAsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMCI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMCI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMSI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMSI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVG9waWNfMiI6IiIsIlRvcGljYWxUcnVzdEZsb3dfVmFsdWVfMiI6IiJ9XX19fQ==
+    http_version:
+  recorded_at: Fri, 05 Jan 2018 12:23:56 GMT
+- request:
+    method: post
+    uri: https://api.marchex.io/api/jsonrpc/1
+    body:
+      encoding: UTF-8
+      string: '{"jsonrpc":"2.0","id":"1","method":"call.search","params":[null,{"extended":true,"start":null,"end":null}]}'
+    headers:
+      User-Agent:
+      - Faraday v0.11.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic bWFyY2hleGFwaUBvbmVpbXMuY29tOk15WFZ6YzdsQjE=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '167'
+      X-Runtime:
+      - '0.016429'
+      Date:
+      - Tue, 09 Jan 2018 10:08:06 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"data":{"code":"unexpected_failure","desc":"unexpected failure","event_id":"Ch4NplpUlIYMywAn"},"error":{"code":-32500,"message":"unexpected
+        failure"},"jsonrpc":"2.0"}'
+    http_version:
+  recorded_at: Tue, 09 Jan 2018 10:08:06 GMT
+recorded_with: VCR 3.0.3

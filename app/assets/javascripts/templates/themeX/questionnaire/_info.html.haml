@@ -1,0 +1,46 @@
+.progress-location.clearfix
+  %ul#wizard-header.stepy-header
+    %li#wizard-head-0{'ng-repeat' => "groupType in group_types", 'ng-class': "{'stepy-active': groupType.id == group.id}"}
+      %div Step {{$index + 1}}
+      %span {{groupType.name}}
+
+.form-group{'ng-repeat' => "question in questions"}
+  .question{'ng-if' => "question.group_id == group.id"}
+
+    %label.control-label {{question.question}}
+    .small.orange{{'ng-show' => 'question.description'}}
+      %span ({{question.description}})
+    %div{"ng-if" => "question.exp_ans_type == 'oneliner'"}
+      .blue.pull-right{"ng-if" => "question.changed == true"}
+        %a{href:"javascript:void(0)","ng-click" => "view_latest_question(question)"}
+          %i.fa.fa-window-restore
+        This Question has been changed
+      %input.form-control.width70per{name: "answer_group_{{question.id}}_answer_oneline",'ng-model' => 'answer_group[question.id]', 'ng-required' => "question.is_mandatory"}
+
+      %span.help-inline{"ng-show" => "question.is_mandatory && is_submitted && questionnaireForm.answer_group_{{question.id}}_answer_oneline.$invalid"} can't be blank
+
+    %div{'ng-if' => "question.exp_ans_type == 'boolean_ans'"}
+      .blue.pull-right{'ng-if' => "question.changed == true"}
+        %i.glyphicon.glyphicon-new-window{"ng-include" => "", :src => "'themeX/questionnaire/_latest_question.html'", "ng-click" => "view_latest_question(question)"}
+        This Question has been changed
+      %label.radio-inline
+        %input{type: "radio", name: "answer_group_{{question.id}}_answer_boolean",'ng-model' => 'answer_group[question.id]', value: "true",'ng-required' => "question.is_mandatory"} Yes
+      %label.radio-inline
+        %input{type: "radio", name: "answer_group_{{question.id}}_answer_boolean",'ng-model' => 'answer_group[question.id]',value: "false", 'ng-required' => "question.is_mandatory"} No
+      %span.help-inline{"ng-show" => "question.is_mandatory && is_submitted && questionnaireForm.answer_group_{{question.id}}_answer_boolean.$invalid"} can't be blank
+
+    %div{'ng-if' => "question.exp_ans_type == 'mcq'"}
+      .blue.pull-right{'ng-if' => "question.changed == true"}
+        %i.glyphicon.glyphicon-new-window{"ng-include" => "", :src => "'themeX/questionnaire/_latest_question.html'", "ng-click" => "view_latest_question(question)"}
+        This Question has been changed
+
+      %label.radio-inline{'ng-repeat' => "choice in question.mcq_choices track by $index"}
+        %input{type: "radio", name: "answer_group_{{question.id}}_answer_mcq",'ng-model' => 'answer_group[question.id]', value: "{{choice}}",'ng-required' => "question.is_mandatory"} {{choice}}
+      %span.help-inline{"ng-show" => "question.is_mandatory && is_submitted && questionnaireForm.answer_group_{{question.id}}_answer_mcq.$invalid"} can't be blank
+
+    %div{ 'ng-if' => "question.exp_ans_type == 'paragraph'"}
+      .blue.pull-right{'ng-if' => "question.changed == true"}
+        %i.glyphicon.glyphicon-new-window{"ng-include" => "", :src => "'themeX/questionnaire/_latest_question.html'", "ng-click" => "view_latest_question(question)"}
+        This Question has been changed
+      %textarea#editor1.form-control.width70per{name: "answer_group_{{question.id}}_answer_paragraph", rows: "5",'ng-model' => 'answer_group[question.id]', 'ng-required' => 'question.is_mandatory'}
+      %span.help-inline{"ng-show" => "question.is_mandatory && is_submitted && questionnaireForm.answer_group_{{question.id}}_answer_paragraph.$invalid"} can't be blank

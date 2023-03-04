@@ -1,0 +1,165 @@
+.panel.panel-default
+  .panel-heading.pointer{role: "tab", id: "headingThree"}
+    %h4{class: "panel-title"}
+      %a{role: "button", "data-toggle": "collapse", "data-parent": "#accordion", href: "#collapseThree", "aria-expanded": "true", "aria-controls": "collapseThree"}
+        Details
+
+  #collapseThree{ class: "panel-collapse collapse in", role: "tabpanel", "aria-labelledby": "headingThree"}
+    .panel-body.Details
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Mobile Phone
+          .col-md-12
+            = f.text_field :mobile_phone, class: "form-control", "data-parsley-trigger": "mouseup input focusin focusout keydown keyup", "data-parsley-type": "digits", "data-parsley-debounce":"500"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Number of Employees
+          .col-md-12
+            = f.number_field :number_of_users, class: "form-control", "data-parsley-trigger": "mouseup input focusin focusout keydown keyup", "data-parsley-type": "digits", "data-parsley-debounce":"500"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Toll Free
+          .col-md-12
+            = f.text_field :toll_free, class: "form-control", "data-parsley-trigger": "mouseup input focusin focusout keydown keyup", "data-parsley-type": "digits", "data-parsley-debounce":"500"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Year Established
+          .col-md-12
+            = f.text_field :year_established, class: "form-control", "data-parsley-trigger": "mouseup input focusin focusout keydown keyup", "data-parsley-type": "digits", "data-parsley-debounce":"500", "data-parsley-max": "{{ max_year }}", "data-parsley-maxlength":"4", "data-parsley-minlength":"4"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Enquiry Email
+          .col-md-12
+            = f.text_field :enquiry_email, class: "form-control", "data-parsley-trigger": "mouseup input focusin focusout keydown keyup", "data-parsley-type": "email", "data-parsley-debounce":"500"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Fax
+          .col-md-12
+            = f.text_field :fax, class: "form-control", "data-parsley-trigger": "mouseup input focusin focusout keydown keyup", "data-parsley-type": "number", "data-parsley-debounce":"500"
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Categories
+          .col-md-12
+            - category = ['Web','Mobile','Social Media','Video Marketing','SEO','Blogs']
+            = f.select :category, options_for_select(category, selected: @location.categories), {}, {class: "form-control", id: 'categories-id'}
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Payment Methods
+          .col-md-12
+            - payment = ['Visa','Master','Cash','Check','Credit Card','Debit Card']
+            = f.select :payment_method, options_for_select(payment, selected: @location.payment_methods), {}, {class: "form-control", id: 'payments-id'}
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Products Services
+          .col-md-12
+            = f.text_field :products_services, class: "form-control",  id: 'products_services', value: @location.products_services.join(',')
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Brands
+          .col-md-12
+            = f.text_field :brands, class: "form-control",  id: 'brands', placeholder: 'Enter brands seperated by comma', data: { default: 'Enter brands seperated by comma' }, value: @location.brands.join(',')
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-3.control-label Languages
+          .col-md-12
+            = f.text_field :languages, class: "form-control",  id: 'languages', value: @location.languages.join(',')
+      .col-md-6
+        .form-group.no-margin-top
+          %label.col-md-12.control-label Professional Associations
+          .col-md-12
+            = f.text_field :professional_associations, class: "form-control",  id: 'professional_associations', value: @location.professional_associations.join(',')
+      .col-md-12
+        .col-md-4
+          %input{checked: "checked", type: "checkbox", id: "business_checkbox"} Business Hours
+      .col-md-12.business_hours_select
+        - options = ["Open", "Closed", "24 Hours"]
+        - weeks = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        - weeks.each_with_index do |week, index|
+          - day_info = @location.business_hours.select{|x| x.days == week}.first
+          .col-md-6.form-group
+            .col-md-4
+              %label.control-label #{week}
+              = hidden_field_tag "location[working_hours][#{index}][days]", week
+            .col-md-8
+              = select_tag "location[working_hours][#{index}][status]", options_for_select(options, selected: day_info&.status), class: 'form-control business_open', id: index, include_blank: true
+          .col-md-3.form-group
+            .col-md-6
+              %input{ class: "TimeField form-control", name: "location[working_hours][#{index}][from_1]", placeholder: "HH:MM", id: "from_#{index}", value: day_info&.from_1 }
+            .col-md-6
+              = select_tag "location[working_hours][#{index}][from_2]", options_for_select(["am","pm"], selected: day_info&.from_2), class: 'form-control',id: "from_day_#{index}", include_blank: true
+          .col-md-3.form-group
+            .col-md-6
+              %input{ class: "TimeField form-control", name: "location[working_hours][#{index}][to_1]", placeholder: "HH:MM", id: "to_#{index}", value: day_info&.to_1 }
+            .col-md-6
+              = select_tag "location[working_hours][#{index}][to_2]", options_for_select(["am","pm"], selected: day_info&.to_2), class: 'form-control', id: "to_day_#{index}", include_blank: true
+
+      .col-md-12.m-t-20
+        %button#save_basic.btn.btn-success.btn-raised.btn-label{ "type": "submit" }
+          = succeed "Save" do
+            .ripple-container
+
+:javascript
+  $(document).ready(function() {
+    $('#categories-id').select2({
+      width: '100%',
+      multiple: true,
+    });
+
+    $('#payments-id').select2({
+      width: '100%',
+      multiple: true,
+    });
+
+    $('.business_open').select2({
+      width: '100%',
+      minimumResultsForSearch: -1
+    });
+
+    $('#0,#1,#2,#3,#4,#5,#6').on('change', function (){
+      let id = $(this).attr("id")
+      if($(this).find('option:selected').text() === "Open") {
+        $(`#from_${id}`).prop('disabled', false)
+        $(`#to_${id}`).prop('disabled', false)
+        $(`#from_day_${id}`).prop('disabled', false)
+        $(`#to_day_${id}`).prop('disabled', false)
+      }else {
+        $(`#from_${id}`).prop('disabled', true)
+        $(`#to_${id}`).prop('disabled', true)
+        $(`#from_day_${id}`).prop('disabled', true)
+        $(`#to_day_${id}`).prop('disabled', true)
+        $(`#from_${id}`).val('')
+        $(`#to_${id}`).val('')
+        $(`#from_day_${id}`).val('')
+        $(`#to_day_${id}`).val('')
+      }
+    });
+
+    $('.TimeField').toArray().forEach(function(field){
+      new Cleave(field, {
+        time: true,
+        timePattern: ['h', 'm']
+      })
+    });
+
+    $('#business_checkbox').click(function(){
+      if($(this).is(":checked")){
+        $('.business_hours_select').show();
+      }
+      else if($(this).is(":not(:checked)")){
+        $('.business_hours_select').hide();
+      }
+    });
+  })
+
+:css
+  .tagsinput{
+    width: 100%!important;
+    height: auto!important;
+    min-height: 0px!important;
+  }
+  .tagsinput div{
+    width: 100%!important;
+  }
+  .tagsinput div input{
+    width: 100%!important;
+  }

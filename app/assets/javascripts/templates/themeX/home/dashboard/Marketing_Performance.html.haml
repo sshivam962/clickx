@@ -1,0 +1,61 @@
+.panel.panel-white.col-sm-12.p-n.m-n{:style => "visibility: visible; opacity: 1; display: block; transform: translateY(0px);"}
+  .panel-heading.cursor-move
+    %h2
+      %a.l-grey{href: "#/leads"}
+        Marketing Performance
+        %i.fa.fa-info-circle.tooltip-text-icon{ "title": "Your marketing performance denoted by graphs of traffic, contacts, and growth metrics." }
+    #onboarding-marketing-performance.on-boarding
+    .panel-ctrls
+      %button.btn.button-icon.mt-sm.refresh-panel{ 'ng-click': 'init_marketing_performance_page()', 'title': 'Refresh report'}
+        %span.material-icons.inverted refresh
+      %button.Dbutton.btn.button-icon.mt-sm{ 'ng-click': 'pdf_export("marketing-performance")', 'title': 'Download report', 'ng-class': "{'disable-button': export_disabled}" }
+        %span.material-icons.invertedx file_download
+      .btn-group.dropdown
+        %button.btn.btn-default.dropdown-toggle.marketing_settings{"data-toggle" => "dropdown" }
+          %i.material-icons> settings
+          %span.caret.ml-sm
+        %ul.dropdown-menu.btn-block{:role => "menu"}
+          %li.p-sm
+            %a{ "ng-click": "setGoals($event, 'Marketing Performance')" }
+              Goal Settings
+  .panel-body.p-xs#marketing-performance
+    .col-sm-12.p-n
+      .panel-body
+        .col-sm-6.col-md-5.col-lg-4.p-n
+          .funnel
+            .fu-vists.pointer{ 'ng-click': 'goTo(current_business+"/google_analytics")' }
+              .funnel-des
+                %p.mb-n.f-w-md.text-white VISITS
+                %p.f-s-28.f-w-md.text-white {{ (count.visits | toLocaleString) || 0 }}
+              -# .funnel-growth
+              -#   .triangle-up
+              -#   %p.f-s-20.f-w-md.up +10%
+            .funnel-divide.text-center
+              %p CONVERSION RATE
+              %h4.f-s-22.f-w-md.mt-xs.mb-md {{ visit_percent  || '0.00%' }}
+          .funnel
+            .fu-vists.fu-contact.pointer{ 'ng-click': 'goTo("leads?status=contact")' }
+              .funnel-des
+                %p.mb-n.f-w-md.text-white CONTACTS
+                %p.f-s-28.f-w-md.text-white {{ (count.contacts | toLocaleString) || 0 }}
+              -# .funnel-growth
+              -#   .triangle-down
+              -#   %p.f-s-20.f-w-md.down -10%
+            .funnel-divide.text-center{ 'ng-if': 'count.customers' }
+              %p CONVERSION RATE
+              %h4.f-s-22.f-w-md.mt-xs.mb-md {{ contact_pecent || '0.00%' }}
+          .funnel{ 'ng-if': 'count.customers' }
+            .fu-vists.fu-customer.pointer{ 'ng-click': 'goTo("leads?status=customer")' }
+              .funnel-des
+                %p.mb-n.f-w-md.text-white CUSTOMERS
+                %p.f-s-28.f-w-md.text-white {{ (count.customers | toLocaleString) || 0 }}
+              -# .funnel-growth
+              -#   .triangle-up
+              -#   %p.f-s-20.f-w-md.up +10%
+        .col-sm-6.col-md-7.col-lg-8.p-n
+          .col-sm-12{:style => "height: 185px; overflow: hidden;"}
+            #visits_line_chart{ 'on-click-chart' => '' }
+          .col-sm-12{:style => "height: 185px; overflow: hidden;"}
+            #contact_line_chart{ 'on-click-chart' => '' }
+          .col-sm-12{ :style => "height: 185px; overflow: hidden;", 'ng-if': 'count.customers' }
+            #customer_line_chart{ 'on-click-chart' => '' }

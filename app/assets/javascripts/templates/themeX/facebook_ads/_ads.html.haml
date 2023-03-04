@@ -1,0 +1,143 @@
+.row
+  .col-md-12{'ng-if':'ads'}
+    .panel.panel-default
+      .panel-heading
+        %h2 Ads Metrics
+        %i.fa.fa-info-circle.tooltip-text-icon{'title': 'Average metrics for the Facebook Ads'}
+      .panel-body
+        .row
+          .col-md-6
+            %table.table.table-hover
+              %tbody
+                %tr
+                  %td Impressions
+                  %td{align: 'right'} {{ads.total_impressions | decimalFilter}}
+                %tr
+                  %td Total Clicks
+                  %td{align: 'right'} {{ads.total_clicks | decimalFilter}}
+                %tr
+                  %td Link Clicks
+                  %td{align: 'right'} {{ads.total_inline_link_clicks | decimalFilter}}
+                %tr
+                  %td Frequency
+                  %td{align: 'right'} {{ads.total_frequency | decimalFilter}}
+                %tr{'ng-if':"ads.total_conversion != '0'"}
+                  %td Conversion
+                  %td{align: 'right'} {{ads.total_conversion | decimalFilter }}
+                %tr{'ng-if':"ads.total_leads != '0'"}
+                  %td Leads
+                  %td{align: 'right'} {{ads.total_leads | decimalFilter }}
+          .col-md-6
+            %table.table.table-hover
+              %tbody
+                %tr
+                  %td Total Reach
+                  %td{align: 'right'} {{ads.total_reach | decimalFilter}}
+                %tr
+                  %td CPC
+                  %td{align: 'right'} ${{ads.total_cpc | decimalFilter }}
+                %tr
+                  %td CTR
+                  %td{align: 'right'} {{ads.total_ctr | decimalFilter }}%
+                %tr
+                  %td Total Spend
+                  %td{align: 'right'} ${{ads.total_spend | decimalFilter }}
+                %tr
+                  %td Revenue
+                  %td{align: 'right'} ${{ads.total_revenue | decimalFilter }}
+.row
+  .col-md-12{'ng-if':'graph_data'}
+    .tab-container
+      %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+        %li.active
+          %a{"data-toggle":"tab", 'data-target': "#fbads-clicks", 'ng-click':"resizeChart('fbads_clicks_line_chart'); overview()", 'title': 'Show me the graph of clicks | received on my FB ads'} Clicks
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#fbads-impressions", 'ng-click':"resizeChart('fbads_impressions_line_chart'); overview()", 'title': 'Show me the graph of impressions | received on my FB ads'} Impressions
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#fbads-cpc", 'ng-click':"resizeChart('fbads_cpc_line_chart'); overview()", 'title': 'Show me the graph of CPC | received on my FB ads'} CPC
+      .tab-content
+        #fbads-clicks.tab-pane.active
+          .panel-body
+            .centered
+              #fbads_clicks_line_chart
+        #fbads-impressions.tab-pane
+          .panel-body
+            .centered
+              #fbads_impressions_line_chart
+        #fbads-cpc.tab-pane
+          .panel-body
+            .centered
+              #fbads_cpc_line_chart
+
+.row
+  .col-md-12{'ng-if':'ad_details'}
+    .tab-container
+      .tab-content{'st-table':"ad_details", 'st-safe-src':"copy_ad_details"}
+        .table-responsive
+          %table.table.table-hover.table-bordered.table-vam
+            %thead
+              %tr
+                %th.vam{'st-sort':'ad_name', style: "padding-right:190px;"}
+                  %u.help_pointer{'title': 'The Facebook Ads Ad name'}
+                    Ad
+                %th.vam{'st-sort':'campaign_name', style: "padding-right:190px;"}
+                  %u.help_pointer{'title': 'The Facebook Ads Campaign name'}
+                    Campaign
+                %th.vam{'st-sort':'adset_name', style: "padding-right:190px;"}
+                  %u.help_pointer{'title': 'The Facebook Ads Adset name'}
+                    Adset
+                %th.text-center{'st-sort':'clicks'}
+                  %u.help_pointer{'title': 'Number of clicks you received through FB ads for the given ads'}
+                    Clicks
+                %th.text-center{'st-sort':'inline_link_clicks'}
+                  %u.help_pointer{'title': 'The number of clicks on links within the ad that led to destinations or experiences, on or off Facebook'}
+                    Link Clicks
+                %th.text-center{'st-sort':'impressions'}
+                  %u.help_pointer{'title': 'Number of views your FB ads got fro the given ads'}
+                    Impressions
+                %th.text-center{'st-sort':'cpc'}
+                  %u.help_pointer{'title': 'Cost Per Clicks for the given ads'}
+                    CPC
+                %th.text-center{'st-sort':'ctr'}
+                  %u.help_pointer{'title': 'Percent of clicks your FB ads got to that of impressions it received for the given ads'}
+                    CTR
+                %th.text-center{'st-sort':'reach'}
+                  Reach
+                %th.text-center{'st-sort':'spend'}
+                  Spend
+                %th.text-center{'st-sort':'conversion', 'ng-if':"ads.total_conversion != '0'"}
+                  Conversion
+                %th.text-center{'st-sort':'revenue', 'ng-if':"ads.total_revenue != '0'"}
+                  Reads
+                %th.text-center{'st-sort':'leads', 'ng-if':"ads.total_leads != '0'"}
+                  Leads
+            %tbody
+              %tr{'ng-repeat':"ad in ad_details", 'ng-if': 'ad'}
+                %td
+                  %div.pointer{'ng-if': 'ad.thumbnail || ad.ad_name', 'ng-click': 'openAdsModal(ad)' }
+                    %img{'ng-src': '{{ad.thumbnail}}'} &nbsp; {{ad.ad_name}}
+                %td.text-center {{ad.campaign_name}}
+                %td.text-center {{ad.adset_name}}
+                %td.text-center {{ad.clicks | decimalFilter}}
+                %td.text-center {{ad.inline_link_clicks | decimalFilter}}
+                %td.text-center {{ad.impressions | decimalFilter}}
+                %td.text-center ${{ad.cpc | decimalFilter}}
+                %td.text-center {{ad.ctr | decimalFilter}}%
+                %td.text-center {{ad.reach | decimalFilter}}
+                %td.text-center ${{ad.spend | decimalFilter}}
+                %td.text-center{'ng-if':"ads.total_conversion != '0'"} {{ad.conversion | decimalFilter}}
+                %td.text-center{'ng-if':"ads.total_reveune != '0'"} {{ad.reveune | decimalFilter}}
+                %td.text-center{'ng-if':"ads.total_leads != '0'"} {{ad.leads | decimalFilter}}
+        %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}
+
+.container-fluid{'ng-if':"error"}
+  %div
+  .row#error
+    .col-md-12
+      .panel.panel-default
+        .panel-body
+          %p.clx-text.text-color-accent-red.text-center
+            {{ error }}
+
+
+%div{"ng-include": "", "src": "'themeX/snippets/_show_facebook_ad_preview.html'"}

@@ -1,0 +1,152 @@
+- content_for :title do
+  Brand Awareness & Customer Acquisition
+- text_color = agency.strategy_product_text_color
+.section.bg-dark.p-tb-60.section-cover{style: "background:#{agency.strategy_product_background_color}"}
+  .container
+    .p-t-60
+    .row.v-center--lg.text-center--md.col-centered--md
+      .col-md-5.col-md-offset-1.text-center
+        = image_tag 'lead_strategy/lead-gen-2.svg', class: 'img-responsive'
+        .p-lg--md
+      .col-md-6
+        %h4{style: "color:#{text_color}"} Google & Facebook Ecommerce
+        %h1{style: "color:#{text_color}"}
+          Brand Awareness
+          %br
+          = precede '& ' do
+            Customer Acquisition
+          %br
+          %span.f-w-lg= @lead.company
+        %p{style: "color:#{text_color}"}
+          Prepared For
+          - if @lead.full_name.present?
+            %br
+            = @lead.full_name
+          - if @lead.email.present?
+            %br
+            = @lead.email
+
+- if @lead_strategy.strategies.present?
+  .section.p-tb-60.bg-light.section-cover
+    .container.container--sm
+      %h2.f-w-lg.pb-xl.text-black Strategy
+      %ul.arrow-list.arrow-list--style-2
+        - @lead_strategy.strategies.each do |strategy|
+          %li
+            = raw(strategy)
+- if @lead_strategy.strategy_images.present?
+  .section.bg-light.p-tb-60.section-cover
+    .container.container--sm
+      .swiper-container.image-carousel
+        .swiper-wrapper
+          - @lead_strategy.strategy_images.order_by_created.each do |image|
+            .swiper-slide
+              .card-new.p-xl
+                %img.img-responsive{alt: '', src: image.file&.url}
+        - if @lead_strategy.strategy_images.count > 1
+          .swiper-pagination
+-if @lead_strategy.ad_spend_info.present?
+  .section.p-tb-60.section-cover
+    .container.container--sm
+      .row.v-center--lg.col-reverse--md
+        .col-md-7
+          %h2.f-w-lg.pb-xl.text-black Budget Recommendations
+          %ul.arrow-list.arrow-list--style-2
+            - @lead_strategy.ad_spend_info.split(/\r?\n/).each do |info|
+              %li= info
+        .col-md-5
+          = image_tag 'lead_strategy/ad-spend-2.svg', class: 'img-responsive img-align-center--md'
+          .p-lg--md
+.section.bg-light.p-tb-60.section-cover
+  .container.container--sm
+    .row.v-center--lg.col-centered--md
+      .col-md-5
+        = image_tag 'lead_strategy/top-funnel.svg', class: 'img-responsive img-align-center--md'
+        .p-lg--md
+      .col-md-6.col-md-offset-1
+        %h2.f-w-lg.pb-xl.text-black
+          %span.color-light Top of Funnel —
+          %br/
+          Awareness Stage:
+        %ul.arrow-list.arrow-list--style-2
+          - Lead::StrategyFunnel.funnels(category: 'Google & Facebook Ecommerce', funnel_type: 'top_funnel').each do |funnel|
+            %li= funnel.content
+.section.p-tb-60.section-cover
+  .container.container--sm
+    .row.v-center--lg.col-reverse--md
+      .col-md-7
+        %h2.f-w-lg.pb-xl.text-black
+          %span.color-light Middle of Funnel —
+          %br/
+          Consideration Stage:
+        %ul.arrow-list.arrow-list--style-2
+          - Lead::StrategyFunnel.funnels(category: 'Google & Facebook Ecommerce', funnel_type: 'middle_funnel').each do |funnel|
+            %li= funnel.content
+      .col-md-5
+        = image_tag 'lead_strategy/middle-funnel-2.svg', class: 'img-responsive img-align-center--md'
+        .p-lg--md
+.section.bg-light.p-tb-60.section-cover
+  .container.container--sm
+    .row.v-center--lg.col-centered--md
+      .col-md-5
+        = image_tag 'lead_strategy/bottom-funnel-2.svg', class: 'img-responsive img-align-center--md'
+        .p-lg--md
+      .col-md-6.col-md-offset-1
+        %h2.f-w-lg.pb-xl.text-black
+          %span.color-light Bottom of Funnel —
+          %br/
+          Decision Stage:
+        %ul.arrow-list.arrow-list--style-2
+          - Lead::StrategyFunnel.funnels(category: 'Google & Facebook Ecommerce', funnel_type: 'bottom_funnel').each do |funnel|
+            %li= funnel.content
+.secion.p-tb-60.text-center.section-cover
+  .container
+    %h2.f-w-lg.text-black Next Steps...
+    .mt-xl.pt-lg
+      .process
+        .process-col
+          .process-icon
+            = image_tag 'lead_strategy/step-icon-1.svg'
+          .process-name.f-w-md
+            Accept
+            = succeed "Proposed Solution" do
+              %br/
+        .process-col
+          .process-icon
+            = image_tag 'lead_strategy/step-icon-2.svg'
+          .process-name.f-w-md
+            Ad Account
+            = succeed "Access" do
+              %br/
+        .process-col
+          .process-icon
+            = image_tag 'lead_strategy/step-icon-3.svg'
+          .process-name.f-w-md
+            Schedule
+            = succeed "Kick Off Call" do
+              %br/
+        .process-col
+          .process-icon
+            = image_tag 'lead_strategy/step-icon-4.svg'
+          .process-name.f-w-md
+            Approve
+            = succeed "Campaign Creative" do
+              %br/
+        .process-col
+          .process-icon
+            = image_tag 'lead_strategy/step-icon-5.svg'
+          .process-name.f-w-md
+            Campaign
+            = succeed "Launch" do
+              %br/
+
+.section.section--calendly.p-tb-60.text-center.section-cover
+  .container.container--sm
+    %h3.f-w-lg.pb-xl.text-center Campaign Reporting
+    %script{:async => "", :src => "https://fast.wistia.com/embed/medias/9rpo4u2k5e.jsonp"}
+    %script{:async => "", :src => "https://fast.wistia.com/assets/external/E-v1.js"}
+    .wistia_responsive_padding{:style => "padding:56.25% 0 0 0;position:relative;"}
+      .wistia_responsive_wrapper{:style => "height:100%;left:0;position:absolute;top:0;width:100%;"}
+        .wistia_embed.wistia_async_9rpo4u2k5e{:class => "videoFoam=true", :style => "height:100%;position:relative;width:100%"}
+          .wistia_swatch{:style => "height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"}
+            %img{:alt => "", "aria-hidden" => "true", :onload => "this.parentNode.style.opacity=1;", :src => "https://fast.wistia.com/embed/medias/9rpo4u2k5e/swatch", :style => "filter:blur(5px);height:100%;object-fit:contain;width:100%;"}/

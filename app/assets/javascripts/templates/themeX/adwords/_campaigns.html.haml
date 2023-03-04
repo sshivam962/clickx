@@ -1,0 +1,38 @@
+.row
+  .col-md-8
+    .tab-container
+      .tab-content{'st-table':"campaigns", 'st-safe-src':"copy_campaigns"}
+        .table-responsive
+          %table.table.table-hover.table-bordered.table-vam
+            %thead
+              %tr
+                %th.vam{'st-sort':'name'}
+                  %u.help_pointer
+                    Campaign
+                %th.text-center{'st-sort':'type'}
+                  Type
+                %th.text-center
+            %tbody
+              %tr{'ng-repeat': "campaign in campaigns"}
+                %td
+                  {{campaign.name}}
+                  %small {{campaign.id}}
+                %td {{campaign.type}}
+                %td.text-center
+                  %a.btn.btn-default.btn-sm{'ng-click': "showLocations(campaign)"} View Locations
+        %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}
+  .col-md-4
+    .tab-container
+      .tab-content{'st-table':"locations", 'st-safe-src':"copy_locations", 'ng-if':"locations.length > 0"}
+        .table-responsive
+          %table.table.table-hover.table-bordered.table-vam
+            %thead
+              %tr
+                %th.vam{'st-sort':'name', colspan: 3}
+                  {{location_title}}
+            %tbody.locations
+              %tr{'ng-repeat': "location in locations"}
+                %td{"ng-class":"location.is_negative ? 'red' : ''"}
+                  {{location.location_name}}
+                %td {{location.is_negative ? 'Excluded' : location.targeting_status | titleize}}
+                %td {{location.display_type}}

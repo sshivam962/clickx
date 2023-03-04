@@ -1,0 +1,13 @@
+= stylesheet_link_tag 'public/public_pages', media: 'all', 'data-turbolinks-track': false
+.page-header
+  %h3
+    Value Hooks
+    %small.pull-right
+      %a.btn.btn-sm.btn-reset-sm.btn-warning.btn-reset-m-0{href: super_admin_value_hooks_path } Back
+.content-container.text-center
+  .bg-white.rounded.shadow.p-4.my-5
+    = @value_hook.video_embed_code.html_safe
+    .mt-5.pt-3
+    - if raw(@value_hook.title).present?
+      %h2.fw-sb.mb-4.mt-0
+        = @value_hook.title

@@ -1,0 +1,19 @@
+%script
+  - if current_agency.present?
+    var case_study_enabled = "#{policy(current_agency).case_study?}"
+    var custom_packages_present = "#{current_agency&.custom_packages&.active.present?}";
+    var is_agency_active = "#{current_agency.active?}"
+
+    var agency_enabled_packages = "#{current_agency.enabled_packages&.join(',')}"
+    var current_agency = "#{current_agency.id}"
+    var current_agency_level = "#{current_agency.level}"
+    var current_agency_name = "#{current_agency.name}"
+  - else
+    var case_study_enabled = false
+    var custom_packages_present = false
+    var is_agency_active = false
+
+    var agency_enabled_packages = ''
+    var current_agency = ''
+    var current_agency_level = ''
+    var current_agency_name = ''

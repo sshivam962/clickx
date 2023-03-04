@@ -1,0 +1,47 @@
+%table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+  %tr
+    %td{:valign => "top", :width => "100%"}
+      %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+        %tr
+          %td{:width => "100%"}
+            %table.table_scale{:bgcolor => "#FFF", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+              %tr
+                %td{:align => "center", :width => "100%"}
+                  %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                    %tr
+                      %td.spacer{:width => "30"}
+                      %td{:width => "540"}
+                        / START OF COLUMN
+                        %table.full{:align => "center", :border => "0", :cellpadding => "10", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "540"}
+                          %tr.cellpadd10{:style => "margin-bottom: 15px"}
+                            %td
+                              %h4 Agency #{@signup_link.company} has accessed the payment page on #{DateTime.now.strftime('%b %d, %y %l:%M%P')}.
+                              %p
+                                Name: #{@signup_link.first_name} #{@signup_link.last_name}
+                                %br
+                                Email: #{@signup_link.email}
+                                %br
+                                Referer: #{@referer}
+                                %br
+                                Landing Page: #{@original_url}
+                                %br
+                                IP: #{@ip}
+                                %br
+                                Country: #{@country}
+                                %br
+                                State: #{@state}
+                                %br
+                                City: #{@city}
+                                %br
+                                Postal Code: #{@postal_code}
+                                %br
+                                Device Type: #{@device_type}
+                                %br
+                                OS: #{@os}
+                                %br
+                                Browser: #{@browser}
+                                %br
+                                %br
+                                Thanks,
+                                %br
+                                Clickx Team

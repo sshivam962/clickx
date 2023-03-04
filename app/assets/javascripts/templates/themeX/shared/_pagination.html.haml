@@ -1,0 +1,16 @@
+.pagination
+  %ul.pagination
+    %li{"ng-class" => "{'disabled':currentPage == 1}"}
+      %a{"aria-label" => "First", "ng-click" => "selectPage(1)"}
+        %span{"aria-hidden" => "true"} First
+    %li{"ng-class" => "{'disabled':currentPage == 1}"}
+      %a{"aria-label" => "Previous", "ng-click" => "selectPage(currentPage-1)"}
+        %span{"aria-hidden" => "true"} Previous
+    %li{"ng-class" => "{active: page==currentPage}", "ng-repeat" => "page in pages"}
+      %a{"ng-click" => "selectPage(page)"} {{page}}
+    %li{"ng-class" => "{'disabled':currentPage == numPages}"}
+      %a{"aria-label" => "Next", "ng-click" => "selectPage(currentPage+1)"}
+        %span{"aria-hidden" => "true"} Next
+    %li{"ng-class" => "{'disabled':currentPage == numPages}"}
+      %a{"aria-label" => "Last", :href => "", "ng-click" => "selectPage(numPages)"}
+        %span{"aria-hidden" => "true"} Last

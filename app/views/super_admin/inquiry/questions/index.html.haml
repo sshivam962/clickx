@@ -1,0 +1,16 @@
+- content_for :title do
+  Inquiry Questions | Clickx
+.d-flex.mb-md.justify-content-between
+  .col
+    %h1
+      Questions
+  .col
+    %a.btn.btn-warning.mt-lg.mb-lg{href:super_admin_inquiry_questionnaires_path}
+      Questionnaires
+%div
+  %div.questions-list
+    - @questions.each do |question|
+      = render 'super_admin/inquiry/questions/shared/question', question: question
+= link_to new_super_admin_inquiry_question_path, class: 'btn btn--add pull-right', remote: true do
+  %i.glyphicon.glyphicon-plus.glyphplus
+#modal_container

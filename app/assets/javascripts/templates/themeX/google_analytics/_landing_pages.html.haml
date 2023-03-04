@@ -1,0 +1,59 @@
+-# .row
+-#   .col-md-12
+-#     .tab-container
+-#       %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+-#         %li.active
+-#           %a{"data-toggle":"tab", 'data-target': "#social_sessions", 'ng-click':"resizeChart('social_session_chart'); top_pages()"} Sessions via Social Referral
+-#         %li
+-#           %a{"data-toggle":"tab", 'data-target': "#all_session", 'ng-click':"resizeChart('all_session_chart'); top_pages()"} All Sessions
+-#       .tab-content
+-#         #social_sessions.tab-pane.active
+-#           .panel-body
+-#             .centered
+-#               #social_session_chart
+-#         #all_session.tab-pane
+-#           .panel-body
+-#             .centered
+-#               #all_session_chart
+-#         .row
+-#           .col-sm-12.text-center{ "ng-include": "", "src": "'themeX/google_analytics/_chartFilter.html'" }
+
+.row
+  .col-md-12
+    .tab-container
+      .tab-content{'st-table':"table_data",'st-safe-src':'cp_table_data'}
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th #
+                %th
+                  %u.help_pointer{ 'title': 'The top Pages that are getting the most traffic on your site' }
+                    Top Pages
+                %th{ 'st-sort': 'sessions', 'st-sort-default': 'reverse' }
+                  %u.help_pointer{ 'title': 'Number of sessions your top pages are getting. We have also included the percent of total sessions a given page getting is' }
+                    Sessions
+                %th{'st-sort':'screenPageViews'}
+                  %u.help_pointer{ 'title': 'Number of page views your top page are getting. We have also included the percent of total page views a given page is getting' }
+                    Page Views
+                %th{'st-sort':'averageSessionDuration'}
+                  %u.help_pointer{ 'title': 'Number of page views your top page are getting.We have also included the percent of total page views a given page is getting' }
+                    Avg. Session
+                %th{'st-sort':'screenPageViewsPerSession'}
+                  %u.help_pointer{ 'title': 'Number of pages users visited per session starting from the given page' }
+                    Pages/Session
+            %tbody
+              %tr{'ng-repeat':'row in table_data'}
+                %td {{$index + 1}}
+                %td.break-long-text{align: "left"}
+                  -# %a.break-long-text{'ng-href':"{{row.site | web_link}}",target:'_blank'}
+                  {{row.pagePath}}
+                %td
+                  {{row.sessions | number}}
+                  %span.per_info ({{(row.sessions/total_sessions) * 100 |number:2}}%)
+                %td
+                  {{row.screenPageViews | number}}
+                  %span.per_info ({{(row.screenPageViews/total_pageviews) * 100 | number:2}}%)
+                %td {{row.averageSessionDuration | date:'HH:mm:ss'}}
+                %td {{row.screenPageViewsPerSession | number}}
+        %div.row.text-center.p-n.mgl-33{"ng-include":"", src: "'themeX/shared/_pagination_links.html'"}

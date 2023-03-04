@@ -1,0 +1,139 @@
+.p-lg-5.p-md-4
+  .funnel_page_form
+    .form-group.mt-0
+      %label{for: "funnel_page_title"} Title
+      .input-wrapper
+        = f.text_field :title, required: true, class: 'login input-wrapper-input', placeholder: 'Enter Title'
+    .form-group.hide
+      %label{for: "funnel_page_industry_id"} Industry
+      = f.select :industry_id, Industry.order(:title).pluck(:title, :id), { include_blank: 'Select Industry' }, required: true, class: 'form-control'
+    .form-group.hide
+      %label{for: "funnel_page_draft"} Draft
+      = f.check_box :draft
+    .form-group.hide
+      %label{for: "funnel_page_lead_form_required"} Lead Form Required
+      = f.check_box :lead_form_required
+    .form-group.hide
+      %label{for: "funnel_page_css"} CSS File Link
+      = f.text_field :css, class: 'login', placeholder: 'CSS File Link'
+    #accordion-wrapper
+      .section-card.bg-white.rounded-12.mb-4
+        .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#accordion-wrapper", "data-toggle" => "collapse", :href => "#section_a"}
+          .d-flex.justify-content-between.align-items-center
+            .col.fw-m.fs-xs
+              Section A
+            .col
+              %span.accordion-arrow
+                %i.fa.fa-chevron-up
+        #section_a.collapse
+          .section-card-body.px-5.py-4
+            %b Dynamic Variables : &nbsp&nbsp&nbsp
+            - FunnelPage::PLACEHOLDERS.each do |key, value|
+              %a.copy_to_clipboard.si-placeholder.mr-md{href: 'javascrip:void(0)', data: {key: "{{#{key}}}"}}
+                {{#{key}}}
+            .form-group
+              = f.cktext_area :section_a, class: '', ckeditor: { toolbar: 'funnel' }
+      .section-card.bg-white.rounded-12.mb-4
+        .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#accordion-wrapper", "data-toggle" => "collapse", :href => "#section_b"}
+          .d-flex.justify-content-between.align-items-center
+            .col.fw-m.fs-xs
+              Section B
+            .col
+              %span.accordion-arrow
+                %i.fa.fa-chevron-up
+        #section_b.collapse
+          .section-card-body.px-5.py-4
+            %b Dynamic Variables : &nbsp&nbsp&nbsp
+            - FunnelPage::PLACEHOLDERS.each do |key, value|
+              %a.copy_to_clipboard.si-placeholder.mr-md{href: 'javascrip:void(0)', data: {key: "{{#{key}}}"}}
+                {{#{key}}}
+            .form-group
+              = f.cktext_area :section_b, class: '', ckeditor: { toolbar: 'funnel' }
+      
+      .section-card.bg-white.rounded-12.mb-4
+        .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#accordion-wrapper", "data-toggle" => "collapse", :href => "#section_c"}
+          .d-flex.justify-content-between.align-items-center
+            .col.fw-m.fs-xs
+              Section C
+            .col
+              %span.accordion-arrow
+                %i.fa.fa-chevron-up
+        #section_c.collapse
+          .section-card-body.px-5.py-4
+            %b Dynamic Variables : &nbsp&nbsp&nbsp
+            - FunnelPage::PLACEHOLDERS.each do |key, value|
+              %a.copy_to_clipboard.si-placeholder.mr-md{href: 'javascrip:void(0)', data: {key: "{{#{key}}}"}}
+                {{#{key}}}
+            .form-group
+              = f.cktext_area :section_c, class: '', ckeditor: { toolbar: 'funnel' }
+      .section-card.bg-white.rounded-12.mb-4
+        .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#accordion-wrapper", "data-toggle" => "collapse", :href => "#section_d"}
+          .d-flex.justify-content-between.align-items-center
+            .col.fw-m.fs-xs
+              Section D
+            .col
+              %span.accordion-arrow
+                %i.fa.fa-chevron-up
+        #section_d.collapse
+          .section-card-body.px-5.py-4
+            %b Dynamic Variables : &nbsp&nbsp&nbsp
+            - FunnelPage::PLACEHOLDERS.each do |key, value|
+              %a.copy_to_clipboard.si-placeholder.mr-md{href: 'javascrip:void(0)', data: {key: "{{#{key}}}"}}
+                {{#{key}}}
+            .form-group
+              = f.cktext_area :section_d, class: '', ckeditor: { toolbar: 'funnel' }
+      .section-card.bg-white.rounded-12.mb-4
+        .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#accordion-wrapper", "data-toggle" => "collapse", :href => "#section_e"}
+          .d-flex.justify-content-between.align-items-center
+            .col.fw-m.fs-xs
+              Section E
+            .col
+              %span.accordion-arrow
+                %i.fa.fa-chevron-up
+        #section_e.collapse
+          .section-card-body.px-5.py-4
+            %b Dynamic Variables : &nbsp&nbsp&nbsp
+            - FunnelPage::PLACEHOLDERS.each do |key, value|
+              %a.copy_to_clipboard.si-placeholder.mr-md{href: 'javascrip:void(0)', data: {key: "{{#{key}}}"}}
+                {{#{key}}}
+            .form-group
+              = f.cktext_area :section_e, class: '', ckeditor: { toolbar: 'funnel' }
+      .section-card.bg-white.rounded-12.mb-4
+        .section-card-heading.px-5.py-4.rounded-t-12.collapsed{"data-parent" => "#accordion-wrapper", "data-toggle" => "collapse", :href => "#section_f"}
+          .d-flex.justify-content-between.align-items-center
+            .col.fw-m.fs-xs
+              Section F
+            .col
+              %span.accordion-arrow
+                %i.fa.fa-chevron-up
+        #section_f.collapse
+          .section-card-body.px-5.py-4
+            %b Dynamic Variables : &nbsp&nbsp&nbsp
+            - FunnelPage::PLACEHOLDERS.each do |key, value|
+              %a.copy_to_clipboard.si-placeholder.mr-md{href: 'javascrip:void(0)', data: {key: "{{#{key}}}"}}
+                {{#{key}}}
+            .form-group
+              = f.cktext_area :section_f, class: '', ckeditor: { toolbar: 'funnel' }
+    = f.hidden_field :agency_id, value: current_agency.id
+    = f.hidden_field :funnel_page_id, value: funnel_page_id
+    .form-group
+      = f.submit "Save", class: 'btn btn-warning btn-raised saveBtn', name: 'Save'
+:javascript
+  $('.copy_to_clipboard').on('click', function (e) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).data('key')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Copied to Clipboard");
+  });
+
+  $(document).on('click', '.ui-accordion-header', function() {
+    if($(this).next('.ui-accordion-content').is(':visible')) {
+      $(this).next('.ui-accordion-content').slideUp();
+      $(this).parent('.ui-accordion').addClass('ui-accordion--collapsed');
+    } else {
+      $(this).next('.ui-accordion-content').slideDown();
+      $(this).parent('.ui-accordion').removeClass('ui-accordion--collapsed');
+    }
+  });

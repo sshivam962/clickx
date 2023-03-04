@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+  %body
+    %div{:bgcolor => "#f7f8f9"}
+      %table{:align => "center", :bgcolor => "#fff", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "width:100%;max-width:600px;margin-top:60px;padding-bottom:60px;border-radius:5px;border-spacing:40px 10px;border:2px solid #f3f3f3"}
+        %tr
+          %td{:align => "center", :style => "padding:40px 30px;border-bottom-width:2px;border-bottom-style:solid;border-bottom-color:#f3f3f3;text-align:center"}
+            %img{:alt => "", :src => "http://www.clickx.io/pdf/clickx-logo.png", :type => "fetch"}/
+
+        = yield
+    %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+      %tr
+        %td{:align => "center", :style => "color:#646464;text-align:center;padding:10px 0 3px"}
+          Questions? Call us at #{@agency.phone} today!
+      %tr
+      %tr
+        %td{:align => "center", :style => "color:#646464;text-align:center;padding:3px 0"}
+          © #{Time.now.year} Clickx
+      %tr
+        %td{:align => "center", :style => "text-align:center"}
+          %img{:alt => "", :height => "auto", :src => "http://www.clickx.io/wp-content/themes/clickxposure/images/Clickx-Favicon.png", :width => "25"}/

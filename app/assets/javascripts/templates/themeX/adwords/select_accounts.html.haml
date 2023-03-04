@@ -1,0 +1,29 @@
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Marketing.title-icon>
+    Select Accounts for Ads {{ service | humanize }}
+    %i.fa.fa-info-circle.tooltip-text-icon{'title': 'UTM Builder lets you add parameters to the URLs in your web and email ads to track them easily.'}
+.container-fluid
+  .row
+    .col-xs-12.col-sm-12.col-md-12{ 'st-table': 'accounts', 'st-pipe': 'getAdwordsAccounts' }
+      .panel.panel-default.panel-white
+        .panel-heading
+          .form-group
+            %button.btn.btn-success.pull-right.m-n{ 'ng-click': 'saveAccount()' } Save
+            %input.bg-white.m-n.p-sm.width50.form-control{ 'ng-model': 'search.name',
+            'placeholder': 'Search for accounts' }
+        .panel-body
+          .table-responsive
+            %table.table.table-hover
+              %thead
+                %tr
+                  %th
+                    %b Account Name
+                  %th
+                    %b Customer ID
+              %tbody.content
+                %tr{ 'ng-repeat': 'account in accounts | filter:search track by $index',
+                'ng-class': "(hover ? 'success pointer white' : '') + ' ' + (selected == account ? 'success' : '')", 'ng-mouseenter': "hover = true",
+                'ng-mouseleave': "hover = false", 'ng-click': 'selectMe(account)' }
+                  %td {{ account.name }}
+                  %td {{ account.customer_id }}

@@ -1,0 +1,9 @@
+- content_for :title do
+  Profile Edit
+
+- if themeX?
+  = render 'edit_themeX'
+- elsif current_user.contractor?
+  = render 'network_edit'
+- else
+  = render 'edit'

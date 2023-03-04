@@ -1,0 +1,31 @@
+- content_for :title do
+  Ad Reports
+.header
+  %h1 Reports
+
+.locations
+  %span
+    %h3.rp-business-list-item.row
+      .col-md-12
+        %a.no-underline{href: '/s/reports/client'}
+          %i.glyphicon.glyphicon-stats
+          Client Reports
+  / %span
+  /   %h3.rp-business-list-item.row
+  /     .col-md-12
+  /       %a.no-underline{href: '/users/audit_report'}
+  /         %i.fa.fa-line-chart
+  /         Site Audit Report
+  %span
+    %h3.rp-business-list-item.row
+      .col-md-12
+        %a.no-underline{href: "/s/reports/google_ads"}
+          %i.fa.fa-bar-chart
+          Google Ad Reports
+  %span
+    %h3.rp-business-list-item.row
+      .col-md-12
+        %a.no-underline{href: "/s/reports/facebook_ads"}
+          %i.fa.fa-bar-chart
+          Facebook Ad Reports
+

@@ -1,0 +1,2 @@
+$('#contacts_show').html("<%= escape_javascript render(partial: 'agency/direct_leads/contacts', locals: { contacts: @contacts, direct_lead: @direct_lead })%>");
+$('.bs-lead-contacts-modal-sm1').modal('show');

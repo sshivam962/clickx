@@ -1,0 +1,11 @@
+%li.competitors_list--item{class: dom_id(competition)}
+  %a.competitors_list--link{ href: "/b/competitions/#{competition.id}", toggle: 'tooltip', 'original-title' => 'View competitor insights' }
+    %span.competitors_list--icon
+      %span.img-circle.img-circle--sm{:style => "background-image: url(#{competition.logo});"}
+    %span.competitors_list--name
+      = competition.name
+  - unless demo_login?
+    .competitors_list--buttons
+      = button_to business_client_competition_path(competition.id), method: :delete, remote: true, data: { confirm: "Are you sure you'd like to archive #{competition.name}?", toggle: 'tooltip', 'original-title' => 'Archive'}, class: 'action-btn action-btn--light' do
+        %span.btn-icon
+          %i.fa.fa-trash

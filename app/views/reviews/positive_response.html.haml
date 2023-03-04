@@ -1,0 +1,19 @@
+.page
+  .container
+    .row
+      .col-sm-12
+        #header.aligncenter
+          %h1 Thank You!
+      .col-sm-6.col-sm-offset-3
+        .social
+          .greatness
+            %i.fa.fa-thumbs-up
+          .coupon
+            = image_tag(@location.positive_review_coupon) if @location.positive_review_coupon.present?
+    - if @business.branded?
+      .row
+        .col-sm-8.col-sm-offset-2
+          .powered.clearfix
+            %a.pull-right{:href => "http://clickx.io", target: '_blank'}
+              Powered by
+              %img{src: "#{image_path('Clickx-Logo.svg')}", type: "image/svg+xml"}

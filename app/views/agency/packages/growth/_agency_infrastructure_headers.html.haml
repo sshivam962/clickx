@@ -1,0 +1,41 @@
+- subscription_schedule = current_agency.subscription_schedules.not_started.first
+%th.col-label{"vertical-align" => "top"}
+  .pt-col-content
+- plans.each_with_index do |plan, index|
+  %th.col-package
+    .pt-col-content
+      - if index.eql?(1)
+        .best-seller-badge.fw-m Best Seller
+      .pt-header-caption= plan.key.titleize
+      - if index.eql?(0)
+        .fs-xxs.text-muted Software
+      - else
+        .fs-xxs.text-muted Software + Group Coaching Calls
+      .pt-header-price
+        .striked-price
+          %span.currency-amount{'data-amount' => plan.amount + 500}= number_to_currency(plan.amount + 500)
+          %span> /mo
+        %div
+          %span.currency-amount{'data-amount' => plan.amount}= number_to_currency(plan.amount)
+          %span> /mo
+      %span.plan-label Save 20% Annually
+      .mt-4
+      - if active_subscription.present?
+        - if subscription_schedule.present?
+          - if subscription_schedule.stripe_plan.eql?(plan.stripe_plan)
+            .btn-block.m-n.text-center.p-10.bdr-line.text-info
+              Scheduled for Downgrade on #{subscription_schedule.start_at.strftime('%B %d')}
+          - else
+            - if active_subscription.plan_id.eql?(plan.stripe_plan)
+              .btn-block.m-n.text-center.p-10.bdr-line.text-info
+                Subscribed
+        - elsif active_subscription.plan_id.eql?(plan.stripe_plan)
+          .btn-block.m-n.text-center.p-10.bdr-line.text-info
+            Subscribed
+        - else
+          - if active_subscription.amount < plan.amount && subscription_schedule.blank?
+            = link_to agency_package_subscription_upgrade_path(package: package.key, plan: plan.key), method: :post, data: { confirm: 'Are you sure?' }, class: 'btn btn-raised btn-block btn-lg m-n btn-info', remote: true do
+              Upgrade
+      - else
+        %a.btn.btn-info.btn-raised.btn-block.btn-lg.m-n{href: agency_checkout_path(package: package.key, plan: plan.key)}
+          Get Started

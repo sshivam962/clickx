@@ -1,0 +1,166 @@
+{
+  "organic": [
+    {
+      "domain": "granny.com",
+      "competitor_relevance": 6.25,
+      "common_keywords": 10,
+      "organic_keywords": 78,
+      "organic_traffic": 151,
+      "organic_cost": 622.0
+    },
+    {
+      "domain": "kickboxer.co",
+      "competitor_relevance": 5.42,
+      "common_keywords": 7,
+      "organic_keywords": 65,
+      "organic_traffic": 14,
+      "organic_cost": 35.0
+    },
+    {
+      "domain": "warmachineroxx.com",
+      "competitor_relevance": 4.67,
+      "common_keywords": 8,
+      "organic_keywords": 69,
+      "organic_traffic": 507,
+      "organic_cost": 1552.0
+    },
+    {
+      "domain": "medow.com",
+      "competitor_relevance": 3.49,
+      "common_keywords": 5,
+      "organic_keywords": 120,
+      "organic_traffic": 78,
+      "organic_cost": 462.0
+    },
+    {
+      "domain": "1ogos.com",
+      "competitor_relevance": 3.17,
+      "common_keywords": 15,
+      "organic_keywords": 3510,
+      "organic_traffic": 2201,
+      "organic_cost": 18484.0
+    },
+    {
+      "domain": "hubbet.com",
+      "competitor_relevance": 2.62,
+      "common_keywords": 13,
+      "organic_keywords": 2873,
+      "organic_traffic": 3089,
+      "organic_cost": 36135.0
+    },
+    {
+      "domain": "bleedingedge.com",
+      "competitor_relevance": 2.48,
+      "common_keywords": 8,
+      "organic_keywords": 785,
+      "organic_traffic": 233,
+      "organic_cost": 3896.0
+    },
+    {
+      "domain": "clarify.com",
+      "competitor_relevance": 2.47,
+      "common_keywords": 3,
+      "organic_keywords": 63,
+      "organic_traffic": 8,
+      "organic_cost": 42.0
+    },
+    {
+      "domain": "pazegi.com",
+      "competitor_relevance": 2.34,
+      "common_keywords": 5,
+      "organic_keywords": 1859,
+      "organic_traffic": 330,
+      "organic_cost": 1362.0
+    },
+    {
+      "domain": "cubone.com",
+      "competitor_relevance": 2.23,
+      "common_keywords": 5,
+      "organic_keywords": 895,
+      "organic_traffic": 128,
+      "organic_cost": 248.0
+    }
+  ],
+  "paid": [
+    {
+      "domain": "rosetta.com",
+      "competitor_relevance": 1.3,
+      "common_keywords": 5,
+      "adwords_keywords": 210,
+      "adwords_traffic": 627,
+      "adwords_cost": 2396.0
+    },
+    {
+      "domain": "avositas.com",
+      "competitor_relevance": 1.04,
+      "common_keywords": 4,
+      "adwords_keywords": 27,
+      "adwords_traffic": 54,
+      "adwords_cost": 538.0
+    },
+    { 
+      "domain": "ductior.com",
+      "competitor_relevance": 1.04,
+      "common_keywords": 4,
+      "adwords_keywords": 55,
+      "adwords_traffic": 255,
+      "adwords_cost": 2836.0
+    },
+    {
+      "domain": "google.com",
+      "competitor_relevance": 0.78,
+      "common_keywords": 3,
+      "adwords_keywords": 251777,
+      "adwords_traffic": 6302098,
+      "adwords_cost": 5927259.0
+    },
+    {
+      "domain": "bluepoint.com",
+      "competitor_relevance": 0.52,
+      "common_keywords": 2,
+      "adwords_keywords": 916,
+      "adwords_traffic": 762,
+      "adwords_cost": 6905.0
+    },
+    {
+      "domain": "redysearch.com",
+      "competitor_relevance": 0.52,
+      "common_keywords": 2,
+      "adwords_keywords": 15,
+      "adwords_traffic": 4,
+      "adwords_cost": 35.0
+    },
+    {
+      "domain": "tekaleet.com",
+      "competitor_relevance": 0.52,
+      "common_keywords": 2,
+      "adwords_keywords": 389,
+      "adwords_traffic": 474,
+      "adwords_cost": 7401.0
+    },
+    {
+      "domain": "avalanche.com",
+      "competitor_relevance": 0.26,
+      "common_keywords": 1,
+      "adwords_keywords": 406,
+      "adwords_traffic": 3376,
+      "adwords_cost": 8477.0
+    },
+    {
+      "domain": "dexter.com",
+      "competitor_relevance": 0.26,
+      "common_keywords": 1,
+      "adwords_keywords": 3513,
+      "adwords_traffic": 1886,
+      "adwords_cost": 13702.0
+    },
+    {
+      "domain": "ezio.com",
+      "competitor_relevance": 0.26,
+      "common_keywords": 1,
+      "adwords_keywords": 1082,
+      "adwords_traffic": 7869,
+      "adwords_cost": 106277.0
+    }
+  ]
+}

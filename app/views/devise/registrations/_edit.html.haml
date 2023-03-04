@@ -1,0 +1,13 @@
+.header.no-bottom-border
+  %h1 Change Your Password
+
+.login-form
+  = form_for(resource, as: resource_name, url: registration_path(resource), html: {method: :patch}) do |f|
+    .form-group
+      = f.password_field :current_password, class: 'form-control login width40per', placeholder: 'Current Password', autofocus: true
+    .form-group
+      = f.password_field :password, class: 'form-control login width40per', placeholder: 'New Password'
+    .form-group
+      = f.password_field :password_confirmation, class: 'form-control password width40per', placeholder: 'New Password Confirmation'
+    %button.btn.btn-warning{:type => "submit"} Change Password
+    %a.btn.btn-default{href: profile_path} Back

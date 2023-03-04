@@ -1,0 +1,226 @@
+- content_for :title do
+  Messages | Clickx
+.spacer10
+%a.btn.btn-default.m-0.btn--xs.px-4.pull-right{"data-target": ".import-contacts", "data-toggle": "modal"}
+  %i.fa.fa-arrow-circle-up
+  Import Contacts
+%a.btn.btn-default.m-0.btn--xs.px-4.pull-right{:href => "chat_templates"}
+  %i.fa.fa-arrow-circle-up
+  Message Templates
+.spacer30
+
+.card.bg-white.rounded{"ng-view" => ""}
+  .messenger-wrapper.rounded.mt-4
+    .messenger-row.flex-wrap
+      .messenger-col-left
+        .messenger-messages
+          .messenger-messages-header
+            .d-flex.justify-content-between.align-items-center
+              .col
+                .fs-md.fw-m Recent Chats
+              .col
+                %a.btn.btn-default.m-0.btn--xs.px-4#new_message{"data-target": ".bs-new-message", "data-toggle": "modal"}
+                  %i.fa.fa-plus
+                  New Message
+                = text_field_tag :search_query, '', class: 'form-control search_box hidden', placeholder: 'Search By Name/Num'
+              .col#search_button{style:"cursor:pointer;"}
+                %i.glyphicon.glyphicon-search
+              %a#close_button.hidden{:href => "javascript:void(0)"}
+                %i.fa.fa-times
+          .messenger-messages-list#messages-list
+            = render 'super_admin/chats/messages_list', threads: @threads
+      .messenger-col-right
+        .d-flex.h-100.w-full.align-items-center.justify-content-center.bg-light
+          %h4 No Chat Selected
+
+.modal.overlay.fade.bs-new-message{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-bg{"data-dismiss" => "modal", :type => "button"}
+  .d-flex.align-items-center.justify-content-center.h-100.w-100
+    .modal-dialog{role: 'document'}
+      = form_tag(send_message_super_admin_chats_path, method: :post) do
+        .modal-content.bg-white.p-5.rounded
+          %button.btn-close-overlay{"data-dismiss" => "modal", :type => "button"}
+            %i.fa.fa-times
+          .modal-header.pt-0.px-0
+            %h3.modal-title.regsubt New Message
+          .modal-body.px-0.pb-0
+            .form-group
+              = text_field_tag :name, '', class: 'form-control', placeholder: 'Enter Name (optional)'
+            .form-group
+              = text_field_tag :phone, '', class: 'form-control', placeholder: 'Enter Phone Number with code', required: true
+            .form-group
+              = select_tag 'chat_template', options_for_select(ChatTemplate.all.pluck(:template_name, :id)), include_blank: 'Choose Template', class: 'form-control'
+            .form-group
+              = text_area_tag :message, '', class: 'form-control', placeholder: 'Enter a Message', required: true, rows:'4'
+              .spinner-overlay.spinner-overlay-intro
+            .form-group
+              %a.btn.btn-raised.btn-success.ai_message.hide
+                %i.fa.fa-rocket.white.font-14
+                AI Message
+              = submit_tag 'Send Message', class: 'btn btn-raised btn--dark fs-xs m-0'
+.modal.overlay.fade.import-contacts{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-bg{"data-dismiss" => "modal", :type => "button"}
+  .d-flex.align-items-center.justify-content-center.h-100.w-100
+    .modal-dialog{role: 'document'}
+      = form_tag import_super_admin_chats_path, multipart: true do
+        .modal-content.bg-white.p-5.rounded
+          %button.btn-close-overlay{"data-dismiss" => "modal", :type => "button"}
+            %i.fa.fa-times
+          .modal-header.pt-0.px-0
+            %h3.modal-title.regsubt Import Contacts
+          .modal-body.px-0.pb-0
+            .form-group
+              = file_field_tag :file
+            = submit_tag 'Import', id: 'file_import', class: 'btn btn-raised btn--dark fs-xs m-0', disabled: true
+
+.modal.overlay.fade.bs-select-template{role: "dialog", tabindex: '-1', data: {backdrop: 'false'}}
+  .modal-bg{"data-dismiss" => "modal", :type => "button"}
+  .d-flex.align-items-center.justify-content-center.h-100.w-100
+    .modal-dialog{role: 'document'}
+      .modal-content.bg-white.p-5.rounded
+        %button.btn-close-overlay{"data-dismiss" => "modal", :type => "button"}
+          %i.fa.fa-times
+        .modal-header.pt-0.px-0
+          %h3.modal-title.regsubt Select Template
+        .modal-body.px-0.pb-0
+          .form-group
+            = select_tag 'chat_template_select', options_for_select(ChatTemplate.all.pluck(:template_name, :id)), include_blank: 'Choose Template', class: 'form-control'
+          .form-group
+            = text_area_tag :message_template, '', class: 'form-control', placeholder: 'Selected Message', rows:'4'
+          %a.btn.btn-primary.m-0.btn--xs.px-4#choose_template
+            Select Template
+
+:javascript
+  $('#file').on('change', function(){
+    if( !$(this).val() == '' ) {
+      $('#file_import').removeAttr('disabled')
+    }
+  });
+  $('#phone').on('input', function (event) { 
+    var phone = this.value.replace(/[^\+0-9]/g, '');
+    console.log(phone);
+    if (phone.indexOf('+') == -1) {
+      phone = '+'+phone;
+    }
+    this.value = phone;
+
+  });
+  $('#search_button').on('click', function(){
+    $('#search_button,#new_message').hide();
+    $('#close_button').removeClass('hidden');
+    $('.search_box').removeClass('hidden').focus();
+  });
+  
+  $('#choose_template').on('click', function(){
+    $('.bs-select-template').modal('toggle');
+    var message_template = $('#message_template').val();
+    $('.write_msg').val(message_template);
+  });
+
+  $('#chat_template').on('change', function(){
+    $(".bs-new-message #message").val("")
+    var chat_template_id = $('#chat_template').find(":selected").val();
+    
+    $.ajax({
+      url: "/s/chats/get_chat_template",
+      method: "GET",
+      dataType: 'json',
+      data: { id: chat_template_id },
+      success:function(response){
+        $(".bs-new-message #message").val(response.template_data)
+        $('.ai_message').removeClass('hide');
+
+      }
+    })
+  });
+  
+  $('#chat_template_select').on('change', function(){
+    $("#message_template").val("")
+    var chat_template_id = $('#chat_template_select').find(":selected").val();
+    
+    $.ajax({
+      url: "/s/chats/get_chat_template",
+      method: "GET",
+      dataType: 'json',
+      data: { id: chat_template_id },
+      success:function(response){
+        $("#message_template").val(response.template_data)
+
+      }
+    })
+  });
+
+  $('#search_query').on("keyup", function() {
+    var query = $('#search_query').val().toLowerCase();
+    $.ajax({
+      url: "/s/chats",
+      type: 'get',
+      data: { query: query },
+      dataType: 'script',
+      async: false,
+      success:function(response){}
+    })
+  });
+
+  $('#message').on("keyup", function() {
+    var message = $(".bs-new-message #message").val()
+    if(message.length > 0)
+      $('.ai_message').removeClass('hide');
+    else
+      $('.ai_message').addClass('hide');
+  });
+
+  $('.ai_message').click(function(e){
+    e.preventDefault()
+    $('.spinner-overlay-intro').css('opacity',1).show()
+    var message = $(".bs-new-message #message").val()
+    if(!message){
+      alert("enter message")
+    } 
+    else {
+      $.ajax({
+        url: '/s/chats/create_ai_message',
+        type: 'post',
+        data: {
+          message: message
+        },
+        dataType: 'json',
+        success:function(response){
+          $('.spinner-overlay-intro').css('opacity',0).hide()
+
+          if (typeof response.data.content !== 'undefined' && response.data.content.length > 0) {
+
+            var content = JSON.parse(response.data.content);
+            words = content[0].replace(/\n/g, "");
+            $('.bs-new-message #message').val(words)
+            
+          }
+          
+        }
+      })
+    }
+    
+  })
+
+  function close_search_box() {
+    $.ajax({
+      url: "/s/chats",
+      type: 'get',
+      data: {},
+      dataType: 'script',
+      async: false,
+      success:function(response){
+        $('#new_message,#search_button').show();
+        $('#close_button').addClass('hidden');
+        $('.search_box').addClass('hidden').val('');
+      }
+    })
+  };
+  $('#close_button').on("click", function() {
+    close_search_box();
+  });
+  $('.search_box').focusout(function(){
+    if($(this).val() == ''){
+      close_search_box();
+    }
+  });

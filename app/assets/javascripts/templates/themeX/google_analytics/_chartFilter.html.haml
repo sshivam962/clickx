@@ -1,0 +1,13 @@
+.btn-group
+  %label.btn.btn-sm.grey_button{ "ng-class": "{'active': filterBy == 'date' }" }
+    %input.hidden{ "type": "checkbox", "ng-click": "toggleFilterBy('date')"}
+      Day
+  %label.btn.btn-sm.grey_button{ "ng-class": "{'active': filterBy == 'week' }" }
+    %input.hidden{ "type": "checkbox", "ng-click": "toggleFilterBy('week')" }
+      Week
+  %label.btn.btn-sm.grey_button{ "ng-class": "{'active': filterBy == 'month' }" }
+    %input.hidden{ "type": "checkbox", "ng-click": "toggleFilterBy('month')" }
+      Month
+  %label.btn.btn-sm.grey_button{ "ng-class": "{'active': filterBy == 'year' }" }
+    %input.hidden{ "type": "checkbox", "ng-click": "toggleFilterBy('year')" }
+      Year

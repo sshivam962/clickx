@@ -1,0 +1,23 @@
+.nested-fields
+  %div
+    .icon-box.lg:px-10.md:px-4.text-lg.mb-8
+      .text-2xl.text-dark.mb-3.flex
+        - n = f.index.to_i + 1
+        %span.text-2xl.text-blue.mr-3.count= "#{n}".length == 1 ? "0#{n}" : n
+        = f.text_field :title, class: 'block w-full border px-2 rounded-lg', placeholder: 'Expertise'
+      .editor1
+        = f.cktext_area :description
+      = link_to_remove_association "remove", f
+:javascript
+  $(document).ready(function(){
+    if("#{new_form}" == 'true'){
+      var count = $('span.count').length.toString();
+      if(count.length == 1) {
+        number = '0' + count;
+      }
+      else {
+        number = count;
+      }
+      $('span.count').last().text(number);
+    }
+  });

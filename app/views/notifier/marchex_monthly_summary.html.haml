@@ -1,0 +1,57 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %meta{:charset => "UTF-8"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+
+
+  %body{:bgcolor => "#f7f8f9", :style => "margin:0;padding:0; font-family:'Helvetica Neue', Helvetica, Helvetica, Arial, sans-serif;", :yahoo => ""}
+    %table{:align => "center", :bgcolor => "#fff", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "width: 100%; max-width: 700px; margin-top: 0; padding-bottom: 0; border-radius: 0;  border: 2px solid #f3f3f3;"}
+      %tbody
+        %tr
+          %td{:align => "center", :style => "padding: 40px 30px; text-align: center; border-spacing: 20px 10px;"}
+            %img{:alt => "", style: 'max-height: 35px', :src => "https://s3.amazonaws.com/clickx-images/Clickx-Logo.png", :width => "180"}
+        %tr{:bgcolor => "#f7af30"}
+          %td{:align => "center", :style => "text-align: center;"}
+            %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+              %tbody
+                %tr
+                  %td{:style => "color: #FFF; font-size: 28px; line-height: 28px; font-weight: bold; padding: 20px 0 10px;"}
+                    Monthly Call Analytics Summary
+                %tr
+                  %td{:style => "color: #FFF; font-size: 18px; line-height: 18px; font-weight: bold; padding: 0 0 20px;"}
+                    %small= "#{@start_time} - #{@end_time}"
+
+        %tr
+          %td
+            %table{:bgcolor => "#f7f8f9", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+              %tbody
+                %tr
+                  %td{:style => "color: #646464; font-size: 18px; line-height: 28px; font-weight: bold; padding: 0;"}
+                    %table{:style => "width: 100%; max-width: 680px; margin: 20px auto;font-size: 15px; line-height: 25px; font-weight: normal;"}
+                      %tbody
+                        %tr{:bgcolor => "#fFF"}
+                          %td{:style => "font-family:'Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif;line-height:15px;margin:0;padding:6px 3px;"} Name
+                          %td{:style => "font-family:'Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif;line-height:15px;margin:0;padding:6px 3px"} Call Duration (Mins)
+                        - @biz_statuses.each_with_index do |(biz_id, biz), index|
+                          %tr{:bgcolor => "#{index.odd? ? '#FFF' : ''}"}
+                            %td{:style => "font-size: 13px; color:#6ac341;font-family:'Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif;line-height:13px;margin:0;padding:6px 3px;"}
+                              = biz[:name]
+                            %td{:style => "font-size: 13px; font-family:'Helvetica Neue','Helvetica',Helvetica,Arial,sans-serif;line-height:13px;margin:0;padding:6px 3px"}
+                              = biz[:info]
+
+        %tr
+          %td
+            %table{:bgcolor => "#5ebcea", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+              %tbody
+                %tr
+                  %td{:align => "center", :style => "color: #FFF; text-align: center; padding: 15px 0 5px;"}
+                    %a{:href => "#{ENV['ROOT_URL']}/email_settings", :style => "color: #FFF; font-size: 12px;"} Change Email Settings
+                %tr
+                  %td{:align => "center", :style => "font-size: 12px; color: #FFF; text-align: center; padding: 3px 0;"}
+                    © #{Time.now.year} Clickx • 233 S Wacker Dr. • Suite 8400 • Chicago, IL 60606
+                %tr
+                  %td{:align => "center", :style => "font-size: 12px; text-align: center;"}
+                    %img{:alt => "", :height => "auto", :src => "http://www.clickx.io/wp-content/themes/clickxposure/images/Clickx-Favicon.png", :width => "25"}

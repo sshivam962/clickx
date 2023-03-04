@@ -1,0 +1,316 @@
+.page-heading.mb-n.pb-md
+  %h1 Billing
+  .options
+    %a.btn.btn-white.btn-raised{'ng-click': 'changeCard(false)', 'ng-if': 'current_plan_card_change'}
+      %i.fa.fa-arrow-left.pr-xs
+      Back
+    %a.btn.btn-white.btn-raised{'ng-click': 'removeSelectedNewPlan()', 'ng-if': 'selected_new_plan'}
+      %i.fa.fa-arrow-left.pr-xs
+      Back
+    %a.btn.btn-white.btn-raised{'ng-click': 'removeFreePlan()', 'ng-if': 'free_plan_selected'}
+      %i.fa.fa-arrow-left.pr-xs
+      Back
+.container-fluid{'ng-if': '!current_plan_card_change && !selected_new_plan && !free_plan_selected'}
+  .ui-sortable{"data-widget-group" => "group1"}
+    .row
+      .col-sm-12
+        .panel.panel-default{:style => "visibility: visible; opacity: 1; display: block; transform: translateY(0px);"}
+          .panel-body
+            %main.pricing-page
+              .well
+                %h4.mb-n.mt-n.text-darkblue
+                  Your Current Plan: {{current_subscription.plan_name || 'None'}}
+                  %br
+                  %small.display-inline{'ng-if': "current_subscription"} Your current plan is billed at {{current_subscription.price_text}}
+                  %small.display-inline{'ng-if': 'show_selected_card'}
+                    using card ending in {{show_selected_card.last4}} expires on {{show_selected_card.exp_month}}/{{show_selected_card.exp_year}}.
+                    %a{'ng-click': 'changeCard(true)'} Change
+              .well.pb-n{'ng-if': 'downgraded_subscription || free_subscription'}
+                %h4.mb-n.mt-n.text-darkblue
+                  %small{'ng-if': 'downgraded_subscription'}
+                    Your subscription is scheduled to be downgraded to {{downgraded_subscription.plan_name}} on {{trial_end}}. To cancel this and continue on the current subscription click on the cancel button
+                  %small{'ng-if': 'free_subscription'}
+                    Your subscription is scheduled to be downgraded to Free subscription on {{free_start}}. To cancel this and continue on the current subscription click on the cancel button
+                  %center
+                    %button.btn.btn-warning.btn-sm.btn-raised.card_submit{'ng-click': 'cancelDowngrade()'} Cancel
+              .pricing-container.pt-xl
+                .plan-container.col-sm-4{'ng-if': '!has_costom_plan'}
+                  .plan-content.text-center.ml-n.mr-sm.mb-xxl
+                    %h4.text-center.plan-title.bg-yellow.white.pt.pb.mt-n Free
+                    %h4.text-center.pl-xl.pr-xl
+                      %strong $0 per month
+                    %p.text-default.pt
+                      %strong Key Features
+                    %p.text-muted Growth Tools
+                    .plan-footer.bg-muted.mt
+                      %button.btn.btn-yellow.white{'ng-click': 'selectFree()', 'ng-disabled': 'current_subscription.plan_id == null || free_subscription'} Start
+                .plan-container.col-sm-4{'ng-repeat': 'plan in client_plans', id: "{{plan.id}}"}
+                  .plan-content.text-center.ml-n.mr-sm.mb-xxl
+                    %h4.text-center.plan-title.bg-blue.white.pt.pb.mt-n {{plan.name}} {{plan.id == business.custom_plan_id ? ' (Custom)' : ''}}
+                    %h4.text-center.pl-xl.pr-xl
+                      %strong {{plan.price_text}}
+                    %p.text-default.pt
+                      %strong Key Features
+                    / %p.text-default
+                    /   %strong OR
+                    / %p.text-muted.pl-md.pr-md $0 billed annualy
+                    %p.text-muted{'ng-repeat': 'feature in plan.features', 'ng-if': 'feature.length'} {{feature}}
+                    .plan-footer.bg-muted.mt
+                      %button.btn.btn-blue{'ng-click': 'SetSelectedNewPlan(plan)', 'ng-disabled': '(plan.plan_id == current_subscription.plan_id) || plan.plan_id == downgraded_subscription.plan_id'} Start
+
+
+.container-fluid{'ng-if': 'current_plan_card_change'}
+  .ui-sortable{"data-widget-group" => "group1"}
+    .panel.panel-default{:style => "visibility: visible; opacity: 1; display: block; transform: translateY(0px);"}
+      .panel-body
+        %main.pricing-page
+          .form-horizontal
+            .row.m-n
+              .col-xs-12.col-sm-7.col-md-8.bg-white.no-border.pl-n
+                .panel.panel-default.mb-n
+                  .panel-heading
+                    %h2 Choose your payment method
+                  .panel-body
+                    %form.form-vertical.col-sm-12{"accept-charset" => "UTF-8", name:'addCard', "ng-submit" => "updateCard(new_card, selected_card)", "data-card" => "", "data-card-container" => "#card-container1"}
+                      .card_form{'ng-show': 'cards == null || cards.length == 0'}
+                        .col-md-12
+                          .form-group
+                            %label.control-label{:for => "Name"} Name
+                            %input.form-control.col-sm-5{ :name => "Name", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.name'}
+                        .col-md-12
+                          .form-group
+                            %label.control-label{:for => "fieldname"} Address 1
+                            %input.form-control.col-sm-5{ :name => "Address 1", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.address_line1'}
+                        .col-md-12
+                          .form-group
+                            %label.control-label{:for => "fieldname"} Address 2
+                            %input.form-control{ :name => "Address 2", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.address_line2'}
+                        .col-md-6
+                          .form-group
+                            %label.control-label{:for => "fieldname"} City
+                            %input.form-control.col-sm-5{ :name => "City", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.address_city'}
+                        .col-md-6
+                          .form-group
+                            %label.control-label{:for => "fieldname"} Zip
+                            %input.form-control.col-sm-5{ :name => "Zip", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.address_zip'}
+                        .col-md-6
+                          .form-group
+                            %label.control-label.ml-sm{:for => "fieldname"} Country
+                            %input.form-control.ml-sm{ :name => "Country", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.address_country'}
+                        .col-md-6
+                          .form-group
+                            %label.control-label.ml-sm{:for => "fieldname"} State
+                            %input.form-control.ml-sm{ :name => "State", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.address_state'}
+                        #card-container1
+                          .col-md-12
+                            .form-group
+                              %label.control-label{:for => "fieldname"} Card Number
+                              %input.form-control{:name => "Card Number", :placeholder => "Card number", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.number', "card-number" => ""}
+                          .col-md-6
+                            .form-group
+                              %label.control-label{:for => "fieldname"} Expiry
+                              %input.form-control{:name => "Expiry", :placeholder => "MM/YYYY", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.expiry', "card-expiry" => ""}
+                          .col-md-6
+                            .form-group
+                              %label.control-label.ml-sm{:for => "fieldname"} CVC
+                              %input.form-control.ml-sm{:name => "Cvc", :placeholder => "123", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.cvc', "card-cvc" => ""}
+                        .col-md-12
+                          .form-group
+                            .checkbox.checkbox-inline.checkbox-primary
+                            %label
+                              %input#locabusinessbours{:checked => "checked", :name => "checkboxs1", :type => "checkbox", disabled: true}
+                              \&#160;&#160;I accept the
+                              %a{:href => "http://www.clickx.io/terms/", :target => "_blank"} User Agreement
+                      .card_list{'ng-show': 'cards != null && cards.length != 0'}
+                        %md-input-container
+                          %label.md-no-float.md-container-ignore Cards
+                          %md-select{"ng-model" => "$parent.selected_card", 'ng-change': 'showAddCardForm($parent.selected_card)'}
+                            %md-option{ "ng-repeat" => "card in cards", "ng-value" => "card", 'md-no-asterisk': true, 'ng-selected': 'card.id == $parent.selected_card.id'}
+                              {{card.brand}} ending in {{card.last4}} expires on {{card.exp_month}}/{{card.exp_year}}
+                            %md-option{'value': 'add_card'}
+                              Add card
+
+                      .pull-right
+                        %button.btn.btn-success.btn-raised.btn-label.card_submit{:type => "submit"}
+                          Submit
+                        %a.btn.btn-white.btn-raised.btn-label{'ng-click': 'changeCard(false)'} Cancel
+
+
+              .col-xs-12.col-sm-5.col-md-4.bg-white.pr-n
+                .plan-content.-adjustHeight.text-center.ml-n.mr-sm.mb-xxl
+                  %h4.text-center.plan-title.bg-warning.white.pt.pb.mt-n {{current_plan.name}}
+                  %h4.text-center.pl-xl.pr-xl
+                    %strong {{current_plan.price_text}}
+                  %p.text-default.pt{'ng-if': 'current_plan.features.length > 0'}
+                    %strong Key Features
+                  %p.text-muted{'ng-repeat': 'feature in current_plan.features', 'ng-if': 'feature.length'} {{feature}}
+
+
+.container-fluid{'ng-if': 'selected_new_plan'}
+  .panel.panel-default{:style => "visibility: visible; opacity: 1; display: block; transform: translateY(0px);"}
+    .panel-body
+      / start pricing detail
+      %main.pricing-page
+        .form-horizontal
+          .row.m-n
+            .col-xs-12.col-sm-7.col-md-8.bg-white.no-border.pl-n
+              .panel.panel-default.mb-n
+                .panel-heading
+                  %h2 Choose your payment method
+                .panel-body
+                  %form.form-vertical.col-sm-12{"accept-charset" => "UTF-8", name:'addCard', "ng-submit" => "subscribe(new_card, selected_card)", "data-card" => "", "data-card-container" => "#card-container"}
+                    .card_form{'ng-show': 'cards == null || cards.length == 0'}
+                      .col-md-12
+                        .form-group
+                          %label.control-label{:for => "Name"} Name
+                          %input.form-control.col-sm-5{ :name => "Name", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.name'}
+                      .col-md-12
+                        .form-group
+                          %label.control-label{:for => "fieldname"} Address 1
+                          %input.form-control.col-sm-5{ :name => "Address 1", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.address_line1'}
+                      .col-md-12
+                        .form-group
+                          %label.control-label{:for => "fieldname"} Address 2
+                          %input.form-control{ :name => "Address 2", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.address_line2'}
+                      .col-md-6
+                        .form-group
+                          %label.control-label{:for => "fieldname"} City
+                          %input.form-control.col-sm-5{ :name => "City", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.address_city'}
+                      .col-md-6
+                        .form-group
+                          %label.control-label{:for => "fieldname"} Zip
+                          %input.form-control.col-sm-5{ :name => "Zip", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.address_zip'}
+                      .col-md-6
+                        .form-group
+                          %label.control-label.ml-sm{:for => "fieldname"} Country
+                          %input.form-control.ml-sm{ :name => "Country", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.address_country'}
+                      .col-md-6
+                        .form-group
+                          %label.control-label.ml-sm{:for => "fieldname"} State
+                          %input.form-control.ml-sm{ :name => "State", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.address_state'}
+                      #card-container
+                        .col-md-12
+                          .form-group
+                            %label.control-label{:for => "fieldname"} Card Number
+                            %input.form-control{:name => "Card Number", :placeholder => "Card number", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.number', "card-number" => ""}
+                        .col-md-6
+                          .form-group
+                            %label.control-label{:for => "fieldname"} Expiry
+                            %input.form-control{:name => "Expiry", :placeholder => "MM/YYYY", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.expiry', "card-expiry" => ""}
+                        .col-md-6
+                          .form-group
+                            %label.control-label.ml-sm{:for => "fieldname"} CVC
+                            %input.form-control.ml-sm{:name => "Cvc", :placeholder => "123", 'ng-required': 'cards.length == 0', :type => "text", 'ng-model': 'new_card.cvc', "card-cvc" => ""}
+                      .col-md-12
+                        .form-group
+                          .checkbox.checkbox-inline.checkbox-primary
+                          %label
+                            %input#locabusinessbours{:checked => "checked", :name => "checkboxs1", :type => "checkbox", disabled: true}
+                            \&#160;&#160;I accept the
+                            %a{:href => "http://www.clickx.io/terms/", :target => "_blank"} User Agreement
+                    .card_list{'ng-show': 'cards != null && cards.length != 0'}
+                      %md-input-container
+                        %label.md-no-float.md-container-ignore Cards
+                        %md-select{"ng-model" => "$parent.selected_card", 'ng-change': 'showAddCardForm($parent.selected_card)'}
+                          %md-option{ "ng-repeat" => "card in cards", "ng-value" => "card", 'md-no-asterisk': true, 'ng-selected': 'card.id == $parent.selected_card.id'}
+                            {{card.brand}} ending in {{card.last4}} expires on {{card.exp_month}}/{{card.exp_year}}
+                          %md-option{'value': 'add_card'}
+                            Add card
+
+                    .pull-right
+                      %button.btn.btn-success.btn-raised.btn-label.card_submit{:type => "submit"}
+                        Submit
+                      %a.btn.btn-white.btn-raised.btn-label{'ng-click': 'removeSelectedNewPlan()'} Cancel
+            .col-xs-12.col-sm-5.col-md-4.bg-white.pr-n
+              .plan-content.-adjustHeight.text-center.ml-n.mr-sm.mb-xxl
+                %h4.text-center.plan-title.bg-warning.white.pt.pb.mt-n {{selected_new_plan.name}}
+                %h4.text-center.pl-xl.pr-xl
+                  %strong {{selected_new_plan.price_text}}
+                %p.text-default.pt{'ng-if': 'selected_new_plan.features.length > 0'}
+                  %strong Key Features
+                %p.text-muted{'ng-repeat': 'feature in selected_new_plan.features', 'ng-if': 'feature.length'} {{feature}}
+
+
+.container-fluid{'ng-if': 'free_plan_selected'}
+  .panel.panel-default{:style => "visibility: visible; opacity: 1; display: block; transform: translateY(0px);"}
+    .panel-body
+      %main.pricing-page
+        .form-horizontal
+          .row.m-n
+            .col-xs-12.col-sm-7.col-md-8.bg-white.no-border.pl-n
+              .disabled-item.mb-n
+                .panel.panel-default.mb-n
+                  .panel-heading
+                    %h2 Choose your payment method
+                  .panel-body
+                    .form-vertical.col-sm-12
+                      .card_form{'ng-show': 'cards == null || cards.length == 0'}
+                        .col-md-12
+                          .form-group
+                            %label.control-label{:for => "Name"} Name
+                            %input.form-control.col-sm-5{ :name => "Name", :type => "text", 'ng-model': 'new_card.name'}
+                        .col-md-12
+                          .form-group
+                            %label.control-label{:for => "fieldname"} Address 1
+                            %input.form-control.col-sm-5{ :name => "Address 1", :type => "text", 'ng-model': 'new_card.address_line1'}
+                        .col-md-12
+                          .form-group
+                            %label.control-label{:for => "fieldname"} Address 2
+                            %input.form-control{ :name => "Address 2", :type => "text", 'ng-model': 'new_card.address_line2'}
+                        .col-md-6
+                          .form-group
+                            %label.control-label{:for => "fieldname"} City
+                            %input.form-control.col-sm-5{ :name => "City", :type => "text", 'ng-model': 'new_card.address_city'}
+                        .col-md-6
+                          .form-group
+                            %label.control-label{:for => "fieldname"} Zip
+                            %input.form-control.col-sm-5{ :name => "Zip", :type => "text", 'ng-model': 'new_card.address_zip'}
+                        .col-md-6
+                          .form-group
+                            %label.control-label.ml-sm{:for => "fieldname"} Country
+                            %input.form-control.ml-sm{ :name => "Country", :type => "text", 'ng-model': 'new_card.address_country'}
+                        .col-md-6
+                          .form-group
+                            %label.control-label.ml-sm{:for => "fieldname"} State
+                            %input.form-control.ml-sm{ :name => "State", :type => "text", 'ng-model': 'new_card.address_state'}
+
+                        .col-md-12
+                          .form-group
+                            %label.control-label{:for => "fieldname"} Card Number
+                            %input.form-control{:placeholder => "Card number"}
+                        .col-md-6
+                          .form-group
+                            %label.control-label{:for => "fieldname"} Expiry
+                            %input.form-control{:placeholder => "MM/YYYY"}
+                        .col-md-6
+                          .form-group
+                            %label.control-label.ml-sm{:for => "fieldname"} CVC
+                            %input.form-control.ml-sm{:placeholder => "123"}
+                        .col-md-12
+                          .form-group
+                            .checkbox.checkbox-inline.checkbox-primary
+                            %label
+                              %input#locabusinessbours{:checked => "checked", :name => "checkboxs1", :type => "checkbox", disabled: true}
+                              \&#160;&#160;I accept the
+                              %a{:href => "http://www.clickx.io/terms/", :target => "_blank"} User Agreement
+                      .card_list{'ng-show': 'cards != null && cards.length != 0'}
+                        %md-input-container
+                          %label.md-no-float.md-container-ignore Cards
+                          %md-select{"ng-model" => "$parent.selected_card", 'ng-change': 'showAddCardForm($parent.selected_card)'}
+                            %md-option{ "ng-repeat" => "card in cards", "ng-value" => "card", 'md-no-asterisk': true, 'ng-selected': 'card.id == $parent.selected_card.id'}
+                              {{card.brand}} ending in {{card.last4}} expires on {{card.exp_month}}/{{card.exp_year}}
+                            %md-option{'value': 'add_card'}
+                              Add card
+
+                      .pull-right
+                        %button.btn.btn-success.btn-raised.btn-label.card_submit{:type => "submit"}
+                          Submit
+                        %a.btn.btn-white.btn-raised.btn-label{'ng-click': 'removeFreePlan()'} Cancel
+            .col-xs-12.col-sm-5.col-md-4.bg-white.pr-n
+              .panel.panel-default
+                .panel-heading
+                  %h2 Downgrade to free plan
+                .panel-body
+                  %small
+                    At the end of your subscription cycle your plan will be downgraded to free plan
+                  %button.btn.btn-warning.btn-block.btn-lg.btn-raised.card_submit{'ng-click': 'subscribeToFreePlan()'} End Subscription

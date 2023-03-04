@@ -1,0 +1,8 @@
+- if client.keyword_ranking_service?
+  %a.btn.btn-danger{id:"krd-d-#{client.id}", href: change_keyword_ranking_super_admin_report_path(client.id), data: { remote: true }}
+    Disable
+- else
+  %a.btn.btn-success{id:"krd-s-#{client.id}", href: change_keyword_ranking_super_admin_report_path(client.id), data: { remote: true }}
+    Enable
+%a.btn.btn-default.m-1{id:"krd-s-#{client.id}", href: keywords_export_super_admin_report_path(client.id, format: :csv), target: '_blank'}
+  Export Keywords

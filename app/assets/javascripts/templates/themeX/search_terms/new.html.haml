@@ -1,0 +1,27 @@
+// Create and Edit modal can be used as single modal
+%script{type:"text/ng-template",id:"create-keyword.html"}
+  %md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-compressed
+    %form{'ng-submit': 'create()'}
+      %md-toolbar
+        .md-toolbar-tools
+          %h3.modal-title Add Keyword
+          %span.flex
+          %md-button.md-button.md-icon-button{"ng-click":"closeModal()"}
+            %span.fa.fa-times-circle-o
+      %md-dialog-content
+        .md-dialog-content
+          .form-group.clearfix
+            %label.col-md-12.control-label.m-n{:for => "fieldname"} Name
+            .col-md-12
+              %input.form-control{type: "text", "ng-model" => "keyword.name"}
+          .form-group.clearfix
+            %label.col-md-12.control-label.m-n{:for => "fieldname"} Country
+            .col-md-12
+              %select.form-control.mb-lg{ 'placeholder': 'Select a Country', 'ng-model': 'keyword.locale', 'ng-change': 'setLocation()' }
+                %option{ 'ng-repeat': 'locale in countryList', 'value': '{{locale.locale}}', 'ng-selected': 'locale.locale == business.locale' } {{locale.country}}
+          .form-group.clearfix
+            %label.col-md-12.control-label.m-n{:for => "fieldname"} Location
+            .col-md-12
+              %input.form-control{name: 'city', 'ng-model': 'keyword.city', type: 'text', 'vs-google-autocomplete': 'options'}
+      %md-dialog-actions
+        %input.btn.btn-raised.btn-primary{:type => "submit", :value => "Save"}

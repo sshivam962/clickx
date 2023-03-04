@@ -1,0 +1,50 @@
+- client.locations.each do |location|
+  .row
+    .col-lg-8.col-sm-6
+      .address.mt-4
+        %h4
+          %a.name.marginright20px.bold-font{href: 'javascript:void(0)'}
+            %i.fa.fa-map-marker.color-location
+            = location.name
+          / %a.p-2{"data-title" => "Edit Location", href: "/#/locations/#{location.id}/edit"}
+          /   %i.fa.fa-pencil
+
+          %a.p-2{href: export_csv_super_admin_location_path(location.id), data: {title: 'Export CSV'}}
+            %i.fa.fa-download
+
+          / %a.p-2{"data-title" => "Invalid Listings", href: "/#/locations/#{location.id}/invalid_listings"}
+          /   %i.fa.fa-info-circle
+        .mt-4.mb-5
+
+          .form-group
+            = form_for location, url: super_admin_location_path(location.id), method: :patch, remote: true do |f|
+              %label.display-inline{:for => "business_yext_store_id"} Yext Store ID
+              .d-flex
+                .col-stretch.pr-4
+                  = f.text_field :yext_store_id, class: 'form-control login display-inline width100per', placeholder: 'Yext Store ID'
+                .col-auto
+                  = f.submit 'Save', class: 'btn btn-success'
+          .form-group
+            = form_for location, url: super_admin_location_path(location.id), method: :patch, remote: true do |f|
+              %label.display-inline{:for => "business_bright_local_report_id"} BrightLocal ReviewFlow ID
+              .d-flex
+                .col-stretch.pr-4
+                  = f.text_field :bright_local_report_id, class: 'form-control login display-inline width100per', placeholder: 'BrightLocal Report ID'
+                .col-auto
+                  = f.submit 'Save', class: 'btn btn-success'
+          .form-group
+            = form_for location, url: super_admin_location_path(location.id), method: :patch, remote: true do |f|
+              %label.display-inline{:for => "business_bright_local_campaign_id"} BrightLocal Citation ID
+              .d-flex
+                .col-stretch.pr-4
+                  = f.text_field :bright_local_campaign_id, class: 'form-control login display-inline width100per', placeholder: 'BrightLocal Campaign ID'
+                .col-auto
+                  = f.submit 'Save', class: 'btn btn-success'
+        %p.ng-binding
+          = location.loc_address
+        %p.ng-binding
+          = location.phone
+        %a.color-location.ng-binding{href: location.website, target: '_blank'}
+          = location.website
+  %hr
+

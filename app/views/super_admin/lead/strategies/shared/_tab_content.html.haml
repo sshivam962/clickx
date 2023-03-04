@@ -1,0 +1,38 @@
+.panel-group.mt-md
+  %table.table.table-bordered.users.reports.table-condensed.table-hover.table-clickable
+    %thead
+      %th{width: '25%'} Name
+      %th{width: '20%'} Company
+      %th{width: '20%'} Agency
+      %th{width: '20%'} Domain
+      %th{width: '15%'} Created On
+
+    %tbody
+      - @leads[status.to_sym].each do |lead|
+        %tr.load_strategies{data: {target: "##{status}_#{dom_id(lead)}", toggle: 'collapse', id: lead.id, status: status}, id: dom_id(lead)}
+          %td
+            = lead.full_name
+            - plan_key = lead.agency.growth_plan_key
+            - if plan_key.present?
+              %span.pull-right
+                %i.fa.fa-money{style: "color: #{strategy_money_color(plan_key)};", title: plan_key.titleize}
+            - if lead.lead_strategies.pluck(:created_by).include?('agency_admin')
+              %span.pull-right.pr-sm{style: 'color: #bad531;'}
+                %i.fa.fa-check-circle-o
+          %td
+            = lead.company
+          %td
+            = lead.agency.name
+          %td
+            %a.text-info{href: "//#{without_scheme(lead.domain)}", target: '_blank'}
+              = lead.domain
+          %td
+            = lead.created_at.strftime("#{lead.created_at.day.ordinalize} %b %Y")
+            %b (#{(Time.now.to_date - lead.created_at.to_date).to_i} days)
+        %tr.collapse{id: "#{status}_#{dom_id(lead)}", class: "lead_body_#{lead.id}"}
+          = render 'super_admin/lead/strategies/shared/list', lead: lead
+%span
+  = will_paginate @leads[status.to_sym], params: {status: status, name: params[:name], agency: params[:agency]}
+
+:javascript
+  $('.pagination a').attr('data-remote', 'true');

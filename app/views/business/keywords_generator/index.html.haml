@@ -1,0 +1,46 @@
+- videoid = 'iv67yl51ag'
+.pb-md.page-heading.no-margin-bottom
+  %h1
+    %i.clickx-icon-Search.title-icon
+    Keyword Generator
+
+    %span.wistia_embed{:class => "popover=true popoverContent=link wistia_async_#{videoid}", :style => "display:inline;position:relative"}
+      %a{:href => "#"}
+        %i.fa.fa-info-circle.tooltip-text-icon{'title': 'This tool is useful to create long-tail keyword list based on keyword combination in each position'}
+.container-fluid
+  .row
+    .col-md-12
+      .tab-container
+        .panel.kw-gen
+          .panel-body
+            %h4 Enter upto 5 sets of keywords and we'll generate all combinations for you
+            = form_with url: generate_business_keywords_generator_index_path, method: :post, local: false do |f|
+              .row
+                .form-group.mt-n
+                  .col-md-2
+                    %label.control-label Keyword List 1
+                    = f.text_area :keywords, class: 'form-control', rows:5, multiple: true
+                  .col-md-2
+                    %label.control-label Keyword List 2
+                    = f.text_area :keywords, class: 'form-control', rows:5, multiple: true
+                  .col-md-2
+                    %label.control-label Keyword List 3
+                    = f.text_area :keywords, class: 'form-control', rows:5, multiple: true
+                  .col-md-2
+                    %label.control-label Keyword List 4
+                    = f.text_area :keywords, class: 'form-control', rows:5, multiple: true
+                  .col-md-2
+                    %label.control-label Keyword List 5
+                    = f.text_area :keywords, class: 'form-control', rows:5, multiple: true
+                  .col-md-2
+                    = f.submit 'Generate', class: 'btn btn-warning'
+
+  #generated_keywords
+
+:javascript
+  function initAutocomplete(country = "us") {
+    var input = document.getElementById('autocomplete');
+    var autocomplete = new google.maps.places.Autocomplete(input, {
+      componentRestrictions: {'country': [country]}
+    });
+  }

@@ -1,0 +1,94 @@
+- content_for :title do
+  Users | Clickx
+
+.page-content
+  .page-heading.no-margin-bottom.mb-4
+    .d-flex.justify-content-between 
+      .col
+        %h1
+          %i.clickx-icon-user-management.title-icon>
+          Users
+      .col
+        - klass = 'disabled' if current_agency.user_limit_exceeded?
+        %a.btn.btn-white.btn-raised{href: new_agency_user_path, class: klass}
+          %i.fa.fa-plus.pr-xs
+          Add New User
+
+.container-fluid
+  .row
+    .col-xs-12
+      .panel.panel-teal
+        .panel-heading
+        .panel-body.no-padding
+          %table.table.table-striped
+            %thead
+              %tr
+                %th #
+                %th Name
+                %th Email
+                %th Invitation Status
+                %th Invitation Sent
+                %th Agency Admin
+                %th Last Seen
+                %th Actions
+            %tbody
+              - @users.each.with_index(1) do |user, index|
+                %tr
+                  %td= index
+                  %td= user.name
+                  %td= user.email
+                  %td
+                    - if user.invitation_accepted?
+                      Accepted
+                    - else
+                      = link_to resend_invitation_agency_user_path(user), method: :put, class: 'btn btn-info btn-raised btn-xs m-n' do
+                        %i.fa.fa-paper-plane
+                        Resend Invitation
+                  %td
+                    - if user.invitation_sent_at.present?
+                      = "#{time_ago_in_words(user.invitation_sent_at)} ago"
+
+                  %td
+                    .styled-checkbox
+                      %input.set_agency_super_admin{id: "agency_super_admin_#{user.id}", type: "checkbox", checked: user.agency_super_admin, data: {id: user.id}}
+                      .styled-checkbox-label
+                        %span
+                        %label{for: "agency_super_admin_#{user.id}"}
+                          &nbsp;
+
+                  %td
+                    %span
+                      - if user.last_seen.present?
+                        = succeed ' ago' do
+                          = time_ago_in_words(user.last_seen)
+                      - else
+                        N/A
+                  %td
+                    = link_to edit_agency_user_path(user), class: 'btn btn-warning btn-raised btn-xs m-n' do
+                      %i.fa.fa-edit
+                      .ripple-container
+                    &nbsp;
+                    - if current_user.id != user.id
+                      = link_to agency_user_path(user), method: :delete, class: 'btn btn-danger btn-raised btn-xs m-n', 'data-confirm': 'Are you sure you want to delete this user?' do
+                        %i.fa.fa-close
+                        .ripple-container
+        .panel-footer
+          .center
+            = will_paginate @users
+:javascript
+  $('.set_agency_super_admin').click(function() {
+    id = $(this).data('id')
+    checkbox = $('#set_agency_super_admin' + id)
+    checked = this.checked
+    url = '/a/users/' + id + '/set_agency_super_admin'
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: {agency_super_admin: checked},
+      success: function(response) {
+        if(response.status != 200){
+          checkbox.prop("checked", !checked);
+        }
+      }
+    });
+  });

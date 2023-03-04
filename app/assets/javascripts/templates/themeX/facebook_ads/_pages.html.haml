@@ -1,0 +1,31 @@
+.row
+  .col-md-12{ 'ng-if': 'page_error'}
+    %p.text-danger.text-center {{page_error}}
+  .col-md-12{ 'ng-if': 'pages'}
+    .panel.panel-default
+      .panel-heading
+        %h2 Pages
+      .panel-body
+        .row
+          .col-sm-3.text-center.mb-md{'ng-repeat': 'page in pages track by $index' }
+            %figure.social-btn.active{ 'ng-click': 'getPageDetails(page)' }
+              %img.img-circle{ 'alt': 'profile img', 'ng-src': '{{ pageIcon }}' }
+              %figcaption {{ page.name }}
+  .col-md-12{ 'ng-show': 'details' } 
+    .panel.panel-default
+      .panel-heading
+        %h2 Page Details
+      .panel-body
+        .row
+          .col-md-6
+            %table.table.table-hover
+              %tbody
+                %tr
+                  %td Impressions
+                  %td.pull-right {{details.impressions}}
+                %tr
+                  %td Likes
+                  %td.pull-right {{details.page_likes}}
+                %tr
+                  %td Engagements
+                  %td.pull-right {{details.engagements}}

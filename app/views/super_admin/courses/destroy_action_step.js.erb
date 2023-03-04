@@ -1,0 +1,6 @@
+<% if @action_step.errors.present? %>
+  toastr.error("<%= @action_step.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success("Action Step deleted");
+  $("#action_step_<%= @action_step.id%>").remove();
+<% end %>

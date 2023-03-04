@@ -1,0 +1,22 @@
+%md-dialog.modal-dialog.clx-modal.modal-darkstone-blue-bg.modal-lg.modal-compressed{ 'aria-label': 'Facebook Ad Integration' }
+  .modal-header
+    %button.close{ 'aria-hidden': 'true', 'ng-click': 'close()' }
+      %span.fa.fa-times-circle-o
+    %h2.modal-title Facebook Ads
+  %md-dialog-content.mt-n.mb-n
+    .modal-body
+      .row
+        .col-md-12{ 'ng-if': 'is_loading' }
+          .tab-container
+            .tab-content
+              %h4.text-muted.text-center
+                {{ error?  error : 'Loading...' }}
+        .col-md-12.text-center
+          .row
+            .col-sm-4.min-height110.text-center.mb-md{'ng-repeat': 'ad_account in ad_accounts track by $index' }
+              %figure.social-btn{'ng-class': "{'active' : ad_account.is_selected}", 'ng-click': 'pickThisAccount(ad_account)' }
+                %img.img-circle{ 'alt': 'profile img', 'ng-src': "#{image_path 'integrations/fb_page_logo.png'}" }
+                %figcaption {{ ad_account.name }}
+  %md-dialog-actions{'layout':'row'}
+    %button.btn.btn-raised.btn-danger{ 'ng-click': 'disconnectAccount()' } Disconnect
+    %button.btn.btn-info.btn-raised{ 'ng-click': 'close()' } Close

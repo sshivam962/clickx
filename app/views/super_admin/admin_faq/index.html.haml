@@ -1,0 +1,17 @@
+- content_for :title do
+  Admin FAQ | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1
+      Admin FAQ
+
+  .container-fluid
+    .panel-group.mt-md
+      - @admin_faqs.each do |faq|
+        .panel.panel-default
+          %a{"data-toggle" => "collapse", :href => "#collapse#{faq.id}"}
+            .panel-heading
+              %h2= faq.question
+          .collapse{id: "collapse#{faq.id}"}
+            .panel-body
+              %p= faq.answer.html_safe

@@ -1,0 +1,19 @@
+- if current_user.present? && !current_user.super_admin?
+  %script{src: "https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js", type: "text/javascript"}
+  :javascript
+    FreshWidget.init("",
+      {
+        "queryString": "&widgetType=popup&screenshot=no&searchArea=no&helpdesk_ticket[requester]=#{current_user.email}",
+        "utf8": "&#x2713;",
+        "widgetType": "popup",
+        "buttonType": "text",
+        "buttonText": "Support",
+        "buttonColor": "white",
+        "buttonBg": '#802929',
+        "alignment": "2",
+        "offset": "235px",
+        "formHeight": "500px",
+        "screenshot": "no",
+        "url": "https://clickx.freshdesk.com"
+      }
+    );

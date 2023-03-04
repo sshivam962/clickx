@@ -1,0 +1,71 @@
+- package_addons = @package.addons
+= form_tag agency_bundle_subscribe_package_path(package: @package.key), method: :post, remote: true, id: 'new_package_subscription_form' do
+  - charge_plans = @package.bundle_plans.select(&:charge?)
+  - recurring_plans = @package.bundle_plans.select(&:subscription?)
+  - white_glove_plan = @package.white_glove_plan
+  - total_price = @package.bundle_plans.sum(&:amount).to_i + recurring_plans.sum(&:onetime_charge).to_i
+  = hidden_field_tag :basic_total, total_price
+  = hidden_field_tag :package, @package.key
+  = hidden_field_tag :expedited_onboarding_fees, @package.implementation_fee
+  = hidden_field_tag :white_glove_fees, white_glove_plan&.amount
+  = hidden_field_tag :business_id
+  = hidden_field_tag :card_id
+  = hidden_field_tag :funnel_platform
+  .l-com-info.pt-n
+    %h4
+      = @package.name
+  .l-com-info.pt-n
+    %h4
+      = number_to_currency(recurring_plans.sum(&:amount), precision: 0)
+      %span> /mo
+      %small{style: 'display:inline'}
+        = "(#{number_to_currency(recurring_plans.sum(&:onetime_charge), precision: 0)} One-Time Implementation Fee)"
+      - if charge_plans.present?
+        = "+ #{number_to_currency(charge_plans.sum(&:amount), precision: 0)}"
+  - if @package.implementation_fee || @package.white_glove_service_enabled?
+    %span
+      .l-com-info.pt-n
+        - if @package.white_glove_service_enabled?
+          %h4
+            %label.pure-material-checkbox
+              = check_box_tag :white_glove_service, nil, false, class: 'bundle_payment_checks'
+              %span
+                = "White-Glove™ Service: #{number_to_currency(white_glove_plan&.amount, precision: 0)}/mo"
+        - if @package.implementation_fee
+          %h4
+            %label.pure-material-checkbox
+              = check_box_tag :expedited_onboarding, nil, false, class: 'bundle_payment_checks'
+              %span
+                = "Expedited Onboarding: #{number_to_currency(@package.implementation_fee, precision: 0)}"
+        - if @package.white_glove_service_enabled?
+          - addon = Plan.find_by(package_type: 'addons', key: 'kickoff_call_with_client')
+          - if addon.present?
+            %h4
+              = hidden_field_tag addon.key, addon.amount
+              %label.pure-material-checkbox
+                = check_box_tag "addons[]", addon.id, addons.include?(addon), class: 'bundle_payment_checks addon_plans', id: addon.key, data: {amount: addon.amount}
+                %span
+                  - if addon.charge?
+                    = "#{addon.name}: #{number_to_currency(addon.amount, precision: 0)}"
+                  - else
+                    = "#{addon.name}: #{number_to_currency(addon.amount, precision: 0)}/mo"
+  - if package_addons.present?
+    %span
+      - package_addons.each do |addon|
+        .l-com-info.pt-n
+          = hidden_field_tag addon.key, addon.amount
+          %h4
+            %label.pure-material-checkbox
+              = check_box_tag "addons[]", addon.id, addons.include?(addon), class: 'bundle_payment_checks addon_plans', id: addon.key, data: {amount: addon.amount}
+              %span
+                - if addon.charge?
+                  = "#{addon.name}: #{number_to_currency(addon.amount, precision: 0)}"
+                - else
+                  = "#{addon.name}: #{number_to_currency(addon.amount, precision: 0)}/mo"
+
+  %span
+    .l-com-info.pt-n
+      %h4
+        Total Amount Due Today:
+        %span.total_amount_due
+          = " #{number_to_currency(total_price, precision: 0)}"

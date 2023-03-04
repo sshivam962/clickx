@@ -1,0 +1,13 @@
+= render 'page_header'
+
+.container-fluid
+  %div
+    .row
+      .col-md-12
+        = render 'tab_menu', active_tab: 'campaign'
+
+      .col-md-12
+        .tab-content.campaign
+          = render 'business/google_ads/campaigns', data: @ads_data
+
+:javascript

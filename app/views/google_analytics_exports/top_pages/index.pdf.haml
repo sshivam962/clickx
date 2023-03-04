@@ -1,0 +1,29 @@
+%html
+  %head
+    %h1 Top pages
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+    %body
+      %table-responsive
+        %table.table.table-bordered.table-vam.table-left
+          %thead
+            %th Top Pages
+            %th Session
+            %th Page Views
+            %th Avg. Session Duration
+            %th Data Hub Activities
+            %th Pages/Session
+          %tbody
+            - @top_data.table_data.each do |top_page|
+              %tr
+                %td.align-center
+                  = top_page.site
+                %td.align-center
+                  = top_page.sessions
+                %td.align-center
+                  = top_page.page_views
+                %td.align-center
+                  = top_page.avg_session
+                %td.align-center
+                  = top_page.data_hub
+                %td.align-center
+                  = top_page.page_per_session

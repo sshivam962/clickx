@@ -1,0 +1,46 @@
+= form_tag agency_settings_payments_path(plan: @plan.key), method: :post, remote: true do
+  .col-lg-6.col-md-6.col-sm-12.col-xs-12.pl-n
+    .panel.panel-default
+      .panel-heading
+        %h2 Package Details
+      .panel-body#plan_details
+        .l-com-info.pt-n
+          %h4
+            = @plan[:name]
+        .l-com-info.pt-n
+          %h4
+            = "Price: #{plan_price(@plan)} + #{number_to_currency(@plan.onetime_charge, precision: 0)}/one-time"
+  .col-lg-6.col-md-6.col-sm-12.col-xs-12.add_card_form.pr-n
+    .panel.panel-default
+      .panel-heading
+        %h2 Payment method
+      .panel-body
+        .card_list
+          %md-input-container
+            %label.md-no-float.md-container-ignore Cards
+            = select_tag "selected_card", options_for_select(card_collection(@cards), @default_card), class: 'form-control'
+        #add_card_form
+          - if @cards.blank?
+            = render 'agency/cards/shared/new'
+        %input.btn.btn-warning.btn-block.btn-lg.btn-raised.card_submit{:type => "submit", :value => "Pay Now", data: {disable_with: "Processing..."}}
+          %p.order-summary-bnf
+            %i.material-icons.secuicon> lock
+            Secure Checkout
+:javascript
+  $('#selected_card').on('change', function (e) {
+    var optionSelected = $("option:selected", this);
+    var valueSelected = this.value;
+    if(valueSelected == 'add_card'){
+      $.ajax({
+        url: "/a/package_subscriptions/new_card",
+        type: 'get',
+        data: {},
+        dataType: 'json',
+        success:function(response){
+          $('#add_card_form').html(response.data)
+        }
+      })
+    }else{
+      $('#add_card_form').html('')
+    }
+  });

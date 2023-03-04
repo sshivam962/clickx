@@ -1,0 +1,41 @@
+%html
+  %head
+    %h1 Ranking position Changes
+    = wicked_pdf_stylesheet_link_tag 'wicked_pdf'
+  %body
+    %table-responsive
+      %table.table.table-bordered.table-vam.table-left{style: 'table-layout: fixed'}
+        %thead
+          %th{style: "width: 15% !important;"} Title
+          %th{style: "width: 20% !important;"} Link
+          %th{style: "width: 30% !important;"} Description
+          %th{style: "width: 8% !important;"} Rank
+          %th.align-center
+            Last
+            %br
+              7 Days
+          %th.align-center
+            Last
+            %br
+              14 Days
+          %th.align-center
+            Last
+            %br
+              30 Days
+        %tbody
+          - @search_term.latest_rankings.each do |ranking|
+            %tr
+              %td.align-center{style: 'word-wrap: break-word;'}
+                = ranking.title
+              %td.align-center{style: 'word-wrap: break-word;'}
+                = ranking.href
+              %td.align-center{style: 'word-wrap: break-word;'}
+                = ranking.description
+              %td.align-center
+                = ranking.rank
+              %td.align-center
+                = ranking.last_7_days
+              %td.align-center
+                = ranking.last_14_days
+              %td.align-center
+                = ranking.last_30_days

@@ -1,0 +1,34 @@
+#calls-list
+  .col-md-12
+    %hr
+    .table-responsive
+      %table.table.table-bordered.table-hover
+        %thead
+          %tr.info
+            %th{style: "width:20px;"}
+            %th Caller
+            %th Caller Name
+            %th Campaign
+            %th Time
+            %th Duration
+            %th Status
+        %tbody
+          - @calls.each do |call|
+            %tr
+              %td
+                = link_to show_call_details_business_call_analytic_path(call.call_id), class: 'btn m-n btn-inverse btn-raised btn-xs', id: "plus_button_#{call.call_id}", remote: true do
+                  %i.fa.fa-plus
+                %button.minus-button.btn.m-n.btn-inverse.btn-raised.btn-xs.hidden{ id: "minus_button_#{call.call_id}" }
+                  %i.fa.fa-minus
+              %td #{call.caller}
+              %td #{call.caller_name}
+              %td #{call.campaign}
+              %td #{call.time}
+              %td #{call.duration}
+              %td #{call.status}
+            %tr.collapse_container_invidividual{ id: "collapse_container_#{call.call_id}" }
+
+    .ui-2020
+      .row.pagination-wrapper
+        .pagination
+          = will_paginate @calls

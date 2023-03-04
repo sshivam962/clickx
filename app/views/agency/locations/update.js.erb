@@ -1,0 +1,5 @@
+<% if @location.errors.present? %>
+  toastr.error("<%= @location.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success("Location linked");
+<% end %>

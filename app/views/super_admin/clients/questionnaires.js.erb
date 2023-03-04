@@ -1,0 +1,2 @@
+$('#modal_container').html("<%= escape_javascript render( partial: 'super_admin/clients/shared/questionnaires', locals: { questionnaires: @questionnaires, client: @client }) %>");
+$('#client-questionnaire-links-modal').modal('show')

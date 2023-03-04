@@ -1,0 +1,60 @@
+%p.clx-text.text-color-accent-red.text-center{ 'ng-if': '!backlinkEnable' }
+  No Data Available
+.panel.panel-default{'st-table':'backlinks', 'st-pipe':'stTableServer',
+  'trigger-st-table-after-events':'', 'ng-show': 'backlinkEnable' }
+  .panel-heading.bg-white.pt-sm
+    %h4.inlineb.f-w-md
+      Backlinks
+      %span.text-info {{page_uri | urlPath}}
+  %hr.mt-xs.mb-md.mr-md.ml-md
+  .panel-body.p-n
+    .col-md-12
+      .col-sm-12.p-n.mb-lg
+        .inlineb.mt-sm
+          %a.text-warning.ml-md {{totalBacklinkSize}} Backlinks
+        .dropdow.inlineb.pull-right
+          %h4.text-left.inlineb.mr-md
+            %small{ 'st-summary': '', 'number-Of-rows': 'st_per_page' }
+          %button.btn.btn-default.m-n.btn-raised.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+            {{limit_backlink_rows}}
+            %span.caret
+          %ul.dropdown-menu
+            %li.p-sm
+              %a{ 'ng-click': 'limit_backlink_rows = totalBacklinkSize' } All
+            %li.p-sm
+              %a{ 'ng-click': 'limit_backlink_rows = 10' } 10
+            %li.p-sm
+              %a{ 'ng-click': 'limit_backlink_rows = 20' } 20
+            %li.p-sm
+              %a{ 'ng-click': 'limit_backlink_rows = 50' } 50
+      .col-sm-12.p-n
+        .table-responsive
+          %table.table.table-hover.table-vam.table-striped.text-muted
+            %thead
+              %tr
+                %th{:width => "30"}
+                %th.f-w-md
+                  %small SOURCE
+                %th.f-w-md
+                  %small TRUST FLOW
+                %th.f-w-md
+                  %small CITATION FLOW
+                %th.f-w-md
+                  %small LINK TYPE
+                %th.f-w-md
+                  %small FIRST INDEXED
+                %th.f-w-md
+                  %small LAST SEEN
+            %tbody
+              %tr{ 'ng-repeat': 'backlink in backlinks'}
+                %td {{(($index + (paginationStart || 0)) +1)}}.
+                %td
+                  %a.text-info.block{ 'ng-href': '{{backlink.SourceURL}}', 'target': '_blank' }
+                    {{backlink.SourceURL}}
+                %td {{backlink.SourceTrustFlow}}
+                %td {{backlink.SourceCitationFlow}}
+                %td {{backlink.LinkType}}
+                %td {{backlink.FirstIndexedDate}}
+                %td {{backlink.LastSeenDate}}
+  .panel-footer.width100.p-sm
+    %div.content-middle{"st-pagination": "","st-items-by-page": "limit_backlink_rows"}

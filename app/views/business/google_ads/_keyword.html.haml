@@ -1,0 +1,135 @@
+.row
+  .col-md-12
+    .tab-container
+      %ul.nav.panel-warning.nav-tabs{:style => "background: #F44336;"}
+        %li.active
+          %a{"data-toggle":"tab", 'data-target': "#ppc-clicks", id: "click_id", 'title': 'Number of times a user clicks on the headline of your Ad'} Clicks
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#ppc-impressions", id: "impression_id" , 'title': 'Each time your ad is shown on a search result page or other site on the Google Network'} Impressions
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#ppc-cost", id: "cost_id", 'title': 'Total costs that were incurred for PPC ads'} Cost
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#ppc-avg-cost", id: "avg_cost_id", 'title': 'Average costs that were incurred for PPC ads'} Avg. Cost
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#ppc-ctr", id: "ctr_id", 'title': 'Percent of clicks received on your PPC ads to that of impressions'} CTR
+        %li
+          %a{"data-toggle":"tab", 'data-target': "#ppc-conversions", id: "conversions_id" , 'title': 'Shows you what happens after a customer clicks on your ads – whether they purchased a product, signed up for your newsletter, called your business, or submitted a form'} Conversions
+      .tab-content
+        #ppc-clicks.tab-pane.active
+          .panel-body
+            .centered
+              #clicks_keyword_chart
+        #ppc-impressions.tab-pane
+          .panel-body
+            .centered
+              #impressions_keyword_chart
+        #ppc-cost.tab-pane.active
+          .panel-body
+            .centered
+              #cost_keyword_chart
+        #ppc-avg.tab-pane
+          .panel-body
+            .centered
+              #avg_cost_keyword_chart
+        #ppc-ctr.tab-pane.active
+          .panel-body
+            .centered
+              #ctr_keyword_chart
+        #ppc-conversions.tab-pane
+          .panel-body
+            .centered
+              #conversions_keyword_chart
+
+.row
+  .col-md-12
+    .tab-container
+      .tab-content
+        .table-responsive
+          %table#keyword_table.table.table-hover.table-bordered.table-vam.mb-5
+            %thead
+              %tr
+                %th.vam{style: "padding-right:190px;"}
+                  %u.help_pointer{'title': 'The PPC keywords that are driving traffic to your site'}
+                    Keyword
+                %th.text-center
+                  %u.help_pointer{'title': 'The type of PPC keywords that are driving you traffic via PPC ads'}
+                    Match Type
+                %th.text-center
+                  %u.help_pointer{'title': 'Number of clicks you received through PPC ads by the given keywords'}
+                    Clicks
+                %th.text-center
+                  %u.help_pointer{'title': 'Number of views your PPC ads got from the given keywords'}
+                    Impressions
+                %th.text-center
+                  %u.help_pointer{'title': 'Average cost incurred for peoples ads for the given keywords'}
+                    Avg. Cost
+                %th.text-center
+                  %u.help_pointer{'title': 'Percent of clicks your PPC ads got to that of impressions it received for the given'}
+                    CTR
+                %th.text-center
+                  %u.help_pointer{'title': 'Number of people who converted after clicking on your PPC ads for the given keywords'}
+                    Conversion
+                %th.text-center
+                  %u.help_pointer{'title': 'Cost per click incurred for PPC ads'}
+                    Cost
+                %th.text-center
+                  %u.help_pointer{'title': 'Percent of impressions your PPC ad received to that of total impressions received by all the ads in Google SERP for the given keywords','title-direction': 'left' }
+                    Search.Imp.Share
+            %tbody
+              - data[:total_details].each do |data|
+                %tr
+                  %td
+                    #{data[:keyword]}
+                    %add-remove-keywords{"keyword":"keyword"}
+                  %td.text-center #{data[:match_type]}
+                  %td.text-center #{data[:clicks]}
+                  %td.text-center #{data[:impressions]}
+                  %td.text-center $#{data[:average_cost]}
+                  %td.text-center #{data[:ctr]}
+                  %td.text-center #{data[:conversions]}
+                  %td.text-center $#{data[:cost]}
+                  %td.text-center #{data[:search_impression_share]}%
+
+
+:javascript
+  $(document).ready( function () {
+    var table = $('#keyword_table').DataTable({
+      "pageLength": 25
+    });
+    $('#keyword_table_filter input').on('keyup change', function () {
+      table.column(0).search($(this).val()).draw();
+    });
+
+    this_period = JSON.parse('#{raw(data[:this_period].to_json)}')
+    last_period = JSON.parse('#{raw(data[:last_period].to_json)}')
+
+    line_chart_data = GoogleAds.performance(
+      this_period,
+      last_period
+    );
+    $('#clicks_keyword_chart').highcharts(line_chart_data[0]);
+
+    $('#click_id').on('click', function() {
+      $('#clicks_keyword_chart').highcharts(line_chart_data[0]);
+    })
+
+    $('#impression_id').on('click', function() {
+      $('#impressions_keyword_chart').highcharts(line_chart_data[1]);
+    })
+
+    $('#cost_id').on('click', function() {
+      $('#cost_keyword_chart').highcharts(line_chart_data[2]);
+    })
+
+    $('#avg_cost_id').on('click', function() {
+      $('#avg_cost_keyword_chart').highcharts(line_chart_data[3]);
+    })
+
+    $('#ctr_id').on('click', function() {
+      $('#ctr_keyword_chart').highcharts(line_chart_data[4]);
+    })
+
+    $('#conversions_id').on('click', function() {
+      $('#conversions_keyword_chart').highcharts(line_chart_data[5]);
+    })
+  });

@@ -1,0 +1,64 @@
+.container.mx-auto.px-4
+  .card.bg-white.shadow-xl.p-5.sm:p-8.rounded-xl.my-12
+    = form_with url: stripe_connect_network_settings_path, id: 'connect_stripe', local: false do |f|
+      .pagge-middle
+        .col.text-center.lg:text-left.flex-1.lg:pl-8.py-6
+          .text-lg.color-dark-blue.font-medium Date Of Birth
+          .grid.sm:grid-cols-2.gap-4.pt-5.flex-wrap
+            %div{"class" =>"col"}
+              = label_tag 'Day'
+              = number_field_tag 'day', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Day', min: 1, required: true
+            %div{"class" =>"col"}
+              = label_tag 'Month'
+              = number_field_tag 'month', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Month', min: 1, required: true
+            %div{"class" =>"col"}
+              = label_tag 'Year'
+              = number_field_tag 'year', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Year', min: 1, required: true
+        .col.text-center.lg:text-left.flex-1.lg:pl-8.py-6
+          .text-lg.color-dark-blue.font-medium Social Security Number
+          .grid.sm:grid-cols-2.gap-4.pt-5.flex-wrap
+            %div{"class" =>"col"}
+              = number_field_tag 'ssn', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'SSN', min: 0, required: true
+        .col.text-center.lg:text-left.flex-1.lg:pl-8.py-6
+          .text-lg.color-dark-blue.font-medium Industry
+          .grid.sm:grid-cols-2.gap-4.pt-5.flex-wrap
+            %div{"class" =>"col"}
+              = select_tag 'industry', options_for_select(industries), class: 'font-light leading-6 block w-full border px-2 rounded-md', include_blank: 'Select Industry', required: true
+        .col.text-center.lg:text-left.flex-1.lg:pl-8.py-6
+          .text-lg.color-dark-blue.font-medium Address
+          .grid.sm:grid-cols-2.gap-4.pt-5.flex-wrap
+            %div{"class" =>"col"}
+              = label_tag 'City'
+              = text_field_tag 'city', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'City', required: true
+            %div{"class" =>"col"}
+              = label_tag 'Country'
+              = text_field_tag 'country', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Country', required: true
+            %div{"class" =>"col"}
+              = label_tag 'Line1'
+              = text_field_tag 'line1', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Line-1', required: true
+            %div{"class" =>"col"}
+              = label_tag 'Line2'
+              = text_field_tag 'line2', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Line-2'
+            %div{"class" =>"col"}
+              = label_tag 'Postal Code'
+              = number_field_tag 'postal_code', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Postal Code', min: 1, required: true
+            %div{"class" =>"col"}
+              = label_tag 'State'
+              = text_field_tag 'state', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'State', required: true
+        .col.text-center.lg:text-left.flex-1.lg:pl-8.py-6
+          .text-lg.color-dark-blue.font-medium Bank Account Details
+          .grid.sm:grid-cols-2.gap-4.pt-5.flex-wrap
+            %div{"class" =>"col"}
+              = label_tag 'Account Number'
+              = text_field_tag 'account_number', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Account Number', required: true, value:'000123456789'
+            %div{"class" =>"col"}
+              = label_tag 'Confirm Account Number'
+              = text_field_tag 'confirm_account_number', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Confirm Account Number', required: true
+            %div{"class" =>"col"}
+              = label_tag 'Routing Number'
+              = text_field_tag 'routing_number', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Routing Number', required: true, value: '110000000'
+            %div{"class" =>"col"}
+              = label_tag 'Account Holder Name'
+              = text_field_tag 'account_holder_name', nil, class: 'font-light leading-6 block w-full border px-2 rounded-md', placeholder: 'Account Holder Name', required: true
+      .text-center.pb-10
+        = f.submit 'Connect', class: 'btn btn-warning submit_button'

@@ -1,0 +1,4 @@
+- if agency_logo.present?
+  = favicon_link_tag asset_path(agency_logo), rel: 'icon', type: "image/x-icon"
+- else
+  = favicon_link_tag asset_path('favicon.ico'), rel: 'icon', type: "image/x-icon"

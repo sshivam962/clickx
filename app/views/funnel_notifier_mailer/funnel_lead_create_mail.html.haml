@@ -1,0 +1,127 @@
+%div{:style => "background-color:#F6F6F7; padding:15px;"}
+  %table.table{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "margin: 0 auto; border-width:0;"}
+    %tr
+      %td
+        / START OF  HEADER BLOCK
+        %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-width:0;", :width => "100%"}
+          %tr
+            %td{:valign => "top", :width => "100%"}
+              %table{:align => "center", :bgcolor => "#fff", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-width:0; background-color: #fff; border-bottom: 1px solid #F6F6F7;"}
+                %tr
+                  %td{:width => "100%"}
+                    %table.table_scale{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-width:0; ", :width => "600"}
+                      %tr
+                        %td
+                        %td{:style => "text-align: center; vertical-align: middle; padding-top:25px; padding-bottom:25px;", :width => "100%"}
+                          %a{:href => "https://www.clickx.io/"}
+                            %img{:alt => "", :src => "https://www.clickx.io/wp-content/uploads/logos/full_color/clickx-logo-fullcolor.png", :style => "width:160px", :width => "100"}/
+                        %td
+        / END OF HEADER BLOCK
+        / START OF CONTENT BLOCK
+        %table{:align => "center", :bgcolor => "#F6F6F7", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "height:420px; background-color:#fff;", :width => "100%"}
+          %tr
+            %td{:valign => "top", :width => "100%"}
+              %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+                %tr
+                  %td{:width => "100%"}
+                    %table.table_scale{:bgcolor => "#FFF", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                      %tr
+                        %td{:align => "center", :width => "100%"}
+                          %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                            %tr
+                              %td.spacer{:width => "30"}
+                              %td
+                                / START OF COLUMN
+                                %table.full{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "540"}
+                                  %tr{:style => "margin-bottom: 15px"}
+                                    %td{:style => "padding-top: 0; padding-bottom: 0; color:#777777"}
+                                      %div{:style => "padding:30px 0 10px;"}
+                                        %h2{:style => "font-size:26px; font-weight:540; text-align:center; margin: 0 0 25px 0; color:#4C4E60;font-family: 'Montserrat', sans-serif;"} Congrats, you've got a new contact!
+                                        %div{:style => "padding:15px; background-color:#F6F6F7; border-radius: 12px; margin-bottom: 50px; margin-top:50px"}
+                                          %table.full{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "510"}
+                                            %tr{:style => ""}
+                                              %td{:style => "padding-top: 0; padding-bottom: 0; color:#777777; width:60px"}
+                                                %img.CToWUd{:alt => "", :width => "40", :height => "40", :src => "https://www.clickx.io//wp-content/uploads/logos/clickx-icon.png"}/
+                                              %td{:style => "padding-top: 0; padding-bottom: 0; padding-left: 10px; text-align: left;"}
+                                                %h3{:style => "font-size:16px; line-height: 1.6em; font-weight:700; margin: 0; color:#4C4E60;font-family: 'Montserrat', sans-serif;"}
+                                                  = "#{@lead.first_name} #{@lead.last_name}"
+                                                %a{:href => "mailto:#{@lead.email}", :style => "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0; color:#4C4E60; font-family: 'Montserrat', sans-serif;", :target => "_blank"}
+                                                  = @lead.email
+                                        %p{:style => "font-size:16px; line-height: 1.6em; font-weight:700; margin: 0 0 15px 0; color:#4C4E60;font-family: 'Montserrat', sans-serif;"} Contact Details:
+                                        %hr{:style => "border-top:1px solid #F6F6F7; border-bottom:none"}/
+                                        %p{:style => "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0 0 15px 0; color:#4C4E60;font-family: 'Montserrat', sans-serif;"}
+                                          %span{:style => "font-weight:600"}Agency Name:&nbsp;
+                                          = @lead.agency.name
+                                        %p{:style => "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0 0 15px 0; color:#4C4E60;font-family: 'Montserrat', sans-serif;"}
+                                          %span{:style => "font-weight:600"}>Niche Name:&nbsp;
+                                          = @niche_name
+                                        %p{:style => "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0; color:#4C4E60;font-family: 'Montserrat', sans-serif;"}
+                                          %span{:style => "font-weight:600"}>Created At:&nbsp; 
+                                          = @lead.created_at.strftime("%m-%d-%Y")
+                                        %div{:style => "font-size:16px; line-height: 1.6em; font-weight:400; margin: 0 0 15px; color:#4C4E60;font-family: 'Montserrat', sans-serif;"}  
+                                / END COLUMN
+                              %td.spacer{:width => "30"}
+        / START OF FOOTER BLOCK
+        %table{:align => "center", :bgcolor => "#fff", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+          %tr
+            %td{:style => "border-top: 1px solid #F6F6F7;", :valign => "top", :width => "100%"}
+              %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+                %tr
+                  %td{:width => "100%"}
+                    %table.table_scale{:bgcolor => "#fff", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                      %tr
+                        %td{:width => "100%"}
+                          %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                            %tr
+                              %td{:width => "600"}
+                                %table.full{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "540"}
+                                  %tr
+                                    %td{:align => "center", :cclass => "center"}
+                                      %p.footer-copy{:style => "font-family: Arial, sans-serif; font-size: 9pt; font-weight: 300; text-align: center; line-height: 1.5; padding:25px 0; color:#b1b1b1;"}  
+                                        // Sent by clickx.io © #{Date.current.year} Clickx . All Rights Reserved.
+                                        © #{Date.current.year} Clickx - Digital Marketing Platform. 
+                                        %br
+                                        All Rights Reserved. Made with 
+                                        %span{style: "color: red"} ♥ 
+                                        in Chicago
+        / END OF FOOTER BLOCK
+:css  
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@300;400&display=swap');
+  .ExternalClass,.ReadMsgBody { background-color: #F6F6F7; width: 100%; }
+  a { color: #F8B018; font-style: normal;font-family: 'Montserrat', sans-serif; font-weight: 300; text-decoration: none; }
+  a:hover { color: #adb2bb; font-style: normal; font-weight: 300; text-decoration: underline; }
+  div,p { margin: 0; font-family: 'Montserrat', sans-serif; }
+  table { border-collapse: collapse; }
+  h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif;}
+  .table { max-width: 600px; border: 1px solid #e6e6e6; margin: 30px auto; border-radius: 4px; display: table;} 
+  .subhead { color: #555555; font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 400; margin: 0; padding: 0; text-align: left; }
+  .sub-title {color: #555555; font-family: 'Montserrat', sans-serif; font-weight: 600;}
+  .subhead--sm {font-size: 16px; line-height: 1.2em;}
+  .mhead { color: #333333; font-family: 'Montserrat', sans-serif; font-size: 23px; font-weight: 600; margin: 0; padding: 0; text-align: left; }
+  .f-head { color: #333333; font-family: 'Montserrat', sans-serif; font-size: 19px; font-weight: 600; margin: 0; padding: 0; text-align: left; }
+  .cellpadd10 { display: table; padding: 10px 20px; }
+  .cellpadd-t-20 { display: table; padding: 20px 20px; }
+  .link-a { color: #2196F3; font-family: 'Montserrat', sans-serif; font-size: 18px; text-decoration: none; }
+  .link-a:hover { color: #4aafff; text-decoration: none;}
+  .divider { border-bottom: 1px solid #e0e0e0; display: block; margin: 0 auto; width: 90%; }      
+  .margt-20 { margin-top: 20px !important }
+  .txtcenter { text-align: center !important }
+  .head-st-2 { padding: 20px 0; font-size: 24px; font-weight: 600; line-height: 40px; }
+  .lnh-n { line-height: 1.6em; letter-spacing: 0px; padding-bottom: 20px; }
+  .link-2 { color:  #F8B018; font-weight: 600px; border-bottom: dashed 1px #f0f0f0 }
+  .link-2:hover { border-bottom: solid 1px #f0f0f0; text-decoration: none }
+		
+  @media only screen and (max-width:640px) { 	table table,td[class=full_width] { 	width : 100% !important;} } 
+  @media only screen and (max-width:640px) { 	div[class=div_scale],table[class=table_scale],td[class=td_scale] { 	margin : 0 auto !important; 	width : 440px !important; } } 
+  @media only screen and (max-width:640px) { 	img[class=img_scale] { 	height : auto !important; 	width : 100% !important; } } 
+  @media only screen and (max-width:640px) { 	table[class=spacer],td[class=spacer] { 	display : none !important; } } 
+  @media only screen and (max-width:640px) { 	td[class=center] { 	text-align : center !important; } } 
+  @media only screen and (max-width:640px) { 	table[class=full] { 	margin-left : 20px !important; 	margin-right : 20px !important; 	width : 400px !important; } } 
+  @media only screen and (max-width:640px) { 	img[class=divider] { 	height : 1px !important; 	width : 400px !important; } } 
+  @media only screen and (max-width:479px) { 	table table,td[class=full_width] { 	width : 100% !important; } } 
+  @media only screen and (max-width:479px) { 	div[class=div_scale],table[class=table_scale],td[class=td_scale] { 	margin : 0 auto !important; 	width : 100% !important; } } 
+  @media only screen and (max-width:479px) { 	img[class=img_scale] { 	height : auto !important; 	width : 100% !important; } } 
+  @media only screen and (max-width:479px) { 	table[class=spacer],td[class=spacer] { 	display : none !important; } } 
+  @media only screen and (max-width:479px) { 	td[class=center] { 	text-align : center !important; } } 
+  @media only screen and (max-width:479px) { 	table[class=full] { 	margin-left : 20px !important; 	margin-right : 20px !important; 	width : auto !important; } } 
+  @media only screen and (max-width:479px) { 	img[class=divider] { 	height : 1px !important; 	width : 100% !important; } }

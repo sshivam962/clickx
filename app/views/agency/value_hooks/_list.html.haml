@@ -1,0 +1,36 @@
+%table.table.mb-0
+  - @value_hooks.each do |value_hook|
+    %tr.text-center.centered-cols.row-card
+      %td.col-client
+        .client-url.d-lg-flex.align-items-center.pl-lg-4
+          .fw-m.text.text-darkblue= value_hook.internal_title
+      %td.text-lg-left
+        %p.m-0= value_hook.title
+      %td.col-btn.text-right
+        .d-lg-flex.align-items-center.justify-content-center.justify-content-lg-end.flex-wrap.flex-lg-nowrap.mt-3.mt-lg-0
+          .d-block.d-lg-inline-block
+            %a.btn.btn-blue.d-block.d-lg-inline-block.mx-auto.mr-lg-3.mb-4.mb-lg-0{:style => "background-image:url(#{value_hook.thumbnail&.file&.url});", "data-target" => "#value_hook_"+"#{value_hook.id}", "data-toggle" => "modal"}
+              Preview
+              %i.pl-sm.fa.fa-angle-double-right
+          .d-flex.justify-content-center.text-center
+            %a.action-btn.action-btn--transparent{ href: public_value_hooks_link(current_agency, value_hook), target: '_blank' }
+              %span.btn-icon
+                %i.fa.fa-external-link{"aria-hidden" => "true"}
+            %a.action-btn.action-btn--transparent{ href: edit_agency_value_hook_path(value_hook) }
+              %span.btn-icon
+                %i.fa.fa-edit{"aria-hidden" => "true"}
+            = link_to agency_value_hook_path(value_hook), method: :delete, data: { confirm: 'Are you sure?' }, class: "action-btn action-btn--transparent" do
+              %span.btn-icon
+                %i.fa.fa-trash
+    .modal.fade{role: "dialog", id:"value_hook_#{value_hook.id}", tabindex: '-1'}
+      .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg.modal-lg{role: 'document'}
+        .modal-content
+          .modal-header
+            %a.close.pl-md{'data-dismiss': 'modal'}
+              %span ×
+          .portfolio-modal-body
+            .loading-spin
+            .modal-body
+              = value_hook.video_embed_code.html_safe            
+    %tr.row-spacer
+      %td{:colspan => "3"}        

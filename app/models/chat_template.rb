@@ -1,0 +1,3 @@
+class ChatTemplate < ApplicationRecord
+  
+end

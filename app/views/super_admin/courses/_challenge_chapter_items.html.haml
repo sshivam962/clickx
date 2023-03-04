@@ -1,0 +1,11 @@
+- @course_chapters.each do |chapter|
+  - klass = (chapter == @active_chapter) ? 'active' : ''
+  %li.list-group-item.chapter_link_item{class: klass, id: dom_id(chapter), data: {url: update_position_super_admin_course_chapter_path(@course, chapter)}}
+    %a.load_chapter.chapter_link{href: 'javascript:void(0)', data: {chapter: chapter.id, course: @course.id}}
+      %span.author
+        = chapter.title
+    .chapter_link_actions
+      %a{href: edit_super_admin_course_chapter_path(@course, chapter)}
+        %i.fa.fa-edit
+      = link_to super_admin_course_chapter_path(@course, chapter), method: :delete, data: { confirm: 'Are you sure?' }, class: 'chapter_link_item_delete' do
+        %i.fa.fa-trash 

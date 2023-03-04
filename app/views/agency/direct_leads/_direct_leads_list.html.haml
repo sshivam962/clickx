@@ -1,0 +1,19 @@
+.panel.panel-default
+  .panel-heading.font-14
+    =lead_source.name
+    %a.btn.btn-primary.btn-raised.btn-sm.pull-right{'data-toggle': 'modal', 'data-target': '#set_email_template'} Set Template
+    %a.btn.btn-primary.btn-raised.btn-sm.pull-right{'data-toggle': 'modal', 'data-target': '#new_direct_lead_modal'} Add Lead
+  .panel-body.font-14
+    %table#leads_listing.table.table-hover.table-bordered.table-vam.mb-n
+      %thead
+        %tr
+          %th Name
+          %th Base Domain
+        %tbody
+          - @lead_source.direct_leads.each do |direct_lead|
+            %tr#direct_lead_tr
+              %td
+                = direct_lead.name
+              %td
+                = direct_lead.base_domain
+= render 'agency/direct_leads/new', lead_source: lead_source

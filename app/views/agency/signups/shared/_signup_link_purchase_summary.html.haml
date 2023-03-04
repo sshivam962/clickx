@@ -1,0 +1,55 @@
+- total_price = @plan.amount + @signup_link.onetime_charge
+- display_price = total_price
+= hidden_field_tag :total_price, total_price
+.input-card.input-card--gray.p-4.mb-5.dark
+  %h4.fw-n Purchase Summary
+  %h3.fw-b.mb-3
+    = @plan.name
+  %p.dark
+    Agency Success Onboarding :
+    - if (@signup_link.discount_by && @signup_link.discount_by.positive?)
+      %s
+        #{number_to_currency(@signup_link.onetime_charge.to_f + @signup_link.discount_by.to_f, precision: 0)}
+    #{number_to_currency(@signup_link.onetime_charge.to_f, precision: 0)}
+    %br
+  - if @signup_link.down_payment?
+    %p.dark
+      Down payment:
+      #{number_to_currency(@signup_link.down_payment, precision: 0)}
+      %br
+  - if @signup_link.onetime_charge_duration?
+    %p.dark
+      Onboarding Charge (#{pluralize(@signup_link.onetime_charge_duration, 'month')}):
+      #{number_to_currency(@signup_link.onetime_charge, precision: 0)}#{@signup_link.onetime_charge_duration == 1 ? '' : '/mo'}
+      %br
+  - else
+    %p.dark
+      Onboarding Recurring Charge: #{number_to_currency(@signup_link.onetime_charge, precision: 0)}/mo
+  %span.current_price_text
+    %b
+      Plan Pricing: #{plan_price(@plan)}
+  %p.dark
+    - if @coupon.present?
+      - coupon_info = coupon_applied_info @coupon, @plan.amount, false
+      %p#coupon_applied
+        = coupon_info.first
+      %p#coupon_offer
+        = coupon_info.last
+      %span.current_price_text
+        - display_price -= discount_by_coupon(@coupon, @plan.amount, false)
+        Amount Payable Today: #{number_to_currency(display_price, precision: 2)}
+    - elsif @signup_link.trial?
+      %p#coupon_applied
+        Free Trial for #{@signup_link.trial_info}
+      %span.current_price_text
+        - onetime_charge = @signup_link.down_payment? ? 0 : @signup_link.onetime_charge
+        - down_payment = @signup_link.down_payment? ? @signup_link.down_payment : 0
+        - total = number_to_currency(onetime_charge.to_f + down_payment.to_f, precision: 0)
+        Amount Payable Today: #{ total }
+    - else
+      %p#coupon_applied
+      %p#coupon_offer
+      .coupon_applied_text.hidden
+        %span.charge_coupon_text
+%a.btn.btn-input.agency_signup_submit{href: 'javascript:void(0)'}
+  Apply to Become a Partner

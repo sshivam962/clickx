@@ -1,0 +1,16 @@
+- flash.each do |key, val|
+  - next if key.to_s == 'timedout'
+  .col-md-6.col-sm-10.col-xs-12.col-md-offset-3.col-sm-offset-1.col-xs-offset-0.alert-custom.alert.alert-dismissable.alert-success
+    #{val}
+    %button.close{'data-dismiss': 'alert', type: 'button'} &#215;
+
+
+- if defined?(resource)
+  - res_obj = resource || current_user
+
+  - if res_obj&.errors&.any?
+    .col-md-6.col-sm-10.col-xs-12.col-md-offset-3.col-sm-offset-1.col-xs-offset-0.alert-custom.alert.alert-dismissable.alert-success
+      %button.close{'data-dismiss': 'alert', type: 'button'} &#215;
+      - res_obj.errors.full_messages.each do |msg|
+        = msg
+        %br

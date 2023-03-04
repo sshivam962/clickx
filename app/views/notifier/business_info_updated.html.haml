@@ -1,0 +1,19 @@
+
+
+%table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+
+  %tr
+    %td
+      #{@business.name} was updated by #{@user.name}
+  %tr
+    %td
+      Changes :
+  %tr
+  - @changes.each do |k, v|
+    %tr
+      %td= k
+      %td= v.first
+      %td →
+      %td= v.second
+
+

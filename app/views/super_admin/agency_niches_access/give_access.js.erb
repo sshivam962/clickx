@@ -1,0 +1,6 @@
+<% if @agency_niches_access.errors.present? %>
+  toastr.error("<%= @agency_niches_access.errors.full_messages.to_sentence %>")
+<% else %>
+  location.reload();
+  toastr.success("Agency Niches Access Saved");
+<% end %>

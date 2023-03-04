@@ -1,0 +1,86 @@
+.header
+  .p-n.col-xs-12.col-sm-12.col-lg-12
+    %h1
+      Lead Info - #{@lead.full_name}
+    %a.btn.btn-default.white.pull-right{href: super_admin_strategy_leads_path} Back
+.locations
+  .container-fluid.mb-md
+    .panel.panel-white.mb-n
+      .panel-body
+        .col-md-12
+          .col-md-6
+            .col-md-3.pl-n
+              Name
+            .col-md-9.pl-n
+              = @lead.full_name
+            .col-md-3.pl-n
+              Company
+            .col-md-9.pl-n
+              = @lead.company
+            .col-md-3.pl-n
+              Domain
+            .col-md-9.pl-n
+              = @lead.domain
+  .container-fluid
+    .panel.panel-white.mb-n
+      .panel-body
+        .col-md-12.mb-sm
+          .col-md-4
+            %b Monthly Marketing Budget (Including Ad Budget)
+          .col-md-8
+            = number_to_currency(@lead.value, precision: 0) || '[N/A]'
+        .col-md-12.mb-sm
+          .col-md-4
+            %b Next Meeting Date (discovery call)
+          .col-md-8
+            = @lead.next_meeting_date&.strftime('%B %d, %Y') || '[N/A]'
+        .col-md-12.mb-sm
+          .col-md-4
+            %b Access to the account?
+          .col-md-8
+            = @lead.audit_request.presence || '[N/A]'
+        .col-md-12.mb-sm
+          .col-md-12
+            %b Client is Interested in
+          .col-md-12
+            - if @lead.campaign_info.present?
+              %ul
+                - @lead.campaign_info.each do |info|
+                  %li= info
+            - else
+              [N/A]
+        .col-md-12.mb-sm
+          .col-md-12
+            %b Client's Current Marketing Tactics
+          .col-md-12
+            = raw(@lead.current_info).presence || '[N/A]'
+        .col-md-12.mb-sm
+          .col-md-12
+            %b Competitor Information
+          .col-md-12
+            - if @lead.competitor_info.present?
+              %ul
+                - @lead.competitor_info.each do |info|
+                  %li= info
+            - else
+              [N/A]
+        .col-md-12.mb-sm
+          .col-md-12
+            %b Client Goals & Expectations
+          .col-md-12
+            = raw(@lead.goals_and_expectations).presence || '[N/A]'
+        .col-md-12.mb-sm
+          .col-md-12
+            %b Next Steps
+          .col-md-12
+            - if @lead.next_steps.present?
+              %ul
+                - @lead.next_steps.each do |info|
+                  %li= info
+            - else
+              [N/A]
+        .col-md-12.mb-sm
+          .col-md-12
+            %b Call Notes
+          .col-md-12
+            = raw(@lead.call_notes).presence || '[N/A]'

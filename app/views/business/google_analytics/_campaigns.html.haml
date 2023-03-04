@@ -1,0 +1,49 @@
+.row
+  .col-md-12
+    .tab-container
+      .tab-content
+        .table-responsive
+          %table#campaign_table.table.table-hover.table-bordered.table-vam.mb-5
+            %thead
+              %tr
+                %th #
+                %th Campaign
+                %th
+                  Sessions
+                %th
+                  New Users
+                %th
+                  Bounce Rate
+                %th.center
+                  Pages /
+                  %br Session
+                %th.center
+                  Avg.Session
+                  %br Duration
+            %tbody
+              - data.each_with_index do |campaign, index|
+                %tr
+                  %td= index + 1
+                  %td.text-left{align:'left'}= campaign["campaignName"]
+                  %td
+                    = campaign["sessions"]
+                    - s = get_percent(campaign["sessions"], total_sessions)
+                    %span.per_info (#{s} %)
+                  %td
+                    = campaign["newUsers"]
+                    - u = get_percent(campaign["newUsers"], total_new_users)
+                    %span.per_info (#{u} %)
+                  %td #{campaign["bounceRate"]}%
+                  %td= campaign["screenPageViewsPerSession"]
+                  %td= campaign["averageSessionDuration"]
+
+:javascript
+  $(document).ready( function () {
+    var table = $('#campaign_table').DataTable({
+      "pageLength": 25
+    });
+
+    $('#campaign_table_filter input').on('keyup change', function () {
+      table.column(1).search($(this).val()).draw();
+    });
+  });

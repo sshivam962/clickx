@@ -1,0 +1,33 @@
+%script{ type: 'text/ng-template', id:'integrations-modal.html' }
+  %md-dialog.modal-dialog.modal-lg.clx-modal.modal-darkstone-blue-bg.keyword-add-modal{"aria-label" => "Conact Integration"}
+    .modal-header
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button", "ng-click":"go_back()"}
+        %span.fa.fa-times-circle-o
+      %h2.modal-title {{integrationName | humanize}} Integration
+      %span{:flex => ""}
+    .col-md-12
+      %form
+        %div{ 'ng-repeat': '(key,value) in integrationConfig' }
+          %h4{ 'ng-repeat': '(config_key,config_value) in value' }
+            %div{ 'layout': 'row', 'layout-align': 'space-between center' }
+              %md-input-container.md-block{ 'flex': '', 'ng-if': 'configId[integrationName]' }
+                %h4.headerColor {{config_key | humanize}}
+                %input{ 'ng-if': '!config_value.name', 'ng-model': 'config_value' }
+                %input{ 'ng-if': 'config_value.name', 'ng-model': 'config_value.name' }
+                %md-dialog-actions{ 'layout': 'row', 'ng-if': 'configId[integrationName]' }
+                  %button.btn.btn-warning.btn-raised{ 'ng-click':'destroyIntegration()' } Delete
+                  %a.btn.btn-raised.mt-md.mb-md.btn-default{'ng-click': "go_back()"} Cancel
+
+              %md-input-container.md-block{ 'flex': '', 'ng-if': '!configId[integrationName]' }
+                %h4.headerColor {{config_key | humanize}}
+                %input{ 'ng-if': 'checkConfig(config_value)', 'ng-model': 'config.val', 'ng-change': 'checkConfigValue()' }
+                %md-select{ 'ng-if': '!checkConfig(config_value)', 'ng-model': 'config.val',
+                  'placeholder': 'Select {{config_key | humanize}}', 'ng-change': 'checkConfigValue()' }
+                  %md-option{ 'ng-if': 'isConfigString', 'ng-value': 'config_value' } {{config_value}}
+                  %md-option{ 'ng-if': 'isConfigArray', 'ng-repeat': 'item in config_value track by $index', 'value': '{{item}}' } {{item.name}}
+                  %md-option{ 'ng-if': 'isConfigObj', 'value': '{{config_value}}' } {{config_value.name}}
+                %small.pull-left.text-danger.text-italic.p-md{ 'ng-if': 'warningEnable' }
+                  Add a {{config_key | humanize}} to enable {{integrationName | humanize}} Integration
+                %md-dialog-actions{:layout => "row", 'ng-if': '!configId[integrationName]'}
+                  %button.btn.btn-info.btn-raised{ 'ng-if': '!configId[integrationName]', 'ng-click':'saveIntegration(config_key)' } Enable
+                  %a.btn.btn-raised.mt-md.mb-md.btn-default{'ng-click': "go_back()"} Cancel

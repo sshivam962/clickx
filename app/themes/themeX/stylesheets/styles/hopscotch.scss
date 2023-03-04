@@ -1,0 +1,77 @@
+$font-stack: 'Source Sans Pro', sans-serif;
+$black: black;
+$color-blue: #60bbea;
+$color-white: #f6f6f7;
+
+.on-boarding {
+  position: relative;
+  left: 35%;
+}
+
+div.hopscotch-bubble {
+  border-radius: 10px;
+  background-color: #efefef;
+  border: 1px solid #bebebe;
+  .hopscotch-bubble-number {
+    display: none;
+  }
+  h3 {
+    color: $color-blue;
+    margin: -15px -15px 0 -55px;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    font-family: $font-stack;
+    border-radius: 5px;
+  }
+  .hopscotch-content {
+    margin-bottom: 20px;
+    margin-left: -40px;
+    font-family: $font-stack;
+    color: $black;
+  }
+  .hopscotch-bubble-arrow-container.up {
+    top: -22px;
+    left: 125px;
+    .hopscotch-bubble-arrow-border {
+      border-bottom: 17px solid rgba(0, 0, 0, 0.5);
+      border-left: 17px solid transparent;
+      border-right: 17px solid transparent;
+      top: 4px;
+      position: relative;
+    }
+    .hopscotch-bubble-arrow {
+      border-bottom: 17px solid #efefef;
+      border-left: 17px solid transparent;
+      border-right: 17px solid transparent;
+      position: relative;
+      top: -12px;
+    }
+  }
+
+  .hopscotch-nav-button {
+    &.next {
+      background: $color-blue;
+      border: $color-blue;
+      text-shadow: none;
+      color: $color-white;
+      text-transform: uppercase;
+      font-weight: 400;
+      margin: 0;
+      &:hover {
+        background: $color-blue;
+      }
+    }
+    &.prev {
+      background: $color-white;
+      border: $color-white;
+      text-shadow: none;
+      color: $black;
+      text-transform: uppercase;
+      font-weight: 400;
+      &:hover {
+        background: $color-white;
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+%table{:align => "center", :bgcolor => "#F5F7FA", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+  %tr
+    %td{:valign => "top", :width => "100%"}
+      %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+        %tr
+          %td{:width => "100%"}
+            %table.table_scale{:bgcolor => "#FFF", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+              %tr
+                %td{:align => "center", :width => "100%"}
+                  %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                    %tr
+                      %td.spacer{:width => "30"}
+                      %td{:width => "540"}
+                        / START OF COLUMN
+                        %table.full{:align => "center", :border => "0", :cellpadding => "10", :cellspacing => "0", :style => "border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;", :width => "540"}
+                          %tr{colspan: 2, rowspan: 3}
+                            %td
+                              Referred By : #{@referrer.name}
+                              %br
+                              Package : #{@plan.name}
+                          %tr
+                            %td
+                              First Name:
+                            %td
+                              = @signup_info['first_name']
+                          %tr
+                            %td
+                              Email:
+                            %td
+                              = @signup_info['email']
+                          %tr
+                            %td
+                              Company Name:
+                            %td
+                              = @signup_info['company_name']
+                          %tr
+                            %td
+                              Phone:
+                            %td
+                              = @signup_info['phone']

@@ -1,0 +1,49 @@
+.panel.panel-default
+  .panel-heading.bg-white.pt-sm
+    %h4.inlineb.f-w-md Top Pages
+    .panel-ctrls.dropdown
+      = link_to export_top_pages_csv_business_client_competitions_path(id: @competition.id), target: "_blank", remote:true, class: 'btn btn-white no-border m-sm ml-n mr-n pr-sm pl-sm' do
+        %i.material-icons.text-muted.pr-sm> file_download
+        %b.text-muted Export
+  %hr.mb-md.mr-n.ml-n/
+  .panel-body.pt-n
+    .col-sm-12.text-center.p-n
+      .table-responsive
+        %table.table.table-hover.table-vam
+          %thead
+            %tr
+              %th
+                %u.help_pointer{ "data-placement" => "right", "data-toggle" => "tooltip", :title => "Top pages on the site with more backlinks."}
+                  Pages
+              %th
+                %u.help_pointer{ "data-placement" => "left", "data-toggle" => "tooltip", :title => "Number of backlinks to the pages." }External Backlinks
+              %th
+                %u.help_pointer{ "data-placement" => "top", "data-toggle" => "tooltip", :title => "Number of reffering domains to your pages."}
+                  Referring Domains
+          %tbody
+            - @top_pages.first(5).each do |page|
+              %tr
+                %td.text-left
+                  %h4
+                    - if page.tropical_trust_flow_value.to_i <= 0
+                      %span.badge.white.badge-danger
+                        = page.tropical_trust_flow_value
+                    - elsif (1..50).include?(page.tropical_trust_flow_value)
+                      %span.badge.white.badge-warning
+                        = page.tropical_trust_flow_value
+                    - elsif page.tropical_trust_flow_value.to_i > 50
+                      %span.badge.white.badge-warning
+                        = page.tropical_trust_flow_value
+                    %span
+                      = page.tropical_trust_flow_topic
+
+                  %h4
+                    %strong
+                      = page.title
+                    %h4
+                      %span.greay-link
+                        = page.page
+                %td.text-left
+                  = page.external_backlinks
+                %td.text-left
+                  = page.referring_domains

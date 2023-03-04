@@ -1,0 +1,89 @@
+- content_for :title do
+  Portfolio | Clickx
+- content_for :custom_assets do
+  %link{href: 'https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css', rel: 'stylesheet'}
+  %script{src: 'https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js'}
+.container-fluid.pt-4
+
+  .bg-sky-blue.rounded.border-1.border-blue.mb-4
+    .bg-white.rounded-t-12.pt-4.pb-md-4.px-lg-5.px-4
+      .d-md-flex.justify-content-between.align-items-center
+        .col-auto
+          .fs-md.color-dark-blue.fw-m My Portfolio
+        .col-auto
+          - if @my_portfolios.present?
+            %a.btn.btn--dark.btn--rounded-md.mb-2.mb-md-0{href: new_agency_portfolio_path}
+              %i.fa.fa-plus
+              \&#160; Create
+    - if @my_portfolios.present?
+      .p-lg-5.p-4
+        .tab-content
+          .tab-pane.fade.in.active
+            #my_portfolio_content.portfolio-list.row
+              = render 'agency/portfolio/shared/my_list', my_portfolios: @my_portfolios
+    - else
+      .p-lg-5.p-4
+        %a.btn.btn--dark.btn--rounded-md.mb-2.mb-md-0{href: new_agency_portfolio_path}
+          %i.fa.fa-plus
+          \&#160; Create
+
+  - if policy(current_agency).portfolio?
+    .bg-sky-blue.rounded.border-1.border-blue
+      .bg-white.rounded-t-12.pt-4.pb-md-4.px-lg-5.px-4
+        .d-md-flex.justify-content-between.align-items-center
+          .col-auto
+            .fs-md.color-dark-blue.fw-m Portfolio
+          .col-auto.pb-4.pb-sm-0
+            %ul.tabs-nav.justify-content-start.mt-4.mt-md-0
+              - Portfolio::CATEGORY_INFO.each do |category|
+                - next unless Portfolio.active.where(category: category[:key]).exists?
+
+                - klass = @category.eql?(category[:key]) ? 'active' : ''
+                %li.mx-1.mx-lg-2{class: klass, id: "portfolio_#{category[:key]}"}
+                  %a.load_portfolios{href: 'javascript:void(0)', data: {category: category[:key]}}
+                    %span.fs-14
+                      = category[:name].upcase
+              - klass = @category.eql?('landing_pages') ? 'active' : ''
+      .p-lg-5.p-4
+        .tab-content
+          .tab-pane.fade.in.active
+            #portfolio_content.portfolio-list.row
+              = render 'agency/portfolio/shared/list', portfolios: @portfolios, category: @category
+    .p-lg-4.p-3
+
+#modal_container
+  .modal.fade.portfolio-modal{role: "dialog", tabindex: '-1'}
+    .modal-dialog.clx-modal.spl-modal.modal-darkstone-blue-bg.modal-lg{role: 'document'}
+      .modal-content
+        .modal-header
+          %a.close.pl-md{'data-dismiss': 'modal'}
+            %span ×
+        .portfolio-modal-body
+          .loading-spin
+          #pf_modal_body.modal-body
+:javascript
+  $(document).on("click",".load_portfolios",function() {
+    category = $(this).data('category');
+    $.ajax({
+      url: "/a/portfolio/load_portfolio",
+      type: 'post',
+      data: {category: category},
+      dataType: 'json',
+      success:function(response){
+        if(response.status == 200){
+          $('li').removeClass('active')
+          $('#portfolio_' + category).addClass('active')
+          $('#portfolio_content').html(response.data.content)
+        }
+      }
+    })
+  });
+
+  $(document).on('click', '.copy_to_clipboard',function() {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(this).attr('href')).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success("Link Copied");
+  });

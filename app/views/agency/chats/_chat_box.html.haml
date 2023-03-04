@@ -1,0 +1,70 @@
+- count = 0
+- messages.reverse_each do |message|
+  - if current_agency.user_ids.include?(message.sender_id)
+    .messaging-chat-area-item.messaging-chat-area-item--reply
+      .col.pr-4.text-right
+        .fs-14.text-dark.pb-1.messaging-chat-name.text-left
+          = message.sender.name
+        .chat-bubble
+          = message.message
+        .text-muted.fs-12.pt-2= message.created_at.strftime("%d %b %I:%M:%S %P")
+      .col-auto
+        .avatar
+          %i.fa.fa-user
+  - else
+    - if !message.read?
+      - count += 1
+      - if count == 1
+        .new-messages
+          %hr.mb-5{:style => "height:1px; width:38%; border-width:0; color:black; background-color:black"}
+          %p.fs-14.text-dark.pb-1.messaging-chat-name.ml-3.mr-3= "#{pluralize(unread_messages_count(@chat_thread.id), 'Unread Message')}"
+          %hr.mb-5{:style => "height:1px; width:38%; border-width:0; color:black; background-color:black"}
+    .messaging-chat-area-item
+      .col-auto
+        .avatar
+          %i.fa.fa-user
+      .col.pl-4
+        .fs-14.text-dark.pb-1.messaging-chat-name
+          = message.sender.name
+        .chat-bubble
+          = message.message
+        .text-muted.fs-12.pt-2= message.created_at.strftime("%d %b %I:%M:%S %P")
+
+#chat_box_bottom
+
+:css
+  .new-messages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+:javascript
+  $(function(){
+    var scrolled = false;
+    var thread_id = #{chat_thread.id};
+    var total_pages = #{messages.total_pages};
+    var current_page = #{messages.current_page};
+    var next_page = current_page + 1;
+
+    $('.messaging-wrapper-messages').scroll(function() {
+      if(($('.messaging-wrapper-messages').scrollTop() < 75 ||  $('.messaging-wrapper-messages').scrollTop() == 0) && !scrolled && (total_pages != current_page)) {
+        scrolled = true;
+
+        $.ajax({
+          url: "/a/messages/chat_history",
+          type: 'GET',
+          data: { page: next_page, thread_id: thread_id },
+          success: function(response){}
+        });
+      }
+    });
+    if(#{@unread_messages.present?}) {
+      $.ajax({
+        url: "/a/messages/unread_messages",
+        type: 'post',
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: {thread_id: #{@chat_thread.id}}
+      })
+    }
+  })

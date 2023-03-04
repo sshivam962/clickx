@@ -1,0 +1,13 @@
+#fbads-modal.modal.fade{tabindex: "-1", role: "dialog", 'aria-labelledby': "ModalLabel", 'aria-hidden': "true"}
+  .modal-dialog{role: "document"}
+    .modal-content
+      .modal-header
+        %h5{class: "modal-title", id: "ModalLabel"} Ad Preview
+        %button{type: "button", class: "close", 'data-dismiss': "modal", 'aria-label': "Close"}
+          %span{'aria-hidden': "true"}
+            &times;
+      .modal-body
+        #preview-body
+          = raw(data)
+      .modal-footer
+        %button{type: "button", class: "btn btn-secondary", 'data-dismiss': "modal"}Close

@@ -1,0 +1,7 @@
+<% if @link.errors.present? %>
+  toastr.error("<%= @link.errors.full_messages.to_sentence %>")
+<% else %>
+  toastr.success('Success');
+  $('#newAdminCalendlyScriptModal').modal('hide');
+  $('#admin_calendly_scripts_container').html("<%= escape_javascript render( partial: '/super_admin/agency_signup_links/shared/calendly_script_list', locals: { links: @admin_calendly_scripts }) %>");
+<% end %>

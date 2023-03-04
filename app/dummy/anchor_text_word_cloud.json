@@ -1,0 +1,21 @@
+{
+  "status": 200,
+  "data": {
+    "386586.example.com": 574,
+    "example": 327,
+    "example.com": 36,
+    "http://www.example.com": 23,
+    "example web design": 21,
+    "http://www.example.com/": 21,
+    "visit website": 19,
+    "www.example.com": 18,
+    "web design company": 15,
+    "web design example": 14,
+    "example company": 11,
+    "website": 9,
+    "home": 9,
+    "web development example": 8,
+    "seo": 8,
+    "visit this seo's website": 3
+  }
+}

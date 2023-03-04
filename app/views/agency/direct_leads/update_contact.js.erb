@@ -1,0 +1,9 @@
+$('.bs-direct-lead-contacts-edit-modal-sm1').modal('hide')
+$('.modal-backdrop').remove()
+$('#contacts_show').html("<%= escape_javascript render(partial: 'agency/direct_leads/contacts', locals: { contacts: @contacts, direct_lead: @direct_lead })%>");
+$('.bs-lead-contacts-modal-sm1').modal('show');
+<% if @status %>
+  toastr['success']("<%=escape_javascript @message %>");
+<% else %>
+  toastr['error']("<%=escape_javascript @message %>");
+<% end %> 

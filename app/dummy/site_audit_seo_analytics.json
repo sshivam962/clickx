@@ -1,0 +1,29 @@
+{
+  "status": 200,
+  "data": {
+    "ssl": {
+      "status": 200,
+      "response": {
+        "data": "Your site uses SSL connection"
+      }
+    },
+    "xml": {
+      "status": 200,
+      "response": {
+        "data": "Site contains xml sitemap"
+      }
+    },
+    "version": {
+      "status": 200,
+      "response": {
+        "data": "URL supports www version"
+      }
+    },
+    "robots": {
+      "status": 200,
+      "response": {
+        "data": "Your site uses robots.txt"
+      }
+    }
+  }
+}

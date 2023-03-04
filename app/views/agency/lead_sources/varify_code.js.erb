@@ -1,0 +1,9 @@
+<% if @status %>
+  toastr['success']("Code is verified");
+  $('.verify_code_lead_source').modal('hide')
+  $("#lead_source_content_<%=@lead_source.id%>").html("<%= escape_javascript render( partial: 'lead_source', locals: { lead_source: @lead_source})%>")
+<% elsif @msg.present? %>
+  toastr['error']("<%=escape_javascript @msg %>")
+<% else %>
+  toastr['error']("Invalid the Code");
+<% end %>  

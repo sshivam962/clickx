@@ -1,0 +1,42 @@
+- content_for :title do
+  Course Challenges | Clickx
+.header
+  .col-xs-12.col-sm-12.col-lg-12.mb-md
+    %h1 Course Challenges
+
+.course_challenges
+  %button.add-course_challenges{type: "button", class: 'btn btn-warning'}
+    Add Course Challenge
+
+  #course_challenges-field
+    = form_with model: @course_challenge, url: super_admin_course_challenges_path do |f|
+      .row.mb-md
+        .col-sm-5
+          = f.text_field :name, class: 'form-control', placeholder: 'Title Name' 
+        .col-sm-2
+          = f.text_field :position, class: 'form-control'  
+        .col
+          = f.submit 'Add', class: 'btn btn-warning m-n'
+  
+  - @course_challenges.each do |course_challenge|
+    = form_with model: course_challenge, url: super_admin_course_challenge_path(course_challenge) do |f|
+      .row.mb-md
+        .col-sm-5
+          = f.text_field :name, class: 'form-control'
+        .col-sm-2
+          = f.text_field :position, class: 'form-control'  
+        .col
+          = f.submit 'Save', class: 'btn btn-warning m-n'
+          = link_to super_admin_course_challenge_path(course_challenge) ,class: 'btn btn-info', method: :delete, data: { confirm: 'Are you sure ?'} do
+            %i.glyphicon.glyphicon-trash.font-size12
+            Delete
+            
+:css
+  #course_challenges-field{
+    display: none;
+  }
+
+:javascript
+  $('.add-course_challenges').on('click', function(){
+    $('#course_challenges-field').show()
+  })            

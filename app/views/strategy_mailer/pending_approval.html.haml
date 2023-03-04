@@ -1,0 +1,10 @@
+%p
+  Lead Strategy Pending Approval - #{@lead.full_name}, #{@strategy.category}
+%p
+  %a{href: edit_super_admin_lead_strategy_url(@lead, @strategy)}
+    Edit
+%p
+  %a{ href: preview_super_admin_lead_strategy_url(@lead, @strategy)}
+    Preview
+
+

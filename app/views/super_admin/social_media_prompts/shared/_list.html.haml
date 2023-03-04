@@ -1,0 +1,8 @@
+%tbody#social_media_prompts_list
+  %tr.centered-cols.row-header.text-black.d-none.d-xl-table-row
+    %th{width: '15%'} Title
+    %th{width: '70%'} Prompt
+    %th.text-xl-right Actions
+  - social_media_prompts.each do |social_media_prompt|
+    %tr.centered-cols.row-card{id: "admin_social_media_prompt_#{social_media_prompt.id}"}
+      = render 'super_admin/social_media_prompts/shared/social_media_prompt', social_media_prompt: social_media_prompt

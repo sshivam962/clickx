@@ -1,0 +1,46 @@
+.row
+  .col-md-12
+    %div
+      %table.table.table--xl
+        %tbody
+          %tr.centered-cols.row-header.text-black.d-none.d-xl-table-row.text-left
+            %th Name
+            %th Email
+            %th Company
+            %th.text-xl-right Actions
+          - if @leads.any?
+            - stripe = current_agency.stripe_credential.present?
+            - @leads.each do |lead|
+              %tr.centered-cols.row-card{id: dom_id(lead)}
+                %td.col-client
+                  %a.client-url{href: edit_agency_lead_path(lead)}
+                    %span.client-logo
+                      = lead.initials
+                    %span.client-name-editable
+                      %span.client-name__name
+                        = lead.full_name
+                      %span.edit-button.edit-button--show-on-hover
+                        = image_tag 'icons/icon-edit.svg'
+                %td.col-data
+                  %span.email
+                    = lead.email
+                %td.col-data
+                  %span
+                    = lead.company
+                %td.col-btns.text-xl-right
+                  = link_to unarchive_agency_lead_path(lead), class: 'text-center action-btn action-btn--warning mx-1', title: 'Unarchive', remote: true, method: :patch, data: { confirm: "Are you sure you'd like to Unarchive #{lead.name}?"} do
+                    %span.btn-icon
+                      %i.fa.fa-archive
+                  = link_to force_delete_agency_lead_path(lead), class: 'text-center action-btn action-btn--danger mx-1', method: :delete, remote: true, data: { confirm: "Are you sure you'd like to permanently delete #{lead.full_name}?"} do
+                    %span.btn-icon
+                      %i.fa.fa-trash        
+              %tr.row-spacer
+                %td{colspan: 7}
+          - else
+            %tr.centered-cols.row-card
+              %td.text-center{colspan: 4}
+                No entries found
+    .row.text-center.p-n.pagination-wrapper
+      = will_paginate @leads
+:javascript
+  $('.pagination a').attr('data-remote', 'true');

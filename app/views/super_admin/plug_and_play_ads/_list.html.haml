@@ -1,0 +1,16 @@
+.row.d-flex.flex-wrap
+  - @plug_and_play_ads.each do |plug_and_play_ad|
+    .col-md-4.col-sm-6.col-xs-12.mb-5
+      .bg-white.rounded.p-4.h-100{ id: "plug_and_play_ad-#{plug_and_play_ad.id}"}
+        .pb-5
+          .preview-thumb{:style => "background-image: url(#{plug_and_play_ad.thumbnail&.file&.url})"}
+        .pt-4.fs-md.d-flex.flex-wrap.align-items-center
+          = link_to super_admin_plug_and_play_ad_path(plug_and_play_ad), class: 'btn btn-default grey-btn-icon d-flex align-items-center mx-1 my-0 py-1 fs-xxs px-3' do
+            %i.glyphicon.glyphicon-eye-open.mr-2
+            View
+          = link_to edit_super_admin_plug_and_play_ad_path(plug_and_play_ad), "data-placement" => "bottom", class: 'btn btn-default grey-btn-icon d-flex align-items-center mx-1 my-0 py-1 fs-xxs px-3' do
+            %i.glyphicon.glyphicon-pencil.mr-2
+            Edit
+          = link_to super_admin_plug_and_play_ad_path(plug_and_play_ad), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger grey-btn-icon d-flex align-items-center mx-1 my-0 py-1 fs-xxs px-3' do
+            %i.fa.fa-trash.mr-2
+            Delete

@@ -1,0 +1,21 @@
+- content_for :custom_assets do
+  = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+  = stylesheet_link_tag 'public/questionnaire', media: 'all', 'data-turbolinks-track' => true
+.horizontal-align.bg-d-grey.text-center
+  .pt-xl.pb-xl
+    .page-logo-wrapper
+      - if @agency.weburl.present?
+        %a{href: formatted_url(@agency.weburl), target: '_blank'}
+          = image_tag @agency.logo || '', class: 'img-responsive'
+      - else
+        = image_tag @agency.logo || '', class: 'img-responsive'
+
+.container
+  .row
+    .col-md-8.col-md-offset-2.text-center.mt-xxl
+      .panel.panel-default.p-xxl.p-md--sm
+        .panel-body.p-lg.p-n--sm.pt-n
+          .thank-you-limage.mb-xxl
+            = image_tag 'thank-you.svg'
+          .f-s-28.mb-md.f-w-md Thank you for providing further information on the campaign.
+          %p We’ll be in touch with you in regards to next steps.

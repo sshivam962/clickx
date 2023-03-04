@@ -1,0 +1,37 @@
+- Lead::StrategyFunnel::FUNNEL.each do |f_key, f_value|
+  .panel
+    .panel-body
+      %h5
+        %b= f_value
+      = form_for Lead::StrategyFunnel.new(category: category, funnel_type: f_key), url: super_admin_strategy_funnels_path, remote: true, method: :post  do |f|
+        = f.hidden_field :category
+        = f.hidden_field :funnel_type
+        .row
+          .col-sm-10
+            = f.text_field :content, class: 'form-control login display-inline funnel-input', placeholder: "#{f_value}"
+          .col-sm-2
+            = f.submit 'Add', class: 'btn btn-warning m-n'
+
+      %ul.pl-n{id: "ul-#{c_key}-#{f_key}"}
+        - Lead::StrategyFunnel.where(category: category).where(funnel_type: f_key).order(:position).each do |funnel|
+          = render 'funnel_item', funnel: funnel, category: category, funnel_type: f_key
+
+          :javascript
+            $(document).ready(function(){
+              $( "#ul-#{c_key}-#{f_key}" ).sortable({
+                update: function(e, ui){
+                  $.ajax({
+                    url: $(ui.item).data("url"),
+                    type: "PATCH",
+                    data: { position: ui.item.index() + 1},
+                  });
+                }
+              });
+            });
+
+:javascript
+  $('.edit-funnel').on('click',function(){
+    funnel_id = $(this).data('id')
+    $('.update-funnel-form').addClass('hidden')
+    $('#update-funnel-' + funnel_id).removeClass('hidden');
+  });

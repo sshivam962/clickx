@@ -1,0 +1,17 @@
+- content_for :title do
+  = "Edit #{@user.name} | Clickx"
+
+.page-heading.no-margin-bottom
+  %h1
+    = @user.name
+
+.container-fluid
+  .row
+    .col-xs-12
+      .bg-white.rounded.p-5
+        = form_for @user, url: set_agency_user_info_agency_user_path(@user), method: :patch do |f|
+          = render 'agency/users/shared/user_info', f: f
+    .col-xs-12
+      .bg-white.rounded.p-5
+        = form_for @user, url: agency_user_path(@user), method: :patch do |f|
+          = render 'agency/users/shared/form', f: f

@@ -1,0 +1,92 @@
+= stylesheet_link_tag 'review_pdf'
+
+- container_width = "col-xs-12"
+.review_pdf_wrapper
+  .content
+    .container
+      .row
+        %div{class:"#{container_width}"}
+          .row
+            .col-xs-12
+              .reviews-list
+                - @reviews.each do |rev|
+                  .review-box-wrapper
+                    .review-box
+                      .row
+                        .col-xs-3.col-sm-2.col-lg-2
+                          .logo-image.text-center
+                            / = link_to 'http://clickx.io', target: '_blank' do
+                            = image_tag "/directories/#{rev.directory}.png", class: 'img-responsive  img-round', height: "26px"
+                          %h5.text-center.text-bold.margin-bottom-5
+                            = image_tag "#{review_stars rev.rating.round}", type: "image/svg+xml", style: "height: auto;width:75px;", class: 'hidden-xs'
+                          %p.text-center.date
+                            = rev.timestamp.strftime("#{rev.timestamp.day.ordinalize} %b %Y") if rev.timestamp.present?
+                        .col-xs-9.col-sm-10.col-lg-10
+                          = image_tag "#{review_stars rev.rating.round}", type: "image/svg+xml", style: "height: auto;width:75px;", class: 'hidden-sm hidden-md hidden-lg'
+                          .paragraphs
+                            - if rev.text.present?
+                              = rev.text
+                            - else
+                              This review on #{rev.name} does not have any content.
+                    -#.review-box-footer{style:"height:10px;width:100%"}
+                    .svg-footer{style:"margin-top:-10px;"}
+                      %svg{height:"4px",width:"100%"}
+                        %defs
+                          %linearGradient#color{"x1":"0%","x2":"100%"}
+                            - color = ["#005bc4","#0c9cf3","#265ca2","#f37d7d","#f80000","#810d00","#570f00",
+                            "#f0ba00","#d79d0d","#97bc5d","#007f32"]
+                            - (1..10).each_with_index do |gradient,index|
+                              - if index == 0
+                                %stop{offset:"#{gradient*10}%",style:"stop-color:#{color[index]};stop-opacity:1"}
+                              - else
+                                %stop{offset:"#{index*10}%",style:"stop-color:#{color[index]};stop-opacity:1"}
+                                %stop{offset:"#{gradient*10}%",style:"stop-color:#{color[index]};stop-opacity:1"}
+                        %rect{width:"100%",height:"4px",fill:"url(#color)"}
+- if @business.branded?
+  .footer
+    .container
+      .row
+        %div{class:"#{container_width}"}
+          %a{href: "http://clickx.io", target: '_blank'}
+            %p.text-center
+              Powered By
+            %p.text-center
+              = image_tag 'https://s3.amazonaws.com/clickx-images/Clickx-Logo.png', type: "image/svg+xml", style: "height: auto;width:100px;"
+
+:css
+  .review_pdf_wrapper .content{
+    padding: 0px;
+  }
+
+  .review_pdf_wrapper .content .title{
+    margin-bottom: 10px;
+  }
+
+  .footer {
+    padding: 0;
+  }
+
+  .date {
+    font-weight: 400;
+  }
+
+  @media (max-width: 767px) {
+    .hidden-xs {
+      display: none !important;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    .hidden-sm {
+      display: none !important;
+    }
+  }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .hidden-md {
+      display: none !important;
+    }
+  }
+  @media (min-width: 1200px) {
+    .hidden-lg {
+      display: none !important;
+    }
+  }

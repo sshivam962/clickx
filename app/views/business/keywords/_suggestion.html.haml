@@ -1,0 +1,17 @@
+.col-sm-12.pt-md.pl-n
+  .panel.panel-default.mb-n
+    .panel-heading.clx-bg.clx-bg-light-haze
+      %span Keywords
+      %span.pull-right Volume
+    .panel-body
+      .scroll-pane
+        %ul.list-unstyled.suggestion-keywords
+          %li.pb-md
+            .checkbox
+            - if @keywords.empty?
+              No Related Keywords Found.
+            - else
+              - @keywords.each do |keyword|
+                %label
+                  = keyword[:keyword_phrase]
+                %span.pull-right #{keyword[:search_volume]}
